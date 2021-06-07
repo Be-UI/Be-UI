@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="142" height="142" viewBox="0 0 142 142">
+  <defs>
+    <filter id="椭圆_233" x="0" y="0" width="142" height="142" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feFlood flood-color="#142b78" flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="椭圆_234" x="10" y="10" width="122" height="122" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7" result="blur-2"/>
+      <feFlood flood-color="#6a6a6a" flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="hover停止" transform="translate(-1712 -818)">
+    <g transform="matrix(1, 0, 0, 1, 1712, 818)" filter="url(#椭圆_233)">
+      <circle id="椭圆_233-2" data-name="椭圆 233" cx="50" cy="50" r="50" transform="translate(21 20)" fill="#8188a3"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1712, 818)" filter="url(#椭圆_234)">
+      <circle id="椭圆_234-2" data-name="椭圆 234" cx="40" cy="40" r="40" transform="translate(31 30)" fill="#cdd2e3"/>
+    </g>
+    <text id="停止分析" transform="translate(1751 894)" fill="#5e5e5e" font-size="16" font-family="MicrosoftYaHei, Microsoft YaHei"><tspan x="0" y="0">停止分析</tspan></text>
+  </g>
+</svg>
