@@ -30,5 +30,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 4.notification  动画  
 5.notification  关闭后的布局问题
 5.notification  连续调用问题
-6.notification  关闭后缓存清空
+
 

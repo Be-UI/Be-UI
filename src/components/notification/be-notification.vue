@@ -20,7 +20,7 @@ const renderBody = function (h) {
                     {/**@slot 弹窗头部按钮**/}
                     <div>
                         {this.closeRender ? this.closeRender() :
-                            <i class="el-icon-close" onClick={() => this.close()}></i>}
+                            <i class="el-icon-close" onClick={(event) => this.close(event)}></i>}
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@ export default {
     data() {
         return {
             style: {},
-          placementSelf:''
+            placementSelf:''
         }
     },
     props: {
@@ -129,15 +129,15 @@ export default {
         offsetBottomStyle() {
             return this.offsetBottom
         },
-      placementStyle() {
-        return this.placement
-       },
+        placementStyle() {
+            return this.placement
+        },
     },
     watch: {
         offsetTopStyle: {
             handler: function (nVal) {
                 if (this.placementSelf === 'topLeft' || this.placementSelf === 'topRight') {
-                  this.style = {top:nVal}
+                    this.style = {top:nVal}
                 }
             },
             deep: true,
@@ -146,35 +146,37 @@ export default {
         offsetBottomStyle: {
             handler: function (nVal) {
                 if (this.placementSelf === 'bottomLeft' || this.placementSelf === 'bottomRight') {
-                  this.style = {bottom:nVal}
+                    this.style = {bottom:nVal}
                 }
             },
             deep: true,
             immediate: true
         },
-       placementStyle: {
-        handler: function (nVal) {
-          this.placementSelf = nVal
-          if (this.placementSelf === 'bottomLeft' || this.placementSelf === 'bottomRight') {
-            this.style = {bottom:this.offsetBottom}
-          }
-          if (this.placementSelf === 'topLeft' || this.placementSelf === 'topRight') {
-            this.style = {top:this.offsetTop}
-          }
+        placementStyle: {
+            handler: function (nVal) {
+                this.placementSelf = nVal
+                if (this.placementSelf === 'bottomLeft' || this.placementSelf === 'bottomRight') {
+                    this.style = {bottom:this.offsetBottom}
+                }
+                if (this.placementSelf === 'topLeft' || this.placementSelf === 'topRight') {
+                    this.style = {top:this.offsetTop}
+                }
+            },
+            deep: true,
+            immediate: true
         },
-        deep: true,
-        immediate: true
-      },
     },
     methods: {
         /**
          * 关闭方法，销毁组件
+         * @param {Event} event - 事件对象
          */
-        close() {
+        close(event) {
+            event && event.stopPropagation()
             /** close事件
              * @event close
              */
-            this.$selfEvent.close && this.$selfEvent.close()
+            this.$selfEvent.onClose && this.$selfEvent.onClose(event)
             if (this.$el && this.$el.parentNode) {
                 this.$el.parentNode.removeChild(this.$el);
             }
@@ -183,29 +185,30 @@ export default {
         },
         /**
          * 确认按钮方法
+         * @param {Event} event - 事件对象
          */
-        confirmFunc() {
-            this.$selfEvent.confirm && this.$selfEvent.confirm()
-            this.close()
+        onClick(event) {
+            this.$selfEvent.onClick && this.$selfEvent.onClick(event)
         }
     },
     mounted() {
     },
-  beforeUpdate() {
-      this.$nextTick(()=>{
-        const preHeight = Number(window.getComputedStyle(this.$el.children[0]).height.split('px')[0])
-        const preBottom = Number(window.getComputedStyle(this.$el).bottom.split('px')[0])
-        if(this.style.bottom && (preBottom < preHeight )){
-          this.style.bottom = preBottom + preHeight + 20 + 'px'
-        }
-      })
+    beforeUpdate() {
+        this.$nextTick(()=>{
+            const preHeight = Number(window.getComputedStyle(this.$el.children[0]).height.split('px')[0])
+            const preBottom = Number(window.getComputedStyle(this.$el).bottom.split('px')[0])
+            if(this.style.bottom && (preBottom < preHeight )){
+                this.style.bottom = preBottom + preHeight + 20 + 'px'
+            }
+        })
     },
     render(h) {
         return (
             <div
                 style={this.style}
-                class={`be-notification be-notification__${this.msgType} be-notification__${this.placement}`
-                } id={`be_notification${this._uid}`}>
+                onClick={(event)=>{this.onClick(event)}}
+                class={`be-notification be-notification__${this.msgType} be-notification__${this.placement}`}
+                id={`be_notification${this._uid}`}>
                 <transition name="be-fade-in-linear">
                     {this.isShow ? renderBody.call(this, h) : ''}
                 </transition>

@@ -27,7 +27,7 @@ const throttle = function(func, delay) {
         }
     }
 }
-// 关闭方法
+// 说动关闭方法
 const closeNotify = function(instance) {
     // 根据组件uid过滤组件实例
     let arr = instanceMap[instance._props.placement].filter(val=>{
@@ -52,6 +52,8 @@ const createNotify = function (options = {}){
         description:'',// 完成
         duration:3000,// 完成,
         key:'',// 完成,
+        //关闭回调方法
+        onClose:null,
     }
     let instanceObj = null
     if(options.placement === undefined){
@@ -125,8 +127,9 @@ const createNotify = function (options = {}){
         instance._props.description = options.description || defaultOption.description
         // 绑定事件
         instance.$selfEvent = {
-            confirm:options.onClick,
-            close:options.onClose
+            // 支持点击关闭回调和点击回调
+            onClick:options.onClick,
+            onClose:options.onClose
         }
         if(!isCache){
             instanceObj.push(instance)
