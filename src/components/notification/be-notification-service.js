@@ -14,8 +14,31 @@ let instanceMap = {
     bottomLeft:[],
     bottomRight:[]
 }
-
-export function BeNotify(options = {}) {
+// 节流方法
+const throttle = function(func, delay) {
+    let prev = Date.now();
+    return function() {
+        var context = this;
+        var args = arguments;
+        var now = Date.now();
+        if (now - prev >= delay) {
+            prev = Date.now();
+            return func.apply(context, args);
+        }
+    }
+}
+// 关闭方法
+const closeNotify = function(instance) {
+    // 根据组件uid过滤组件实例
+    let arr = instanceMap[instance._props.placement].filter(val=>{
+        return val._uid !== instance._uid
+    })
+    instanceMap[instance._props.placement] = arr
+    // 关闭
+    instance.close()
+}
+const createNotify = function (options = {}){
+    // 节流处理，防止多次调用时，前一个没有渲染，第二个开始生成
     const defaultOption = {
         titles:'',// 完成
         customClass:'',// 完成
@@ -63,7 +86,7 @@ export function BeNotify(options = {}) {
     }
 
     // 手动设置props
-    instance.$nextTick(() => {
+    Vue.nextTick(() => {
         instance._props.isShow = true
         instance._props.titles = options.titles || defaultOption.titles
         instance._props.customClass = options.customClass || defaultOption.customClass
@@ -73,7 +96,6 @@ export function BeNotify(options = {}) {
         let offsetBottom = options.offsetBottom || defaultOption.offsetBottom
         let offsetTop = options.offsetTop || defaultOption.offsetTop
         // 第二个起，偏移是第一个的偏移 + （高 + 20）* 数量
-
         if(instanceMap[instance._props.placement].length >= 1 && !isCache){
             const len = instanceObj.length
             let preHeight = Number(window.getComputedStyle(instanceObj[len - 1].$el.children[0]).height.split('px')[0])
@@ -87,8 +109,8 @@ export function BeNotify(options = {}) {
             if (instance._props.placement === 'bottomLeft' || instance._props.placement === 'bottomRight') {
                 instance._props.offsetBottom = offsetBottom + 'px'
             }
-         }
-         else{
+        }
+        else{
             // 第一个的时候不需要处理，直接使用传入的偏移
             if (instance._props.placement === 'topLeft' || instance._props.placement === 'topRight') {
                 instance._props.offsetTop = offsetTop
@@ -96,7 +118,7 @@ export function BeNotify(options = {}) {
             if (instance._props.placement === 'bottomLeft' || instance._props.placement === 'bottomRight') {
                 instance._props.offsetBottom = offsetBottom
             }
-         }
+        }
         instance._props.bodyRender = options.bodyRender || defaultOption.bodyRender
         instance._props.iconPreRender = options.iconPreRender || defaultOption.iconPreRender
         instance._props.closeRender = options.closeRender || defaultOption.closeRender
@@ -109,13 +131,16 @@ export function BeNotify(options = {}) {
         if(!isCache){
             instanceObj.push(instance)
         }
-         // 定时关闭
+        // 定时关闭
         const duration = options.duration === null ? null : defaultOption.duration
         if(duration && duration !== 0 && Object.prototype.toString.call(duration) === '[object Number]'){
             setTimeout(()=>{
-                instance.close()
+                closeNotify(instance)
             },duration)
         }
     });
-    return instance
+    return {notify:instance,close:closeNotify.bind(this,instance)}
+}
+export function BeNotify(options = {}) {
+    return createNotify(options)
 }
