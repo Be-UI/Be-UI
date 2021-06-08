@@ -27,6 +27,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 1.loading的定位问题  
 2.messageBox 动画  
 3.服务式访问的全局绑定  
-4.notification  动画
-4.notification  的key 更新
+4.notification  动画  
+5.notification  关闭后的布局问题
 

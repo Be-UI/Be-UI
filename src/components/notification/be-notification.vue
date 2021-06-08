@@ -8,7 +8,7 @@
 <script type="text/jsx">
 const renderBody = function (h) {
     return (
-        <div class={`be-notification-container be-notification-container__${this.placement}`}>
+        <div class={`be-notification-container be-notification-container__${this.placement} ${this.customClass}`}>
             <div class="be-notification-title">
                 <div class="be-notification-head"
                      id={`be_notification_head${this._uid}`}>
@@ -196,7 +196,7 @@ export default {
         const preHeight = Number(window.getComputedStyle(this.$el.children[0]).height.split('px')[0])
         const preBottom = Number(window.getComputedStyle(this.$el).bottom.split('px')[0])
         if(this.style.bottom && (preBottom < preHeight )){
-          this.style.bottom = preHeight + 20 + 'px'
+          this.style.bottom = preBottom + preHeight + 20 + 'px'
         }
       })
     },
@@ -204,7 +204,7 @@ export default {
         return (
             <div
                 style={this.style}
-                class={`be-notification be-notification__${this.msgType} be-notification__${this.placement} ${this.customClass}`
+                class={`be-notification be-notification__${this.msgType} be-notification__${this.placement}`
                 } id={`be_notification${this._uid}`}>
                 <transition name="be-fade-in-linear">
                     {this.isShow ? renderBody.call(this, h) : ''}

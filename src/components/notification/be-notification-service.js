@@ -27,7 +27,8 @@ export function BeNotify(options = {}) {
         iconPreRender:null,// 完成
         closeRender:null,// 完成
         description:'',// 完成
-        duration:3000// 完成
+        duration:3000,// 完成,
+        key:'',// 完成,
     }
     let instanceObj = null
     if(options.placement === undefined){
@@ -35,17 +36,32 @@ export function BeNotify(options = {}) {
     }else{
         instanceObj = instanceMap[options.placement]
     }
-
-    const instance = new beNotifyConstructor({
-        el:document.createElement('div')
-    })
-    // 挂载元素
-    const bodyElement = document.querySelector('body')
-    if (bodyElement.append) {
-        bodyElement.append(instance.$el)
-    } else {
-        bodyElement.appendChild(instance.$el)
+    let instance = null
+    let isCache = false
+    // 如果传入了key，则变量实例缓存，拿到对应实例
+    if(options.key){
+        instanceObj.forEach(val=>{
+            if(val.$notifyKey === options.key){
+                isCache = true
+                instance = val
+            }
+        })
     }
+    // 如果instance 为null，则是没有传入key 或者没有匹配到实例缓存，就创建新的
+    if(!instance){
+        instance = new beNotifyConstructor({
+            el:document.createElement('div'),
+        })
+        instance.$notifyKey = options.key || ''
+        // 挂载元素
+        const bodyElement = document.querySelector('body')
+        if (bodyElement.append) {
+            bodyElement.append(instance.$el)
+        } else {
+            bodyElement.appendChild(instance.$el)
+        }
+    }
+
     // 手动设置props
     instance.$nextTick(() => {
         instance._props.isShow = true
@@ -57,7 +73,8 @@ export function BeNotify(options = {}) {
         let offsetBottom = options.offsetBottom || defaultOption.offsetBottom
         let offsetTop = options.offsetTop || defaultOption.offsetTop
         // 第二个起，偏移是第一个的偏移 + （高 + 20）* 数量
-        if(instanceMap[instance._props.placement].length >= 1){
+
+        if(instanceMap[instance._props.placement].length >= 1 && !isCache){
             const len = instanceObj.length
             let preHeight = Number(window.getComputedStyle(instanceObj[len - 1].$el.children[0]).height.split('px')[0])
             let preTop = Number(window.getComputedStyle(instanceObj[0].$el).top.split('px')[0])
@@ -89,10 +106,11 @@ export function BeNotify(options = {}) {
             confirm:options.onClick,
             close:options.onClose
         }
-        instanceObj.push(instance)
-
+        if(!isCache){
+            instanceObj.push(instance)
+        }
          // 定时关闭
-         const duration = options.duration || defaultOption.duration
+        const duration = options.duration === null ? null : defaultOption.duration
         if(duration && duration !== 0 && Object.prototype.toString.call(duration) === '[object Number]'){
             setTimeout(()=>{
                 instance.close()
