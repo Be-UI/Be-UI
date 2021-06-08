@@ -29,6 +29,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 3.服务式访问的全局绑定  
 4.notification  动画  
 5.notification  关闭后的布局问题
-5.notification  连续调用问题
 
 

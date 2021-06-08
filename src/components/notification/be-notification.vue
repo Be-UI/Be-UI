@@ -8,27 +8,27 @@
 <script type="text/jsx">
 const renderBody = function (h) {
     return (
-        <div class={`be-notification-container be-notification-container__${this.placement} ${this.customClass}`}>
+        <div class={`be-notification-container be-notification-container__${this.option.placement}`}>
             <div class="be-notification-title">
                 <div class="be-notification-head"
                      id={`be_notification_head${this._uid}`}>
                     <div>
-                        {this.iconPreRender ? this.iconPreRender() :
-                            <i class={`el-icon-${this.msgType} icon-${this.msgType}`}></i>}
-                        <span class={`text-${this.msgType}`}>{this.titles}</span>
+                        {this.option.iconPreRender ? this.option.iconPreRender() :
+                            <i class={`el-icon-${this.option.msgType} icon-${this.option.msgType}`}></i>}
+                        <span class={`text-${this.option.msgType}`}>{this.option.titles}</span>
                     </div>
                     {/**@slot 弹窗头部按钮**/}
                     <div>
-                        {this.closeRender ? this.closeRender() :
+                        {this.option.closeRender ? this.option.closeRender() :
                             <i class="el-icon-close" onClick={(event) => this.close(event)}></i>}
                     </div>
                 </div>
             </div>
             {/**@slot 弹窗主体**/}
             <div class='be-notification-body'>
-                {this.bodyRender ? this.bodyRender() :
+                {this.option.bodyRender ? this.option.bodyRender() :
                     <p class="be-notification-description">
-                        {this.description}
+                        {this.option.description}
                     </p>
                 }
             </div>
@@ -39,105 +39,43 @@ export default {
     name: "BeNotification",
     data() {
         return {
+          option:{
+            isShow:false,
             style: {},
-            placementSelf:''
-        }
-    },
-    props: {
-        /**
-         * 标题
-         */
-        'titles': {
-            type: String,
-        },
-        /**
-         * 是否显示
-         */
-        'isShow': {
-            type: Boolean,
-            default: false
-        },
-        /**
-         * offsetTop 消息从顶部弹出时，距离顶部的位置，单位像素
-         */
-        'offsetTop': {
-            type: String,
-            default: '24px'
-        },
-        /**
-         * 消息从底部弹出时，距离底部的位置，单位像素
-         */
-        'offsetBottom': {
-            type: String,
-            default: '24px'
-        },
-        /**
-         * 自定义样式类
-         */
-        'customClass': {
-            type: String,
-        },
-        /**
-         * 情感类型
-         * @values warning、info、success、error
-         */
-        'msgType': {
-            type: String,
-            default: 'warning'
-        },
-        /**
-         * 主体渲染
-         */
-        'bodyRender': {
-            type: Function,
-            default: null,
-        },
-        /**
-         * 标题前置图标渲染
-         */
-        'iconPreRender': {
-            type: Function,
-            default: null,
-        },
-        /**
-         * 关闭按钮渲染
-         */
-        'closeRender': {
-            type: Function,
-            default: null,
-        },
-        /**
-         * 弹出位置，可选
-         * @values topLeft、topRight、bottomLeft、bottomRight
-         */
-        'placement': {
-            type: String,
-            default: 'topRight',
-        },
-        /**
-         * 内容
-         */
-        'description': {
-            type: String,
+            placementSelf:'',
+            titles:'',//
+            customClass:'',//
+            msgType:'warning',//
+            offsetTop:0,//
+            offsetBottom:0,//
+            placement:'topRight',//
+            bodyRender:null,//
+            iconPreRender:null,//
+            closeRender:null,//
+            description:'',//
+            duration:4500,//
+            key:'',//
+            timer:null,//
+          },
+          containerClass:''
         }
     },
     computed: {
-
         offsetTopStyle() {
-            return this.offsetTop
+            return this.option.offsetTop
         },
         offsetBottomStyle() {
-            return this.offsetBottom
+            return this.option.offsetBottom
         },
-        placementStyle() {
-            return this.placement
-        },
+      placementStyle() {
+        return this.option.placement
+       },
     },
     watch: {
         offsetTopStyle: {
             handler: function (nVal) {
-                if (this.placementSelf === 'topLeft' || this.placementSelf === 'topRight') {
-                    this.style = {top:nVal}
+                if (this.option.placementSelf === 'topLeft' || this.option.placementSelf === 'topRight') {
+                  this.option.style = {top:nVal + 'px'}
                 }
             },
             deep: true,
@@ -145,98 +83,127 @@ export default {
         },
         offsetBottomStyle: {
             handler: function (nVal) {
-                if (this.placementSelf === 'bottomLeft' || this.placementSelf === 'bottomRight') {
-                    this.style = {bottom:nVal}
+                if (this.option.placementSelf === 'bottomLeft' || this.option.placementSelf === 'bottomRight') {
+                  this.option.style = {bottom:nVal + 'px'}
                 }
             },
             deep: true,
             immediate: true
         },
-        placementStyle: {
-            handler: function (nVal) {
-                this.placementSelf = nVal
-                if (this.placementSelf === 'bottomLeft' || this.placementSelf === 'bottomRight') {
-                    this.style = {bottom:this.offsetBottom}
-                }
-                if (this.placementSelf === 'topLeft' || this.placementSelf === 'topRight') {
-                    this.style = {top:this.offsetTop}
-                }
-            },
-            deep: true,
-            immediate: true
+       placementStyle: {
+        handler: function (nVal) {
+          this.option.placementSelf = nVal
+          if (this.option.placementSelf === 'bottomLeft' || this.option.placementSelf === 'bottomRight') {
+            this.option.style = {bottom:this.option.offsetBottom}
+          }
+          if (this.option.placementSelf === 'topLeft' || this.option.placementSelf === 'topRight') {
+            this.option.style = {top:this.option.offsetTop}
+          }
         },
+        deep: true,
+        immediate: true
+      },
     },
     methods: {
-        /**
-         * 关闭方法，销毁组件
-         * @param {Event} event - 事件对象
+      /**
+       * 关闭方法，销毁组件
+       * @param {Event} event - 事件对象
+       */
+      close(event) {
+        event && event.stopPropagation()
+        /** close事件
+         * @event close
          */
-        close(event) {
-            event && event.stopPropagation()
-            /** close事件
-             * @event close
-             */
-            this.$selfEvent.onClose && this.$selfEvent.onClose(event)
-            if (this.$el && this.$el.parentNode) {
-                this.$el.parentNode.removeChild(this.$el);
-            }
-            // 销毁组件
-            this.$destroy()
-        },
-        /**
-         * 确认按钮方法
-         * @param {Event} event - 事件对象
-         */
-        onClick(event) {
-            this.$selfEvent.onClick && this.$selfEvent.onClick(event)
+        this.$selfEvent.onClose && this.$selfEvent.onClose(event)
+        if (this.$el && this.$el.parentNode) {
+          this.$el.parentNode.removeChild(this.$el);
         }
+        this.$closeNotify(this,true)
+        // 销毁组件
+        this.$destroy()
+      },
+      /**
+       * 确认按钮方法
+       * @param {Event} event - 事件对象
+       */
+      onClick(event) {
+        this.$selfEvent.onClick && this.$selfEvent.onClick(event)
+      },
+      /**
+       * 銷毀定時器
+       */
+      clearTimer() {
+        clearTimeout(this.timer);
+        this.timer = null
+      },
+      /**
+       * 定時器 關閉銷毀組件
+       */
+      startTimer() {
+        if (this.option.duration > 0) {
+          this.timer = setTimeout(() => {
+              this.close();
+          }, this.option.duration);
+        }
+      },
+      /**
+       * 设置动画
+       */
+      setAnimate(){
+        let classStr = `be-notification be-notification__${this.option.msgType} be-notification__${this.option.placement} ${this.option.customClass}`
+        let Animate = ` be-notification__Animate_enter_${this.option.placement}`
+        this.containerClass = classStr + Animate
+        /*setTimeout(()=>{
+          if (this.option.placement === 'bottomRight' || this.option.placement === 'topRight') {
+            this.containerClass = `be-notification be-notification__${this.option.msgType} be-notification__${this.option.placement} ${this.option.customClass} be-notification-fade-enter-right`
+          }
+          if (this.option.placement === 'bottomLeft' || this.option.placement === 'topLeft') {
+            this.containerClass = `be-notification be-notification__${this.option.msgType} be-notification__${this.option.placement} ${this.option.customClass} be-notification-fade-enter-left`
+          }
+        },100)*/
+      }
+    },
+    created(){
+     this.setAnimate()
     },
     mounted() {
-    },
-    beforeUpdate() {
-        /*this.$nextTick(()=>{
-          const preHeight = Number(window.getComputedStyle(this.$el.children[0]).height.split('px')[0])
-          const preBottom = Number(window.getComputedStyle(this.$el).bottom.split('px')[0])
-          if(this.style.bottom && (preBottom < preHeight )){
-            this.style.bottom = preBottom + preHeight + 20 + 'px'
-              debugger
-          }
-        })*/
+      this.startTimer()
     },
     render(h) {
+      this.clearTimer()
+      this.startTimer()
         return (
             <div
-                style={this.style}
+                style={this.option.style}
                 onClick={(event)=>{this.onClick(event)}}
-                class={`be-notification be-notification__${this.msgType} be-notification__${this.placement}`}
-                id={`be_notification${this._uid}`}>
-                <transition name="be-fade-in-linear">
-                    {this.isShow ? renderBody.call(this, h) : ''}
-                </transition>
+                class={this.containerClass} id={`be_notification${this._uid}`}>
+              <transition name="be-fade-in-linear">
+                {this.option.isShow ? renderBody.call(this, h) : ''}
+              </transition>
             </div>
         )
     }
 }
 </script>
 
-<style scoped lang="scss">
+<style   lang="scss">
 @import './be-notification.scss';
-
-.be-zoom-in-top-enter-active, .be-zoom-in-top-leave-active {
-    opacity: 1;
-    -webkit-transform: scaleY(1);
-    transform: scaleY(1);
-    -webkit-transition: opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-    transition: opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-    transition: transform .3s cubic-bezier(.23, 1, .32, 1), opacity .3s cubic-bezier(.23, 1, .32, 1);
-    transition: transform .3s cubic-bezier(.23, 1, .32, 1), opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-    -webkit-transform-origin: center top;
-    transform-origin: center top
+.be-notification__Animate_enter_bottomRight,
+.be-notification__Animate_enter_topRight{
+  right: 0;
+  opacity: 0;
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+}
+.be-notification__Animate_enter_bottomLeft,
+.be-notification__Animate_enter_topLeft{
+  left: 0;
+  opacity: 0;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
-.be-zoom-in-top-enter, .be-zoom-in-top-leave-active {
-    opacity: 0;
-    -webkit-transform: scaleY(0);
-    transform: scaleY(0)
-}
+
+
+
 </style>

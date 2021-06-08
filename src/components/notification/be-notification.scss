@@ -11,9 +11,9 @@ $error: #F14E53FF;
 }
 .be-notification {
     z-index: 10;
+    min-height: 100px;
     .be-notification-container {
         width: 305px;
-        min-height: 100px;
         background: #FFFFFF;
         padding: 16px 16px 16px 20px;
         box-shadow: 0 6px 13px rgba(0, 0, 0, 0.16);

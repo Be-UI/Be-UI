@@ -1,5 +1,5 @@
 <template>
-    <div id="app" ref="chart" @click="opennin">
+    <div id="app" ref="chart" @click="opennin(cuP++)">
         <!--      <be-loading :show="true">
                 <div style="width: 100%;height: 100px;background: #4D60B2" @click="()=>{console.log(111111111)}"></div>
               </be-loading>-->
@@ -52,16 +52,30 @@ export default {
     mounted() {
     },
     methods:{
-        opennin(){
+        opennin(num){
            /* BeNotify({
                 titles:'qwdddddd',
                 offsetTop:'50px'
             })*/
 
-          BeNotify({
-            titles:'qwdddddd',
-            placement:'bottomLeft'
+          let BeNotifys = BeNotify({
+            titles: num,//
+            customClass: 'bottomRight完全顶顶顶顶顶顶顶顶顶顶大大大',//
+            msgType: 'error',//
+            offsetBottom: 150,//
+            placement: 'bottomRight',//
+            bodyRender: ()=><div>1</div>,//
+            iconPreRender:()=><div>2</div>,//
+            closeRender: ()=><div>3</div>,//
+            duration:0,
+            description: '完全顶顶顶顶顶顶顶顶顶顶大大大',//
+            onClick:()=>{
+              console.log('点击方法')
+            }
           })
+        /*  setTimeout(()=>{
+            BeNotifys.close()
+          },3000)*/
         },
         customRender(){
             return (<svg-icon iconClass='Unfold_left' className="iconTitle"></svg-icon>);
