@@ -30,10 +30,9 @@ const throttle = function(func, delay) {
 // 说动关闭方法
 const closeNotify = function(instance) {
     // 根据组件uid过滤组件实例
-    let arr = instanceMap[instance._props.placement].filter(val=>{
+    instanceMap[instance._props.placement] = instanceMap[instance._props.placement].filter(val=>{
         return val._uid !== instance._uid
     })
-    instanceMap[instance._props.placement] = arr
     // 关闭
     instance.close()
 }
@@ -98,27 +97,40 @@ const createNotify = function (options = {}){
         let offsetBottom = options.offsetBottom || defaultOption.offsetBottom
         let offsetTop = options.offsetTop || defaultOption.offsetTop
         // 第二个起，偏移是第一个的偏移 + （高 + 20）* 数量
+        debugger
         if(instanceMap[instance._props.placement].length >= 1 && !isCache){
             const len = instanceObj.length
-            let preHeight = Number(window.getComputedStyle(instanceObj[len - 1].$el.children[0]).height.split('px')[0])
-            let preTop = Number(window.getComputedStyle(instanceObj[0].$el).top.split('px')[0])
-            let preBottom = Number(window.getComputedStyle(instanceObj[0].$el).bottom.split('px')[0])
-            offsetTop =   preTop + (instanceMap[instance._props.placement].length ) * (preHeight + 20)
-            offsetBottom =  preBottom + (instanceMap[instance._props.placement].length ) * (preHeight + 20)
-            if (instance._props.placement === 'topLeft' || instance._props.placement === 'topRight') {
-                instance._props.offsetTop = offsetTop + 'px'
-            }
-            if (instance._props.placement === 'bottomLeft' || instance._props.placement === 'bottomRight') {
-                instance._props.offsetBottom = offsetBottom + 'px'
-            }
+            // 当前组件实例的这些偏移设置是根据上一个组件实例计算的
+            // 所以这些操作放到一个组件实例$nextTick中处理
+            instanceObj[len - 1].$nextTick(()=>{
+                debugger
+                let preHeight = Number(window.getComputedStyle(instanceObj[0].$el.children[0]).height.split('px')[0])
+                let preTop = Number(window.getComputedStyle(instanceObj[0].$el).top.split('px')[0])
+                let preBottom = Number(instanceObj[0].offsetBottom.split('px')[0])
+                offsetTop =   preTop + (len - 1 ) * (preHeight + 20)
+                offsetBottom =  preBottom + (len - 1) * (preHeight + 20)
+                if (instance._props.placement === 'topLeft' || instance._props.placement === 'topRight') {
+                    instance._props.offsetTop = offsetTop + 'px'
+                }
+                if (instance._props.placement === 'bottomLeft' || instance._props.placement === 'bottomRight') {
+                    instance._props.offsetBottom = offsetBottom + 'px'
+                }
+            })
         }
-        else{
+        if(instanceMap[instance._props.placement].length < 1 && !isCache){
             // 第一个的时候不需要处理，直接使用传入的偏移
             if (instance._props.placement === 'topLeft' || instance._props.placement === 'topRight') {
                 instance._props.offsetTop = offsetTop
             }
             if (instance._props.placement === 'bottomLeft' || instance._props.placement === 'bottomRight') {
-                instance._props.offsetBottom = offsetBottom
+                instance.$nextTick(()=>{
+                    const preHeight = Number(window.getComputedStyle(instance.$el.children[0]).height.split('px')[0])
+                    const Bottom = Number(offsetBottom.split('px')[0])
+                    if(Bottom < preHeight ){
+                        instance._props.offsetBottom = Bottom + preHeight + 20 + 'px'
+                    }
+                })
+
             }
         }
         instance._props.bodyRender = options.bodyRender || defaultOption.bodyRender

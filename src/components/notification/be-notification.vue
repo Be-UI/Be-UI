@@ -194,13 +194,14 @@ export default {
     mounted() {
     },
     beforeUpdate() {
-        this.$nextTick(()=>{
-            const preHeight = Number(window.getComputedStyle(this.$el.children[0]).height.split('px')[0])
-            const preBottom = Number(window.getComputedStyle(this.$el).bottom.split('px')[0])
-            if(this.style.bottom && (preBottom < preHeight )){
-                this.style.bottom = preBottom + preHeight + 20 + 'px'
-            }
-        })
+        /*this.$nextTick(()=>{
+          const preHeight = Number(window.getComputedStyle(this.$el.children[0]).height.split('px')[0])
+          const preBottom = Number(window.getComputedStyle(this.$el).bottom.split('px')[0])
+          if(this.style.bottom && (preBottom < preHeight )){
+            this.style.bottom = preBottom + preHeight + 20 + 'px'
+              debugger
+          }
+        })*/
     },
     render(h) {
         return (
