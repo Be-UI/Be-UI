@@ -27,9 +27,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 1.loading的定位问题  (待测试)
 2.服务式访问的全局绑定  
 3.notification  动画  
+4.dialog 动画
 ### 排期
 1.图标组件
-2.去element化
+2.分页组件
+3.去element化
 
 
 
