@@ -1,8 +1,8 @@
 <template>
-    <div id="app" ref="chart" @click="test">
-              <be-loading :show="true">
+    <div id="app" ref="chart" @click="opennin(cuP++)">
+<!--              <be-loading :show="true">
                 <div style="width: 100%;height: 100px;background: #4D60B2"></div>
-              </be-loading>
+              </be-loading>-->
         <!-- <BePager
            :currentPage="10"
            :pageCount="10"
@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import {BeMsg} from "../src/components/message-box/be-message-box-service.js";
+//import {BeMsg} from "../src/components/message-box/be-message-box-service.js";
 // import {BeLoading} from "../src/components/Loading/be-loading-service.js";
-// import {BeNotify} from "../src/components/notification/be-notification-service.js";
+ import {BeNotify} from "../src/components/notification/be-notification-service.js";
 // import BeInput from "../src/components/input/be-input";
 export default {
     name: 'app',
@@ -74,7 +74,6 @@ export default {
             placement: 'bottomRight',//
             bodyRender: ()=><div>1</div>,//
             iconPreRender:()=><div>2</div>,//
-            closeRender: ()=><div>3</div>,//
             duration:0,
             description: '完全顶顶顶顶顶顶顶顶顶顶大大大',//
             onClick:()=>{

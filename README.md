@@ -25,9 +25,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### 已知问题
 1.loading的定位问题  (待测试)
-2.messageBox 动画  
-3.服务式访问的全局绑定  
-4.notification  动画  
-5.notification  关闭后的布局问题
+2.服务式访问的全局绑定  
+3.notification  动画  
+### 排期
+1.图标组件
+2.去element化
+
 
 

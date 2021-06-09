@@ -20,8 +20,15 @@ let instanceMap = {
  * js手动关闭方法
  * @param {Object} instance - 组件实例上下文
  * @param {Boolean} isSelf - 是否源于组件内部调用
+ * @param {Boolean} isAll - 是否关闭全部
  */
-const closeNotify = function (instance,isSelf = false,isAll = false) {
+const closeNotify = function (instance,isAll = false,isSelf = false) {
+    if (!instance) return;
+    let index = -1
+    let pacement = instance.option.placement
+    let instancesList = instanceMap[pacement]
+    let direction = /^top-/.test(pacement) ? 'top' : 'bottom';
+    let len = instancesList.length
     // 關閉全部
     if(isAll){
         Object.keys(instanceMap).forEach(placement=>{
@@ -37,10 +44,29 @@ const closeNotify = function (instance,isSelf = false,isAll = false) {
         }
         return
     }
+    // 从缓存中找到要删除的组件实例索引
+    try {
+        instancesList.forEach((val, i) => {
+            if (instance._uid === val._uid) {
+                index = i;
+                throw new Error('EndIterative');
+            }
+        });
+    }catch(e) {
+        if(e.message!="EndIterative") throw e;
+    };
+    // 从缓存中删除
+    instancesList.splice(index, 1);
+    if (len <= 1) return;
+    const removedHeight = instance.$el.offsetHeight;
+    for (let i = index; i < len - 1 ; i++) {
+            instancesList[i].$el.style[direction] =
+            parseInt(instancesList[i].$el.style[direction], 10) - removedHeight - 35 + 'px';
+    }
     // 根据组件uid过滤组件实例
-    instanceMap[instance.option.placement] = instanceMap[instance.option.placement].filter(val => {
+   /* instanceMap[pacement] = instanceMap[pacement].filter(val => {
         return val._uid !== instance._uid
-    })
+    })*/
     // 关闭
     if(!isSelf){
         instance.close()
@@ -102,19 +128,21 @@ const createNotify = function (options = {}) {
             bodyElement.appendChild(instance.$el)
         }
     } else {
-        // instance
         instance.option = option
     }
     instance.$nextTick(()=>{
         instance.option.isShow = true;
     })
-
+    // 设置组件的偏移
     let verticalOffset;
+    let direction = ''
     if (option.placement === 'topLeft' || option.placement === 'topRight') {
         verticalOffset = option.offsetTop || 0
+        direction = 'offsetTop'
     }
     if (option.placement === 'bottomLeft' || option.placement === 'bottomRight') {
         verticalOffset = option.offsetBottom || 0
+        direction = 'offsetBottom'
     }
     if (!isCache) {
         instanceObj.forEach(item => {
@@ -122,13 +150,8 @@ const createNotify = function (options = {}) {
         });
     }
     verticalOffset += 35;
-    // 第一个的时候不需要处理，直接使用传入的偏移
-    if (option.placement === 'topLeft' || option.placement === 'topRight') {
-        instance.option.offsetTop = verticalOffset
-    }
-    if (option.placement === 'bottomLeft' || option.placement === 'bottomRight') {
-        instance.option.offsetBottom = verticalOffset
-    }
+    instance.option[direction] = verticalOffset
+
     if (!isCache) {
         // 绑定事件
         instance.$selfEvent = {

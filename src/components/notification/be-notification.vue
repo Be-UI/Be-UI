@@ -20,7 +20,7 @@ const renderBody = function (h) {
                     {/**@slot 弹窗头部按钮**/}
                     <div>
                         {this.option.closeRender ? this.option.closeRender() :
-                            <i class="el-icon-close" onClick={(event) => this.close(event)}></i>}
+                            <i class="el-icon-close" onClick={(event) => this.close(event)}>awd</i>}
                     </div>
                 </div>
             </div>
@@ -115,10 +115,10 @@ export default {
              * @event close
              */
             this.$selfEvent.onClose && this.$selfEvent.onClose(event)
+            this.$closeNotify(this,false,true)
             if (this.$el && this.$el.parentNode) {
-                this.$el.parentNode.removeChild(this.$el);
+              this.$el.parentNode.removeChild(this.$el);
             }
-            this.$closeNotify(this,true)
             // 销毁组件
             this.$destroy()
         },
