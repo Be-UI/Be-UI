@@ -100,10 +100,7 @@
             /**
              * 自定义主题样式类
              */
-            customClass: {
-                type: String,
-                default: '',
-            },
+            customClass: [String , Object],
             /**
              * 是否启用前端分页
              */

@@ -323,7 +323,6 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-$mainColor3:#00ffff;
 .be-input {
   display: flex;
   align-items: center;

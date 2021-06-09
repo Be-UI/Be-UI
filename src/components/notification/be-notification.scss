@@ -73,7 +73,7 @@ $error: #F14E53FF;
                 div:nth-child(2){
                     cursor: pointer;
                 }
-             }
+            }
 
         }
     }
@@ -85,17 +85,17 @@ $error: #F14E53FF;
     .be-notification-container__topRight{
         right: 5px;
     }
-   .be-notification-body {
-       min-height: 50px;
-       margin-top: 10px;
-       .be-notification-description{
-           font-size: 14px;
-           font-family: Microsoft YaHei;
-           font-weight: 400;
-           line-height: 20px;
-           color: #000000;
-           letter-spacing: 3px;
-       }
+    .be-notification-body {
+        min-height: 50px;
+        margin-top: 10px;
+        .be-notification-description{
+            font-size: 14px;
+            font-family: Microsoft YaHei;
+            font-weight: 400;
+            line-height: 20px;
+            color: #000000;
+            letter-spacing: 3px;
+        }
     }
 }
 .be-notification__topLeft, .be-notification__bottomLeft{

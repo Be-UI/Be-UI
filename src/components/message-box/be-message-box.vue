@@ -6,8 +6,49 @@
 */
 
 <script type="text/jsx">
+const renderBox = function (h) {
+    return (
+            <div class={this.containerstyle}
+                 id={`be_message_box_container${this._uid}`}
+                 v-drag={{isDrag: this.isDrag}}>
+                <div class="be-message-box-title">
+                    <div class="be-message-box-head"
+                         id={`be_message_box_head${this._uid}`}>
+                        <div>
+                            {this.iconPreRender ? this.iconPreRender() :
+                                <i class={`el-icon-${this.msgType} icon-${this.msgType}`}></i>}
+                            <span class={`text-${this.msgType}`}>{this.titles}</span>
+                        </div>
+                        {/**@slot 弹窗头部按钮**/}
+                        <div>
+                            {this.iconNextRender ? this.iconNextRender() :
+                                <i class="el-icon-close" onClick={() => this.close()}></i>}
+                        </div>
+                    </div>
+                </div>
+                {/**@slot 弹窗主体**/}
+                <div class='be-message-box-body'>
+                    {this.bodyRender ? this.bodyRender() : ''}
+                </div>
+                {/**@slot 弹窗底部**/}
+                <div class={`be-message-box-footer be-message-box-footer__${this.footerType}`}>
+                    {this.footerRender ? this.footerRender() :
+                        <button class={`be-button be-button__mini be-button__${this.msgType}`}
+                                onClick={() => this.confirmFunc()}>
+                            知道了
+                        </button>
+                    }
+                </div>
+            </div>
+    )
+}
 export default {
     name: "BeMessageBox",
+    data(){
+      return {
+          containerClass:''
+      }
+    },
     props: {
         /**
          * 是否拖拽(完成)
@@ -90,6 +131,11 @@ export default {
             default: null,
         }
     },
+    computed: {
+        containerstyle() {
+            return this.containerClass
+        },
+    },
     methods: {
         /**
          * 关闭方法，销毁组件
@@ -111,51 +157,37 @@ export default {
         confirmFunc() {
             this.$selfEvent.confirm && this.$selfEvent.confirm()
             this.close()
+        },
+        /**
+         * 设置动画
+         */
+        setAnimate(){
+            let _this = this
+            let containerClass = `be-message-box-container`
+            let animateClass = ' be-fadeOut'
+            _this.containerClass = containerClass + animateClass
+            setTimeout(()=>{
+                _this.containerClass = containerClass + ' be-fadeIn'
+            },100)
+
         }
     },
+
     mounted() {
         if (this.isOpenModal) {
             this.dialogModels = 'be-modal'
         }
+        this.setAnimate()
     },
     render(h) {
-        if (this.isShow) {
+         if (this.isShow) {
             return (
-                <div
-                    class={`be-message-box be-message-box__${this.msgType} ${this.dialogModels} ${this.customClass}`}>
-                        <div class="be-message-box-container"
-                             id={`be_message_box_container${this._uid}`}
-                             v-drag={{isDrag: this.isDrag}}>
-                            <div class="be-message-box-title">
-                                <div class="be-message-box-head"
-                                     id={`be_message_box_head${this._uid}`}>
-                                    <div>
-                                        {this.iconPreRender ? this.iconPreRender() :
-                                            <i class={`el-icon-${this.msgType} icon-${this.msgType}`}></i>}
-                                        <span class={`text-${this.msgType}`}>{this.titles}</span>
-                                    </div>
-                                    {/**@slot 弹窗头部按钮**/}
-                                    <div>
-                                        {this.iconNextRender ? this.iconNextRender() :
-                                            <i class="el-icon-close" onClick={() => this.close()}></i>}
-                                    </div>
-                                </div>
-                            </div>
-                            {/**@slot 弹窗主体**/}
-                            <div class='be-message-box-body'>
-                                {this.bodyRender ? this.bodyRender() : ''}
-                            </div>
-                            {/**@slot 弹窗底部**/}
-                            <div class={`be-message-box-footer be-message-box-footer__${this.footerType}`}>
-                                {this.footerRender ? this.footerRender() :
-                                    <button class={`be-button be-button__mini be-button__${this.msgType}`}
-                                            onClick={() => this.confirmFunc()}>
-                                        知道了
-                                    </button>
-                                }
-                            </div>
-                        </div>
-                </div>
+            <div
+                class={`be-message-box be-message-box__${this.msgType} ${this.dialogModels} ${this.customClass}`}>
+                {
+                    renderBox.call(this,h)
+                }
+            </div>
             )
         }
 
@@ -166,19 +198,12 @@ export default {
 <style scoped lang="scss">
 @import './be-message-box.scss';
 
-.be-zoom-in-top-enter-active, .be-zoom-in-top-leave-active {
+.be-fadeIn{
     opacity: 1;
-    -webkit-transform: scaleY(1);
-    transform: scaleY(1);
-    -webkit-transition: opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-    transition: opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-    transition: transform .3s cubic-bezier(.23, 1, .32, 1), opacity .3s cubic-bezier(.23, 1, .32, 1);
-    transition: transform .3s cubic-bezier(.23, 1, .32, 1), opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-    -webkit-transform-origin: center top;
-    transform-origin: center top
+
 }
 
-.be-zoom-in-top-enter, .be-zoom-in-top-leave-active {
+.be-fadeOut {
     opacity: 0;
     -webkit-transform: scaleY(0);
     transform: scaleY(0)

@@ -94,7 +94,6 @@
 </script>
 
 <style scoped lang='scss'>
-$mainColor3:#00ffff;
     .be-input-select {
         &::-webkit-scrollbar {
             margin: 5px;

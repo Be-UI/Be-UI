@@ -38,6 +38,7 @@ $error: #F14E53FF;
 }
 .be-message-box {
     .be-message-box-container {
+        transition: opacity .5s;
         width: 305px;
         min-height: 158px;
         background: #FFFFFF;
