@@ -24,7 +24,7 @@ export function BeLoading(options = {}) {
         bgColor:'rgba(255,255,255,.5)',
         customRender : () => null,
         text:'',
-        size:'large',
+        size:'default',
         customClass:'',
         color:'#4F60A7FF',
         colorText:'black',

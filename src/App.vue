@@ -1,8 +1,8 @@
 <template>
-    <div id="app" ref="chart" @click="opennin(cuP++)">
-        <!--      <be-loading :show="true">
-                <div style="width: 100%;height: 100px;background: #4D60B2" @click="()=>{console.log(111111111)}"></div>
-              </be-loading>-->
+    <div id="app" ref="chart" @click="test">
+              <be-loading :show="true">
+                <div style="width: 100%;height: 100px;background: #4D60B2"></div>
+              </be-loading>
         <!-- <BePager
            :currentPage="10"
            :pageCount="10"
@@ -32,9 +32,10 @@
 </template>
 
 <script>
-//import {BeLoading} from "../src/components/Loading/be-loading-service.js";
-import {BeNotify} from "../src/components/notification/be-notification-service.js";
-//import BeInput from "../src/components/input/be-input";
+import {BeMsg} from "../src/components/message-box/be-message-box-service.js";
+// import {BeLoading} from "../src/components/Loading/be-loading-service.js";
+// import {BeNotify} from "../src/components/notification/be-notification-service.js";
+// import BeInput from "../src/components/input/be-input";
 export default {
     name: 'app',
     data () {
@@ -47,11 +48,18 @@ export default {
         }
     },
     components:{
+      // BeLoading
        // BeInput,
     },
     mounted() {
+
     },
     methods:{
+        test(){
+          BeMsg({
+            titles:'qwdqwd'
+          })
+        },
         opennin(num){
            /* BeNotify({
                 titles:'qwdddddd',
@@ -111,7 +119,7 @@ body,html{
 }
 #app{
     width: 30%;
-    height: calc(90%) ;
+    height: 110%;
     background-color: burlywood;
     margin-left: 10px;
     position: absolute;

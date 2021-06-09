@@ -5,7 +5,7 @@
 * @update (czh 2021/6/6)
 */
 <template>
-    <div>
+    <div style="position: relative">
         <slot></slot>
         <transition name="be-fade-in-linear">
             <div class="be-load-container"
@@ -216,13 +216,15 @@ export default {
             this.$nextTick(() => {
                 let slotElemstyle = this.getAbsolutePosition(slotElem)
                 // 根据插槽元素数据，计算loading动画位置
-                this.left = (slotElemstyle.width / 2) + slotElemstyle.left + 'px'
-                this.top = (slotElemstyle.height / 2) + slotElemstyle.top + 'px'
+                // this.left = (slotElemstyle.width / 2) + slotElemstyle.left + 'px'
+                // this.top = (slotElemstyle.height / 2) + slotElemstyle.top + 'px'
+              this.left = (slotElemstyle.width / 2)  + 'px'
+              this.top = (slotElemstyle.height / 2) + 'px'
                 // 根据插槽元素数据，计算loading遮罩位置、宽高
                 this.loadWidth = slotElemstyle.width + 'px'
                 this.laodHeight = slotElemstyle.height + 'px'
-                this.leftLoader = slotElemstyle.left + 'px'
-                this.topLoader = slotElemstyle.top + 'px'
+               // this.leftLoader = slotElemstyle.left + 'px'
+               // this.topLoader = slotElemstyle.top + 'px'
                 if (this.text) {
                     // 根据插槽元素数据，计算文字位置
                     this.$nextTick(() => {
