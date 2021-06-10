@@ -53,7 +53,7 @@ const closeNotify = function (instance,isAll = false,isSelf = false) {
             }
         });
     }catch(e) {
-        if(e.message!="EndIterative") throw e;
+        if(e.message!=="EndIterative") throw e;
     };
     // 从缓存中删除
     instancesList.splice(index, 1);
