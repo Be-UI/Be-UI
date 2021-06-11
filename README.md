@@ -24,15 +24,14 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
-1.loading的定位问题  (待测试)
-2.服务式访问的全局绑定  
-3.notification  动画  
-4.dialog 动画
-5.图标组件支持iconfont
-## 排期
 
-2.分页组件
-3.去element化
+1.服务式访问的全局绑定  
+2.notification  动画  
+3.dialog 动画  
+4.图标组件支持iconfont  
+## 排期
+1.分页组件  
+2.去element化  
 
 ## 框架内容
 ### 已有（需要修改）
@@ -48,7 +47,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 10.消息通知组件 be-notification  
 ### 计划组件（未完成）
 
-1.文本省略组件 be-ellipsis
+1.文本省略组件 be-ellipsis  
 2.弹出显示 be-toolTip
 
 

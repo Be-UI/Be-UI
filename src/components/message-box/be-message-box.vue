@@ -135,6 +135,18 @@ export default {
         containerstyle() {
             return this.containerClass
         },
+        openModal(){
+            return this.isOpenModal
+        }
+    },
+    watch:{
+        openModal(nVal){
+            if(nVal){
+                this.dialogModels = 'be-modal'
+            }else{
+                this.dialogModels = ''
+            }
+        }
     },
     methods: {
         /**

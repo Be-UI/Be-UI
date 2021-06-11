@@ -33,3 +33,4 @@ export function BeIconComponets (name,template){
     }
     Vue.component(`${name}-icon`, render)
 }
+Vue.prototype.$BeIconComponets = BeIconComponets

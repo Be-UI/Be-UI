@@ -18,6 +18,7 @@ export function BeMsg(options = {}) {
         bodyRender:null,
         iconPreRender:null,
         iconNextRender:null,
+        isOpenModal:true,
     }
     const instance = new beMsgConstructor({
         el:document.createElement('div')
@@ -29,9 +30,10 @@ export function BeMsg(options = {}) {
         bodyElement.appendChild(instance.$el)
     }
     // 手动设置props
-    Vue.nextTick(() => {
+    instance.$nextTick(() => {
         instance._props.isShow = true
         instance._props.isDrag = options.isDrag || defaultOption.isDrag
+        instance._props.isOpenModal = options.isOpenModal === undefined ? defaultOption.isOpenModal:options.isOpenModal
         instance._props.titles = options.titles || defaultOption.titles
         instance._props.customClass = options.customClass || defaultOption.customClass
         instance._props.msgType = options.msgType || defaultOption.msgType
