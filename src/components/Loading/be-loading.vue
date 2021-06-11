@@ -2,10 +2,10 @@
 * @be-loading.vue
 * @deprecated 公共的loading组件
 * @author czh
-* @update (czh 2021/6/6)
+* @update (czh 2021/6/11)
 */
 <template>
-    <div style="position: relative">
+    <div style="position: relative;height: 100%">
         <slot></slot>
         <transition name="be-fade-in-linear">
             <div class="be-load-container"
@@ -18,9 +18,9 @@
                  width:${loadWidth};
                  height:${laodHeight}`"
                  v-if="isShowLoader">
-                    <!--loading动画-->
-                    <BeLoadingAnimate></BeLoadingAnimate>
-                    <span class="be-loader-text"
+                <!--loading动画-->
+                <BeLoadingAnimate></BeLoadingAnimate>
+                <span class="be-loader-text"
                       v-if="text"
                       :style="`color:${colorText};left:${leftTxt};top:${topTxt}`"
                       :class="`be-loader-text__${sizeLoader}`">{{ text }}</span>
@@ -218,13 +218,13 @@ export default {
                 // 根据插槽元素数据，计算loading动画位置
                 // this.left = (slotElemstyle.width / 2) + slotElemstyle.left + 'px'
                 // this.top = (slotElemstyle.height / 2) + slotElemstyle.top + 'px'
-              this.left = (slotElemstyle.width / 2)  + 'px'
-              this.top = (slotElemstyle.height / 2) + 'px'
+                this.left = (slotElemstyle.width / 2)  + 'px'
+                this.top = (slotElemstyle.height / 2) + 'px'
                 // 根据插槽元素数据，计算loading遮罩位置、宽高
                 this.loadWidth = slotElemstyle.width + 'px'
                 this.laodHeight = slotElemstyle.height + 'px'
-               // this.leftLoader = slotElemstyle.left + 'px'
-               // this.topLoader = slotElemstyle.top + 'px'
+                // this.leftLoader = slotElemstyle.left + 'px'
+                // this.topLoader = slotElemstyle.top + 'px'
                 if (this.text) {
                     // 根据插槽元素数据，计算文字位置
                     this.$nextTick(() => {
@@ -279,5 +279,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    @import "loading";
+@import "loading";
 </style>

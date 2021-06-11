@@ -91,7 +91,7 @@ export default {
             customClass: 'bottomRight完全顶顶顶顶顶顶顶顶顶顶大大大',//
             msgType: 'error',//
             offsetBottom: 150,//
-            placement: 'bottomRight',//
+            placement: 'bottomLeft',//
             bodyRender: ()=><div>1</div>,//
             iconPreRender:()=><div>2</div>,//
             duration:0,

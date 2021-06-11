@@ -151,16 +151,13 @@ export default {
          */
         setAnimate(){
             let classStr = `be-notification be-notification__${this.option.msgType} be-notification__${this.option.placement} ${this.option.customClass}`
-            let Animate = ` be-notification__Animate_enter_${this.option.placement}`
-            this.containerClass = classStr + Animate
-            /*setTimeout(()=>{
-              if (this.option.placement === 'bottomRight' || this.option.placement === 'topRight') {
-                this.containerClass = `be-notification be-notification__${this.option.msgType} be-notification__${this.option.placement} ${this.option.customClass} be-notification-fade-enter-right`
-              }
-              if (this.option.placement === 'bottomLeft' || this.option.placement === 'topLeft') {
-                this.containerClass = `be-notification be-notification__${this.option.msgType} be-notification__${this.option.placement} ${this.option.customClass} be-notification-fade-enter-left`
-              }
-            },100)*/
+            this.containerClass = classStr
+            if (this.option.placement === 'bottomRight' || this.option.placement === 'topRight') {
+              this.containerClass = classStr + ' be-notification-animation-right-in be-notification-bottom'
+            }
+            if (this.option.placement === 'bottomLeft' || this.option.placement === 'topLeft') {
+                this.containerClass = classStr + ' be-notification-animation-left-in be-notification-top'
+            }
         }
     },
     created(){
@@ -188,22 +185,48 @@ export default {
 
 <style   lang="scss">
 @import './be-notification.scss';
-/*.be-notification__Animate_enter_bottomRight,
-.be-notification__Animate_enter_topRight{
-    right: 0;
-    opacity: 0;
-    -webkit-transform: translateX(100%);
-    transform: translateX(100%);
+.be-notification-bottom{
+    transition: bottom .3s;
 }
-.be-notification__Animate_enter_bottomLeft,
-.be-notification__Animate_enter_topLeft{
-    left: 0;
-    opacity: 0;
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
-}*/
+.be-notification-top{
+    transition: bottom .3s;
+}
+.be-notification-animation-right-in{
+    -webkit-animation:bounceInRight .3s .2s ease both;
+    -moz-animation:bounceInRight .3s .2s ease both;
+}
+@-webkit-keyframes bounceInRight{
+    0%{opacity:0;
+        -webkit-transform:translateX(2000px)}
+    60%{opacity:1;
+        -webkit-transform:translateX(-30px)}
+    80%{-webkit-transform:translateX(10px)}
+    100%{-webkit-transform:translateX(0)}
+}
+@-moz-keyframes bounceInRight{
+    0%{opacity:0;
+        -moz-transform:translateX(2000px)}
+    60%{opacity:1;
+        -moz-transform:translateX(-30px)}
+    80%{-moz-transform:translateX(10px)}
+    100%{-moz-transform:translateX(0)}
+}
 
-
-
+.be-notification-animation-left-in{
+    -webkit-animation:fadeInLeftBig .3s .2s ease both;
+    -moz-animation:fadeInLeftBig .3s .2s ease both;
+}
+@-webkit-keyframes fadeInLeftBig{
+    0%{opacity:0;
+        -webkit-transform:translateX(-2000px)}
+    100%{opacity:1;
+        -webkit-transform:translateX(0)}
+}
+@-moz-keyframes fadeInLeftBig{
+    0%{opacity:0;
+        -moz-transform:translateX(-2000px)}
+    100%{opacity:1;
+        -moz-transform:translateX(0)}
+}
 
 </style>
