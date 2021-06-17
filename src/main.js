@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import BeIcon from './components/svg-icon/index'
+import BeUI  from './components/index.js'
 Vue.config.productionTip = false
-Vue.use(BeIcon)
+Vue.use(BeUI)
 new Vue({
   render: h => h(App),
 }).$mount('#app')

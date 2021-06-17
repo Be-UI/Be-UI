@@ -184,7 +184,7 @@ export default {
 </script>
 
 <style   lang="scss">
-@import './be-notification.scss';
+@import 'be-notification';
 .be-notification-bottom{
     transition: bottom .3s;
 }

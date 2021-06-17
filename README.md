@@ -24,8 +24,8 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
-1.服务式访问的全局绑定  
-2.notification  动画  
+1.服务式访问的全局绑定  notification、icon
+2.组件引用编写
 3.dialog 动画  
 4.图标组件支持iconfont  
 ## 排期
