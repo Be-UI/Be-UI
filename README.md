@@ -24,11 +24,11 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
-1.dialog 动画  
-2.图标组件支持iconfont  
+1.图标组件支持iconfont  
 ## 排期
-1.分页组件  
-2.去element化  
+1.按钮
+2.分页组件  
+3.去element化  
 ## 长期排期
 1.服务式访问的全局绑定
 2.组件引用编写

@@ -1,6 +1,6 @@
 <template>
-  <div :class="spinClass">
-    <svg :class="svgClass"
+  <div class='be-icon-container' :class="spinClass">
+    <svg class="be-icon"
          :width="width"
          :height="height"
          aria-hidden="true"
@@ -64,50 +64,41 @@ export default {
     iconName() {
       return `#${this.icon}`
     },
-    // 设置对应自定义样式
-    svgClass() {
-      if (this.customClass) {
-        return 'svg-icon ' + this.customClass
-      } else {
-        return 'svg-icon'
-      }
-    },
     // 设置旋转
     spinClass() {
-      return this.spin ? 'be-icon-spin' :''
-    },
-    svgClass() {
-      if (this.customClass) {
-        return 'svg-icon ' + (this.spin ? 'be-icon-spin' :'') + this.customClass
-      } else {
-        return 'svg-icon ' + (this.spin ? 'be-icon-spin' :'')
-      }
+      return this.spin ? 'be-icon-spin ' + this.customClass: '' + this.customClass
     }
   }
 }
 </script>
 
-<style scoped>
-@keyframes spin{
+<style lang="scss" scoped>
+@keyframes spin {
   100% {
     transform: rotate(360deg);
   }
 }
-.be-icon {
-  width: 1.5em;
-  height: 1.5em;
-  vertical-align: -0.15em;
-  overflow: hidden;
+
+.be-icon-container {
+  display: inline-block;
+  .be-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    overflow: hidden;
+  }
+
+  .be-external-icon {
+    background-color: black;
+    mask-size: cover !important;
+    display: inline-block;
+  }
+
+  .be-icon-spin {
+    display: inline-block;
+    -webkit-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear;
+  }
 }
 
-.be-external-icon {
-  background-color: black;
-  mask-size: cover!important;
-  display: inline-block;
-}
-.be-icon-spin{
-  display: inline-block;
-  -webkit-animation: spin 1s infinite linear;
-  animation: spin 1s infinite linear;
-}
 </style>
