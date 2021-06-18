@@ -24,10 +24,9 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
-1.服务式访问的全局绑定  
-2.notification  动画  
-3.dialog 动画  
-4.图标组件支持iconfont  
+1.服务式访问的全局绑定(loading、messagebox、svg-icon、notification)
+2.dialog 动画  
+3.图标组件支持iconfont  
 ## 排期
 1.分页组件  
 2.去element化  
