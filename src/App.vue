@@ -1,7 +1,5 @@
 <template>
     <div id="app" ref="chart" @click="opennin(cuP++)">
-      <panda-icon customClass="wqdwqdwqd"></panda-icon>
-<!--      <be-icon icon="coin"></be-icon>-->
 <!--              <be-loading :show="true">
                 <div style="width: 100%;height: 100px;background: #4D60B2"></div>
               </be-loading>-->
@@ -34,6 +32,7 @@
 </template>
 
 <script>
+
 const PandaSvg = {
   template: `
     <svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor">
@@ -49,12 +48,9 @@ const PandaSvg = {
   `,
 };
 
-//import {BeMsg} from "../src/components/message-box/be-message-box-service.js";
-// import {BeLoading} from "../src/components/Loading/be-loading-service.js";
- import {BeNotify} from "../src/components/notification/be-notification-service.js";
 // import BeInput from "../src/components/input/be-input";
-import {BeIconComponets} from "../src/components/svg-icon/index";
-let pandaicons = BeIconComponets('panda',PandaSvg)
+import BeIcon from "../src/components/svg-icon/index";
+let pandaicons = BeIcon.BeIconComponets('panda',PandaSvg)
 export default {
     name: 'app',
     data () {
@@ -67,42 +63,27 @@ export default {
         }
     },
     components:{
-      // BeLoading
+      //BeLoading,
        // BeInput,
       pandaicons
     },
     mounted() {
-
+      this.$beNotify({
+        titles:'qwdddddd',
+        offsetTop:'50px'
+      })
     },
     methods:{
         test(){
-          BeMsg({
+          this.$beMsg({
             titles:'qwdqwd'
           })
         },
         opennin(num){
-           /* BeNotify({
+            BeNotify({
                 titles:'qwdddddd',
                 offsetTop:'50px'
-            })*/
-
-          let BeNotifys = BeNotify({
-            titles: num,//
-            customClass: 'bottomRight完全顶顶顶顶顶顶顶顶顶顶大大大',//
-            msgType: 'error',//
-            offsetBottom: 150,//
-            placement: 'bottomLeft',//
-            bodyRender: ()=><div>1</div>,//
-            iconPreRender:()=><div>2</div>,//
-            duration:0,
-            description: '完全顶顶顶顶顶顶顶顶顶顶大大大',//
-            onClick:()=>{
-              console.log('点击方法')
-            }
-          })
-        /*  setTimeout(()=>{
-            BeNotifys.close()
-          },3000)*/
+            })
         },
         customRender(){
             return (<svg-icon iconClass='Unfold_left' className="iconTitle"></svg-icon>);

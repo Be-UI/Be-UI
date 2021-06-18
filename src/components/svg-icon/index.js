@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import SvgIcon from './be-icon.vue'
+import SvgIcon from './src/be-icon.vue'
 // 获取创建svg上下文
 const req = require.context('../../assets/icon', false, /\.svg$/)
 const requireAll = requireContext => requireContext.keys().map(requireContext)
@@ -8,16 +8,15 @@ requireAll(req)
 const BeIcon = {
     install:function(Vue) {
         Vue.component('be-icon', SvgIcon)
-    }
-}
-export default BeIcon;
-/**
- * 自定义图标方法,该方法会直接根据参数name构造图名为 name-icon 的图标组件
- * @param name - 组件名称
- * @param template 组件渲染模板
- * @constructor
- */
-export function BeIconComponets (name,template){
+    },
+    service:SvgIcon,
+    /**
+     * 自定义图标方法,该方法会直接根据参数name构造图名为 name-icon 的图标组件
+     * @param name - 组件名称
+     * @param template 组件渲染模板
+     * @constructor
+     */
+    BeIconComponets:(name,template) => {
     let render  = {
         template:`<div :class="spinClass">
                     <svg :class="svgClass"
@@ -33,4 +32,5 @@ export function BeIconComponets (name,template){
     }
     Vue.component(`${name}-icon`, render)
 }
-Vue.prototype.$BeIconComponets = BeIconComponets
+}
+export default BeIcon;
