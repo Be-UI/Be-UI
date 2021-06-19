@@ -4,6 +4,7 @@ import SvgIcon from './src/be-icon.vue'
 const req = require.context('../../assets/icon', false, /\.svg$/)
 const requireAll = requireContext => requireContext.keys().map(requireContext)
 requireAll(req)
+const customCache = new Set();
 // 构造beIcon组件
 const BeIcon = {
     install: function (Vue) {
@@ -19,19 +20,38 @@ const BeIcon = {
     BeIconComponets: (name, template) => {
         let render = {
             template: `
-              <div :class="spinClass">
-              <svg :class="svgClass"
+              <div class='be-icon-container' :class="spinClass">
+              <svg class="be-icon"
                    :width="width"
                    :height="height"
                    aria-hidden="true"
                    v-on="$listeners">
                 ${template.template}
               </svg>
-              </div>`,
+              </div>
+            `,
             props: SvgIcon.props,
             computed: SvgIcon.computed,
         }
-        Vue.component(`${name}-icon`, render)
+       return Vue.component(`${name}-icon`, render)
+    },
+    createFromIconfontCN:(url,name) => {
+        if (
+            typeof document !== 'undefined' &&
+            typeof window !== 'undefined' &&
+            typeof document.createElement === 'function' &&
+            typeof url === 'string' &&
+            url.length &&
+            !customCache.has(url)
+        ) {
+            const script = document.createElement('script');
+            script.setAttribute('src', url);
+            script.setAttribute('data-namespace', url);
+            customCache.add(url);
+            document.body.appendChild(script);
+        }
     }
 }
 export default BeIcon;
+export const BeIconComponets = BeIcon.BeIconComponets;
+export const createFromIconfontCN = BeIcon.createFromIconfontCN;

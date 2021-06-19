@@ -1,0 +1,16 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10135501",
+      "name": "厨余垃圾-残枝落叶",
+      "font_class": "chuyulaji-canzhilaye",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    }
+  ]
+}
