@@ -26,9 +26,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
-1.按钮  
-2.分页组件  
-3.去element化  
+1.分页组件  
+2.去element化  
 ## 长期排期
 1.服务式访问的全局绑定  
 2.组件引用编写
@@ -48,15 +47,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 1.文本省略组件 be-ellipsis  
 2.弹出显示 be-toolTip
 
-
-
-
-按钮：
-
-
-4. 圆形
-
-8. 图标按钮 tag
 
 
 
