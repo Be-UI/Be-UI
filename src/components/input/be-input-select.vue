@@ -93,7 +93,7 @@
     }
 </script>
 
-<style scoped lang='scss'>
+<style lang='scss'>
     .be-input-select {
         &::-webkit-scrollbar {
             margin: 5px;

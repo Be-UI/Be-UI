@@ -1,6 +1,12 @@
 <template>
     <div id="app" ref="chart" >
-    <be-icon icon="icon-chuyulaji-canzhilaye"></be-icon>
+    <be-button size="medium"
+               round="50"
+               isIcon
+               @click="()=>{loading = !loading}"
+               type="error"
+               preIcon="fill-in"
+               :loading="loading">测试按钮</be-button>
 <!--      <be-icon icon="coin"></be-icon>-->
 <!--              <be-loading :show="true">
                 <div style="width: 100%;height: 100px;background: #4D60B2"></div>
@@ -55,7 +61,7 @@ const PandaSvg = {
 };
 
 //import {BeMsg} from "../src/components/message-box/be-message-box-service.js";
-// import {BeLoading} from "../src/components/Loading/be-loading-service.js";
+// import {BeLoading} from "../src/components/loading/be-loading-service.js";
 // import BeInput from "../src/components/input/be-input";
 // import {BeIconComponets} from "../src/components/svg-icon/index";
 // let pandaicons = BeIconComponets('panda',PandaSvg)
@@ -69,6 +75,7 @@ export default {
             show:false,
             isEdit:true,
             links:null,
+            loading:false,
             cuP:1,
             text:''
         }

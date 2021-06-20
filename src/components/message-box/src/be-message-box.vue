@@ -207,8 +207,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-@import 'be-message-box';
+<style lang="scss">
+@import 'src/assets/style/be-message-box';
 
 .be-fadeIn{
     opacity: 1;

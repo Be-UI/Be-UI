@@ -40,13 +40,28 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 4.输入框组件   be-input  
 5.loading组件 be-loading  
 6.消息对话组件 be-message-box  
-7.分页组件 be-pagination  
+7.分页组件 be-pager  
 8.图标组件 be-icon  
 9.消息通知组件 be-notification  
 ### 计划组件（未完成）
 
 1.文本省略组件 be-ellipsis  
 2.弹出显示 be-toolTip
+
+
+
+
+按钮：
+
+
+4. 圆形
+
+8. 图标按钮 tag
+
+
+
+
+
 
 
 

@@ -72,7 +72,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @keyframes spin {
   100% {
     transform: rotate(360deg);
@@ -88,17 +88,11 @@ export default {
     overflow: hidden;
   }
 
-  .be-external-icon {
-    background-color: black;
-    mask-size: cover !important;
-    display: inline-block;
-  }
-
-  .be-icon-spin {
-    display: inline-block;
-    -webkit-animation: spin 1s infinite linear;
-    animation: spin 1s infinite linear;
-  }
 }
 
+.be-icon-spin {
+  display: inline-block;
+  -webkit-animation: spin 1s infinite linear;
+  animation: spin 1s infinite linear;
+}
 </style>

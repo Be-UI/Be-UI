@@ -65,7 +65,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .be-footer {
         width: 100%;
         font-size: 12px;

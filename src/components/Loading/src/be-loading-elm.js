@@ -4,7 +4,7 @@
 * @author czh
 * @update (czh 2021/06/06)
 */
-import './loading.scss'
+import '../../../assets/style/be-loading.scss'
 
 const renderCircle = function (h,color) {
     return (

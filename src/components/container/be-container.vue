@@ -39,7 +39,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .be-container {
         display: flex;
         flex-direction: row;

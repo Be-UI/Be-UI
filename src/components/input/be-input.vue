@@ -322,7 +322,7 @@ export default {
 }
 </script>
 
-<style scoped lang='scss'>
+<style lang='scss'>
 .be-input {
   display: flex;
   align-items: center;

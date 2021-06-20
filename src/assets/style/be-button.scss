@@ -1,0 +1,339 @@
+@import 'common';
+
+.be-button {
+  border-radius: 2px;
+  outline: 0;
+  border: 0;
+  color: white;
+  display: inline-block;
+
+  .be-button-body {
+    margin: 0px auto;
+    display: flex;
+
+    .be-button__inner {
+      border: 0;
+      outline: 0;
+      cursor: pointer;
+      padding: 0;
+      background: transparent;
+      vertical-align: bottom;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .be-button__inner__disabled {
+      cursor: not-allowed;
+    }
+
+    .be-button-preIcon__error,
+    .be-button-nextIcon__error,
+    .be-button-preIcon__warning,
+    .be-button-nextIcon__warning,
+    .be-button-preIcon__success,
+    .be-button-nextIcon__success {
+      .be-icon {
+        use {
+          fill: $whiteText;
+        }
+      }
+    }
+
+    .be-button-preIcon__info,
+    .be-button-nextIcon__info,
+    .be-button-preIcon__default,
+    .be-button-nextIcon__default {
+      .be-icon {
+        use {
+          fill: $defaultText;
+        }
+      }
+    }
+
+    .be-button-preIcon__primary,
+    .be-button-nextIcon__primary {
+      .be-icon {
+        use {
+          fill: $primaryText;
+        }
+      }
+    }
+
+    .be-button-preIcon {
+      .be-icon {
+        vertical-align: -0.1em;
+      }
+    }
+
+    .be-button-nextIcon {
+      .be-icon {
+        vertical-align: -0.1em;
+      }
+    }
+  }
+
+
+}
+
+.be-button__mini {
+  height: 24px;
+  line-height: 24px;
+  padding: 0 10px;
+  box-sizing: border-box;
+
+  button {
+    line-height: 24px;
+  }
+}
+
+.be-button__medium {
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  box-sizing: border-box;
+
+  button {
+    line-height: 30px;
+  }
+}
+
+.be-button__large {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  box-sizing: border-box;
+
+  button {
+    line-height: 40px;
+  }
+}
+
+.be-button__error {
+  background: $error;
+  color: $whiteText;
+
+  button {
+    color: $whiteText;
+  }
+
+  border: 0;
+
+  &:hover {
+    background: $errorHover;
+  }
+}
+
+.be-button__info {
+  background: $default;
+  color: $defaultText;
+
+  button {
+    color: $defaultText;
+  }
+
+  border: 0;
+
+  &:hover {
+    background: #eeeeee;
+  }
+}
+
+.be-button__success {
+  background: $success;
+  color: $whiteText;
+
+  button {
+    color: $whiteText;
+  }
+
+  border: 0;
+
+  &:hover {
+    background: $successHover;
+  }
+}
+
+.be-button__warning {
+  background: $warning;
+  color: $whiteText;
+
+  button {
+    color: $whiteText;
+  }
+
+  border: 0;
+
+  &:hover {
+    background: $warningHover;
+  }
+}
+
+.be-button__primary {
+  color: $primaryText;
+  background: $primary;
+
+  button {
+    color: $primaryText;
+  }
+
+  border: 0;
+
+  &:hover {
+    background: $primaryHover;
+    color: $whiteText;
+
+    button {
+      color: $whiteText;
+    }
+
+    .be-button-preIcon__primary,
+    .be-button-nextIcon__primary {
+      .be-icon {
+        use {
+          fill: $whiteText;
+        }
+
+      }
+    }
+
+    border-color: $primaryText;
+  }
+}
+
+.be-button__default {
+  background: $default;
+  color: $defaultText;
+  border: 0;
+
+  button {
+    color: $defaultText;
+  }
+
+  &:hover {
+    color: $primaryText;
+
+    button {
+      color: $primaryText;
+    }
+
+    .be-button-preIcon__default,
+    .be-button-nextIcon__default {
+      .be-icon {
+        use {
+          fill: $primaryText;
+        }
+
+      }
+    }
+
+    background: $primary;
+  }
+}
+
+
+.be-button__error__border {
+  background: $error;
+  color: $whiteText;
+  border-color: $errorBorder;
+  border-width: 1px;
+
+  button {
+    color: $whiteText;
+  }
+
+  &:hover {
+    background: $errorHover;
+    border-color: $errorHoverBorder;
+  }
+}
+
+.be-button__info__border {
+  background: $default;
+  color: $defaultText;
+  border-color: $infoBorder;
+  border-width: 1px;
+
+  button {
+    color: $defaultText;
+  }
+
+  &:hover {
+    background: #eeeeee;
+    border-color: $infoHoverBorder;
+  }
+}
+
+.be-button__success__border {
+  background: $success;
+  color: $whiteText;
+  border-color: $successBorder;
+  border-width: 1px;
+
+  button {
+    color: $whiteText;
+  }
+
+  &:hover {
+    background: $successHover;
+    border-color: $successHoverBorder;
+  }
+}
+
+.be-button__warning__border {
+  background: $warning;
+  color: $whiteText;
+  border-color: $warningBorder;
+  border-width: 1px;
+
+  button {
+    color: $whiteText;
+  }
+
+  &:hover {
+    background: $warningHover;
+    border-color: $warningHoverBorder;
+  }
+}
+
+.be-button__primary__border {
+  color: $primaryText;
+  background: $primary;
+  border-color: $primaryBorder;
+  border-width: 1px;
+
+  button {
+    color: $primaryText;
+  }
+
+  &:hover {
+    background: $primaryHover;
+    color: $whiteText;
+
+    button {
+      color: $whiteText;
+    }
+
+    border-color: $primaryHoverBorder;
+  }
+}
+
+.be-button__default__border {
+  background: $default;
+  color: $defaultText;
+  border-width: 1px;
+
+  button {
+    color: $defaultText;
+  }
+
+  &:hover {
+    button {
+      color: $primaryText;
+    }
+
+    color: $primaryText;
+    background: $primary;
+    border-color: $primaryBorder;
+  }
+}
+

@@ -125,7 +125,7 @@ export default {
     },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .Be-contextmenu {
     .Be-contextmenu-divider {
         height: 0;

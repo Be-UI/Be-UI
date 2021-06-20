@@ -60,7 +60,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .be-header {
          width: 100%;
         font-size: 12px;

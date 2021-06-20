@@ -55,3 +55,4 @@ export function BeLoading(options = {}) {
     });
     return instance
 }
+export const BeLoadingComp = beLoadingComponents

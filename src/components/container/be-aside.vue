@@ -49,7 +49,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .be-aside{
         box-sizing: border-box;
         flex:3;

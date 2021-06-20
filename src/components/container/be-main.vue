@@ -27,7 +27,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .be-main {
         display: block;
         flex: 1;
