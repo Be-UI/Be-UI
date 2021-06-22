@@ -1,12 +1,19 @@
 <template>
     <div id="app" ref="chart" >
-    <be-button size="medium"
+      <be-pager
+          @change="(num)=>pageParams.currentPage = num"
+          :currentPage="pageParams.currentPage"
+          :pageCount="pageParams.pageCount"
+          :pagerCount="pageParams.pagerCount">
+
+      </be-pager>
+<!--    <be-button size="medium"
                round="50"
                isIcon
                @click="()=>{loading = !loading}"
                type="error"
                preIcon="fill-in"
-               :loading="loading">测试按钮</be-button>
+               :loading="loading">测试按钮</be-button>-->
 <!--      <be-icon icon="coin"></be-icon>-->
 <!--              <be-loading :show="true">
                 <div style="width: 100%;height: 100px;background: #4D60B2"></div>
@@ -77,7 +84,12 @@ export default {
             links:null,
             loading:false,
             cuP:1,
-            text:''
+            text:'',
+            pageParams:{
+              currentPage:1,
+              pageCount:77,
+              pagerCount:10,
+            }
         }
     },
     components:{
@@ -100,7 +112,7 @@ body,html{
     background-color: rgb(52, 80, 91);
 }
 #app{
-    width: 30%;
+    width:40%;
     height: 110%;
     background-color: burlywood;
     margin-left: 10px;

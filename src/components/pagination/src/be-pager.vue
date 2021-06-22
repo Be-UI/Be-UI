@@ -1,56 +1,81 @@
 <template>
-  <!--***************** 常规分页 **********************-->
-  <ul @click="onPagerClick" class="el-pager" v-if="!isDynamic">>
-    <!--第一页-->
-    <li
-      :class="{ active: currentPage === 1, disabled }"
-      class="number"
-      v-if="pageCount > 0">1
-    </li>
-    <!--更多上页缩略翻页-->
-    <li
-      :class="[quickprevIconClass, { disabled }]"
-      @mouseenter="onMouseenter('left')"
-      @mouseleave="quickprevIconClass = 'el-icon-more'"
-      class="el-icon more btn-quickprev"
-      v-if="showPrevMore">
-    </li>
-    <li
-      :class="{ active: currentPage === pager, disabled }"
-      :key="pager"
-      class="number"
-      v-for="pager in pagers">{{ pager }}
-    </li>
-    <!--更多下页缩略翻页-->
-    <li
-      :class="[quicknextIconClass, { disabled }]"
-      @mouseenter="onMouseenter('right')"
-      @mouseleave="quicknextIconClass = 'el-icon-more'"
-      class="el-icon more btn-quicknext"
-      v-if="showNextMore">
-    </li>
-    <!--最后一页-->
-    <li
-      :class="{ active: currentPage === pageCount, disabled }"
-      class="number"
-      v-if="pageCount > 1">{{ pageCount }}
-    </li>
-  </ul>
-  <!--***************** 动态分页 **********************-->
-  <ul @click="onPagerClick" class="el-pager" v-else-if="isDynamic">
-    <li
-      :class="{ active: currentPage === pager, disabled }"
-      :key="pager"
-      class="number"
-      v-for="pager in pagersDynamic">{{ pager }}
-    </li>
-  </ul>
+  <div>
+    <ul class="be-pager">
+      <li @click="prePage"><be-icon icon="left"></be-icon></li>
+    </ul>
+    <!--***************** 常规分页 **********************-->
+    <ul @click="onPagerClick" class="be-pager" v-if="!isDynamic">
+      <!--第一页-->
+      <li
+          :class="{ active: currentPage === 1, disabled }"
+          class="number"
+          v-if="pageCount > 0">1
+      </li>
+      <!--更多上页缩略翻页-->
+      <li
+          :class="[quickprevIconClass, { disabled }]"
+          @mouseenter="onMouseenter('left')"
+          @mouseleave="hoverPreIconClass = '#409EFF'"
+          v-if="showPrevMore">
+        <be-icon :icon="quickprevIconClass"
+                 class="more btn-quickprev"
+                 :color="hoverPreIconClass"></be-icon>
+      </li>
+      <!--分页主体-->
+      <li
+          :class="{ active: currentPage === pager, disabled }"
+          :key="pager"
+          class="number"
+          v-for="pager in pagers">{{ pager }}
+      </li>
+      <!--更多下页缩略翻页-->
+      <li
+          :class="[quicknextIconClass, { disabled }]"
+          @mouseenter="onMouseenter('right')"
+          @mouseleave="hoverNextIconClass = '#303133'"
+          v-if="showNextMore">
+        <be-icon :icon="quicknextIconClass"
+                 class="more btn-quicknext"
+                 :color="hoverNextIconClass"></be-icon>
+      </li>
+      <!--最后一页-->
+      <li
+          :class="{ active: currentPage === pageCount, disabled }"
+          class="number"
+          v-if="pageCount > 1">{{ pageCount }}
+      </li>
+    </ul>
+    <!--***************** 动态分页 **********************-->
+    <ul @click="onPagerClick" class="be-pager" v-else-if="isDynamic">
+      <li
+          :class="{ active: currentPage === pager, disabled }"
+          :key="pager"
+          class="number"
+          v-for="pager in pagersDynamic">{{ pager }}
+      </li>
+    </ul>
+    <ul class="be-pager">
+      <li @click="nextPage"><be-icon icon="right"></be-icon></li>
+    </ul>
+  </div>
+
 </template>
 
 <script type="text/babel">
   import pagerDynamic from "./be-pager-dynamic";
   export default {
     name: 'BePager',
+    data() {
+      return {
+        current: null,
+        showPrevMore: false,
+        showNextMore: false,
+        quicknextIconClass: 'more',
+        quickprevIconClass: 'more',
+        hoverNextIconClass: '#303133',
+        hoverPreIconClass: '#303133'
+      };
+    },
     mixins: [pagerDynamic],
     props: {
       /**
@@ -91,15 +116,62 @@
 
     watch: {
       showPrevMore(val) {
-        if (!val) this.quickprevIconClass = 'el-icon-more';
+        if (!val) {
+          this.quickprevIconClass = 'more';
+        }
       },
 
       showNextMore(val) {
-        if (!val) this.quicknextIconClass = 'el-icon-more';
+        if (!val) {
+          this.quicknextIconClass = 'more';
+        }
       }
     },
 
     methods: {
+      /**
+       * 翻页事件
+       * @param {String} type - 类型
+       */
+      changePage(type){
+        let newPage = 0
+        if(type === 'next'){
+           newPage = this.currentPage + 1
+        }else{
+          newPage = this.currentPage - 1
+        }
+        const pageCount = this.pageCount;
+        const currentPage = this.currentPage;
+        // 点击缩略翻页时的偏移量
+        const pagerCountOffset = this.pagerCount - 100;
+        // 缩略翻页 可能会超出页数范围，这里做限制
+        if (!isNaN(newPage)) {
+          if (newPage < 1) {
+            newPage = 1;
+          }
+          if (newPage > pageCount) {
+            newPage = pageCount;
+          }
+        }
+        if (newPage !== currentPage) {
+          /**
+           * 返回新页码
+           */
+          this.$emit('change', newPage);
+        }
+      },
+      /**
+       * 上页方法
+       */
+      prePage(){
+        this.changePage('pre')
+      },
+      /**
+       * 下页方法
+       */
+      nextPage(){
+       this.changePage('next')
+      },
       /**
        * 页码点击事件
        * @param {Event} event - 事件对象
@@ -114,7 +186,7 @@
         const pageCount = this.pageCount;
         const currentPage = this.currentPage;
         // 点击缩略翻页时的偏移量
-        const pagerCountOffset = this.pagerCount - 100;
+        const pagerCountOffset = this.pagerCount;
         // 判断点击的元素class 是否为缩略翻页，并设置对应偏移页码 newPage
         if (target.className.indexOf('more') !== -1) {
           if (target.className.indexOf('quickprev') !== -1) {
@@ -147,9 +219,11 @@
       onMouseenter(direction) {
         if (this.disabled) return;
         if (direction === 'left') {
-          this.quickprevIconClass = 'el-icon-d-arrow-left';
+          this.hoverPreIconClass = '#409EFF'
+          //this.quickprevIconClass = 'be-icon-d-arrow-left';
         } else {
-          this.quicknextIconClass = 'el-icon-d-arrow-right';
+          this.hoverNextIconClass = '#409EFF'
+          //this.quicknextIconClass = 'be-icon-d-arrow-right';
         }
       }
     },
@@ -165,7 +239,6 @@
         const halfPagerCount = (pagerCount - 1) / 2;
         const currentPage = Number(this.currentPage);
         const pageCount = Number(this.pageCount);
-
         let showPrevMore = false;
         let showNextMore = false;
         // 根据页数和显示页数，判断是否显示翻页缩略
@@ -189,13 +262,13 @@
         } else if ((!showPrevMore && showNextMore) || (!showPrevMore && !showNextMore)) {
           // 只显示下页缩略翻页或都不显示时，pagerCount的有效参数必须大于2
           // i 从2开始，刚好排除了第一页和最后一页永远都是显示的次数
-          for (let i = 2; i < pagerCount; i++) {
+          for (let i = 2; i < pagerCount ; i++) {
             array.push(i);
           }
         } else if (showPrevMore && showNextMore) {
           // 上下页缩略翻页都显示时，渲染范围根据当前页，前后各偏移
           const offset = Math.floor(pagerCount / 2) - 1;
-          for (let i = currentPage - offset; i <= currentPage + offset; i++) {
+          for (let i = currentPage - offset; i < currentPage + offset; i++) {
             array.push(i);
           }
         }
@@ -203,16 +276,9 @@
         this.showNextMore = showNextMore;
         return array;
       }
-    },
-
-    data() {
-      return {
-        current: null,
-        showPrevMore: false,
-        showNextMore: false,
-        quicknextIconClass: 'el-icon-more',
-        quickprevIconClass: 'el-icon-more'
-      };
     }
   };
 </script>
+<style  lang="scss">
+  @import 'src/assets/style/be-pager';
+</style>

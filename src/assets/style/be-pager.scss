@@ -1,0 +1,65 @@
+.be-pager {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  list-style: none;
+  font-size: 0;
+}
+
+
+.be-pager, .be-pager li {
+  vertical-align: top;
+  margin: 0;
+  display: inline-block;
+}
+
+.be-pager, .be-pagination.is-background .btn-next, .be-pagination.is-background .btn-prev {
+  padding: 0;
+}
+
+.be-pager li {
+  padding: 0 4px;
+  font-size: 13px;
+  min-width: 35.5px;
+  height: 28px;
+  line-height: 28px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+
+.be-dialog, .be-pager li {
+  background: #FFF;
+  -webkit-box-sizing: border-box;
+}
+
+.be-pager li.btn-quicknext, .be-pager li.btn-quickprev {
+  line-height: 28px;
+  color: #303133;
+}
+
+.be-pager li {
+  padding: 0 4px;
+  font-size: 13px;
+  min-width: 35.5px;
+  height: 28px;
+  line-height: 28px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+
+.be-pager li.active {
+  color: #409EFF;
+  cursor: default;
+}
+
+
+.be-pager li, .be-pager li.btn-quicknext:hover, .be-pager li.btn-quickprev:hover {
+  cursor: pointer;
+}
+
+.be-pager .more::before {
+  line-height: 30px;
+}
