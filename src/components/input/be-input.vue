@@ -20,8 +20,8 @@
           :value="value"
           :maxlength="maxLen"
           @input="handleInput($event.target.value)"
-          @blur="handleFocus($event.target.value)"
-          @focus="handleBlur($event.target.value,$event)"
+          @blur="handleBlur($event.target.value)"
+          @focus="handleFocus($event.target.value,$event)"
           class="be-input__inner">
       <i @click="handleIcon" :class='`el-icon-${nextIcon}`' class="be-input-nextIcon" v-if="nextIcon"></i>
       <!--清除按钮-->
@@ -214,16 +214,16 @@ export default {
       this.$emit('input', val)
     },
     /**
-     * focus 事件处理方法
+     * blur 事件处理方法
      * @param {String | Number} value - 更新后值
      */
-    handleFocus(value) {
+    handleBlur(value) {
       this.expandStyle = ''
-      /** 输入focus事件
-       * @event focus
+      /** 输入 blur 事件
+       * @event blur
        * @param {String | Number} value - 输入框值
        */
-      this.$emit('focus', value)
+      this.$emit('blur', value)
     },
     /**
      * 关闭输入建议下拉框，方法由指令v-click-outside调用
@@ -232,11 +232,11 @@ export default {
       this.isShowSelect = false
     },
     /**
-     * blur 事件处理方法
+     * focus 事件处理方法
      * @param {String | Number} value - 更新后值
      * @param {Event} event - 事件对象
      */
-    handleBlur(value, event) {
+    handleFocus(value, event) {
       const $eventDom = event.target.parentElement
       this.eventDom = $eventDom
       // 触发输入建议回调方法，获取下拉列表数据
@@ -247,11 +247,11 @@ export default {
         this.computedPositon($eventDom)
         this.isShowSelect = true
       }
-      /** 输入 blur 事件
-       * @event blur
+      /** 输入 focus 事件
+       * @event focus
        * @param {String | Number} value - 输入框值
        */
-      this.$emit('blur', value)
+      this.$emit('focus', value)
     },
     /**
      * 获取输入建议
