@@ -1,10 +1,9 @@
 <template>
-  <div class='be-icon-container' :class="spinClass">
+  <div class='be-icon-container' :class="spinClass" v-on="$listeners" >
     <svg class="be-icon"
          :width="width"
          :height="height"
-         aria-hidden="true"
-         v-on="$listeners">
+         aria-hidden="true">
       <use :xlink:href="iconName" :fill="color"/>
     </svg>
   </div>

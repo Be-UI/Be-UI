@@ -3,7 +3,7 @@ export default {
     pagersDynamic() {
       let array = []
       const currentPage = Number(this.currentPage) >= 1 ? Number(this.currentPage) : 1
-      const showPageCount = Number(this.isShowPageCount)
+      const showPageCount = Number(this.pagerShowCount)
       const halfPagerCount = parseInt(showPageCount / 2 );
       // 小于等于showPageCount中位数halfPagerCount 显示范围1-showPageCount
       if(currentPage <= halfPagerCount){

@@ -1,11 +1,17 @@
 <template>
     <div id="app" ref="chart" >
-      <be-pager
-          @change="(num)=>pageParams.currentPage = num"
+<!--      <be-pager
+          @change="test"
           :currentPage="pageParams.currentPage"
           :pageCount="pageParams.pageCount"
-          :pagerCount="pageParams.pagerCount">
-
+          :pagerShowCount="pageParams.pagerCount">
+      </be-pager>-->
+      <be-pager
+          @change="test"
+          :currentPage="pageParams.currentPage"
+          :pageCount="pageParams.pageCount"
+          is-dynamic
+          :pagerShowCount="10">
       </be-pager>
 <!--    <be-button size="medium"
                round="50"
@@ -99,7 +105,10 @@ export default {
 
     },
     methods:{
-
+      test(num){
+        this.pageParams.currentPage = num;
+        console.log(num)
+      }
     }
 }
 </script>
