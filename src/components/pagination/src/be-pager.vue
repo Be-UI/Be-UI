@@ -4,7 +4,7 @@
       <li @click="prePage"><be-icon icon="left"></be-icon></li>
     </ul>
     <!--***************** 常规分页 **********************-->
-    <ul @click="onPagerClick" class="be-pager" v-if="!isDynamic">
+    <ul @click="onPagerClick" class="be-pager" v-if="!isDynamic && !isFront">
       <!--第一页-->
       <li :class="{ active: currentPage === 1, disabled }"
           class="number"
@@ -43,11 +43,19 @@
       </li>
     </ul>
     <!--***************** 动态分页 **********************-->
-    <ul @click="onPagerClick" class="be-pager" v-else-if="isDynamic">
+    <ul @click="onPagerClick" class="be-pager" v-else-if="isDynamic && !isFront">
       <li :class="{ active: currentPage === pager, disabled }"
           :key="pager"
           class="number"
           v-for="pager in pagersDynamic">{{ pager }}
+      </li>
+    </ul>
+    <!--***************** 前端分页 **********************-->
+    <ul @click="onPagerClick" class="be-pager" v-else-if="!isDynamic && isFront">
+      <li :class="{ active: currentPage === pager, disabled }"
+          :key="pager"
+          class="number"
+          v-for="pager in frontList">{{ pager }}
       </li>
     </ul>
     <ul class="be-pager">
@@ -60,6 +68,7 @@
 <script type="text/babel">
   import pagerDynamic from "./be-pager-dynamic";
   import pagerOrdinary from "./be-pager-ordinary";
+  import pagerFront from "./be-pager-front";
   export default {
     name: 'BePager',
     data() {
@@ -73,8 +82,15 @@
         hoverPreIconClass: '#303133'
       };
     },
-    mixins: [pagerDynamic,pagerOrdinary],
+    mixins: [pagerDynamic,pagerOrdinary,pagerFront],
     props: {
+      /**
+       * 每页条数
+       */
+      pageSize: {
+        type: Number,
+        default: 0
+      },
       /**
        * 当前页
        */
@@ -103,6 +119,21 @@
         type: Boolean,
         default: false,
       },
+      /**
+       * 是否开启前端分页
+       */
+      isFront: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * 前端分页数据，开启前端分页后，会针对这些数据进行切片
+       * 每翻页，则会返回对于页数据
+       */
+      pageData:{
+        type: Array,
+        default: ()=>[],
+      }
     },
 
     watch: {
@@ -131,7 +162,7 @@
         }else{
           newPage = this.currentPage - 1
         }
-        const pageCount = this.pageCount;
+        const pageCount = this.isFront ? this. pageParamsFront.pageCount : this.pageCount
         const currentPage = this.currentPage;
         // 点击缩略翻页时的偏移量
         // 缩略翻页 可能会超出页数范围，这里做限制
@@ -144,10 +175,19 @@
           }
         }
         if (newPage !== currentPage) {
+          // 调用前端分页方法
+          if(type === 'next'){
+            this.nextPageFront()
+          }else{
+            this.prePageFront()
+          }
+          if (this.isFront){
+            this.$emit("updatePage", {data: this.sliceList.get(newPage)});
+          }
           /**
            * 返回新页码
            */
-          this.$emit('change', newPage);
+          this.$emit('change', {currentPage:newPage,pageCount:this.isFront ? this. pageParamsFront.pageCount : this.pageCount,pageSize:this.pageSize});
         }
       },
       /**
@@ -218,10 +258,13 @@
           }
         }
         if (newPage !== currentPage) {
+          if (this.isFront){
+            this.$emit("updatePage", {data: this.sliceList.get(newPage)});
+          }
           /**
            * 返回新页码
            */
-          this.$emit('change', newPage);
+          this.$emit('change', {currentPage:newPage,pageCount:this.isFront ? this. pageParamsFront.pageCount : this.pageCount,pageSize:this.pageSize});
         }
       },
     },

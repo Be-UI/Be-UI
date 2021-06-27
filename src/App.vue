@@ -6,12 +6,20 @@
           :pageCount="pageParams.pageCount"
           :pagerShowCount="pageParams.pagerCount">
       </be-pager>-->
-      <be-pager
+<!--      <be-pager
           @change="test"
           :currentPage="pageParams.currentPage"
           :pageCount="pageParams.pageCount"
           is-dynamic
           :pagerShowCount="10">
+      </be-pager>-->
+      <be-pager
+          @change="test"
+          isFront
+          @updatePage="updatePage"
+          :page-size="5"
+          :currentPage="pageParams.currentPage"
+          :page-data="pageData">
       </be-pager>
 <!--    <be-button size="medium"
                round="50"
@@ -91,6 +99,15 @@ export default {
             loading:false,
             cuP:1,
             text:'',
+            pageData:[
+              {num:0},
+              {num:1},
+              {num:2},
+              {num:3},
+              {num:4},
+              {num:5},
+
+            ],
             pageParams:{
               currentPage:1,
               pageCount:77,
@@ -106,8 +123,11 @@ export default {
     },
     methods:{
       test(num){
-        this.pageParams.currentPage = num;
+        this.pageParams.currentPage = num.currentPage;
         console.log(num)
+      },
+      updatePage(page){
+        console.log(page)
       }
     }
 }
