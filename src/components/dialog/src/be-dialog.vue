@@ -15,7 +15,7 @@
            :class="customClassStyle"
            v-drag="{isDrag:isDrag}">
         <div class="be-dialog-title">
-          <div class="be-dialog-contanter-head" :id="`be-head${this._uid}`">
+          <div class="be-dialog-contanter-head" :id="`be_head${this._uid}`">
             <span>{{ titles }}</span>
             <!-- @slot 弹窗头部按钮 -->
             <slot name="headerIcon">

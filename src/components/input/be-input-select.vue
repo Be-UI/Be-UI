@@ -7,9 +7,9 @@
 */
 <template>
     <transition name="be-zoom-in-top">
-        <div class="be-input-select" v-if="isShow" :style="selectStyle">
+        <div class="be-input-select" v-if="isShow" :style="selectStyle"  :id="`be_input_select${this._uid}`">
             <ul v-show="!loading" :style="selectStyle"
-                :id="`be-input-select${this._uid}`" :key="`be-input-select${this._uid}`">
+                :id="`be_input_select_ul${this._uid}`" :key="`be_input_select_ul${this._uid}`">
                 <!-- <li class="be-input-select__line" v-show="selectList.data.length > 0"></li>-->
                 <li class="be-input-select__inner"
                     v-for="(item, index) in selectList.data"
@@ -86,6 +86,14 @@
                     }
                 })
             }
+        },
+        beforeDestroy() {
+            // 组件销毁前手动删除对应下拉框，由于v-clickoutside是异步的，某些v-if场景下 无法清除dom
+            this.$nextTick(() => {
+                const bodyElement = document.querySelector('body')
+                const selectElement = document.getElementById(`be-input-select${this._uid}`)
+                bodyElement.removeChild(selectElement);
+            })
         },
         mounted() {
             this.appendEleToBody()
