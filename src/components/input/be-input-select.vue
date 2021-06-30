@@ -92,7 +92,9 @@
             this.$nextTick(() => {
                 const bodyElement = document.querySelector('body')
                 const selectElement = document.getElementById(`be-input-select${this._uid}`)
-                bodyElement.removeChild(selectElement);
+                if(selectElement){
+                    bodyElement.removeChild(selectElement);
+                }
             })
         },
         mounted() {
