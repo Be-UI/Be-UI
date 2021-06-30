@@ -52,10 +52,40 @@
     </ul>
     <!--***************** 前端分页 **********************-->
     <ul @click="onPagerClick" class="be-pager" v-else-if="!isDynamic && isFront">
+      <!--第一页-->
+      <li :class="{ active: currentPage === 1, disabled }"
+          class="number"
+          v-if="pageParamsFront.pageCount > 0">1
+      </li>
+      <!--更多上页缩略翻页-->
+      <li :class="[quickprevIconClass, { disabled }]"
+          @mouseenter="onMouseenter('left')"
+          @mouseleave="hoverPreIconClass = '#409EFF'"
+          v-if="showPrevMore">
+        <be-icon :icon="quickprevIconClass"
+                 class="more btn-quickprev"
+                 @click.stop="onPagerClick"
+                 :color="hoverPreIconClass"></be-icon>
+      </li>
       <li :class="{ active: currentPage === pager, disabled }"
           :key="pager"
           class="number"
           v-for="pager in frontList">{{ pager }}
+      </li>
+      <!--更多下页缩略翻页-->
+      <li :class="[quicknextIconClass, { disabled }]"
+          @mouseenter="onMouseenter('right')"
+          @mouseleave="hoverNextIconClass = '#303133'"
+          v-if="showNextMore">
+        <be-icon :icon="quicknextIconClass"
+                 @click.stop="onPagerClick"
+                 class="more btn-quicknext"
+                 :color="hoverNextIconClass"></be-icon>
+      </li>
+      <!--最后一页-->
+      <li :class="{ active: currentPage === pageParamsFront.pageCount, disabled }"
+          class="number"
+          v-if="pageParamsFront.pageCount > 1">{{ pageParamsFront.pageCount }}
       </li>
     </ul>
     <ul class="be-pager">
@@ -176,13 +206,12 @@
         }
         if (newPage !== currentPage) {
           // 调用前端分页方法
-          if(type === 'next'){
-            this.nextPageFront()
-          }else{
-            this.prePageFront()
-          }
           if (this.isFront){
-            this.$emit("updatePage", {data: this.sliceList.get(newPage)});
+            if(type === 'next'){
+              this.nextPageFront()
+            }else{
+              this.prePageFront()
+            }
           }
           /**
            * 返回新页码

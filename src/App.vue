@@ -17,7 +17,8 @@
           @change="test"
           isFront
           @updatePage="updatePage"
-          :page-size="5"
+          :page-size="10"
+          :pagerShowCount = "5"
           :currentPage="pageParams.currentPage"
           :page-data="pageData">
       </be-pager>
@@ -99,15 +100,7 @@ export default {
             loading:false,
             cuP:1,
             text:'',
-            pageData:[
-              {num:0},
-              {num:1},
-              {num:2},
-              {num:3},
-              {num:4},
-              {num:5},
-
-            ],
+            pageData:[],
             pageParams:{
               currentPage:1,
               pageCount:77,
@@ -119,7 +112,9 @@ export default {
      // pandaicons
     },
     mounted() {
-
+        for(let i = 1;i<=100;i ++){
+          this.pageData.push({num:i})
+        }
     },
     methods:{
       test(num){
