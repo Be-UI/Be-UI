@@ -1,8 +1,8 @@
-import paginationComponents from './src/be-pager.vue';
+import paginationComponents from './src/be-pagination.js';
 
 const pagination = {
     install:function(Vue) {
-        Vue.component('be-pager', paginationComponents)
+        Vue.component('be-pagination', paginationComponents)
     },
     service:paginationComponents
 }

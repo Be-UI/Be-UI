@@ -1,3 +1,6 @@
+.be-pager-container{
+  display: flex;
+}
 .be-pager {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -29,8 +32,9 @@
 }
 
 
-.be-dialog, .be-pager li {
+.be-pager li {
   background: #FFF;
+  margin: 0 3px;
   -webkit-box-sizing: border-box;
 }
 
@@ -42,18 +46,24 @@
 .be-pager li {
   padding: 0 4px;
   font-size: 13px;
-  min-width: 35.5px;
-  height: 28px;
-  line-height: 28px;
+  min-width: 25px;
+  height: 25px;
+  line-height: 25px;
   box-sizing: border-box;
   text-align: center;
+  border-radius: 3px;
 }
 
 
-.be-pager li.active {
+.be-pager li.active{
   color: #409EFF;
   cursor: default;
 }
+.be-pager li:hover{
+  color: #409EFF;
+}
+
+
 
 
 .be-pager li, .be-pager li.btn-quicknext:hover, .be-pager li.btn-quickprev:hover {
@@ -62,4 +72,11 @@
 
 .be-pager .more::before {
   line-height: 30px;
+}
+.be-pager__disabled li, .be-pager__disabled li.btn-quicknext:hover, .be-pager__disabled li.btn-quickprev:hover {
+  cursor: not-allowed;
+}
+.be-pager__disabled li {
+  background: #FFF;
+  -webkit-box-sizing: border-box;
 }

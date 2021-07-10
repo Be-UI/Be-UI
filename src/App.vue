@@ -13,15 +13,17 @@
           is-dynamic
           :pagerShowCount="10">
       </be-pager>-->
-      <be-pager
+      <BePagination
           @change="test"
-          isFront
           @updatePage="updatePage"
+          isFront
           :page-size="10"
           :pagerShowCount = "5"
           :currentPage="pageParams.currentPage"
           :page-data="pageData">
-      </be-pager>
+        <div slot="prev">prev </div>
+        <div slot="next">next </div>
+      </BePagination>
 <!--    <be-button size="medium"
                round="50"
                isIcon
@@ -102,7 +104,7 @@ export default {
             text:'',
             pageData:[],
             pageParams:{
-              currentPage:1,
+              currentPage:5,
               pageCount:77,
               pagerCount:10,
             }

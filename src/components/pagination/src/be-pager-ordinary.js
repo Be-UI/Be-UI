@@ -6,10 +6,10 @@ export default {
      * @returns {[]}
      */
     pagers() {
-      const pagerCount = this.pagerShowCount;
+      const pagerCount = this.$$BePagination.pagerShowCount;
       const halfPagerCount = (pagerCount - 1) / 2;
-      const currentPage = Number(this.currentPage);
-      const pageCount = Number(this.pageCount);
+      const currentPage = Number(this.$$BePagination.currentPage);
+      const pageCount = Number(this.$$BePagination.pageCount);
       let showPrevMore = false;
       let showNextMore = false;
       // 根据页数和显示页数，判断是否显示翻页缩略
