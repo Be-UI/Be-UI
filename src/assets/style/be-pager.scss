@@ -1,5 +1,7 @@
+@import 'common';
 .be-pager-container{
   display: flex;
+  align-items: center;
 }
 .be-pager {
   -webkit-user-select: none;
@@ -40,7 +42,7 @@
 
 .be-pager li.btn-quicknext, .be-pager li.btn-quickprev {
   line-height: 28px;
-  color: #303133;
+  color: $info;
 }
 
 .be-pager li {
@@ -56,11 +58,11 @@
 
 
 .be-pager li.active{
-  color: #409EFF;
+  color: $primaryText;
   cursor: default;
 }
 .be-pager li:hover{
-  color: #409EFF;
+  color: $primaryText;
 }
 
 
@@ -79,4 +81,17 @@
 .be-pager__disabled li {
   background: #FFF;
   -webkit-box-sizing: border-box;
+}
+.be-pager-info{
+  font-size: 12px;
+
+}
+.be-pager-jump{
+  margin: 0 5px;
+  font-size: 12px;
+}
+.be-pager-jump-input{
+  @include be-input;
+  margin: 0 2px;
+  width: 35px;
 }

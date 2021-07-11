@@ -21,6 +21,7 @@ export default {
                 this.sliceList.set(1, []);
                 this.pageParamsFront.pageCount = 1;
             }
+            this.$emit('getPageCount',this.pageParamsFront)
             for (let i = 1; i <= maxPageNum; i++) {
                 let slice = this.$$BePagination.pageData.slice((i - 1) * this.$$BePagination.pageSize, i * this.$$BePagination.pageSize);
                 this.sliceList.set(i, slice)

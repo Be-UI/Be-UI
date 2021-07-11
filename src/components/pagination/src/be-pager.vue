@@ -14,7 +14,7 @@
       <!--更多上页缩略翻页-->
       <li :class="[quickprevIconClass, { disabled:$$BePagination.disabled }]"
           @mouseenter="onMouseenter('left')"
-          @mouseleave="hoverPreIconClass = '#409EFF'"
+          @mouseleave="hoverPreIconClass = '#303133'"
           v-if="showPrevMore">
         <be-icon :icon="quickprevIconClass"
                  class="more btn-quickprev"
@@ -61,7 +61,7 @@
       <!--更多上页缩略翻页-->
       <li :class="[quickprevIconClass, { disabled:$$BePagination.disabled }]"
           @mouseenter="onMouseenter('left')"
-          @mouseleave="hoverPreIconClass = '#409EFF'"
+          @mouseleave="hoverPreIconClass = '#303133'"
           v-if="showPrevMore">
         <be-icon :icon="quickprevIconClass"
                  class="more btn-quickprev"
@@ -166,7 +166,12 @@
           /**
            * 返回新页码
            */
-          this.$emit('change', {currentPage:newPage,pageCount:this.$$BePagination.isFront ? this. pageParamsFront.pageCount : this.$$BePagination.pageCount,pageSize:this.$$BePagination.pageSize});
+          const resData =  {
+            currentPage:newPage,
+            pageCount:this.$$BePagination.isFront ? this. pageParamsFront.pageCount : this.$$BePagination.pageCount,
+            pageSize:this.$$BePagination.pageSize
+          }
+          this.$emit('change',resData);
         }
       },
       /**
@@ -200,36 +205,40 @@
         }
       },
       /**
-       * 页码点击事件
+       * 页码点击、跳转事件
        * @param {Event} event - 事件对象
+       *
        */
-      onPagerClick(event) {
-
-        const target = event.target;
-        // 禁用或触发为ul标签 阻止事件
-        if (target.tagName === 'UL' || this.$$BePagination.disabled) {
-          return;
-        }
-        let newPage = Number(event.target.textContent);
+      onPagerClick(event,jump) {
         const pageCount = this.$$BePagination.pageCount;
         const currentPage = this.$$BePagination.currentPage;
-        // 点击缩略翻页时的偏移量
-        const pagerCountOffset = this.$$BePagination.pagerShowCount;
-        // 判断点击的元素class 是否为缩略翻页，并设置对应偏移页码 newPage
-        if (target.className && Object.prototype.toString.call(target.className) === '[object String]' && target.className.indexOf('more') !== -1) {
-          if (target.className.indexOf('quickprev') !== -1) {
-            newPage = currentPage - pagerCountOffset;
-          } else if (target.className.indexOf('quicknext') !== -1) {
-            newPage = currentPage + pagerCountOffset;
+        let newPage = jump;
+        if(!jump){
+          const target = event.target;
+          // 禁用或触发为ul标签 阻止事件
+          if (target.tagName === 'UL' || this.$$BePagination.disabled) {
+            return;
+          }
+          newPage = Number(event.target.textContent);
+          // 点击缩略翻页时的偏移量
+          const pagerCountOffset = this.$$BePagination.pagerShowCount;
+          // 判断点击的元素class 是否为缩略翻页，并设置对应偏移页码 newPage
+          if (target.className && Object.prototype.toString.call(target.className) === '[object String]' && target.className.indexOf('more') !== -1) {
+            if (target.className.indexOf('quickprev') !== -1) {
+              newPage = currentPage - pagerCountOffset;
+            } else if (target.className.indexOf('quicknext') !== -1) {
+              newPage = currentPage + pagerCountOffset;
+            }
+          }
+          if (target.className && Object.prototype.toString.call(target.className) === '[object SVGAnimatedString]' && target.className.baseVal.indexOf('be-icon') !== -1) {
+            if (target.parentElement.className.indexOf('quickprev') !== -1) {
+              newPage = currentPage - pagerCountOffset;
+            } else if (target.parentElement.className.indexOf('quicknext') !== -1) {
+              newPage = currentPage + pagerCountOffset;
+            }
           }
         }
-        if (target.className && Object.prototype.toString.call(target.className) === '[object SVGAnimatedString]' && target.className.baseVal.indexOf('be-icon') !== -1) {
-          if (target.parentElement.className.indexOf('quickprev') !== -1) {
-            newPage = currentPage - pagerCountOffset;
-          } else if (target.parentElement.className.indexOf('quicknext') !== -1) {
-            newPage = currentPage + pagerCountOffset;
-          }
-        }
+
         // 缩略翻页 可能会超出页数范围，这里做限制
         if (!isNaN(newPage)) {
           if (newPage < 1) {
@@ -240,19 +249,22 @@
           }
         }
         if (newPage !== currentPage) {
+          // 前端分页返回分页数据
           if (this.$$BePagination.isFront){
             this.$emit("updatePage", {data: this.sliceList.get(newPage)});
           }
           /**
            * 返回新页码
            */
-          this.$emit('change', {currentPage:newPage,pageCount:this.$$BePagination.isFront ? this. pageParamsFront.pageCount : this.$$BePagination.pageCount,pageSize:this.$$BePagination.pageSize});
+          const resData =  {
+            currentPage:Number(newPage),
+            pageCount:this.$$BePagination.isFront ? this. pageParamsFront.pageCount : this.$$BePagination.pageCount,
+            pageSize:this.$$BePagination.pageSize
+          }
+          this.$emit('change',resData);
         }
       },
     },
 
   };
 </script>
-<style  lang="scss">
-  @import 'src/assets/style/be-pager';
-</style>

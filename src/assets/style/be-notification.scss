@@ -1,10 +1,5 @@
 @import 'common';
-@mixin be-message-tilte{
-    font-size: 18px;
-    font-family: Microsoft YaHei;
-    font-weight: bold;
-    vertical-align: top;
-}
+
 .be-notification {
     z-index: 10;
     min-height: 100px;
