@@ -29,7 +29,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 5.分页前后置缩略hover 圖標
 ## 排期
 1.分页组件  
-2.去element化  
+2.be-toolTip 开发
+3.be-ellipsis 结合 be-toolTip
+2.去element化
 ## 长期排期
 1.服务式访问的全局绑定  
 2.组件引用编写
@@ -44,9 +46,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 7.分页组件 be-pager  
 8.图标组件 be-icon  
 9.消息通知组件 be-notification  
+10 .文本省略组件 be-ellipsis
 ### 计划组件（未完成）
-
-1.文本省略组件 be-ellipsis  
 2.弹出显示 be-toolTip
 
 
