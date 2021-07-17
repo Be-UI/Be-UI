@@ -5,13 +5,17 @@ import BeIcon from '../components/svg-icon/index.js';// 支持 按需组件式�
 import BeDialog from '../components/dialog/index.js';// 支持 按需组件式调用、全局组件调用
 import BeButton from '../components/button/index.js';// 支持 按需组件式调用、全局组件调用
 import BePager from '../components/pagination/index.js';// 支持 按需组件式调用、全局组件调用
+import BeTooltip from '../components/tooltip/index.js';// 支持 按需组件式调用、全局组件调用
+import BeEllipsis from '../components/ellipsis/index.js';// 支持 按需组件式调用、全局组件调用
 // 以BeUI在入口文件批量引用
 const components = [
     BeLoading.instance,
     BeIcon.service,
     BeDialog.service,
     BeButton.service,
-    BePager.service
+    BePager.service,
+    BeTooltip.service,
+    BeEllipsis.service
 ]
 const install = function(Vue, opts = {}) {
     components.forEach(component => {
@@ -38,3 +42,5 @@ export const beIcon = BeIcon
 export const beDialog = BeDialog
 export const beButton = BeButton
 export const bePager = BePager
+export const beTooltip = BeTooltip
+export const beEllipsis= BeEllipsis

@@ -13,17 +13,18 @@
           is-dynamic
           :pagerShowCount="10">
       </be-pager>-->
-      <BePagination
+<!--      <BePagination
           @change="test"
           @updatePage="updatePage"
           isFront
+          disabledJump
           :page-size="10"
           :pagerShowCount = "5"
           :currentPage="pageParams.currentPage"
           :page-data="pageData">
         <div slot="prev">prev </div>
         <div slot="next">next </div>
-      </BePagination>
+      </BePagination>-->
 <!--    <be-button size="medium"
                round="50"
                isIcon
@@ -65,6 +66,13 @@
         layout="right"
         titles="测试弹窗">
       </be-dialog>-->
+      <be-tooltip></be-tooltip>
+      <be-ellipsis
+          text=" 电灯熄灭 物换星移 泥牛入海<br />黑暗好像 一颗巨石 按在胸口<br />独脚大盗
+    百万富翁 摸爬滚打<br />黑暗好像 一颗巨石 按在胸口"
+          content="住在我心里孤独的 孤独的海怪 痛苦"
+          expandTrigger
+      ></be-ellipsis>
     </div>
 </template>
 

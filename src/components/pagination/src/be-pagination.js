@@ -18,9 +18,15 @@ const pageInfoComponent = function (h){
  * @return {JSX.Element}
  */
 const pageJumpComponent = function (h){
+    const disabled = this.disabled ? true : this.disabledJump ? true : false
     return (
         <div class = 'be-pager-jump'>
-            跳至<input class = 'be-pager-jump-input' type='text' value={this.jumpPage}  onkeyup={this.handleEnterEvn}/>页
+            跳至<input
+                     disabled={disabled}
+                     class = 'be-pager-jump-input'
+                     type='text'
+                     value={this.jumpPage}
+                     onkeyup={this.handleEnterEvn}/>页
         </div>
     )
 }
@@ -67,6 +73,10 @@ export default {
          * 是否禁用
          */
         disabled: Boolean,
+        /**
+         * 是否禁用输入跳转
+         */
+        disabledJump: Boolean,
         /**
          * 是否开启动态分页
          * 开启后类似于百度分页
