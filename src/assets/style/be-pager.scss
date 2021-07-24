@@ -95,3 +95,13 @@
   margin: 0 2px;
   width: 35px;
 }
+.be-pager-select{
+  margin: 0 5px;
+  .be-input-body{
+    font-size: 12px;
+    width: 30%;
+    .be-input__inner{
+      height: 16px;
+    }
+  }
+}

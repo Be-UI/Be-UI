@@ -6,10 +6,13 @@ export default {
      * @returns {[]}
      */
     pagers() {
-      const pagerCount = this.$$BePagination.pagerShowCount;
+      let pagerCount = this.$$BePagination.pagerShowCount;
       const halfPagerCount = (pagerCount - 1) / 2;
-      const currentPage = Number(this.$$BePagination.currentPage);
       const pageCount = Number(this.$$BePagination.pageCount);
+      this.maxPageNum = Math.ceil(pageCount / Number(this.$$BePagination.pageSize))
+      const currentPage = Number(this.$$BePagination.currentPage) > this.maxPageNum ? this.maxPageNum : Number(this.$$BePagination.currentPage);
+      // 当小于用户定义的显示页数 大于 用户总页数和显示数计算出来的总页数时，使用计算的总页数
+      pagerCount = (Number(this.$$BePagination.pageSize) / pageCount) <= pagerCount ? (Number(this.$$BePagination.pageSize)/ pageCount) : pagerCount;
       let showPrevMore = false;
       let showNextMore = false;
       // 根据页数和显示页数，判断是否显示翻页缩略

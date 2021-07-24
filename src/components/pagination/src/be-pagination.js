@@ -1,6 +1,7 @@
 import Pager from './be-pager.vue';
+import beInput from '../../input/be-input.vue';
 import '../../../assets/style/be-pager.scss';
-
+import {getUuid} from '../../../utils/common/common'
 /**
  * 页码信息组件
  * @param h
@@ -9,7 +10,7 @@ import '../../../assets/style/be-pager.scss';
 const pageInfoComponent = function (h){
     const total = this.isFront ? this.pageParamsFront.pageCount : this.pageCount
     return (
-        <span class = 'be-pager-info'>第{this.currentPage}页/共{total}页</span>
+        <span class = 'be-pager-info'>第{this.currentPage >total ? total : this.currentPage }页/共{total}页</span>
     )
 }
 /**
@@ -37,7 +38,9 @@ export default {
             jumpPage:'',
             pageParamsFront:{
                 pageCount:0
-            }
+            },
+            // 每页显示数量
+            pageNumVal:'',
         }
     },
     //把当前组件实例上下文传递给子组件使用
@@ -52,12 +55,21 @@ export default {
          */
         pageSize: {
             type: Number,
-            default: 0
+            default: 1,
+            validator: function(value){
+                return value <= 0 ? 1 : value;
+            }
         },
         /**
          * 当前页
          */
-        currentPage: Number,
+        currentPage: {
+            type: Number,
+            default: 1,
+            validator: function(value){
+                return value <= 0 ? 1 : value;
+            }
+        },
         /**
          * 总页数
          */
@@ -147,10 +159,35 @@ export default {
          */
         getPageCount(data){
             this.pageParamsFront = data
+        },
+        /**
+         * 生成每页显示数量设置列表
+         * @param {Function} cb - input-select的回调方法
+         */
+        createPageNumList(data,cb){
+            let list = []
+            const total = parseInt((this.isFront ? this.pageData.length : this.pageCount)/10) * 10
+            for(let i = 10; i<= total;i = i + 10){
+                list.push({label:i,id:getUuid()})
+            }
+            cb(list,'label','id')
+        },
+        /**
+         * 获取每页显示数量设置类别的选择结果
+         * @param {Object} data - 页面设置数据
+         * @public
+         */
+        getPageNum(data){
+            this.pageNumVal = data.label + '/页'
+            this.$emit('updateNum',data.label)
         }
     },
     components:{
-        Pager
+        Pager,
+        beInput
+    },
+    created(){
+        this.pageNumVal = this.pageSize + '/页' //disabled
     },
     render(h) {
         return (
@@ -159,6 +196,12 @@ export default {
                 </Pager>
                 {pageJumpComponent.call(this,h)}
                 {pageInfoComponent.call(this,h)}
+                <be-input v-model={this.pageNumVal}
+                          readonly
+                          custom-class={'be-pager-select'}
+                          fetch-suggestions= {this.createPageNumList}
+                          {...{on: {select: this.getPageNum}}}
+                        ></be-input>
             </div>
         );
     }

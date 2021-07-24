@@ -13,18 +13,18 @@
           is-dynamic
           :pagerShowCount="10">
       </be-pager>-->
-<!--      <BePagination
+      <BePagination
           @change="test"
           @updatePage="updatePage"
+          @updateNum = 'updateNum'
           isFront
-          disabledJump
-          :page-size="10"
+          :page-size="30"
           :pagerShowCount = "5"
           :currentPage="pageParams.currentPage"
           :page-data="pageData">
-        <div slot="prev">prev </div>
-        <div slot="next">next </div>
-      </BePagination>-->
+<!--        <div slot="prev">prev </div>
+        <div slot="next">next </div>-->
+      </BePagination>
 <!--    <be-button size="medium"
                round="50"
                isIcon
@@ -67,12 +67,12 @@
         titles="测试弹窗">
       </be-dialog>-->
       <be-tooltip></be-tooltip>
-      <be-ellipsis
+<!--      <be-ellipsis
           text=" 电灯熄灭 物换星移 泥牛入海<br />黑暗好像 一颗巨石 按在胸口<br />独脚大盗
     百万富翁 摸爬滚打<br />黑暗好像 一颗巨石 按在胸口"
           content="住在我心里孤独的 孤独的海怪 痛苦"
           expandTrigger
-      ></be-ellipsis>
+      ></be-ellipsis>-->
     </div>
 </template>
 
@@ -122,7 +122,7 @@ export default {
      // pandaicons
     },
     mounted() {
-        for(let i = 1;i<=100;i ++){
+        for(let i = 1;i<=78;i ++){
           this.pageData.push({num:i})
         }
     },
@@ -132,6 +132,9 @@ export default {
         console.log(num)
       },
       updatePage(page){
+        console.log(page)
+      },
+      updateNum(page){
         console.log(page)
       }
     }

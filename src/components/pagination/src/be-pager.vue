@@ -38,7 +38,8 @@
                  :color="hoverNextIconClass"></be-icon>
       </li>
       <!--最后一页-->
-      <li :class="{ active: $$BePagination.currentPage === $$BePagination.pageCount, disabled:$$BePagination.disabled }"
+      <li :class=" { active: $$BePagination.currentPage < maxPageNum ? ($$BePagination.currentPage === pageParamsFront.pageCount) : (maxPageNum === pageParamsFront.pageCount),
+                    disabled:$$BePagination.disabled }"
           class="number"
           v-if="$$BePagination.pageCount > 1">{{ $$BePagination.pageCount }}
       </li>
@@ -84,7 +85,8 @@
                  :color="hoverNextIconClass"></be-icon>
       </li>
       <!--最后一页-->
-      <li :class="{ active: $$BePagination.currentPage === pageParamsFront.pageCount, disabled:$$BePagination.disabled }"
+      <li :class=" { active: $$BePagination.currentPage < maxPageNum ? ($$BePagination.currentPage === pageParamsFront.pageCount) : (maxPageNum === pageParamsFront.pageCount),
+                    disabled:$$BePagination.disabled }"
           class="number"
           v-if="pageParamsFront.pageCount > 1">{{ pageParamsFront.pageCount }}
       </li>
@@ -105,6 +107,7 @@
     name: 'BePager',
     data() {
       return {
+        maxPageNum:0,
         current: null,
         showPrevMore: false,
         showNextMore: false,
@@ -129,21 +132,35 @@
         }
       }
     },
-
+    created(){
+      if(this.isFront){
+        const pageSize = this.$$BePagination.pageNumVal ? Number(this.$$BePagination.pageNumVal.split('/')[0]) : this.$$BePagination.pageSize
+        this.maxPageNum = Math.ceil(this.$$BePagination.pageData.length / pageSize)
+      }else{
+        const pageCount = Number(this.$$BePagination.pageCount);
+        this.maxPageNum = Math.ceil(pageCount / Number(this.$$BePagination.pageSize))
+      }
+    },
     methods: {
       /**
        * 翻页事件
        * @param {String} type - 类型
        */
       changePage(type){
+        let currentPage = 0
+        // 动态分页不需要处理
+        if(this.$$BePagination.isDynamic){
+          currentPage = Number(this.$$BePagination.currentPage)
+        }else{
+          currentPage = Number(this.$$BePagination.currentPage) > this.maxPageNum ? this.maxPageNum : Number(this.$$BePagination.currentPage);
+        }
         let newPage = 0
         if(type === 'next'){
-           newPage = this.$$BePagination.currentPage + 1
+           newPage = currentPage + 1
         }else{
-          newPage = this.$$BePagination.currentPage - 1
+          newPage = currentPage - 1
         }
         const pageCount = this.$$BePagination.isFront ? this. pageParamsFront.pageCount : this.$$BePagination.pageCount
-        const currentPage = this.$$BePagination.currentPage;
         // 点击缩略翻页时的偏移量
         // 缩略翻页 可能会超出页数范围，这里做限制
         if (!isNaN(newPage)) {
@@ -169,7 +186,7 @@
           const resData =  {
             currentPage:newPage,
             pageCount:this.$$BePagination.isFront ? this. pageParamsFront.pageCount : this.$$BePagination.pageCount,
-            pageSize:this.$$BePagination.pageSize
+            pageSize:this.$$BePagination.pageNumVal ? Number(this.$$BePagination.pageNumVal.split('/')[0]) : this.$$BePagination.pageSize
           }
           this.$emit('change',resData);
         }
@@ -211,7 +228,13 @@
        */
       onPagerClick(event,jump) {
         const pageCount = this.$$BePagination.pageCount;
-        const currentPage = this.$$BePagination.currentPage;
+        let currentPage = 0
+        // 动态分页不需要处理
+        if(this.$$BePagination.isDynamic){
+          currentPage = Number(this.$$BePagination.currentPage)
+        }else{
+          currentPage = Number(this.$$BePagination.currentPage) > this.maxPageNum ? this.maxPageNum : Number(this.$$BePagination.currentPage);
+        }
         let newPage = jump;
         if(!jump){
           const target = event.target;
@@ -259,7 +282,7 @@
           const resData =  {
             currentPage:Number(newPage),
             pageCount:this.$$BePagination.isFront ? this. pageParamsFront.pageCount : this.$$BePagination.pageCount,
-            pageSize:this.$$BePagination.pageSize
+            pageSize:this.$$BePagination.pageNumVal ? Number(this.$$BePagination.pageNumVal.split('/')[0]) : this.$$BePagination.pageSize
           }
           this.$emit('change',resData);
         }

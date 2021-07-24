@@ -6,7 +6,7 @@
 * @update (czh 2021/6/2)
 */
 <template>
-  <div class="be-input" v-click-outside="closeDisplay">
+  <div class="be-input" v-click-outside="closeDisplay" :class="customClass">
     <div class="be-input-body" :class="expandStyle">
       <!-- @slot 前置插槽-->
       <slot name="preSlot"></slot>
@@ -96,6 +96,13 @@ export default {
     type: {
       type: String,
       default: 'text'
+    },
+    /**
+     * 自定义样式
+     */
+    customClass: {
+      type: String,
+      default: ''
     },
     /**
      * 是否可以清除
@@ -301,6 +308,7 @@ export default {
      * @param {Element} $eventDom - 输入建议下拉框dom
      */
     computedPositon($eventDom) {
+      if(!$eventDom)return
       this.selectStyle.width = Number(window.getComputedStyle($eventDom).width.split('px')[0]) + 'px'
       this.selectStyle.top = $eventDom.getBoundingClientRect().top + Number(window.getComputedStyle($eventDom).height.split('px')[0]) + 2 + 'px'
       this.selectStyle.left = $eventDom.getBoundingClientRect().left + 'px'
@@ -323,128 +331,6 @@ export default {
 </script>
 
 <style lang='scss'>
-.be-input {
-  display: flex;
-  align-items: center;
-
-  .be-input-body {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border-radius: 3px;
-    border: 1px solid #dcdfe6;
-    width: 100%;
-    padding: 0 5px;
-    box-sizing: border-box;
-
-    &:hover {
-      border: 1px solid $mainColor3;
-    }
-
-    .be-input__inner {
-      height: 30px;
-      line-height: 30px;
-      outline: 0;
-      border: 0;
-      border-radius: 3px;
-      width: 100%;
-    }
-
-    .be-input-nextIcon,
-    .be-input-preIcon {
-      cursor: pointer;
-      color: #e5e5e5;
-      width: 14px;
-      height: 14px;
-      font-size: 14px;
-
-      &:hover {
-        color: $mainColor3
-      }
-    }
-
-    .be-input-preIcon {
-      margin-right: 10px;
-      margin-left: 10px;
-    }
-
-    .be-input-nextIcon {
-      margin: 0 10px;
-    }
-
-    .be-input-close {
-      cursor: pointer;
-      border-radius: 50px;
-      border: 1px solid #e5e5e5;
-      color: #e5e5e5;
-      width: 12px;
-      height: 12px;
-      font-size: 12px;
-      margin-right: 10px;
-
-      &:hover {
-        border: 1px solid $mainColor3;
-        color: $mainColor3
-      }
-    }
-
-    .be-input-select {
-      &::-webkit-scrollbar {
-        margin: 5px;
-        width: 8px;
-        height: 8px;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: #c1c1c1;
-        border-radius: 5px;
-      }
-
-      background-color: white;
-      border-radius: 0 0 3px 3px;
-      border: 1px solid $mainColor3;
-      border-top: 0;
-      padding: 0;
-      position: absolute;
-      max-height: 300px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      margin: 0;
-
-      .be-input-select__line {
-        height: 1px;
-        background-color: #dcdfe6;
-        width: 90%;
-        margin: 0 auto;
-        list-style: none;
-      }
-
-      .be-input-select__inner {
-        height: 30px;
-        line-height: 30px;
-        list-style: none;
-        margin: 10px 0;
-        padding-left: 10px;
-        box-sizing: border-box;
-        cursor: pointer;
-
-        &:hover {
-          background-color: #dcdfe6;
-        }
-      }
-    }
-  }
-
-  .be-input-body__expand {
-    border: 1px solid $mainColor3;
-    border-bottom: 0;
-    border-radius: 3px 3px 0 0;
-
-    &:hover {
-      border-bottom: 0;
-    }
-  }
-
-}
+@import 'src/assets/style/be-input';
 
 </style>
