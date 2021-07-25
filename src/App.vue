@@ -1,29 +1,34 @@
 <template>
     <div id="app" ref="chart" >
+<!--    常规分页  -->
 <!--      <be-pager
           @change="test"
           :currentPage="pageParams.currentPage"
           :pageCount="pageParams.pageCount"
           :pagerShowCount="pageParams.pagerCount">
       </be-pager>-->
-<!--      <be-pager
+<!--    动态分页  -->
+<!--      <BePagination
           @change="test"
           :currentPage="pageParams.currentPage"
           :pageCount="pageParams.pageCount"
           is-dynamic
+          :layout="['page','info']"
           :pagerShowCount="10">
-      </be-pager>-->
+      </BePagination>-->
+<!--    前端分页  -->
       <BePagination
           @change="test"
           @updatePage="updatePage"
           @updateNum = 'updateNum'
           isFront
-          :page-size="30"
+          :layout="['page','prev','pNum','next']"
+          :page-size="10"
           :pagerShowCount = "5"
           :currentPage="pageParams.currentPage"
           :page-data="pageData">
-<!--        <div slot="prev">prev </div>
-        <div slot="next">next </div>-->
+        <div slot="prev">prev </div>
+        <div slot="next">next </div>
       </BePagination>
 <!--    <be-button size="medium"
                round="50"

@@ -14,7 +14,7 @@
       <!--更多上页缩略翻页-->
       <li :class="[quickprevIconClass, { disabled:$$BePagination.disabled }]"
           @mouseenter="onMouseenter('left')"
-          @mouseleave="hoverPreIconClass = '#303133'"
+          @mouseleave="hoverPreIconClass = '#303133';quickprevIconClass = 'more'"
           v-if="showPrevMore">
         <be-icon :icon="quickprevIconClass"
                  class="more btn-quickprev"
@@ -30,7 +30,7 @@
       <!--更多下页缩略翻页-->
       <li :class="[quicknextIconClass, { disabled:$$BePagination.disabled }]"
           @mouseenter="onMouseenter('right')"
-          @mouseleave="hoverNextIconClass = '#303133'"
+          @mouseleave="hoverNextIconClass = '#303133';quicknextIconClass = 'more'"
           v-if="showNextMore">
         <be-icon :icon="quicknextIconClass"
                  @click.stop="onPagerClick"
@@ -62,7 +62,7 @@
       <!--更多上页缩略翻页-->
       <li :class="[quickprevIconClass, { disabled:$$BePagination.disabled }]"
           @mouseenter="onMouseenter('left')"
-          @mouseleave="hoverPreIconClass = '#303133'"
+          @mouseleave="hoverPreIconClass = '#303133';quickprevIconClass = 'more'"
           v-if="showPrevMore">
         <be-icon :icon="quickprevIconClass"
                  class="more btn-quickprev"
@@ -77,7 +77,7 @@
       <!--更多下页缩略翻页-->
       <li :class="[quicknextIconClass, { disabled:$$BePagination.disabled }]"
           @mouseenter="onMouseenter('right')"
-          @mouseleave="hoverNextIconClass = '#303133'"
+          @mouseleave="hoverNextIconClass = '#303133';quicknextIconClass = 'more'"
           v-if="showNextMore">
         <be-icon :icon="quicknextIconClass"
                  @click.stop="onPagerClick"
@@ -215,10 +215,10 @@
         if (this.$$BePagination.disabled) return;
         if (direction === 'left') {
           this.hoverPreIconClass = '#409EFF'
-          //this.quickprevIconClass = 'be-icon-d-arrow-left';
+          this.quickprevIconClass = 'page-first';
         } else {
           this.hoverNextIconClass = '#409EFF'
-          //this.quicknextIconClass = 'be-icon-d-arrow-right';
+          this.quicknextIconClass = 'page-last';
         }
       },
       /**

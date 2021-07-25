@@ -58,7 +58,6 @@ export default {
                 for (let i = 2; i < pagerCount ; i++) {
                     array.push(i);
                 }
-                debugger
             } else if (showPrevMore && showNextMore) {
                 // 上下页缩略翻页都显示时，渲染范围根据当前页，前后各偏移
                 const offset = Math.floor(pagerCount / 2) - 1;
@@ -77,7 +76,6 @@ export default {
          */
         pageFrontData:{
             handler:function(nVal) {
-                console.log(nVal)
                 if(this.$$BePagination.isFront){
                     this.frontList = nVal
                 }

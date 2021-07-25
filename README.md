@@ -24,14 +24,10 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
-3.支持自定义布局、 输入跳转（支持禁用）（初步完成）、每页条数设置 （初步完成）/// 页数显示（初步完成） --- 动态分页不支持
-4.插槽：前后插槽
-5.分页前后置缩略hover 圖標
 ## 排期
-1.分页组件  
-2.be-toolTip 开发
-3.be-ellipsis 结合 be-toolTip
-2.去element化
+1.be-toolTip 开发 
+2.be-ellipsis 结合 be-toolTip 
+3.去element化
 ## 长期排期
 1.服务式访问的全局绑定  
 2.组件引用编写

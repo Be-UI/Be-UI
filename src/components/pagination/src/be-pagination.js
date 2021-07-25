@@ -8,6 +8,7 @@ import {getUuid} from '../../../utils/common/common'
  * @return {JSX.Element}
  */
 const pageInfoComponent = function (h){
+    if(this.isDynamic){return}
     const total = this.isFront ? this.pageParamsFront.pageCount : this.pageCount
     return (
         <span class = 'be-pager-info'>第{this.currentPage >total ? total : this.currentPage }页/共{total}页</span>
@@ -112,7 +113,15 @@ export default {
         pageData:{
             type: Array,
             default: ()=>[],
-        }
+        },
+        /**
+         * 自定义布局
+         * ['page','jump','info','pNum','prev','next']
+         */
+        layout:{
+            type: Array,
+            default: ()=>['page'],
+        },
     },
     methods:{
         /**
@@ -190,18 +199,29 @@ export default {
         this.pageNumVal = this.pageSize + '/页' //disabled
     },
     render(h) {
+        // 定义布局渲染列表
+        let renderLsit = {
+            page:(<Pager ref='pager' {...{on: {updatePage: this.handleUpdatePage,change:this.handleChange,getPageCount:this.getPageCount}}}>
+            </Pager>),
+            jump:pageJumpComponent.call(this,h),
+            info:pageInfoComponent.call(this,h),
+            next:this.$scopedSlots.next(),
+            prev:this.$scopedSlots.prev()
+        }
+        // 分动态布局才支持页面数量显示设置
+        if(!this.isDynamic){
+            renderLsit. pNum = (<be-input v-model={this.pageNumVal}
+                                        readonly
+                                        custom-class={'be-pager-select'}
+                                        fetch-suggestions= {this.createPageNumList}
+                                        {...{on: {select: this.getPageNum}}}></be-input>)
+        }
         return (
             <div class="be-pager-container">
-                <Pager ref='pager' {...{on: {updatePage: this.handleUpdatePage,change:this.handleChange,getPageCount:this.getPageCount}}}>
-                </Pager>
-                {pageJumpComponent.call(this,h)}
-                {pageInfoComponent.call(this,h)}
-                <be-input v-model={this.pageNumVal}
-                          readonly
-                          custom-class={'be-pager-select'}
-                          fetch-suggestions= {this.createPageNumList}
-                          {...{on: {select: this.getPageNum}}}
-                        ></be-input>
+                {/*根据渲染布局props渲染renderList，实现自定义布局*/}
+                {this.layout.map(v => {
+                    return  renderLsit[v]
+                })}
             </div>
         );
     }
