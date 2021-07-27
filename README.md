@@ -24,6 +24,26 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
+button loading 偏移问题
+be-popover
+触发3种 (完成)
+**props** 
+四个方向 placement
+是否显示箭头 raw
+自定义样式覆盖 customClass
+位置 x
+位置 y
+width 宽度
+disabled 禁用 (完成)
+delay 延时显示 (完成)
+duration 延时关闭 (完成)
+**event**
+显隐回调 update:show (完成)
+**slot**
+header
+body
+footer
+
 ## 排期
 1.be-toolTip 开发 
 2.be-ellipsis 结合 be-toolTip 
@@ -44,7 +64,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 9.消息通知组件 be-notification  
 10 .文本省略组件 be-ellipsis
 ### 计划组件（未完成）
-2.弹出显示 be-toolTip
+2.弹出显示 be-popover
+2.文本弹出显示 be-toolTip
 
 
 

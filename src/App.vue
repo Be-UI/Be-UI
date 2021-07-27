@@ -17,7 +17,7 @@
           :pagerShowCount="10">
       </BePagination>-->
 <!--    前端分页  -->
-      <BePagination
+<!--      <BePagination
           @change="test"
           @updatePage="updatePage"
           @updateNum = 'updateNum'
@@ -29,14 +29,14 @@
           :page-data="pageData">
         <div slot="prev">prev </div>
         <div slot="next">next </div>
-      </BePagination>
+      </BePagination>-->
 <!--    <be-button size="medium"
                round="50"
                isIcon
                @click="()=>{loading = !loading}"
                type="error"
                preIcon="fill-in"
-               :loading="loading">测试按钮</be-button>-->
+               loading="loading">测试按钮</be-button>-->
 <!--      <be-icon icon="coin"></be-icon>-->
 <!--              <be-loading :show="true">
                 <div style="width: 100%;height: 100px;background: #4D60B2"></div>
@@ -71,7 +71,11 @@
         layout="right"
         titles="测试弹窗">
       </be-dialog>-->
-      <be-tooltip></be-tooltip>
+      <be-popover
+        trigger="manual">
+        <be-button slot="trigger" loading>测试Popover</be-button>
+        <span>测试Popovers测试Popovers测试Popovers测试Popovers测试Popovers测试Popovers测试Popovers</span>
+      </be-popover>
 <!--      <be-ellipsis
           text=" 电灯熄灭 物换星移 泥牛入海<br />黑暗好像 一颗巨石 按在胸口<br />独脚大盗
     百万富翁 摸爬滚打<br />黑暗好像 一颗巨石 按在胸口"

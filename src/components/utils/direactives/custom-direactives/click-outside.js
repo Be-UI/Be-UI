@@ -14,7 +14,6 @@ function directive (e, el, binding) {
     const handler = typeof binding.value === 'function' ? binding.value : binding.value.handler
 
     const isActive = (typeof binding.value === 'object' && binding.value.closeConditional) || defaultConditional
-
     // The include element callbacks below can be expensive
     // so we should avoid calling them when we're not active.
     // Explicitly check for false to allow fallback compatibility
@@ -45,6 +44,8 @@ export const ClickOutside = {
         // available, iOS does not support
         // clicks on body
         inserted (el, binding) {
+            const isDisabled = (typeof binding.value === 'object' && binding.value.isDisabled)
+            if(isDisabled){return}
             const onClick = (e) => directive(e, el, binding)
             // iOS does not recognize click events on document
             // or body, this is the entire purpose of the v-app

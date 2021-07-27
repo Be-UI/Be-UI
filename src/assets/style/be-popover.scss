@@ -1,0 +1,16 @@
+@import 'common';
+.be-popover{
+  background-color: $default;
+  color: $info;
+  text-align: center;
+  padding: 8px 14px;
+  border-radius: 3px;
+  font-size: 12px;
+  position: fixed;
+  .be-popover-header{
+
+  }
+  .be-popover-footer{
+
+  }
+}
