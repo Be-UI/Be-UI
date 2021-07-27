@@ -5,7 +5,7 @@
 * @update (czh 2021/6/11)
 */
 <template>
-  <div style="position: relative;height: 100%">
+  <div style="position: relative;height: 100%;width: max-content;">
     <slot></slot>
     <transition name="be-fade-in-linear">
       <div class="be-load-container"

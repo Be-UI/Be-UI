@@ -137,7 +137,7 @@ export default {
         'cursor': this.disabled ? "not-allowed" : "pointer",
         'border-style': this.dashed ? "dashed" : "solid",
         'border-radius': `${this.round}px`,
-        'display': this.flex ? "flex" : "",
+        'display': this.flex ? "flex" : "block",
       }
     },
     borderStyle() {

@@ -24,7 +24,7 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
-button loading 偏移问题
+button loading 宽度问题
 be-popover
 触发3种 (完成)
 **props** 
