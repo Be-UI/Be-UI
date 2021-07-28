@@ -72,9 +72,12 @@
         titles="测试弹窗">
       </be-dialog>-->
       <be-popover
+          x="100"
+          y="150"
+        placement="right"
         trigger="manual">
-        <be-button slot="trigger" loading>测试Popover</be-button>
-        <span>测试Popovers测试Popovers测试Popovers测试Popovers测试Popovers测试Popovers测试Popovers</span>
+        <be-button slot="trigger">测试Popover</be-button>
+        <span>测试Popovers测试Popovers测试</span>
       </be-popover>
 <!--      <be-ellipsis
           text=" 电灯熄灭 物换星移 泥牛入海<br />黑暗好像 一颗巨石 按在胸口<br />独脚大盗

@@ -24,9 +24,9 @@ export default {
       triggerDom: null,
       show: false,
       outsideDisabled: false,
-      style:{
-        left:0,
-        top:0,
+      style: {
+        left: '0px',
+        top: '0px',
       },
 
     }
@@ -127,8 +127,8 @@ export default {
       }
       setTimeout(() => {
         this.show = show
-        this.$nextTick(()=>{
-          this.show && this.computePosition()
+        this.$nextTick(() => {
+          this.show && this.computePosition(this.placement)
         })
         /** 提交触发 显示跟新 事件
          * @event update
@@ -140,32 +140,44 @@ export default {
     /**
      * 计算显示位置
      */
-    computePosition(){
-       if(this.x && this.y){
-         this.style.left = this.x
-         this.style.top = this.y
-         return
-       }
-       let popover = document.getElementById(`be_popover_${this._uid}`)
-       let triggerWidth = Number(window.getComputedStyle(this.triggerDom).width.split('px')[0])
-       let triggerHeight = this.triggerDom.getBoundingClientRect().height
-       let popoverHeight = popover.getBoundingClientRect().height
-       let popoverWidth = popover.getBoundingClientRect().width
-       let triggerLeft = this.triggerDom.getBoundingClientRect().left
-       let triggerTop = this.triggerDom.getBoundingClientRect().top
-       console.log(triggerWidth)
-       if(this.placement === 'top'){
-         this.style.left = this.x || triggerLeft - popoverWidth/2 + triggerWidth/2 + 'px'
-         this.style.top = this.y || triggerTop - popoverHeight - 10 + 'px'//- popoverHeight - 10 + 'px'
-       }
-      if(this.placement === 'bottom'){
-
-       }
-       if(this.placement === 'left'){
-
-       }
-      if(this.placement === 'right'){
-
+    computePosition(placement) {
+      if (this.x && this.y) {
+        this.style.left = this.x + 'px'
+        this.style.top = this.y + 'px'
+        return
+      }
+      let place = placement
+      let popover = document.getElementById(`be_popover_${this._uid}`)
+      let triggerWidth = Number(window.getComputedStyle(this.triggerDom).width.split('px')[0])
+      let triggerHeight = this.triggerDom.getBoundingClientRect().height
+      let popoverHeight = popover.getBoundingClientRect().height
+      let popoverWidth = popover.getBoundingClientRect().width
+      let triggerLeft = this.triggerDom.getBoundingClientRect().left
+      let triggerTop = this.triggerDom.getBoundingClientRect().top
+      let leftCur = triggerLeft - popoverWidth
+      let rightCur = triggerLeft + popoverWidth + triggerWidth
+      if (leftCur < 0 && this.placement === 'left') {
+        place = 'right'
+      }
+      if (rightCur >= document.body.clientWidth && this.placement === 'right') {
+        place = 'left'
+      }
+      if (place === 'top') {
+        this.style.left = (this.x || triggerLeft - popoverWidth / 2 + triggerWidth / 2) + 'px'
+        this.style.top = (this.y || triggerTop - popoverHeight - 10) + 'px'
+      }
+      if (this.placement === 'bottom') {
+        this.style.left = (this.x || triggerLeft - popoverWidth / 2 + triggerWidth / 2) + 'px'
+        this.style.top = (this.y || triggerTop + popoverHeight + 10) + 'px'
+      }
+      if (place === 'left') {
+        this.style.left = (this.x || triggerLeft - popoverWidth - 10 )+ 'px'
+        this.style.top = (this.y || triggerTop + popoverHeight / 2 - triggerHeight / 2) + 'px'
+        console.log(this.style.left)
+      }
+      if (place === 'right') {
+        this.style.left = (this.x || triggerLeft + triggerWidth + 10) + 'px'
+        this.style.top = (this.y || triggerTop + popoverHeight / 2 - triggerHeight / 2) + 'px'
       }
     },
   },
@@ -193,6 +205,14 @@ export default {
       }
       if (this.triggerDom && this.trigger === 'manual') {
         this.triggerDom.addEventListener('click', () => this.changeDisplay(!this.show), false)
+      }
+      window.onresize = () => {
+        this.computePosition(this.placement)
+
+      }
+      window.onscroll = () => {
+        // 设置显示位置,宽度
+        this.computePosition(this.placement)
       }
     } else {
       console.error('Please set the trigger element')

@@ -28,11 +28,11 @@ button loading 宽度问题
 be-popover
 触发3种 (完成)
 **props** 
-四个方向 placement
+四个方向 placement (完成)
 是否显示箭头 raw
 自定义样式覆盖 customClass
-位置 x
-位置 y
+位置 x (完成)
+位置 y (完成)
 width 宽度
 disabled 禁用 (完成)
 delay 延时显示 (完成)
