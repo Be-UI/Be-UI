@@ -72,9 +72,8 @@
         titles="测试弹窗">
       </be-dialog>-->
       <be-popover
-          x="100"
-          y="150"
-        placement="right"
+        placement="left"
+        width="500"
         trigger="manual">
         <be-button slot="trigger">测试Popover</be-button>
         <span>测试Popovers测试Popovers测试</span>

@@ -25,15 +25,16 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
 button loading 宽度问题
+be-popover 纵向微调
 be-popover
 触发3种 (完成)
 **props** 
 四个方向 placement (完成)
-是否显示箭头 raw
+是否显示箭头 raw (完成)
 自定义样式覆盖 customClass
 位置 x (完成)
 位置 y (完成)
-width 宽度
+width 宽度 (完成)
 disabled 禁用 (完成)
 delay 延时显示 (完成)
 duration 延时关闭 (完成)
@@ -64,7 +65,7 @@ footer
 9.消息通知组件 be-notification  
 10 .文本省略组件 be-ellipsis
 ### 计划组件（未完成）
-2.弹出显示 be-popover
+1.弹出显示 be-popover
 2.文本弹出显示 be-toolTip
 
 

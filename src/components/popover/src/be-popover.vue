@@ -1,7 +1,7 @@
 <template>
   <div v-click-outside="{handler:close,isDisabled:outsideDisabled}">
     <slot name="trigger"></slot>
-    <div class='be-popover'
+    <div class="be-popover"
          :id="`be_popover_${this._uid}`"
          v-if="show"
          :style="style">
@@ -12,6 +12,7 @@
       <div class='be-popover-footer' v-if="$slots.footer">
         <slot name="footer"></slot>
       </div>
+      <div class="be-popover-arrow"  v-if="raw"  :class="`be-popover-arrow--${place}`"></div>
     </div>
   </div>
 </template>
@@ -24,6 +25,7 @@ export default {
       triggerDom: null,
       show: false,
       outsideDisabled: false,
+      place:'',
       style: {
         left: '0px',
         top: '0px',
@@ -44,7 +46,7 @@ export default {
      */
     'raw': {
       type: Boolean,
-      default: true
+      default: false
     },
     /**
      * 自定义样式覆盖
@@ -69,7 +71,7 @@ export default {
      * 宽度
      */
     'width': {
-      type: Number,
+      type: String | Number,
     },
     /**
      * 是否禁用
@@ -164,21 +166,22 @@ export default {
       }
       if (place === 'top') {
         this.style.left = (this.x || triggerLeft - popoverWidth / 2 + triggerWidth / 2) + 'px'
-        this.style.top = (this.y || triggerTop - popoverHeight - 10) + 'px'
+        this.style.top = (this.y || triggerTop - popoverHeight - 5) + 'px'
       }
       if (this.placement === 'bottom') {
         this.style.left = (this.x || triggerLeft - popoverWidth / 2 + triggerWidth / 2) + 'px'
-        this.style.top = (this.y || triggerTop + popoverHeight + 10) + 'px'
+        this.style.top = (this.y || triggerTop + popoverHeight + 5) + 'px'
       }
       if (place === 'left') {
-        this.style.left = (this.x || triggerLeft - popoverWidth - 10 )+ 'px'
+        this.style.left = (this.x || triggerLeft - popoverWidth - 5 )+ 'px'
         this.style.top = (this.y || triggerTop + popoverHeight / 2 - triggerHeight / 2) + 'px'
         console.log(this.style.left)
       }
       if (place === 'right') {
-        this.style.left = (this.x || triggerLeft + triggerWidth + 10) + 'px'
+        this.style.left = (this.x || triggerLeft + triggerWidth + 5) + 'px'
         this.style.top = (this.y || triggerTop + popoverHeight / 2 - triggerHeight / 2) + 'px'
       }
+      this.place = place
     },
   },
   created() {
@@ -191,6 +194,9 @@ export default {
     // 禁用就不绑定触发事件了
     if (this.disabled) {
       return
+    }
+    if(this.width){
+      this.style.width = this.width + 'px'
     }
     // 给触发插槽绑定事件
     if (this.$slots.trigger) {

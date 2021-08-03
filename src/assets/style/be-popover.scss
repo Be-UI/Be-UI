@@ -14,4 +14,36 @@
   .be-popover-footer{
 
   }
+  .be-popover-arrow{
+    transform: rotate(45deg);
+    border-color: transparent #fff #fff transparent;
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: transparent;
+    border-style: solid;
+    border-width: 4px;
+  }
+  .be-popover-arrow--left{
+    bottom: calc(50% - 8px);
+    right: 0;
+    border-color: #fff #fff transparent transparent;
+  }
+  .be-popover-arrow--right{
+    bottom: calc(50% - 8px);
+    left: 0;
+    border-color: transparent transparent #fff #fff ;
+  }
+  .be-popover-arrow--top{
+    bottom: 0;
+    left: 50%;
+    border-color: transparent #fff #fff transparent;
+  }
+  .be-popover-arrow--bottom{
+    top: 0;
+    left: 50%;
+    border-color:  #fff transparent transparent #fff;
+  }
+
 }
