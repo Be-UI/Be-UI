@@ -71,12 +71,15 @@
         layout="right"
         titles="测试弹窗">
       </be-dialog>-->
-      <be-popover custom-class="asdqwd" trigger="click" placement="left">
+<!--      <be-popover custom-class="asdqwd" trigger="click" placement="left">
         <be-button slot="trigger">测试Popover</be-button>
         <div class="qwdwaa">
           测试Popovers测试Popovers测试
         </div>
-      </be-popover>
+      </be-popover>-->
+      <be-tooltip custom-class="asdqwd"  placement="right" content=" 测试Popovers测试Popovers测试">
+        <be-button>tooltip</be-button>
+      </be-tooltip>
 <!--      <be-ellipsis
           text=" 电灯熄灭 物换星移 泥牛入海<br />黑暗好像 一颗巨石 按在胸口<br />独脚大盗
     百万富翁 摸爬滚打<br />黑暗好像 一颗巨石 按在胸口"
