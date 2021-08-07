@@ -49,8 +49,7 @@ button loading 宽度问题
 9.消息通知组件 be-notification  
 10 .文本省略组件 be-ellipsis
 ### 计划组件（未完成）
-1.弹出显示 be-popover
-2.文本弹出显示 be-toolTip
+1.文本弹出显示 be-toolTip
 
 
 
