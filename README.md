@@ -25,8 +25,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
 button loading 宽度问题
-be-popover 纵向微调
-be-popover
+
 
 
 
