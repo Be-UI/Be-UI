@@ -1,18 +1,18 @@
 @import 'common';
 .be-popover{
-  background-color: $default;
-  color: $info;
-  text-align: center;
-  padding: 8px 14px;
-  border-radius: 3px;
-  font-size: 12px;
   position: fixed;
-  word-break: keep-all;
-  .be-popover-header{
-
-  }
-  .be-popover-footer{
-
+  .be-popover-body{
+    background-color: $default;
+    color: $info;
+    text-align: center;
+    padding: 8px 14px;
+    border-radius: 3px;
+    font-size: 12px;
+    word-break: keep-all;
+    position: relative;
+    z-index: 2;
+    top: 0;
+    left: 0;
   }
   .be-popover-arrow{
     transform: rotate(45deg);
@@ -37,12 +37,12 @@
   }
   .be-popover-arrow--top{
     bottom: 0;
-    left: 50%;
+    left: calc(50% - 8px);
     border-color: transparent #fff #fff transparent;
   }
   .be-popover-arrow--bottom{
     top: 0;
-    left: 50%;
+    left: calc(50% - 8px);
     border-color:  #fff transparent transparent #fff;
   }
 

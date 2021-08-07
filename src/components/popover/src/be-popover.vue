@@ -2,15 +2,12 @@
   <div v-click-outside="{handler:close,isDisabled:outsideDisabled}">
     <slot name="trigger"></slot>
     <div class="be-popover"
+         :class="customClass"
          :id="`be_popover_${this._uid}`"
          v-if="show"
          :style="style">
-      <div class='be-popover-header' v-if="$slots.header">
-        <slot name="header"></slot>
-      </div>
-      <slot></slot>
-      <div class='be-popover-footer' v-if="$slots.footer">
-        <slot name="footer"></slot>
+      <div class="be-popover-body">
+        <slot></slot>
       </div>
       <div class="be-popover-arrow"  v-if="raw"  :class="`be-popover-arrow--${place}`"></div>
     </div>
@@ -46,7 +43,7 @@ export default {
      */
     'raw': {
       type: Boolean,
-      default: false
+      default: true
     },
     /**
      * 自定义样式覆盖
@@ -174,12 +171,12 @@ export default {
       }
       if (place === 'left') {
         this.style.left = (this.x || triggerLeft - popoverWidth - 5 )+ 'px'
-        this.style.top = (this.y || triggerTop + popoverHeight / 2 - triggerHeight / 2) + 'px'
+        this.style.top = (this.y || triggerTop + popoverHeight / 2 - triggerHeight / 2) - 2 + 'px'
         console.log(this.style.left)
       }
       if (place === 'right') {
         this.style.left = (this.x || triggerLeft + triggerWidth + 5) + 'px'
-        this.style.top = (this.y || triggerTop + popoverHeight / 2 - triggerHeight / 2) + 'px'
+        this.style.top = (this.y || triggerTop + popoverHeight / 2 - triggerHeight / 2) - 2 + 'px'
       }
       this.place = place
     },

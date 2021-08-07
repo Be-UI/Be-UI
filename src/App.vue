@@ -71,12 +71,11 @@
         layout="right"
         titles="测试弹窗">
       </be-dialog>-->
-      <be-popover
-        placement="left"
-        width="500"
-        trigger="manual">
+      <be-popover custom-class="asdqwd" trigger="click" placement="left">
         <be-button slot="trigger">测试Popover</be-button>
-        <span>测试Popovers测试Popovers测试</span>
+        <div class="qwdwaa">
+          测试Popovers测试Popovers测试
+        </div>
       </be-popover>
 <!--      <be-ellipsis
           text=" 电灯熄灭 物换星移 泥牛入海<br />黑暗好像 一颗巨石 按在胸口<br />独脚大盗
@@ -139,6 +138,7 @@ export default {
     },
     methods:{
       test(num){
+        debugger
         this.pageParams.currentPage = num.currentPage;
         console.log(num)
       },
@@ -169,5 +169,10 @@ body,html{
     top:10%;
     padding: 10px;
     box-sizing: border-box;
+}
+.asdqwd .be-popover-body{
+
+    background: red;
+
 }
 </style>
