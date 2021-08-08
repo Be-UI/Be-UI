@@ -1,10 +1,11 @@
 <template>
-    <span
-        v-html="text"
-        :title="content"
-        @click="expandTriggerFunc"
-        :style="styleStr">
+  <be-tooltip :content="content" :placement="placement">
+     <span
+         v-html="text"
+         @click="expandTriggerFunc"
+         :style="styleStr">
     </span>
+  </be-tooltip>
 </template>
 
 <script>
@@ -55,7 +56,7 @@ export default {
       default: 5
     },
     /**
-     * 缩略字符数
+     * 缩略位置
      */
     'placement': {
       type: String,

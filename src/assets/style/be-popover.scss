@@ -1,14 +1,14 @@
 @import 'common';
 .be-popover{
-  position: fixed;
+   margin: 10px;
   .be-popover-body{
     background-color: $default;
     color: $info;
     text-align: center;
     padding: 8px 14px;
+    box-sizing: border-box;
     border-radius: 3px;
     font-size: 12px;
-    word-break: keep-all;
     position: relative;
     z-index: 2;
     top: 0;
