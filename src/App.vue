@@ -71,9 +71,9 @@
         layout="right"
         titles="测试弹窗">
       </be-dialog>-->
-      <be-popover custom-class="asdqwd" trigger="manual" placement="left">
+<!--      <be-popover custom-class="asdqwd" trigger="hover" placement="bottom">
         <be-button slot="trigger" custom-class="test-button">测试Popover</be-button>
-        1百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
+        1百万富翁
         百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
         百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
         百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
@@ -82,16 +82,14 @@
         百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
         百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
         百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
-        百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
-        百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗2
-
-      </be-popover>
+        百万富翁 摸爬滚打 2
+      </be-popover>-->
 <!--      <be-tooltip custom-class="asdqwd"  placement="right" content=" 测试Popovers测试Popovers测试">
         <be-button>tooltip</be-button>
       </be-tooltip>-->
 
-<!--      <be-ellipsis
-          placement="right"
+      <be-ellipsis
+          placement="left"
           text=" 电灯熄灭 物换星移 泥牛入海<br />黑暗好像 一颗巨石 按在胸口<br />独脚大盗
     百万富翁 摸爬滚打<br />黑暗好像 一颗巨石 按在胸口"
           content="电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
@@ -119,7 +117,7 @@
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口"
           expandTrigger
-      ></be-ellipsis>-->
+      ></be-ellipsis>
     </div>
 </template>
 
@@ -212,8 +210,8 @@ body,html{
 
 }
 .test-button{
-/*  position: absolute;
+  position: absolute;
   right: 25%;
-  top:40%;*/
+  bottom:40%;
 }
 </style>
