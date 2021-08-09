@@ -25,7 +25,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
 button loading 宽度问题
-popover 的位置边界问题
+
 去element化
 ## 排期
 
