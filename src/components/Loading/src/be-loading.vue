@@ -5,29 +5,29 @@
 * @update (czh 2021/6/11)
 */
 <template>
-  <div style="position: relative;height: 100%;width: max-content;">
-    <slot></slot>
-    <transition name="be-fade-in-linear">
-      <div class="be-load-container"
-           :id="`be_load_${this._uid}`"
-           :class="`${customClass} ${isFullScreenStyle}`"
-           :style="`
+    <div :id="`be_load_${this._uid}`" :style="`position: fixed;height: ${containerHeight};width: ${containerWidth};left: ${containerLeft};top: ${containerTop};`">
+      <transition name="be-fade-in-linear">
+        <div class="be-load-container"
+             :class="`${customClass} ${isFullScreenStyle}`"
+             :style="`
                  background-color: ${bgColor};
                  left: ${leftLoader};
                  top: ${topLoader};
                  width:${loadWidth};
                  border-radius: ${round}px;
                  height:${laodHeight}`"
-           v-if="isShowLoader">
-        <!--loading动画-->
-        <BeLoadingAnimate></BeLoadingAnimate>
-        <span class="be-loader-text"
-              v-if="text"
-              :style="`color:${colorText};left:${leftTxt};top:${topTxt}`"
-              :class="`be-loader-text__${sizeLoader}`">{{ text }}</span>
-      </div>
-    </transition>
+             v-if="isShowLoader">
+          <!--loading动画-->
+          <BeLoadingAnimate></BeLoadingAnimate>
+          <span class="be-loader-text"
+                v-if="text"
+                :style="`color:${colorText};left:${leftTxt};top:${topTxt}`"
+                :class="`be-loader-text__${sizeLoader}`">{{ text }}</span>
+        </div>
+      </transition>
+
   </div>
+
 
 </template>
 
@@ -42,9 +42,9 @@ export default {
   data() {
     return {
       // loading动画left
-      left: '',
+      left: '50%',
       // loading动画top
-      top: '',
+      top: '50%',
       // loading文字left
       leftTxt: '',
       // loading文字left
@@ -63,6 +63,11 @@ export default {
       sizeLoader: 'default',
       // loading显示控制
       isShowLoader: false,
+      containerHeight:'',
+      containerWidth:'',
+      containerLeft:'',
+      containerTop:'',
+      parentElement:null
     }
   },
   components: {BeLoadingAnimate},
@@ -269,6 +274,7 @@ export default {
      * 初始化组件
      */
     initComp() {
+      // 全屏显示时
       if (this.isFullScreen) {
         this.appendEleToBody()
         this.computePosition(document.querySelector('body'))
@@ -277,10 +283,19 @@ export default {
         }
         return
       }
-      this.computePosition(this.$slots.default[0].elm)
+      this.getParentDomAttr(this.$el.parentElement)
+      this.parentElement = this.$el.parentElement
       window.onresize = () => {
-        this.computePosition(this.$slots.default[0].elm)
+        this.getParentDomAttr(this.parentElement)
       }
+    },
+    getParentDomAttr(parentDom){
+      const parentStylr = this.getAbsolutePosition(parentDom)
+      this.containerWidth = window.getComputedStyle(parentDom).width
+      this.containerHeight = window.getComputedStyle(parentDom).height
+      this.containerLeft = parentStylr.left + 'px'
+      this.containerTop = parentStylr.top + 'px'
+      this.appendEleToBody()
     }
   },
 
