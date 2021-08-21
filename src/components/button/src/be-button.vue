@@ -1,12 +1,13 @@
 <template>
-  <be-loading :show="loading"
-              :customRender="customRenderLoading"
-              :isBackground='false'
-              :round="round">
     <div class="be-button"
          v-on="listeners"
          :class='`be-button__${size} be-button__${type}${borderStyle} ${customClass}`'
          :style="btnStyle">
+      <be-loading :show="loading"
+                  :customRender="customRenderLoading"
+                  :isBackground='false'
+                  :round="round">
+      </be-loading>
       <div class="be-button-body" style="margin: 0 auto;display: flex">
         <be-icon :icon="preIconStyle" v-if="preIcon"
                  :custom-class="`be-button-preIcon be-button-preIcon__${type}`">
@@ -18,13 +19,14 @@
                 :class='`be-button__inner ${disabledStyle}`'
                 :disabled="disabled">
           <slot v-if="!loading"></slot>
+          <slot></slot>
         </button>
         <be-icon :icon="nextIconStyle" v-if="nextIcon"
                  :custom-class="`be-button-nextIcon be-button-nextIcon__${type}`">
         </be-icon>
       </div>
     </div>
-  </be-loading>
+
 </template>
 
 <script>
@@ -137,7 +139,7 @@ export default {
         'cursor': this.disabled ? "not-allowed" : "pointer",
         'border-style': this.dashed ? "dashed" : "solid",
         'border-radius': `${this.round}px`,
-        'display': this.flex ? "flex" : "block",
+        'display': this.flex ? "flex" : "",
       }
     },
     borderStyle() {
