@@ -5,40 +5,6 @@ export const createCustom = (template:string) :object=>{
          name:'BeCustomIcon',
          props: {
              /**
-              * 自定义宽
-              */
-             width: {
-                 type: [Number, String],
-                 default: 18
-             },
-             /**
-              * 自定义高
-              */
-             height: {
-                 type: [Number, String],
-                 default: 18
-             },
-             /**
-              * 定义颜色
-              */
-             color: {
-                 type: String,
-                 default: ''
-             },
-             /**
-              * icon 名称
-              */
-             icon: {
-                 type: String,
-             },
-             /**
-              * 自定义样式类
-              */
-             customClass: {
-                 type: String,
-                 default: ''
-             },
-             /**
               * 是否旋转
               */
              spin: {
@@ -46,65 +12,20 @@ export const createCustom = (template:string) :object=>{
                  default: false
              }
          },
+         setup(props:any) {
+             const spinClass = computed(() => props.spin ? 'be-icon-spin ' + props.customClass: '' + props.customClass)
+             return {
+                 spinClass
+             }
+         },
          render () {
+             debugger
              return h(
-                 <div>
-                     {template}
-                 </div>
+                 <div class={`be-icon-container ${this.spinClass}`}>
+                    {template}
+                </div>
+
              )
          }
      }
 };
-
-
-/*export default defineComponent({
-    name:'BeCustomIcon',
-    props: {
-        /!**
-         * 自定义宽
-         *!/
-        width: {
-            type: [Number, String],
-            default: 18
-        },
-        /!**
-         * 自定义高
-         *!/
-        height: {
-            type: [Number, String],
-            default: 18
-        },
-        /!**
-         * 定义颜色
-         *!/
-        color: {
-            type: String,
-            default: ''
-        },
-        /!**
-         * icon 名称
-         *!/
-        icon: {
-            type: String,
-        },
-        /!**
-         * 自定义样式类
-         *!/
-        customClass: {
-            type: String,
-            default: ''
-        },
-        /!**
-         * 是否旋转
-         *!/
-        spin: {
-            type: Boolean,
-            default: false
-        }
-    },
-    render () {
-        return h(
-           <span>123456</span>
-        )
-    }
-})*/

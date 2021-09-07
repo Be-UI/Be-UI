@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import { defineComponent } from "vue";
+  import { defineComponent ,computed} from "vue";
 /*
 * 旋转
 * */
@@ -59,14 +59,13 @@ export default defineComponent({
       default: false
     }
   },
-  computed: {
-    // 设置对应图标
-    iconName() {
-      return `${this.icon}`
-    },
-    // 设置旋转
-    spinClass() {
-      return this.spin ? 'be-icon-spin ' + this.customClass: '' + this.customClass
+  setup(props, context) {
+    const iconName = computed(() => `${props.icon}`)
+    const spinClass = computed(() => props.spin ? 'be-icon-spin ' + props.customClass: '' + props.customClass)
+    return {
+      props,
+      iconName,
+      spinClass
     }
   }
 })

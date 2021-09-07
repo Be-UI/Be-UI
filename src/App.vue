@@ -10,8 +10,8 @@
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口"
             expandTrigger>
     </be-ellipsis>-->
-    <panda></panda>
-    <be-icon icon="add"></be-icon>
+    <panda width="25" height="25" spin></panda>
+    <be-icon icon="add" @click="test"></be-icon>
     <!--<div class='be-icon-container'>
       <svg class="be-icon"
            :width="30"
@@ -41,7 +41,12 @@ export default {
     panda
   },
   mounted() {
-    debugger
+
+  },
+  methods:{
+    test(){
+      console.log(111)
+    }
   }
   }
 </script>
