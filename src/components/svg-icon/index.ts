@@ -1,5 +1,6 @@
 import { App ,defineComponent} from 'vue'
 import SvgIcon from './src/be-icon.vue'
+import {createCustom} from './src/be-custom-icon'
 import {SFCWithInstall} from "../../utils/types";
 import BeEllipsis from "../ellipsis/src/be-ellipsis.vue";
 // 获取创建svg上下文
@@ -17,7 +18,13 @@ const BeIcon: SFCWithInstall<typeof SvgIcon> = SvgIcon
 interface template {
     template?:string
 }
-BeIcon.BeIconComponets = (name:string,option:template) => {
+
+BeIcon.BeIconComponets = (name:string,option:template) :object => {
+    const tempStr:string = option.template
+    const compObject:object = defineComponent(createCustom(tempStr))
+    compObject.install = (app:App): void => {
+        app.component(name,compObject)
+    }
     /*let render = {
         template: `
               <div class='be-icon-container' :class="spinClass">
@@ -38,11 +45,7 @@ BeIcon.BeIconComponets = (name:string,option:template) => {
    /* icons.install = (app: App): void => {
         app.component(icons.name, icons)
     }*/
-    return  defineComponent({
-        render:(h)=>{
-            return `<span>123</span>`
-        }
-    })
+    return compObject
 }
 /**
  * 远程调用iconfont方法
