@@ -5,7 +5,8 @@
 * @update (czh 2021/6/7)
 */
 
-<script type="text/jsx">
+import {defineComponent } from 'vue'
+import '../../../assets/style/be-notification.scss';
 const renderBody = function (h) {
     return (
         <div class={`be-notification-container be-notification-container__${this.option.placement}`}>
@@ -20,7 +21,7 @@ const renderBody = function (h) {
                     {/**@slot 弹窗头部按钮**/}
                     <div>
                         {this.option.closeRender ? this.option.closeRender() :
-                            <i class="el-icon-close" onClick={(event) => this.close(event)}>awd</i>}
+                            <i class="el-icon-close" onClick={(event) => this.close(event)}></i>}
                     </div>
                 </div>
             </div>
@@ -35,7 +36,7 @@ const renderBody = function (h) {
         </div>
     )
 }
-export default {
+export default defineComponent({
     name: "BeNotification",
     data() {
         return {
@@ -94,10 +95,10 @@ export default {
             handler: function (nVal) {
                 this.option.placementSelf = nVal
                 if (this.option.placementSelf === 'bottomLeft' || this.option.placementSelf === 'bottomRight') {
-                    this.option.style = {bottom:this.option.offsetBottom}
+                    this.option.style = {bottom:this.option.offsetBottom + 'px'}
                 }
                 if (this.option.placementSelf === 'topLeft' || this.option.placementSelf === 'topRight') {
-                    this.option.style = {top:this.option.offsetTop}
+                    this.option.style = {top:this.option.offsetTop + 'px'}
                 }
             },
             deep: true,
@@ -110,6 +111,7 @@ export default {
          * @param {Event} event - 事件对象
          */
         close(event) {
+            debugger
             event && event.stopPropagation()
             /** close事件
              * @event close
@@ -164,7 +166,6 @@ export default {
         this.setAnimate()
     },
     mounted() {
-        this.startTimer()
     },
     render(h) {
         this.clearTimer()
@@ -180,53 +181,4 @@ export default {
             </div>
         )
     }
-}
-</script>
-
-<style   lang="scss">
-@import 'src/assets/style/be-notification';
-.be-notification-bottom{
-    transition: bottom .3s;
-}
-.be-notification-top{
-    transition: bottom .3s;
-}
-.be-notification-animation-right-in{
-    -webkit-animation:bounceInRight .3s .2s ease both;
-    -moz-animation:bounceInRight .3s .2s ease both;
-}
-@-webkit-keyframes bounceInRight{
-    0%{opacity:0;
-        -webkit-transform:translateX(2000px)}
-    60%{opacity:1;
-        -webkit-transform:translateX(-30px)}
-    80%{-webkit-transform:translateX(10px)}
-    100%{-webkit-transform:translateX(0)}
-}
-@-moz-keyframes bounceInRight{
-    0%{opacity:0;
-        -moz-transform:translateX(2000px)}
-    60%{opacity:1;
-        -moz-transform:translateX(-30px)}
-    80%{-moz-transform:translateX(10px)}
-    100%{-moz-transform:translateX(0)}
-}
-
-.be-notification-animation-left-in{
-    -webkit-animation:fadeInLeftBig .3s .2s ease both;
-    -moz-animation:fadeInLeftBig .3s .2s ease both;
-}
-@-webkit-keyframes fadeInLeftBig{
-    0%{opacity:0;
-        -webkit-transform:translateX(-2000px)}
-    100%{opacity:1;
-        -webkit-transform:translateX(0)}
-}
-@-moz-keyframes fadeInLeftBig{
-    0%{opacity:0;
-        -moz-transform:translateX(-2000px)}
-    100%{opacity:1;
-        -moz-transform:translateX(0)}
-}
-
-</style>
+})

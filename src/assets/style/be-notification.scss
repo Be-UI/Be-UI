@@ -97,3 +97,13 @@
     position: fixed;
     right: 5px;
 }
+.be-notification-bottom{
+    transition: bottom .3s;
+}
+.be-notification-top{
+    transition: bottom .3s;
+}
+.be-notification-animation-right-in{
+    -webkit-animation:bounceInRight .3s .2s ease both;
+    -moz-animation:bounceInRight .3s .2s ease both;
+}

@@ -1,6 +1,6 @@
 <template>
   <div  id="App">
-    <!--<be-ellipsis
+<!--    <be-ellipsis
             placement="left"
             text="电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
@@ -10,8 +10,8 @@
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口"
             expandTrigger>
     </be-ellipsis>-->
-    <panda width="25" height="25" spin></panda>
-    <be-icon icon="add" @click="test"></be-icon>
+    <panda width="25" height="25" spin @click="test"></panda>
+<!--    <be-icon icon="add" @click="test"></be-icon>-->
     <!--<div class='be-icon-container'>
       <svg class="be-icon"
            :width="30"
@@ -33,8 +33,9 @@
 
 </template>
 
-<script lang="ts">
+<script lang="tsx">
 import {panda} from './test'
+import {BeNotify} from "./components/notification/src/be-notification-service";
 export default {
   name: 'App',
   components:{
@@ -45,7 +46,16 @@ export default {
   },
   methods:{
     test(){
-      console.log(111)
+        BeNotify({
+            titles:'到期提醒',
+            bodyRender:()=>{
+                return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
+                    您的体验时间仅剩
+                </p>
+            },
+            offsetTop:10,
+            duration:4500,
+        })
     }
   }
   }
