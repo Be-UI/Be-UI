@@ -170,7 +170,8 @@ const createNotify = function (options:INotifyOption) :object {
         }
         instanceObj.push(instance)
     }
-    return {notify: instance, close: closeNotify.bind(this, instance)}
+    //return {notify: instance, close: closeNotify.bind(this, instance)}
+    return {notify: instance}
 }
 
 export const BeNotify = (options:INotifyOption):object =>{
