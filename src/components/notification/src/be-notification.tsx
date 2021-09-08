@@ -145,7 +145,7 @@ export default defineComponent({
             if (this.option.duration > 0) {
                 this.timer = setTimeout(() => {
                     this.close();
-                }, this.option.duration);
+                }, this.option.duration);//sad
             }
         },
         /**
