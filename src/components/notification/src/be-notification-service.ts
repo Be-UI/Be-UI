@@ -4,8 +4,8 @@
 * @author czh
 * @update (czh 2021/06/07)
 */
-import { createVNode, render,DefineComponent,createApp } from 'vue';
-import beNotifyComponents from './be-notification';
+import {createVNode, render, DefineComponent, createApp, h} from 'vue';
+import beNotifyComponents,{initNotify} from './be-notification';
 import type {
     INotifyOption,
     ItInstanceMap
@@ -83,18 +83,22 @@ let instanceMap:ItInstanceMap = {
 const createNotify = function (options:INotifyOption) :object {
     // 初始默认配置
     const defaultOption = {
-        titles: '',
-        customClass: '',
-        msgType: 'warning',
-        offsetTop: 0,
-        offsetBottom: 0,
-        placement: 'topRight',
-        bodyRender: null,
-        iconPreRender: null,
-        closeRender: null,
-        description: '',
-        duration: 4500,
-        key: '',
+        isShow:false,
+        style: {},
+        placementSelf:'',
+        titles:'',//
+        customClass:'',//
+        msgType:'warning',//
+        offsetTop:0,//
+        offsetBottom:0,//
+        placement:'topRight',//
+        bodyRender:null,//
+        iconPreRender:null,//
+        closeRender:null,//
+        description:'',//
+        duration:4500,//
+        key:'',//
+        timer:0,//
         //关闭回调方法
         onClose: null,
         //点击回调方法
@@ -122,14 +126,11 @@ const createNotify = function (options:INotifyOption) :object {
     }
     // 如果instance 为null，则是没有传入key 或者没有匹配到实例缓存，就创建新的
     if (!instance) {
-        // 因为option是在data里维护，所有这里直接改写data方法。并使用createApp
-        Object(beNotifyComponents).data = ():object =>{
-            return {
-                option,
-                containerClass:''
-            }
-        }
-        instance = createApp(beNotifyComponents).mount(document.createElement('div'))
+        // 因为option是在data里维护，所有这里直接改写。并使用createApp
+        let instanceComp = createApp(beNotifyComponents)
+        instanceComp._component.props.option.default = option;
+        instanceComp._component.props.option.default.isShow = true;
+        instance = instanceComp.mount(document.createElement('div'))
         // 挂载元素
         const bodyElement:Element | null= document.querySelector('body')
         if (bodyElement && bodyElement.append) {
@@ -138,10 +139,15 @@ const createNotify = function (options:INotifyOption) :object {
             bodyElement && bodyElement.appendChild(instance.$el)
         }
     } else {
-        Object(instance).option = option
+        instance.$props.option = option
     }
     instance.$nextTick(()=>{
         instance.option.isShow = true;
+       // instance.$options.props.option.isShow = true;
+       // const options = instance.$options.props.option
+       // instance.$options.setup({option:options})
+       //const options = instance.$options.props.option
+       //instance.$options.setup({option:options})
     })
     // 设置组件的偏移
     let verticalOffset:number = 0;

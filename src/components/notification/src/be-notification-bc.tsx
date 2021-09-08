@@ -111,7 +111,6 @@ export default defineComponent({
          * @param {Event} event - 事件对象
          */
         close(event) {
-            debugger
             event && event.stopPropagation()
             /** close事件
              * @event close

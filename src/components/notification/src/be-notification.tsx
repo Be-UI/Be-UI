@@ -5,70 +5,75 @@
 * @update (czh 2021/6/7)
 */
 
-import {computed, defineComponent, reactive, ref} from 'vue'
+import {computed, defineComponent, reactive, ref,watch,h,onBeforeUpdate} from 'vue'
 import '../../../assets/style/be-notification.scss';
-const renderBody = function (h) {
-    return (
-        <div class={`be-notification-container be-notification-container__${this.option.placement}`}>
-            <div class="be-notification-title">
-                <div class="be-notification-head"
-                     id={`be_notification_head${this._uid}`}>
-                    <div>
-                        {this.option.iconPreRender ? this.option.iconPreRender() :
-                            <i class={`el-icon-${this.option.msgType} icon-${this.option.msgType}`}></i>}
-                        <span class={`text-${this.option.msgType}`}>{this.option.titles}</span>
-                    </div>
-                    {/**@slot 弹窗头部按钮**/}
-                    <div>
-                        {this.option.closeRender ? this.option.closeRender() :
-                            <i class="el-icon-close" onClick={(event) => this.close(event)}></i>}
-                    </div>
-                </div>
-            </div>
-            {/**@slot 弹窗主体**/}
-            <div class='be-notification-body'>
-                {this.option.bodyRender ? this.option.bodyRender() :
-                    <p class="be-notification-description">
-                        {this.option.description}
-                    </p>
-                }
-            </div>
-        </div>
-    )
-}
 export default defineComponent({
     name: "BeNotification",
-    setup(){
-        let option = reactive({
-            isShow:false,
-            style: {},
-            placementSelf:'',
-            titles:'',//
-            customClass:'',//
-            msgType:'warning',//
-            offsetTop:0,//
-            offsetBottom:0,//
-            placement:'topRight',//
-            bodyRender:null,//
-            iconPreRender:null,//
-            closeRender:null,//
-            description:'',//
-            duration:4500,//
-            key:'',//
-            timer:null,//
-        })
+    props:{
+      option:{
+          type: Object,
+          default: {
+              isShow:false,
+              style: {},
+              placementSelf:'',
+              titles:'',//
+              customClass:'',//
+              msgType:'warning',//
+              offsetTop:0,//
+              offsetBottom:0,//
+              placement:'topRight',//
+              bodyRender:null,//
+              iconPreRender:null,//
+              closeRender:null,//
+              description:'',//
+              duration:4500,//
+              key:'',//
+              timer:0,//
+              //关闭回调方法
+              onClose: null,
+              //点击回调方法
+              onClick:null
+          }
+      }
+    },
+    setup(props,ctx){
+        let uid = '1234'
+        let option = props.option
         let containerClass = ref('')
-
+        let selfEvent = reactive( {
+            onClose: ():void=> {},
+            onClick: ():void=> {}
+        })
         const offsetTopStyle = computed(() => option.offsetTop)
+        watch(offsetTopStyle,(offsetTopNval:number) => {
+            if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight') {
+                option.style = {top:offsetTopNval + 'px'}
+            }
+        })
         const offsetBottomStyle = computed(() => option.offsetBottom)
+        watch(offsetBottomStyle,(offsetBottomNval:number) => {
+            if (option.placementSelf === 'bottomLeft' || option.placementSelf === 'bottomRight') {
+                option.style = {bottom:offsetBottomNval + 'px'}
+            }
+        })
         const placementStyle = computed(() => option.placement)
+        watch(placementStyle,(placementNval:string) => {
+            option.placementSelf = placementNval
+            if (option.placementSelf === 'bottomLeft' || option.placementSelf === 'bottomRight') {
+                option.style = {bottom:option.offsetBottom + 'px'}
+            }
+            if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight') {
+               option.style = {top:option.offsetTop + 'px'}
+            }
+        })
 
         const close = (event:Event | null):void=>{
             event && event.stopPropagation()
             /** close事件
              * @event close
              */
-            this.$selfEvent.onClose && this.$selfEvent.onClose(event)
+
+            selfEvent.onClose && selfEvent.onClose(event)
             this.$closeNotify(this,false,true)
             if (this.$el && this.$el.parentNode) {
                 this.$el.parentNode.removeChild(this.$el);
@@ -77,15 +82,16 @@ export default defineComponent({
             this.$destroy()
         }
         const onClick = (event:Event | null):void=>{
-            this.$selfEvent.onClick && this.$selfEvent.onClick(event)
+            selfEvent.onClick && selfEvent.onClick(event)
         }
         const clearTimer = ()=>{
-            clearTimeout(this.timer);
-            this.timer = null
+            clearTimeout(option.timer);
+            option.timer = 0
         }
         const startTimer = ()=>{
+            console.log(option.duration)
             if (option.duration > 0) {
-                this.timer = setTimeout(() => {
+                option.timer = setTimeout(() => {
                     close(null);
                 }, option.duration);//sad
             }
@@ -100,35 +106,74 @@ export default defineComponent({
                 containerClass.value = classStr + ' be-notification-animation-left-in be-notification-top'
             }
         }
+        const renderBody = function (h) {
+            return (
+                <div class={`be-notification-container be-notification-container__${option.placement}`}>
+                    <div class="be-notification-title">
+                        <div class="be-notification-head"
+                             id={`be_notification_head${uid}`}>
+                            <div>
+                                {option.iconPreRender ? option.iconPreRender() :
+                                    <i class={`el-icon-${option.msgType} icon-${option.msgType}`}></i>}
+                                <span class={`text-${option.msgType}`}>{option.titles}</span>
+                            </div>
+                            {/**@slot 弹窗头部按钮**/}
+                            <div>
+                                {option.closeRender ? option.closeRender() :
+                                    <i class="el-icon-close" onClick={(event) => this.close(event)}></i>}
+                            </div>
+                        </div>
+                    </div>
+                    {/**@slot 弹窗主体**/}
+                    <div class='be-notification-body'>
+                        {option.bodyRender ? option.bodyRender() :
+                            <p class="be-notification-description">
+                                {option.description}
+                            </p>
+                        }
+                    </div>
+                </div>
+            )
+        }
+        debugger
+        setAnimate()
+        onBeforeUpdate(()=>{
+            debugger
+        })
 
-     return{
-         option,
-         containerClass,
-         setAnimate,
-         startTimer,
-         clearTimer,
-         onClick,
-         close
+
+     return ()=>{
+         return (
+             <div
+                 style={option.style}
+                 onClick={(event)=>{onClick(event)}}
+                 class={containerClass.value} id={`be_notification${uid}`}>
+                 <transition name="be-fade-in-linear">
+                     {option.isShow ? renderBody.call(this, h) : ''}
+                 </transition>
+             </div>
+         )
      }
     },
-    render(h) {
-        this.clearTimer()
-        this.startTimer()
+   /* render(h) {
+        //this.clearTimer()
+        //this.startTimer()
+        let op = this.option
+        debugger
+        if(h==='w') op = this.props.option
         return (
             <div
-                style={this.option.style}
+                style={op.style}
                 onClick={(event)=>{this.onClick(event)}}
-                class={this.containerClass} id={`be_notification${this._uid}`}>
+                class={this.containerClass} id={`be_notification${this.uid}`}>
                 <transition name="be-fade-in-linear">
-                    {this.option.isShow ? renderBody.call(this, h) : ''}
+                    {/!*{op.isShow ? renderBody.call(this, h) : ''}*!/}
+                    { op.isShow ? 'renderBody.call(this, h)' : ''}
                 </transition>
             </div>
         )
-    },
-    computed: {
-
-    },
-    watch: {
+    },*/
+    /*watch: {
         offsetTopStyle: {
             handler: function (nVal) {
                 if (this.option.placementSelf === 'topLeft' || this.option.placementSelf === 'topRight') {
@@ -160,7 +205,7 @@ export default defineComponent({
             deep: true,
             immediate: true
         },
-    },
+    },*/
    /* methods: {
         /!**
          * 关闭方法，销毁组件

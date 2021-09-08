@@ -2,15 +2,13 @@
   <div  id="App">
 <!--    <be-ellipsis
             placement="left"
-            text="电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
-    百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
-    百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口"
+            :text="qcwqwd"
             content="电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口"
             expandTrigger>
     </be-ellipsis>-->
-    <panda width="25" height="25" spin @click="test"></panda>
+    <panda width="25" height="25"  @click="test"></panda>
 <!--    <be-icon icon="add" @click="test"></be-icon>-->
     <!--<div class='be-icon-container'>
       <svg class="be-icon"
@@ -38,6 +36,12 @@ import {panda} from './test'
 import {BeNotify} from "./components/notification/src/be-notification-service";
 export default {
   name: 'App',
+  data(){
+    return{
+      qcwqwd:'asdqwd'
+    }
+
+  },
   components:{
     panda
   },
@@ -53,8 +57,10 @@ export default {
                     您的体验时间仅剩
                 </p>
             },
+            onClick:()=>console.log('click'),
+            onClose:()=>console.log('close'),
             offsetTop:10,
-            duration:4500,
+            duration:10000,
         })
     }
   }
