@@ -1,5 +1,5 @@
 <template>
-  <div class='be-icon-container' :class="spinClass" v-on="$listeners" >
+  <div class='be-icon-container' :class="spinClass" v-on="$attrs" >
     <svg class="be-icon"
          :width="width"
          :height="height"

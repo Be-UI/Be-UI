@@ -19,9 +19,8 @@ export const createCustom = (template:string) :object=>{
              }
          },
          render () {
-             debugger
              return h(
-                 <div class={`be-icon-container ${this.spinClass}`}>
+                 <div class={`be-icon-container ${this.spinClass}`} {...this.$attrs}>
                     {template}
                 </div>
 
