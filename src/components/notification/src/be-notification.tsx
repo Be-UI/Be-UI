@@ -5,7 +5,7 @@
 * @update (czh 2021/6/7)
 */
 
-import {computed, defineComponent, reactive, ref,watch,h,onBeforeUpdate} from 'vue'
+import {computed, defineComponent, reactive, ref,watch,h,onBeforeUpdate,getCurrentInstance,render} from 'vue'
 import '../../../assets/style/be-notification.scss';
 export default defineComponent({
     name: "BeNotification",
@@ -37,50 +37,43 @@ export default defineComponent({
       }
     },
     setup(props,ctx){
-        let uid = '1234'
+        const internalInstance:defineComponent = getCurrentInstance()
+        console.log(internalInstance)
+        let uid = internalInstance.uid
         let option = props.option
         let containerClass = ref('')
         let selfEvent = reactive( {
-            onClose: ():void=> {},
-            onClick: ():void=> {}
+            onClose: props.option.onClose,
+            onClick: props.option.onClick
         })
         const offsetTopStyle = computed(() => option.offsetTop)
-        watch(offsetTopStyle,(offsetTopNval:number) => {
-            if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight') {
-                option.style = {top:offsetTopNval + 'px'}
-            }
-        })
+        if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight') {
+            option.style = {top:offsetTopStyle.value + 'px'}
+        }
+
         const offsetBottomStyle = computed(() => option.offsetBottom)
-        watch(offsetBottomStyle,(offsetBottomNval:number) => {
-            if (option.placementSelf === 'bottomLeft' || option.placementSelf === 'bottomRight') {
-                option.style = {bottom:offsetBottomNval + 'px'}
-            }
-        })
+        if (option.placementSelf === 'bottomLeft' || option.placementSelf === 'bottomRight') {
+            option.style = {bottom:offsetBottomStyle.value + 'px'}
+        }
+
         const placementStyle = computed(() => option.placement)
-        watch(placementStyle,(placementNval:string) => {
-            option.placementSelf = placementNval
-            if (option.placementSelf === 'bottomLeft' || option.placementSelf === 'bottomRight') {
-                option.style = {bottom:option.offsetBottom + 'px'}
-            }
-            if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight') {
-               option.style = {top:option.offsetTop + 'px'}
-            }
-        })
+        option.placementSelf = placementStyle.value
+        if (option.placementSelf === 'bottomLeft' || option.placementSelf === 'bottomRight') {
+            option.style = {bottom:option.offsetBottom + 'px'}
+        }
+        if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight') {
+            option.style = {top:option.offsetTop + 'px'}
+        }
+
 
         const close = (event:Event | null):void=>{
             event && event.stopPropagation()
-            /** close事件
-             * @event close
-             */
-
+            // 關閉回調
             selfEvent.onClose && selfEvent.onClose(event)
-            this.$closeNotify(this,false,true)
-            if (this.$el && this.$el.parentNode) {
-                this.$el.parentNode.removeChild(this.$el);
-            }
-            // 销毁组件
-            this.$destroy()
+            // 刪除緩存的組件實例，調整位置.关闭销毁
+            props.option.closeNotify(internalInstance,false,true)
         }
+
         const onClick = (event:Event | null):void=>{
             selfEvent.onClick && selfEvent.onClick(event)
         }
@@ -89,7 +82,6 @@ export default defineComponent({
             option.timer = 0
         }
         const startTimer = ()=>{
-            console.log(option.duration)
             if (option.duration > 0) {
                 option.timer = setTimeout(() => {
                     close(null);
@@ -135,14 +127,10 @@ export default defineComponent({
                 </div>
             )
         }
-        debugger
         setAnimate()
-        onBeforeUpdate(()=>{
-            debugger
-        })
-
-
      return ()=>{
+         clearTimer()
+         startTimer()
          return (
              <div
                  style={option.style}

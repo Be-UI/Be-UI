@@ -9,7 +9,7 @@
             expandTrigger>
     </be-ellipsis>-->
     <panda width="25" height="25"  @click="test"></panda>
-<!--    <be-icon icon="add" @click="test"></be-icon>-->
+    <be-icon icon="add" @click="testclose"></be-icon>
     <!--<div class='be-icon-container'>
       <svg class="be-icon"
            :width="30"
@@ -38,7 +38,8 @@ export default {
   name: 'App',
   data(){
     return{
-      qcwqwd:'asdqwd'
+      num:0,
+      notify:null
     }
 
   },
@@ -50,8 +51,8 @@ export default {
   },
   methods:{
     test(){
-        BeNotify({
-            titles:'到期提醒',
+        this.notify = BeNotify({
+            titles:this.num,
             bodyRender:()=>{
                 return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
                     您的体验时间仅剩
@@ -59,10 +60,15 @@ export default {
             },
             onClick:()=>console.log('click'),
             onClose:()=>console.log('close'),
-            offsetTop:10,
-            duration:10000,
+            offsetBottom:10,
+            placement:'bottomRight',
+            duration:0,
+
         })
-    }
+    },
+      testclose(){
+          this.notify.close()
+      }
   }
   }
 </script>
