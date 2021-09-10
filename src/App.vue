@@ -9,7 +9,7 @@
             expandTrigger>
     </be-ellipsis>-->
     <panda width="25" height="25"  @click="test"></panda>
-    <be-icon icon="add" @click="testclose"></be-icon>
+    <be-icon icon="delete" @click="testclose"></be-icon>
     <!--<div class='be-icon-container'>
       <svg class="be-icon"
            :width="30"
@@ -52,18 +52,19 @@ export default {
   methods:{
     test(){
         this.notify = BeNotify({
-            titles:this.num,
+            titles:'NotificationNotificationNotificationNotificationNotification',
             bodyRender:()=>{
                 return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
                     您的体验时间仅剩
                 </p>
             },
+            msgType:'info',
             onClick:()=>console.log('click'),
             onClose:()=>console.log('close'),
             offsetBottom:10,
             placement:'bottomRight',
             duration:0,
-
+            key:1
         })
     },
       testclose(){

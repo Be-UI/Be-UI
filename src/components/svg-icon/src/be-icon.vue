@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import { defineComponent ,computed} from "vue";
+import { defineComponent ,computed} from "vue";
 /*
 * 旋转
 * */

@@ -5,7 +5,8 @@
 * @update (czh 2021/6/7)
 */
 
-import {computed, defineComponent, reactive, ref,watch,h,onBeforeUpdate,getCurrentInstance,render} from 'vue'
+import {computed, defineComponent, reactive, ref,h,getCurrentInstance} from 'vue'
+import BeIcon from '../../svg-icon/src/be-icon.vue'
 import '../../../assets/style/be-notification.scss';
 export default defineComponent({
     name: "BeNotification",
@@ -38,7 +39,6 @@ export default defineComponent({
     },
     setup(props,ctx){
         const internalInstance:defineComponent = getCurrentInstance()
-        console.log(internalInstance)
         let uid = internalInstance.uid
         let option = props.option
         let containerClass = ref('')
@@ -98,21 +98,22 @@ export default defineComponent({
                 containerClass.value = classStr + ' be-notification-animation-left-in be-notification-top'
             }
         }
-        const renderBody = function (h) {
+        const renderBody = function (h:any) {
             return (
-                <div class={`be-notification-container be-notification-container__${option.placement}`}>
+                h(<div class={`be-notification-container be-notification-container__${option.placement}`}>
                     <div class="be-notification-title">
                         <div class="be-notification-head"
                              id={`be_notification_head${uid}`}>
                             <div>
                                 {option.iconPreRender ? option.iconPreRender() :
-                                    <i class={`el-icon-${option.msgType} icon-${option.msgType}`}></i>}
+                                    <BeIcon icon={`${option.msgType}`} customClass={`icon-${option.msgType}`}></BeIcon>}
+
                                 <span class={`text-${option.msgType}`}>{option.titles}</span>
                             </div>
                             {/**@slot 弹窗头部按钮**/}
                             <div>
                                 {option.closeRender ? option.closeRender() :
-                                    <i class="el-icon-close" onClick={(event) => this.close(event)}></i>}
+                                    <BeIcon icon="delete" onClick={(event:Event) => close(event)}></BeIcon>}
                             </div>
                         </div>
                     </div>
@@ -124,7 +125,7 @@ export default defineComponent({
                             </p>
                         }
                     </div>
-                </div>
+                </div>)
             )
         }
         setAnimate()
@@ -137,7 +138,7 @@ export default defineComponent({
                  onClick={(event)=>{onClick(event)}}
                  class={containerClass.value} id={`be_notification${uid}`}>
                  <transition name="be-fade-in-linear">
-                     {option.isShow ? renderBody.call(this, h) : ''}
+                     {option.isShow ? renderBody.call(this,h) : ''}
                  </transition>
              </div>
          )

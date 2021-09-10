@@ -17,17 +17,14 @@ export type INotifyOption = {
     key?: string,
     onClose?: () => void
     onClick?: () => void
-    bodyRender: any,//完成
-    iconPreRender: any,//完成
-    closeRender: any,//完成
+    bodyRender: any,
+    iconPreRender: any,
+    closeRender: any,
 }
-export type NotificationVM = VNode
-type ItInstanceMapItem = {
-    vm: NotificationVM
-}
+
 export type ItInstanceMap = {
-    topLeft?: Array<ItInstanceMapItem>,
-    topRight?: Array<ItInstanceMapItem>,
-    bottomLeft?: Array<ItInstanceMapItem>,
-    bottomRight?: Array<ItInstanceMapItem>,
+    topLeft?: Array<Object>,
+    topRight?: Array<Object>,
+    bottomLeft?: Array<Object>,
+    bottomRight?: Array<Object>,
 }

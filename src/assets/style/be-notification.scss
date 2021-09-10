@@ -1,10 +1,14 @@
 
-
+@mixin be-notification-icon{
+    line-height: 25px;
+    margin-right: 10px;
+    font-size: 20px;
+}
 .be-notification {
     z-index: 10;
     min-height: 100px;
     .be-notification-container {
-        width: 305px;
+       /* width: 305px;*/
         background: #FFFFFF;
         padding: 16px 16px 16px 20px;
         box-shadow: 0 6px 13px rgba(0, 0, 0, 0.16);
@@ -21,28 +25,20 @@
                 justify-content: space-between;
                 div:nth-child(1){
                     .icon-warning{
-                        color:$warning;
-                        line-height: 25px;
-                        margin-right: 5px;
-                        font-size: 20px;
+                        fill:$warning;
+                        @include be-notification-icon;
                     }
                     .icon-info{
-                        color:$info;
-                        line-height: 25px;
-                        margin-right: 5px;
-                        font-size: 20px;
+                        fill:$info;
+                        @include be-notification-icon;
                     }
                     .icon-success{
-                        color:$success;
-                        line-height: 25px;
-                        margin-right: 5px;
-                        font-size: 20px;
+                        fill:$success;
+                        @include be-notification-icon;
                     }
                     .icon-error{
-                        color:$error;
-                        line-height: 25px;
-                        margin-right: 5px;
-                        font-size: 20px;
+                        fill:$error;
+                        @include be-notification-icon;
                     }
                     .text-warning{
                         @include be-message-tilte;
