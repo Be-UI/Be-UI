@@ -41,7 +41,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 6.消息对话组件 be-message-box  
 7.分页组件 be-pager  
 8.图标组件 be-icon （迁移完成） 
-9.消息通知组件 be-notification  
+9.消息通知组件 be-notification （迁移完成）
 10.文本省略组件 be-ellipsis
 11.弹出显示 be-popover
 12.文本弹出显示 be-toolTip

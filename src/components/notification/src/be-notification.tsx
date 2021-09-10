@@ -5,9 +5,10 @@
 * @update (czh 2021/6/7)
 */
 
-import {computed, defineComponent, reactive, ref,h,getCurrentInstance} from 'vue'
+import {computed, DefineComponent,defineComponent, reactive, ref,h,getCurrentInstance} from 'vue'
 import BeIcon from '../../svg-icon/src/be-icon.vue'
 import '../../../assets/style/be-notification.scss';
+import {INotfiy} from './be-notification-type'
 export default defineComponent({
     name: "BeNotification",
     props:{
@@ -38,14 +39,10 @@ export default defineComponent({
       }
     },
     setup(props,ctx){
-        const internalInstance:defineComponent = getCurrentInstance()
-        let uid = internalInstance.uid
+        const internalInstance  = getCurrentInstance() as INotfiy
         let option = props.option
-        let containerClass = ref('')
-        let selfEvent = reactive( {
-            onClose: props.option.onClose,
-            onClick: props.option.onClick
-        })
+
+        /************************************** 根據方向 進行位置偏移設置******************************/
         const offsetTopStyle = computed(() => option.offsetTop)
         if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight') {
             option.style = {top:offsetTopStyle.value + 'px'}
@@ -64,8 +61,15 @@ export default defineComponent({
         if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight') {
             option.style = {top:option.offsetTop + 'px'}
         }
-
-
+        /************************************** 處理 點擊 關閉事件******************************/
+        let selfEvent = reactive( {
+            onClose: props.option.onClose,
+            onClick: props.option.onClick
+        })
+        /**
+         * 關閉方法
+         * @param event
+         */
         const close = (event:Event | null):void=>{
             event && event.stopPropagation()
             // 關閉回調
@@ -73,14 +77,24 @@ export default defineComponent({
             // 刪除緩存的組件實例，調整位置.关闭销毁
             props.option.closeNotify(internalInstance,false,true)
         }
-
+        /**
+         * 點擊方法
+         * @param event
+         */
         const onClick = (event:Event | null):void=>{
             selfEvent.onClick && selfEvent.onClick(event)
         }
+        /************************************** 自動關閉定時器 方法******************************/
+        /**
+         * 關閉定時器清除方法
+         */
         const clearTimer = ()=>{
             clearTimeout(option.timer);
             option.timer = 0
         }
+        /**
+         * 開啓定時關閉方法
+         */
         const startTimer = ()=>{
             if (option.duration > 0) {
                 option.timer = setTimeout(() => {
@@ -88,6 +102,11 @@ export default defineComponent({
                 }, option.duration);//sad
             }
         }
+        /************************************** 動畫類設置方法******************************/
+        let containerClass = ref('')
+        /**
+         * 動畫類設置方法
+         */
         const setAnimate = ()=>{
             let classStr = `be-notification be-notification__${option.msgType} be-notification__${option.placement} ${option.customClass}`
             containerClass.value = classStr
@@ -98,6 +117,13 @@ export default defineComponent({
                 containerClass.value = classStr + ' be-notification-animation-left-in be-notification-top'
             }
         }
+        setAnimate()
+        /************************************** 組件主dom渲染方法 ******************************/
+        let uid = internalInstance.uid
+        /**
+         * 渲染組件主體dom方法
+         * @param h
+         */
         const renderBody = function (h:any) {
             return (
                 h(<div class={`be-notification-container be-notification-container__${option.placement}`}>
@@ -128,9 +154,10 @@ export default defineComponent({
                 </div>)
             )
         }
-        setAnimate()
      return ()=>{
+         // 清楚定時器
          clearTimer()
+         // 開啓定時器
          startTimer()
          return (
              <div
@@ -143,108 +170,5 @@ export default defineComponent({
              </div>
          )
      }
-    },
-   /* render(h) {
-        //this.clearTimer()
-        //this.startTimer()
-        let op = this.option
-        debugger
-        if(h==='w') op = this.props.option
-        return (
-            <div
-                style={op.style}
-                onClick={(event)=>{this.onClick(event)}}
-                class={this.containerClass} id={`be_notification${this.uid}`}>
-                <transition name="be-fade-in-linear">
-                    {/!*{op.isShow ? renderBody.call(this, h) : ''}*!/}
-                    { op.isShow ? 'renderBody.call(this, h)' : ''}
-                </transition>
-            </div>
-        )
-    },*/
-    /*watch: {
-        offsetTopStyle: {
-            handler: function (nVal) {
-                if (this.option.placementSelf === 'topLeft' || this.option.placementSelf === 'topRight') {
-                    this.option.style = {top:nVal + 'px'}
-                }
-            },
-            deep: true,
-            immediate: true
-        },
-        offsetBottomStyle: {
-            handler: function (nVal) {
-                if (this.option.placementSelf === 'bottomLeft' || this.option.placementSelf === 'bottomRight') {
-                    this.option.style = {bottom:nVal + 'px'}
-                }
-            },
-            deep: true,
-            immediate: true
-        },
-        placementStyle: {
-            handler: function (nVal) {
-                this.option.placementSelf = nVal
-                if (this.option.placementSelf === 'bottomLeft' || this.option.placementSelf === 'bottomRight') {
-                    this.option.style = {bottom:this.option.offsetBottom + 'px'}
-                }
-                if (this.option.placementSelf === 'topLeft' || this.option.placementSelf === 'topRight') {
-                    this.option.style = {top:this.option.offsetTop + 'px'}
-                }
-            },
-            deep: true,
-            immediate: true
-        },
-    },*/
-   /* methods: {
-        /!**
-         * 关闭方法，销毁组件
-         * @param {Event} event - 事件对象
-         *!/
-        close(event) {
-
-        },
-        /!**
-         * 确认按钮方法
-         * @param {Event} event - 事件对象
-         *!/
-        onClick(event) {
-            this.$selfEvent.onClick && this.$selfEvent.onClick(event)
-        },
-        /!**
-         * 銷毀定時器
-         *!/
-        clearTimer() {
-            clearTimeout(this.timer);
-            this.timer = null
-        },
-        /!**
-         * 定時器 關閉銷毀組件
-         *!/
-        startTimer() {
-            if (this.option.duration > 0) {
-                this.timer = setTimeout(() => {
-                    this.close();
-                }, this.option.duration);//sad
-            }
-        },
-        /!**
-         * 设置动画
-         *!/
-        setAnimate(){
-            let classStr = `be-notification be-notification__${this.option.msgType} be-notification__${this.option.placement} ${this.option.customClass}`
-            this.containerClass = classStr
-            if (this.option.placement === 'bottomRight' || this.option.placement === 'topRight') {
-              this.containerClass = classStr + ' be-notification-animation-right-in be-notification-bottom'
-            }
-            if (this.option.placement === 'bottomLeft' || this.option.placement === 'topLeft') {
-                this.containerClass = classStr + ' be-notification-animation-left-in be-notification-top'
-            }
-        }
-    },
-    created(){
-        this.setAnimate()
-    },
-    mounted() {
-    },*/
-
+    }
 })

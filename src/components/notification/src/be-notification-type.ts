@@ -4,7 +4,7 @@
 * @author czh
 * @update (czh 2021/9/8)
 */
-import type { VNode } from 'vue'
+import type { ComponentInternalInstance,DefineComponent} from 'vue'
 export type INotifyOption = {
     titles?: string,
     customClass?: string,
@@ -27,4 +27,8 @@ export type ItInstanceMap = {
     topRight?: Array<Object>,
     bottomLeft?: Array<Object>,
     bottomRight?: Array<Object>,
+}
+export interface INotfiy extends ComponentInternalInstance {
+    uid: number
+
 }

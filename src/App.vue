@@ -52,7 +52,7 @@ export default {
   methods:{
     test(){
         this.notify = BeNotify({
-            titles:'NotificationNotificationNotificationNotificationNotification',
+            titles:'Notification',
             bodyRender:()=>{
                 return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
                     您的体验时间仅剩

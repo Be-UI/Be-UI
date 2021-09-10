@@ -99,7 +99,7 @@ const closeAll = ():void=>{
  * @param {Array} instanceArr - 組件緩存數組
  * @param {Boolean} isCache - 當前實例是否緩存過
  */
-const computeOffset = (option:INotifyOption,instanceArr:Array<Object>,isCache:boolean):void=>{
+const computeOffset = (option:INotifyOption,instanceArr:Array<Object>,isCache:boolean,instance:any):void=>{
     // 计算偏移
     let verticalOffset:number = 0;
     let direction:string = ''
@@ -117,8 +117,9 @@ const computeOffset = (option:INotifyOption,instanceArr:Array<Object>,isCache:bo
         });
     }
     verticalOffset += 35;
-    Object(option)[direction] = verticalOffset
+    instance.el.style.bottom = verticalOffset + 'px'
 }
+
 /**
  * 渲染组件实例
  * @param {Object} option - 配置對象
@@ -135,7 +136,6 @@ const componentRender = (option:INotifyOption,instanceArr:Array<Object>,isCacheI
         instanceInner.props.option.isShow = true;
         elm = document.createElement('div')
         render(instanceInner,elm)
-        // 挂载元素
         const bodyElement:Element | null= document.querySelector('body')
         if (bodyElement && bodyElement.append) {
             bodyElement.append(instanceInner.el)
@@ -214,10 +214,10 @@ const createNotify = function (options:INotifyOption) :object {
             }
         })
     }
-    // 计算偏移
-    computeOffset(option,instanceArr,isCache)
     // 渲染组件实例
     instance = componentRender(option,instanceArr,isCache,instance)
+    // 计算偏移
+    computeOffset(option,instanceArr,isCache,instance)
     return {notify: instance, close: closeNotify.bind(this, instance)}
 }
 
