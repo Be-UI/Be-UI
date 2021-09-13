@@ -19,11 +19,11 @@
   </div>
 </template>
 
-<script>
-import Vue from 'vue';
+<script lang="ts">
+import { defineComponent ,computed} from "vue";
+//const PopperJS = require('../../../utils/popper');
 
-const PopperJS = require('../../../utils/popper');
-export default {
+export default defineComponent({
   name: "BePopover",
   data() {
     return {
@@ -248,7 +248,7 @@ export default {
       this.triggerDom.removeEventListener('mouseleave', () => this.changeDisplay(false), false)
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

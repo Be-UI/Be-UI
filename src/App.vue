@@ -34,6 +34,7 @@
 <script lang="tsx">
 import {panda} from './test'
 import {BeNotify} from "./components/notification/src/be-notification-service";
+import remoteLoad from './components/popover/src/load-script.js'
 export default {
   name: 'App',
   data(){
@@ -47,7 +48,7 @@ export default {
     panda
   },
   mounted() {
-
+      remoteLoad('../../../utils/popper')
   },
   methods:{
     test(){
