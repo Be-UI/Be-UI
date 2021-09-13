@@ -8,8 +8,14 @@
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口"
             expandTrigger>
     </be-ellipsis>-->
-    <panda width="25" height="25"  @click="test"></panda>
-    <be-icon icon="delete" @click="testclose"></be-icon>
+      <be-popover>
+          <template #trigger>
+          <panda width="25" height="25"  @click="test"></panda>
+          </template>
+      </be-popover>
+
+<!--    <be-icon icon="delete" @click="testclose"></be-icon>-->
+
     <!--<div class='be-icon-container'>
       <svg class="be-icon"
            :width="30"
@@ -34,7 +40,7 @@
 <script lang="tsx">
 import {panda} from './test'
 import {BeNotify} from "./components/notification/src/be-notification-service";
-import remoteLoad from './components/popover/src/load-script.js'
+import BePopover from "./components/popover/src/be-popover.vue";
 export default {
   name: 'App',
   data(){
@@ -48,7 +54,7 @@ export default {
     panda
   },
   mounted() {
-      remoteLoad('../../../utils/popper')
+
   },
   methods:{
     test(){

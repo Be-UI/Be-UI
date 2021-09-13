@@ -1,5 +1,6 @@
 <template>
-  <div v-click-outside="{handler:close,isDisabled:outsideDisabled}">
+<!--  <div v-click-outside="{handler:close,isDisabled:outsideDisabled}">-->
+ <div >
     <div :id="`be_popover_trigger${this._uid}`">
       <slot name="trigger"></slot>
     </div>
@@ -22,7 +23,7 @@
 <script lang="ts">
 import { defineComponent ,computed} from "vue";
 //const PopperJS = require('../../../utils/popper');
-
+import { createPopper } from '@popperjs/core'
 export default defineComponent({
   name: "BePopover",
   data() {
@@ -77,7 +78,7 @@ export default defineComponent({
      * 宽度
      */
     'width': {
-      type: String | Number,
+      type: Number,
     },
     /**
      * 是否禁用
@@ -161,7 +162,7 @@ export default defineComponent({
         _this.popperJS.destroy();
       }
       let popover = document.getElementById(`be_popover_${_this._uid}`)
-      _this.popperJS = new PopperJS(_this.triggerDom, popover, {
+      _this.popperJS = createPopper(_this.triggerDom, popover, {
         placement: placement
       });
       this.popperJS.onCreate(cbData => {
@@ -181,6 +182,9 @@ export default defineComponent({
     matchDom(root) {
       for (let i = 0; i < root.childNodes.length; i++) {
         let node = root.childNodes[i];
+        if((node.nodeType === 3) || (node.nodeType === 8) || (node.nodeName === 'SCRIPT')) {
+            return this.matchDom(node)
+          }
         let triggerWidth = Number(window.getComputedStyle(node).width.split('px')[0])
         let triggerHeight = node.getBoundingClientRect().height
         if (triggerWidth !== 0 || triggerHeight !== 0 && (node.nodeType !== 3) && (node.nodeType !== 8) && (node.nodeName !== 'SCRIPT')) {
@@ -218,6 +222,7 @@ export default defineComponent({
     // 给触发插槽绑定事件
     if (this.$slots.trigger) {
       this.triggerDom = this.matchDom(document.getElementById(`be_popover_trigger${this._uid}`))
+        debugger
       // 根据触发类型 设置不同的事件监听
       if (this.triggerDom && this.trigger === 'click') {
         this.triggerDom.addEventListener('click', () => this.changeDisplay(true), false)
