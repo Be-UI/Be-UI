@@ -10,10 +10,13 @@
     </be-ellipsis>-->
       <be-popover>
           <template #trigger>
-          <panda width="25" height="25"  @click="test"></panda>
+            <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
+<!--            <be-icon icon="delete" @click="testclose" style="position: absolute;left: 20%;top: 100px;"></be-icon>-->
           </template>
+           <panda width="25" height="25"  @click="test"></panda>
       </be-popover>
-
+<!--        <div style="width:100px;height: 30px;background: #4F62A7" id="qwq">cesas</div>
+    <div style="width: 60px;height: 30px;background: #4F62A7" id="aaa">top</div>-->
 <!--    <be-icon icon="delete" @click="testclose"></be-icon>-->
 
     <!--<div class='be-icon-container'>
@@ -41,6 +44,7 @@
 import {panda} from './test'
 import {BeNotify} from "./components/notification/src/be-notification-service";
 import BePopover from "./components/popover/src/be-popover.vue";
+import { createPopper } from '@popperjs/core'
 export default {
   name: 'App',
   data(){
@@ -54,7 +58,11 @@ export default {
     panda
   },
   mounted() {
-
+   /* const tr = document.getElementById('qwq')
+    const po = document.getElementById('aaa')
+    createPopper(tr, po, {
+          placement: 'top',
+    })*/
   },
   methods:{
     test(){

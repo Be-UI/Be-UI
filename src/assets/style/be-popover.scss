@@ -1,6 +1,6 @@
 
 .be-popover{
-   margin: 10px;
+
   .be-popover-body{
     background-color: $default;
     color: $info;
@@ -9,10 +9,10 @@
     box-sizing: border-box;
     border-radius: 3px;
     font-size: 12px;
-    position: relative;
+   /* position: relative;
     z-index: 2;
     top: 0;
-    left: 0;
+    left: 0;*/
   }
   .be-popover-arrow{
     transform: rotate(45deg);

@@ -13,7 +13,8 @@ export const createCustom = (template:string) :object=>{
              }
          },
          setup(props:any) {
-             const spinClass = computed(() => props.spin ? 'be-icon-spin ' + props.customClass: '' + props.customClass)
+             const customClass = props.customClass ? props.customClass :''
+             const spinClass = computed(() => props.spin ? 'be-icon-spin ' + customClass: '' + customClass)
              return {
                  spinClass
              }

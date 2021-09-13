@@ -1,20 +1,21 @@
 <template>
 <!--  <div v-click-outside="{handler:close,isDisabled:outsideDisabled}">-->
  <div >
-    <div :id="`be_popover_trigger${this._uid}`">
+    <div :id="`be_popover_trigger${this._.uid}`" aria-describedby="tooltip">
       <slot name="trigger"></slot>
     </div>
     <div class="be-popover"
          :class="customClass"
-         :id="`be_popover_${this._uid}`"
-         :key="`be_popover_${this._uid}`"
-         v-if="show"
+         role="tooltip"
+         :id="`be_popover_${this._.uid}`"
+         :key="`be_popover_${this._.uid}`"
+         v-if="true"
          :style="style">
-      <div class="be-popover-body" :id="`be_popover_body${this._uid}`">
+      <div class="be-popover-body" :id="`be_popover_body${this._.uid}`">
         <slot></slot>
       </div>
       <div class="be-popover-arrow"
-           :id="`be_popover_arrow${this._uid}`"
+           :id="`be_popover_arrow${this._.uid}`"
            v-if="raw" :class="`be-popover-arrow--${place}`"></div>
     </div>
   </div>
@@ -46,7 +47,7 @@ export default defineComponent({
      */
     'placement': {
       type: String,
-      default: 'top'
+      default: 'bottom'
     },
     /**
      * 显示箭头
@@ -153,26 +154,46 @@ export default defineComponent({
     computePosition(placement) {
       const _this = this
       if (this.x && this.y) {
-        this.style.left = this.x + 'px'
-        this.style.top = this.y + 'px'
+         this.style.left = this.x + 'px'
+         this.style.top = this.y + 'px'
         return
       }
       // 使用popover.js 对popover进行定位
       if (_this.popperJS && this.popperJS.destroy) {
         _this.popperJS.destroy();
       }
-      let popover = document.getElementById(`be_popover_${_this._uid}`)
+      let popover = document.getElementById(`be_popover_${_this._.uid}`)
+
       _this.popperJS = createPopper(_this.triggerDom, popover, {
-        placement: placement
+        placement: placement,
+        modifiers: [
+         /* {
+            name: 'offset',
+            options: {
+              offset: [10, 20],
+            },
+          },
+          {
+            name: 'flip',
+            options: {
+              fallbackPlacements: ['top', 'right'],
+            },
+          },*/
+        ],
       });
-      this.popperJS.onCreate(cbData => {
-        this.place = popover.getAttribute('x-placement')
-        /** 提交触发 显示跟新 事件
-         * @event update
-         * @param {Boolean} 当前显示状态
-         */
+      this.popperJS.update().then(res=>{
+        _this.place = res.placement
         _this.$emit('update', _this.show)
       })
+      this.$forceUpdate()
+      /*this.popperJS.onCreate(cbData => {
+        this.place = popover.getAttribute('x-placement')
+        /!** 提交触发 显示跟新 事件
+         * @event update
+         * @param {Boolean} 当前显示状态
+         *!/
+        _this.$emit('update', _this.show)
+      })*/
     },
     /**
      * 遍历dom树，找到合适的trigger元素
@@ -182,16 +203,15 @@ export default defineComponent({
     matchDom(root) {
       for (let i = 0; i < root.childNodes.length; i++) {
         let node = root.childNodes[i];
-        if((node.nodeType === 3) || (node.nodeType === 8) || (node.nodeName === 'SCRIPT')) {
+        if ((node.nodeType !== 3) && (node.nodeType !== 8) && (node.nodeName !== 'SCRIPT')) {
+          let triggerWidth = Number(window.getComputedStyle(node).width.split('px')[0])
+          let triggerHeight = node.getBoundingClientRect().height
+          if(triggerWidth !== 0 || triggerHeight !== 0){
+            return node
+            break
+          }else{
             return this.matchDom(node)
           }
-        let triggerWidth = Number(window.getComputedStyle(node).width.split('px')[0])
-        let triggerHeight = node.getBoundingClientRect().height
-        if (triggerWidth !== 0 || triggerHeight !== 0 && (node.nodeType !== 3) && (node.nodeType !== 8) && (node.nodeName !== 'SCRIPT')) {
-          return node;
-          break
-        } else {
-          return this.matchDom(node)
         }
       }
     },
@@ -199,7 +219,7 @@ export default defineComponent({
      * 设置箭头
      */
     setArrow() {
-      let popover = document.getElementById(`be_popover_${this._uid}`)
+      let popover = document.getElementById(`be_popover_${this._.uid}`)
       if (popover) {
         this.place = popover.getAttribute('x-placement')
       }
@@ -212,6 +232,8 @@ export default defineComponent({
     }
   },
   mounted() {
+
+
     // 禁用就不绑定触发事件了
     if (this.disabled) {
       return
@@ -221,8 +243,7 @@ export default defineComponent({
     }
     // 给触发插槽绑定事件
     if (this.$slots.trigger) {
-      this.triggerDom = this.matchDom(document.getElementById(`be_popover_trigger${this._uid}`))
-        debugger
+      this.triggerDom = this.matchDom(document.getElementById(`be_popover_trigger${this._.uid}`))
       // 根据触发类型 设置不同的事件监听
       if (this.triggerDom && this.trigger === 'click') {
         this.triggerDom.addEventListener('click', () => this.changeDisplay(true), false)
