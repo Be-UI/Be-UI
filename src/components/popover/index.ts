@@ -8,7 +8,7 @@ const BePopover = {
 }
 export default BePopover;*/
 import { App ,defineComponent,DefineComponent} from 'vue'
-import bePopover from './src/be-popover.vue'
+import bePopover from './src/be-popover-bc.vue'
 import {SFCWithInstall} from "../../utils/types";
 /**
  * 组件装载方法

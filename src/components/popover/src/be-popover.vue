@@ -1,6 +1,6 @@
 <template>
 <!--  <div v-click-outside="{handler:close,isDisabled:outsideDisabled}">-->
- <div >
+ <teleport to="body">
     <div :id="`be_popover_trigger${this._.uid}`" aria-describedby="tooltip">
       <slot name="trigger"></slot>
     </div>
@@ -14,11 +14,12 @@
       <div class="be-popover-body" :id="`be_popover_body${this._.uid}`">
         <slot></slot>
       </div>
-      <div class="be-popover-arrow"
+<!--      <div class="be-popover-arrow"
            :id="`be_popover_arrow${this._.uid}`"
-           v-if="raw" :class="`be-popover-arrow--${place}`"></div>
+           v-if="raw" :class="`be-popover-arrow&#45;&#45;${place}`">
+      </div>-->
     </div>
-  </div>
+  </teleport>
 </template>
 
 <script lang="ts">
@@ -47,7 +48,7 @@ export default defineComponent({
      */
     'placement': {
       type: String,
-      default: 'bottom'
+      default: 'top'
     },
     /**
      * 显示箭头
@@ -166,26 +167,27 @@ export default defineComponent({
 
       _this.popperJS = createPopper(_this.triggerDom, popover, {
         placement: placement,
-        modifiers: [
-         /* {
-            name: 'offset',
-            options: {
-              offset: [10, 20],
-            },
+      /*modifiers: [
+       /*
+          name: 'offset',
+          options: {
+            offset: [10, 20],
           },
-          {
-            name: 'flip',
-            options: {
-              fallbackPlacements: ['top', 'right'],
-            },
-          },*/
-        ],
+        },
+        {
+          name: 'flip',
+          options: {
+            fallbackPlacements: ['top', 'right'],
+          },
+        },
+        ],*/
       });
       this.popperJS.update().then(res=>{
-        _this.place = res.placement
-        _this.$emit('update', _this.show)
+        /*_this.place = res.placement
+        _this.$emit('update', _this.show)*/
       })
-      this.$forceUpdate()
+
+
       /*this.popperJS.onCreate(cbData => {
         this.place = popover.getAttribute('x-placement')
         /!** 提交触发 显示跟新 事件
@@ -256,12 +258,12 @@ export default defineComponent({
         this.triggerDom.addEventListener('click', () => this.changeDisplay(!this.show), false)
       }
 
-      window.onresize = () => {
-        this.setArrow()
+      /*window.onresize = () => {
+         this.setArrow()
       }
       window.onscroll = () => {
-        this.setArrow()
-      }
+         this.setArrow()
+      }*/
     } else {
       console.error('Please set the trigger element')
     }
