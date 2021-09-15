@@ -8,7 +8,7 @@
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口"
             expandTrigger>
     </be-ellipsis>-->
-      <be-popover trigger="hover">
+      <be-popover trigger="manual">
           <template #trigger>
             <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
 <!--            <be-icon icon="delete" @click="testclose" style="position: absolute;left: 20%;top: 100px;"></be-icon>-->
