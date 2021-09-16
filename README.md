@@ -44,7 +44,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 9.消息通知组件 be-notification （迁移完成）
 10.文本省略组件 be-ellipsis
 11.弹出显示 be-popover （迁移完成）
-12.文本弹出显示 be-toolTip
+12.文本弹出显示 be-toolTip （迁移中）
 
 
 
