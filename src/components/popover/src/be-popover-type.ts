@@ -13,5 +13,4 @@ export type TPopoverStyle = {
 }
 export interface IPopover extends ComponentInternalInstance {
     uid: number
-
 }

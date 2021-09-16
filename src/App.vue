@@ -8,7 +8,7 @@
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口"
             expandTrigger>
     </be-ellipsis>-->
-      <be-popover trigger="manual">
+      <be-popover trigger="click" width="300" customClass="asdwq" :raw="false">
           <template #trigger>
             <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
 <!--            <be-icon icon="delete" @click="testclose" style="position: absolute;left: 20%;top: 100px;"></be-icon>-->
@@ -94,5 +94,8 @@ export default {
     height: 100%;
     width: 100%;
     position: fixed;
+  }
+  .asdwq{
+      background-color: red;
   }
 </style>

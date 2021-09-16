@@ -1,49 +1,53 @@
 
 .be-popover{
   position: fixed;
+  background-color: $default;
+  border-radius: 3px;
   .be-popover-body{
-    background-color: $default;
     color: $info;
     text-align: center;
     padding: 8px 14px;
     box-sizing: border-box;
-    border-radius: 3px;
     font-size: 12px;
-   /* position: relative;
-    z-index: 2;
-    top: 0;
-    left: 0;*/
   }
-  .be-popover-arrow{
-    transform: rotate(45deg);
-    border-color: transparent #fff #fff transparent;
+  .be-popover-arrow,
+  .be-popover-arrow::before {
     position: absolute;
-    display: block;
     width: 8px;
     height: 8px;
-    background: transparent;
-    border-style: solid;
-    border-width: 4px;
-  }
-  .be-popover-arrow--left{
-    bottom: calc(50% - 8px);
-    right: 0;
-    border-color: #fff #fff transparent transparent;
-  }
-  .be-popover-arrow--right{
-    bottom: calc(50% - 8px);
-    left: 0;
-    border-color: transparent transparent #fff #fff ;
-  }
-  .be-popover-arrow--top{
-    bottom: 0;
-    left: calc(50% - 8px);
-    border-color: transparent #fff #fff transparent;
-  }
-  .be-popover-arrow--bottom{
-    top: 0;
-    left: calc(50% - 8px);
-    border-color:  #fff transparent transparent #fff;
+    background: inherit;
   }
 
+  .be-popover-arrow {
+    visibility: hidden;
+  }
+
+  .be-popover-arrow::before {
+    visibility: visible;
+    content: '';
+    transform: rotate(45deg);
+  }
+
+}
+
+.be-popover[data-popper-placement^='top']{
+  .be-popover-arrow {
+    bottom: -4px;
+  }
+}
+
+.be-popover[data-popper-placement^='bottom'] {
+  .be-popover-arrow {
+    top: -4px;
+  }
+}
+.be-popover[data-popper-placement^='left'] {
+  .be-popover-arrow {
+    right: -4px;
+  }
+}
+.be-popover[data-popper-placement^='right'] {
+  .be-popover-arrow {
+    left: -4px;
+  }
 }

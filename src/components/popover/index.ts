@@ -8,8 +8,8 @@ const BePopover = {
 }
 export default BePopover;*/
 import { App ,defineComponent,DefineComponent} from 'vue'
-import bePopover from './src/be-popover-bc.vue'
-import {SFCWithInstall} from "../../utils/types";
+import bePopover from './src/be-popover.vue'
+import type {SFCWithInstall} from "../../utils/types";
 /**
  * 组件装载方法
  * @param app
@@ -21,5 +21,5 @@ bePopover.install = (app:App): void => {
 /**
  * 自定义图标方法,该方法会直接根据参数name构造图名为 name-icon 的图标组件
  */
-const BePopover: SFCWithInstall<typeof bePopover> = bePopover
+const BePopover = bePopover as SFCWithInstall<typeof bePopover>
 export default BePopover

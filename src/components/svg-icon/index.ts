@@ -14,7 +14,7 @@ SvgIcon.install = (app:App): void => {
 /**
  * 自定义图标方法,该方法会直接根据参数name构造图名为 name-icon 的图标组件
  */
-const BeIcon: SFCWithInstall<typeof SvgIcon> = SvgIcon
+const BeIcon = SvgIcon as SFCWithInstall<typeof SvgIcon>
 
 interface template {
     template?:string
