@@ -1,11 +1,11 @@
 <template>
-  <!--<be-tooltip :content="content" :placement="placement">    @click="expandTriggerFunc" :style="styleStr"-->
+  <be-tooltip :content="content" :placement="placement">    @click="expandTriggerFunc" :style="styleStr"
      <span
          @click="expandTriggerFunc"
          :style="styleStr"
          v-html="state.textInner">
     </span>
-<!--  </be-tooltip>-->
+  </be-tooltip>
 </template>
 
 <script lang="ts">

@@ -1,13 +1,13 @@
 <template>
   <div  id="App">
-<!--    <be-ellipsis
+    <be-ellipsis
             placement="left"
-            :text="qcwqwd"
+            text="qcwqwd"
             content="电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口"
             expandTrigger>
-    </be-ellipsis>-->
+    </be-ellipsis>
 <!--      <be-popover trigger="click" width="300" customClass="asdwq" >
           <template #trigger>
             <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>

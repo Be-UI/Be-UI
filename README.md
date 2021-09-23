@@ -38,13 +38,13 @@ be-popover x，y 定位 箭头位置bug
 3.对话框组件   be-dialog  
 4.输入框组件   be-input  
 5.loading组件 be-loading  
-6.消息对话组件 be-message-box  （迁移中）
+6.消息对话组件 be-message-box  （迁移中）  
 7.分页组件 be-pager  
-8.图标组件 be-icon （迁移完成） 
-9.消息通知组件 be-notification （迁移完成）
-10.文本省略组件 be-ellipsis
-11.弹出显示 be-popover （迁移完成）
-12.文本弹出显示 be-toolTip （迁移完成）
+8.图标组件 be-icon （迁移完成）   
+9.消息通知组件 be-notification （迁移完成）  
+10.文本省略组件 be-ellipsis  （迁移完成）  
+11.弹出显示 be-popover （迁移完成） 
+12.文本弹出显示 be-toolTip （迁移完成） 
 
 
 
