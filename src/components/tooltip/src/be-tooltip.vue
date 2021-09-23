@@ -10,7 +10,9 @@
       :y="y"
       :width="width"
       :trigger = "trigger">
-      <slot slot="trigger"></slot>
+    <template #trigger>
+      <slot></slot>
+    </template>
     <span>{{content}}</span>
   </be-popover>
 </template>

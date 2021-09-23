@@ -8,13 +8,17 @@
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口"
             expandTrigger>
     </be-ellipsis>-->
-      <be-popover trigger="click" width="300" customClass="asdwq" :raw="false">
+<!--      <be-popover trigger="click" width="300" customClass="asdwq" >
           <template #trigger>
             <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
-<!--            <be-icon icon="delete" @click="testclose" style="position: absolute;left: 20%;top: 100px;"></be-icon>-->
+&lt;!&ndash;            <be-icon icon="delete" @click="testclose" style="position: absolute;left: 20%;top: 100px;"></be-icon>&ndash;&gt;
           </template>
            <panda width="25" height="25"  @click="test"></panda>
-      </be-popover>
+      </be-popover>-->
+    <be-tooltip content="'qwddddddddddddddddddd" placement="left" x="300" y="300" trigger="manual">
+      <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
+    </be-tooltip>
+
 <!--        <div style="width:100px;height: 30px;background: #4F62A7" id="qwq">cesas</div>
     <div style="width: 60px;height: 30px;background: #4F62A7" id="aaa">top</div>-->
 <!--    <be-icon icon="delete" @click="testclose"></be-icon>-->

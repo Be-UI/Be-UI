@@ -10,12 +10,7 @@ import {SFCWithInstall} from "../../utils/types";
 SvgIcon.install = (app:App): void => {
     app.component(SvgIcon.name,SvgIcon)
 }
-
-/**
- * 自定义图标方法,该方法会直接根据参数name构造图名为 name-icon 的图标组件
- */
 const BeIcon = SvgIcon as SFCWithInstall<typeof SvgIcon>
-
 interface template {
     template?:string
 }

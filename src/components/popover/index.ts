@@ -9,9 +9,5 @@ import type {SFCWithInstall} from "../../utils/types";
 bePopover.install = (app:App): void => {
     app.component(bePopover.name,bePopover)
 }
-
-/**
- * 自定义图标方法,该方法会直接根据参数name构造图名为 name-icon 的图标组件
- */
 const BePopover = bePopover as SFCWithInstall<typeof bePopover>
 export default BePopover
