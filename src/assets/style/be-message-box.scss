@@ -7,7 +7,7 @@
         min-height: 158px;
         background: #FFFFFF;
         padding: 16px 16px 16px 20px;
-        box-shadow: 0px 6px 13px rgba(0, 0, 0, 0.16);
+        box-shadow: 0 6px 13px rgba(0, 0, 0, 0.16);
         border-radius: 2px;
         box-sizing: border-box;
         position: absolute;
@@ -24,25 +24,25 @@
                 justify-content: space-between;
                 div:nth-child(1){
                     .icon-warning{
-                        color:$warning;
+                        fill:$warning;
                         line-height: 25px;
                         margin-right: 5px;
                         font-size: 20px;
                     }
                     .icon-info{
-                        color:$info;
+                        fill:$info;
                         line-height: 25px;
                         margin-right: 5px;
                         font-size: 20px;
                     }
                     .icon-success{
-                        color:$success;
+                        fill:$success;
                         line-height: 25px;
                         margin-right: 5px;
                         font-size: 20px;
                     }
                     .icon-error{
-                        color:$error;
+                        fill:$error;
                         line-height: 25px;
                         margin-right: 5px;
                         font-size: 20px;

@@ -1,23 +1,25 @@
 <template>
   <div  id="App">
-    <be-ellipsis
+<!--    <be-ellipsis
             placement="left"
             text="qcwqwd"
             content="电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口电灯熄灭 物换星移 泥牛入海 黑暗好像 一颗巨石 按在胸口独脚大盗
     百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口"
             expandTrigger>
-    </be-ellipsis>
+    </be-ellipsis>-->
+
 <!--      <be-popover trigger="click" width="300" customClass="asdwq" >
           <template #trigger>
-            <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
-&lt;!&ndash;            <be-icon icon="delete" @click="testclose" style="position: absolute;left: 20%;top: 100px;"></be-icon>&ndash;&gt;
+&lt;!&ndash;            <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>&ndash;&gt;
+            <be-icon icon="delete" @click="testclose" style="position: absolute;left: 20%;top: 100px;"></be-icon>
           </template>
            <panda width="25" height="25"  @click="test"></panda>
       </be-popover>-->
-    <be-tooltip content="'qwddddddddddddddddddd" placement="left" x="300" y="300" trigger="manual">
+<!--    <be-tooltip content="'qwddddddddddddddddddd" placement="left" x="300" y="300" trigger="manual">
       <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
-    </be-tooltip>
+    </be-tooltip>-->
+    <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
 
 <!--        <div style="width:100px;height: 30px;background: #4F62A7" id="qwq">cesas</div>
     <div style="width: 60px;height: 30px;background: #4F62A7" id="aaa">top</div>-->
@@ -47,6 +49,7 @@
 <script lang="tsx">
 import {panda} from './test'
 import {BeNotify} from "./components/notification/src/be-notification-service";
+import {BeMsg} from "./components/message-box/src/be-message-box-service";
 import BePopover from "./components/popover/src/be-popover.vue";
 import { createPopper } from '@popperjs/core'
 export default {
@@ -70,7 +73,25 @@ export default {
   },
   methods:{
     test(){
-        this.notify = BeNotify({
+      BeMsg({
+        isDrag:true,
+        titles:'MessageBox',
+        customClass:'q1qwdsaddddddd',
+        msgType:'warning',
+        footerType:'left',
+        footerRender:null,
+        bodyRender:()=>{
+          return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
+            您的体验时间仅剩
+          </p>
+        },
+        onConfirm:()=>console.log('click'),
+        onClose:()=>console.log('close'),
+        iconPreRender:null,
+        iconNextRender:null,
+        isOpenModal:true,
+      })
+       /* this.notify = BeNotify({
             titles:'Notification',
             bodyRender:()=>{
                 return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
@@ -84,7 +105,7 @@ export default {
             placement:'bottomRight',
             duration:0,
             key:1
-        })
+        })*/
     },
       testclose(){
           this.notify.close()

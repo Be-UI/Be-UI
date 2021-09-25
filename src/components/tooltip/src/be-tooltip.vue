@@ -17,9 +17,12 @@
   </be-popover>
 </template>
 <script lang="ts">
-import {defineComponent} from "vue";
+import {defineAsyncComponent, defineComponent} from "vue";
 export default defineComponent({
     name: "BeTooltip",
+  components:{
+    'be-popover': defineAsyncComponent(() => import("../../popover")),
+  },
     props: {
         /**
          * 显示方向

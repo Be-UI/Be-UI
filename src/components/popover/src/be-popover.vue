@@ -1,9 +1,9 @@
 <template>
     <!--  <div v-click-outside="{handler:close,isDisabled:outsideDisabled}">-->
-    <teleport to="body">
         <div :id="`be_popover_trigger${uid}`" aria-describedby="tooltip">
             <slot name="trigger"></slot>
         </div>
+      <teleport to="body">
         <div class="be-popover"
              v-click-outside="{handler:close,isDisabled:outsideDisabled}"
              :class="customClass"

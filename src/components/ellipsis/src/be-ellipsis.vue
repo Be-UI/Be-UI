@@ -1,5 +1,5 @@
 <template>
-  <be-tooltip :content="content" :placement="placement">    @click="expandTriggerFunc" :style="styleStr"
+  <be-tooltip :content="content" :placement="placement">
      <span
          @click="expandTriggerFunc"
          :style="styleStr"
@@ -9,13 +9,20 @@
 </template>
 
 <script lang="ts">
+
 import {
-    defineComponent,
-    reactive,
-    watchEffect,
-    ref} from "vue";
+  defineComponent,
+  defineAsyncComponent,
+  reactive,
+  watchEffect,
+  ref
+} from "vue";
+
 export default defineComponent({
   name: "BeEllipsis",
+  components: {
+    'be-tooltip': defineAsyncComponent(() => import("../../tooltip")),
+  },
   props: {
     /**
      * 提示显示内容
@@ -60,56 +67,53 @@ export default defineComponent({
       default: 'left'
     },
   },
-  setup(props, context){
-      // 定义state
-      const state = reactive({
-          isExpand:false,
-          textCache:'',
-          textInner:''
-      })
-      /**
-       * 监听文字变化，根据方向处理文字
-       */
-      const handleText = (): void =>{
-          if(props.placement === 'left'){
-              state.textInner = props.text.slice(0, props.text.length - props.elpNum) + '...'
-          }
-          if(props.placement === 'center'){
-              let elpNumCenter = props.elpNum/2
-              let lenCenter = props.text.length/2
-              let subStr1 = props.text.substr( 0, lenCenter - elpNumCenter);
-              let subStr2 = props.text.substr( lenCenter + elpNumCenter, props.text.length);
-              let subStr = subStr1 + "..." + subStr2 ;
-              state.textInner = subStr;
-          }
-          if(props.placement === 'right'){
-              state.textInner = '...' + props.text.slice(0, props.text.length - props.elpNum)
-          }
+  setup(props, context) {
+    // 定义state
+    const state = reactive({
+      isExpand: false,
+      textCache: '',
+      textInner: ''
+    })
+    /**
+     * 监听文字变化，根据方向处理文字
+     */
+    const handleText = (): void => {
+      if (props.placement === 'left') {
+        state.textInner = props.text.slice(0, props.text.length - props.elpNum) + '...'
       }
-      watchEffect(() => {
-              state.textCache = props.text;
-              handleText()})
-      /**
-       * 展开方法
-       */
-      const styleStr = ref(`-webkit-line-clamp:${props.lineClamp};display:-webkit-inline-box;-webkit-box-orient:vertical;overflow:hidden;`)
-      const expandTriggerFunc = ():void =>{
-          if(!props.expandTrigger) return
-          state.isExpand = !state.isExpand
-          styleStr.value = state.isExpand ? '' : `-webkit-line-clamp:${props.lineClamp};display:-webkit-inline-box;-webkit-box-orient:vertical;overflow:hidden;`
-          state.isExpand && (state.textInner = state.textCache)
-          !state.isExpand && handleText()
+      if (props.placement === 'center') {
+        let elpNumCenter = props.elpNum / 2
+        let lenCenter = props.text.length / 2
+        let subStr1 = props.text.substr(0, lenCenter - elpNumCenter);
+        let subStr2 = props.text.substr(lenCenter + elpNumCenter, props.text.length);
+        let subStr = subStr1 + "..." + subStr2;
+        state.textInner = subStr;
       }
-      return {
-          state,
-          handleText,
-          styleStr,
-          expandTriggerFunc,
-      };
+      if (props.placement === 'right') {
+        state.textInner = '...' + props.text.slice(0, props.text.length - props.elpNum)
+      }
+    }
+    watchEffect(() => {
+      state.textCache = props.text;
+      handleText()
+    })
+    /**
+     * 展开方法
+     */
+    const styleStr = ref(`-webkit-line-clamp:${props.lineClamp};display:-webkit-inline-box;-webkit-box-orient:vertical;overflow:hidden;`)
+    const expandTriggerFunc = (): void => {
+      if (!props.expandTrigger) return
+      state.isExpand = !state.isExpand
+      styleStr.value = state.isExpand ? '' : `-webkit-line-clamp:${props.lineClamp};display:-webkit-inline-box;-webkit-box-orient:vertical;overflow:hidden;`
+      state.isExpand && (state.textInner = state.textCache)
+      !state.isExpand && handleText()
+    }
+    return {
+      state,
+      handleText,
+      styleStr,
+      expandTriggerFunc,
+    };
   },
 })
 </script>
-
-<style scoped>
-
-</style>

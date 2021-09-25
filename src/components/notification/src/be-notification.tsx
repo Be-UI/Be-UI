@@ -5,7 +5,7 @@
 * @update (czh 2021/6/7)
 */
 
-import {computed, DefineComponent,defineComponent, reactive, ref,h,getCurrentInstance} from 'vue'
+import {computed,defineComponent, reactive, ref,h,getCurrentInstance} from 'vue'
 import BeIcon from '../../svg-icon/src/be-icon.vue'
 import '../../../assets/style/be-notification.scss';
 import {INotfiy} from './be-notification-type'
