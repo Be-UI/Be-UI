@@ -26,7 +26,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
-组件迁移 be-button be-pager
+组件迁移 be-button loading\loading禁用，图标禁用,重构
+be-loading
 
 ## 长期排期
 1.服务式访问的全局绑定  

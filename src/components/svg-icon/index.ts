@@ -1,4 +1,4 @@
-import { App ,defineComponent,DefineComponent} from 'vue'
+import { App ,defineComponent} from 'vue'
 import SvgIcon from './src/be-icon.vue'
 import {createCustom} from './src/be-custom-icon'
 import {SFCWithInstall} from "../../utils/types";
@@ -17,7 +17,7 @@ interface template {
 /**
  * 自定义图标方法,该方法会直接根据参数name构造图名为 name-icon 的图标组件
  * @param name - 组件名称
- * @param template -组件渲染模板
+ * @param option -组件渲染模板
  * @constructor
  */
 BeIcon.BeIconComponets = (name:string,option:template) :object | void => {

@@ -1,5 +1,6 @@
 <template>
   <div  id="App">
+
 <!--    <be-ellipsis
             placement="left"
             text="qcwqwd"
@@ -19,7 +20,19 @@
 <!--    <be-tooltip content="'qwddddddddddddddddddd" placement="left" x="300" y="300" trigger="manual">
       <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
     </be-tooltip>-->
-    <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
+    <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;">
+        <be-button
+            @click="test"
+            :loading="isLoading"
+            preIcon="delete"
+            nextIcon="delete"
+            customClass = 'asdwq'
+            round="5"
+            type="default "
+            size="large">
+            测试
+        </be-button>
+    </div>
 
 <!--        <div style="width:100px;height: 30px;background: #4F62A7" id="qwq">cesas</div>
     <div style="width: 60px;height: 30px;background: #4F62A7" id="aaa">top</div>-->
@@ -57,7 +70,8 @@ export default {
   data(){
     return{
       num:0,
-      notify:null
+      notify:null,
+      isLoading:true
     }
 
   },

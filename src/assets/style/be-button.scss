@@ -1,4 +1,42 @@
-
+@mixin be-icon-default($color) {
+  .be-icon{
+    use {
+      fill: $color;
+    }
+  }
+}
+@mixin be-button-type($bgColor,$textColor,$hoverColor) {
+  background: $bgColor;
+  color: $textColor;
+  button {
+    color: $textColor;
+  }
+  border: 0;
+  &:hover {
+    background: $hoverColor;
+  }
+}
+@mixin be-button-border($bgColor,$textColor,$borderColor,$hoverBgColor,$HoverBorderColor,$hoverIconColor) {
+  background: $bgColor;
+  color: $textColor;
+  border-color: $borderColor;
+  border-width: 1px;
+  button {
+    color: $textColor;
+  }
+  &:hover {
+    background: $hoverBgColor;
+    border-color: $HoverBorderColor;
+    .be-button-preIcon__primary,
+    .be-button-nextIcon__primary {
+      .be-icon {
+        use {
+          fill: $hoverIconColor;
+        }
+      }
+    }
+  }
+}
 
 .be-button {
   border-radius: 2px;
@@ -8,7 +46,7 @@
   display: inline-block;
 
   .be-button-body {
-    margin: 0px auto;
+    margin: 0 auto;
     display: flex;
 
     .be-button__inner {
@@ -32,31 +70,19 @@
     .be-button-nextIcon__warning,
     .be-button-preIcon__success,
     .be-button-nextIcon__success {
-      .be-icon {
-        use {
-          fill: $whiteText;
-        }
-      }
+      @include be-icon-default($whiteText);
     }
 
     .be-button-preIcon__info,
     .be-button-nextIcon__info,
     .be-button-preIcon__default,
     .be-button-nextIcon__default {
-      .be-icon {
-        use {
-          fill: $defaultText;
-        }
-      }
+      @include be-icon-default($defaultText);
     }
 
     .be-button-preIcon__primary,
     .be-button-nextIcon__primary {
-      .be-icon {
-        use {
-          fill: $primaryText;
-        }
-      }
+      @include be-icon-default($primaryText);
     }
 
     .be-button-preIcon {
@@ -109,219 +135,83 @@
 }
 
 .be-button__error {
-  background: $error;
-  color: $whiteText;
-
-  button {
-    color: $whiteText;
-  }
-
-  border: 0;
-
-  &:hover {
-    background: $errorHover;
-  }
+  @include be-button-type($error,$whiteText,$errorHover);
 }
 
 .be-button__info {
-  background: $default;
-  color: $defaultText;
-
-  button {
-    color: $defaultText;
-  }
-
-  border: 0;
-
-  &:hover {
-    background: #eeeeee;
-  }
+  @include be-button-type($default,$defaultText,$infoHover);
 }
 
 .be-button__success {
-  background: $success;
-  color: $whiteText;
-
-  button {
-    color: $whiteText;
-  }
-
-  border: 0;
-
-  &:hover {
-    background: $successHover;
-  }
+  @include be-button-type($success,$whiteText,$successHover);
 }
 
 .be-button__warning {
-  background: $warning;
-  color: $whiteText;
-
-  button {
-    color: $whiteText;
-  }
-
-  border: 0;
-
-  &:hover {
-    background: $warningHover;
-  }
+  @include be-button-type($warning,$whiteText,$warningHover);
 }
 
 .be-button__primary {
-  color: $primaryText;
-  background: $primary;
-
-  button {
-    color: $primaryText;
-  }
-
-  border: 0;
-
+  @include be-button-type($primary,$primaryText,$primaryHover);
   &:hover {
     background: $primaryHover;
     color: $whiteText;
-
     button {
       color: $whiteText;
     }
-
     .be-button-preIcon__primary,
     .be-button-nextIcon__primary {
       .be-icon {
         use {
           fill: $whiteText;
         }
-
       }
     }
-
     border-color: $primaryText;
   }
 }
 
 .be-button__default {
-  background: $default;
-  color: $defaultText;
-  border: 0;
-
-  button {
-    color: $defaultText;
-  }
-
+  @include be-button-type($default,$defaultText,$defaultText);
   &:hover {
     color: $primaryText;
-
     button {
       color: $primaryText;
     }
-
     .be-button-preIcon__default,
     .be-button-nextIcon__default {
       .be-icon {
         use {
           fill: $primaryText;
         }
-
       }
     }
-
     background: $primary;
   }
 }
 
 
 .be-button__error__border {
-  background: $error;
-  color: $whiteText;
-  border-color: $errorBorder;
-  border-width: 1px;
-
-  button {
-    color: $whiteText;
-  }
-
-  &:hover {
-    background: $errorHover;
-    border-color: $errorHoverBorder;
-  }
+@include be-button-border($error,$whiteText,$errorBorder,$errorHover,$errorHoverBorder,$whiteText);
 }
 
 .be-button__info__border {
-  background: $default;
-  color: $defaultText;
-  border-color: $infoBorder;
-  border-width: 1px;
-
-  button {
-    color: $defaultText;
-  }
-
-  &:hover {
-    background: #eeeeee;
-    border-color: $infoHoverBorder;
-  }
+  @include be-button-border($default,$defaultText,$infoBorder,$infoHover,$infoHoverBorder,$defaultText);
 }
 
 .be-button__success__border {
-  background: $success;
-  color: $whiteText;
-  border-color: $successBorder;
-  border-width: 1px;
-
-  button {
-    color: $whiteText;
-  }
-
-  &:hover {
-    background: $successHover;
-    border-color: $successHoverBorder;
-  }
+  @include be-button-border($success,$whiteText,$successBorder,$successHover,$successHoverBorder,$whiteText);
 }
 
 .be-button__warning__border {
-  background: $warning;
-  color: $whiteText;
-  border-color: $warningBorder;
-  border-width: 1px;
-
-  button {
-    color: $whiteText;
-  }
-
-  &:hover {
-    background: $warningHover;
-    border-color: $warningHoverBorder;
-  }
+  @include be-button-border($warning,$whiteText,$warningBorder,$warningHover,$warningHoverBorder,$whiteText);
 }
 
 .be-button__primary__border {
-  color: $primaryText;
-  background: $primary;
-  border-color: $primaryBorder;
-  border-width: 1px;
-
-  button {
-    color: $primaryText;
-  }
-
-  &:hover {
-    background: $primaryHover;
-    color: $whiteText;
-
-    button {
-      color: $whiteText;
-    }
-
-    border-color: $primaryHoverBorder;
-  }
+  @include be-button-border($primary,$primaryText,$primaryBorder,$primaryHover,$primaryHoverBorder,$whiteText);
 }
 
 .be-button__default__border {
-  background: $default;
-  color: $defaultText;
-  border-width: 1px;
-
+  @include be-button-border($default,$defaultText,$infoBorder,  $primary,$primaryBorder,$whiteText);
   button {
     color: $defaultText;
   }
@@ -330,10 +220,7 @@
     button {
       color: $primaryText;
     }
-
     color: $primaryText;
-    background: $primary;
-    border-color: $primaryBorder;
   }
 }
 
