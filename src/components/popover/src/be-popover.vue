@@ -184,6 +184,12 @@ export default defineComponent({
                             fallbackPlacements: ['top', 'right'],
                         },
                     },
+                    {
+                        name: 'offset',
+                        options: {
+                            offset: [0, 10],
+                        },
+                    },
                 ],
                 strategy:'fixed' as PositioningStrategy
             }
