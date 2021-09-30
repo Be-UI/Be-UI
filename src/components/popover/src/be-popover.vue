@@ -181,7 +181,7 @@ export default defineComponent({
                     {
                         name: 'flip',
                         options: {
-                            fallbackPlacements: ['top', 'right'],
+                            fallbackPlacements: ['top', 'right','bottom'],
                         },
                     },
                     {
