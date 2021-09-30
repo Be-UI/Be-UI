@@ -24,10 +24,10 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
-be-popover x，y 定位 箭头位置bug
+
 ## 排期
-组件迁移
-引导组件
+组件迁移 be-button be-pager
+
 ## 长期排期
 1.服务式访问的全局绑定  
 2.组件引用编写
@@ -44,7 +44,8 @@ be-popover x，y 定位 箭头位置bug
 9.消息通知组件 be-notification （迁移完成）  
 10.文本省略组件 be-ellipsis  （迁移完成）  
 11.弹出显示 be-popover （迁移完成） 
-12.文本弹出显示 be-toolTip （迁移完成） 
+12.文本弹出显示 be-toolTip （迁移完成）
+13.按钮组件 be-button 
 
 
 

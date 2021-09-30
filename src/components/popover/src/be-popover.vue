@@ -36,7 +36,7 @@ import {
 import {ClickOutside } from '../../../utils/direactives/custom-direactives/click-outside';
 import { createPopper} from '@popperjs/core';
 import type {Options,Placement,PositioningStrategy} from '@popperjs/core';
-import {IPopover, TPopoverStyle} from './be-popover-type'
+import {IPopover, TPopoverStyle,VirtualElement} from './be-popover-type'
 export default defineComponent({
     name: "BePopover",
     directives: { ClickOutside },
@@ -163,11 +163,6 @@ export default defineComponent({
          * @param {String} placement - 位置
          */
         const computePosition = (placement: string): void => {
-            if (props.x && props.y) {
-                stylePopover.left = props.x + 'px'
-                stylePopover.top = props.y + 'px'
-                return
-            }
             // 使用popover.js 对popover进行定位
             if (popperJS && popperJS.destroy) {
                 popperJS.destroy();
@@ -192,7 +187,34 @@ export default defineComponent({
                 ],
                 strategy:'fixed' as PositioningStrategy
             }
-            popperJS = createPopper(triggerDom, popover, popoverOption);
+            if (props.x && props.y) {
+                // 传入了坐标就 创建虚拟trigger
+                let VNodeTrigger:VirtualElement =  {
+                    getBoundingClientRect:generateGetBoundingClientRect()
+                }
+                popperJS = createPopper(VNodeTrigger, popover, popoverOption);
+                VNodeTrigger.getBoundingClientRect = generateGetBoundingClientRect(props.x,props.y);
+                popperJS.update();
+            }else{
+                popperJS = createPopper(triggerDom, popover, popoverOption);
+            }
+
+        }
+        /**
+         * 用户传入指定坐标，创建vnode，用于popover.js定位
+         * @param {number} x - 位置
+         * @param {number} y - 位置
+         */
+        const generateGetBoundingClientRect = (x:number = 0, y:number = 0) =>{
+            const rect = {
+                width: 0,
+                height: 0,
+                top: y,
+                right: x,
+                bottom: y,
+                left: x,
+            } as DOMRect
+            return ()=>rect;
         }
         /******************************************** dom操作相关 ************************************/
         // 触发元素dom

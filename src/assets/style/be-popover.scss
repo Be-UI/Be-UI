@@ -3,6 +3,7 @@
   position: fixed;
   background-color: $default;
   border-radius: 3px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
   .be-popover-body{
     color: $info;
     text-align: center;
