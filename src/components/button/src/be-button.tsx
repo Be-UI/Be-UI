@@ -1,31 +1,5 @@
-<template>
-    <div class="be-button"
-         :id="`be_button_container_${uid}`"
-         :class='`be-button__${size} be-button__${type}${borderStyle} ${customClass}`'
-         :style="btnStyle">
-      <div class="be-button-body" style="margin: 0 auto;display: flex">
-        <be-icon :icon="preIconStyle" v-if="preIcon"
-                  :spin="loading"
-                 :custom-class="`be-button-preIcon be-button-preIcon__${type}`">
-        </be-icon>
-        <button type="button"
-                v-if="!isIcon"
-                :id="`be_button_${uid}`"
-                :style="btnStyle"
-                :class='`be-button__inner ${disabledStyle}`'
-                :disabled="disabled">
-          <slot></slot>
-        </button>
-        <be-icon :icon="nextIconStyle" v-if="nextIcon"
-                 :custom-class="`be-button-nextIcon be-button-nextIcon__${type}`">
-        </be-icon>
-      </div>
-    </div>
-
-</template>
-
-<script lang="ts">
 import {computed, defineComponent, getCurrentInstance, nextTick, onMounted} from "vue";
+import '../../../assets/style/be-button.scss';
 import {IButtonInst} from "./be-button";
 
 export default defineComponent({
@@ -126,7 +100,7 @@ export default defineComponent({
             default: ''
         },
     },
-    setup(props){
+    setup(props,ctx){
         const internalInstance = getCurrentInstance() as IButtonInst
         const btnStyle =  computed(()=>{
             return {
@@ -141,7 +115,7 @@ export default defineComponent({
             return props.bordered ? "__border" : ""
         })
         const disabledStyle =  computed(()=>{
-            return props.disabled ? "be-button__inner__disabled" : ""
+            return (props.disabled || props.loading) ? "be-button__inner__disabled" : ""
         })
         const preIconStyle =  computed(()=>{
             if(props.loading){ return 'refresh'}
@@ -162,17 +136,6 @@ export default defineComponent({
                 return ''
             }
         })
-        const listeners =  computed(()=>{
-            return internalInstance.attrs
-        })
-        onMounted((): void => {
-            nextTick(()=>{
-                let dom:HTMLElement | null= document.getElementById(`be_button_container_${internalInstance.uid}`)
-                dom && dom.removeEventListener('click',listeners.value.onClick)
-            })
-
-            debugger
-        })
         return {
             uid:internalInstance.uid,
             btnStyle,
@@ -180,24 +143,39 @@ export default defineComponent({
             disabledStyle,
             preIconStyle,
             nextIconStyle,
-            listeners,
+            //listeners,
 
         }
     },
-    beforeUpdate() {
-        /*if(this.loading){
-          const button = document.getElementById(`be_button_${this._uid}`)
-          this.btnStyle = {
-            'width':Number(window.getComputedStyle(button).width.split('px')[0]) + 'px'
-          }
-        }else{
-          this.btnStyle = ''
-        }*/
-    }
+    render(){
+        const preIconRender = !this.preIcon ? ''
+            :(<be-icon icon={this.preIconStyle} spin = {this.loading} custom-class={`be-button-preIcon be-button-preIcon__${this.type}`}> </be-icon>);
+
+        const nextIconRender = !this.nextIcon ? ''
+            :(<be-icon icon={this.nextIconStyle} custom-class={`be-button-nextIcon be-button-nextIcon__${this.type}`}> </be-icon>);
+
+        return (
+            <button type = "button"
+                    {...this.$attrs}
+                    style={this.btnStyle}
+                    id={ `be_button_${this.uid}` }
+                    class={`
+                    be-button 
+                    be-button__inner ${this.disabledStyle} 
+                    be-button__${this.size} 
+                    be-button__${this.type}${this.borderStyle} 
+                    ${this.customClass}`}
+                    disabled={this.disabled || this.loading}>
+                    <div class="be-button-body" style="margin: 0 auto;display: flex">
+                        {preIconRender}
+                        <div class='be-button-slot' >{this.$slots.default()}</div>
+                        {nextIconRender}
+                    </div>
+            </button>
+        )
+    },
+
 
 })
-</script>
 
-<style lang="scss">
-@import 'src/assets/style/be-button';
-</style>
+

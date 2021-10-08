@@ -1,3 +1,4 @@
+
 @mixin be-icon-default($color) {
   .be-icon{
     use {
@@ -37,7 +38,20 @@
     }
   }
 }
+.be-button__inner {
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  padding: 0;
+  background: transparent;
+  vertical-align: bottom;
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
+.be-button__inner__disabled {
+  cursor: not-allowed;
+}
 .be-button {
   border-radius: 2px;
   outline: 0;
@@ -48,22 +62,9 @@
   .be-button-body {
     margin: 0 auto;
     display: flex;
-
-    .be-button__inner {
-      border: 0;
-      outline: 0;
-      cursor: pointer;
-      padding: 0;
-      background: transparent;
-      vertical-align: bottom;
-      margin-left: 5px;
-      margin-right: 5px;
+    .be-button-slot{
+      margin:0 3px;
     }
-
-    .be-button__inner__disabled {
-      cursor: not-allowed;
-    }
-
     .be-button-preIcon__error,
     .be-button-nextIcon__error,
     .be-button-preIcon__warning,

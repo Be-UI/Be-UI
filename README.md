@@ -26,7 +26,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
-组件迁移 be-button loading\loading禁用，图标禁用,重构
+组件迁移 重构
+
 be-loading
 
 ## 长期排期
@@ -46,7 +47,7 @@ be-loading
 10.文本省略组件 be-ellipsis  （迁移完成）  
 11.弹出显示 be-popover （迁移完成） 
 12.文本弹出显示 be-toolTip （迁移完成）
-13.按钮组件 be-button 
+13.按钮组件 be-button （迁移完成） 
 
 
 

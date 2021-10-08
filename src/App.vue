@@ -23,12 +23,10 @@
     <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;">
         <be-button
             @click="test"
-            :loading="isLoading"
             preIcon="delete"
             nextIcon="delete"
-            customClass = 'asdwq'
             round="5"
-            type="default "
+            type="warning "
             size="large">
             测试
         </be-button>
@@ -86,7 +84,8 @@ export default {
     })*/
   },
   methods:{
-    test(){
+    test(qw){
+        debugger
       BeMsg({
         isDrag:true,
         titles:'MessageBox',

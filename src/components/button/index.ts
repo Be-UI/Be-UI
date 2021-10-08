@@ -1,7 +1,7 @@
 import { App} from 'vue'
-import beButton from './src/be-button.vue'
-import {IButton} from "./src/be-button";
-const button = beButton as IButton
+import Button from './src/be-button'
+import {IButton} from "./src/be-button-type";
+const button = Button as IButton
 /**
  * 组件装载方法
  * @param app
