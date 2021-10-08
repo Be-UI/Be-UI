@@ -1,6 +1,6 @@
 import {computed, defineComponent, getCurrentInstance, nextTick, onMounted} from "vue";
 import '../../../assets/style/be-button.scss';
-import {IButtonInst} from "./be-button";
+import {IButtonInst} from "./be-button-type";
 
 export default defineComponent({
 

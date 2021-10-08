@@ -1,12 +1,12 @@
 /*
-* @be-loading-service.js
+* @be-loading-service.ts
 * @description loading组件的服务调用脚本
 * @author czh
 * @update (czh 2021/06/06)
 */
 import Vue from 'vue';
 import beLoadingComponents from './be-loading.vue';
-const LoadingConstructor = Vue.extend(beLoadingComponents);
+/*const LoadingConstructor = Vue.extend(beLoadingComponents);
 LoadingConstructor.prototype.close = function (){
     // 移除dom
     const bodyElement = document.querySelector('body')
@@ -54,5 +54,6 @@ export function BeLoading(options = {}) {
         instance._props.colorText = options.colorText || defaultOption.colorText
     });
     return instance
-}
-export const BeLoadingComp = beLoadingComponents
+}*/
+//export const BeLoadingComp = beLoadingComponents
+export default beLoadingComponents

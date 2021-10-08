@@ -1,6 +1,15 @@
 <template>
   <div  id="App">
+<be-loading
+    show
+    text="测试loading"
+    size="large"
+    round="0"
+    color="red"
+    timer="5000"
+    colorText="white">
 
+</be-loading>
 <!--    <be-ellipsis
             placement="left"
             text="qcwqwd"
@@ -85,7 +94,6 @@ export default {
   },
   methods:{
     test(qw){
-        debugger
       BeMsg({
         isDrag:true,
         titles:'MessageBox',
@@ -127,6 +135,11 @@ export default {
   }
 </script>
 <style lang="scss">
+body{
+    height: 100%;
+    position: fixed;
+    width: 100%;
+}
   #App{
     background: $info;
     height: 100%;
