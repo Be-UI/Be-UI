@@ -4,9 +4,11 @@
     show
     text="测试loading"
     size="large"
-    round="0"
+    round="10"
     color="red"
+    :isBackground="false"
     timer="5000"
+    customClass="asdwq"
     colorText="white">
 
 </be-loading>
@@ -34,7 +36,6 @@
             @click="test"
             preIcon="delete"
             nextIcon="delete"
-            round="5"
             type="warning "
             size="large">
             测试

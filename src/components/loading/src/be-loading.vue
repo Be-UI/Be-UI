@@ -15,7 +15,6 @@
                  left: ${leftLoader};
                  top: ${topLoader};
                  width:${loaderWidth};
-                 border-radius: ${round}px;
                  height:${laoderHeight}`"
                      v-if="isShowLoader">
                     <!--loading动画-->
@@ -46,7 +45,7 @@ export default defineComponent({
   },
   props: {
     /**
-     * 按钮圆角
+     * 按钮圆角 (完成)
      */
     round: {
       type: [Number, String],
@@ -60,63 +59,63 @@ export default defineComponent({
       default: 0,
     },
     /**
-     * loading开启
+     * loading开启 (完成)
      */
     show: {
       type: Boolean,
       default: false,
     },
     /**
-     * 颜色
+     * 颜色 (完成)
      */
     color: {
       type: String,
       default: '#4F60A7FF',
     },
     /**
-     * 文字颜色
+     * 文字颜色 (完成)
      */
     colorText: {
       type: String,
       default: 'black',
     },
     /**
-     * 自定义主题样式类
+     * 自定义主题样式类 (完成)
      */
     customClass: {
       type: String,
       default: '',
     },
     /**
-     * 尺寸
+     * 尺寸 (完成)
      */
     size: {
       type: String,
       default: 'default',
     },
     /**
-     * 自定义文本
+     * 自定义文本 (完成)
      */
     text: {
       type: String,
       default: '',
     },
     /**
-     * 是否扩展至body下全屏 serX
+     * 是否扩展至body下全屏 serX (完成)
      */
     isFullScreen: {
       type: Boolean,
       default: false
     },
     /**
-     * 是否开启小圆角背景
+     * 是否开启小圆角背景 (完成)
      */
     isBackground: {
       type: Boolean,
       default: true,
     },
     /**
-     * 背景颜色
+     * 背景颜色 (完成)
      */
     bgColor: {
       type: String,

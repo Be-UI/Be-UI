@@ -31,7 +31,7 @@ export default defineComponent({
         }
         return (
             <div
-                 style={`left:${this.$$BeLoading.left};top:${this.$$BeLoading.top}`}
+                 style={`left:${this.$$BeLoading.left};top:${this.$$BeLoading.top};border-radius: ${this.$$BeLoading.round}px;`}
                  class={`be-loader be-loader__${this.$$BeLoading.sizeLoader} ${this.$$BeLoading.isBackgroundStyle}`}>
                 {/*loading动画渲染*/}
                 {loadingAnim}
