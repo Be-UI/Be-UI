@@ -1,13 +1,13 @@
 <template>
   <div  id="App">
 <be-loading
-    show
+    :show="isLoading"
     text="测试loading"
     size="large"
     round="10"
     color="red"
     :isBackground="false"
-    timer="5000"
+    delay="5000"
     customClass="asdwq"
     colorText="white">
 
@@ -92,10 +92,17 @@ export default {
     createPopper(tr, po, {
           placement: 'top',
     })*/
+      setTimeout(()=>{
+          this.test()
+      },7000)
+      setTimeout(()=>{
+          this.test()
+      },9000)
   },
   methods:{
     test(qw){
-      BeMsg({
+        this.isLoading = !this.isLoading
+     /* BeMsg({
         isDrag:true,
         titles:'MessageBox',
         customClass:'q1qwdsaddddddd',
@@ -112,7 +119,7 @@ export default {
         iconPreRender:null,
         iconNextRender:null,
         isOpenModal:true,
-      })
+      })*/
        /* this.notify = BeNotify({
             titles:'Notification',
             bodyRender:()=>{

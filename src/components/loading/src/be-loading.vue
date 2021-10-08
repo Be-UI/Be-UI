@@ -33,7 +33,7 @@
  * 公共的loading组件
  */
 import BeLoadingAnimate from './be-loading-elm'
-import {computed, defineComponent, ref, nextTick, getCurrentInstance, watch, onMounted,Ref} from 'vue'
+import {computed, defineComponent, ref, nextTick, getCurrentInstance, watch, onMounted, Ref, watchEffect} from 'vue'
 import {ILoadingInst, IPosStyle} from "./be-loading-type";
 export default defineComponent({
   name: "BeLoading",
@@ -52,7 +52,7 @@ export default defineComponent({
       default: 2
     },
     /**
-     * 延时loading
+     * 延时loading (完成)
      */
     delay: {
       type: Number,
@@ -149,8 +149,6 @@ export default defineComponent({
         const containerTop = ref('50%')
         const isBackgroundStyle = computed(()=> props.isBackground ? 'be-loader__bg' : '')
         const isFullScreenStyle = computed(()=> props.isFullScreen ? 'be-load-container__fullScreen' : '')
-        const isShowLoader = computed(()=> props.show)
-        const internalInstance = getCurrentInstance() as ILoadingInst
 
 
         /******************************************** loading位置、宽高设置 ************************************/
@@ -230,6 +228,7 @@ export default defineComponent({
         }
         /******************************************** 初始化组件 ************************************/
         const parentElement = ref(null)
+        const internalInstance = getCurrentInstance() as ILoadingInst
         /**
          * 初始化组件
          */
@@ -268,8 +267,8 @@ export default defineComponent({
             setText()
         }
         /************************************* 延迟显示 ************************************/
-        watch(isShowLoader,(nVal:any)=>{
-            if (nVal) {
+        const delayShow = (show)=>{
+            if (show) {
                 timer.value = setTimeout(() => {
                     nextTick(() => {
                         initComp()
@@ -279,9 +278,13 @@ export default defineComponent({
                 clearTimeout(timer)
                 timer.value= null
             }
+        }
+        const isShowLoader = computed(()=> props.show)
+        watchEffect(()=>{
+            delayShow(isShowLoader)
         })
-        onMounted(()=>{
-            initComp()
+        watch(isShowLoader,(nVal:any)=>{
+            delayShow(nVal)
         })
         return {
             uid:internalInstance.uid,
