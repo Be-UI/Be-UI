@@ -1,13 +1,3 @@
-/*
-import {BeLoadingComp} from "./src/be-loading-service.ts";
-import BeLoading from "./src/be-loading";
-export default {
-    install:function(Vue) {
-        Vue.component(BeLoading.name, BeLoading);
-    },
-    instance:BeLoading,
-    service:BeLoadingComp
-};*/
 import loading from "./src/be-loading-service";
 import { App} from 'vue'
 import {ILoading} from "./src/be-loading-type";
@@ -21,4 +11,3 @@ load.install = (app:App): void => {
 }
 const BeLoading:ILoading = load
 export default BeLoading;
-export {BeLoading}

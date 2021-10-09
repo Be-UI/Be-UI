@@ -3,19 +3,18 @@
 * @deprecated 可拖拽弹窗
 * @author czh
 * @create (czh 2021/5/8)
-* @update (czh 2021/5/8)
+* @update (czh 2021/5/8)  v-drag="{isDrag:isDrag}"
 */
 <template>
-
     <div class="be-dialog" :class="dialogModels" v-show="isShow">
       <transition name="be-zoom-in-top">
       <div class="be-dialog-container"
            v-show="isShow"
-           :id="`be_dialog_container${this._uid}`"
+           :id="`be_dialog_container$this._uid`"
            :class="customClassStyle"
-           v-drag="{isDrag:isDrag}">
+          >
         <div class="be-dialog-title">
-          <div class="be-dialog-contanter-head" :id="`be_head${this._uid}`">
+          <div class="be-dialog-contanter-head" :id="`be_head$this._uid`">
             <span>{{ titles }}</span>
             <!-- @slot 弹窗头部按钮 -->
             <slot name="headerIcon">
@@ -42,11 +41,18 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import {
+    defineComponent,
+    defineAsyncComponent,
+    reactive,
+    watchEffect,
+    ref
+} from "vue";
 /**
  * 可拖拽、放大、缩小弹窗
  */
-export default {
+export default defineComponent({
   name: "BeDialog",
   data() {
     return {
@@ -165,140 +171,9 @@ export default {
   beforeDestroy() {
     this.removeEscExitFunc()
   }
-}
+})
 </script>
 
 <style lang="scss">
-.be-zoom-in-top-enter-active, .be-zoom-in-top-leave-active {
-  opacity: 1;
-  -webkit-transform: scaleY(1);
-  transform: scaleY(1);
-  -webkit-transition: opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-  transition: opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-  transition: transform .3s cubic-bezier(.23, 1, .32, 1), opacity .3s cubic-bezier(.23, 1, .32, 1);
-  transition: transform .3s cubic-bezier(.23, 1, .32, 1), opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-  -webkit-transform-origin: center top;
-  transform-origin: center top
-}
-
-.be-zoom-in-top-enter, .be-zoom-in-top-leave-active {
-  opacity: 0;
-  -webkit-transform: scaleY(0);
-  transform: scaleY(0)
-}
-.be-dialog-modal {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 2077;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.be-dialog {
-  .be-dialog-contanter-head {
-    border-radius: 5px;
-    border-bottom: none;
-    height: 50px;
-    color: #666;
-    margin: 0 0 10px 0;
-    text-align: left;
-    font-weight: bold;
-    /* cursor: move;*/
-    font-size: 18px;
-    padding: 10px;
-    line-height: 30px;
-    box-sizing: border-box;
-
-    .be-dialog-close {
-      line-height: 35px;
-      color: #000000;
-      cursor: pointer;
-      float: right;
-    }
-
-  }
-
-  .be-dialog-container {
-    box-sizing: border-box;
-    position: absolute;
-    left: calc(50% - 400px);
-    top: calc(50% - 250px);
-    bottom: 60px;
-    width: 800px;
-    height: 500px;
-    background: rgba(242, 244, 245, 1);
-    box-shadow: 0px 6px 13px rgba(0, 0, 0, 0.16);
-    border-radius: 5px;
-    z-index: 998;
-
-    .be-dialog-title {
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.77);
-
-      span {
-        color: #000000;
-        font-size: 16px;
-        font-family: "Microsoft YaHei";
-      }
-
-      span:nth-child(2) {
-        font-size: 20px;
-        font-weight: 400;
-      }
-    }
-
-    .be-dialog-body {
-      height: calc(100% - 115px);
-      padding: 10px;
-      box-sizing: border-box;
-      margin-bottom: 10px;
-
-      .be-dialog-body__inner {
-        background: rgba(255, 255, 255, 0.77);
-      }
-    }
-
-    .be-dialog-footer {
-      height: 40px;
-      line-height: 40px;
-      padding: 0 30px;
-    }
-
-    .be-dialog-footer__center {
-      display: flex;
-      justify-content: center;
-    }
-
-    .be-dialog-footer__right {
-      display: flex;
-      justify-content: flex-end;
-    }
-  }
-
-
-}
-
-
+@import "../../../assets/style/be-dialog";
 </style>
-<docs>
-## 事例
-```jsx
-<be-dialog
-    titles="查看更多子节点"
-    ref='moreNodeDialog'
-    animIn='animate__fadeInBottomLeft'
-    animOut='animate__fadeOutBottomLeft'
-    :is-show.sync="isExpandMoreNode"
-    :is-open-modal="true"
-    :escExit='true'
-    @escCb="closePanel()"
-    custom-class="plus-dialog">
-  <div slot="headerIcon" style="display: inline-block;float: right">
-  </div>
-  <div slot="body" class="plus-dialog-body">
-  </div>
-</be-dialog>
-```
-</docs>

@@ -1,6 +1,6 @@
 <template>
   <div  id="App">
-<be-loading
+<!--<be-loading
     :show="isLoading"
     text="测试loading"
     size="large"
@@ -11,7 +11,7 @@
     customClass="asdwq"
     colorText="white">
 
-</be-loading>
+</be-loading>-->
 <!--    <be-ellipsis
             placement="left"
             text="qcwqwd"
@@ -63,6 +63,20 @@
         </svg>
       </svg>
     </div>-->
+
+      <be-dialog
+          titles="查看更多子节点"
+          ref='moreNodeDialog'
+          animIn='animate__fadeInBottomLeft'
+          animOut='animate__fadeOutBottomLeft'
+          :is-show.sync="showDialog"
+          :is-open-modal="true"
+          custom-class="plus-dialog">
+          <div slot="headerIcon" style="display: inline-block;float: right">
+          </div>
+          <div slot="body" class="plus-dialog-body">
+          </div>
+      </be-dialog>
   </div>
 
 </template>
@@ -73,13 +87,16 @@ import {BeNotify} from "./components/notification/src/be-notification-service";
 import {BeMsg} from "./components/message-box/src/be-message-box-service";
 import BePopover from "./components/popover/src/be-popover.vue";
 import { createPopper } from '@popperjs/core'
+import { BeLoadingSer } from './components'
 export default {
   name: 'App',
   data(){
     return{
       num:0,
       notify:null,
-      isLoading:true
+      isLoading:true,
+      showDialog:false,
+      loadingInst:null,
     }
 
   },
@@ -99,7 +116,17 @@ export default {
           return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)
       },
     test(qw){
-        this.isLoading = !this.isLoading
+        this.loadingInst = BeLoadingSer.init({
+            isBackground:false,
+            bgColor:'#F2F4F5',
+            text:'正在访问中，请稍候…',
+            color:'#b1b1b1',
+        })
+        setTimeout(()=>{
+            BeLoadingSer.close(this.loadingInst)
+        },3000)
+
+     // this.isLoading = !this.isLoading
      /* BeMsg({
         isDrag:true,
         titles:'MessageBox',

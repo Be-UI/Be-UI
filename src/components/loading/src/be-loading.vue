@@ -33,7 +33,18 @@
  * 公共的loading组件
  */
 import BeLoadingAnimate from './be-loading-elm'
-import {computed, defineComponent, ref, nextTick, getCurrentInstance, watch, onMounted, Ref, watchEffect} from 'vue'
+import {
+    computed,
+    defineComponent,
+    ref,
+    nextTick,
+    getCurrentInstance,
+    watch,
+    onMounted,
+    Ref,
+    watchEffect,
+    onUnmounted
+} from 'vue'
 import {ILoadingInst, IPosStyle} from "./be-loading-type";
 export default defineComponent({
   name: "BeLoading",
@@ -277,14 +288,19 @@ export default defineComponent({
             } else {
                 clearTimeout(timer)
                 timer.value= null
+                window.onresize = null
             }
         }
         const isShowLoader = computed(()=> props.show)
         watchEffect(()=>{
-            delayShow(isShowLoader)
+            let show:boolean = isShowLoader.value
+            delayShow(show)
         })
         watch(isShowLoader,(nVal:any)=>{
             delayShow(nVal)
+        })
+        onUnmounted(()=>{
+            window.onresize = null
         })
         return {
             uid:internalInstance.uid,
@@ -305,33 +321,7 @@ export default defineComponent({
             isShowLoader,
             isBackgroundStyle
         }
-    },
-  /*watch: {
-    // 设置延时渲染
-    showLoader: {
-      handler: function (nVal) {
-        if (nVal) {
-          this.timer = setTimeout(() => {
-              nextTick(() => {
-              this.isShowLoader = nVal
-              this.initComp()
-            })
-          }, this.delay)
-        } else {
-          clearTimeout(this.timer)
-          this.timer = null
-          this.isShowLoader = false
-        }
-      },
-      deep: true,
-      immediate: true
-    },
-
-
-  },*/
-  beforeDestroy() {
-    window.onresize = null
-  },
+    }
 })
 </script>
 

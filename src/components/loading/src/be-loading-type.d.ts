@@ -9,6 +9,10 @@ export interface ILoading {
     install?:Function
     name:string
 }
+export interface ILoadingPlg {
+    close:Function
+    init:Function
+}
 export interface ILoadingInst extends ComponentInternalInstance {
     uid: number
     attrs:any

@@ -4,21 +4,17 @@
 * @author czh
 * @update (czh 2021/06/06)
 */
-import Vue from 'vue';
+import {createVNode, render, RendererNode, VNode} from 'vue';
 import beLoadingComponents from './be-loading.vue';
-/*const LoadingConstructor = Vue.extend(beLoadingComponents);
-LoadingConstructor.prototype.close = function (){
-    // 移除dom
-    const bodyElement = document.querySelector('body')
-    const loaderElement = document.getElementById('be_load_' + this._uid)
-    if (this.$el && this.$el.parentNode) {
-        this.$el.parentNode.removeChild(this.$el);
-        bodyElement.removeChild(loaderElement);
-    }
-    // 销毁组件
-    this.$destroy()
+import {ILoadingPlg} from "./be-loading-type";
+const closeLoading = (instance:RendererNode)=> {
+    render(null,instance.beLoadingElm)
 }
-export function BeLoading(options = {}) {
+/**
+ * 初始化方法
+ * @param {Object} options - props配置向
+ */
+const initLoading = (options = {})=> {
     const defaultOption = {
         isBackground:true,
         bgColor:'rgba(255,255,255,.5)',
@@ -28,32 +24,31 @@ export function BeLoading(options = {}) {
         customClass:'',
         color:'#4F60A7FF',
         colorText:'black',
-        delay:0
+        delay:0,
+        round:5,
+        show:false,
+        isFullScreen:true,
     }
-    const instance = new LoadingConstructor({
-        el:document.createElement('div')
-    })
-    const bodyElement = document.querySelector('body')
-    if (bodyElement.append) {
-        bodyElement.append(instance.$el)
+    // 合并参数
+    let option = Object.assign({}, defaultOption, options)
+    let instanceInner:RendererNode = createVNode(beLoadingComponents, {...option});
+    // 设置全屏和显示
+    instanceInner.props.show = true;
+    instanceInner.props.isFullScreen = true
+    // 渲染挂载
+    let elm:HTMLElement = document.createElement('div')
+    render(instanceInner as VNode,elm)
+    const bodyElement:HTMLElement | null= document.querySelector('body')
+    if (bodyElement && bodyElement.append) {
+        bodyElement.append(instanceInner.el)
     } else {
-        bodyElement.appendChild(instance.$el)
+        bodyElement && bodyElement.appendChild(instanceInner.el)
     }
-    // 手动设置props
-    Vue.nextTick(() => {
-        instance._props.show = true;
-        instance._props.isFullScreen = true;
-        instance._props.isBackground = options.isBackground === undefined ? defaultOption.isBackground : options.isBackground
-        instance._props.bgColor = options.bgColor || defaultOption.bgColor
-        instance._props.customRender = options.customRender || defaultOption.customRender
-        instance._props.text = options.text || defaultOption.text
-        instance._props.size = options.size || defaultOption.size
-        instance._props.customClass = options.customClass || defaultOption.customClass
-        instance._props.color = options.color || defaultOption.color
-        instance._props.delay = options.delay || defaultOption.delay
-        instance._props.colorText = options.colorText || defaultOption.colorText
-    });
-    return instance
-}*/
-//export const BeLoadingComp = beLoadingComponents
+    instanceInner.beLoadingElm = elm
+    return instanceInner
+}
 export default beLoadingComponents
+export const beLoading:ILoadingPlg = {
+    close:closeLoading,
+    init:initLoading
+}

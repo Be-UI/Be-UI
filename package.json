@@ -11,6 +11,7 @@
     "vue": "^3.0.4"
   },
   "devDependencies": {
+    "@types/node": "^16.7.4",
     "@types/marked": "^2.0.2",
     "@vitejs/plugin-vue": "^1.2.2",
     "@vitejs/plugin-vue-jsx": "^1.0.2",
