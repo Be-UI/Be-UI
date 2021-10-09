@@ -3,7 +3,7 @@
 * @deprecated 可拖拽弹窗
 * @author czh
 * @create (czh 2021/5/8)
-* @update (czh 2021/5/8)  v-drag="{isDrag:isDrag}"
+* @update (czh 2021/5/8)
 */
 <template>
     <div class="be-dialog" :class="dialogModels" v-show="isShow">
@@ -11,8 +11,8 @@
       <div class="be-dialog-container"
            v-show="isShow"
            :id="`be_dialog_container$this._uid`"
-           :class="customClassStyle"
-          >
+           v-drag="{isDrag:isDrag}"
+           :class="customClassStyle">
         <div class="be-dialog-title">
           <div class="be-dialog-contanter-head" :id="`be_head$this._uid`">
             <span>{{ titles }}</span>
@@ -33,7 +33,7 @@
         <div :class="`be-dialog-footer be-dialog-footer__${layout}`">
           <!-- @slot 弹窗底部-->
           <slot name="footer">
-            <button>确定</button>
+            <be-button type="primary" bordered>确定</be-button>
           </slot>
         </div>
       </div>
@@ -44,23 +44,16 @@
 <script lang="ts">
 import {
     defineComponent,
-    defineAsyncComponent,
     reactive,
-    watchEffect,
-    ref
+    ref, computed, onMounted, onUnmounted
 } from "vue";
+import {dragDirective } from '../../../utils/direactives/custom-direactives/drag-directives';
 /**
  * 可拖拽、放大、缩小弹窗
  */
 export default defineComponent({
   name: "BeDialog",
-  data() {
-    return {
-      animate: '',
-      offsetData: {},
-      dialogModels: ''
-    }
-  },
+  directives: { drag:dragDirective },
   props: {
     /**
      * 是否拖拽
@@ -112,64 +105,67 @@ export default defineComponent({
       default: 'center'
     }
   },
-  methods: {
-    /**
-     * 获取 v-drag 移动后的位置数据
-     * @param {Object} coordinateData - 移动路径数据
-     */
-    getCoordinate(coordinateData) {
-      this.offsetData = coordinateData
-    },
-    /**
-     * 关闭组件
-     */
-    close() {
+  setup(props,ctx){
+      const customClassStyle = computed(()=> props.customClass)
 
-      if (this.$listeners.close) {
-        /** 弹窗关闭事件
-         * @event close
-         */
-        this.$emit('close')
-      } else {
-        this.$emit('update:isShow', false)
+      const offsetData = reactive({})
+      /**
+       * 获取 v-drag 移动后的位置数据
+       * @param {Object} coordinateData - 移动路径数据
+       */
+      const getCoordinate = (coordinateData):void =>{
+          offsetData = coordinateData
       }
-    },
-
-    /**
-     * 键盘esc 退出的监听
-     */
-    listenerEscExitFunc() {
-      if (this.escExit) {
-        document.onkeydown = (e) => {
-          if (e && e.keyCode === 27) {
-            /** esc按键弹窗关闭事件
-             * @event escCb
-             */
-            this.$emit('escCb')
+      /**
+       * 关闭组件
+       */
+      const close = ():void =>{
+          if (ctx.attrs.onClose) {
+              /** 弹窗关闭事件
+               * @event close
+               */
+              ctx.emit('close')
+          } else {
+              ctx.emit('update:isShow', false)
           }
-        }
       }
-    },
-    /**
-     * 键盘esc退出的监听取消
-     */
-    removeEscExitFunc() {
-      document.onkeydown = null
-    }
-  },
-  computed: {
-    customClassStyle() {
-      return this.customClass
-    }
-  },
-  mounted() {
-    if (this.isOpenModal) {
-      this.dialogModels = 'be-dialog-modal'
-    }
-    this.listenerEscExitFunc()
-  },
-  beforeDestroy() {
-    this.removeEscExitFunc()
+      /**
+       * 键盘esc 退出的监听
+       */
+      const listenerEscExitFunc = ():void =>{
+          if (props.escExit) {
+              document.onkeydown = (e) => {
+                  if (e && e.keyCode === 27) {
+                      /** esc按键弹窗关闭事件
+                       * @event escCb
+                       */
+                      ctx.emit('escCb')
+                  }
+              }
+          }
+      }
+      /**
+       * 键盘esc退出的监听取消
+       */
+      const removeEscExitFunc = ():void =>{
+          document.onkeydown = null
+      }
+      const dialogModels = ref('')
+      // 开启遮罩与键盘监听
+      onMounted(()=>{
+          if (props.isOpenModal) {
+              dialogModels.value = 'be-dialog-modal'
+          }
+          listenerEscExitFunc()
+      })
+      onUnmounted(()=>{
+          removeEscExitFunc()
+      })
+      return {
+          dialogModels,
+          customClassStyle,
+          close,
+      }
   }
 })
 </script>

@@ -5,15 +5,16 @@ import {
     ref,
     getCurrentInstance,
     onMounted,
-    render,
     defineAsyncComponent
 } from 'vue'
 import '../../../assets/style/be-message-box.scss';
 import '../../../assets/style/be-button.scss';
 import {IMsg} from "./be-message-box-type";
+import {dragDirective} from "../../../utils/direactives/custom-direactives/drag-directives";
 
 export default defineComponent({
     name: "BeMessageBox",
+    directives: { drag:dragDirective },
     components: {
         'be-icon': defineAsyncComponent(() => import("../../svg-icon")),
     },
@@ -178,8 +179,8 @@ export default defineComponent({
                     <div
                         class={`be-message-box be-message-box__${props.msgType} ${dialogModels.value} ${props.customClass}`}>
                         <div class={containerstyle.value}
+                             v-drag={{isDrag: props.isDrag}}
                              id={`be_message_box_container${_uid}`}>
-                            {/*v-drag={{isDrag: props.isDrag}}>*/}
                             <div class="be-message-box-title">
                                 <div class="be-message-box-head"
                                      id={`be_message_box_head${_uid}`}>

@@ -209,6 +209,9 @@
 
 .be-button__primary__border {
   @include be-button-border($primary,$primaryText,$primaryBorder,$primaryHover,$primaryHoverBorder,$whiteText);
+  &:hover{
+    color: $whiteText;
+  }
 }
 
 .be-button__default__border {

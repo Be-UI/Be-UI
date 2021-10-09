@@ -24,11 +24,10 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
-
+be-message-box 与拖拽指令冲突
 ## 排期
 组件迁移 重构
 be-dialog
-
 ## 长期排期
 1.服务式访问的全局绑定  
 2.组件引用编写

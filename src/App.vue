@@ -67,9 +67,7 @@
       <be-dialog
           titles="查看更多子节点"
           ref='moreNodeDialog'
-          animIn='animate__fadeInBottomLeft'
-          animOut='animate__fadeOutBottomLeft'
-          :is-show.sync="showDialog"
+          v-model:is-show="showDialog"
           :is-open-modal="true"
           custom-class="plus-dialog">
           <div slot="headerIcon" style="display: inline-block;float: right">
@@ -116,7 +114,8 @@ export default {
           return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)
       },
     test(qw){
-        this.loadingInst = BeLoadingSer.init({
+         // this.showDialog = true
+        /*this.loadingInst = BeLoadingSer.init({
             isBackground:false,
             bgColor:'#F2F4F5',
             text:'正在访问中，请稍候…',
@@ -124,10 +123,10 @@ export default {
         })
         setTimeout(()=>{
             BeLoadingSer.close(this.loadingInst)
-        },3000)
+        },3000)*/
 
-     // this.isLoading = !this.isLoading
-     /* BeMsg({
+      // this.isLoading = !this.isLoading
+      BeMsg({
         isDrag:true,
         titles:'MessageBox',
         customClass:'q1qwdsaddddddd',
@@ -144,7 +143,7 @@ export default {
         iconPreRender:null,
         iconNextRender:null,
         isOpenModal:true,
-      })*/
+      })
        /* this.notify = BeNotify({
             titles:'Notification',
             bodyRender:()=>{
