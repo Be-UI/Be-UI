@@ -7,7 +7,7 @@
     round="10"
     color="red"
     :isBackground="false"
-    delay="5000"
+    :customRender="customRender"
     customClass="asdwq"
     colorText="white">
 
@@ -92,14 +92,12 @@ export default {
     createPopper(tr, po, {
           placement: 'top',
     })*/
-      setTimeout(()=>{
-          this.test()
-      },7000)
-      setTimeout(()=>{
-          this.test()
-      },9000)
+
   },
   methods:{
+      customRender(){
+          return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)
+      },
     test(qw){
         this.isLoading = !this.isLoading
      /* BeMsg({

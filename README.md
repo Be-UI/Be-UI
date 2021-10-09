@@ -39,7 +39,7 @@ be-loading
 2.右键菜单组件 be-contextmenu
 3.对话框组件   be-dialog  
 4.输入框组件   be-input  
-5.loading组件 be-loading  （迁移中）  
+5.loading组件 be-loading  （迁移完成）
 6.消息对话组件 be-message-box  （迁移完成）
 7.分页组件 be-pager  
 8.图标组件 be-icon （迁移完成）   

@@ -15,7 +15,7 @@
                  left: ${leftLoader};
                  top: ${topLoader};
                  width:${loaderWidth};
-                 height:${laoderHeight}`"
+                 height:${loaderHeight}`"
                      v-if="isShowLoader">
                     <!--loading动画-->
                     <BeLoadingAnimate></BeLoadingAnimate>
@@ -122,7 +122,7 @@ export default defineComponent({
       default: 'rgba(255,255,255,.5)',
     },
     /**
-     * 自定义渲染内容
+     * 自定义渲染内容 (完成)
      */
     customRender: {
       type: Function,
@@ -155,7 +155,7 @@ export default defineComponent({
         // loading动画遮罩容器width
         const loaderWidth = ref('')
         // loading动画遮罩容器height
-        const laoderHeight = ref('')
+        const loaderHeight = ref('')
         /**
          * 计算loading位置居中
          * @param {Element} slotElem - 插槽元素对象
@@ -170,7 +170,7 @@ export default defineComponent({
                     top.value = (slotElemstyle.height as number / 2) + 'px'
                     // 根据插槽元素数据，计算loading遮罩位置、宽高
                     loaderWidth.value = slotElemstyle.width + 'px'
-                    laoderHeight.value = slotElemstyle.height + 'px'
+                    loaderHeight.value = slotElemstyle.height + 'px'
                 }
                 // 设置文字位置
                 setText()
@@ -267,7 +267,7 @@ export default defineComponent({
             setText()
         }
         /************************************* 延迟显示 ************************************/
-        const delayShow = (show)=>{
+        const delayShow = (show:boolean)=>{
             if (show) {
                 timer.value = setTimeout(() => {
                     nextTick(() => {
@@ -296,7 +296,7 @@ export default defineComponent({
             leftLoader,
             topLoader,
             loaderWidth,
-            laoderHeight,
+            loaderHeight,
             leftTxt,
             topTxt,
             left,
