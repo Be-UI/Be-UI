@@ -63,17 +63,27 @@
         </svg>
       </svg>
     </div>-->
-
       <be-dialog
-          titles="查看更多子节点"
+          titles="测试Dialog"
           ref='moreNodeDialog'
           v-model:is-show="showDialog"
-          :is-open-modal="true"
-          custom-class="plus-dialog">
-          <div slot="headerIcon" style="display: inline-block;float: right">
-          </div>
+          customClass="asdwq"
+           escExit
+          :is-open-modal="true">
+<!--          <template #headerIcon>
+            <be-icon icon="error" @click="showDialog = false"></be-icon>
+          </template>-->
+        <template #body>
           <div slot="body" class="plus-dialog-body">
+            这是一个弹窗哦 么么么
           </div>
+        </template>
+        <template #footer>
+        <be-button type="primary"
+                   bordered
+                   round="3">确定
+        </be-button>
+        </template>
       </be-dialog>
   </div>
 
@@ -114,7 +124,7 @@ export default {
           return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)
       },
     test(qw){
-         // this.showDialog = true
+          this.showDialog = !this.showDialog
         /*this.loadingInst = BeLoadingSer.init({
             isBackground:false,
             bgColor:'#F2F4F5',
@@ -126,7 +136,7 @@ export default {
         },3000)*/
 
       // this.isLoading = !this.isLoading
-      BeMsg({
+     /* BeMsg({
         isDrag:true,
         titles:'MessageBox',
         customClass:'q1qwdsaddddddd',
@@ -143,7 +153,7 @@ export default {
         iconPreRender:null,
         iconNextRender:null,
         isOpenModal:true,
-      })
+      })*/
        /* this.notify = BeNotify({
             titles:'Notification',
             bodyRender:()=>{

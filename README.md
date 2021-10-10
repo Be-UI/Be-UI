@@ -27,7 +27,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 排期
 组件迁移 重构
-be-dialog
+be-input
 ## 长期排期
 1.服务式访问的全局绑定  
 2.组件引用编写
@@ -35,7 +35,7 @@ be-dialog
 ### 已有
 1.布局容器组件 be-container  
 2.右键菜单组件 be-contextmenu
-3.对话框组件   be-dialog  （迁移中） 
+3.对话框组件   be-dialog  （迁移完成）
 4.输入框组件   be-input  
 5.loading组件 be-loading  （迁移完成）
 6.消息对话组件 be-message-box  （迁移完成）
