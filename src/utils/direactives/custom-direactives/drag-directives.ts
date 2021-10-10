@@ -11,6 +11,8 @@ import {IEvent} from "../../types";
 export const dragDirective:ObjectDirective = {
     beforeMount(el:HTMLElement, binding:DirectiveBinding) :void{
             let op:HTMLElement = el
+            op.style.transform = 'translate(0%, 0%)'
+            op.style.position = 'absolute'
             // 设置不拖拽就直接返回
             if (binding.value && (binding.value.isDrag === false || binding.value.isDrag === 'false')) {
                 return
@@ -71,17 +73,18 @@ export const dragDirective:ObjectDirective = {
                         if (top < 0) {
                             top = 0
                         }
-                        if (left < eWidth) {
+                        if (left < 0) {
                             left = 0
                         }
-                        if (top >= maxBottom) {
+                        if (top > maxBottom) {
                             top = maxBottom
                         }
-                        if (left >= maxLeft) {
+                        if (left > maxLeft) {
                             left = maxLeft
                         }
                         op.style.left = left + 'px'
                         op.style.top = top + 'px'
+                        op.style.transform = 'translate(0%, 0%)'
                         //将移动后的top和left回调出去
                         if (binding.value && Object.prototype.toString.call(binding.value) === "[object Function]") {
                             binding.value({ left, top })

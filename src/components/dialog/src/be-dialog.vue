@@ -108,7 +108,7 @@ export default defineComponent({
   setup(props,ctx){
       const customClassStyle = computed(()=> props.customClass)
 
-      const offsetData = reactive({})
+      let offsetData = reactive({})
       /**
        * 获取 v-drag 移动后的位置数据
        * @param {Object} coordinateData - 移动路径数据

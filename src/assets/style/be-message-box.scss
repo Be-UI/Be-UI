@@ -10,10 +10,7 @@
         box-shadow: 0 6px 13px rgba(0, 0, 0, 0.16);
         border-radius: 2px;
         box-sizing: border-box;
-        position: absolute;
-        left:calc(50%);
-        top:calc(50%);
-        transform: translate(-50%,-50%);
+        align-self: center;
         z-index: 998;
         .be-message-box-title {
             width: 100%;
@@ -96,4 +93,6 @@
     top: 0;
     z-index: 2077;
     background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
 }

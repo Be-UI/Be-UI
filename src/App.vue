@@ -131,7 +131,7 @@ export default {
         titles:'MessageBox',
         customClass:'q1qwdsaddddddd',
         msgType:'warning',
-        footerType:'left',
+        footerType:'center',
         footerRender:null,
         bodyRender:()=>{
           return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
