@@ -40,6 +40,17 @@
             size="large">
             测试
         </be-button>
+        <div style="margin-top: 10px">
+            <!--  layout,isFront,pageData,isDynamic,disabledJump,disabled    //:pageSize="pageParams.pageSize"-->
+            <be-pagination
+                            :pageSize="pageParams.pageSize"
+                           :pageCount="pageParams.total"
+                           :pagerShowCount="5"
+                           @change="pageChange"
+                           :currentPage="pageParams.currentPage">
+            </be-pagination>
+        </div>
+
     </div>
 
 <!--        <div style="width:100px;height: 30px;background: #4F62A7" id="qwq">cesas</div>
@@ -96,6 +107,7 @@ import {BeMsg} from "./components/message-box/src/be-message-box-service";
 import BePopover from "./components/popover/src/be-popover.vue";
 import { createPopper } from '@popperjs/core'
 import { BeLoadingSer } from './components'
+
 export default {
   name: 'App',
   data(){
@@ -105,6 +117,12 @@ export default {
       isLoading:true,
       showDialog:false,
       loadingInst:null,
+        pageParams: {
+            currentPage: 1,
+            pageNum: 1,
+            pageSize: 5,
+            total: 100
+        },
     }
 
   },
@@ -120,6 +138,9 @@ export default {
 
   },
   methods:{
+      pageChange(data){
+          this.pageParams.currentPage = data.currentPage
+      },
       customRender(){
           return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)
       },

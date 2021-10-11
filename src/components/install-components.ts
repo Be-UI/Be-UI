@@ -5,6 +5,7 @@ export { default as BeTooltip } from './tooltip';//全局、按需
 export { default as BeButton } from './button';//全局、按需
 export { default as BeDialog } from './dialog';//全局、按需
 export { default as BeLoading } from './loading';//全局、按需
+export { default as BePagination } from './pagination';//全局、按需
 // plugins
 export { default as BeNotification } from './notification';//服务
 export { default as BeMsg } from './message-box';//服务

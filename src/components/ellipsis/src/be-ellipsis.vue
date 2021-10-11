@@ -67,7 +67,7 @@ export default defineComponent({
       default: 'left'
     },
   },
-  setup(props, context) {
+  setup(props) {
     // 定义state
     const state = reactive({
       isExpand: false,

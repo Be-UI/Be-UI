@@ -2,15 +2,14 @@
  * id生成方法
  * @return {string}
  */
-export function getUuid () {
-    let s = [];
-    let hexDigits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    for (var i = 0; i < 36; i++) {
+export const getUuid = ():string =>{
+    let s:Array<any> = [];
+    let hexDigits:string = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    for (let i:number = 0; i < 36; i++) {
         s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1)
     }
     s[14] = "4"
     s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1)
     s[8] = s[13] = s[18] = s[23] = "-"
-    let uuid = s.join("")
-    return uuid
+    return s.join("")
 }

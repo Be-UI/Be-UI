@@ -49,7 +49,7 @@
 <script lang="ts">
 import {
   defineComponent,
-  ref, computed, onMounted, onUnmounted, watchEffect, watch
+  ref, computed, onMounted, onUnmounted
 } from "vue";
 import {dragDirective} from '../../../utils/direactives/custom-direactives/drag-directives';
 
@@ -144,7 +144,7 @@ export default defineComponent({
     const listenerEscExitFunc = (): void => {
       if (props.escExit) {
         document.onkeydown = (e) => {
-          if (e && e.keyCode === 27) {
+          if (e && e.key === 'Esc') {
             /** esc按键弹窗关闭事件
              * @event escCb
              */
