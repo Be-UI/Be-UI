@@ -38,28 +38,31 @@
                  :color="hoverNextIconClass"></be-icon>
       </li>
       <!--最后一页-->
-      <li :class=" { active: pagerProps.currentPage < maxPageNum ? (pagerProps.currentPage === pagerMix.pageParamsFront.pageCount) : (maxPageNum === pagerMix.pageParamsFront.pageCount),
+      {{maxPageNum}}
+      {{pagerProps.currentPage}}
+      {{pagerMix.pageParamsFront.pageCount}}
+      <li :class=" { active: pagerProps.currentPage < maxPageNum ? false : true,
                     disabled:pagerProps.disabled }"
           class="number"
-          v-if="pagerProps.pageCount > 1">{{ pagerProps.pageCount }}
+          v-if="pagerProps.pageCount > 1">{{ maxPageNum }}
       </li>
     </ul>
     <!--***************** 动态分页 **********************-->
-    <ul @click="onPagerClick" class="be-pager" :class="{'be-pager__disabled':pagerProps.disabled}" v-else-if="pagerProps.isDynamic && !pagerProps.isFront">
+<!--    <ul @click="onPagerClick" class="be-pager" :class="{'be-pager__disabled':pagerProps.disabled}" v-else-if="pagerProps.isDynamic && !pagerProps.isFront">
       <li :class="{ active: pagerProps.currentPage === pager, disabled:pagerProps.disabled }"
           :key="pager"
           class="number"
           v-for="pager in pagersDynamic">{{ pager }}
       </li>
-    </ul>
+    </ul>-->
     <!--***************** 前端分页 **********************-->
-    <ul @click="onPagerClick" class="be-pager" :class="{'be-pager__disabled':pagerProps.disabled}" v-else-if="!pagerProps.isDynamic && pagerProps.isFront">
-      <!--第一页-->
+<!--    <ul @click="onPagerClick" class="be-pager" :class="{'be-pager__disabled':pagerProps.disabled}" v-else-if="!pagerProps.isDynamic && pagerProps.isFront">
+      &lt;!&ndash;第一页&ndash;&gt;
       <li :class="{ active: pagerProps.currentPage === 1, disabled:pagerProps.disabled }"
           class="number"
           v-if="pagerMix.pageParamsFront.pageCount > 0">1
       </li>
-      <!--更多上页缩略翻页-->
+      &lt;!&ndash;更多上页缩略翻页&ndash;&gt;
       <li :class="[quickprevIconClass, { disabled:pagerProps.disabled }]"
           @mouseenter="onMouseenter('left')"
           @mouseleave="hoverPreIconClass = '#303133';quickprevIconClass = 'more'"
@@ -74,7 +77,7 @@
           class="number"
           v-for="pager in frontList">{{ pager }}
       </li>
-      <!--更多下页缩略翻页-->
+      &lt;!&ndash;更多下页缩略翻页&ndash;&gt;
       <li :class="[quicknextIconClass, { disabled:pagerProps.disabled }]"
           @mouseenter="onMouseenter('right')"
           @mouseleave="hoverNextIconClass = '#303133';quicknextIconClass = 'more'"
@@ -84,13 +87,13 @@
                  class="more btn-quicknext"
                  :color="hoverNextIconClass"></be-icon>
       </li>
-      <!--最后一页-->
+      &lt;!&ndash;最后一页&ndash;&gt;
       <li :class=" { active: pagerProps.currentPage < maxPageNum ? (pagerProps.currentPage === pagerMix.pageParamsFront.pageCount) : (maxPageNum === pagerMix.pageParamsFront.pageCount),
                     disabled:pagerProps.disabled }"
           class="number"
           v-if="pagerMix.pageParamsFront.pageCount > 1">{{ pagerMix.pageParamsFront.pageCount }}
       </li>
-    </ul>
+    </ul>-->
     <ul class="be-pager" :class="{'be-pager__disabled':pagerProps.disabled}">
       <li @click="nextPage"><be-icon icon="right"></be-icon></li>
     </ul>
@@ -123,12 +126,12 @@ import {
         let hoverNextIconClass = ref( '#303133')
         let hoverPreIconClass = ref( '#303133')
         let pagers = pagersList($$BePaginProps,maxPageNum,showPrevMore,showNextMore)
-        let pagersDynamic = pagersDynamicList($$BePaginProps)
-        let pagerFrontParam = pagerFront($$BePaginProps,$$BePaginMix,maxPageNum,showPrevMore,showNextMore,ctx)
-        let sliceList = pagerFrontParam.sliceList
-        let frontList = pagerFrontParam.frontList
-        let nextPageFront = pagerFrontParam.nextPageFront
-        let prePageFront = pagerFrontParam.prePageFront
+        //let pagersDynamic = pagersDynamicList($$BePaginProps)
+        //let pagerFrontParam = pagerFront($$BePaginProps,$$BePaginMix,maxPageNum,showPrevMore,showNextMore,ctx)
+        //let sliceList = pagerFrontParam.sliceList
+        //let frontList = pagerFrontParam.frontList
+        //let nextPageFront = pagerFrontParam.nextPageFront
+        //let prePageFront = pagerFrontParam.prePageFront
         watchEffect(()=>{
             if(!showPrevMore.value){
                 quickprevIconClass.value = 'more';
@@ -163,28 +166,27 @@ import {
             }
             let newPage:number = 0
             if(type === 'next'){
-                newPage = currentPage + 1
+                newPage = currentPage >= maxPageNum.value ? currentPage : currentPage + 1
             }else{
                 newPage = currentPage - 1
             }
-            const pageCount:number = $$BePaginProps.isFront ? $$BePaginMix.pageParamsFront.pageCount : $$BePaginProps.pageCount
             // 点击缩略翻页时的偏移量
             // 缩略翻页 可能会超出页数范围，这里做限制
             if (!isNaN(newPage)) {
                 if (newPage < 1) {
                     newPage = 1;
                 }
-                if (newPage > pageCount) {
-                    newPage = pageCount;
+                if (newPage > maxPageNum.value) {
+                    newPage = maxPageNum.value;
                 }
             }
             if (newPage !== currentPage) {
                 // 调用前端分页方法
                 if ($$BePaginProps.isFront){
                     if(type === 'next'){
-                        nextPageFront()
+                        //nextPageFront()
                     }else{
-                        prePageFront()
+                        //prePageFront()
                     }
                 }
                 /**
@@ -195,7 +197,7 @@ import {
                     pageCount:$$BePaginProps.isFront ? $$BePaginMix.pageParamsFront.pageCount : $$BePaginProps.pageCount,
                     pageSize:$$BePaginMix.pageNumVal ? Number($$BePaginMix.pageNumVal.split('/')[0]) : $$BePaginProps.pageSize
                 }
-                ctx.emit('change',resData);
+                 ctx.emit('changePage',resData);
             }
         }
         /**
@@ -234,7 +236,6 @@ import {
          *
          */
         const onPagerClick = (event:MouseEvent,jump:number | string):void => {
-            const pageCount = $$BePaginProps.pageCount;
             let currentPage = 0
             // 动态分页不需要处理
             if($$BePaginProps.isDynamic){
@@ -276,14 +277,14 @@ import {
                 if (newPage < 1) {
                     newPage = 1;
                 }
-                if (newPage > pageCount) {
-                    newPage = pageCount;
+                if (newPage > maxPageNum.value) {
+                    newPage = maxPageNum.value;
                 }
             }
             if (newPage !== currentPage) {
                 // 前端分页返回分页数据
                 if ($$BePaginProps.isFront){
-                    ctx.emit("updatePage", {data: sliceList.get(newPage)});
+                    // ctx.emit("updatePage", {data: sliceList.get(newPage)});
                 }
                 /**
                  * 返回新页码
@@ -293,7 +294,7 @@ import {
                     pageCount:$$BePaginProps.isFront ? $$BePaginMix.pageParamsFront.pageCount : $$BePaginProps.pageCount,
                     pageSize:$$BePaginMix.pageNumVal ? Number($$BePaginMix.pageNumVal.split('/')[0]) : $$BePaginProps.pageSize
                 }
-                ctx.emit('change',resData);
+                 ctx.emit('changePage',resData);
             }
         }
         onMounted(()=>{
@@ -308,12 +309,13 @@ import {
       return{
           pagerMix:$$BePaginMix,
           pagerProps:$$BePaginProps,
+          // frontList,
           quickprevIconClass,
           hoverPreIconClass,
           quicknextIconClass,
           hoverNextIconClass,
           pagers,
-          pagersDynamic,
+          // pagersDynamic,
           showPrevMore,
           showNextMore,
           maxPageNum,

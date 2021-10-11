@@ -4,6 +4,7 @@ import '../../../assets/style/be-pager.scss';
 import {getUuid} from "../../../utils/common"
 import {
     defineComponent,
+    getCurrentInstance,
     provide,
     ref, computed, onMounted, onUnmounted, watchEffect, watch, reactive
 } from "vue";
@@ -96,7 +97,8 @@ export default defineComponent({
     },
     setup(props,ctx){
         let jumpPage = ref('')
-
+        const curInst = getCurrentInstance()
+        console.log(curInst)
         let pageParamsFront = reactive({pageCount:0})
         // 每页显示数量
         let pageNumVal = ref('')
@@ -106,7 +108,7 @@ export default defineComponent({
          * @public
          */
         const jumpTo = (value:number | string):void => {
-           // this.$refs.pager.onPagerClick(null,value)
+            curInst.refs.pager.onPagerClick(null,value)
         }
 
         // 坑，直接把props给provide，放到对象里会失去响应式
@@ -127,13 +129,15 @@ export default defineComponent({
         const handleEnterEvn = (e:KeyboardEvent):void =>{
             if(e.key === 'Enter' && e.target !== null){
                 const pageCount:number = props.pageCount ? props.pageCount : 0
-                const total:number = props.isFront ? pageParamsFront.pageCount : pageCount
+                const maxPageNum = Math.ceil(pageCount / Number(props.pageSize))
+                const total = props.isFront ? pageParamsFront.pageCount : maxPageNum
                 const value:string = (e.target as HTMLInputElement).value
                 // 只处理小于最大页码的正整数
                 if(/^\d+$/.test(value) && Number(value) <= total){
                     jumpTo(value)
                 }else{
                     (e.target as HTMLInputElement).value = ''
+                    debugger
                 }
             }
         }
@@ -149,7 +153,7 @@ export default defineComponent({
          * @param {Object} data - 分页参数
          */
         const handleChange = (data:any):void =>{
-            ctx.emit('change',data)
+             ctx.emit('changePage',data)
         }
         /**
          * 前端分页数据更新
@@ -187,9 +191,10 @@ export default defineComponent({
         const pageInfoComponent =  ():JSX.Element | undefined =>{
             if(props.isDynamic){return}
             const pageCount:number = props.pageCount ? props.pageCount : 0
-            const total = props.isFront ? pageParamsFront.pageCount : pageCount
+            const maxPageNum = Math.ceil(pageCount / Number(props.pageSize))
+            const total = props.isFront ? pageParamsFront.pageCount : maxPageNum
             return (
-                <span class = 'be-pager-info'>第{props.currentPage >total ? total : props.currentPage }页/共{total}页</span>
+                <span class = 'be-pager-info'>第{props.currentPage > total ? total : props.currentPage }页/共{total}页</span>
             )
         }
         /**
@@ -215,7 +220,7 @@ export default defineComponent({
         return ()=>{
             // 定义布局渲染列表
             let renderLsit = {
-                page:(<Pager ref='pager' {...{onUpdatePage: handleUpdatePage,onChange:handleChange,onGetPageCount:getPageCount}}>
+                page:(<Pager ref='pager' {...{onUpdatePage: handleUpdatePage,onChangePage:handleChange,onGetPageCount:getPageCount}}>
                 </Pager>),
                 jump:pageJumpComponent.call(this),
                 info:pageInfoComponent.call(this),

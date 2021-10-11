@@ -46,7 +46,7 @@
                             :pageSize="pageParams.pageSize"
                            :pageCount="pageParams.total"
                            :pagerShowCount="5"
-                           @change="pageChange"
+                           @changePage="pageChange"
                            :currentPage="pageParams.currentPage">
             </be-pagination>
         </div>
@@ -121,7 +121,7 @@ export default {
             currentPage: 1,
             pageNum: 1,
             pageSize: 5,
-            total: 100
+            total: 50
         },
     }
 
@@ -139,6 +139,7 @@ export default {
   },
   methods:{
       pageChange(data){
+        console.log(data)
           this.pageParams.currentPage = data.currentPage
       },
       customRender(){
