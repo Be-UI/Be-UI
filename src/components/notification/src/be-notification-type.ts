@@ -30,5 +30,4 @@ export type ItInstanceMap = {
 }
 export interface INotfiy extends ComponentInternalInstance {
     uid: number
-
 }

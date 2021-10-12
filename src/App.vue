@@ -42,15 +42,93 @@
         </be-button>
         <div style="margin-top: 10px">
             <!--  layout,isFront,pageData,isDynamic,disabledJump,disabled    //:pageSize="pageParams.pageSize"-->
-            <be-pagination
-                            :pageSize="pageParams.pageSize"
+<!--            <be-pagination
+                           :pageSize="pageParams.pageSize"
                            :pageCount="pageParams.total"
                            :pagerShowCount="5"
                            @changePage="pageChange"
                            :currentPage="pageParams.currentPage">
+&lt;!&ndash;                <template #prev>
+                    <be-button
+                        @click="test"
+                        preIcon="delete"
+                        nextIcon="delete"
+                        type="warning "
+                        size="large">
+                        测试
+                    </be-button>
+                </template>
+                <template #next>
+                    <be-button
+                        @click="test"
+                        preIcon="delete"
+                        nextIcon="delete"
+                        type="warning "
+                        size="large">
+                        测试
+                    </be-button>
+                </template>&ndash;&gt;
+            </be-pagination>-->
+<!--            <be-pagination
+                :pageSize="pageParams.pageSize"
+                :pageCount="pageParams.total"
+                isDynamic
+                :pagerShowCount="5"
+                @changePage="pageChange"
+                :currentPage="pageParams.currentPage">
+                <template #prev>
+                    <be-button
+                        @click="test"
+                        preIcon="delete"
+                        nextIcon="delete"
+                        type="warning "
+                        size="large">
+                        测试
+                    </be-button>
+                </template>
+                <template #next>
+                    <be-button
+                        @click="test"
+                        preIcon="delete"
+                        nextIcon="delete"
+                        type="warning "
+                        size="large">
+                        测试
+                    </be-button>
+                </template>
+            </be-pagination>-->
+            <be-pagination
+                :pageSize="pageParams.pageSize"
+                :pageCount="pageParams.total"
+                :pagerShowCount="5"
+                @changePage="pageChange"
+                @updatePage="updatePage"
+                @updateNum = 'updateNum'
+                :page-data="pageData"
+                isFront
+                :currentPage="pageParams.currentPage">
+                <template #prev>
+                    <be-button
+                        @click="test"
+                        preIcon="delete"
+                        nextIcon="delete"
+                        type="warning "
+                        size="large">
+                        测试
+                    </be-button>
+                </template>
+                <template #next>
+                    <be-button
+                        @click="test"
+                        preIcon="delete"
+                        nextIcon="delete"
+                        type="warning "
+                        size="large">
+                        测试
+                    </be-button>
+                </template>
             </be-pagination>
         </div>
-
     </div>
 
 <!--        <div style="width:100px;height: 30px;background: #4F62A7" id="qwq">cesas</div>
@@ -86,7 +164,7 @@
           </template>-->
         <template #body>
           <div slot="body" class="plus-dialog-body">
-            这是一个弹窗哦 么么么
+            这是一个弹窗哦
           </div>
         </template>
         <template #footer>
@@ -117,6 +195,7 @@ export default {
       isLoading:true,
       showDialog:false,
       loadingInst:null,
+      pageData:[],
         pageParams: {
             currentPage: 1,
             pageNum: 1,
@@ -135,12 +214,20 @@ export default {
     createPopper(tr, po, {
           placement: 'top',
     })*/
-
+      for(let i = 0;i<50;i ++){
+          this.pageData.push({num:i})
+      }
   },
   methods:{
       pageChange(data){
         console.log(data)
           this.pageParams.currentPage = data.currentPage
+      },
+      updatePage(data){
+          console.log(data)
+      },
+      updateNum(data){
+          console.log(data)
       },
       customRender(){
           return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)

@@ -1,6 +1,6 @@
 <template>
   <div>
-<!--    <slot name="prev"></slot>-->
+    <!--***************** 上页按钮 **********************-->
     <ul class="be-pager" :class="{'be-pager__disabled':pagerProps.disabled}">
       <li @click="prePage"><be-icon icon="left"></be-icon></li>
     </ul>
@@ -38,9 +38,6 @@
                  :color="hoverNextIconClass"></be-icon>
       </li>
       <!--最后一页-->
-      {{maxPageNum}}
-      {{pagerProps.currentPage}}
-      {{pagerMix.pageParamsFront.pageCount}}
       <li :class=" { active: pagerProps.currentPage < maxPageNum ? false : true,
                     disabled:pagerProps.disabled }"
           class="number"
@@ -48,21 +45,21 @@
       </li>
     </ul>
     <!--***************** 动态分页 **********************-->
-<!--    <ul @click="onPagerClick" class="be-pager" :class="{'be-pager__disabled':pagerProps.disabled}" v-else-if="pagerProps.isDynamic && !pagerProps.isFront">
+    <ul @click="onPagerClick" class="be-pager" :class="{'be-pager__disabled':pagerProps.disabled}" v-else-if="pagerProps.isDynamic && !pagerProps.isFront">
       <li :class="{ active: pagerProps.currentPage === pager, disabled:pagerProps.disabled }"
           :key="pager"
           class="number"
           v-for="pager in pagersDynamic">{{ pager }}
       </li>
-    </ul>-->
+    </ul>
     <!--***************** 前端分页 **********************-->
-<!--    <ul @click="onPagerClick" class="be-pager" :class="{'be-pager__disabled':pagerProps.disabled}" v-else-if="!pagerProps.isDynamic && pagerProps.isFront">
-      &lt;!&ndash;第一页&ndash;&gt;
+    <ul @click="onPagerClick" class="be-pager" :class="{'be-pager__disabled':pagerProps.disabled}" v-else-if="!pagerProps.isDynamic && pagerProps.isFront">
+      <!--第一页-->
       <li :class="{ active: pagerProps.currentPage === 1, disabled:pagerProps.disabled }"
           class="number"
-          v-if="pagerMix.pageParamsFront.pageCount > 0">1
+          v-if="pagerMix.pageParamsFront.maxPageNum > 0">1
       </li>
-      &lt;!&ndash;更多上页缩略翻页&ndash;&gt;
+      <!--更多上页缩略翻页-->
       <li :class="[quickprevIconClass, { disabled:pagerProps.disabled }]"
           @mouseenter="onMouseenter('left')"
           @mouseleave="hoverPreIconClass = '#303133';quickprevIconClass = 'more'"
@@ -77,7 +74,7 @@
           class="number"
           v-for="pager in frontList">{{ pager }}
       </li>
-      &lt;!&ndash;更多下页缩略翻页&ndash;&gt;
+      <!--更多下页缩略翻页-->
       <li :class="[quicknextIconClass, { disabled:pagerProps.disabled }]"
           @mouseenter="onMouseenter('right')"
           @mouseleave="hoverNextIconClass = '#303133';quicknextIconClass = 'more'"
@@ -87,71 +84,68 @@
                  class="more btn-quicknext"
                  :color="hoverNextIconClass"></be-icon>
       </li>
-      &lt;!&ndash;最后一页&ndash;&gt;
-      <li :class=" { active: pagerProps.currentPage < maxPageNum ? (pagerProps.currentPage === pagerMix.pageParamsFront.pageCount) : (maxPageNum === pagerMix.pageParamsFront.pageCount),
+      <!--最后一页-->
+      <li :class=" { active: pagerProps.currentPage < maxPageNum ? (pagerProps.currentPage === pagerMix.pageParamsFront.maxPageNum) : (maxPageNum === pagerMix.pageParamsFront.maxPageNum),
                     disabled:pagerProps.disabled }"
           class="number"
-          v-if="pagerMix.pageParamsFront.pageCount > 1">{{ pagerMix.pageParamsFront.pageCount }}
+          v-if="pagerMix.pageParamsFront.maxPageNum > 1">{{ pagerMix.pageParamsFront.maxPageNum }}
       </li>
-    </ul>-->
+    </ul>
+      <!--***************** 下页按钮 **********************-->
     <ul class="be-pager" :class="{'be-pager__disabled':pagerProps.disabled}">
       <li @click="nextPage"><be-icon icon="right"></be-icon></li>
     </ul>
-<!--    <slot name="next"></slot>-->
   </div>
-
 </template>
 
 <script lang="ts">
 import {
     defineComponent,
     inject,
-    ref, computed, onMounted, onUnmounted, watchEffect, watch, reactive
+    ref, onMounted, watchEffect, watch, Ref
 } from "vue";
   import {pagersDynamicList} from "./pager-dynamic";
   import {pagersList} from "./pager-ordinary";
   import {pagerFront} from "./pager-front";
-  import {IPageProvide} from "./be-pagenation-type";
+import {IPageData, IPageProvide, IPagesFront} from "./be-pagenation-type";
   export default defineComponent({
     name: 'BePager',
     setup(props,ctx){
+        /************************************** 翻页事件方法 ******************************/
         const $$BePaginMix  = inject('$$BePaginMix') as IPageProvide
         const $$BePaginProps = inject('$$BePaginProps') as IPageProvide
-        let maxPageNum = ref(0)
-        let current = ref( null)
-        let showPrevMore = ref( false)
-        let showNextMore = ref( false)
-        let quicknextIconClass = ref( 'more')
-        let quickprevIconClass = ref( 'more')
-        let hoverNextIconClass = ref( '#303133')
-        let hoverPreIconClass = ref( '#303133')
-        let pagers = pagersList($$BePaginProps,maxPageNum,showPrevMore,showNextMore)
-        //let pagersDynamic = pagersDynamicList($$BePaginProps)
-        //let pagerFrontParam = pagerFront($$BePaginProps,$$BePaginMix,maxPageNum,showPrevMore,showNextMore,ctx)
-        //let sliceList = pagerFrontParam.sliceList
-        //let frontList = pagerFrontParam.frontList
-        //let nextPageFront = pagerFrontParam.nextPageFront
-        //let prePageFront = pagerFrontParam.prePageFront
-        watchEffect(()=>{
-            if(!showPrevMore.value){
-                quickprevIconClass.value = 'more';
+        // 最大页码
+        let maxPageNum = ref<number>(0)
+        // 下页缩略显示控制
+        let showPrevMore = ref<boolean>( false)
+        // 上页缩略显示控制
+        let showNextMore = ref<boolean>( false)
+        // 处理获得常规分页页码数据
+        let pagers:Array<number> = pagersList($$BePaginProps,maxPageNum,showPrevMore,showNextMore).value
+        // 处理获得动态分页页码数据
+        let pagersDynamic:Array<number> = pagersDynamicList($$BePaginProps).value
+        // 处理获得前端分页页码数据、分页切片、前端分页的前后翻页方法
+        let pagerFrontParam:IPagesFront | undefined = pagerFront($$BePaginProps,$$BePaginMix,maxPageNum,showPrevMore,showNextMore,ctx)
+        let sliceList:Map<any,any> | null= pagerFrontParam ? pagerFrontParam.sliceList : null
+        let frontList:Array<number> | null =  pagerFrontParam ? pagerFrontParam.frontList : null
+        let nextPageFront:Function | null =  pagerFrontParam ? pagerFrontParam.nextPageFront : null
+        let prePageFront:Function | null =   pagerFrontParam ? pagerFrontParam.prePageFront : null
+        /**
+         * 缩略翻页 可能会超出页数范围，这里做限制
+         * @param {number} newPage - 當前頁
+         * @param {Ref} maxPageNum - 最大頁數
+         * @param {IPageProvide} $$BePaginProps - provide/inject的 page Props
+         */
+        const isNaNPage = (newPage:number,maxPageNum:Ref,$$BePaginProps:IPageProvide):void=>{
+            if (!isNaN(newPage)) {
+                if (newPage < 1) {
+                    newPage = 1;
+                }
+                if (newPage > maxPageNum.value && !$$BePaginProps.isDynamic) {
+                    newPage = maxPageNum.value;
+                }
             }
-        })
-        watchEffect(()=>{
-            if(!showNextMore.value){
-                quicknextIconClass.value = 'more';
-            }
-        })
-        watch(showPrevMore,(val)=>{
-            if (!val) {
-                quickprevIconClass.value = 'more';
-            }
-        })
-        watch(showNextMore,(val)=>{
-            if (!val) {
-                quicknextIconClass.value = 'more';
-            }
-        })
+        }
         /**
          * 翻页事件
          * @param {String} type - 类型
@@ -166,38 +160,92 @@ import {
             }
             let newPage:number = 0
             if(type === 'next'){
-                newPage = currentPage >= maxPageNum.value ? currentPage : currentPage + 1
+                newPage = $$BePaginProps.isDynamic ? currentPage + 1 : (currentPage >= maxPageNum.value ? currentPage : currentPage + 1)
             }else{
                 newPage = currentPage - 1
             }
             // 点击缩略翻页时的偏移量
             // 缩略翻页 可能会超出页数范围，这里做限制
-            if (!isNaN(newPage)) {
-                if (newPage < 1) {
-                    newPage = 1;
-                }
-                if (newPage > maxPageNum.value) {
-                    newPage = maxPageNum.value;
-                }
-            }
+            isNaNPage(newPage,maxPageNum,$$BePaginProps)
+
             if (newPage !== currentPage) {
                 // 调用前端分页方法
                 if ($$BePaginProps.isFront){
                     if(type === 'next'){
-                        //nextPageFront()
+                        nextPageFront && nextPageFront()
                     }else{
-                        //prePageFront()
+                        prePageFront && prePageFront()
                     }
                 }
                 /**
                  * 返回新页码
                  */
-                const resData =  {
+                const resData:IPageData =  {
                     currentPage:newPage,
-                    pageCount:$$BePaginProps.isFront ? $$BePaginMix.pageParamsFront.pageCount : $$BePaginProps.pageCount,
+                    pageCount:$$BePaginProps.isFront ? $$BePaginMix.pageParamsFront.maxPageNum : $$BePaginProps.pageCount,
                     pageSize:$$BePaginMix.pageNumVal ? Number($$BePaginMix.pageNumVal.split('/')[0]) : $$BePaginProps.pageSize
                 }
                  ctx.emit('changePage',resData);
+            }
+        }
+        /**
+         * 页码点击、跳转事件
+         * @param {Event} event - 事件对象
+         * @param {number | string} jump - 是否时输入指定跳转
+         */
+        const onPagerClick = (event:MouseEvent | null,jump:number | string):void => {
+            let currentPage:number = 0
+            // 动态分页不需要处理
+            if($$BePaginProps.isDynamic){
+                currentPage = Number($$BePaginProps.currentPage)
+            }else{
+                currentPage = Number($$BePaginProps.currentPage) > maxPageNum.value ? maxPageNum.value : Number($$BePaginProps.currentPage);
+            }
+            let newPage:number | string = jump;
+            if(!jump){
+                let target = event?.target as HTMLElement;
+                // 禁用或触发为ul标签 阻止事件
+                if (target.tagName === 'UL' || $$BePaginProps.disabled) {
+                    return;
+                }
+                newPage = Number(target.textContent);
+                // 点击缩略翻页时的偏移量
+                const pagerCountOffset = $$BePaginProps.pagerShowCount;
+                // 判断点击的元素class 是否为缩略翻页，并设置对应偏移页码 newPage
+                if (target.className && Object.prototype.toString.call(target.className) === '[object String]' && target.className.indexOf('more') !== -1) {
+                    if (target.className.indexOf('quickprev') !== -1) {
+                        newPage = currentPage - pagerCountOffset;
+                    } else if (target.className.indexOf('quicknext') !== -1) {
+                        newPage = currentPage + pagerCountOffset;
+                    }
+                }
+                const classNameSVG = event?.target as SVGAElement;
+                if (target.className && Object.prototype.toString.call(target.className) === '[object SVGAnimatedString]'
+                    && classNameSVG.className.baseVal && classNameSVG.className.baseVal.toString().indexOf('be-icon') !== -1) {
+                    if (target.parentElement && target.parentElement.className.indexOf('quickprev') !== -1) {
+                        newPage = currentPage - pagerCountOffset;
+                    } else if (target.parentElement &&  target.parentElement.className.indexOf('quicknext') !== -1) {
+                        newPage = currentPage + pagerCountOffset;
+                    }
+                }
+            }
+
+            // 缩略翻页 可能会超出页数范围，这里做限制
+            isNaNPage(Number(newPage),maxPageNum,$$BePaginProps)
+            if (newPage !== currentPage) {
+                // 前端分页返回分页数据
+                if ($$BePaginProps.isFront && sliceList){
+                    ctx.emit("updatePage", {data: sliceList.get(Number(newPage))});
+                }
+                /**
+                 * 返回新页码
+                 */
+                const resData:IPageData =  {
+                    currentPage:Number(newPage),
+                    pageCount:$$BePaginProps.isFront ? $$BePaginMix.pageParamsFront.maxPageNum : $$BePaginProps.pageCount,
+                    pageSize:$$BePaginMix.pageNumVal ? Number($$BePaginMix.pageNumVal.split('/')[0]) : $$BePaginProps.pageSize
+                }
+                ctx.emit('changePage',resData);
             }
         }
         /**
@@ -214,7 +262,29 @@ import {
             if ($$BePaginProps.disabled) return;
             changePage('next')
         }
-
+        /************************************** 上下缩略翻页样式控制 ******************************/
+        let quicknextIconClass = ref<string>( 'more')
+        let quickprevIconClass = ref<string>( 'more')
+        let hoverNextIconClass = ref<string>( '#303133')
+        let hoverPreIconClass = ref<string>( '#303133')
+        watchEffect(()=>{
+            if(!showPrevMore.value){
+                quickprevIconClass.value = 'more';
+            }
+        })
+        watchEffect(()=>{
+            if(!showNextMore.value){
+                quicknextIconClass.value = 'more';
+            }
+        })
+        watch([showNextMore,showPrevMore],([valNext,valPre])=>{
+            if (!valNext) {
+                quicknextIconClass.value = 'more';
+            }
+            if (!valPre) {
+                quickprevIconClass.value = 'more';
+            }
+        })
         /**
          * 鼠标移入上下页缩略翻页按钮的方法 改变样式
          * @param {String} direction - 方向
@@ -230,73 +300,6 @@ import {
                 quicknextIconClass.value = 'page-last';
             }
         }
-        /**
-         * 页码点击、跳转事件
-         * @param {Event} event - 事件对象
-         *
-         */
-        const onPagerClick = (event:MouseEvent,jump:number | string):void => {
-            let currentPage = 0
-            // 动态分页不需要处理
-            if($$BePaginProps.isDynamic){
-                currentPage = Number($$BePaginProps.currentPage)
-            }else{
-                currentPage = Number($$BePaginProps.currentPage) > maxPageNum.value ? maxPageNum.value : Number($$BePaginProps.currentPage);
-            }
-            let newPage = jump;
-            if(!jump){
-                const target = event.target as HTMLElement;
-                // 禁用或触发为ul标签 阻止事件
-                if (target.tagName === 'UL' || $$BePaginProps.disabled) {
-                    return;
-                }
-                newPage = Number(target.textContent);
-                // 点击缩略翻页时的偏移量
-                const pagerCountOffset = $$BePaginProps.pagerShowCount;
-                // 判断点击的元素class 是否为缩略翻页，并设置对应偏移页码 newPage
-                if (target.className && Object.prototype.toString.call(target.className) === '[object String]' && target.className.indexOf('more') !== -1) {
-                    if (target.className.indexOf('quickprev') !== -1) {
-                        newPage = currentPage - pagerCountOffset;
-                    } else if (target.className.indexOf('quicknext') !== -1) {
-                        newPage = currentPage + pagerCountOffset;
-                    }
-                }
-                const classNameSVG = target
-                if (target.className && Object.prototype.toString.call(target.className) === '[object SVGAnimatedString]'
-                    && classNameSVG.className.baseVal && classNameSVG.className.baseVal.toString().indexOf('be-icon') !== -1) {
-                    if (target.parentElement && target.parentElement.className.indexOf('quickprev') !== -1) {
-                        newPage = currentPage - pagerCountOffset;
-                    } else if (target.parentElement &&  target.parentElement.className.indexOf('quicknext') !== -1) {
-                        newPage = currentPage + pagerCountOffset;
-                    }
-                }
-            }
-
-            // 缩略翻页 可能会超出页数范围，这里做限制
-            if (!isNaN(Number(newPage))) {
-                if (newPage < 1) {
-                    newPage = 1;
-                }
-                if (newPage > maxPageNum.value) {
-                    newPage = maxPageNum.value;
-                }
-            }
-            if (newPage !== currentPage) {
-                // 前端分页返回分页数据
-                if ($$BePaginProps.isFront){
-                    // ctx.emit("updatePage", {data: sliceList.get(newPage)});
-                }
-                /**
-                 * 返回新页码
-                 */
-                const resData =  {
-                    currentPage:Number(newPage),
-                    pageCount:$$BePaginProps.isFront ? $$BePaginMix.pageParamsFront.pageCount : $$BePaginProps.pageCount,
-                    pageSize:$$BePaginMix.pageNumVal ? Number($$BePaginMix.pageNumVal.split('/')[0]) : $$BePaginProps.pageSize
-                }
-                 ctx.emit('changePage',resData);
-            }
-        }
         onMounted(()=>{
             if($$BePaginProps.isFront){
                 const pageSize = $$BePaginMix.pageNumVal ? Number($$BePaginMix.pageNumVal.split('/')[0]) : $$BePaginProps.pageSize
@@ -309,13 +312,13 @@ import {
       return{
           pagerMix:$$BePaginMix,
           pagerProps:$$BePaginProps,
-          // frontList,
+          frontList,
           quickprevIconClass,
           hoverPreIconClass,
           quicknextIconClass,
           hoverNextIconClass,
           pagers,
-          // pagersDynamic,
+          pagersDynamic,
           showPrevMore,
           showNextMore,
           maxPageNum,

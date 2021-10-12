@@ -6,8 +6,19 @@ import {
     defineComponent,
     getCurrentInstance,
     provide,
-    ref, computed, onMounted, onUnmounted, watchEffect, watch, reactive
+    ref,
+    onMounted,
+    reactive
 } from "vue";
+import {
+    IPage,
+    IPageData,
+    IPageParamsFront,
+    IPagerEvt,
+    IPagerInst,
+    IPagerMix,
+    IPagerRenderLsit
+} from "./be-pagenation-type";
 
 export default defineComponent({
     name: 'BePagination',
@@ -72,6 +83,13 @@ export default defineComponent({
             default: false,
         },
         /**
+         * 常規分頁
+         */
+        isOrdianry: {
+            type: Boolean,
+            default: true,
+        },
+        /**
          * 前端分页数据，开启前端分页后，会针对这些数据进行切片
          * 每翻页，则会返回对于页数据
          */
@@ -85,7 +103,7 @@ export default defineComponent({
          */
         layout:{
             type: Array,
-            default: ()=>['page','jump','info'],
+            default: ()=>['prev','page','jump','info','next'],
         },
         /**
          * 是否开启前端分页
@@ -96,32 +114,19 @@ export default defineComponent({
         },
     },
     setup(props,ctx){
-        let jumpPage = ref('')
-        const curInst = getCurrentInstance()
-        console.log(curInst)
-        let pageParamsFront = reactive({pageCount:0})
-        // 每页显示数量
-        let pageNumVal = ref('')
+        const curInst = getCurrentInstance() as IPage
+        let pageParamsFront = reactive<IPageParamsFront>({maxPageNum:0})
+        /********************************* 输入指定页码跳转 *****************************************/
+        let jumpPage = ref<string>('')
         /**
          * 分页跳转方法
          * @param {Number | String} value - 跳转页码
          * @public
          */
         const jumpTo = (value:number | string):void => {
-            curInst.refs.pager.onPagerClick(null,value)
+            let curInstRefs = curInst.refs.pager as IPagerInst
+            curInstRefs.onPagerClick(null,value)
         }
-
-        // 坑，直接把props给provide，放到对象里会失去响应式
-        provide('$$BePaginProps', props)
-        let pagerMix = reactive({
-            jumpPage:jumpPage.value,
-            pageParamsFront:pageParamsFront,
-            pageNumVal:pageNumVal.value
-        })
-        provide('$$BePaginMix',pagerMix)
-
-
-
         /**
          * 分页参数传递方法
          * @param {KeyboardEvent} e - 输入事件
@@ -129,44 +134,25 @@ export default defineComponent({
         const handleEnterEvn = (e:KeyboardEvent):void =>{
             if(e.key === 'Enter' && e.target !== null){
                 const pageCount:number = props.pageCount ? props.pageCount : 0
-                const maxPageNum = Math.ceil(pageCount / Number(props.pageSize))
-                const total = props.isFront ? pageParamsFront.pageCount : maxPageNum
+                const maxPageNum:number = Math.ceil(pageCount / Number(props.pageSize))
+                const total:number = props.isFront ? pageParamsFront.maxPageNum : maxPageNum
                 const value:string = (e.target as HTMLInputElement).value
                 // 只处理小于最大页码的正整数
                 if(/^\d+$/.test(value) && Number(value) <= total){
                     jumpTo(value)
                 }else{
                     (e.target as HTMLInputElement).value = ''
-                    debugger
                 }
             }
         }
-        /**
-         * 前端分页数据传递方法
-         * @param {Object} data - 分页数据
-         */
-        const handleUpdatePage = (data:any):void =>{
-            ctx.emit('updatePage',data)
-        }
-        /**
-         * 分页参数传递方法
-         * @param {Object} data - 分页参数
-         */
-        const handleChange = (data:any):void =>{
-             ctx.emit('changePage',data)
-        }
-        /**
-         * 前端分页数据更新
-         * @param {Object} data - 分页参数
-         */
-         const getPageCount = (data:any):void =>{
-            pageParamsFront = data
-        }
+        /********************************* 每页显示数量设置 *****************************************/
+        // 每页显示数量
+        let pageNumVal = ref<string>('')
         /**
          * 生成每页显示数量设置列表
          * @param {Function} cb - input-select的回调方法
          */
-        const createPageNumList = (data:any,cb:Function):void=>{
+       /* const createPageNumList = (data:any,cb:Function):void=>{
             let list:Array<any> = []
             const pageCount:number = props.pageCount ? props.pageCount : 0
             const total = parseInt(String((props.isFront ? props.pageData.length : pageCount) / 10)) * 10
@@ -175,15 +161,42 @@ export default defineComponent({
             }
             cb(list,'label','id')
         }
-        /**
+        /!**
          * 获取每页显示数量设置类别的选择结果
          * @param {Object} data - 页面设置数据
          * @public
-         */
+         *!/
         const getPageNum = (data:any):void=>{
-           pageNumVal.value = data.label + '/页'
+            pageNumVal.value = data.label + '/页'
             ctx.emit('updateNum',data.label)
+        }*/
+        onMounted(()=>{
+            pageNumVal.value = props.pageSize + '/页' //disabled
+        })
+        /********************************* 分页事件emit *****************************************/
+        /**
+         * 前端分页 数据传递方法
+         * @param {Object} data - 分页数据
+         */
+        const handleUpdatePage = (data:Array<number>):void =>{
+            ctx.emit('updatePage',data)
         }
+        /**
+         * 前端分页数据更新
+         * @param {Object} data - 分页参数
+         */
+        const getPageCount = (data:IPageParamsFront):void =>{
+            pageParamsFront = data
+        }
+        /**
+         * 分页参数传递方法
+         * @param {Object} data - 分页参数
+         */
+        const handleChange = (data:IPageData):void =>{
+             ctx.emit('changePage',data)
+        }
+
+        /********************************* 分页 内置渲染组件，页码信息、输入跳转 *****************************************/
         /**
          * 页码信息组件
          * @return {JSX.Element | undefined}
@@ -191,8 +204,8 @@ export default defineComponent({
         const pageInfoComponent =  ():JSX.Element | undefined =>{
             if(props.isDynamic){return}
             const pageCount:number = props.pageCount ? props.pageCount : 0
-            const maxPageNum = Math.ceil(pageCount / Number(props.pageSize))
-            const total = props.isFront ? pageParamsFront.pageCount : maxPageNum
+            const maxPageNum:number = Math.ceil(pageCount / Number(props.pageSize))
+            const total:number = props.isFront ? pageParamsFront.maxPageNum : maxPageNum
             return (
                 <span class = 'be-pager-info'>第{props.currentPage > total ? total : props.currentPage }页/共{total}页</span>
             )
@@ -202,7 +215,7 @@ export default defineComponent({
          * @return {JSX.Element}
          */
         const pageJumpComponent =  ():JSX.Element | undefined => {
-            const disabled = props.disabled ? true : (props.disabledJump ? true : false)
+            const disabled:boolean = props.disabled ? true : (props.disabledJump ? true : false)
             return (
                 <div class = 'be-pager-jump'>
                     跳至<input
@@ -214,18 +227,33 @@ export default defineComponent({
                 </div>
             )
         }
-        onMounted(()=>{
-           pageNumVal.value = props.pageSize + '/页' //disabled
+        /********************************* provide 注入 *****************************************/
+        // 坑，直接把props给provide，放到对象里会失去响应式
+        provide('$$BePaginProps', props)
+        let pagerMix = reactive<IPagerMix>({
+            jumpPage:jumpPage.value,
+            pageParamsFront:pageParamsFront,
+            pageNumVal:pageNumVal.value
         })
+        provide('$$BePaginMix',pagerMix)
+
         return ()=>{
+            // 定义传入事件（必须on开头，原因请阅读vue3 v-bind 解析）
+            const onEvt:IPagerEvt = {
+                onUpdatePage: handleUpdatePage,
+                onChangePage:handleChange,
+                onGetPageCount:getPageCount
+            }
+            const nextSlot:Function  = curInst.slots.next ? curInst.slots.next : ()=>{}
+            const prevSlot:Function  = curInst.slots.prev ? curInst.slots.prev : ()=>{}
             // 定义布局渲染列表
-            let renderLsit = {
-                page:(<Pager ref='pager' {...{onUpdatePage: handleUpdatePage,onChangePage:handleChange,onGetPageCount:getPageCount}}>
-                </Pager>),
+            let renderLsit:IPagerRenderLsit= {
+                page:(<Pager ref='pager' {...onEvt}></Pager>),
                 jump:pageJumpComponent.call(this),
                 info:pageInfoComponent.call(this),
-               /* next:this.$scopedSlots.next(),
-                prev:this.$scopedSlots.prev()*/
+                next:nextSlot(),
+                prev:prevSlot(),
+                pNum:undefined
             }
             // 分动态布局才支持页面数量显示设置
             /*if(!this.isDynamic){
