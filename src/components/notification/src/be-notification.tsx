@@ -125,6 +125,9 @@ export default defineComponent({
          * @param h
          */
         const renderBody = function (h:any) {
+            const evt = {
+                onClick:(event:Event) => close(event)
+            }
             return (
                 h(<div class={`be-notification-container be-notification-container__${option.placement}`}>
                     <div class="be-notification-title">
@@ -139,7 +142,7 @@ export default defineComponent({
                             {/**@slot 弹窗头部按钮**/}
                             <div>
                                 {option.closeRender ? option.closeRender() :
-                                    <BeIcon icon="delete" onClick={(event:Event) => close(event)}></BeIcon>}
+                                    <BeIcon icon="delete" {...evt}></BeIcon>}
                             </div>
                         </div>
                     </div>
