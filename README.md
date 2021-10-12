@@ -26,12 +26,16 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
+
 组件迁移 重构  
+be-input
 be-pager 重构完成
 常规分页 （修改完成，pager-ordinary重构完成）  
 动态分页 （部分修改完成，差每页显示设置，pager-dynamic重构完成）  
 前端分页 （部分修改完成，差每页显示设置，pager-front重构完成）  
-be-input
+新组件
+select
+InputNumber
 ## 长期排期
 1.服务式访问的全局绑定  
 2.组件引用编写
