@@ -88,7 +88,7 @@ export default defineComponent({
         /**
          * 前置图标 （完成）
          */
-        preIcon: {
+        prevIcon: {
             type: String,
             default: ''
         },
@@ -117,10 +117,10 @@ export default defineComponent({
         const disabledStyle =  computed(()=>{
             return (props.disabled || props.loading) ? "be-button__inner__disabled" : ""
         })
-        const preIconStyle =  computed(()=>{
+        const prevIconStyle =  computed(()=>{
             if(props.loading){ return 'refresh'}
-            if(props.preIcon){
-                return props.preIcon
+            if(props.prevIcon){
+                return props.prevIcon
             }else{
                 return ''
             }
@@ -141,15 +141,15 @@ export default defineComponent({
             btnStyle,
             borderStyle,
             disabledStyle,
-            preIconStyle,
+            prevIconStyle,
             nextIconStyle,
             //listeners,
 
         }
     },
     render(){
-        const preIconRender = !this.preIcon ? ''
-            :(<be-icon icon={this.preIconStyle} spin = {this.loading} custom-class={`be-button-preIcon be-button-preIcon__${this.type}`}> </be-icon>);
+        const prevIconRender = !this.prevIcon ? ''
+            :(<be-icon icon={this.prevIconStyle} spin = {this.loading} custom-class={`be-button-prevIcon be-button-prevIcon__${this.type}`}> </be-icon>);
 
         const nextIconRender = !this.nextIcon ? ''
             :(<be-icon icon={this.nextIconStyle} custom-class={`be-button-nextIcon be-button-nextIcon__${this.type}`}> </be-icon>);
@@ -167,7 +167,7 @@ export default defineComponent({
                     ${this.customClass}`}
                     disabled={this.disabled || this.loading}>
                     <div class="be-button-body" style="margin: 0 auto;display: flex">
-                        {preIconRender}
+                        {prevIconRender}
                         <div class='be-button-slot' >{this.$slots.default()}</div>
                         {nextIconRender}
                     </div>

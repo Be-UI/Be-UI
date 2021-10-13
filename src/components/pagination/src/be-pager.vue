@@ -14,12 +14,12 @@
       <!--更多上页缩略翻页-->
       <li :class="[quickprevIconClass, { disabled:pagerProps.disabled }]"
           @mouseenter="onMouseenter('left')"
-          @mouseleave="hoverPreIconClass = '#303133';quickprevIconClass = 'more'"
+          @mouseleave="hoverprevIconClass = '#303133';quickprevIconClass = 'more'"
           v-if="showPrevMore">
         <be-icon :icon="quickprevIconClass"
                  class="more btn-quickprev"
                  @click.stop="onPagerClick"
-                 :color="hoverPreIconClass"></be-icon>
+                 :color="hoverprevIconClass"></be-icon>
       </li>
       <!--分页主体-->
       <li :class="{ active: pagerProps.currentPage === pager, disabled:pagerProps.disabled }"
@@ -62,12 +62,12 @@
       <!--更多上页缩略翻页-->
       <li :class="[quickprevIconClass, { disabled:pagerProps.disabled }]"
           @mouseenter="onMouseenter('left')"
-          @mouseleave="hoverPreIconClass = '#303133';quickprevIconClass = 'more'"
+          @mouseleave="hoverprevIconClass = '#303133';quickprevIconClass = 'more'"
           v-if="showPrevMore">
         <be-icon :icon="quickprevIconClass"
                  class="more btn-quickprev"
                  @click.stop="onPagerClick"
-                 :color="hoverPreIconClass"></be-icon>
+                 :color="hoverprevIconClass"></be-icon>
       </li>
       <li :class="{ active: pagerProps.currentPage === pager, disabled:pagerProps.disabled }"
           :key="pager"
@@ -266,7 +266,7 @@ import {IPageData, IPageProvide, IPagesFront} from "./be-pagenation-type";
         let quicknextIconClass = ref<string>( 'more')
         let quickprevIconClass = ref<string>( 'more')
         let hoverNextIconClass = ref<string>( '#303133')
-        let hoverPreIconClass = ref<string>( '#303133')
+        let hoverprevIconClass = ref<string>( '#303133')
         watchEffect(()=>{
             if(!showPrevMore.value){
                 quickprevIconClass.value = 'more';
@@ -293,7 +293,7 @@ import {IPageData, IPageProvide, IPagesFront} from "./be-pagenation-type";
         const onMouseenter = (direction:string):void =>{
             if ($$BePaginProps.disabled) return;
             if (direction === 'left') {
-                hoverPreIconClass.value = '#409EFF'
+                hoverprevIconClass.value = '#409EFF'
                 quickprevIconClass.value = 'page-first';
             } else {
                 hoverNextIconClass.value = '#409EFF'
@@ -314,7 +314,7 @@ import {IPageData, IPageProvide, IPagesFront} from "./be-pagenation-type";
           pagerProps:$$BePaginProps,
           frontList,
           quickprevIconClass,
-          hoverPreIconClass,
+          hoverprevIconClass,
           quicknextIconClass,
           hoverNextIconClass,
           pagers,

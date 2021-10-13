@@ -104,5 +104,5 @@
 </script>
 
 <style lang='scss'>
-@import 'src/assets/style/be-input';
+@import '../../../assets/style/be-input';
 </style>

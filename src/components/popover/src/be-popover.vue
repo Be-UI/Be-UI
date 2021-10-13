@@ -1,26 +1,30 @@
 <template>
-    <!--  <div v-click-outside="{handler:close,isDisabled:outsideDisabled}">-->
         <div :id="`be_popover_trigger${uid}`" aria-describedby="tooltip">
             <slot name="trigger"></slot>
         </div>
-      <teleport to="body">
-        <div class="be-popover"
-             v-click-outside="{handler:close,isDisabled:outsideDisabled}"
-             :class="customClass"
-             role="tooltip"
-             :id="`be_popover_${uid}`"
-             :key="`be_popover_${uid}`"
-             v-if="show"
-             :style="stylePopover">
-            <div class="be-popover-body" :id="`be_popover_body${uid}`">
-                <slot></slot>
-            </div>
-            <div :id="`be_popover_arrow${uid}`"
-                 :class="`be-popover-arrow`"
-                 v-if="raw">
-            </div>
-        </div>
-    </teleport>
+          <teleport to="body">
+<!--              <transition name="be-zoom-in-top">-->
+              <div class="be-popover"
+                   v-click-outside="{handler:close,isDisabled:outsideDisabled}"
+                   :class="`${animateClass} ${customClass}`"
+                   role="tooltip"
+                   :id="`be_popover_${uid}`"
+                   :key="`be_popover_${uid}`"
+                   v-if="show"
+                   :style="stylePopover">
+                  <div class="be-popover-body" :id="`be_popover_body${uid}`">
+                      <slot></slot>
+                  </div>
+                  <div :id="`be_popover_arrow${uid}`"
+                       :class="`be-popover-arrow`"
+                       v-if="raw">
+                  </div>
+              </div>
+<!--              </transition>-->
+          </teleport>
+
+
+
 </template>
 
 <script lang="ts">
@@ -155,6 +159,7 @@ export default defineComponent({
         let stylePopover: TPopoverStyle = reactive({
             left: '0px',
             top: '0px',
+            opacity: 0
         })
         // popover.js 实例缓存
         let popperJS:any = null
@@ -162,6 +167,7 @@ export default defineComponent({
          * 计算显示位置
          * @param {String} placement - 位置
          */
+        const animateClass = ref<string>('')
         const computePosition = (placement: string): void => {
             // 使用popover.js 对popover进行定位
             if (popperJS && popperJS.destroy) {
@@ -181,7 +187,7 @@ export default defineComponent({
                     {
                         name: 'flip',
                         options: {
-                            fallbackPlacements: ['top', 'right','bottom'],
+                            fallbackPlacements: ['top', 'bottom','right'],
                         },
                     },
                     {
@@ -204,6 +210,16 @@ export default defineComponent({
             }else{
                 popperJS = createPopper(triggerDom, popover, popoverOption);
             }
+            //stylePopover.opacity = 1
+            setTimeout(()=>{
+                debugger
+                animateClass.value = 'dialog-fade-enter-active'
+                nextTick(()=>{
+                    debugger
+                    stylePopover.opacity = 1
+                })
+
+            },2000)
 
         }
         /**
@@ -290,7 +306,9 @@ export default defineComponent({
                 triggerDom.removeEventListener('mouseleave', () => changeDisplay(false), false)
             }
         })
+
         return {
+            animateClass,
             uid: internalInstance.uid,
             stylePopover,
             outsideDisabled,

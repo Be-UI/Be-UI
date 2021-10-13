@@ -2,21 +2,19 @@
 .be-input {
   display: flex;
   align-items: center;
+  width: 100%;
+  background-color: $default;
+  border-radius: 3px;
+  border: 1px solid $infoHover;
 
+  &:hover {
+    border: 1px solid $infoHover;
+  }
   .be-input-body {
     display: flex;
-    align-items: center;
-    background-color: white;
-    border-radius: 3px;
-    border: 1px solid #dcdfe6;
-    width: 100%;
     padding: 0 5px;
     box-sizing: border-box;
-
-    &:hover {
-      border: 1px solid $infoHover;
-    }
-
+    align-items: center;
     .be-input__inner {
       height: 30px;
       line-height: 30px;
@@ -27,19 +25,19 @@
     }
 
     .be-input-nextIcon,
-    .be-input-preIcon {
+    .be-input-prevIcon {
       cursor: pointer;
-      color: #e5e5e5;
-      width: 14px;
-      height: 14px;
-      font-size: 14px;
-
+      color: $infoHover;
+      width: 12px;
+      height: 12px;
+      line-height: 12px;
+      font-size: 12px;
       &:hover {
         color: $infoHover
       }
     }
 
-    .be-input-preIcon {
+    .be-input-prevIcon {
       margin-right: 10px;
       margin-left: 10px;
     }
@@ -48,22 +46,32 @@
       margin: 0 10px;
     }
 
-    .be-input-close {
+    .be-input-icon {
       cursor: pointer;
-      border-radius: 50px;
-      border: 1px solid #e5e5e5;
-      color: #e5e5e5;
+      color: $infoHover;
       width: 12px;
       height: 12px;
+      line-height: 12px;
       font-size: 12px;
-      margin-right: 10px;
-
+      margin: 0 3px;
+      .be-icon{
+        fill: $infoHover;
+        vertical-align: 0;
+      }
+    }
+    .be-input-close {
+      border-radius: 50px;
+      border: 1px solid $infoHover;
       &:hover {
         border: 1px solid $infoHover;
         color: $infoHover
       }
     }
-
+    .be-input-password {
+      height: 18px;
+      font-size: 18px;
+      line-height: 18px;
+    }
     .be-input-select {
       &::-webkit-scrollbar {
         margin: 5px;
@@ -76,7 +84,7 @@
         border-radius: 5px;
       }
 
-      background-color: white;
+      background-color: $default;
       border-radius: 0 0 3px 3px;
       border: 1px solid $infoHover;
       border-top: 0;
@@ -89,7 +97,7 @@
 
       .be-input-select__line {
         height: 1px;
-        background-color: #dcdfe6;
+        background-color: $infoHover;
         width: 90%;
         margin: 0 auto;
         list-style: none;
@@ -105,7 +113,7 @@
         cursor: pointer;
 
         &:hover {
-          background-color: #dcdfe6;
+          background-color: $infoHover;
         }
       }
     }
@@ -121,6 +129,36 @@
     }
   }
 
+}
+.be-input__disabled{
+  cursor: not-allowed;
+}
+.be-input__mini{
+  .be-input-body {
+    .be-input__inner{
+      font-size: 14px;
+      line-height: 25px;
+      height: 25px;
+    }
+  }
+}
+.be-input__small{
+  .be-input-body {
+    .be-input__inner{
+      font-size: 14px;
+      line-height: 30px;
+      height: 30px;
+    }
+  }
+}
+.be-input__medium{
+  .be-input-body {
+    .be-input__inner{
+      font-size: 14px;
+      line-height: 36px;
+      height: 36px;
+    }
+  }
 }
 
 
@@ -174,22 +212,4 @@
       background-color: #dcdfe6;
     }
   }
-}
-
-.be-zoom-in-top-enter-active, .be-zoom-in-top-leave-active {
-  opacity: 1;
-  -webkit-transform: scaleY(1);
-  transform: scaleY(1);
-  -webkit-transition: opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-  transition: opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-  transition: transform .3s cubic-bezier(.23, 1, .32, 1), opacity .3s cubic-bezier(.23, 1, .32, 1);
-  transition: transform .3s cubic-bezier(.23, 1, .32, 1), opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-  -webkit-transform-origin: center top;
-  transform-origin: center top
-}
-
-.be-zoom-in-top-enter, .be-zoom-in-top-leave-active {
-  opacity: 0;
-  -webkit-transform: scaleY(0);
-  transform: scaleY(0)
 }
