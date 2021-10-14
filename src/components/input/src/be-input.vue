@@ -281,7 +281,7 @@ export default defineComponent({
              * @event focus
              * @param {String | Number} value - 输入框值
              */
-            ctx.emit('focus', value)
+            ctx.emit('focus', value,event)
         }
         /**
          * 处理按键

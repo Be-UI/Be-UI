@@ -5,7 +5,7 @@
 * @update (czh 2021/10/13)
 */
 <template>
-<be-popover trigger="manual" placement="bottom">
+<be-popover trigger="manual" placement="bottom"  ref="beInputPopover">
     <template #trigger>
         <be-input
             v-bind="attrs"
@@ -26,19 +26,24 @@
         </be-input>
     </template>
     <transition name="dialog-fade">
-        <div>qwdqwd</div>
+        <be-input-select
+            @select="handleSelect"
+            :selectStyle="selectStyle"
+            :select-list="selectList">
+        </be-input-select>
     </transition>
 </be-popover>
 </template>
 
 <script lang="ts">
-
-import {defineComponent, ref, useAttrs} from "vue";
+import {defineComponent, getCurrentInstance, onMounted, reactive, ref, useAttrs} from "vue";
 import BePopover from "../../popover/src/be-popover.vue";
 import BeInput from "../../input/src/be-input.vue";
+import BeInputSelect from "../src/be-input-select.vue";
+import {IInputInst, IInputSelectInst} from "../../input/src/be-input-type";
 export default defineComponent({
     name: "BeAutocomplete",
-    components: {BeInput, BePopover},
+    components: {BeInputSelect, BeInput, BePopover},
     emits: [
         'update:modelValue',
         'input',
@@ -62,7 +67,9 @@ export default defineComponent({
     },
     setup(props,ctx){
         const attrs = useAttrs()
+        const internalInstance = getCurrentInstance() as IInputInst
         const valInner = ref<string>('')
+
         /**
          * change 事件处理方法
          * @param { String | Number } value - 更新后值
@@ -90,12 +97,16 @@ export default defineComponent({
              */
             ctx.emit('blur', valInner.value)
         }
+        let eventDom:HTMLElement | null = null
         /**
          * focus 事件处理方法
          * @param {String | Number} value - 更新后值
          * @param {Event} event - 事件对象
          */
         const handleFocus = (value: string | number, event: Event): void => {
+            const $eventDom:HTMLElement |null = (event.target as HTMLInputElement).parentElement
+            eventDom = $eventDom
+            computedPositon($eventDom)
             ctx.emit('focus', valInner.value)
         }
         /**
@@ -117,7 +128,70 @@ export default defineComponent({
         const handleIconClickNext = (): void => {
             ctx.emit('nextIconClick')
         }
+        /**************************************** 输入建议下拉框方法 *******************************************/
+        let selectStyle = reactive({width:'0px'})
+        /**
+         * 计算输入建议下拉框位置
+         * @param {Element} $eventDom - 输入建议下拉框dom
+         */
+        const computedPositon = ($eventDom:HTMLElement | null):void => {
+            if(!$eventDom)return
+            selectStyle.width = Number(window.getComputedStyle($eventDom).width.split('px')[0]) + 'px'
+        }
+        /**
+         * 获取输入建议
+         * @param {String | Number} value - 更新后值
+         */
+        /*const getSuggestions = (value:string | number):void =>{
+            this.fetchSuggestions(value, (data, label, keyName) => {
+                // 设置输入建议数据
+                this.selectList = {data, label, keyName}
+                this.selectListCache = JSON.parse(JSON.stringify(this.selectList))
+                this.loading = false
+            })
+        }*/
+
+        /**
+         * 下拉搜索选择事件方法
+         * @param {Object } value - 选中后值
+         * @param {Number} index - 点击索引
+         */
+        const handleSelect = (value: any, index: number):void=>{
+            /** 输入建议选中 select 事件
+             * @event select
+             * @param {Object} value - 点击对象数据
+             * @param {Number} index - 点击的对应列表索引
+             */
+            valInner.value = value.label
+            handleChange(valInner.value)
+            ctx.emit('select', value, index)
+            const curInst = internalInstance.refs.beInputPopover as IInputSelectInst
+            curInst.close()
+
+        }
+        /**
+         * 关闭输入建议下拉框，方法由指令v-click-outside调用
+         */
+        /*const closeDisplay = ():void =>{
+            this.isShowSelect = false
+        }*/
+        onMounted(()=>{
+            const $eventDom:HTMLElement | null = eventDom
+            // 设置显示位置,宽度
+            computedPositon($eventDom)
+        })
+        const selectList = reactive([
+            {keyName:'wqdag;jadfjglzfjgzfxq',label:'qwdasaa'},
+            {keyName:'wqdag;jadfjglzfjgzfxdwq',label:'qwdasaa'},
+            {keyName:'wqdag;jadfjglzfjgzfxas',label:'qwdasaa'},
+            {keyName:'wqdag;jadfjglzfjgzfsx',label:'qwdasaa'},
+        ])
         return{
+            selectList,
+            handleSelect,
+            selectStyle,
+
+            uid: internalInstance.uid,
             attrs,
             valInner,
             handleChange,
