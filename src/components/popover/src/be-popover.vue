@@ -108,6 +108,13 @@ export default defineComponent({
             type: String,
             default: 'hover'
         },
+        /**
+         * 触发方式
+         */
+        'triggerElm': {
+          type: String,
+          default: ''
+        },
     },
     setup(props, ctx) {
         const internalInstance = getCurrentInstance() as IPopover
@@ -250,7 +257,11 @@ export default defineComponent({
          */
         const addEvent = ():void=>{
             if (ctx.slots.trigger) {
+              if(props.triggerElm){
+                triggerDom = document.getElementById(props.triggerElm)
+              }else{
                 triggerDom = matchDom(document.getElementById(`be_popover_trigger${internalInstance.uid}`))
+              }
                 // 根据触发类型 设置不同的事件监听
                 if (triggerDom && props.trigger === 'click') {
                     triggerDom.addEventListener('click', () => changeDisplay(true), false)

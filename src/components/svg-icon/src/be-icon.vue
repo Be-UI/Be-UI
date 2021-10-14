@@ -72,26 +72,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.be-icon-container {
-  display: inline-block;
-  .be-icon {
-    width: 1em;
-    height: 1em;
-    vertical-align: -0.15em;
-    overflow: hidden;
-  }
-
-}
-
-.be-icon-spin {
-  display: inline-block;
-  -webkit-animation: spin 1s infinite linear;
-  animation: spin 1s infinite linear;
-}
+@import '../../../assets/style/be-input';
 </style>

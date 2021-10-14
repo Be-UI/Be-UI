@@ -7,6 +7,7 @@
 */
 <template>
     <div
+        :id="`be_input_${uid}`"
         :class="`
         be-input
         be-input__${size}
@@ -21,12 +22,13 @@
             <be-icon @click="handleIcon('prev')" :icon="prevIcon" class="be-input-prevIcon"
                      v-if="prevIcon"></be-icon>
             <input
-                ref="beInputInner"
+                :ref="beInputInner"
                 :disabled="disabled"
                 :placeholder="placeholder"
                 :value="modelValue"
                 :maxlength="maxlength"
                 :type="inputType"
+                :id="id"
                 v-bind="attrs"
                 @focus="handleFocus($event.target.value,$event)"
                 @blur="handleBlur($event.target.value)"
@@ -64,8 +66,9 @@
  * 带输入建议远程搜索的输入框
  */
 // import BeInputSelect from "./be-input-select";
-import {computed, defineComponent, nextTick, ref, useAttrs, watch} from "vue";
+import {computed, defineComponent, getCurrentInstance, nextTick, ref, useAttrs} from "vue";
 import BeIcon from "../../svg-icon/src/be-icon.vue";
+import {IInputInst} from "./be-input-type";
 
 
 export default defineComponent({
@@ -85,30 +88,12 @@ export default defineComponent({
         'mouseleave',
         'mouseenter',
     ],
-    // components: {BeInputSelect},
-    data() {
-        return {
-            /* // 输入建议显示
-             isShowSelect: false,
-             // 输入建议数据列表
-             selectList: {data: [], label: '', keyName: ''},
-             // 输入建议数据列表缓存
-             selectListCache: {data: [], label: '', keyName: ''},
-             // 输入建议数据列表
-             selectStyle: {left: '0px', top: '0px'},
-             // 输入建议loading标志
-             loading: false,
-             // 输入建议展开时，input样式
-             expandStyle: '',
-             // 输入建议数据列表最大显示长度
-             maxStrLen: 0,
-             // 事件触发dom
-             eventDom: null*/
-
-        }
-    },
     // 原生属性 readonly autocomplete name max min step autofocus form
     props: {
+        /**
+         * id
+         */
+        id:String,
         /**
          * 绑定值 （完成）
          */
@@ -206,7 +191,7 @@ export default defineComponent({
 
     setup(props, ctx) {
         const attrs = useAttrs()
-
+        const internalInstance = getCurrentInstance() as IInputInst
         const inputType = ref<string>(props.type)
         const isPassWord = ref<boolean>(props.type === 'password' ? true : false)
         const handlePassword = (): void => {
@@ -245,8 +230,8 @@ export default defineComponent({
                  })
                  this.$set(this.selectList, 'data', arr)
              }*/
-            ctx.emit('update:modelValue', val)
-            ctx.emit('input', val)
+             ctx.emit('update:modelValue', val)
+             ctx.emit('input', val)
         }
 
         /**
@@ -286,7 +271,7 @@ export default defineComponent({
         /**
          * 处理按键
          */
-        const handleKeydown = (e) => {
+        const handleKeydown = (e:Event) => {
             ctx.emit('keydown', e)
         }
         /**
@@ -309,7 +294,7 @@ export default defineComponent({
             }
         }
         /**************************************** 暴露对外的公共方法 *******************************************/
-        const beInputInner = ref(null)
+        const beInputInner = ref<any>(null)
         const inputOrTextarea = computed(() => {
             return beInputInner.value
         })
@@ -319,7 +304,7 @@ export default defineComponent({
          */
         const focus = (): void => {
             nextTick(() => {
-                inputOrTextarea.value.focus()
+               inputOrTextarea.value.focus()
             })
         }
         /**
@@ -327,7 +312,8 @@ export default defineComponent({
          * @public
          */
         const blur = (): void => {
-            inputOrTextarea.value.blur()
+          inputOrTextarea.value.blur()
+
         }
         /**
          * 手动选择文字方法
@@ -382,6 +368,7 @@ export default defineComponent({
             this.isShowSelect = false
         }*/
         return {
+            uid: internalInstance.uid,
             attrs,
             beInputInner,
             inputOrTextarea,
@@ -399,19 +386,6 @@ export default defineComponent({
             handleFocus,
             handleBlur
         }
-    },
-    methods: {},
-    mounted() {
-        /* window.onresize = () => {
-           const $eventDom = this.eventDom
-           // 设置显示位置,宽度
-           this.computedPositon($eventDom)
-         }*/
-
-    },
-    beforeDestroy() {
-        /* this.eventDom = null
-         window.onresize = null*/
     }
 })
 </script>

@@ -212,7 +212,6 @@
                 </template>
             </be-input>-->
             <be-autocomplete
-                ref="sssinput"
                 clearable
                 showPassword
                 type="password"

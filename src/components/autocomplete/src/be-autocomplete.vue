@@ -3,17 +3,20 @@
 * @deprecated
 * @author czh
 * @update (czh 2021/10/13)
+  点击触发、输入触发、自定义模板、远程加载
 */
 <template>
-<be-popover trigger="manual" placement="bottom"  ref="beInputPopover">
+<be-popover trigger="manual" placement="bottom"  ref="beInputPopover" :trigger-elm="`be_input_select_inner_${uid}`">
     <template #trigger>
         <be-input
+            :id="`be_input_select_inner_${uid}`"
             v-bind="attrs"
             @change="handleChange"
             @input="handleInput"
             @focus="handleFocus"
             @blur="handleBlur"
             @clear="handleClear"
+            ref="beInputInner"
             @prevIconClick="handleIconClickPrev"
             @nextIconClick="handleIconClickNext"
             v-model="valInner">
