@@ -1,30 +1,26 @@
 <template>
-        <div :id="`be_popover_trigger${uid}`" aria-describedby="tooltip">
-            <slot name="trigger"></slot>
+    <!--  <div v-click-outside="{handler:close,isDisabled:outsideDisabled}">-->
+    <div :id="`be_popover_trigger${uid}`" aria-describedby="tooltip">
+        <slot name="trigger"></slot>
+    </div>
+    <teleport to="body">
+        <div class="be-popover"
+             v-click-outside="{handler:close,isDisabled:outsideDisabled}"
+             :class="customClass"
+             role="tooltip"
+             :id="`be_popover_${uid}`"
+             :key="`be_popover_${uid}`"
+             v-if="show"
+             :style="stylePopover">
+            <div class="be-popover-body" :id="`be_popover_body${uid}`">
+                <slot></slot>
+            </div>
+            <div :id="`be_popover_arrow${uid}`"
+                 :class="`be-popover-arrow`"
+                 v-if="raw">
+            </div>
         </div>
-          <teleport to="body">
-<!--              <transition name="be-zoom-in-top">-->
-              <div class="be-popover"
-                   v-click-outside="{handler:close,isDisabled:outsideDisabled}"
-                   :class="`${animateClass} ${customClass}`"
-                   role="tooltip"
-                   :id="`be_popover_${uid}`"
-                   :key="`be_popover_${uid}`"
-                   v-if="show"
-                   :style="stylePopover">
-                  <div class="be-popover-body" :id="`be_popover_body${uid}`">
-                      <slot></slot>
-                  </div>
-                  <div :id="`be_popover_arrow${uid}`"
-                       :class="`be-popover-arrow`"
-                       v-if="raw">
-                  </div>
-              </div>
-<!--              </transition>-->
-          </teleport>
-
-
-
+    </teleport>
 </template>
 
 <script lang="ts">
@@ -116,7 +112,7 @@ export default defineComponent({
     setup(props, ctx) {
         const internalInstance = getCurrentInstance() as IPopover
         /******************************************** 显示控制相关 ************************************/
-        // 是否显示
+            // 是否显示
         let show = ref(false)
         /**
          * click-outside 指令使用的关闭方法
@@ -155,19 +151,17 @@ export default defineComponent({
             }, delay)
         }
         /************************************** 使用popover.js设置箭头、popover ******************************/
-        // 位置样式
+            // 位置样式
         let stylePopover: TPopoverStyle = reactive({
-            left: '0px',
-            top: '0px',
-            opacity: 0
-        })
+                left: '0px',
+                top: '0px',
+            })
         // popover.js 实例缓存
         let popperJS:any = null
         /**
          * 计算显示位置
          * @param {String} placement - 位置
          */
-        const animateClass = ref<string>('')
         const computePosition = (placement: string): void => {
             // 使用popover.js 对popover进行定位
             if (popperJS && popperJS.destroy) {
@@ -187,7 +181,7 @@ export default defineComponent({
                     {
                         name: 'flip',
                         options: {
-                            fallbackPlacements: ['top', 'bottom','right'],
+                            fallbackPlacements: ['top', 'right','bottom'],
                         },
                     },
                     {
@@ -210,16 +204,6 @@ export default defineComponent({
             }else{
                 popperJS = createPopper(triggerDom, popover, popoverOption);
             }
-            //stylePopover.opacity = 1
-            setTimeout(()=>{
-                debugger
-                animateClass.value = 'dialog-fade-enter-active'
-                nextTick(()=>{
-                    debugger
-                    stylePopover.opacity = 1
-                })
-
-            },2000)
 
         }
         /**
@@ -239,7 +223,7 @@ export default defineComponent({
             return ()=>rect;
         }
         /******************************************** dom操作相关 ************************************/
-        // 触发元素dom
+            // 触发元素dom
         let triggerDom: Element | any = null
         /**
          * 遍历dom树，找到合适的trigger元素
@@ -306,9 +290,7 @@ export default defineComponent({
                 triggerDom.removeEventListener('mouseleave', () => changeDisplay(false), false)
             }
         })
-
         return {
-            animateClass,
             uid: internalInstance.uid,
             stylePopover,
             outsideDisabled,
