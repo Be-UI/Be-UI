@@ -109,7 +109,7 @@ export default defineComponent({
             default: 'hover'
         },
         /**
-         * 触发方式
+         * 触发元素
          */
         'triggerElm': {
           type: String,
@@ -123,6 +123,7 @@ export default defineComponent({
         let show = ref(false)
         /**
          * click-outside 指令使用的关闭方法
+         * @public
          */
         const close = (): void => {
             setTimeout(() => {
@@ -140,6 +141,7 @@ export default defineComponent({
         /**
          * 显示控制方法
          * @param {Boolean} isShow - 显示变量
+         * @public
          */
         const changeDisplay = (isShow: boolean): void => {
             let delay:number = 100
@@ -209,7 +211,7 @@ export default defineComponent({
                 VNodeTrigger.getBoundingClientRect = generateGetBoundingClientRect(props.x,props.y);
                 popperJS.update();
             }else{
-                popperJS = createPopper(triggerDom, popover, popoverOption);
+                popperJS = createPopper(computeDom, popover, popoverOption);
             }
 
         }
@@ -232,6 +234,7 @@ export default defineComponent({
         /******************************************** dom操作相关 ************************************/
             // 触发元素dom
         let triggerDom: Element | any = null
+        let computeDom: Element | any = null
         /**
          * 遍历dom树，找到合适的trigger元素
          * @param root
@@ -245,7 +248,7 @@ export default defineComponent({
                     let triggerHeight:number = node.getBoundingClientRect().height
                     if (triggerWidth !== 0 || triggerHeight !== 0) {
                         return node
-                        break
+                        break;
                     } else {
                         return matchDom(node)
                     }
@@ -259,8 +262,10 @@ export default defineComponent({
             if (ctx.slots.trigger) {
               if(props.triggerElm){
                 triggerDom = document.getElementById(props.triggerElm)
+                computeDom =  matchDom(document.getElementById(`be_popover_trigger${internalInstance.uid}`))
               }else{
                 triggerDom = matchDom(document.getElementById(`be_popover_trigger${internalInstance.uid}`))
+                computeDom = triggerDom
               }
                 // 根据触发类型 设置不同的事件监听
                 if (triggerDom && props.trigger === 'click') {
@@ -307,6 +312,7 @@ export default defineComponent({
             outsideDisabled,
             show,
             close,
+            changeDisplay,
             raw: props.raw,
             customClass: props.customClass
         }
