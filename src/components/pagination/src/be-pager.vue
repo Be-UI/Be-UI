@@ -102,7 +102,7 @@
 import {
     defineComponent,
     inject,
-    ref, onMounted, watchEffect, watch, Ref
+    ref, onMounted, watchEffect, watch, Ref, computed, reactive
 } from "vue";
   import {pagersDynamicList} from "./pager-dynamic";
   import {pagersList} from "./pager-ordinary";
@@ -125,11 +125,18 @@ import {IPageData, IPageProvide, IPagesFront} from "./be-pagenation-type";
         // 处理获得动态分页页码数据
         let pagersDynamic:Array<number> = pagersDynamicList($$BePaginProps).value
         // 处理获得前端分页页码数据、分页切片、前端分页的前后翻页方法
-        let pagerFrontParam:IPagesFront | undefined = pagerFront($$BePaginProps,$$BePaginMix,maxPageNum,showPrevMore,showNextMore,ctx)
-        let sliceList:Map<any,any> | null= pagerFrontParam ? pagerFrontParam.sliceList : null
-        let frontList:Array<number> | null =  pagerFrontParam ? pagerFrontParam.frontList : null
-        let nextPageFront:Function | null =  pagerFrontParam ? pagerFrontParam.nextPageFront : null
-        let prePageFront:Function | null =   pagerFrontParam ? pagerFrontParam.prePageFront : null
+        let pagerFrontParam:IPagesFront | undefined = reactive(pagerFront($$BePaginProps,$$BePaginMix,maxPageNum,showPrevMore,showNextMore,ctx))
+        let sliceList =   ref(pagerFrontParam ? pagerFrontParam.sliceList : null)
+        let frontList  = ref(pagerFrontParam ? pagerFrontParam.frontList : null)
+        let nextPageFront = ref( pagerFrontParam ? pagerFrontParam.nextPageFront : null)
+        let prePageFront =   ref(pagerFrontParam ? pagerFrontParam.prePageFront : null)
+        watch($$BePaginProps,(nva)=>{
+            pagerFrontParam =  pagerFront(nva,$$BePaginMix,maxPageNum,showPrevMore,showNextMore,ctx)
+            frontList.value = pagerFrontParam ? pagerFrontParam.frontList : null
+            sliceList.value = pagerFrontParam ? pagerFrontParam.sliceList : null
+            nextPageFront.value = pagerFrontParam ? pagerFrontParam.nextPageFront : null
+            prePageFront.value = pagerFrontParam ? pagerFrontParam.prePageFront : null
+        })
         /**
          * 缩略翻页 可能会超出页数范围，这里做限制
          * @param {number} newPage - 當前頁
@@ -172,9 +179,9 @@ import {IPageData, IPageProvide, IPagesFront} from "./be-pagenation-type";
                 // 调用前端分页方法
                 if ($$BePaginProps.isFront){
                     if(type === 'next'){
-                        nextPageFront && nextPageFront()
+                        nextPageFront.value && nextPageFront.value()
                     }else{
-                        prePageFront && prePageFront()
+                        prePageFront.value && prePageFront.value()
                     }
                 }
                 /**
@@ -234,8 +241,8 @@ import {IPageData, IPageProvide, IPagesFront} from "./be-pagenation-type";
             isNaNPage(Number(newPage),maxPageNum,$$BePaginProps)
             if (newPage !== currentPage) {
                 // 前端分页返回分页数据
-                if ($$BePaginProps.isFront && sliceList){
-                    ctx.emit("updatePage", {data: sliceList.get(Number(newPage))});
+                if ($$BePaginProps.isFront && sliceList.value){
+                    ctx.emit("updatePage", {data: sliceList.value.get(Number(newPage))});
                 }
                 /**
                  * 返回新页码

@@ -54,8 +54,8 @@ export interface IPagerMix {
     pageNumVal:string
 }
 export interface IPagesFront {
-    sliceList:Map<any,any>
-    frontList:Array<number>,
-    prePageFront:Function,
-    nextPageFront:Function,
+    sliceList?:Map<any,any>
+    frontList?:Array<number>,
+    prePageFront?:Function,
+    nextPageFront?:Function,
 }

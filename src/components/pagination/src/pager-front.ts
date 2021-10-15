@@ -14,7 +14,7 @@ export const pagerFront = (
     $$BePaginMix:IPagerMix,
     maxPageNum:Ref,
     showPrev:Ref,
-    showNext:Ref,inst:any):IPagesFront | undefined =>{
+    showNext:Ref,inst:any):IPagesFront =>{
     if($$BePaginProps.isFront) {
         // 分页切片
         const sliceList:Map<any,any> = new Map()
@@ -111,6 +111,14 @@ export const pagerFront = (
             frontList:pageFrontData.value,
             prePageFront,
             nextPageFront,
+        }
+    }
+    else{
+        return {
+            sliceList:undefined,
+            frontList:undefined,
+            prePageFront:undefined,
+            nextPageFront:undefined,
         }
     }
 

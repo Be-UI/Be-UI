@@ -229,7 +229,9 @@ export default defineComponent({
         }
         /********************************* provide 注入 *****************************************/
         // 坑，直接把props给provide，放到对象里会失去响应式
+        let prop = ref(props.pageData)
         provide('$$BePaginProps', props)
+        provide('$$pageData', prop)
         let pagerMix = reactive<IPagerMix>({
             jumpPage:jumpPage.value,
             pageParamsFront:pageParamsFront,
