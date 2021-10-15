@@ -27,15 +27,21 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 排期
 组件迁移 重构  
+
+be-autocomplete 逻辑整理 周天...
+be-message 周天...
+
+select  
 be-pager 重构完成  
 常规分页 （修改完成，pager-ordinary重构完成）  
 动态分页 （部分修改完成，差每页显示设置，pager-dynamic重构完成）  
 前端分页 （部分修改完成，差每页显示设置，pager-front重构完成）  
-be-input  
+be-input  差文本域  
+
 新组件  
 InputNumber  
-be-message  
-select  
+
+
 ## 长期排期
 1.服务式访问的全局绑定  
 2.组件引用编写
@@ -54,7 +60,7 @@ select
 11.弹出显示 be-popover （迁移完成）  
 12.文本弹出显示 be-toolTip （迁移完成）  
 13.按钮组件 be-button （迁移完成）   
-14.自动补全输入 be-autocomplete （迁移完成）  
+14.自动补全输入 be-autocomplete （迁移中）  
 
 
 

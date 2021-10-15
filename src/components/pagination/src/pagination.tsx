@@ -1,5 +1,5 @@
 import Pager from './be-pager.vue';
-//import beInput from '../../input/be-input.vue';
+import beAutocomplete from '../../autocomplete/src/be-autocomplete.vue';
 import '../../../assets/style/be-pager.scss';
 import {getUuid} from "../../../utils/common"
 import {
@@ -24,7 +24,7 @@ export default defineComponent({
     name: 'BePagination',
     components:{
         Pager,
-        //beInput
+        beAutocomplete
     },
     props: {
         /**
@@ -103,7 +103,7 @@ export default defineComponent({
          */
         layout:{
             type: Array,
-            default: ()=>['prev','page','jump','info','next'],
+            default: ()=>['prev','page','jump','info','next','pNum'],
         },
         /**
          * 是否开启前端分页
@@ -152,24 +152,24 @@ export default defineComponent({
          * 生成每页显示数量设置列表
          * @param {Function} cb - input-select的回调方法
          */
-       /* const createPageNumList = (data:any,cb:Function):void=>{
+        const createPageNumList = (cb:Function):void=>{
             let list:Array<any> = []
             const pageCount:number = props.pageCount ? props.pageCount : 0
             const total = parseInt(String((props.isFront ? props.pageData.length : pageCount) / 10)) * 10
             for(let i = 10; i<= total;i = i + 10){
                 list.push({label:i,id:getUuid()})
             }
-            cb(list,'label','id')
+            cb(list)
         }
-        /!**
+        /**
          * 获取每页显示数量设置类别的选择结果
          * @param {Object} data - 页面设置数据
          * @public
-         *!/
+         */
         const getPageNum = (data:any):void=>{
             pageNumVal.value = data.label + '/页'
             ctx.emit('updateNum',data.label)
-        }*/
+        }
         onMounted(()=>{
             pageNumVal.value = props.pageSize + '/页' //disabled
         })
@@ -231,7 +231,6 @@ export default defineComponent({
         // 坑，直接把props给provide，放到对象里会失去响应式
         let prop = ref(props.pageData)
         provide('$$BePaginProps', props)
-        provide('$$pageData', prop)
         let pagerMix = reactive<IPagerMix>({
             jumpPage:jumpPage.value,
             pageParamsFront:pageParamsFront,
@@ -257,14 +256,17 @@ export default defineComponent({
                 prev:prevSlot(),
                 pNum:undefined
             }
-            // 分动态布局才支持页面数量显示设置
-            /*if(!this.isDynamic){
-                renderLsit.pNum = (<be-input v-model={this.pageNumVal}
-                                            readonly
+            // 非动态布局才支持页面数量显示设置
+            if(!props.isDynamic){
+               /* renderLsit.pNum = (<be-autocomplete
+                                            v-model={pageNumVal.value}
+                                            keyValue="id"
+                                            labelValue="label"
                                             custom-class={'be-pager-select'}
-                                            fetch-suggestions= {this.createPageNumList}
-                                            {...{on: {select: this.getPageNum}}}></be-input>)
-            }*/
+                                            focusTrigger={false}
+                                            fetch-suggestions= {createPageNumList}
+                                            onSelect = {getPageNum}></be-autocomplete>)*/
+            }
             return (
                 <div class="be-pager-container">
                     {/*根据渲染布局props渲染renderList，实现自定义布局*/}

@@ -212,7 +212,7 @@
                 </template>
             </be-input>-->
 <!--           :focusTrigger="false"   :suggestionList="testList" -->
-<!--            <be-autocomplete
+            <be-autocomplete
                 :focusTrigger="false"
                 clearable
                 size="mini"
@@ -228,7 +228,7 @@
                 @focus="handlefocus"
                 @blur="handleblur"
                 v-model="num">
-&lt;!&ndash;                <template #prev>
+<!--                <template #prev>
                     <be-button
                         @click="test"
                         prevIcon="delete"
@@ -237,8 +237,8 @@
                         size="large">
                         测试
                     </be-button>
-                </template>&ndash;&gt;
-&lt;!&ndash;                <template #next>
+                </template>-->
+<!--                <template #next>
                     <be-button
                         @click="test"
                         prevIcon="delete"
@@ -247,7 +247,7 @@
                         size="large">
                         测试
                     </be-button>
-                </template>&ndash;&gt;
+                </template>-->
                 <template v-slot:cus-temp="slotProps">
                     <div style="display: flex;justify-content: center;align-items: center">
                         {{slotProps.item.label}}
@@ -255,7 +255,7 @@
                     </div>
 
                 </template>
-            </be-autocomplete>-->
+            </be-autocomplete>
 
         </div>
     </div>

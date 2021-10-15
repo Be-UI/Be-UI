@@ -196,7 +196,7 @@ export default defineComponent({
             nextTick(()=>{
                 selectList.value = value ? ordData.filter(
                     (val:any) => {
-                        return (val[props.labelValue].toLowerCase().indexOf(value.toLowerCase()) >= 0);
+                        return (val[props.labelValue].toString().toLowerCase().indexOf(value.toLowerCase()) >= 0);
                     }
                 ) : ordData
             })
