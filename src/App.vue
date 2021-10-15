@@ -245,6 +245,13 @@
                         测试
                     </be-button>
                 </template>
+                <template v-slot:cus-temp="slotProps">
+                    <div style="display: flex;justify-content: center;align-items: center">
+                        {{slotProps.item.label}}
+                        <be-icon icon="error"></be-icon>
+                    </div>
+
+                </template>
             </be-autocomplete>
 
         </div>
@@ -259,6 +266,7 @@ import {BeMsg} from "./components/message-box/src/be-message-box-service";
 import BePopover from "./components/popover/src/be-popover.vue";
 import {createPopper} from '@popperjs/core'
 import {BeLoadingSer} from './components'
+import BeIcon from "./components/svg-icon/src/be-icon.vue";
 
 
 export default {
@@ -281,6 +289,7 @@ export default {
 
     },
     components: {
+        BeIcon,
 
         panda
     },

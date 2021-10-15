@@ -3,7 +3,7 @@
 * @deprecated
 * @author czh
 * @update (czh 2021/10/13)
-  点击触发、输入触发、自定义模板、远程加载
+  点击触发、输入触发、自定义模板 √、远程加载
 */
 <template>
 <be-popover trigger="manual" placement="bottom"  ref="beInputPopover" :trigger-elm="`be_input_select_inner_${uid}`">
@@ -33,6 +33,9 @@
             @select="handleSelect"
             :selectStyle="selectStyle"
             :select-list="selectList">
+            <template v-slot:cus-temp="slotProps">
+                <slot name="cus-temp" :item="slotProps.item"></slot>
+            </template>
         </be-input-select>
     </transition>
 </be-popover>

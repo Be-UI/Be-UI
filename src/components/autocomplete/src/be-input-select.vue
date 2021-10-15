@@ -10,12 +10,13 @@
     <div class="be-input-select" :style="selectStyle" :id="`be_input_select${uid}`">
       <ul v-show="!loading" :style="selectStyle"
           :id="`be_input_select_ul${uid}`" :key="`be_input_select_ul${uid}`">
-        <!-- <li class="be-input-select__line" v-show="selectList.data.length > 0"></li>-->
         <li class="be-input-select__inner"
             v-for="(item, index) in selectList"
             :key="item.keyName"
             @click="handleSelect(item,index)">
-          {{ item.label }}
+            <slot name="cus-temp" :item="item">
+                {{ item.label }}
+            </slot>
         </li>
       </ul>
       <ul v-show="loading" :key="`be-input-select${uid}-loading`">
