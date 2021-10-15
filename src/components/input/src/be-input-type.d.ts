@@ -11,4 +11,5 @@ export interface IInputInst extends ComponentInternalInstance {
 }
 export interface IInputSelectInst {
     close:Function
+    changeDisplay:Function
 }

@@ -21,7 +21,7 @@
                     expandTrigger>
             </be-ellipsis>-->
 
-        <!--      <be-popover trigger="click" width="300" customClass="asdwq" >
+<!--              <be-popover trigger="hover" width="300" customClass="asdwq" >
                   <template #trigger>
         &lt;!&ndash;            <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>&ndash;&gt;
                     <be-icon icon="delete" @click="testclose" style="position: absolute;left: 20%;top: 100px;"></be-icon>
@@ -211,13 +211,16 @@
                     </be-button>
                 </template>
             </be-input>-->
+<!--           :focusTrigger="false"   :suggestionList="testList" -->
             <be-autocomplete
+                :focusTrigger="false"
                 clearable
-                showPassword
-                type="password"
                 size="mini"
                 prevIcon="delete"
                 nextIcon="delete"
+                :fetchSuggestions="getSuggest"
+                keyValue="id"
+                labelValue="label"
                 @prevIconClick="handlePrevIcon"
                 @nextIconClick="handlenextIcon"
                 @change="handleChange"
@@ -225,7 +228,7 @@
                 @focus="handlefocus"
                 @blur="handleblur"
                 v-model="num">
-                <template #prev>
+<!--                <template #prev>
                     <be-button
                         @click="test"
                         prevIcon="delete"
@@ -234,8 +237,8 @@
                         size="large">
                         测试
                     </be-button>
-                </template>
-                <template #next>
+                </template>-->
+<!--                <template #next>
                     <be-button
                         @click="test"
                         prevIcon="delete"
@@ -244,7 +247,7 @@
                         size="large">
                         测试
                     </be-button>
-                </template>
+                </template>-->
                 <template v-slot:cus-temp="slotProps">
                     <div style="display: flex;justify-content: center;align-items: center">
                         {{slotProps.item.label}}
@@ -285,6 +288,20 @@ export default {
                 pageSize: 5,
                 total: 50
             },
+            testList:[
+                {label:'落日绣帘卷',id:'落日绣帘卷'},
+                {label:'亭下水连空',id:'亭下水连空'},
+                {label:'知君为我新作',id:'知君为我新作'},
+                {label:'窗户湿青红',id:'窗户湿青红'},
+                {label:'长记平山堂上',id:'欹枕江南烟雨'},
+                {label:'欹枕江南烟雨',id:'长记平山堂上'},
+                {label:'杳杳没孤鸿',id:'杳杳没孤鸿'},
+                {label:'千里快哉風',id:'千里快哉風'},
+                {label:'认得醉翁语',id:'认得醉翁语'},
+                {label:'山色有无中',id:'山色有无中'},
+                {label:'一點浩然氣',id:'一點浩然氣'},
+                {label:'千里快哉風',id:'fjkhfsdaiuorgga'},
+            ]
         }
 
     },
@@ -306,6 +323,26 @@ export default {
         }
     },
     methods: {
+        getSuggest(cb){
+            setTimeout(()=>{
+                cb(
+                    [
+                        {label:'落日绣帘卷',id:'落日绣帘卷'},
+                        {label:'亭下水连空',id:'亭下水连空'},
+                        {label:'知君为我新作',id:'知君为我新作'},
+                        {label:'窗户湿青红',id:'窗户湿青红'},
+                        {label:'长记平山堂上',id:'欹枕江南烟雨'},
+                        {label:'欹枕江南烟雨',id:'长记平山堂上'},
+                        {label:'杳杳没孤鸿',id:'杳杳没孤鸿'},
+                        {label:'千里快哉風',id:'千里快哉風'},
+                        {label:'认得醉翁语',id:'认得醉翁语'},
+                        {label:'山色有无中',id:'山色有无中'},
+                        {label:'一點浩然氣',id:'一點浩然氣'},
+                        {label:'千里快哉風',id:'fjkhfsdaiuorgga'},
+                    ]
+                )
+            },3000)
+        },
         handleblur(){
 
         },
@@ -319,20 +356,20 @@ export default {
 
         },
         handleinput(data) {
-            console.log(data)
+            //console.log(data)
         },
         handleChange(data) {
-            console.log(data)
+            //console.log(data)
         },
         pageChange(data) {
-            console.log(data)
+            // console.log(data)
             this.pageParams.currentPage = data.currentPage
         },
         updatePage(data) {
-            console.log(data)
+            //console.log(data)
         },
         updateNum(data) {
-            console.log(data)
+           // console.log(data)
         },
         customRender() {
             return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)

@@ -47,13 +47,6 @@
             <!--密碼按鈕-->
             <be-icon @click="handlePassword" :icon="`${isPassWord ? 'no-eye' :'eye'}`"
                      class="be-input-icon be-input-password" v-show="showPassword"></be-icon>
-            <!--建议输入下拉框-->
-            <!--      <be-input-select
-                      @select="handleSelect"
-                      :select-style="selectStyle"
-                      :select-list="selectList"
-                      :is-show="isShowSelect">
-                  </be-input-select>-->
         </div>
         <!-- @slot 后置插槽-->
         <slot name="next"></slot>
@@ -177,15 +170,7 @@ export default defineComponent({
         inputStyle: {
             type: Object
         },
-        /**
-         * 输入建议方法
-         */
-        fetchSuggestions: {
-            type: Function,
-            default: null
-        },
 
-        // autosize 待定
     },
 
 
@@ -217,19 +202,6 @@ export default defineComponent({
          * @param {String | Number} val - 更新后值
          */
         const handleInput = (val: string | number): void => {
-            // 根据输入值处理输入建议
-            /* if (val === '') {
-                 this.getSuggestions(val)
-             } else {
-                 let arr = []
-                 this.selectList.data = []
-                 this.selectListCache.data.forEach(res => {
-                     if (res[_this.selectListCache.label].indexOf(val) >= 0) {
-                         arr.push(res)
-                     }
-                 })
-                 this.$set(this.selectList, 'data', arr)
-             }*/
              ctx.emit('update:modelValue', val)
              ctx.emit('input', val)
         }
@@ -239,7 +211,6 @@ export default defineComponent({
          * @param {String | Number} value - 更新后值
          */
         const handleBlur = (value: string | number): void => {
-            //this.expandStyle = ''
             /** 输入 blur 事件
              * @event blur
              * @param {String | Number} value - 输入框值
@@ -252,20 +223,6 @@ export default defineComponent({
          * @param {Event} event - 事件对象
          */
         const handleFocus = (value: string | number, event: Event): void => {
-            //const $eventDom = event.target.parentElement
-            //this.eventDom = $eventDom
-            // 触发输入建议回调方法，获取下拉列表数据
-            /*if (Object.prototype.toString.call(this.fetchSuggestions) === '[object Function]') {
-                this.loading = true
-                this.getSuggestions(value)
-                // 设置显示位置,宽度
-                this.computedPositon($eventDom)
-                this.isShowSelect = true
-            }*/
-            /** 输入 focus 事件
-             * @event focus
-             * @param {String | Number} value - 输入框值
-             */
             ctx.emit('focus', value,event)
         }
         /**
@@ -322,51 +279,6 @@ export default defineComponent({
         const select = (): void => {
             inputOrTextarea.value.select()
         }
-
-        /**************************************** 输入建议下拉框方法 *******************************************/
-        /**
-         * 计算输入建议下拉框位置
-         * @param {Element} $eventDom - 输入建议下拉框dom
-         */
-        /*const computedPositon = ($eventDom:HTMLElement):void => {
-            if(!$eventDom)return
-            this.selectStyle.width = Number(window.getComputedStyle($eventDom).width.split('px')[0]) + 'px'
-            this.selectStyle.top = $eventDom.getBoundingClientRect().top + Number(window.getComputedStyle($eventDom).height.split('px')[0]) + 2 + 'px'
-            this.selectStyle.left = $eventDom.getBoundingClientRect().left + 'px'
-            this.expandStyle = this.expandStyle + 'be-input-body__expand'
-        }*/
-        /**
-         * 获取输入建议
-         * @param {String | Number} value - 更新后值
-         */
-        /*const getSuggestions = (value:string | number):void =>{
-            this.fetchSuggestions(value, (data, label, keyName) => {
-                // 设置输入建议数据
-                this.selectList = {data, label, keyName}
-                this.selectListCache = JSON.parse(JSON.stringify(this.selectList))
-                this.loading = false
-            })
-        }*/
-        /**
-         * 下拉搜索选择事件方法
-         * @param {String | Number} value - 更新后值
-         * @param {Number} index - 点击索引
-         */
-        /*const handleSelect = (value:string | number, index:number):void => {
-            /!** 输入建议选中 select 事件
-             * @event select
-             * @param {Object} value - 点击对象数据
-             * @param {Number} index - 点击的对应列表索引
-             *!/
-            this.$emit('select', value, index)
-            this.closeDisplay()
-        }*/
-        /**
-         * 关闭输入建议下拉框，方法由指令v-click-outside调用
-         */
-        /*const closeDisplay = ():void =>{
-            this.isShowSelect = false
-        }*/
         return {
             uid: internalInstance.uid,
             attrs,

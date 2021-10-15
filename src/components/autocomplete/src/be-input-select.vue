@@ -11,13 +11,18 @@
       <ul v-show="!loading" :style="selectStyle"
           :id="`be_input_select_ul${uid}`" :key="`be_input_select_ul${uid}`">
         <li class="be-input-select__inner"
-            v-for="(item, index) in selectList"
-            :key="item.keyName"
+            v-if="list.length > 0"
+            v-for="(item, index) in list"
+            :key="item[keyValue]"
             @click="handleSelect(item,index)">
             <slot name="cus-temp" :item="item">
-                {{ item.label }}
+                {{ item[labelValue] }}
             </slot>
         </li>
+          <li class="be-input-select__inner"
+              v-if="list.length === 0">
+              暂无数据
+          </li>
       </ul>
       <ul v-show="loading" :key="`be-input-select${uid}-loading`">
         <li class="be-input-select__line"></li>
@@ -30,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, getCurrentInstance} from 'vue'
+import {computed, defineComponent, getCurrentInstance} from 'vue'
 import {IInputInst} from "../../input/src/be-input-type";
 export default defineComponent({
   name: "BeInputSelect",
@@ -66,6 +71,20 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    /**
+     * key
+     */
+     keyValue: {
+         type: String,
+         default: 'id'
+     },
+      /**
+       * label
+       */
+     labelValue: {
+         type: String,
+         default: 'label'
+     },
   },
   setup(props,ctx){
     const internalInstance = getCurrentInstance() as IInputInst
@@ -77,9 +96,13 @@ export default defineComponent({
     const handleSelect = (value:string, index:number):void =>{
       ctx.emit('select', value, index)
     }
+    const list = computed(()=>{
+        return props.selectList
+    })
     return {
       uid:internalInstance.uid,
-      handleSelect
+      handleSelect,
+      list
     }
   }
 })

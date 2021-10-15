@@ -72,5 +72,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import '../../../assets/style/be-input';
+@import '../../../assets/style/be-icon.scss';
 </style>
