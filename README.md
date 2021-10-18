@@ -27,14 +27,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 排期
 组件迁移 重构
+be-input  差文本域
 be-message 周天...
-
 select  
 be-pager 重构完成  
 常规分页 （修改完成，pager-ordinary重构完成）  
 动态分页 （部分修改完成，差每页显示设置，pager-dynamic重构完成）  
 前端分页 （部分修改完成，差每页显示设置，pager-front重构完成）  
-be-input  差文本域  
+ 
 
 新组件  
 InputNumber  
