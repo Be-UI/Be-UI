@@ -211,14 +211,14 @@
                     </be-button>
                 </template>
             </be-input>-->
-<!--           :focusTrigger="false"   :suggestionList="testList" -->
+<!--           :focusTrigger="false"   :suggestionList="testList" :fetchSuggestions="getSuggest"-->
             <be-autocomplete
                 :focusTrigger="false"
                 clearable
                 size="mini"
                 prevIcon="delete"
                 nextIcon="delete"
-                :fetchSuggestions="getSuggest"
+                :suggestionList="testList"
                 keyValue="id"
                 labelValue="label"
                 @prevIconClick="handlePrevIcon"

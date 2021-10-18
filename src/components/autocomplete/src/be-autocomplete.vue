@@ -3,7 +3,6 @@
 * @deprecated
 * @author czh
 * @update (czh 2021/10/13)
-  点击触发√、输入匹配触发√、自定义模板 √、远程加载
 */
 <template>
 <be-popover :trigger="focusTrigger ? 'manual':'none'"
@@ -118,13 +117,22 @@ export default defineComponent({
          * input 事件处理方法，实现双向绑定
          */
         const handleInput = (): void => {
-            // 調用遠程加載數據方法
-            if (props.fetchSuggestions) {
-                getSuggestions()
+            let suggestionList = props.suggestionList.length > 0 ? props.suggestionList : listDataCache
+            // 點擊觸發時
+            if(props.focusTrigger){
+                matchSuggestions(valInner.value,suggestionList)
             }else{
-                // 匹配输入建议
-                matchSuggestions(valInner.value,props.suggestionList)
-                showPopover()
+                // 輸入觸發，傳遞了方法就遠程獲取
+                if (props.fetchSuggestions) {
+                    getSuggestions((list:Array<any>):void =>{
+                        matchSuggestions(valInner.value,list)
+                        showPopover()
+                    })
+                }else{
+                    // 否則直接匹配
+                    matchSuggestions(valInner.value,suggestionList)
+                    showPopover()
+                }
             }
             ctx.emit('update:modelValue', valInner.value)
             ctx.emit('input', valInner.value)
@@ -152,6 +160,10 @@ export default defineComponent({
             eventDom = $eventDom
             computedPositon($eventDom)
             ctx.emit('focus', valInner.value)
+            // 焦點獲取數據
+            if (props.fetchSuggestions && props.focusTrigger) {
+                getSuggestions()
+            }
         }
         /**
          * 输入框内容清除方法
@@ -215,25 +227,19 @@ export default defineComponent({
         /**
          * 获取输入建议
          */
-        const getSuggestions = ():void =>{
-            showPopover()
+        const getSuggestions = (cb:Function = ()=>{}):void =>{
             nextTick(()=>{
                 // 沒有缓存就請求數據
-                loading.value = true
                 if(props.fetchSuggestions && listDataCache.length === 0){
+                    loading.value = true
                     props.fetchSuggestions((listData:Array<any>) => {
                         // 设置输入建议数据
                         selectList.value = JSON.parse(JSON.stringify(listData))
                         listDataCache = JSON.parse(JSON.stringify(listData))
-                        // 匹配輸入
-                        matchSuggestions(valInner.value,listDataCache)
                         loading.value = false
                     })
-                }else{
-                    // 匹配輸入
-                    matchSuggestions(valInner.value,listDataCache)
-                    loading.value = false
                 }
+                if(cb) cb(listDataCache)
             })
         }
         /**

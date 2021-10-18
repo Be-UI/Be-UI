@@ -26,9 +26,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
-组件迁移 重构  
-
-be-autocomplete 逻辑整理 周天...
+组件迁移 重构
 be-message 周天...
 
 select  
