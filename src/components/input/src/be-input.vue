@@ -79,7 +79,6 @@
 /**
  * 带输入建议远程搜索的输入框
  */
-// import BeInputSelect from "./be-input-select";
 import {computed, defineComponent, getCurrentInstance, nextTick, onMounted, reactive, ref, useAttrs, watch} from "vue";
 import BeIcon from "../../svg-icon/src/be-icon.vue";
 import {AutosizeProp, IInputInst} from "./be-input-type";
@@ -196,8 +195,6 @@ export default defineComponent({
         inputStyle: {
             type: Object
         },
-
-
         /**
          * 输入框行数，只对 type="textarea" 有效
          */
@@ -308,8 +305,9 @@ export default defineComponent({
                 }
             } else {
                 areaStyle.value = {
-                    minHeight: compTextareaHeight(curInstAreaRefs).minHeight,
+                    minHeight: compTextareaHeight(curInstAreaRefs,props.rows).minHeight,
                 }
+                console.log(areaStyle.value)
             }
         }
         const computedTextareaStyle = computed(() => ({

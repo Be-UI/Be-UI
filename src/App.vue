@@ -189,7 +189,7 @@
                 @input="handleinput"
                 @focus="handlefocus"
                 @blur="handleblur"
-                autosize
+                :rows="4"
                 style="resize:none"
                 v-model="num">
 <!--                <template #prev>

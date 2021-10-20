@@ -82,13 +82,13 @@ function computeMaxRowH( height: number,
                          maxRows:number | null,
                          boxSizing:string,
                          paddingSize:number,
-                         borderSize:number):void{
+                         borderSize:number):number | undefined{
     if(!maxRows) return
     let maxHeight = singleRowHeight * maxRows
     if (boxSizing === 'border-box') {
         maxHeight = maxHeight + paddingSize + borderSize
     }
-    height = Math.min(maxHeight, height)
+    return Math.min(maxHeight, height)
 }
 export default function compTextareaHeight(
     targetElement: HTMLInputElement,
@@ -122,7 +122,7 @@ export default function compTextareaHeight(
         result.minHeight = `${minHeight}px`
     }
     if (maxRows !== null) {
-        computeMaxRowH(height,singleRowHeight,maxRows,boxSizing,paddingSize,borderSize)
+        height = computeMaxRowH(height,singleRowHeight,maxRows,boxSizing,paddingSize,borderSize) || height
     }
     result.height = `${height}px`
     hiddenTextarea.parentNode?.removeChild(hiddenTextarea)
