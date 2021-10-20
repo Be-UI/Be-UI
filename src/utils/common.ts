@@ -33,6 +33,7 @@ export function isEmpty(val: unknown) {
 }
 export const clearTimer = (timer: Ref<TimeoutHandle>) => {
     clearTimeout(timer.value)
+    // @ts-ignore
     timer.value = null
 }
 export const isBool = (val: unknown) => typeof val === 'boolean'
