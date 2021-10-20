@@ -182,15 +182,15 @@
             </be-button>
             <be-input
                 ref="sssinput"
-                type="textarea"
+                type="test"
                 placeholder="测试文本域"
                 @keydown="handleChange"
                 @change="handleChange"
+                clearable
+                showPassword
                 @input="handleinput"
                 @focus="handlefocus"
                 @blur="handleblur"
-                :rows="4"
-                style="resize:none"
                 v-model="num">
 <!--                <template #prev>
                     <be-button

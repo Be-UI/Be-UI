@@ -37,6 +37,8 @@
                 @blur="handleBlur($event.target.value)"
                 @change='handleChange'
                 @keydown="handleKeydown"
+                @mouseenter="handleEnter"
+                @mouseleave="handleLeave"
                 @input="handleInput($event.target.value)"
                 :class="`be-input__inner ${disabled ? 'be-input__disabled' :''}`"/>
             <!--            @blur="handleBlur($event.target.value)"
@@ -44,9 +46,11 @@
             <!--后置图标-->
             <be-icon @click="handleIcon('next')" :icon="nextIcon" class="be-input-nextIcon"
                      v-if="nextIcon"></be-icon>
-            <!--清除按钮-->
-            <be-icon @click="handleClear" icon="delete" class="be-input-icon be-input-close"
-                     v-show="clearable"></be-icon>
+            <!--清除按钮 v-show="showClearIcon-->
+            <div class="be-input-close-body">
+                <be-icon @click="handleClear" icon="delete" class="be-input-icon be-input-close"
+                         v-show="showClearIcon"></be-icon>
+            </div>
             <!--密碼按鈕-->
             <be-icon @click="handlePassword" :icon="`${isPassWord ? 'no-eye' :'eye'}`"
                      class="be-input-icon be-input-password" v-show="showPassword"></be-icon>
@@ -291,10 +295,19 @@ export default defineComponent({
                 ctx.emit('nextIconClick')
             }
         }
+        let showClearIcon = ref<boolean>(false)
+        const handleEnter = (): void => {
+            if (props.clearable) {
+                showClearIcon.value = true
+            }
+        }
+        const handleLeave = (): void => {
+            showClearIcon.value = false
+        }
         /**************************************** 文本域相关方法 *******************************************/
         const areaStyle = ref({})
         const resizeTextarea = () => {
-            const {autosize } = props
+            const {autosize} = props
             if (inputType.value !== 'textarea') return
 
             if (autosize) {
@@ -305,7 +318,7 @@ export default defineComponent({
                 }
             } else {
                 areaStyle.value = {
-                    minHeight: compTextareaHeight(curInstAreaRefs,props.rows).minHeight,
+                    minHeight: compTextareaHeight(curInstAreaRefs, props.rows).minHeight,
                 }
                 console.log(areaStyle.value)
             }
@@ -328,10 +341,10 @@ export default defineComponent({
         /**************************************** 暴露对外的公共方法 *******************************************/
         const beInputInner = ref<any>(null)
         let curInstInputRefs = null
-        let curInstAreaRefs:any =  null
-        nextTick(()=>{
+        let curInstAreaRefs: any = null
+        nextTick(() => {
             curInstInputRefs = reactive(internalInstance.refs.beInputInner as IInputInst)
-            curInstAreaRefs =  reactive(internalInstance.refs.beInputAreaInner as IInputInst)
+            curInstAreaRefs = reactive(internalInstance.refs.beInputAreaInner as IInputInst)
             beInputInner.value = inputType.value === 'textarea' ? curInstAreaRefs : curInstInputRefs
 
         })
@@ -362,7 +375,7 @@ export default defineComponent({
         const select = (): void => {
             inputOrTextarea.value.select()
         }
-        onMounted(()=>{
+        onMounted(() => {
             nextTick(resizeTextarea)
         })
         return {
@@ -377,13 +390,16 @@ export default defineComponent({
             select,
             handleKeydown,
             blur,
+            showClearIcon,
             handleChange,
             handlePassword,
             handleInput,
             handleIcon,
             handleClear,
             handleFocus,
-            handleBlur
+            handleBlur,
+            handleEnter,
+            handleLeave
         }
     }
 })

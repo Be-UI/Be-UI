@@ -67,22 +67,27 @@
       color: $infoHover;
       width: 12px;
       height: 12px;
-      line-height: 12px;
+      line-height: 1.5;
       font-size: 12px;
       margin: 0 3px;
       .be-icon{
         fill: $infoHover;
-        vertical-align: 0;
+        vertical-align: 1em;
       }
     }
-    .be-input-close {
-      border-radius: 50px;
-      border: 1px solid $infoHover;
-      &:hover {
+    .be-input-close-body{
+      width: 1em;
+      height: 1em;
+      .be-input-close {
+        border-radius: 50px;
         border: 1px solid $infoHover;
-        color: $infoHover
+        &:hover {
+          border: 1px solid $infoHover;
+          color: $infoHover
+        }
       }
     }
+
     .be-input-password {
       height: 18px;
       font-size: 18px;
