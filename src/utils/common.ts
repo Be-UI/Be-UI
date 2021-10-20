@@ -1,3 +1,11 @@
+import {
+    isArray,
+    isObject,
+    toRawType,
+} from '@vue/shared'
+
+import type { Ref } from 'vue'
+import {TimeoutHandle} from "./types";
 /**
  * id生成方法
  * @return {string}
@@ -13,3 +21,20 @@ export const getUuid = ():string =>{
     s[8] = s[13] = s[18] = s[23] = "-"
     return s.join("")
 }
+export function isEmpty(val: unknown) {
+    if (
+        (!val && val !== 0) ||
+        (isArray(val) && !val.length) ||
+        (isObject(val) && !Object.keys(val).length)
+    )
+        return true
+
+    return false
+}
+export const clearTimer = (timer: Ref<TimeoutHandle>) => {
+    clearTimeout(timer.value)
+    timer.value = null
+}
+export const isBool = (val: unknown) => typeof val === 'boolean'
+export const isNumber = (val: unknown) => typeof val === 'number'
+export const isHTMLElement = (val: unknown) => toRawType(val).startsWith('HTML')

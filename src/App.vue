@@ -31,7 +31,7 @@
         <!--    <be-tooltip content="'qwddddddddddddddddddd" placement="left" x="300" y="300" trigger="manual">
               <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
             </be-tooltip>-->
-            <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;">
+<!--            <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;">
                 <be-button
                     @click="test"
                     prevIcon="delete"
@@ -41,8 +41,8 @@
                     测试
                 </be-button>
                 <div style="margin-top: 10px">
-                    <!--  layout,isFront,pageData,isDynamic,disabledJump,disabled    //:pageSize="pageParams.pageSize"-->
-        <!--            <be-pagination
+                    &lt;!&ndash;  layout,isFront,pageData,isDynamic,disabledJump,disabled    //:pageSize="pageParams.pageSize"&ndash;&gt;
+        &lt;!&ndash;            <be-pagination
                                    :pageSize="pageParams.pageSize"
                                    :pageCount="pageParams.total"
                                    :pagerShowCount="5"
@@ -68,8 +68,8 @@
                                 测试
                             </be-button>
                         </template>&ndash;&gt;
-                    </be-pagination>-->
-        <!--            <be-pagination
+                    </be-pagination>&ndash;&gt;
+        &lt;!&ndash;            <be-pagination
                         :pageSize="pageParams.pageSize"
                         :pageCount="pageParams.total"
                         isDynamic
@@ -96,7 +96,7 @@
                                 测试
                             </be-button>
                         </template>
-                    </be-pagination>-->
+                    </be-pagination>&ndash;&gt;
                     <be-pagination
                         :pageSize="pageParams.pageSize"
                         :pageCount="pageParams.total"
@@ -129,7 +129,7 @@
                         </template>
                     </be-pagination>
                 </div>
-            </div>
+            </div>-->
 
         <!--        <div style="width:100px;height: 30px;background: #4F62A7" id="qwq">cesas</div>
             <div style="width: 60px;height: 30px;background: #4F62A7" id="aaa">top</div>-->
@@ -175,22 +175,24 @@
                 </template>
               </be-dialog>-->
         <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;">
-<!--            <be-input
+            <be-button type="primary"
+                       bordered
+                       @click="testInputFunc"
+                       round="3">确定
+            </be-button>
+            <be-input
                 ref="sssinput"
-                clearable
-                showPassword
-                type="password"
-                size="mini"
-                prevIcon="delete"
-                nextIcon="delete"
-                @prevIconClick="handlePrevIcon"
-                @nextIconClick="handlenextIcon"
+                type="textarea"
+                placeholder="测试文本域"
+                @keydown="handleChange"
                 @change="handleChange"
                 @input="handleinput"
                 @focus="handlefocus"
                 @blur="handleblur"
+                autosize
+                style="resize:none"
                 v-model="num">
-                <template #prev>
+<!--                <template #prev>
                     <be-button
                         @click="test"
                         prevIcon="delete"
@@ -209,10 +211,10 @@
                         size="large">
                         测试
                     </be-button>
-                </template>
-            </be-input>-->
+                </template>-->
+            </be-input>
 <!--           :focusTrigger="false"   :suggestionList="testList" :fetchSuggestions="getSuggest"-->
-            <be-autocomplete
+<!--            <be-autocomplete
                 :focusTrigger="false"
                 clearable
                 size="mini"
@@ -228,7 +230,7 @@
                 @focus="handlefocus"
                 @blur="handleblur"
                 v-model="num">
-<!--                <template #prev>
+&lt;!&ndash;                <template #prev>
                     <be-button
                         @click="test"
                         prevIcon="delete"
@@ -237,8 +239,8 @@
                         size="large">
                         测试
                     </be-button>
-                </template>-->
-<!--                <template #next>
+                </template>&ndash;&gt;
+&lt;!&ndash;                <template #next>
                     <be-button
                         @click="test"
                         prevIcon="delete"
@@ -247,7 +249,7 @@
                         size="large">
                         测试
                     </be-button>
-                </template>-->
+                </template>&ndash;&gt;
                 <template v-slot:cus-temp="slotProps">
                     <div style="display: flex;justify-content: center;align-items: center">
                         {{slotProps.item.label}}
@@ -255,7 +257,7 @@
                     </div>
 
                 </template>
-            </be-autocomplete>
+            </be-autocomplete>-->
 
         </div>
     </div>
@@ -323,6 +325,9 @@ export default {
         }
     },
     methods: {
+        testInputFunc(){
+          this.$refs.sssinput.select()
+        },
         getSuggest(cb){
             setTimeout(()=>{
                 cb(

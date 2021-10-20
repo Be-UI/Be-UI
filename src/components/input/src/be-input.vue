@@ -12,21 +12,24 @@
         be-input
         be-input__${size}
         ${disabled ? 'be-input__disabled ' :''}
+        ${inputType === 'textarea' ? 'be-input__textarea' : ''}
         ${customClass}`">
         <!-- @slot 前置插槽-->
-         <slot name="prev"></slot>
-        <div class="be-input-body">
+        <slot name="prev"></slot>
+        <div class="be-input-body" v-if="inputType !== 'textarea'">
             <!--  <div class="be-input" v-click-outside="closeDisplay" :class="customClass">
                 <div class="be-input-body" :class="expandStyle">-->
             <!--前置图标-->
             <be-icon @click="handleIcon('prev')" :icon="prevIcon" class="be-input-prevIcon"
                      v-if="prevIcon"></be-icon>
             <input
-                :ref="beInputInner"
+                ref="beInputInner"
                 :disabled="disabled"
                 :placeholder="placeholder"
                 :value="modelValue"
                 :maxlength="maxlength"
+                :tabindex="tabindex"
+                :aria-label="label"
                 :type="inputType"
                 :id="id"
                 v-bind="attrs"
@@ -50,6 +53,24 @@
         </div>
         <!-- @slot 后置插槽-->
         <slot name="next"></slot>
+        <div class="be-input-body" v-if="inputType === 'textarea'">
+            <textarea
+                ref="beInputAreaInner"
+                class="be-input__textarea__inner"
+                v-bind="attrs"
+                :tabindex="tabindex"
+                :aria-label="label"
+                :value="modelValue"
+                :style="computedTextareaStyle"
+                :disabled="disabled"
+                :placeholder="placeholder"
+                @focus="handleFocus($event.target.value,$event)"
+                @blur="handleBlur($event.target.value)"
+                @change='handleChange'
+                @keydown="handleKeydown"
+                @input="handleInput($event.target.value)">
+            </textarea>
+        </div>
     </div>
 
 </template>
@@ -59,10 +80,12 @@
  * 带输入建议远程搜索的输入框
  */
 // import BeInputSelect from "./be-input-select";
-import {computed, defineComponent, getCurrentInstance, nextTick, ref, useAttrs} from "vue";
+import {computed, defineComponent, getCurrentInstance, nextTick, onMounted, reactive, ref, useAttrs, watch} from "vue";
 import BeIcon from "../../svg-icon/src/be-icon.vue";
-import {IInputInst} from "./be-input-type";
-
+import {AutosizeProp, IInputInst} from "./be-input-type";
+import type {PropType} from 'vue'
+import {isObject} from "@vue/shared";
+import compTextareaHeight from "./computeAreaHeight";
 
 export default defineComponent({
     name: "BeInput",
@@ -86,7 +109,7 @@ export default defineComponent({
         /**
          * id
          */
-        id:String,
+        id: String,
         /**
          * 绑定值 （完成）
          */
@@ -155,6 +178,24 @@ export default defineComponent({
             type: String,
             default: ''
         },
+        /**
+         * 输入框关联的label文字
+         */
+        label: {
+            type: String,
+        },
+        /**
+         * 输入框的tabindex
+         */
+        tabindex: {
+            type: [Number, String],
+        },
+        /**
+         * input元素或textarea元素的style
+         */
+        inputStyle: {
+            type: Object
+        },
 
 
         /**
@@ -165,10 +206,11 @@ export default defineComponent({
             default: 2
         },
         /**
-         * input元素或textarea元素的style
+         * 文本域自动调整
          */
-        inputStyle: {
-            type: Object
+        autosize: {
+            type: [Boolean, Object] as PropType<AutosizeProp>,
+            default: false as AutosizeProp,
         },
 
     },
@@ -179,6 +221,9 @@ export default defineComponent({
         const internalInstance = getCurrentInstance() as IInputInst
         const inputType = ref<string>(props.type)
         const isPassWord = ref<boolean>(props.type === 'password' ? true : false)
+        /**
+         * 密码显示按钮方法
+         */
         const handlePassword = (): void => {
             isPassWord.value = !isPassWord.value
             if (!isPassWord.value) {
@@ -187,7 +232,6 @@ export default defineComponent({
                 inputType.value = props.type
             }
         }
-
 
         /**
          * change 事件处理方法
@@ -202,8 +246,8 @@ export default defineComponent({
          * @param {String | Number} val - 更新后值
          */
         const handleInput = (val: string | number): void => {
-             ctx.emit('update:modelValue', val)
-             ctx.emit('input', val)
+            ctx.emit('update:modelValue', val)
+            ctx.emit('input', val)
         }
 
         /**
@@ -223,12 +267,12 @@ export default defineComponent({
          * @param {Event} event - 事件对象
          */
         const handleFocus = (value: string | number, event: Event): void => {
-            ctx.emit('focus', value,event)
+            ctx.emit('focus', value, event)
         }
         /**
          * 处理按键
          */
-        const handleKeydown = (e:Event) => {
+        const handleKeydown = (e: Event) => {
             ctx.emit('keydown', e)
         }
         /**
@@ -250,8 +294,49 @@ export default defineComponent({
                 ctx.emit('nextIconClick')
             }
         }
+        /**************************************** 文本域相关方法 *******************************************/
+        const areaStyle = ref({})
+        const resizeTextarea = () => {
+            const {autosize } = props
+            if (inputType.value !== 'textarea') return
+
+            if (autosize) {
+                const minRows = isObject(autosize) ? autosize.minRows : undefined
+                const maxRows = isObject(autosize) ? autosize.maxRows : undefined
+                areaStyle.value = {
+                    ...compTextareaHeight(curInstAreaRefs, minRows, maxRows),
+                }
+            } else {
+                areaStyle.value = {
+                    minHeight: compTextareaHeight(curInstAreaRefs).minHeight,
+                }
+            }
+        }
+        const computedTextareaStyle = computed(() => ({
+            ...props.inputStyle,
+            ...areaStyle.value,
+        }))
+        watch(
+            () => props.modelValue,
+            (val) => {
+                nextTick(resizeTextarea)
+                // 表单校验
+                /*if (props.validateEvent) {
+                    elFormItem.formItemMitt?.emit('el.form.change', [val])
+                }*/
+            }
+        )
+
         /**************************************** 暴露对外的公共方法 *******************************************/
         const beInputInner = ref<any>(null)
+        let curInstInputRefs = null
+        let curInstAreaRefs:any =  null
+        nextTick(()=>{
+            curInstInputRefs = reactive(internalInstance.refs.beInputInner as IInputInst)
+            curInstAreaRefs =  reactive(internalInstance.refs.beInputAreaInner as IInputInst)
+            beInputInner.value = inputType.value === 'textarea' ? curInstAreaRefs : curInstInputRefs
+
+        })
         const inputOrTextarea = computed(() => {
             return beInputInner.value
         })
@@ -261,7 +346,7 @@ export default defineComponent({
          */
         const focus = (): void => {
             nextTick(() => {
-               inputOrTextarea.value.focus()
+                inputOrTextarea.value.focus()
             })
         }
         /**
@@ -269,7 +354,7 @@ export default defineComponent({
          * @public
          */
         const blur = (): void => {
-          inputOrTextarea.value.blur()
+            inputOrTextarea.value.blur()
 
         }
         /**
@@ -279,6 +364,9 @@ export default defineComponent({
         const select = (): void => {
             inputOrTextarea.value.select()
         }
+        onMounted(()=>{
+            nextTick(resizeTextarea)
+        })
         return {
             uid: internalInstance.uid,
             attrs,
@@ -286,6 +374,7 @@ export default defineComponent({
             inputOrTextarea,
             inputType,
             isPassWord,
+            computedTextareaStyle,
             focus,
             select,
             handleKeydown,

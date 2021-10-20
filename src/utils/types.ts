@@ -4,3 +4,4 @@ export type SFCWithInstall<T> = T & Plugin
 export interface IEvent extends MouseEvent{
     path:Array<HTMLElement>
 }
+export type TimeoutHandle = ReturnType<typeof window.setTimeout>
