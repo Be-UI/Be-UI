@@ -21,13 +21,13 @@
                     expandTrigger>
             </be-ellipsis>-->
 
-<!--              <be-popover trigger="hover" width="300" customClass="asdwq" >
+              <be-popover trigger="hover" width="300" customClass="asdwq" placement="bottom">
                   <template #trigger>
-        &lt;!&ndash;            <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>&ndash;&gt;
+        <!--            <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>-->
                     <be-icon icon="delete" @click="testclose" style="position: absolute;left: 20%;top: 100px;"></be-icon>
                   </template>
                    <panda width="25" height="25"  @click="test"></panda>
-              </be-popover>-->
+              </be-popover>
         <!--    <be-tooltip content="'qwddddddddddddddddddd" placement="left" x="300" y="300" trigger="manual">
               <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
             </be-tooltip>-->
@@ -175,12 +175,12 @@
                 </template>
               </be-dialog>-->
         <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;">
-            <be-button type="primary"
+<!--            <be-button type="primary"
                        bordered
                        @click="testInputFunc"
                        round="3">确定
-            </be-button>
-            <be-input
+            </be-button>-->
+<!--            <be-input
                 ref="sssinput"
                 type="test"
                 placeholder="测试文本域"
@@ -192,7 +192,7 @@
                 @focus="handlefocus"
                 @blur="handleblur"
                 v-model="num">
-<!--                <template #prev>
+&lt;!&ndash;                <template #prev>
                     <be-button
                         @click="test"
                         prevIcon="delete"
@@ -211,11 +211,11 @@
                         size="large">
                         测试
                     </be-button>
-                </template>-->
-            </be-input>
+                </template>&ndash;&gt;
+            </be-input>-->
 <!--           :focusTrigger="false"   :suggestionList="testList" :fetchSuggestions="getSuggest"-->
 <!--            <be-autocomplete
-                :focusTrigger="false"
+
                 clearable
                 size="mini"
                 prevIcon="delete"
