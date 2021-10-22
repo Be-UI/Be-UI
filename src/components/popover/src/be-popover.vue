@@ -5,23 +5,24 @@
     </div>
 
     <teleport to="body">
+            <transition  name="be-fade-in-linear">
+                <div class="be-popover"
+                     v-click-outside="{handler:close,isDisabled:outsideDisabled}"
+                     role="tooltip"
+                     :id="`be_popover_${uid}`"
+                     :key="`be_popover_${uid}`"
+                     v-if="show"
+                     :style="stylePopover">
+                    <div class="be-popover-body" :id="`be_popover_body${uid}`">
+                        <slot></slot>
+                    </div>
+                    <div :id="`be_popover_arrow${uid}`"
+                         :class="`be-popover-arrow`"
+                         v-if="raw">
+                    </div>
+                </div>
+            </transition>
 
-            <div class="be-popover"
-                 v-click-outside="{handler:close,isDisabled:outsideDisabled}"
-                 :class="asd"
-                 role="tooltip"
-                 :id="`be_popover_${uid}`"
-                 :key="`be_popover_${uid}`"
-                 v-if="show"
-                 :style="stylePopover">
-                <div class="be-popover-body" :id="`be_popover_body${uid}`">
-                    <slot></slot>
-                </div>
-                <div :id="`be_popover_arrow${uid}`"
-                     :class="`be-popover-arrow`"
-                     v-if="raw">
-                </div>
-            </div>
 
     </teleport>
 </template>
@@ -170,7 +171,6 @@ export default defineComponent({
             })
         // popover.js 实例缓存
         let popperJS:any = null
-        let asd = ref('shakes')
         /**
          * 计算显示位置
          * @param {String} placement - 位置
@@ -216,9 +216,7 @@ export default defineComponent({
                 popperJS.update();
             }else{
                 popperJS = createPopper(computeDom, popover, popoverOption);
-                nextTick(()=>{
-                    asd.value = 'shake'
-                })
+
 
             }
         }
@@ -322,7 +320,6 @@ export default defineComponent({
             changeDisplay,
             raw: props.raw,
             customClass: props.customClass,
-            asd
         }
     }
 })
@@ -330,23 +327,6 @@ export default defineComponent({
 
 <style lang="scss">
 @import "../../../assets/style/be-popover";
-.shake {
-    opacity: 1;
-  /*  -webkit-transform: scaleY(1);
-    transform: scaleY(1);
-    -webkit-transition: opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-    transition: opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-    transition: transform .3s cubic-bezier(.23, 1, .32, 1), opacity .3s cubic-bezier(.23, 1, .32, 1);
-    transition: transform .3s cubic-bezier(.23, 1, .32, 1), opacity .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
-    -webkit-transform-origin: center top;
-    transform-origin: center top*/
-    transition:all 1s
-}
-.shakes{
-    opacity: 0;
-   /* -webkit-transform: scaleY(0);
-    transform: scaleY(0)*/
-}
 
 @keyframes shakess {
     10%,
