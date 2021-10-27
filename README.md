@@ -27,7 +27,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 排期
 组件迁移 重构
-be-popover 动画  
+
 select  
 be-message 周天...
 be-pager 重构完成  
