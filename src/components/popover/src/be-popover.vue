@@ -1,5 +1,5 @@
 <template>
-    <!--  <div v-click-outside="{handler:close,isDisabled:outsideDisabled}">-->
+    <!--  v-click-outside="{handler:close,isDisabled:outsideDisabled}"-->
     <div :id="`be_popover_trigger${uid}`" aria-describedby="tooltip">
         <slot name="trigger"></slot>
     </div>
@@ -131,10 +131,8 @@ export default defineComponent({
          */
         const close = (): void => {
             setTimeout(() => {
-                if (popperJS && popperJS.destroy) {
-                    popperJS.destroy();
-                }
                 show.value = false
+                //show.value = false
                 /** 提交触发 显示跟新 事件
                  * @event update
                  * @param {Boolean} 当前显示状态
@@ -148,7 +146,7 @@ export default defineComponent({
          * @public
          */
         const changeDisplay = (isShow: boolean): void => {
-            let delay:number = 100
+            let delay:number = 0
             if (isShow) {
                 delay = props.delay
             } else {
@@ -288,11 +286,11 @@ export default defineComponent({
             }
         }
         // 是否禁用  click-outside 标识
-        let outsideDisabled: boolean = false
+        let outsideDisabled = ref<Boolean>(false)
         onMounted(() :void => {
             // 根据触发类型 设置是否禁用 click-outside,只有click触发类型时才使用
             if (props.trigger === 'hover' || props.trigger === 'manual') {
-                outsideDisabled = true
+                outsideDisabled.value = true
             }
             // 禁用就不绑定触发事件了
             if (props.disabled) {
@@ -309,6 +307,9 @@ export default defineComponent({
                 triggerDom.removeEventListener('click', () => changeDisplay(true), false)
                 triggerDom.removeEventListener('mouseenter', () => changeDisplay(true), false)
                 triggerDom.removeEventListener('mouseleave', () => changeDisplay(false), false)
+            }
+            if (popperJS && popperJS.destroy) {
+                popperJS.destroy();
             }
         })
         return {
@@ -328,26 +329,4 @@ export default defineComponent({
 <style lang="scss">
 @import "../../../assets/style/be-popover";
 
-@keyframes shakess {
-    10%,
-    90% {
-        transform: translate3d(-1px, 0, 0);
-    }
-
-    20%,
-    80% {
-        transform: translate3d(2px, 0, 0);
-    }
-
-    30%,
-    50%,
-    70% {
-        transform: translate3d(-4px, 0, 0);
-    }
-
-    40%,
-    60% {
-        transform: translate3d(4px, 0, 0);
-    }
-}
 </style>

@@ -8,7 +8,7 @@
   "dependencies": {
     "@popperjs/core": "^2.10.1",
     "save": "^2.4.0",
-    "vue": "^3.0.4"
+    "vue": "^3.2.4"
   },
   "devDependencies": {
     "@types/node": "^16.7.4",

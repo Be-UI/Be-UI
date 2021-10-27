@@ -21,10 +21,10 @@
                     expandTrigger>
             </be-ellipsis>-->
 
-              <be-popover trigger="hover" width="300" customClass="asdwq" placement="bottom">
+              <be-popover trigger="manual" width="300" customClass="asdwq" placement="bottom">
                   <template #trigger>
         <!--            <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>-->
-                    <be-icon icon="delete" @click="testclose" style="position: absolute;left: 20%;top: 100px;"></be-icon>
+                    <be-icon icon="delete" @click="testclose" style="position: absolute;left: 20%;top: 300px;"></be-icon>
                   </template>
                    <panda width="25" height="25"  @click="test"></panda>
               </be-popover>
@@ -215,7 +215,6 @@
             </be-input>-->
 <!--           :focusTrigger="false"   :suggestionList="testList" :fetchSuggestions="getSuggest"-->
 <!--            <be-autocomplete
-
                 clearable
                 size="mini"
                 prevIcon="delete"
@@ -427,7 +426,7 @@ export default {
              })*/
         },
         testclose() {
-            this.notify.close()
+           // this.notify.close()
         }
     }
 }
