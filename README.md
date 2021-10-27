@@ -28,7 +28,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 排期
 组件迁移 重构
 
-select  
+select  开发中...
 be-message 周天...
 be-pager 重构完成  
 常规分页 （修改完成，pager-ordinary重构完成）  
