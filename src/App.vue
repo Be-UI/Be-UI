@@ -20,14 +20,14 @@
             百万富翁 摸爬滚打 黑暗好像 一颗巨石 按在胸口"
                     expandTrigger>
             </be-ellipsis>-->
-
+<!--
               <be-popover trigger="manual" width="300" customClass="asdwq" placement="bottom">
                   <template #trigger>
-        <!--            <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>-->
+        &lt;!&ndash;            <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>&ndash;&gt;
                     <be-icon icon="delete" @click="testclose" style="position: absolute;left: 20%;top: 300px;"></be-icon>
                   </template>
                    <panda width="25" height="25"  @click="test"></panda>
-              </be-popover>
+              </be-popover>-->
         <!--    <be-tooltip content="'qwddddddddddddddddddd" placement="left" x="300" y="300" trigger="manual">
               <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
             </be-tooltip>-->
@@ -257,7 +257,7 @@
 
                 </template>
             </be-autocomplete>-->
-
+        <be-select  size="medium" v-model="seletStr"></be-select>
         </div>
     </div>
 
@@ -271,7 +271,6 @@ import BePopover from "./components/popover/src/be-popover.vue";
 import {createPopper} from '@popperjs/core'
 import {BeLoadingSer} from './components'
 import BeIcon from "./components/svg-icon/src/be-icon.vue";
-
 
 export default {
     name: 'App',
@@ -289,6 +288,7 @@ export default {
                 pageSize: 5,
                 total: 50
             },
+            seletStr:'aaqw',
             testList:[
                 {label:'落日绣帘卷',id:'落日绣帘卷'},
                 {label:'亭下水连空',id:'亭下水连空'},
@@ -308,7 +308,6 @@ export default {
     },
     components: {
         BeIcon,
-
         panda
     },
     mounted() {

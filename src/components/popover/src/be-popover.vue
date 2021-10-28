@@ -6,19 +6,21 @@
 
     <teleport to="body">
             <transition  name="be-fade-in-linear">
-                <div class="be-popover"
-                     v-click-outside="{handler:close,isDisabled:outsideDisabled}"
-                     role="tooltip"
-                     :id="`be_popover_${uid}`"
-                     :key="`be_popover_${uid}`"
-                     v-if="show"
-                     :style="stylePopover">
-                    <div class="be-popover-body" :id="`be_popover_body${uid}`">
-                        <slot></slot>
-                    </div>
-                    <div :id="`be_popover_arrow${uid}`"
-                         :class="`be-popover-arrow`"
-                         v-if="raw">
+                <div :class="customClass">
+                    <div class="be-popover"
+                         v-click-outside="{handler:close,isDisabled:outsideDisabled}"
+                         role="tooltip"
+                         :id="`be_popover_${uid}`"
+                         :key="`be_popover_${uid}`"
+                         v-if="show"
+                         :style="stylePopover">
+                        <div class="be-popover-body" :id="`be_popover_body${uid}`">
+                            <slot></slot>
+                        </div>
+                        <div :id="`be_popover_arrow${uid}`"
+                             :class="`be-popover-arrow`"
+                             v-if="raw">
+                        </div>
                     </div>
                 </div>
             </transition>

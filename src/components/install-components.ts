@@ -10,6 +10,7 @@ export { default as BeLoading } from './loading';//全局、按需
 export { default as BePagination } from './pagination';//全局、按需
 export { default as BeInput } from './input';//全局、按需
 export { default as BeAutocomplete } from './autocomplete';//全局、按需
+export { default as BeSelect } from './select';//全局、按需
 // plugins
 export { default as BeNotification } from './notification';//服务
 export { default as BeMsg } from './message-box';//服务

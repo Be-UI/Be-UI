@@ -1,0 +1,67 @@
+.be-select{
+    .be-select-input{
+        outline: 0;
+        border: 0;
+        width: 100%;
+    }
+    .be-select-input__mini{
+        height: 28px;
+        line-height: 28px;
+    }
+    .be-select-input__medium{
+        height: 30px;
+        line-height: 30px;
+    }
+    .be-select-input__large{
+        height: 40px;
+        line-height: 40px;
+    }
+    .be-input-select {
+        background-color: $default;
+        .be-input-select__inner{
+            margin: 0;
+        }
+        ul{
+            margin-block-start: .5em;
+            margin-block-end: .5em;
+        }
+    }
+    .be-select-body{
+        display: flex;
+        align-items: center;
+        outline: 0;
+        border: 1px solid $infoBorder;
+        border-radius: 3px;
+        width: 100%;
+        background-color: $default;
+        padding: 0 8px;
+        box-sizing: border-box;
+    }
+    .be-select-icon{
+        fill: $defaultText;
+    }
+
+}
+.be-select-option-body{
+    padding: .5em 0;
+    box-sizing: border-box;
+    .be-select-option{
+        height: 30px;
+        line-height: 30px;
+        text-align: left;
+        padding-left: 15px;
+        box-sizing: border-box;
+        &:hover{
+            background-color: $infoHover;
+        }
+    }
+}
+
+.be-select-popover{
+        .be-popover {
+            .be-popover-body{
+                padding: 0;
+            }
+        }
+
+}

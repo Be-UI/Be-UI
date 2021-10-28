@@ -6,7 +6,7 @@
 */
 
 import { App} from 'vue'
-import beSelect from './src/be-select.vue'
+import beSelect from './src/be-select'
 import type {SFCWithInstall} from "../../utils/types";
 /**
  * 组件装载方法
