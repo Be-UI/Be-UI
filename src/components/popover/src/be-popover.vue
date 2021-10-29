@@ -37,7 +37,7 @@ import {
     ref,
     nextTick,
     getCurrentInstance,
-    reactive
+    reactive, watch, computed
 } from "vue";
 import {ClickOutside } from '../../../utils/direactives/custom-direactives/click-outside';
 import { createPopper} from '@popperjs/core';
@@ -46,6 +46,9 @@ import {IPopover, TPopoverStyle,VirtualElement} from './be-popover-type'
 export default defineComponent({
     name: "BePopover",
     directives: { ClickOutside },
+    emits: [
+        'update',
+    ],
     props: {
         /**
          * 显示方向(完成)
@@ -263,6 +266,12 @@ export default defineComponent({
         /**
          * 触发元素触发事件方法绑定
          */
+        const evtList ={
+            'click':changeDisplay.bind(this,true),
+            'mouseenter':changeDisplay.bind(this,true),
+            'mouseleave':changeDisplay.bind(this,false),
+            'manual':changeDisplay.bind(this,!show.value)
+        }
         const addEvent = ():void=>{
             if (ctx.slots.trigger) {
               if(props.triggerElm){
@@ -272,19 +281,40 @@ export default defineComponent({
                 triggerDom = matchDom(document.getElementById(`be_popover_trigger${internalInstance.uid}`))
                 computeDom = triggerDom
               }
+              const evt =  changeDisplay.bind(this,true)
                 // 根据触发类型 设置不同的事件监听
                 if (triggerDom && props.trigger === 'click') {
-                    triggerDom.addEventListener('click', () => changeDisplay(true), false)
+                    triggerDom.addEventListener('click', evtList['click'], false)
                 }
                 if (triggerDom && props.trigger === 'hover') {
-                    triggerDom.addEventListener('mouseenter', () => changeDisplay(true), false)
-                    triggerDom.addEventListener('mouseleave', () => changeDisplay(false), false)
+                    triggerDom.addEventListener('mouseenter', evtList['mouseenter'], false)
+                    triggerDom.addEventListener('mouseleave', evtList['mouseleave'], false)
                 }
                 if (triggerDom && props.trigger === 'manual') {
-                    triggerDom.addEventListener('click', () => changeDisplay(!show.value), false)
+                    triggerDom.addEventListener('click', evtList['manual'], false)
                 }
             } else {
                 console.error('Please set the trigger element')
+            }
+
+        }
+        const isDisabled = computed(()=>{return props.disabled})
+        watch(isDisabled,(nVal)=>{
+            if(nVal){
+                removeEvt()
+            }else{
+                addEvent()
+            }
+        })
+        /**
+         * 触发元素触发事件方法移除
+         */
+        const removeEvt = ():void => {
+            if (triggerDom) {
+                triggerDom.removeEventListener('click', evtList['click'], false)
+                triggerDom.removeEventListener('mouseenter', evtList['mouseenter'], false)
+                triggerDom.removeEventListener('mouseleave', evtList['mouseleave'], false)
+                triggerDom.removeEventListener('mouseleave', evtList['manual'], false)
             }
         }
         // 是否禁用  click-outside 标识
@@ -305,11 +335,7 @@ export default defineComponent({
         })
         onBeforeUnmount(() => {
             // 取消事件监听
-            if (triggerDom) {
-                triggerDom.removeEventListener('click', () => changeDisplay(true), false)
-                triggerDom.removeEventListener('mouseenter', () => changeDisplay(true), false)
-                triggerDom.removeEventListener('mouseleave', () => changeDisplay(false), false)
-            }
+            removeEvt()
             if (popperJS && popperJS.destroy) {
                 popperJS.destroy();
             }

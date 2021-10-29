@@ -174,7 +174,7 @@
                 </be-button>
                 </template>
               </be-dialog>-->
-        <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;">
+        <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 180px">
 <!--            <be-button type="primary"
                        bordered
                        @click="testInputFunc"
@@ -257,7 +257,7 @@
 
                 </template>
             </be-autocomplete>-->
-        <be-select  size="medium" v-model="seletStr"></be-select>
+        <be-select  size="medium" v-model="seletStr" clear></be-select>
         </div>
     </div>
 
@@ -288,7 +288,7 @@ export default {
                 pageSize: 5,
                 total: 50
             },
-            seletStr:'aaqw',
+            seletStr:'',
             testList:[
                 {label:'落日绣帘卷',id:'落日绣帘卷'},
                 {label:'亭下水连空',id:'亭下水连空'},

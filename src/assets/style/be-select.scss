@@ -2,7 +2,8 @@
     .be-select-input{
         outline: 0;
         border: 0;
-        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
     }
     .be-select-input__mini{
         height: 28px;
@@ -29,6 +30,7 @@
     .be-select-body{
         display: flex;
         align-items: center;
+        justify-content: space-between;
         outline: 0;
         border: 1px solid $infoBorder;
         border-radius: 3px;
