@@ -1,4 +1,16 @@
-import {computed, defineComponent, reactive, ref, h, getCurrentInstance, Transition, VNode, nextTick} from 'vue'
+import {
+    computed,
+    defineComponent,
+    reactive,
+    ref,
+    h,
+    getCurrentInstance,
+    Transition,
+    VNode,
+    nextTick,
+    watch,
+    onMounted
+} from 'vue'
 import '../../../assets/style/be-select.scss';
 import {ISelect} from "../src/be-select-type";
 import BeInputSelect from "../../autocomplete/src/be-input-select.vue";
@@ -17,6 +29,8 @@ export default defineComponent({
         'blur',
         'openChange',
         'clear',
+        'MouseEnter',
+        'MouseLeave',
     ],
     props: {
         /**
@@ -40,8 +54,40 @@ export default defineComponent({
         list: {
             type: Array,
             default: () => [
-                {id: 'qwdasdqw', label: 'gadohgae'},
-                {id: 'qwdasddqw', label: 'aaqw'}
+               /* {id: 'qwdasdqw', label: 'gadohgae',disabled:true},
+                {id: 'qwdasddqw', label: 'aaqw'}*/
+                {
+                    type:'group',
+                    label:'group1',
+                    id:'asdwq',
+                    children:[
+                        {
+                            label: 'Drive My Car',
+                            id: 'songdqw1'
+                        },
+                        {
+                            label: 'Drive My Car',
+                            id: 'song1as',
+                            disabled:true
+                        }
+                    ]
+                },
+                {
+                    type:'group',
+                    label:'group2',
+                    id:'asdwqf',
+                    children:[
+                        {
+                            label: 'Drive My Car dwqd',
+                            id: 'songdqw1a'
+                        },
+                        {
+                            label: 'Drive My Car asd',
+                            id: 'song1aqws',
+                            disabled:true
+                        }
+                    ]
+                }
             ]
         },
         /**
@@ -83,7 +129,14 @@ export default defineComponent({
         selectIcon:{
             type:String,
             default:'under'
-        }
+        },
+        /**
+         * 开启分组
+         */
+        group:{
+            type: Boolean,
+            default: false
+        },
 
 
     },
@@ -96,11 +149,27 @@ export default defineComponent({
         const cursor = props.disabled ? 'not-allowed' : readonlyInput.value ? 'pointer' : ''
         const loading = ref<boolean>(false)
         const dataList = ref<Array<any>>(props.list)
-        // 沒有指定key，則生成
-        if (!props.keyValue) {
-            dataList.value.forEach(val => {
-                val.id = getUuid()
-            })
+
+        watch(dataList,(nVal,oVal)=>{
+            if(nVal !== oVal){
+                handleList()
+            }
+        })
+        /**
+         * 處理列表數據
+         */
+        const handleList = ():void =>{
+            // 分组数据处理逻辑
+            if(props.group){
+
+            }else{
+                // 沒有指定key，則生成
+                if (!props.keyValue) {
+                    dataList.value.forEach(val => {
+                        val.id = getUuid()
+                    })
+                }
+            }
         }
         // 输入建议下拉样式
         let selectStyle = reactive({width: '0px'})
@@ -183,11 +252,9 @@ export default defineComponent({
 
         }
         const iconType = ref<string>(computed(()=>props.selectIcon).value)
-        const triggerDisabled = ref<boolean>(false)
         const changeIcon = (type:string | undefined):void =>{
             if(props.clear && props.modelValue){
                 iconType.value = type || 'error'
-                triggerDisabled.value = true
                 return
             }
         }
@@ -197,6 +264,11 @@ export default defineComponent({
          */
         const handleMouseEnter = (event: Event):void =>{
             changeIcon(undefined)
+            /** MouseEnter 事件
+             * @event MouseEnter
+             * @param {Event} event - 事件对象
+             */
+            ctx.emit('MouseEnter',event)
         }
         /**
          * 處理鼠標移出
@@ -204,6 +276,11 @@ export default defineComponent({
          */
         const handleMouseLeave = (event: Event):void =>{
             changeIcon(props.selectIcon)
+            /** MouseLeave 事件
+             * @event MouseLeave
+             * @param {Event} event - 事件对象
+             */
+            ctx.emit('MouseLeave',event)
         }
         /**
          * 清除方法
@@ -215,7 +292,6 @@ export default defineComponent({
              */
             ctx.emit('clear')
             changeIcon(props.selectIcon)
-            triggerDisabled.value = false
         }
         /**
          * 選項列表渲染
@@ -226,22 +302,27 @@ export default defineComponent({
             dataList.value.forEach((val,index)=>{
                 optionList.push((
                     <div
-                        class='be-select-option'
+                        class={`be-select-option ${val.disabled ? 'be-select-option__disabled' : ''}`}
                         key={val[keyValue]}
-                        onClick = {()=>handleSelect(val,index)} >
+                        onClick = {()=>{
+                            if(val.disabled) return
+                            handleSelect(val,index)
+                        }} >
                         {val[props.labelValue]}
                     </div>
                 ))
             })
             return optionList
         }
+        onMounted(()=>{
+            handleList()
+        })
         return () => {
             return (
                 <div id={`be_select-${uid}`}
                      class='be-select'>
                     <be-popover
                         onUpdate={selectOpenChange}
-                        disabled={triggerDisabled.value}
                         trigger='click'
                         placement="bottom"
                         ref="beSelectPopover"

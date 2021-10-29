@@ -57,6 +57,13 @@
             background-color: $infoHover;
         }
     }
+    .be-select-option__disabled{
+        color: $infoHover;
+        cursor: not-allowed;
+        &:hover{
+            background-color: transparent;
+        }
+    }
 }
 
 .be-select-popover{
