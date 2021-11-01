@@ -257,14 +257,15 @@
 
                 </template>
             </be-autocomplete>-->
-        <be-select  size="medium" v-model="seletStr" clear></be-select>
+            <be-icon icon="error" @click="showDialog = false" width="25" height="25" color="#00ffff" custom-class="asdqw" spin></be-icon>
+<!--        <be-select  size="medium" v-model="seletStr" clear></be-select>-->
         </div>
     </div>
 
 </template>
 
 <script lang="tsx">
-import {panda} from './test'
+import {panda} from './icon-testing'
 import {BeNotify} from "./components/notification/src/be-notification-service";
 import {BeMsg} from "./components/message-box/src/be-message-box-service";
 import BePopover from "./components/popover/src/be-popover.vue";
