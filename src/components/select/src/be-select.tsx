@@ -21,7 +21,7 @@ import {getUuid} from "../../../utils/common";
 
 export default defineComponent({
     name: "be-select",
-    components: {BeInputSelect, BePopover,BeIcon},
+    components: {BeInputSelect, BePopover, BeIcon},
     emits: [
         'update:modelValue',
         'select',
@@ -54,13 +54,13 @@ export default defineComponent({
         list: {
             type: Array,
             default: () => [
-               /* {id: 'qwdasdqw', label: 'gadohgae',disabled:true},
-                {id: 'qwdasddqw', label: 'aaqw'}*/
+                /* {id: 'qwdasdqw', label: 'gadohgae',disabled:true},
+                 {id: 'qwdasddqw', label: 'aaqw'}*/
                 {
-                    type:'group',
-                    label:'group1',
-                    id:'asdwq',
-                    children:[
+                    type: 'group',
+                    label: 'group1',
+                    id: 'asdwq',
+                    children: [
                         {
                             label: 'Drive My Car',
                             id: 'songdqw1'
@@ -68,15 +68,15 @@ export default defineComponent({
                         {
                             label: 'Drive My Car',
                             id: 'song1as',
-                            disabled:true
+                            disabled: true
                         }
                     ]
                 },
                 {
-                    type:'group',
-                    label:'group2',
-                    id:'asdwqf',
-                    children:[
+                    type: 'group',
+                    label: 'group2',
+                    id: 'asdwqf',
+                    children: [
                         {
                             label: 'Drive My Car dwqd',
                             id: 'songdqw1a'
@@ -84,7 +84,7 @@ export default defineComponent({
                         {
                             label: 'Drive My Car asd',
                             id: 'song1aqws',
-                            disabled:true
+                            disabled: true
                         }
                     ]
                 }
@@ -93,47 +93,45 @@ export default defineComponent({
         /**
          * 绑定值 （完成）
          */
-        modelValue: {
-
-        },
+        modelValue: {},
         /**
          * 下拉label
          */
-        labelValue:{
-            type:String,
-            default:'label'
+        labelValue: {
+            type: String,
+            default: 'label'
         },
         /**
          * 下拉key
          */
-        keyValue:{
-            type:String,
+        keyValue: {
+            type: String,
         },
         /**
          * placeholder
          */
-        placeholder:{
-            type:String,
-            default:'请选择'
+        placeholder: {
+            type: String,
+            default: '请选择'
         },
         /**
          * 可清空
          */
-        clear:{
+        clear: {
             type: Boolean,
             default: false
         },
         /**
          * 下拉图标
          */
-        selectIcon:{
-            type:String,
-            default:'under'
+        selectIcon: {
+            type: String,
+            default: 'under'
         },
         /**
          * 开启分组
          */
-        group:{
+        group: {
             type: Boolean,
             default: false
         },
@@ -149,31 +147,33 @@ export default defineComponent({
         const cursor = props.disabled ? 'not-allowed' : readonlyInput.value ? 'pointer' : ''
         const loading = ref<boolean>(false)
         const dataList = ref<Array<any>>(props.list)
-        const list = computed(()=>{return props.list})
-        watch(list,(nVal,oVal)=>{
-            if(nVal !== oVal){
+        const list = computed(() => {
+            return props.list
+        })
+        watch(list, (nVal, oVal) => {
+            if (nVal !== oVal) {
                 handleList()
             }
         })
         /**
          * 處理列表數據
          */
-        const handleList = ():void =>{
+        const handleList = (): void => {
             // 分组数据处理逻辑
-            if(props.group){
-                let arr:Array<any> = []
-                props.list.forEach((res:any)=> {
+            if (props.group) {
+                let arr: Array<any> = []
+                props.list.forEach((res: any) => {
                     let group = {...res}
                     delete group.children
                     arr.push(group)
-                    if(res.children?.length > 0){
-                        res.children.forEach((childRes:any)=> {
+                    if (res.children?.length > 0) {
+                        res.children.forEach((childRes: any) => {
                             arr.push(childRes)
                         })
                     }
                 })
                 dataList.value = arr
-            }else{
+            } else {
                 // 沒有指定key，則生成
                 if (!props.keyValue) {
                     dataList.value.forEach(val => {
@@ -188,7 +188,7 @@ export default defineComponent({
          * 计算输入建议下拉框位置
          */
         const computedPositon = (): void => {
-            const $eventDom:HTMLElement | null = document.getElementById(`be-select-body${uid}`)
+            const $eventDom: HTMLElement | null = document.getElementById(`be-select-body${uid}`)
             if (!$eventDom) return
             selectStyle.width = Number(window.getComputedStyle($eventDom).width.split('px')[0]) + 'px'
         }
@@ -215,8 +215,8 @@ export default defineComponent({
              * @param {Object} value - 点击对象数据
              * @param {Number} index - 点击的对应列表索引
              */
-            ctx.emit('select', value,index)
-             // 关闭下拉，清除缓存
+            ctx.emit('select', value, index)
+            // 关闭下拉，清除缓存
             const curInstPopover = internalInstance.refs.beSelectPopover as IInputSelectFunc
             curInstPopover.close()
         }
@@ -232,8 +232,8 @@ export default defineComponent({
              * @event focus
              * @param {Event} event - 事件对象
              */
-            ctx.emit('focus',event)
-             // 焦點獲取數據
+            ctx.emit('focus', event)
+            // 焦點獲取數據
             /*  if (props.fetchSuggestions && props.focusTrigger) {
                  getSuggestions()
              }*/
@@ -247,24 +247,24 @@ export default defineComponent({
              * @event blur
              * @param {Event} event - 事件对象
              */
-            ctx.emit('blur',event)
+            ctx.emit('blur', event)
         }
 
         /**
          * 下拉列表展開關閉方法
          * @param {Boolean} showPopover - popover展開狀態
          */
-        const selectOpenChange = (showPopover:boolean):void =>{
+        const selectOpenChange = (showPopover: boolean): void => {
             /** 输入 openChange 事件
              * @event blur
              * @param {Boolean} showPopover - popover展開狀態
              */
-            ctx.emit('openChange',showPopover)
+            ctx.emit('openChange', showPopover)
 
         }
-        const iconType = ref<string>(computed(()=>props.selectIcon).value)
-        const changeIcon = (type:string | undefined):void =>{
-            if(props.clear && props.modelValue){
+        const iconType = ref<string>(computed(() => props.selectIcon).value)
+        const changeIcon = (type: string | undefined): void => {
+            if (props.clear && props.modelValue) {
                 iconType.value = type || 'error'
                 return
             }
@@ -273,30 +273,30 @@ export default defineComponent({
          * 處理鼠標移入
          * @param {Event} event - 事件对象
          */
-        const handleMouseEnter = (event: Event):void =>{
+        const handleMouseEnter = (event: Event): void => {
             changeIcon(undefined)
             /** MouseEnter 事件
              * @event MouseEnter
              * @param {Event} event - 事件对象
              */
-            ctx.emit('MouseEnter',event)
+            ctx.emit('MouseEnter', event)
         }
         /**
          * 處理鼠標移出
          * @param {Event} event - 事件对象
          */
-        const handleMouseLeave = (event: Event):void =>{
+        const handleMouseLeave = (event: Event): void => {
             changeIcon(props.selectIcon)
             /** MouseLeave 事件
              * @event MouseLeave
              * @param {Event} event - 事件对象
              */
-            ctx.emit('MouseLeave',event)
+            ctx.emit('MouseLeave', event)
         }
         /**
          * 清除方法
          */
-        const handleClear = ():void =>{
+        const handleClear = (): void => {
             updateValue('')
             /** 输入 clear 事件
              * @event clear
@@ -307,11 +307,14 @@ export default defineComponent({
         /**
          * 選項列表渲染
          */
-        const renderOption = ():Array<VNode> => {
+        const renderOption = (): Array<VNode> => {
             const keyValue = props?.keyValue || 'id'
-            let optionList:Array<VNode> = []
-            dataList.value.forEach((val,index)=>{
-                // 分组分割线
+            let optionList: Array<VNode> = []
+            if(internalInstance.slots.default){
+                return internalInstance.slots.default()
+            }
+            dataList.value.forEach((val, index) => {
+                // 選項列表
                 optionList.push((
                     <div
                         class={`
@@ -319,17 +322,17 @@ export default defineComponent({
                         ${val.type === 'group' ? 'be-select-option__group' : 'be-select-option'}
                         ${val.disabled ? 'be-select-option__disabled' : ''}`}
                         key={val[keyValue]}
-                        onClick = {()=>{
-                            if(val.disabled || val.type === 'group') return
-                            handleSelect(val,index)
-                        }} >
+                        onClick={() => {
+                            if (val.disabled || val.type === 'group') return
+                            handleSelect(val, index)
+                        }}>
                         {val[props.labelValue]}
                     </div>
                 ))
             })
             return optionList
         }
-        onMounted(()=>{
+        onMounted(() => {
             handleList()
         })
         return () => {
@@ -356,10 +359,10 @@ export default defineComponent({
                                          cursor: cursor
                                      }}
                                      tabindex={`0`}
-                                     onMouseenter={($event) =>handleMouseEnter($event)}
-                                     onMouseleave={($event) =>handleMouseLeave($event)}
+                                     onMouseenter={($event) => handleMouseEnter($event)}
+                                     onMouseleave={($event) => handleMouseLeave($event)}
                                      onFocus={($event) => handleFocus($event)}
-                                     onBlur={($event)=>handleBlur($event)}>
+                                     onBlur={($event) => handleBlur($event)}>
                                     <input readonly={readonlyInput.value}
                                            tabindex={`-1`}
                                            onFocus={computedPositon}
@@ -372,11 +375,12 @@ export default defineComponent({
                                            class={`be-select-input be-select-input__${props.size}`}
                                     />
                                     <be-icon icon={iconType.value}
-                                             onClick={($event:Event)=>{
-                                                 if(iconType.value === 'error') {
+                                             onClick={($event: Event) => {
+                                                 if (iconType.value === 'error') {
                                                      handleClear()
                                                      $event.stopPropagation()
-                                                 }}}
+                                                 }
+                                             }}
                                              class={`be-select-icon`}>
                                     </be-icon>
                                 </div>
