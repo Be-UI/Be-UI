@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+//import 'virtual:windi.css'
 import App from './App.vue'
 const app = createApp(App)
 import BeUI  from './components'

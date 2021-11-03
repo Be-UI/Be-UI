@@ -149,8 +149,8 @@ export default defineComponent({
         const cursor = props.disabled ? 'not-allowed' : readonlyInput.value ? 'pointer' : ''
         const loading = ref<boolean>(false)
         const dataList = ref<Array<any>>(props.list)
-
-        watch(dataList,(nVal,oVal)=>{
+        const list = computed(()=>{return props.list})
+        watch(list,(nVal,oVal)=>{
             if(nVal !== oVal){
                 handleList()
             }
@@ -161,7 +161,18 @@ export default defineComponent({
         const handleList = ():void =>{
             // 分组数据处理逻辑
             if(props.group){
-
+                let arr:Array<any> = []
+                props.list.forEach((res:any)=> {
+                    let group = {...res}
+                    delete group.children
+                    arr.push(group)
+                    if(res.children?.length > 0){
+                        res.children.forEach((childRes:any)=> {
+                            arr.push(childRes)
+                        })
+                    }
+                })
+                dataList.value = arr
             }else{
                 // 沒有指定key，則生成
                 if (!props.keyValue) {
@@ -300,12 +311,16 @@ export default defineComponent({
             const keyValue = props?.keyValue || 'id'
             let optionList:Array<VNode> = []
             dataList.value.forEach((val,index)=>{
+                // 分组分割线
                 optionList.push((
                     <div
-                        class={`be-select-option ${val.disabled ? 'be-select-option__disabled' : ''}`}
+                        class={`
+                        ${val.type === 'group' && index !== 0 ? 'be-select-option__line' : ''}
+                        ${val.type === 'group' ? 'be-select-option__group' : 'be-select-option'}
+                        ${val.disabled ? 'be-select-option__disabled' : ''}`}
                         key={val[keyValue]}
                         onClick = {()=>{
-                            if(val.disabled) return
+                            if(val.disabled || val.type === 'group') return
                             handleSelect(val,index)
                         }} >
                         {val[props.labelValue]}

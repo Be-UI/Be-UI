@@ -1,11 +1,18 @@
-
+@import "var";
 input:focus-visible {
   outline-offset: 0;
 }
 :focus-visible {
   outline: 0;
 }
-
+.line{
+  height: 2px;
+  width: 100%;
+  padding-left: calc(100% - 3px);
+  padding-right: calc(100% - 3px);
+  position: relative;
+  background-color:$infoHover;
+}
 
 @mixin be-message-tilte{
   font-size: 18px;

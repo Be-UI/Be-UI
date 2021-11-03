@@ -4,7 +4,6 @@ import BeIcon from '../src/be-icon.vue'
  * 测试props生效
  * @param options
  */
-/*
 describe('test-be-icon-props', () => {
     test('width-height-number', () => {
         const wrapper = mount(BeIcon, {
@@ -64,10 +63,10 @@ describe('test-be-icon-props', () => {
         expect(wrapper.element.className.indexOf('be-icon-spin') > 0).toBeTruthy()
     })
 })
-/!**
+/**
  * 测试时间响应方法
  * @param options
- *!/
+ */
 const _mount = (options:any) =>
     mount({
         components: {
@@ -94,7 +93,6 @@ describe('test-be-icon-event', () => {
         expect(handleClick).toBeCalled()
     })
 })
-*/
 
 
 /**

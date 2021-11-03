@@ -53,9 +53,27 @@
         text-align: left;
         padding-left: 15px;
         box-sizing: border-box;
+        color: $defaultText;
+        cursor: pointer;
         &:hover{
             background-color: $infoHover;
         }
+    }
+    .be-select-option__group{
+        color: $info;
+        height: 30px;
+        line-height: 30px;
+        text-align: left;
+        padding-left: 6px;
+        box-sizing: border-box;
+
+    }
+    .be-select-option__line::before{
+        content: ' ';
+        width: 93%;
+        height: 1px;
+        background-color: $infoHover;
+        position: absolute;
     }
     .be-select-option__disabled{
         color: $infoHover;
