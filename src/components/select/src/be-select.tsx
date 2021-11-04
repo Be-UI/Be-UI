@@ -17,7 +17,7 @@ import BeInputSelect from "../../autocomplete/src/be-input-select.vue";
 import BePopover from "../../popover/src/be-popover.vue";
 import BeIcon from "../../svg-icon/src/be-icon.vue";
 import {IInputSelectFunc} from "../../autocomplete/src/be-autocomplete-type";
-import {getUuid} from "../../../utils/common";
+import {getUuid, isString} from "../../../utils/common";
 
 export default defineComponent({
     name: "be-select",
@@ -53,42 +53,7 @@ export default defineComponent({
          */
         list: {
             type: Array,
-            default: () => [
-                 {id: 'qwdasdqw', label: 'gadohgae',disabled:true},
-                 {id: 'qwdasddqw', label: 'aaqw'}
-               /* {
-                    type: 'group',
-                    label: 'group1',
-                    id: 'asdwq',
-                    children: [
-                        {
-                            label: 'Drive My Car',
-                            id: 'songdqw1'
-                        },
-                        {
-                            label: 'Drive My Car',
-                            id: 'song1as',
-                            disabled: true
-                        }
-                    ]
-                },
-                {
-                    type: 'group',
-                    label: 'group2',
-                    id: 'asdwqf',
-                    children: [
-                        {
-                            label: 'Drive My Car dwqd',
-                            id: 'songdqw1a'
-                        },
-                        {
-                            label: 'Drive My Car asd',
-                            id: 'song1aqws',
-                            disabled: true
-                        }
-                    ]
-                }*/
-            ]
+            default: () => []
         },
         /**
          * 绑定值 （完成）
@@ -142,6 +107,25 @@ export default defineComponent({
             type: Boolean,
             default: false
         },
+        /**
+         * 开启搜索匹配
+         */
+        search: {
+            type: Boolean,
+            default: false
+        },
+        /**
+         * 搜索匹配方法
+         */
+        searchFunc :{
+            type: Function,
+        },
+        /**
+         * 搜索排序方法
+         */
+        sortFunc :{
+            type: Function,
+        },
 
 
     },
@@ -150,8 +134,11 @@ export default defineComponent({
         const uid = internalInstance.uid
         // 只读
         const readonlyInput = ref<boolean>(true)
+        if(props.search){
+            readonlyInput.value = false
+        }
         // cursor 的样式
-        const cursor = props.disabled ? 'not-allowed' : readonlyInput.value ? 'pointer' : ''
+        let cursor = props.disabled ? 'not-allowed' : readonlyInput.value ? 'pointer' : ''
         const loading = ref<boolean>(false)
         const dataList = ref<Array<any>>(props.list)
         const list = computed(() => {
@@ -162,6 +149,8 @@ export default defineComponent({
                 handleList()
             }
         })
+
+        let listCache:Array<any> = []
         /**
          * 處理列表數據
          */
@@ -188,6 +177,7 @@ export default defineComponent({
                     })
                 }
             }
+            listCache = JSON.parse(JSON.stringify(dataList.value))
         }
         // 输入建议下拉样式
         let selectStyle = reactive({width: '0px'})
@@ -204,7 +194,7 @@ export default defineComponent({
          * @param value
          */
         const updateValue = (value: any): void => {
-            if (props.keyValue) {
+            if (isString(value)) {
                 ctx.emit('update:modelValue', value)
             } else {
                 ctx.emit('update:modelValue', value[props.labelValue])
@@ -216,6 +206,7 @@ export default defineComponent({
          * @param {Number} index - 点击索引
          */
         const handleSelect = (value: any, index: number): void => {
+
             updateValue(value)
             /** 选中 select 事件
              * @event select
@@ -234,6 +225,7 @@ export default defineComponent({
          * @param {Event} event - 事件对象
          */
         const handleFocus = (event: Event): void => {
+
             computedPositon()
             /** focus 事件
              * @event focus
@@ -275,6 +267,7 @@ export default defineComponent({
                 iconType.value = type || 'error'
                 return
             }
+
         }
         /**
          * 處理鼠標移入
@@ -310,6 +303,7 @@ export default defineComponent({
              */
             ctx.emit('clear')
             changeIcon(props.selectIcon)
+            dataList.value = listCache
         }
         /**
          * 選項列表渲染
@@ -374,6 +368,38 @@ export default defineComponent({
             }
         }
 
+        /**
+         * 匹配输入建议
+         * @param {string} value - 輸入值
+         * @param {Array} ordData - 原始數據集
+         */
+        const matchSuggestions = (value:string,ordData:Array<any>):void =>{
+            const filter = (value:string,ordData:Array<any>,labelValue:string) =>{
+                let arr  = value ? ordData.filter(
+                    (val:any) => {
+                        return (val[labelValue].toString().toLowerCase().indexOf(value.toLowerCase()) >= 0);
+                    }
+                ) : ordData
+                return arr.length > 0 ? arr : ordData
+            }
+            // dataList.value
+            // 匹配過濾
+            let filterRes = props.searchFunc ? props.searchFunc(value,ordData,props.labelValue) : filter(value,ordData,props.labelValue)
+            // 排序調用排序
+            if(props.sortFunc) {
+                filterRes.sort(props.sortFunc)
+            }
+            dataList.value = filterRes
+        }
+        /**
+         * @param {Event} event - 事件对象
+         */
+        const inputChange = (event:Event):void =>{
+             const $eventDom = (event.target as HTMLInputElement)
+             updateValue($eventDom.value)
+             matchSuggestions( $eventDom.value,listCache)
+
+        }
 
         onMounted(() => {
             handleList()
@@ -392,7 +418,9 @@ export default defineComponent({
                         {{
                             default: (
                                 <div style={selectStyle} class='be-select-option-body'>
-                                    {renderOption()}
+                                    <div class='be-select-option-container scrollDiy'>
+                                        {renderOption()}
+                                    </div>
                                     {/*动态扩展*/}
                                     {renderExtendElm()}
                                 </div>
@@ -414,6 +442,7 @@ export default defineComponent({
                                            value={props.modelValue}
                                            placeholder={props.placeholder}
                                            disabled={props.disabled}
+                                           onInput = {($event) => inputChange($event)}
                                            style={{
                                                cursor: cursor
                                            }}

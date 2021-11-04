@@ -265,7 +265,7 @@
                 <span >{{ slotProps.label }}</span>
             </template>
         </be-select>-->
-            <be-select  size="medium" v-model="seletStr" clear extend>
+            <be-select  size="medium" v-model="seletStr" clear search :list="testList" keyValue = 'id' :searchFunc = 'searchFunc' :sortFunc = 'sortFunc'>
 
             </be-select>
         </div>
@@ -298,7 +298,7 @@ export default {
                 pageSize: 5,
                 total: 50
             },
-            seletStr:'',
+            seletStr:'落日绣帘卷',
             testList:[
                 {label:'落日绣帘卷',id:'落日绣帘卷'},
                 {label:'亭下水连空',id:'亭下水连空'},
@@ -311,7 +311,9 @@ export default {
                 {label:'认得醉翁语',id:'认得醉翁语'},
                 {label:'山色有无中',id:'山色有无中'},
                 {label:'一點浩然氣',id:'一點浩然氣'},
-                {label:'千里快哉風',id:'fjkhfsdaiuorgga'},
+                {label:'千里快哉風我',id:'fjkhfsdaiuorgga'},
+                {label:'a',id:'fjkhfsdaiuawdorgga'},
+                {label:'ab',id:'fjkhfsadaiuorgga'},
             ]
         }
 
@@ -333,6 +335,17 @@ export default {
         }
     },
     methods: {
+        searchFunc(value:string,ordData:Array<any>,labelValue:string){
+            let arr  = value ? ordData.filter(
+                (val:any) => {
+                    return (val[labelValue].toString().toLowerCase().indexOf(value.toLowerCase()) >= 0);
+                }
+            ) : ordData
+            return arr.length > 0 ? arr : ordData
+        },
+        sortFunc(a,b){
+            return a.label.toLowerCase().localeCompare(b.label.toLowerCase())
+        },
         testInputFunc(){
           this.$refs.sssinput.select()
         },
@@ -348,10 +361,10 @@ export default {
                         {label:'欹枕江南烟雨',id:'长记平山堂上'},
                         {label:'杳杳没孤鸿',id:'杳杳没孤鸿'},
                         {label:'千里快哉風',id:'千里快哉風'},
+                        {label:'千里快哉風千里快哉風',id:'千里快哉風千里快哉風'},
                         {label:'认得醉翁语',id:'认得醉翁语'},
                         {label:'山色有无中',id:'山色有无中'},
                         {label:'一點浩然氣',id:'一點浩然氣'},
-                        {label:'千里快哉風',id:'fjkhfsdaiuorgga'},
                     ]
                 )
             },3000)

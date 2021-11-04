@@ -37,5 +37,6 @@ export const clearTimer = (timer: Ref<TimeoutHandle>) => {
     timer.value = null
 }
 export const isBool = (val: unknown) => typeof val === 'boolean'
+export const isString = (val: unknown) => (typeof val=='string')&&val.constructor==String;
 export const isNumber = (val: unknown) => typeof val === 'number'
 export const isHTMLElement = (val: unknown) => toRawType(val).startsWith('HTML')
