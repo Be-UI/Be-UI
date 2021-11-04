@@ -12,7 +12,7 @@ import {
     onMounted
 } from 'vue'
 import '../../../assets/style/be-select.scss';
-import {ISelect} from "../src/be-select-type";
+import {IOption, ISelect} from "../src/be-select-type";
 import BeInputSelect from "../../autocomplete/src/be-input-select.vue";
 import BePopover from "../../popover/src/be-popover.vue";
 import BeIcon from "../../svg-icon/src/be-icon.vue";
@@ -54,9 +54,9 @@ export default defineComponent({
         list: {
             type: Array,
             default: () => [
-                /* {id: 'qwdasdqw', label: 'gadohgae',disabled:true},
-                 {id: 'qwdasddqw', label: 'aaqw'}*/
-                {
+                 {id: 'qwdasdqw', label: 'gadohgae',disabled:true},
+                 {id: 'qwdasddqw', label: 'aaqw'}
+               /* {
                     type: 'group',
                     label: 'group1',
                     id: 'asdwq',
@@ -87,7 +87,7 @@ export default defineComponent({
                             disabled: true
                         }
                     ]
-                }
+                }*/
             ]
         },
         /**
@@ -132,6 +132,13 @@ export default defineComponent({
          * 开启分组
          */
         group: {
+            type: Boolean,
+            default: false
+        },
+        /**
+         * 动态扩展
+         */
+        extend: {
             type: Boolean,
             default: false
         },
@@ -315,6 +322,7 @@ export default defineComponent({
                 optionList.push((
                     <div
                         class={`
+                        ellipsis
                         ${val.type === 'group' && index !== 0 ? 'be-select-option__line' : ''}
                         ${val.type === 'group' ? 'be-select-option__group' : 'be-select-option'}
                         ${val.disabled ? 'be-select-option__disabled' : ''}`}
@@ -330,6 +338,43 @@ export default defineComponent({
             })
             return optionList
         }
+
+
+
+
+        /**
+         * 擴展渲染
+         * 不支持分組
+         */
+        const renderExtendElm = (): VNode | void => {
+            if(props.extend && !props.group){
+                return (
+                    <div  class={`
+                        be-select-option__extend`}>
+                        <be-input value={addItem.value} onInput={handleInput}>
+                        </be-input>
+                        <be-icon icon='add' onClick={addItemToList}></be-icon>
+                    </div>
+                )
+            }
+        }
+        const addItem = ref<string>('')
+        const handleInput = (value:string):void =>{
+            addItem.value = value
+        }
+        const addItemToList = ():void =>{
+            if(addItem.value){
+                let item:IOption = {}
+                let keyValue = props.keyValue || 'id'
+                let labelValue = props.keyValue || 'label'
+                item[keyValue] = getUuid()
+                item[labelValue] = addItem.value
+                dataList.value.push(item)
+                addItem.value = ''
+            }
+        }
+
+
         onMounted(() => {
             handleList()
         })
@@ -348,6 +393,8 @@ export default defineComponent({
                             default: (
                                 <div style={selectStyle} class='be-select-option-body'>
                                     {renderOption()}
+                                    {/*动态扩展*/}
+                                    {renderExtendElm()}
                                 </div>
                             ),
                             trigger: (

@@ -13,7 +13,11 @@ input:focus-visible {
   position: relative;
   background-color:$infoHover;
 }
-
+.ellipsis{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 @mixin be-message-tilte{
   font-size: 18px;
   font-family: Microsoft YaHei,sans-serif;

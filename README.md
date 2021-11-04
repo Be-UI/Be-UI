@@ -29,7 +29,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 组件迁移 重构
 
 select  开发中...
-be-message 周天...
+tags 
+be-message 
 be-pager 重构完成  
 常规分页 （修改完成，pager-ordinary重构完成）  
 动态分页 （部分修改完成，差每页显示设置，pager-dynamic重构完成）  

@@ -258,11 +258,16 @@
                 </template>
             </be-autocomplete>-->
 <!--            <be-icon icon="error" @click="showDialog = false" width="25" height="25" color="#00ffff" custom-class="asdqw" spin></be-icon>-->
-        <be-select  size="medium" v-model="seletStr" clear group>
+
+
+<!--        <be-select  size="medium" v-model="seletStr" clear group>
             <template v-slot="slotProps">
                 <span >{{ slotProps.label }}</span>
             </template>
-        </be-select>
+        </be-select>-->
+            <be-select  size="medium" v-model="seletStr" clear extend>
+
+            </be-select>
         </div>
     </div>
 

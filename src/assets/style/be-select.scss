@@ -55,9 +55,28 @@
         box-sizing: border-box;
         color: $defaultText;
         cursor: pointer;
+
         &:hover{
             background-color: $infoHover;
         }
+    }
+    .be-select-option__extend{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 5px;
+        padding: 0 10px;
+        .be-input{
+            width: 70%;
+            flex: 8;
+        }
+        .be-icon-container{
+            flex: 2;
+            .be-icon{
+                cursor: pointer;
+            }
+        }
+
     }
     .be-select-option__group{
         color: $info;
