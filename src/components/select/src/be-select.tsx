@@ -310,9 +310,6 @@ export default defineComponent({
         const renderOption = (): Array<VNode> => {
             const keyValue = props?.keyValue || 'id'
             let optionList: Array<VNode> = []
-            if(internalInstance.slots.default){
-                return internalInstance.slots.default()
-            }
             dataList.value.forEach((val, index) => {
                 // 選項列表
                 optionList.push((
@@ -326,7 +323,8 @@ export default defineComponent({
                             if (val.disabled || val.type === 'group') return
                             handleSelect(val, index)
                         }}>
-                        {val[props.labelValue]}
+                        {/*有插槽就渲染插槽*/}
+                        {internalInstance.slots.default ? internalInstance.slots.default(val,index): val[props.labelValue]}
                     </div>
                 ))
             })
