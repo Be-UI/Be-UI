@@ -31,7 +31,7 @@
         <!--    <be-tooltip content="'qwddddddddddddddddddd" placement="left" x="300" y="300" trigger="manual">
               <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
             </be-tooltip>-->
-<!--            <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;">
+            <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;">
                 <be-button
                     @click="test"
                     prevIcon="delete"
@@ -41,14 +41,15 @@
                     测试
                 </be-button>
                 <div style="margin-top: 10px">
-                    &lt;!&ndash;  layout,isFront,pageData,isDynamic,disabledJump,disabled    //:pageSize="pageParams.pageSize"&ndash;&gt;
-        &lt;!&ndash;            <be-pagination
+                    <!--  layout,isFront,pageData,isDynamic,disabledJump,disabled    //:pageSize="pageParams.pageSize"-->
+                    <be-pagination
                                    :pageSize="pageParams.pageSize"
                                    :pageCount="pageParams.total"
                                    :pagerShowCount="5"
+                                   @updateNum = 'updateNum'
                                    @changePage="pageChange"
                                    :currentPage="pageParams.currentPage">
-        &lt;!&ndash;                <template #prev>
+        <!--                <template #prev>
                             <be-button
                                 @click="test"
                                 prevIcon="delete"
@@ -67,9 +68,9 @@
                                 size="large">
                                 测试
                             </be-button>
-                        </template>&ndash;&gt;
-                    </be-pagination>&ndash;&gt;
-        &lt;!&ndash;            <be-pagination
+                        </template>-->
+                    </be-pagination>
+        <!--            <be-pagination
                         :pageSize="pageParams.pageSize"
                         :pageCount="pageParams.total"
                         isDynamic
@@ -96,8 +97,8 @@
                                 测试
                             </be-button>
                         </template>
-                    </be-pagination>&ndash;&gt;
-                    <be-pagination
+                    </be-pagination>-->
+<!--                    <be-pagination
                         :pageSize="pageParams.pageSize"
                         :pageCount="pageParams.total"
                         :pagerShowCount="5"
@@ -127,9 +128,9 @@
                                 测试
                             </be-button>
                         </template>
-                    </be-pagination>
+                    </be-pagination>-->
                 </div>
-            </div>-->
+            </div>
 
         <!--        <div style="width:100px;height: 30px;background: #4F62A7" id="qwq">cesas</div>
             <div style="width: 60px;height: 30px;background: #4F62A7" id="aaa">top</div>-->
@@ -268,9 +269,9 @@
 <!--            <be-select  size="medium" v-model="seletStr" clear search :list="testList" keyValue = 'id' :searchFunc = 'searchFunc' :sortFunc = 'sortFunc'>
 
             </be-select>-->
-            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
+<!--            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
 
-            </be-select>
+            </be-select>-->
         </div>
     </div>
 
@@ -299,7 +300,7 @@ export default {
                 currentPage: 1,
                 pageNum: 1,
                 pageSize: 5,
-                total: 50
+                total: 500
             },
             seletStr:'落日绣帘卷',
             testList:[
@@ -333,7 +334,7 @@ export default {
          })*/
 
 
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 500; i++) {
             this.pageData.push({num: i})
         }
     },
@@ -399,6 +400,7 @@ export default {
             //console.log(data)
         },
         updateNum(data) {
+            this.pageParams.pageSize = data
            // console.log(data)
         },
         customRender() {

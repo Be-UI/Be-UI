@@ -137,6 +137,13 @@ export default defineComponent({
          */
         remoteFunc: {
             type: Function,
+        },
+        /**
+         * 指定样式
+         */
+        customClass: {
+            type: String,
+            default: ''
         }
 
     },
@@ -182,6 +189,13 @@ export default defineComponent({
                 if (!props.keyValue) {
                     list.forEach(val => {
                         val.id = getUuid()
+                    })
+                }
+                if (props.keyValue) {
+                    list.forEach((val:any) => {
+                        if(!val[props.keyValue || 'id']){
+                            val[props.keyValue || 'id'] = getUuid()
+                        }
                     })
                 }
                 dataList.value = list
@@ -259,17 +273,17 @@ export default defineComponent({
             ctx.emit('blur', event)
         }
         // 當前實例屬性attr
-        const curAttrs =  useAttrs()
+        const curAttrs = useAttrs()
         /**
          * 下拉列表展開關閉方法
          * @param {Boolean} showPopover - popover展開狀態
          */
         const selectOpenChange = (showPopover: boolean): void => {
             // 增加滾動監聽
-            if(showPopover && curAttrs.onScroll){
-                nextTick(()=>{
+            if (showPopover && curAttrs.onScroll) {
+                nextTick(() => {
                     const dom = document.getElementById(`be_select_option_container_${uid}`)
-                    dom?.addEventListener('scroll',handleScroll)
+                    dom?.addEventListener('scroll', handleScroll)
                 })
 
             }
@@ -329,12 +343,12 @@ export default defineComponent({
             dataList.value = listCache
         }
 
-        const handleScroll = ():void =>{
+        const handleScroll = (): void => {
             ctx.emit('scroll')
         }
         const addScrollEvt = (): void => {
             const dom = document.getElementById(`be_select_option_container_${uid}`)
-            dom?.addEventListener('scroll',handleScroll)
+            dom?.addEventListener('scroll', handleScroll)
         }
 
         /**************************************** 擴展渲染選項方法 ************************************/
@@ -480,7 +494,7 @@ export default defineComponent({
                      class='be-select'>
                     <be-popover
                         onUpdate={selectOpenChange}
-                        trigger={trigger}
+                        trigger={trigger.value}
                         placement="bottom"
                         ref="beSelectPopover"
                         trigger-elm={`be_select-${uid}`}
@@ -492,17 +506,19 @@ export default defineComponent({
                                     be-select-option-container 
                                     scrollDiy 
                                     ${loading.value ? 'be-select-loading ' : ''}`}
-                                    id={`be_select_option_container_${uid}`}>
+                                         id={`be_select_option_container_${uid}`}>
                                         {/*渲染loading 或者列表 */}
-                                        {loading.value ? <be-icon icon='loading' spin width='25' height='25'
-                                                                  fill='#606266'></be-icon> : renderOption()}
+                                        {loading.value ?
+                                            <be-icon icon='loading' spin width='25' height='25'
+                                                     fill='#606266'>
+                                            </be-icon> : renderOption()}
                                     </div>
                                     {/*动态扩展*/}
                                     {renderExtendElm()}
                                 </div>
                             ),
                             trigger: (
-                                <div class='be-select-body'
+                                <div class={`be-select-body ${props.customClass}`}
                                      id={`be-select-body${uid}`}
                                      style={{
                                          cursor: cursor

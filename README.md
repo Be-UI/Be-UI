@@ -33,8 +33,8 @@ tags
 be-message 
 be-pager 重构完成  
 常规分页 （修改完成，pager-ordinary重构完成）  
-动态分页 （部分修改完成，差每页显示设置，pager-dynamic重构完成）  
-前端分页 （部分修改完成，差每页显示设置，pager-front重构完成）  
+动态分页 （部分修改完成，差每页显示设置，pager-dynamic重构完成）  ing....
+前端分页 （部分修改完成，差每页显示设置，pager-front重构完成）  ing....
  
 
 新组件  
