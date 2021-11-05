@@ -265,7 +265,10 @@
                 <span >{{ slotProps.label }}</span>
             </template>
         </be-select>-->
-            <be-select  size="medium" v-model="seletStr" clear search :list="testList" keyValue = 'id' :searchFunc = 'searchFunc' :sortFunc = 'sortFunc'>
+<!--            <be-select  size="medium" v-model="seletStr" clear search :list="testList" keyValue = 'id' :searchFunc = 'searchFunc' :sortFunc = 'sortFunc'>
+
+            </be-select>-->
+            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
 
             </be-select>
         </div>
@@ -335,6 +338,7 @@ export default {
         }
     },
     methods: {
+
         searchFunc(value:string,ordData:Array<any>,labelValue:string){
             let arr  = value ? ordData.filter(
                 (val:any) => {
@@ -367,7 +371,7 @@ export default {
                         {label:'一點浩然氣',id:'一點浩然氣'},
                     ]
                 )
-            },3000)
+            },500)
         },
         handleblur(){
 
@@ -448,6 +452,7 @@ export default {
              })*/
         },
         testclose() {
+            console.log(1111)
            // this.notify.close()
         }
     }

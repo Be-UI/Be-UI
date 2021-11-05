@@ -36,7 +36,22 @@ export const clearTimer = (timer: Ref<TimeoutHandle>) => {
     // @ts-ignore
     timer.value = null
 }
+export function debounce(func:Function,wait:number) {
+    let timeout:TimeoutHandle;
+    return function () {
+        const context = this;
+        const args = [...arguments];
+        if (timeout) clearTimeout(timeout);
+        const callNow = !timeout;
+        timeout = setTimeout(() => {
+            // @ts-ignore
+            timeout = null;
+        }, wait)
+        if (callNow) func.apply(context, args)
+    }
+}
 export const isBool = (val: unknown) => typeof val === 'boolean'
 export const isString = (val: unknown) => (typeof val=='string')&&val.constructor==String;
 export const isNumber = (val: unknown) => typeof val === 'number'
 export const isHTMLElement = (val: unknown) => toRawType(val).startsWith('HTML')
+export const isFunction = (val: unknown) => typeof val === 'function'

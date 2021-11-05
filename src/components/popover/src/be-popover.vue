@@ -163,6 +163,7 @@ export default defineComponent({
                     if (show.value) {
                         computePosition(props.placement)
                     }
+                    ctx.emit('update', show.value)
                 })
             }, delay)
         }

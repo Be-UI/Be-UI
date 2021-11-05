@@ -11,7 +11,7 @@
 √ 选项搜索 search
 √ 搜索排序
 √ 加载中状态
-13.远程搜索
+√ 远程搜索
 
 
 
@@ -31,8 +31,8 @@
 √ onMouseEnter	鼠标移入时回调	function	-
 √ onMouseLeave	鼠标移出时回调	function	-
 √ onSelect	被选中时调用，参数为选中项的 value (或 key) 值
+√ onSearch	文本框值变化时回调	function(value: string)	- 在開啓搜索功能后，獲得搜索結果回調
+√ scroll	下拉列表滚动时的回调	function	-
 onChange	选中 option，或 input 的 value 变化时，调用此函数	function(value, option:Option | Array<Option>)	-
 onDeselect	取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效	function(string | number | LabeledValue)	-
-onInputKeyDown	按键按下时回调	function	-
-onPopupScroll	下拉列表滚动时的回调	function	-
-onSearch	文本框值变化时回调	function(value: string)	-
+
