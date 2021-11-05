@@ -41,7 +41,7 @@
       <li :class=" { active: pagerProps.currentPage < maxPageNum ? false : true,
                     disabled:pagerProps.disabled }"
           class="number"
-          v-if="pagerProps.pageCount > 1">{{ maxPageNum }}
+          v-if="maxPageNum > 1">{{ maxPageNum }}
       </li>
     </ul>
     <!--***************** 动态分页 **********************-->
@@ -121,9 +121,13 @@ import {IPageData, IPageProvide, IPagesFront} from "./be-pagenation-type";
         // 上页缩略显示控制
         let showNextMore = ref<boolean>( false)
         // 处理获得常规分页页码数据
-        let pagers:Array<number> = pagersList($$BePaginProps,maxPageNum,showPrevMore,showNextMore).value
+        let pagers = computed(():Array<number>=>{
+          return pagersList($$BePaginProps,maxPageNum,showPrevMore,showNextMore)
+        })
         // 处理获得动态分页页码数据
-        let pagersDynamic:Array<number> = pagersDynamicList($$BePaginProps).value
+        let pagersDynamic = computed(():Array<number>=>{
+          return pagersDynamicList($$BePaginProps)
+        })
         // 处理获得前端分页页码数据、分页切片、前端分页的前后翻页方法
         let pagerFrontParam:IPagesFront | undefined = reactive(pagerFront($$BePaginProps,$$BePaginMix,maxPageNum,showPrevMore,showNextMore,ctx))
         let sliceList =   ref(pagerFrontParam ? pagerFrontParam.sliceList : null)
@@ -170,6 +174,7 @@ import {IPageData, IPageProvide, IPagesFront} from "./be-pagenation-type";
                 newPage = $$BePaginProps.isDynamic ? currentPage + 1 : (currentPage >= maxPageNum.value ? currentPage : currentPage + 1)
             }else{
                 newPage = currentPage - 1
+                newPage = newPage <= 0 ? 1 : newPage
             }
             // 点击缩略翻页时的偏移量
             // 缩略翻页 可能会超出页数范围，这里做限制

@@ -1,11 +1,10 @@
-import { computed } from "vue";
+
 import {IPageProvide} from "./be-pagenation-type";
 /**
  * 计算 动态 分页列表数据
  * @param {Object} $$BePaginProps - provide/inject的 page Props
  */
 export const pagersDynamicList = ($$BePaginProps:IPageProvide) =>{
-  return computed(():Array<number>=>{
     if($$BePaginProps.isDynamic) {
       let array:Array<number> = []
       const currentPage:number = Number($$BePaginProps.currentPage) >= 1 ? Number($$BePaginProps.currentPage) : 1
@@ -27,6 +26,4 @@ export const pagersDynamicList = ($$BePaginProps:IPageProvide) =>{
       return array
     }
     return []
-
-  })
 }

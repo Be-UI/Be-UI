@@ -26,7 +26,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
-组件迁移 重构
+分页数量设置bug
 
 select  开发中...
 tags 

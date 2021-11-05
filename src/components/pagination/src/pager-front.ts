@@ -40,10 +40,8 @@ export const pagerFront = (
             let pagerShowCount:number = $$BePaginProps.pagerShowCount;
             // 顯示的頁碼數量中位數，用於計算是否顯示上下縮略頁
             const halfPagerCount:number = (pagerShowCount - 1) / 2;
-            // 數據縂條數
-            const pageCount:number = $$BePaginProps.pageData.length ;
             // 当小于用户定义的显示页数 大于 用户总页数和显示数计算出来的总页数时，使用计算的总页数
-            pagerShowCount = (pageCount <= pagerShowCount) ? pageCount : pagerShowCount;
+            pagerShowCount = (maxPageNum.value <= pagerShowCount) ? maxPageNum.value : pagerShowCount;
             // 计算当前页，大于最大页时，使用最大页
             const currentPage:number = (Number($$BePaginProps.currentPage) > maxPageNum.value) ? maxPageNum.value : Number($$BePaginProps.currentPage);
             // 初始时，返回切片数据
@@ -51,7 +49,7 @@ export const pagerFront = (
             let showPrevMore:boolean = false;
             let showNextMore:boolean = false;
             // 根据页数和显示页数，判断是否显示翻页缩略
-            if (pageCount > pagerShowCount) {
+            if (maxPageNum.value > pagerShowCount) {
                 if (currentPage > pagerShowCount - halfPagerCount) {
                     showPrevMore = true;
                 }

@@ -1,4 +1,4 @@
-import {computed, Ref} from "vue";
+import {Ref} from "vue";
 import {IPageProvide} from "./be-pagenation-type";
 /**
  * 计算常规分页列表数据
@@ -8,7 +8,6 @@ import {IPageProvide} from "./be-pagenation-type";
  * @param {Boolean} showNextMore - 下页缩略显示标识
  */
 export const pagersList = ($$BePaginProps:IPageProvide,maxPageNum:Ref,showPrevMore:Ref,showNextMore:Ref)=>{
-  return computed(():Array<number>=>{
     if($$BePaginProps.isFront || $$BePaginProps.isDynamic) return []
     // 顯示的頁碼數量
     let pagerShowCount:number = $$BePaginProps.pagerShowCount;
@@ -21,12 +20,12 @@ export const pagersList = ($$BePaginProps:IPageProvide,maxPageNum:Ref,showPrevMo
     // 計算當前頁碼，props的currentPage的當前頁碼 大於計算的最大頁數maxPageNum，則使用 maxPageNum ，否則用props的currentPage
     const currentPage:number = (Number($$BePaginProps.currentPage) > maxPageNum.value) ? maxPageNum.value : Number($$BePaginProps.currentPage);
     // 当數據縂條數 小於 用戶定義的顯示頁面數，則用數據縂條數，否則用顯示頁面數
-    pagerShowCount = (pageCount <= pagerShowCount)  ? pageCount : pagerShowCount;
+    pagerShowCount = (maxPageNum.value <= pagerShowCount)  ? maxPageNum.value : pagerShowCount;
     // 上下縮略也 顯示標識
     let showPrevMoreIner:boolean = false;
     let showNextMoreIner:boolean = false;
     // 根据页数和显示页数，判断是否显示翻页缩略
-    if (pageCount > pagerShowCount) {
+    if (maxPageNum.value > pagerShowCount) {
       // 當前頁碼 大於 （顯示的頁碼數量 - 顯示的頁碼數量中位數） 顯示上頁縮略翻頁
       if (currentPage > pagerShowCount - halfPagerCount ) {
         showPrevMoreIner = true;
@@ -62,5 +61,4 @@ export const pagersList = ($$BePaginProps:IPageProvide,maxPageNum:Ref,showPrevMo
     showPrevMore.value = showPrevMoreIner;
     showNextMore.value = showNextMoreIner;
     return array;
-  })
 }

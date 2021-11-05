@@ -42,14 +42,14 @@
                 </be-button>
                 <div style="margin-top: 10px">
                     <!--  layout,isFront,pageData,isDynamic,disabledJump,disabled    //:pageSize="pageParams.pageSize"-->
-                    <be-pagination
+<!--                    <be-pagination
                                    :pageSize="pageParams.pageSize"
                                    :pageCount="pageParams.total"
                                    :pagerShowCount="5"
                                    @updateNum = 'updateNum'
                                    @changePage="pageChange"
                                    :currentPage="pageParams.currentPage">
-        <!--                <template #prev>
+        &lt;!&ndash;                <template #prev>
                             <be-button
                                 @click="test"
                                 prevIcon="delete"
@@ -68,8 +68,8 @@
                                 size="large">
                                 测试
                             </be-button>
-                        </template>-->
-                    </be-pagination>
+                        </template>&ndash;&gt;
+                    </be-pagination>-->
         <!--            <be-pagination
                         :pageSize="pageParams.pageSize"
                         :pageCount="pageParams.total"
@@ -98,7 +98,7 @@
                             </be-button>
                         </template>
                     </be-pagination>-->
-<!--                    <be-pagination
+                    <be-pagination
                         :pageSize="pageParams.pageSize"
                         :pageCount="pageParams.total"
                         :pagerShowCount="5"
@@ -128,7 +128,7 @@
                                 测试
                             </be-button>
                         </template>
-                    </be-pagination>-->
+                    </be-pagination>
                 </div>
             </div>
 
@@ -299,8 +299,8 @@ export default {
             pageParams: {
                 currentPage: 1,
                 pageNum: 1,
-                pageSize: 5,
-                total: 500
+                pageSize: 200,
+                total: 300
             },
             seletStr:'落日绣帘卷',
             testList:[
@@ -334,7 +334,7 @@ export default {
          })*/
 
 
-        for (let i = 0; i < 500; i++) {
+        for (let i = 0; i < 300; i++) {
             this.pageData.push({num: i})
         }
     },
