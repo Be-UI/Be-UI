@@ -139,7 +139,7 @@ export default defineComponent({
         }
         // cursor 的样式
         let cursor = props.disabled ? 'not-allowed' : readonlyInput.value ? 'pointer' : ''
-        const loading = ref<boolean>(false)
+        const loading = ref<boolean>(true)
         const dataList = ref<Array<any>>(props.list)
         const list = computed(() => {
             return props.list
@@ -418,8 +418,11 @@ export default defineComponent({
                         {{
                             default: (
                                 <div style={selectStyle} class='be-select-option-body'>
-                                    <div class='be-select-option-container scrollDiy'>
-                                        {renderOption()}
+                                    <div class={`
+                                    be-select-option-container 
+                                    scrollDiy 
+                                    ${loading.value  ? 'be-select-loading ' : ''}`}>
+                                        {loading.value  ? <be-icon icon='loading' spin width='25' height='25' fill='#606266'></be-icon> : renderOption()}
                                     </div>
                                     {/*动态扩展*/}
                                     {renderExtendElm()}
