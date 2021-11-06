@@ -112,7 +112,12 @@
 }
 
 .be-pager-jump-input {
-    @include be-input;
+    color: $info;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    transition: all .3s;
     margin: 0 2px;
     width: 35px;
 }

@@ -5,6 +5,7 @@ export * from './install-components';
 export * from './composables';*/
 
 import * as components from './install-components';
+import '../assets/style/tailwind.css'
 const componentList:object = components
 type componentKeyType = keyof typeof componentList;
 export const install = function (app: App) {

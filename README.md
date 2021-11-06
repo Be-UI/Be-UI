@@ -26,16 +26,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
-分页数量设置bug
+
 
 select  开发中...
-tags 
-be-message 
+be-message
+InputNumber
 
- 
 
-新组件  
-InputNumber  
+样式重构 
 图标修改
 
 ## 长期排期

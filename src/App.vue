@@ -1,5 +1,5 @@
 <template>
-    <div id="App">
+    <div id="App" class="app">
         <!--<be-loading
             :show="isLoading"
             text="测试loading"
@@ -272,7 +272,7 @@
 <!--            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
 
             </be-select>-->
-          <be-tag type="warning" :option="testOption" round="10" @close="handleClick" isClose>asdw</be-tag>
+          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>
         </div>
     </div>
 
@@ -477,10 +477,14 @@ body {
 }
 
 #App {
-    background: $info;
+
+   /* background: $info;*/
     height: 100%;
     width: 100%;
     position: fixed;
+}
+.app{
+  @apply bg-green-100
 }
 
 .asdwq {

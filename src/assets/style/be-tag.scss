@@ -14,44 +14,27 @@
   }
 }
 .be-tag{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 5px;
-  box-sizing: border-box;
-  cursor: pointer;
+  @apply inline-flex justify-center items-center cursor-pointer box-border;
   span{
-    margin-right: 3px;
+    @apply mr-1.5;
   }
   .be-icon-container .be-icon{
-    width: 14px;
-    height: 14px;
+    @apply w-4 h-4;
   }
 }
 .be-tag__disabled {
-  cursor: not-allowed;
+  @apply cursor-not-allowed;
 }
-
 .be-tag__mini {
-  height: 24px;
-  line-height: 24px;
-  padding: 0 10px;
-  box-sizing: border-box;
+  @apply box-border px-2.5 h-6 leading-6;
 }
 
 .be-tag__medium {
-  height: 30px;
-  line-height: 30px;
-  padding: 0 10px;
-  box-sizing: border-box;
+  @apply box-border px-2.5 h-8 leading-8;
 }
 
 .be-tag__large {
-  height: 40px;
-  line-height: 40px;
-  padding: 0 10px;
-  box-sizing: border-box;
-
+  @apply box-border px-2.5 h-10 leading-10;
 }
 
 .be-tag__error {
@@ -69,7 +52,7 @@
 }
 
 .be-tag__warning {
-  @include be-tag-type($warning,$whiteText,$warningHover);
+  @apply bg-warning border-0 text-white hover:bg-warningh;
   @include be-icon-default($whiteText);
 }
 
