@@ -31,15 +31,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 select  开发中...
 tags 
 be-message 
-be-pager 重构完成  
-常规分页 （修改完成，pager-ordinary重构完成）  
-动态分页 （部分修改完成，差每页显示设置，pager-dynamic重构完成）  ing....
-前端分页 （部分修改完成，差每页显示设置，pager-front重构完成）  ing....
+
  
 
 新组件  
 InputNumber  
-
 图标修改
 
 ## 长期排期
@@ -53,7 +49,7 @@ InputNumber
 4.输入框组件   be-input  （迁移完成）    
 5.loading组件 be-loading  （迁移完成）  
 6.消息对话组件 be-message-box  （迁移完成）  
-7.分页组件 be-pager  （迁移中）  
+7.分页组件 be-pager  （迁移完成）  
 8.图标组件 be-icon （迁移完成）   
 9.消息通知组件 be-notification （迁移完成）  
 10.文本省略组件 be-ellipsis  （迁移完成）  
