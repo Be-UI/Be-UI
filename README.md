@@ -57,6 +57,8 @@ InputNumber
 12.文本弹出显示 be-toolTip （迁移完成）  
 13.按钮组件 be-button （迁移完成）   
 14.自动补全输入 be-autocomplete （迁移完成）    
+14.tag标签 be-tag （完成）    
+14.选择框 be-select （开发中）    
 
 
 

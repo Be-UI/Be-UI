@@ -31,7 +31,7 @@
         <!--    <be-tooltip content="'qwddddddddddddddddddd" placement="left" x="300" y="300" trigger="manual">
               <div width="25" height="25"  @click="test" style="position: absolute;left: 20%;top: 100px;">++</div>
             </be-tooltip>-->
-            <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;">
+<!--            <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;">
                 <be-button
                     @click="test"
                     prevIcon="delete"
@@ -41,8 +41,8 @@
                     测试
                 </be-button>
                 <div style="margin-top: 10px">
-                    <!--  layout,isFront,pageData,isDynamic,disabledJump,disabled    //:pageSize="pageParams.pageSize"-->
-<!--                    <be-pagination
+                    &lt;!&ndash;  layout,isFront,pageData,isDynamic,disabledJump,disabled    //:pageSize="pageParams.pageSize"&ndash;&gt;
+&lt;!&ndash;                    <be-pagination
                                    :pageSize="pageParams.pageSize"
                                    :pageCount="pageParams.total"
                                    :pagerShowCount="5"
@@ -69,8 +69,8 @@
                                 测试
                             </be-button>
                         </template>&ndash;&gt;
-                    </be-pagination>-->
-        <!--            <be-pagination
+                    </be-pagination>&ndash;&gt;
+        &lt;!&ndash;            <be-pagination
                         :pageSize="pageParams.pageSize"
                         :pageCount="pageParams.total"
                         isDynamic
@@ -97,7 +97,7 @@
                                 测试
                             </be-button>
                         </template>
-                    </be-pagination>-->
+                    </be-pagination>&ndash;&gt;
                     <be-pagination
                         :pageSize="pageParams.pageSize"
                         :pageCount="pageParams.total"
@@ -130,7 +130,7 @@
                         </template>
                     </be-pagination>
                 </div>
-            </div>
+            </div>-->
 
         <!--        <div style="width:100px;height: 30px;background: #4F62A7" id="qwq">cesas</div>
             <div style="width: 60px;height: 30px;background: #4F62A7" id="aaa">top</div>-->
@@ -272,6 +272,7 @@
 <!--            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
 
             </be-select>-->
+          <be-tag type="warning" :option="testOption" round="10" @close="handleClick" isClose>asdw</be-tag>
         </div>
     </div>
 
@@ -290,6 +291,11 @@ export default {
     name: 'App',
     data() {
         return {
+            testOption:{
+              border:'1px solid #00ffff',
+              backgroundColor:'red',
+              color:'green'
+            },
             num: 0,
             notify: null,
             isLoading: true,
@@ -406,6 +412,9 @@ export default {
         customRender() {
             return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)
         },
+      handleClick(){
+          debugger
+      },
         test(qw) {
             this.showDialog = !this.showDialog
             /*this.loadingInst = BeLoadingSer.init({
@@ -477,4 +486,5 @@ body {
 .asdwq {
     background-color: red;
 }
+
 </style>

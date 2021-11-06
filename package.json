@@ -10,7 +10,7 @@
   "dependencies": {
     "@popperjs/core": "^2.10.1",
     "save": "^2.4.0",
-    "vue": "^3.2.20"
+    "vue": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

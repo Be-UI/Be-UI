@@ -1,0 +1,104 @@
+@mixin be-icon-default($color) {
+  .be-icon{
+    use {
+      fill: $color;
+    }
+  }
+}
+@mixin be-tag-type($bgColor,$textColor,$hoverColor) {
+  background: $bgColor;
+  color: $textColor;
+  border: 0;
+  &:hover {
+    background: $hoverColor;
+  }
+}
+.be-tag{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  span{
+    margin-right: 3px;
+  }
+  .be-icon-container .be-icon{
+    width: 14px;
+    height: 14px;
+  }
+}
+.be-tag__disabled {
+  cursor: not-allowed;
+}
+
+.be-tag__mini {
+  height: 24px;
+  line-height: 24px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.be-tag__medium {
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.be-tag__large {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  box-sizing: border-box;
+
+}
+
+.be-tag__error {
+  @include be-tag-type($error,$whiteText,$errorHover);
+  @include be-icon-default($whiteText);
+}
+
+.be-tag__info {
+  @include be-tag-type($default,$defaultText,$infoHover);
+  @include be-icon-default($defaultText);
+}
+.be-tag__success{
+  @include be-tag-type($success,$whiteText,$successHover);
+  @include be-icon-default($whiteText);
+}
+
+.be-tag__warning {
+  @include be-tag-type($warning,$whiteText,$warningHover);
+  @include be-icon-default($whiteText);
+}
+
+.be-tag__primary {
+  @include be-tag-type($primary,$primaryText,$primaryHover);
+  @include be-icon-default($primaryText);
+  &:hover {
+    background: $primaryHover;
+    color: $whiteText;
+    border-color: $primaryText;
+    .be-icon {
+      use {
+        fill: $whiteText;
+      }
+    }
+  }
+}
+
+.be-tag__default {
+  @include be-tag-type($default,$defaultText,$defaultText);
+  @include be-icon-default($defaultText);
+  &:hover {
+    color: $primaryText;
+    background: $primary;
+    .be-icon {
+      use {
+        fill: $primaryText;
+      }
+    }
+  }
+}
+
