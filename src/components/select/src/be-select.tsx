@@ -459,7 +459,7 @@ export default defineComponent({
         }
         onMounted(() => {
             handleList(props.list)
-
+            addScrollEvt()
         })
         /**
          * 選項列表渲染
