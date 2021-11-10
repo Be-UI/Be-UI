@@ -26,7 +26,7 @@
   @apply cursor-not-allowed;
 }
 .be-tag__mini {
-  @apply box-border px-2.5 h-6 leading-6;
+  @apply box-border px-2.5 h-6 leading-6 text-xs;
 }
 
 .be-tag__medium {
@@ -45,6 +45,7 @@
 .be-tag__info {
   @include be-tag-type($default,$defaultText,$infoHover);
   @include be-icon-default($defaultText);
+  border: 1px solid $infoHover;
 }
 .be-tag__success{
   @include be-tag-type($success,$whiteText,$successHover);
