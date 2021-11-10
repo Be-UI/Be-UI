@@ -269,10 +269,9 @@
 <!--            <be-select  size="medium" v-model="seletStr" clear search :list="testList" keyValue = 'id' :searchFunc = 'searchFunc' :sortFunc = 'sortFunc'>
 
             </be-select>-->
-<!--            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
-
-            </be-select>-->
-          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>
+            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
+            </be-select>
+<!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
         </div>
     </div>
 
