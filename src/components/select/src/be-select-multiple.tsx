@@ -14,7 +14,7 @@ import BeInputSelect from "../../autocomplete/src/be-input-select.vue";
 import BePopover from "../../popover/src/be-popover.vue";
 import BeIcon from "../../svg-icon/src/be-icon.vue";
 import {IInputSelectFunc} from "../../autocomplete/src/be-autocomplete-type";
-import {debounce, getUuid, isFunction, isString, mapToArr} from "../../../utils/common";
+import {arrDupRemov, debounce, getUuid, isFunction, isString, jsonClone, mapToArr} from "../../../utils/common";
 
 export default defineComponent({
     name: "be-select",
@@ -177,7 +177,7 @@ export default defineComponent({
          * @param {Array} propList - 数据列表
          */
         const handleList = (propList: Array<any>): void => {
-            const list = JSON.parse(JSON.stringify(propList))
+            const list = jsonClone(propList)
             // 分组数据处理逻辑
             if (props.group) {
                 let arr: Array<any> = []
@@ -211,7 +211,7 @@ export default defineComponent({
                 }
                 dataList.value = list
             }
-            listCache = JSON.parse(JSON.stringify(dataList.value))
+            listCache = jsonClone(dataList.value)
         }
 
         /**************************************** 樣式相關處理 ************************************/
@@ -240,7 +240,7 @@ export default defineComponent({
             curInstPopover.computePosition(null, 'update')
         }
         /**************************************** 各種事件方法 ************************************/
-        // 當前實例屬性attr
+            // 當前實例屬性attr
         const curAttrs = useAttrs()
         // 圖標類型
         const iconType = ref<string>(computed(() => props.selectIcon).value)
@@ -384,12 +384,14 @@ export default defineComponent({
         }
         // loading顯示標識
         const loading = ref<boolean>(false)
+        const addItemList = ref<Array<any>>([])
         /**
          * 匹配输入建议
-         * @param {string} value - 輸入值
+         * @param {string} inputValue - 輸入值
          * @param {Array} ordData - 原始數據集
          */
-        const matchSuggestions = (value: string, ordData: Array<any>): void => {
+        const matchSuggestions = (inputValue: string, ordData: Array<any>): void => {
+            let value = jsonClone(inputValue)
             // 模糊匹配方法
             const filter = (value: string, ordData: Array<any>, labelValue: string) => {
                 let arr = value ? ordData.filter(
@@ -397,45 +399,64 @@ export default defineComponent({
                         return (val[labelValue].toString().toLowerCase().indexOf(value.toLowerCase()) >= 0);
                     }
                 ) : ordData
-                return {data:arr.length > 0 ? JSON.parse(JSON.stringify(arr)) : JSON.parse(JSON.stringify(ordData)),isHas:arr.length > 0}
+                return {
+                    data: arr.length > 0 ? jsonClone(arr) : jsonClone(ordData),
+                    isHas: arr.length > 0
+                }
             }
             // 匹配數據
-            let dataL = JSON.parse(JSON.stringify(ordData))
+            let dataL = jsonClone(ordData)
             // 匹配結果
-            let filterRes:Array<any> = []
-            // 字符串包含 ‘，’，进行分割
-            if(value.indexOf(',') >= 0){
-                let inputVal = value.split(',').filter((res)=>res)
+            let filterRes: Array<any> = []
+            if(value){
+                // 字符串包含 ‘，’，进行分割
+                let isHasComma = value.indexOf(',') >= 0
+                if(isHasComma) inputMultiple.value = ''
+                let inputVal = value.split(',').filter((res:any) => res)
                 // 輸入去重
                 inputVal = Array.from(new Set(inputVal));
+                // 和 tagList 取并集
+                let tagListLabel = tagList.value.map(res => res.label)
+                inputVal = [...new Set([...tagListLabel, ...inputVal])]
                 // 匹配到的
-                let hasList:Array<any> = []
+                let hasList: Array<any> = []
                 // 沒匹配到的
-                let addList:Array<any> = []
+                let addList: Array<any> = []
                 // 挨个匹配
-                inputVal.forEach((res)=>{
+                inputVal.forEach((res:any) => {
                     let filterResult = filter(res, dataL, props.labelValue || 'id')
-                    if(!filterResult.isHas){
-                        let item:IOption = {}
-                        item[props.labelValue || 'label'] = res
-                        item[props.keyValue || 'id'] = getUuid()
+                    if (!filterResult.isHas) {
+                        let item: IOption = {}
+                        item[label] = res
+                        item[keyId] = getUuid()
+                        // 有逗号 更新tagList
+                        if(isHasComma){
+                            item.isSelect = true
+                            item.isAutoAdd = true
+                            selectMap.set(item[keyId], item)
+                            updateValue()
+                            addItemList.value.push(item)
+                        }
+                        item.isAutoAdd = true
                         addList.push(item)
                         dataL.push(item)
-                    }else{
-                        hasList = hasList.concat(filterResult.data)
+                    } else {
+                        // 对象去重 合并
+                        hasList = arrDupRemov([...filterResult.data, ...hasList],props.keyValue ||'id')
                     }
                 })
                 filterRes = hasList.concat(addList)
+                // 排序調用排序
+                if (props.sortFunc) {
+                    filterRes.sort(props.sortFunc as (a: any, b: any) => number)
+                }
+                ctx.emit('search', filterRes)
+                // 更新下拉列表 - 選中狀態匹配
+                dataList.value = isHasComma ? dataL : filterRes
             }else{
-                filterRes = props.searchFunc ? props.searchFunc(value, ordData, props.labelValue || 'label') : filter(value, ordData, props.labelValue || 'label').data
+                // 爲空則使用原始數據 - 選中狀態匹配
+                dataList.value = jsonClone(ordData)
             }
-            // 排序調用排序
-            if (props.sortFunc) {
-                filterRes.sort(props.sortFunc as (a: any, b: any) => number)
-            }
-            //filterRes = filterRes.concat(tagList.value)
-            ctx.emit('search', filterRes)
-            dataList.value = filterRes
         }
         /**
          * 输入事件
@@ -450,7 +471,7 @@ export default defineComponent({
             updatePopover()
             const curInstPopover = internalInstance.refs.beSelectPopover as IInputSelectFunc
             // 开启远程搜索时
-           /* if (props.remote && isFunction(props.remoteFunc) && props.remoteFunc) {
+            if (props.remote && isFunction(props.remoteFunc) && props.remoteFunc) {
                 const handleRemote = function () {
                     // 为空，关闭下拉 直接返回
                     if (!$eventDom.value) {
@@ -470,9 +491,9 @@ export default defineComponent({
                     })
                 }
                 return debounce(handleRemote, 300).call(this)
-            }*/
+            }
             // 匹配輸入建議
-            matchSuggestions($eventDom.value, listCache)
+            matchSuggestions($eventDom.value, listCache.concat(addItemList.value))
         }
         /**************************************** 多選相關方法 ************************************/
             // tag 列表
@@ -494,9 +515,15 @@ export default defineComponent({
         const handleSelect = (value: any, index: number): void => {
             const itemLabel = value[keyId]
             if (selectMap.has(itemLabel)) {
+                if(value.isAutoAdd){
+                    addItemList.value =  addItemList.value.filter(val=>val[keyId] !== value[keyId])
+                }
                 selectMap.delete(itemLabel)
                 value.isSelect = false
             } else {
+                if(value.isAutoAdd){
+                    addItemList.value.push(value)
+                }
                 selectMap.set(itemLabel, value)
                 value.isSelect = true
             }
@@ -506,6 +533,10 @@ export default defineComponent({
              * @param {Number} index - 点击的对应列表索引
              */
             ctx.emit('select', value, index)
+            inputMultiple.value = ''
+            if(value.isAutoAdd){
+                dataList.value = listCache.concat(addItemList.value)
+            }
             updateValue()
             updatePopover()
         }
@@ -513,7 +544,7 @@ export default defineComponent({
          * 更新數據方法
          */
         const updateValue = (): void => {
-            const res = JSON.parse(JSON.stringify(mapToArr(selectMap)))
+            const res = jsonClone(mapToArr(selectMap))
             tagList.value = res
             ctx.emit('update:modelValue', res)
         }
@@ -540,11 +571,11 @@ export default defineComponent({
          */
         const initTagList = () => {
             tagList.value = props.modelValue as Array<any>
-            tagList.value.forEach((tag:any)=>{
+            tagList.value.forEach((tag: any) => {
                 // 更新 selectMap
                 selectMap.set(tag[keyId], tag)
                 // 更新 dataList選中状态
-                setSelectState(true,tag[keyId])
+                setSelectState(true, tag[keyId])
             })
         }
         /**
@@ -552,9 +583,9 @@ export default defineComponent({
          * @param {boolean} state - 状态值
          * @param {Object} match - 匹配对象
          */
-        const setSelectState = (state:boolean,match:any):void=>{
-            dataList.value.forEach((select:any)=>{
-                if(select[keyId] === match){
+        const setSelectState = (state: boolean, match: any): void => {
+            dataList.value.forEach((select: any) => {
+                if (select[keyId] === match) {
                     select.isSelect = state
                 }
             })
@@ -577,9 +608,12 @@ export default defineComponent({
          * @param {Object } value - 选中后值
          */
         const closeTag = (value: any): void => {
-            value.isSelect = false
             selectMap.delete(value[keyId])
-            setSelectState(false,value[keyId])
+            setSelectState(false, value[keyId])
+            if(value.isAutoAdd){
+                addItemList.value =  addItemList.value.filter(val=>val[keyId] !== value[keyId])
+                dataList.value = listCache.concat(addItemList.value)
+            }
             updateValue()
             updatePopover()
         }

@@ -6,6 +6,7 @@ import {
 
 import type { Ref } from 'vue'
 import {TimeoutHandle} from "./types";
+import {IOption} from "./types";
 /**
  * id生成方法
  * @return {string}
@@ -57,6 +58,15 @@ export const mapToArr = (map:any):Array<any> => {
     }
     return list;
 };
+export const arrDupRemov = (arr:Array<any>,key:string):Array<any> => {
+    let newObj:IOption = {};
+    return arr .reduce((preVal, curVal) => {
+        newObj[curVal[key]] ? '' : newObj[curVal[key]] = preVal.push(curVal);
+        return preVal
+    }, [])
+};
+
+export const jsonClone = <T>(val: T):T => JSON.parse(JSON.stringify(val))
 export const isBool = (val: unknown) => typeof val === 'boolean'
 export const isString = (val: unknown) => (typeof val=='string')&&val.constructor==String;
 export const isNumber = (val: unknown) => typeof val === 'number'

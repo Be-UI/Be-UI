@@ -14,7 +14,7 @@ import BeInputSelect from "../../autocomplete/src/be-input-select.vue";
 import BePopover from "../../popover/src/be-popover.vue";
 import BeIcon from "../../svg-icon/src/be-icon.vue";
 import {IInputSelectFunc} from "../../autocomplete/src/be-autocomplete-type";
-import {debounce, getUuid, isFunction, isString} from "../../../utils/common";
+import {debounce, getUuid, isFunction, isString, jsonClone} from "../../../utils/common";
 
 export default defineComponent({
     name: "be-select",
@@ -200,7 +200,7 @@ export default defineComponent({
                 }
                 dataList.value = list
             }
-            listCache = JSON.parse(JSON.stringify(dataList.value))
+            listCache = jsonClone(dataList.value)
         }
         /**
          * 下拉搜索选择事件方法

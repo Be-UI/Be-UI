@@ -5,3 +5,6 @@ export interface IEvent extends MouseEvent{
     path:Array<HTMLElement>
 }
 export type TimeoutHandle = ReturnType<typeof window.setTimeout>
+export interface IOption {
+    [key: string]: any
+}

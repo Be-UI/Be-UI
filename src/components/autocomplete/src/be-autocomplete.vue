@@ -52,6 +52,7 @@ import BePopover from "../../popover/src/be-popover.vue";
 import BeInput from "../../input/src/be-input.vue";
 import BeInputSelect from "../src/be-input-select.vue";
 import {IInputSelectInst, IInputSelectFunc} from "./be-autocomplete-type";
+import {jsonClone} from "../../../utils/common";
 export default defineComponent({
     name: "BeAutocomplete",
     components: {BeInputSelect, BeInput, BePopover},
@@ -234,8 +235,8 @@ export default defineComponent({
                     loading.value = true
                     props.fetchSuggestions((listData:Array<any>) => {
                         // 设置输入建议数据
-                        selectList.value = JSON.parse(JSON.stringify(listData))
-                        listDataCache = JSON.parse(JSON.stringify(listData))
+                        selectList.value = jsonClone(listData)
+                        listDataCache = jsonClone(listData)
                         loading.value = false
                     })
                 }
