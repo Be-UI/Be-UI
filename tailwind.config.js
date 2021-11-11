@@ -214,7 +214,11 @@ module.exports = {
       '2xl': '0 25px 25px rgba(0, 0, 0, 0.15)',
       none: '0 0 #0000',
     },
-    fill: { current: 'currentColor' },
+    fill: theme => ({
+      'red': theme('colors.red.500'),
+      'green': theme('colors.green.500'),
+      'blue': theme('colors.blue.300'),
+    }),
     grayscale: {
       0: '0',
       DEFAULT: '100%',

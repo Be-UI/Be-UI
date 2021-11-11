@@ -50,6 +50,13 @@ export function debounce(func:Function,wait:number) {
         if (callNow) func.apply(context, args)
     }
 }
+export const mapToArr = (map:any):Array<any> => {
+    let list = [];
+    for (let key of map) {
+        list.push(key[1]);
+    }
+    return list;
+};
 export const isBool = (val: unknown) => typeof val === 'boolean'
 export const isString = (val: unknown) => (typeof val=='string')&&val.constructor==String;
 export const isNumber = (val: unknown) => typeof val === 'number'

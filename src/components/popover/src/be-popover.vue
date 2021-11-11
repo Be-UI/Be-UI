@@ -179,7 +179,11 @@ export default defineComponent({
          * 计算显示位置
          * @param {String} placement - 位置
          */
-        const computePosition = (placement: string): void => {
+        const computePosition = (placement: string,type:string = ''): void => {
+            if(type === 'update'){
+              popperJS.update();
+              return
+            }
             // 使用popover.js 对popover进行定位
             if (popperJS && popperJS.destroy) {
                 popperJS.destroy();
@@ -348,6 +352,7 @@ export default defineComponent({
             show,
             close,
             changeDisplay,
+            computePosition,
             raw: props.raw,
             customClass: props.customClass,
         }

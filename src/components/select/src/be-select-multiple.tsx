@@ -14,7 +14,7 @@ import BeInputSelect from "../../autocomplete/src/be-input-select.vue";
 import BePopover from "../../popover/src/be-popover.vue";
 import BeIcon from "../../svg-icon/src/be-icon.vue";
 import {IInputSelectFunc} from "../../autocomplete/src/be-autocomplete-type";
-import {debounce, getUuid, isFunction, isString} from "../../../utils/common";
+import {debounce, getUuid, isFunction, isString, mapToArr} from "../../../utils/common";
 
 export default defineComponent({
     name: "be-select",
@@ -144,6 +144,13 @@ export default defineComponent({
         customClass: {
             type: String,
             default: ''
+        },
+        /**
+         * 開啓多選
+         */
+        multiple: {
+            type: Boolean,
+            default: false
         }
 
     },
@@ -167,13 +174,15 @@ export default defineComponent({
         let listCache: Array<any> = []
         /**
          * 處理列表數據
-         * @param {Array} list - 数据列表
+         * @param {Array} propList - 数据列表
          */
-        const handleList = (list: Array<any>): void => {
+        const handleList = (propList: Array<any>): void => {
+            const list = JSON.parse(JSON.stringify(propList))
             // 分组数据处理逻辑
             if (props.group) {
                 let arr: Array<any> = []
                 list.forEach((res: any) => {
+                    res.isSelect = false
                     let group = {...res}
                     delete group.children
                     arr.push(group)
@@ -187,13 +196,15 @@ export default defineComponent({
             } else {
                 // 沒有指定key，則生成
                 if (!props.keyValue) {
-                    list.forEach(val => {
+                    list.forEach((val: any) => {
+                        val.isSelect = false
                         val.id = getUuid()
                     })
                 }
                 if (props.keyValue) {
-                    list.forEach((val:any) => {
-                        if(!val[props.keyValue || 'id']){
+                    list.forEach((val: any) => {
+                        val.isSelect = false
+                        if (!val[props.keyValue || 'id']) {
                             val[props.keyValue || 'id'] = getUuid()
                         }
                     })
@@ -202,34 +213,7 @@ export default defineComponent({
             }
             listCache = JSON.parse(JSON.stringify(dataList.value))
         }
-        /**
-         * 下拉搜索选择事件方法
-         * @param {Object } value - 选中后值
-         * @param {Number} index - 点击索引
-         */
-        const handleSelect = (value: any, index: number): void => {
-            updateValue(value)
-            /** 选中 select 事件
-             * @event select
-             * @param {Object} value - 点击对象数据
-             * @param {Number} index - 点击的对应列表索引
-             */
-            ctx.emit('select', value, index)
-            // 关闭下拉，清除缓存
-            const curInstPopover = internalInstance.refs.beSelectPopover as IInputSelectFunc
-            curInstPopover.close()
-        }
-        /**
-         * 更新數據方法
-         * @param value
-         */
-        const updateValue = (value: any): void => {
-            if (isString(value)) {
-                ctx.emit('update:modelValue', value)
-            } else {
-                ctx.emit('update:modelValue', value[props.labelValue])
-            }
-        }
+
         /**************************************** 樣式相關處理 ************************************/
             // 只读
         const readonlyInput = ref<boolean>(true)
@@ -248,13 +232,24 @@ export default defineComponent({
             if (!$eventDom) return
             selectStyle.width = Number(window.getComputedStyle($eventDom).width.split('px')[0]) + 'px'
         }
+        /**
+         * 更新popover
+         */
+        const updatePopover = (): void => {
+            const curInstPopover = internalInstance.refs.beSelectPopover as IInputSelectFunc
+            curInstPopover.computePosition(null, 'update')
+        }
         /**************************************** 各種事件方法 ************************************/
+        // 當前實例屬性attr
+        const curAttrs = useAttrs()
+        // 圖標類型
+        const iconType = ref<string>(computed(() => props.selectIcon).value)
         /**
          * focus 事件处理方法
          * @param {Event} event - 事件对象
          */
         const handleFocus = (event: Event): void => {
-            computedPositon()
+            (event.target as HTMLInputElement).querySelector('input')?.focus()
             /** focus 事件
              * @event focus
              * @param {Event} event - 事件对象
@@ -272,8 +267,6 @@ export default defineComponent({
              */
             ctx.emit('blur', event)
         }
-        // 當前實例屬性attr
-        const curAttrs = useAttrs()
         /**
          * 下拉列表展開關閉方法
          * @param {Boolean} showPopover - popover展開狀態
@@ -294,8 +287,6 @@ export default defineComponent({
             ctx.emit('openChange', showPopover)
 
         }
-        // 圖標類型
-        const iconType = ref<string>(computed(() => props.selectIcon).value)
         /**
          * 修改圖標方法。鼠標移入 變成清楚圖標
          * @param {String} type - 圖標類型
@@ -331,21 +322,14 @@ export default defineComponent({
             ctx.emit('MouseLeave', event)
         }
         /**
-         * 清除方法
+         * 滾動方法
          */
-        const handleClear = (): void => {
-            updateValue('')
-            /** 输入 clear 事件
-             * @event clear
-             */
-            ctx.emit('clear')
-            changeIcon(props.selectIcon)
-            dataList.value = listCache
-        }
-
         const handleScroll = (): void => {
             ctx.emit('scroll')
         }
+        /**
+         * 滾動條事件監聽方法
+         */
         const addScrollEvt = (): void => {
             const dom = document.getElementById(`be_select_option_container_${uid}`)
             dom?.addEventListener('scroll', handleScroll)
@@ -391,7 +375,15 @@ export default defineComponent({
                 addItem.value = ''
             }
         }
+
         /**************************************** 輸入匹配建議相關方法 ************************************/
+            // 远程时设置为不触发，由input事件内手动渲染
+        const trigger = ref<string>('click')
+        if (props.remote && isFunction(props.remoteFunc)) {
+            trigger.value = 'none'
+        }
+        // loading顯示標識
+        const loading = ref<boolean>(false)
         /**
          * 匹配输入建议
          * @param {string} value - 輸入值
@@ -416,13 +408,6 @@ export default defineComponent({
             ctx.emit('search', filterRes)
             dataList.value = filterRes
         }
-        // 远程时设置为不触发，由input事件内手动渲染
-        const trigger = ref<string>('click')
-        if (props.remote && isFunction(props.remoteFunc)) {
-            trigger.value = 'none'
-        }
-        // loading顯示標識
-        const loading = ref<boolean>(false)
         /**
          * 输入事件
          * @param {Event} event - 事件对象
@@ -430,7 +415,10 @@ export default defineComponent({
         const inputChange = (event: Event): void | Function => {
             // 更新值
             const $eventDom = (event.target as HTMLInputElement)
-            updateValue($eventDom.value)
+            inputMultiple.value = $eventDom.value
+            // 改变文字宽度
+            txtWidth.value = textWidth($eventDom.value);
+
             const curInstPopover = internalInstance.refs.beSelectPopover as IInputSelectFunc
             // 开启远程搜索时
             if (props.remote && isFunction(props.remoteFunc) && props.remoteFunc) {
@@ -457,11 +445,147 @@ export default defineComponent({
             // 匹配輸入建議
             matchSuggestions($eventDom.value, listCache)
         }
+        /**************************************** 多選相關方法 ************************************/
+            // tag 列表
+        const tagList = ref<Array<any>>([])
+        // 多選時，維護的内部輸入
+        const inputMultiple = ref<string>('')
+        // 输入框宽度
+        const txtWidth = ref<number>(0)
+        // 列表显示label
+        const label = props.labelValue || 'label'
+        // 列表显示keyid
+        const keyId = props.keyValue || 'id'
+        let selectMap = new Map()
+        /**
+         * 下拉搜索选择事件方法
+         * @param {Object } value - 选中后值
+         * @param {Number} index - 点击索引
+         */
+        const handleSelect = (value: any, index: number): void => {
+            const itemLabel = value[keyId]
+            if (selectMap.has(itemLabel)) {
+                selectMap.delete(itemLabel)
+                value.isSelect = false
+            } else {
+                selectMap.set(itemLabel, value)
+                value.isSelect = true
+            }
+            /** 选中 select 事件
+             * @event select
+             * @param {Object} value - 点击对象数据
+             * @param {Number} index - 点击的对应列表索引
+             */
+            ctx.emit('select', value, index)
+            updateValue()
+            updatePopover()
+        }
+        /**
+         * 更新數據方法
+         */
+        const updateValue = (): void => {
+            const res = JSON.parse(JSON.stringify(mapToArr(selectMap)))
+            tagList.value = res
+            ctx.emit('update:modelValue', res)
+        }
+        /**
+         * 清除方法
+         */
+        const handleClear = (): void => {
+            selectMap = new Map()
+            tagList.value = []
+            // 多選時，維護的内部輸入
+            inputMultiple.value = ''
+            // 输入框宽度
+            txtWidth.value = 0
+            /** 输入 clear 事件
+             * @event clear
+             */
+            ctx.emit('clear')
+            updateValue()
+            changeIcon(props.selectIcon)
+            dataList.value = listCache
+        }
+        /**
+         * 初始化taglist
+         */
+        const initTagList = () => {
+            tagList.value = props.modelValue as Array<any>
+            tagList.value.forEach((tag:any)=>{
+                // 更新 selectMap
+                selectMap.set(tag[keyId], tag)
+                // 更新 dataList選中状态
+                setSelectState(true,tag[keyId])
+            })
+        }
+        /**
+         * 遍历dataList 设置选中状态
+         * @param {boolean} state - 状态值
+         * @param {Object} match - 匹配对象
+         */
+        const setSelectState = (state:boolean,match:any):void=>{
+            dataList.value.forEach((select:any)=>{
+                if(select[keyId] === match){
+                    select.isSelect = state
+                }
+            })
+        }
+        /**
+         * 根据输入文字计算宽度
+         * @param text
+         */
+        const textWidth = (text: string) => {
+            let sensor = document.createElement('a');
+            sensor.innerHTML = text;
+            let body = document.getElementsByTagName('body')[0];
+            body.appendChild(sensor);
+            let width = sensor.offsetWidth;
+            body.removeChild(sensor);
+            return width;
+        }
+        /**
+         * 清除tag
+         * @param {Object } value - 选中后值
+         */
+        const closeTag = (value: any): void => {
+            value.isSelect = false
+            selectMap.delete(value[keyId])
+            setSelectState(false,value[keyId])
+            updateValue()
+            updatePopover()
+        }
         onMounted(() => {
             handleList(props.list)
             addScrollEvt()
+            initTagList()
 
         })
+        /**
+         * 渲染tag
+         */
+        const renderTags = (): Array<VNode> | void => {
+            if (!tagList.value || tagList.value?.length === 0) {
+                return
+            }
+            let list: Array<VNode> = []
+            tagList.value.forEach((val) => {
+                // 選項列表
+                list.push((
+                    <div class='be-select-tag'>
+                        <be-tag key={val.label + 'tag'}
+                                isClose={true}
+                                type='info'
+                                size='mini'
+                                class='ellipsis'
+                                onClose={() => closeTag(val)}>
+                            {val.label}
+                        </be-tag>
+                    </div>
+                ))
+            })
+            return list
+        }
+
         /**
          * 選項列表渲染
          */
@@ -475,6 +599,7 @@ export default defineComponent({
                         class={`
                         ellipsis
                         ${val.type === 'group' && index !== 0 ? 'be-select-option__line' : ''}
+                         ${val.isSelect ? 'be-select-option__choice' : ''}
                         ${val.type === 'group' ? 'be-select-option__group' : 'be-select-option'}
                         ${val.disabled ? 'be-select-option__disabled' : ''}`}
                         key={val[keyValue]}
@@ -484,6 +609,7 @@ export default defineComponent({
                         }}>
                         {/*有插槽就渲染插槽*/}
                         {internalInstance.slots.default ? internalInstance.slots.default(val, index) : val[props.labelValue]}
+                        {val.isSelect ? <be-icon icon='select' custom-class={`be-select-hook`}></be-icon> : ''}
                     </div>
                 ))
             })
@@ -529,15 +655,16 @@ export default defineComponent({
                                      onMouseleave={($event) => handleMouseLeave($event)}
                                      onFocus={($event) => handleFocus($event)}
                                      onBlur={($event) => handleBlur($event)}>
+                                    {renderTags()}
                                     <input readonly={readonlyInput.value}
                                            tabindex={`-1`}
                                            onFocus={computedPositon}
-                                           value={props.modelValue}
-                                           placeholder={props.placeholder}
+                                           value={inputMultiple.value}
                                            disabled={props.disabled}
                                            onInput={($event) => inputChange($event)}
                                            style={{
-                                               cursor: cursor
+                                               cursor: cursor,
+                                               width: txtWidth.value + 'px'
                                            }}
                                            class={`be-select-input be-select-input__${props.size}`}
                                     />

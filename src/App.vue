@@ -175,7 +175,7 @@
                 </be-button>
                 </template>
               </be-dialog>-->
-        <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 180px">
+        <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 280px">
 <!--            <be-button type="primary"
                        bordered
                        @click="testInputFunc"
@@ -269,8 +269,11 @@
 <!--            <be-select  size="medium" v-model="seletStr" clear search :list="testList" keyValue = 'id' :searchFunc = 'searchFunc' :sortFunc = 'sortFunc'>
 
             </be-select>-->
-            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
+<!--            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
+            </be-select>-->
+            <be-select  size="medium" v-model="seletStr" clear keyValue = 'id' multiple :list="testList" search>
             </be-select>
+            {{seletStr}}
 <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
         </div>
     </div>
@@ -307,7 +310,8 @@ export default {
                 pageSize: 200,
                 total: 300
             },
-            seletStr:'落日绣帘卷',
+            // seletStr:[],
+            seletStr:[{label:'落日绣帘卷',id:'落日绣帘卷'},{label:'亭下水连空',id:'亭下水连空'},],
             testList:[
                 {label:'落日绣帘卷',id:'落日绣帘卷'},
                 {label:'亭下水连空',id:'亭下水连空'},
