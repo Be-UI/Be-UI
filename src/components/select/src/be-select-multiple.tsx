@@ -390,21 +390,50 @@ export default defineComponent({
          * @param {Array} ordData - 原始數據集
          */
         const matchSuggestions = (value: string, ordData: Array<any>): void => {
+            // 模糊匹配方法
             const filter = (value: string, ordData: Array<any>, labelValue: string) => {
                 let arr = value ? ordData.filter(
                     (val: any) => {
                         return (val[labelValue].toString().toLowerCase().indexOf(value.toLowerCase()) >= 0);
                     }
                 ) : ordData
-                return arr.length > 0 ? arr : ordData
+                return {data:arr.length > 0 ? JSON.parse(JSON.stringify(arr)) : JSON.parse(JSON.stringify(ordData)),isHas:arr.length > 0}
             }
-            // dataList.value
-            // 匹配過濾
-            let filterRes = props.searchFunc ? props.searchFunc(value, ordData, props.labelValue) : filter(value, ordData, props.labelValue)
+            // 匹配數據
+            let dataL = JSON.parse(JSON.stringify(ordData))
+            // 匹配結果
+            let filterRes:Array<any> = []
+            // 字符串包含 ‘，’，进行分割
+            if(value.indexOf(',') >= 0){
+                let inputVal = value.split(',').filter((res)=>res)
+                // 輸入去重
+                inputVal = Array.from(new Set(inputVal));
+                // 匹配到的
+                let hasList:Array<any> = []
+                // 沒匹配到的
+                let addList:Array<any> = []
+                // 挨个匹配
+                inputVal.forEach((res)=>{
+                    let filterResult = filter(res, dataL, props.labelValue || 'id')
+                    if(!filterResult.isHas){
+                        let item:IOption = {}
+                        item[props.labelValue || 'label'] = res
+                        item[props.keyValue || 'id'] = getUuid()
+                        addList.push(item)
+                        dataL.push(item)
+                    }else{
+                        hasList = hasList.concat(filterResult.data)
+                    }
+                })
+                filterRes = hasList.concat(addList)
+            }else{
+                filterRes = props.searchFunc ? props.searchFunc(value, ordData, props.labelValue || 'label') : filter(value, ordData, props.labelValue || 'label').data
+            }
             // 排序調用排序
             if (props.sortFunc) {
-                filterRes.sort(props.sortFunc)
+                filterRes.sort(props.sortFunc as (a: any, b: any) => number)
             }
+            //filterRes = filterRes.concat(tagList.value)
             ctx.emit('search', filterRes)
             dataList.value = filterRes
         }
@@ -418,10 +447,10 @@ export default defineComponent({
             inputMultiple.value = $eventDom.value
             // 改变文字宽度
             txtWidth.value = textWidth($eventDom.value);
-
+            updatePopover()
             const curInstPopover = internalInstance.refs.beSelectPopover as IInputSelectFunc
             // 开启远程搜索时
-            if (props.remote && isFunction(props.remoteFunc) && props.remoteFunc) {
+           /* if (props.remote && isFunction(props.remoteFunc) && props.remoteFunc) {
                 const handleRemote = function () {
                     // 为空，关闭下拉 直接返回
                     if (!$eventDom.value) {
@@ -441,7 +470,7 @@ export default defineComponent({
                     })
                 }
                 return debounce(handleRemote, 300).call(this)
-            }
+            }*/
             // 匹配輸入建議
             matchSuggestions($eventDom.value, listCache)
         }
