@@ -431,7 +431,6 @@ export default defineComponent({
                         item[keyId] = getUuid()
                         // 有逗号 更新tagList
                         if(isHasComma){
-                            item.isSelect = true
                             item.isAutoAdd = true
                             selectMap.set(item[keyId], item)
                             updateValue()
@@ -457,6 +456,10 @@ export default defineComponent({
                 // 爲空則使用原始數據 - 選中狀態匹配
                 dataList.value = jsonClone(ordData)
             }
+
+            tagList.value.forEach((tag: any) => {
+                setSelectState(true,tag[keyId])
+            })
         }
         /**
          * 输入事件
@@ -514,6 +517,7 @@ export default defineComponent({
          */
         const handleSelect = (value: any, index: number): void => {
             const itemLabel = value[keyId]
+            let isSelect = false
             if (selectMap.has(itemLabel)) {
                 if(value.isAutoAdd){
                     addItemList.value =  addItemList.value.filter(val=>val[keyId] !== value[keyId])
@@ -526,6 +530,7 @@ export default defineComponent({
                 }
                 selectMap.set(itemLabel, value)
                 value.isSelect = true
+
             }
             /** 选中 select 事件
              * @event select
