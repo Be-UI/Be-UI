@@ -26,13 +26,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
-
-
-select  开发中...
-be-message
+be-message 
 InputNumber
-
-
 样式重构 
 图标修改
 
@@ -56,7 +51,7 @@ InputNumber
 13.按钮组件 be-button （迁移完成）   
 14.自动补全输入 be-autocomplete （迁移完成）    
 14.tag标签 be-tag （完成）    
-14.选择框 be-select （开发中）    
+14.选择框 be-select （完成）    
 
 
 
