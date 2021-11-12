@@ -424,14 +424,14 @@ export default defineComponent({
                 let addList: Array<any> = []
                 // 挨个匹配
                 inputVal.forEach((res:any) => {
-                    let filterResult = filter(res, dataL, props.labelValue || 'id')
+                    let filterResult = filter(res, dataL, label)
+                    let item: IOption = {}
+                    item[label] = res
                     if (!filterResult.isHas) {
-                        let item: IOption = {}
-                        item[label] = res
-                        item[keyId] = getUuid()
                         // 有逗号 更新tagList
                         if(isHasComma){
                             item.isAutoAdd = true
+                            item[keyId] = getUuid()
                             selectMap.set(item[keyId], item)
                             updateValue()
                             addItemList.value.push(item)
@@ -440,8 +440,30 @@ export default defineComponent({
                         addList.push(item)
                         dataL.push(item)
                     } else {
+                        if (isHasComma) {
+                            let isHas:boolean = false
+                            dataList.value.forEach((dataRes:any)=>{
+                                if(res === dataRes[label]){
+                                    isHas = true
+                                    if(!selectMap.has(dataRes[keyId])){
+                                        selectMap.set(dataRes[keyId], dataRes)
+                                    }
+                                }
+                            })
+                            // 匹配函数匹配到，但是列表中没有
+                            // 比如 列表有 ‘ab’。输入‘b’，这里增加
+                            if(!isHas){
+                                item.isAutoAdd = true
+                                item[keyId] = getUuid()
+                                selectMap.set(item[keyId], item)
+                                addList.push(item)
+                                dataL.push(item)
+                            }
+                            updateValue()
+                        }
                         // 对象去重 合并
-                        hasList = arrDupRemov([...filterResult.data, ...hasList],props.keyValue ||'id')
+                        hasList = arrDupRemov([...filterResult.data, ...hasList],keyId)
+
                     }
                 })
                 filterRes = hasList.concat(addList)
