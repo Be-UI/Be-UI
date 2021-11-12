@@ -7,6 +7,7 @@
 import {createVNode, render, DefineComponent} from 'vue';
 import beNotifyComponents from './be-notification';
 import type { INotifyOption, ItInstanceMap} from './be-notification-type'
+import {INotfiyInst} from "./be-notification-type";
 
 // 各個方向的實例緩存
 let instanceMap:ItInstanceMap = {
@@ -171,7 +172,7 @@ const componentRender = (option:INotifyOption,instanceArr:Array<Object>,isCacheI
  * 創建组件实例
  * @param {Object} options - 配置對象
  */
-const createNotify = function (options:INotifyOption) :object {
+const createNotify = function (options:INotifyOption) :INotfiyInst {
     // 初始默认配置
     const defaultOption= {
         isShow:false,
@@ -221,6 +222,6 @@ const createNotify = function (options:INotifyOption) :object {
     return {notify: instance, close: closeNotify.bind(this, instance)}
 }
 
-export const BeNotify = (options:INotifyOption):object =>{
+export const BeNotify = (options:INotifyOption):INotfiyInst =>{
     return createNotify(options)
 };

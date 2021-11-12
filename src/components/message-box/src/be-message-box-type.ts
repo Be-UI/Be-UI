@@ -1,5 +1,5 @@
 /*
-* @be-notification-type.ts
+* @be-message-box-type.ts
 * @deprecated
 * @author czh
 * @update (czh 2021/9/8)

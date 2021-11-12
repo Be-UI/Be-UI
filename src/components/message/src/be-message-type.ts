@@ -1,11 +1,11 @@
 /*
-* @be-notification-type.ts
+* @be-message-type.ts
 * @deprecated 
 * @author czh
-* @update (czh 2021/9/8)
+* @update (czh 2021/11/12)
 */
 import type { ComponentInternalInstance} from 'vue'
-export type INotifyOption = {
+export type IMessage = {
     titles?: string,
     customClass?: string,
     msgType?: string,
@@ -18,8 +18,8 @@ export type INotifyOption = {
     onClose?: () => void
     onClick?: () => void
     bodyRender: any,
-    iconPreRender?: any,
-    closeRender?: any,
+    iconPreRender: any,
+    closeRender: any,
 }
 
 export type ItInstanceMap = {
@@ -28,10 +28,10 @@ export type ItInstanceMap = {
     bottomLeft?: Array<Object>,
     bottomRight?: Array<Object>,
 }
-export interface INotfiy extends ComponentInternalInstance {
+export interface IMsgInstance extends ComponentInternalInstance {
     uid: number
 }
-export interface INotfiyInst {
-    notify: INotfiy,
+export interface IMsgInst {
+    message: IMsgInstance,
     close: Function,
 }

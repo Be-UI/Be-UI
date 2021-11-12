@@ -346,7 +346,21 @@ export default {
          createPopper(tr, po, {
                placement: 'top',
          })*/
-
+        this.notify = BeNotify({
+            titles:'Notification',
+            bodyRender:()=>{
+                return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
+                    您的体验时间仅剩
+                </p>
+            },
+            msgType:'info',
+            onClick:()=>console.log('click'),
+            onClose:()=>console.log('close'),
+            offsetBottom:10,
+            placement:'bottomRight',
+            duration:0,
+            key:'1',
+        })
 
         for (let i = 0; i < 300; i++) {
             this.pageData.push({num: i})
