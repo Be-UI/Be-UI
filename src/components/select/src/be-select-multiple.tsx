@@ -1,21 +1,19 @@
 import {
-    computed,
+
     defineComponent,
-    reactive,
     ref,
-    getCurrentInstance,
     VNode,
     watch,
-    onMounted, nextTick, useAttrs
+    onMounted
 } from 'vue'
 import '../../../assets/style/be-select.scss';
-import {IOption, ISelect} from "../src/be-select-type";
+import {IOption} from "../src/be-select-type";
 import BeInputSelect from "../../autocomplete/src/be-input-select.vue";
 import BePopover from "../../popover/src/be-popover.vue";
 import BeIcon from "../../svg-icon/src/be-icon.vue";
 import {IInputSelectFunc} from "../../autocomplete/src/be-autocomplete-type";
 import {arrDupRemov, debounce, getUuid, isFunction, isString, jsonClone, mapToArr} from "../../../utils/common";
-
+import composition from './be-select-composition'
 export default defineComponent({
     name: "be-select",
     components: {BeInputSelect, BePopover, BeIcon},
@@ -30,6 +28,9 @@ export default defineComponent({
         'MouseEnter',
         'MouseLeave',
         'scroll',
+        'closeTag',
+        'Deselect',
+        'change',
     ],
     props: {
         /**
@@ -157,35 +158,47 @@ export default defineComponent({
          */
         maxTag: {
             type: String,
-            default: '1'
         },
         /**
          * 最大选择数
          */
         max: {
             type: String,
-            default: ''
         },
 
     },
     setup(props, ctx) {
-        // 當前實例
-        const internalInstance = getCurrentInstance() as ISelect
-        // 當前實例uid
-        const uid = internalInstance.uid
-        // 下拉數據列表
-        const dataList = ref<Array<any>>([])
-        // 下拉數據列表監聽
-        const list = computed(() => {
-            return props.list
-        })
+        let {
+            internalInstance,
+            uid,
+            dataList,
+            list,
+            listCache,
+            readonlyInput,
+            cursor,
+            selectStyle,
+            iconType,
+            trigger,
+            loading,
+            addItemList,
+            addItem,
+            handleInput,
+            addItemToList,
+            computedPosition,
+            updatePopover,
+            addScrollEvt,
+            handleMouseLeave,
+            handleMouseEnter,
+            selectOpenChange,
+            handleBlur,
+            handleFocus,
+            changeIcon,
+        } = composition(props, ctx)
         watch(list, (nVal, oVal) => {
             if (nVal !== oVal) {
                 handleList(props.list)
             }
         })
-        // 列表緩存
-        let listCache: Array<any> = []
         /**
          * 處理列表數據
          * @param {Array} propList - 数据列表
@@ -227,128 +240,6 @@ export default defineComponent({
             }
             listCache = jsonClone(dataList.value)
         }
-
-        /**************************************** 樣式相關處理 ************************************/
-            // 只读
-        const readonlyInput = ref<boolean>(true)
-        if (props.search) {
-            readonlyInput.value = false
-        }
-        // cursor 的样式
-        let cursor = props.disabled ? 'not-allowed' : readonlyInput.value ? 'pointer' : ''
-        // 输入建议下拉样式
-        let selectStyle = reactive({width: '0px'})
-        /**
-         * 计算输入建议下拉框位置
-         */
-        const computedPositon = (): void => {
-            const $eventDom: HTMLElement | null = document.getElementById(`be-select-body${uid}`)
-            if (!$eventDom) return
-            selectStyle.width = Number(window.getComputedStyle($eventDom).width.split('px')[0]) + 'px'
-        }
-        /**
-         * 更新popover
-         */
-        const updatePopover = (): void => {
-            const curInstPopover = internalInstance.refs.beSelectPopover as IInputSelectFunc
-            curInstPopover.computePosition(null, 'update')
-        }
-        /**************************************** 各種事件方法 ************************************/
-            // 當前實例屬性attr
-        const curAttrs = useAttrs()
-        // 圖標類型
-        const iconType = ref<string>(computed(() => props.selectIcon).value)
-        /**
-         * focus 事件处理方法
-         * @param {Event} event - 事件对象
-         */
-        const handleFocus = (event: Event): void => {
-            (event.target as HTMLInputElement).querySelector('input')?.focus()
-            /** focus 事件
-             * @event focus
-             * @param {Event} event - 事件对象
-             */
-            ctx.emit('focus', event)
-        }
-        /**
-         * blur 事件处理方法
-         * @param {Event} event - 事件对象
-         */
-        const handleBlur = (event: Event): void => {
-            /** 输入 blur 事件
-             * @event blur
-             * @param {Event} event - 事件对象
-             */
-            ctx.emit('blur', event)
-        }
-        /**
-         * 下拉列表展開關閉方法
-         * @param {Boolean} showPopover - popover展開狀態
-         */
-        const selectOpenChange = (showPopover: boolean): void => {
-            // 增加滾動監聽
-            if (showPopover && curAttrs.onScroll) {
-                nextTick(() => {
-                    const dom = document.getElementById(`be_select_option_container_${uid}`)
-                    dom?.addEventListener('scroll', handleScroll)
-                })
-
-            }
-            /** 输入 openChange 事件
-             * @event blur
-             * @param {Boolean} showPopover - popover展開狀態
-             */
-            ctx.emit('openChange', showPopover)
-
-        }
-        /**
-         * 修改圖標方法。鼠標移入 變成清楚圖標
-         * @param {String} type - 圖標類型
-         */
-        const changeIcon = (type: string | undefined): void => {
-            if (props.clear && props.modelValue) {
-                iconType.value = type || 'error'
-                return
-            }
-        }
-        /**
-         * 處理鼠標移入
-         * @param {Event} event - 事件对象
-         */
-        const handleMouseEnter = (event: Event): void => {
-            changeIcon(undefined)
-            /** MouseEnter 事件
-             * @event MouseEnter
-             * @param {Event} event - 事件对象
-             */
-            ctx.emit('MouseEnter', event)
-        }
-        /**
-         * 處理鼠標移出
-         * @param {Event} event - 事件对象
-         */
-        const handleMouseLeave = (event: Event): void => {
-            changeIcon(props.selectIcon)
-            /** MouseLeave 事件
-             * @event MouseLeave
-             * @param {Event} event - 事件对象
-             */
-            ctx.emit('MouseLeave', event)
-        }
-        /**
-         * 滾動方法
-         */
-        const handleScroll = (): void => {
-            ctx.emit('scroll')
-        }
-        /**
-         * 滾動條事件監聽方法
-         */
-        const addScrollEvt = (): void => {
-            const dom = document.getElementById(`be_select_option_container_${uid}`)
-            dom?.addEventListener('scroll', handleScroll)
-        }
-
         /**************************************** 擴展渲染選項方法 ************************************/
         /**
          * 擴展渲染
@@ -366,39 +257,7 @@ export default defineComponent({
                 )
             }
         }
-        // 新增的下拉選項數據
-        const addItem = ref<string>('')
-        /**
-         * 新增的下拉選項數據賦值方法
-         * @param {String} value - 新增選項值
-         */
-        const handleInput = (value: string): void => {
-            addItem.value = value
-        }
-        /**
-         * 新增選綫組裝，並加入到列表中
-         */
-        const addItemToList = (): void => {
-            if (addItem.value) {
-                let item: IOption = {}
-                let keyValue = props.keyValue || 'id'
-                let labelValue = props.keyValue || 'label'
-                item[keyValue] = getUuid()
-                item[labelValue] = addItem.value
-                dataList.value.push(item)
-                addItem.value = ''
-            }
-        }
-
         /**************************************** 輸入匹配建議相關方法 ************************************/
-            // 远程时设置为不触发，由input事件内手动渲染
-        const trigger = ref<string>('click')
-        if (props.remote && isFunction(props.remoteFunc)) {
-            trigger.value = 'none'
-        }
-        // loading顯示標識
-        const loading = ref<boolean>(false)
-        const addItemList = ref<Array<any>>([])
         /**
          * 匹配输入建议
          * @param {string} inputValue - 輸入值
@@ -489,6 +348,10 @@ export default defineComponent({
                 if (props.sortFunc) {
                     filterRes.sort(props.sortFunc as (a: any, b: any) => number)
                 }
+                /** search 事件
+                 * @event search
+                 * @param {Array} filterRes - 过滤结果
+                 */
                 ctx.emit('search', filterRes)
                 // 更新下拉列表 - 選中狀態匹配
                 dataList.value =isHasComma ? dataL : filterRes
@@ -512,6 +375,11 @@ export default defineComponent({
             // 改变文字宽度
             txtWidth.value = textWidth($eventDom.value);
             updatePopover()
+            /** 选中 change 事件
+             * @event change
+             * @param {Object} value - 点击对象数据
+             */
+            ctx.emit('change', $eventDom)
             const curInstPopover = internalInstance.refs.beSelectPopover as IInputSelectFunc
             // 开启远程搜索时
             if (props.remote && isFunction(props.remoteFunc) && props.remoteFunc) {
@@ -567,20 +435,30 @@ export default defineComponent({
                 }
                 selectMap.delete(itemLabel)
                 value.isSelect = false
+                /** 取消选中 Deselect 事件
+                 * @event Deselect
+                 * @param {Object} value - 点击对象数据
+                 * @param {Number} index - 点击的对应列表索引
+                 */
+                ctx.emit('Deselect', value, index)
             } else {
                 if(value.isAutoAdd){
                     addItemList.value.push(value)
                 }
                 selectMap.set(itemLabel, value)
                 value.isSelect = true
-
+                /** 选中 select 事件
+                 * @event select
+                 * @param {Object} value - 点击对象数据
+                 * @param {Number} index - 点击的对应列表索引
+                 */
+                ctx.emit('select', value, index)
             }
-            /** 选中 select 事件
-             * @event select
+            /** 选中 change 事件
+             * @event change
              * @param {Object} value - 点击对象数据
-             * @param {Number} index - 点击的对应列表索引
              */
-            ctx.emit('select', value, index)
+            ctx.emit('change', value)
             inputMultiple.value = ''
             //if(value.isAutoAdd){
                 dataList.value = listCache.concat(addItemList.value)
@@ -658,6 +536,7 @@ export default defineComponent({
         /**
          * 清除tag
          * @param {Object } closeVal - 选中后值
+         * @public
          */
         const closeTag = (closeVal: any): void => {
             const value = closeVal.isNum ? tagList.value.pop(): closeVal
@@ -669,6 +548,11 @@ export default defineComponent({
             }
             updateValue()
             updatePopover()
+            /** closeTag 事件
+             * @event closeTag
+             * @param {Object} value - 关闭的tag数据对象
+             */
+            ctx.emit('closeTag',value)
         }
         onMounted(() => {
             handleList(props.list)
@@ -694,18 +578,21 @@ export default defineComponent({
                 renderTag.push(numTag)
             }
             let list: Array<VNode> = []
-            renderTag.forEach((val) => {
+            renderTag.forEach((val,index) => {
                 // 選項列表
                 list.push((
                     <div class='be-select-tag'>
-                        <be-tag key={val.label + 'tag'}
-                                isClose={true}
-                                type='info'
-                                size='mini'
-                                class='ellipsis'
-                                onClose={() => closeTag(val)}>
-                            {val[label]}
-                        </be-tag>
+                        {/*tag 自定义插槽*/}
+                        {internalInstance.slots.tag ? internalInstance.slots.tag({data:val, index}) :
+                            <be-tag key={val.label + 'tag'}
+                                    isClose={true}
+                                    type='info'
+                                    size='mini'
+                                    className='ellipsis'
+                                    onClose={() => closeTag(val)}>
+                                {val[label]}
+                            </be-tag>
+                        }
                     </div>
                 ))
             })
@@ -734,7 +621,7 @@ export default defineComponent({
                             handleSelect(val, index)
                         }}>
                         {/*有插槽就渲染插槽*/}
-                        {internalInstance.slots.default ? internalInstance.slots.default(val, index) : val[props.labelValue]}
+                        {internalInstance.slots.default ? internalInstance.slots.default({data:val, index}) : val[props.labelValue]}
                         {val.isSelect ? <be-icon icon='select' custom-class={`be-select-hook`}></be-icon> : ''}
                     </div>
                 ))
@@ -784,7 +671,7 @@ export default defineComponent({
                                     {renderTags()}
                                     <input readonly={readonlyInput.value}
                                            tabindex={`-1`}
-                                           onFocus={computedPositon}
+                                           onFocus={computedPosition}
                                            value={inputMultiple.value}
                                            disabled={props.disabled}
                                            onInput={($event) => inputChange($event)}

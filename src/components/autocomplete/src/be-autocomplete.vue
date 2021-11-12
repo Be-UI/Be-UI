@@ -159,7 +159,7 @@ export default defineComponent({
             // 获取事件目标元素，计算宽度，用于下拉样式设置
             const $eventDom:HTMLElement |null = (event.target as HTMLInputElement).parentElement
             eventDom = $eventDom
-            computedPositon($eventDom)
+            computedPosition($eventDom)
             ctx.emit('focus', valInner.value)
             // 焦點獲取數據
             if (props.fetchSuggestions && props.focusTrigger) {
@@ -196,7 +196,7 @@ export default defineComponent({
          * 计算输入建议下拉框位置
          * @param {Element} $eventDom - 输入建议下拉框dom
          */
-        const computedPositon = ($eventDom:HTMLElement | null):void => {
+        const computedPosition = ($eventDom:HTMLElement | null):void => {
             if(!$eventDom)return
             selectStyle.width = Number(window.getComputedStyle($eventDom).width.split('px')[0]) + 'px'
         }
@@ -266,7 +266,7 @@ export default defineComponent({
         onMounted(()=>{
             const $eventDom:HTMLElement | null = eventDom
             // 设置显示位置,宽度
-            computedPositon($eventDom)
+            computedPosition($eventDom)
         })
         return{
             loading,

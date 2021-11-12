@@ -9,6 +9,8 @@ import {ComponentInternalInstance} from "vue";
 export interface ISelect extends ComponentInternalInstance {
     uid: number
 }
+
 export interface IOption {
     [key: string]: any
 }
+
