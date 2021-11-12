@@ -151,7 +151,21 @@ export default defineComponent({
         multiple: {
             type: Boolean,
             default: false
-        }
+        },
+        /**
+         * 最大tag数
+         */
+        maxTag: {
+            type: String,
+            default: '1'
+        },
+        /**
+         * 最大选择数
+         */
+        max: {
+            type: String,
+            default: ''
+        },
 
     },
     setup(props, ctx) {
@@ -391,6 +405,10 @@ export default defineComponent({
          * @param {Array} ordData - 原始數據集
          */
         const matchSuggestions = (inputValue: string, ordData: Array<any>): void => {
+            // 大于最大数量直接返回
+            if(tagList.value.length >= Number(props.max) && props.max){
+                return
+            }
             let value = jsonClone(inputValue)
             // 模糊匹配方法
             const filter = (value: string, ordData: Array<any>, labelValue: string) => {
@@ -428,10 +446,10 @@ export default defineComponent({
                     let item: IOption = {}
                     item[label] = res
                     if (!filterResult.isHas) {
+                        item[keyId] = getUuid()
                         // 有逗号 更新tagList
                         if(isHasComma){
                             item.isAutoAdd = true
-                            item[keyId] = getUuid()
                             selectMap.set(item[keyId], item)
                             updateValue()
                             addItemList.value.push(item)
@@ -440,7 +458,7 @@ export default defineComponent({
                         addList.push(item)
                         dataL.push(item)
                     } else {
-                        if (isHasComma) {
+                        if (isHasComma){
                             let isHas:boolean = false
                             dataList.value.forEach((dataRes:any)=>{
                                 if(res === dataRes[label]){
@@ -473,7 +491,7 @@ export default defineComponent({
                 }
                 ctx.emit('search', filterRes)
                 // 更新下拉列表 - 選中狀態匹配
-                dataList.value = isHasComma ? dataL : filterRes
+                dataList.value =isHasComma ? dataL : filterRes
             }else{
                 // 爲空則使用原始數據 - 選中狀態匹配
                 dataList.value = jsonClone(ordData)
@@ -538,8 +556,11 @@ export default defineComponent({
          * @param {Number} index - 点击索引
          */
         const handleSelect = (value: any, index: number): void => {
+            // 大于最大数量直接返回
+            if(tagList.value.length >= Number(props.max) && props.max){
+                return
+            }
             const itemLabel = value[keyId]
-            let isSelect = false
             if (selectMap.has(itemLabel)) {
                 if(value.isAutoAdd){
                     addItemList.value =  addItemList.value.filter(val=>val[keyId] !== value[keyId])
@@ -561,10 +582,13 @@ export default defineComponent({
              */
             ctx.emit('select', value, index)
             inputMultiple.value = ''
-            if(value.isAutoAdd){
+            //if(value.isAutoAdd){
                 dataList.value = listCache.concat(addItemList.value)
-            }
+           // }
             updateValue()
+            tagList.value.forEach((tag: any) => {
+                setSelectState(tag.isSelect,tag[keyId])
+            })
             updatePopover()
         }
         /**
@@ -599,6 +623,7 @@ export default defineComponent({
         const initTagList = () => {
             tagList.value = props.modelValue as Array<any>
             tagList.value.forEach((tag: any) => {
+                tag.isSelect = true
                 // 更新 selectMap
                 selectMap.set(tag[keyId], tag)
                 // 更新 dataList選中状态
@@ -632,9 +657,10 @@ export default defineComponent({
         }
         /**
          * 清除tag
-         * @param {Object } value - 选中后值
+         * @param {Object } closeVal - 选中后值
          */
-        const closeTag = (value: any): void => {
+        const closeTag = (closeVal: any): void => {
+            const value = closeVal.isNum ? tagList.value.pop(): closeVal
             selectMap.delete(value[keyId])
             setSelectState(false, value[keyId])
             if(value.isAutoAdd){
@@ -657,8 +683,18 @@ export default defineComponent({
             if (!tagList.value || tagList.value?.length === 0) {
                 return
             }
+            let renderTag = jsonClone(tagList.value)
+            // maxTag 实现
+            if(props.maxTag && tagList.value.length > Number(props.maxTag)){
+                renderTag = renderTag.slice(0,Number(props.maxTag))
+                let numTag:IOption = {}
+                numTag[keyId] = getUuid()
+                numTag[label] = `+${tagList.value.length - Number(props.maxTag)}`
+                numTag.isNum = true
+                renderTag.push(numTag)
+            }
             let list: Array<VNode> = []
-            tagList.value.forEach((val) => {
+            renderTag.forEach((val) => {
                 // 選項列表
                 list.push((
                     <div class='be-select-tag'>
@@ -668,7 +704,7 @@ export default defineComponent({
                                 size='mini'
                                 class='ellipsis'
                                 onClose={() => closeTag(val)}>
-                            {val.label}
+                            {val[label]}
                         </be-tag>
                     </div>
                 ))

@@ -310,7 +310,7 @@ export default {
                 pageSize: 200,
                 total: 300
             },
-            // seletStr:[],
+             // seletStr:[],
             seletStr:[{label:'落日绣帘卷',id:'落日绣帘卷'},{label:'亭下水连空',id:'亭下水连空'}],
             testList:[
                 {label:'落日绣帘卷',id:'落日绣帘卷'},
