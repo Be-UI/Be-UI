@@ -288,6 +288,7 @@
 <script lang="tsx">
 import {panda} from './icon-testing'
 import {BeNotify} from "./components/notification/src/be-notification-service";
+import {BeMessage} from "./components/message/src/be-message-service";
 import {BeMsg} from "./components/message-box/src/be-message-box-service";
 import BePopover from "./components/popover/src/be-popover.vue";
 import {createPopper} from '@popperjs/core'
@@ -346,22 +347,18 @@ export default {
          createPopper(tr, po, {
                placement: 'top',
          })*/
-        this.notify = BeNotify({
-            titles:'Notification',
-            bodyRender:()=>{
-                return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
-                    您的体验时间仅剩
-                </p>
-            },
-            msgType:'info',
-            onClick:()=>console.log('click'),
-            onClose:()=>console.log('close'),
-            offsetBottom:10,
-            placement:'bottomRight',
-            duration:0,
-            key:'1',
+        this.notify = BeMessage({
+          titles:'titles',
+          msgType:'warning',
+          offsetTop:120,
+          customClass: 'options.customClass',
+          duration: 0,
+          close:true,
+          key: 'options.key',
+          onClose:()=>console.log('close'),
+          iconPreRender: ()=><span>🐕</span>,
+          closeRender:()=><span>❀</span>,
         })
-
         for (let i = 0; i < 300; i++) {
             this.pageData.push({num: i})
         }

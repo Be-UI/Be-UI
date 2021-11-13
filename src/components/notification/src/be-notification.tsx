@@ -17,6 +17,7 @@ export default defineComponent({
           default: {
               isShow:false,
               style: {},
+              close:false,
               placementSelf:'',
               titles:'',//
               customClass:'',//
@@ -142,7 +143,7 @@ export default defineComponent({
                             {/**@slot 弹窗头部按钮**/}
                             <div>
                                 {option.closeRender ? option.closeRender() :
-                                    <BeIcon icon="delete" {...evt}></BeIcon>}
+                                    option.close ? <BeIcon icon="delete" {...evt}></BeIcon> :''}
                             </div>
                         </div>
                     </div>

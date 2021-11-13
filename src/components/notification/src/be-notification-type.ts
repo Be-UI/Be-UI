@@ -17,9 +17,10 @@ export type INotifyOption = {
     key?: string,
     onClose?: () => void
     onClick?: () => void
-    bodyRender: any,
+    bodyRender?: any,
     iconPreRender?: any,
     closeRender?: any,
+    close?:boolean
 }
 
 export type ItInstanceMap = {

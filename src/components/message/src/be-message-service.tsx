@@ -7,24 +7,22 @@
 import {IMessage, IMsgInst} from "./be-message-type";
 import {BeNotify} from "../../notification/src/be-notification-service";
 import {INotfiyInst} from "../../notification/src/be-notification-type";
-const notifyDict = {}
 const createMessage = function (options:IMessage) :IMsgInst {
-    let optionInner = {
-        titles:'Notification',
-        bodyRender:()=>{
-            return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
-                        您的体验时间仅剩
-                   </p>
-        },
-        msgType:'info',
-        onClick:()=>console.log('click'),
-        onClose:()=>console.log('close'),
-        offsetBottom:10,
-        placement:'bottomRight',
-        duration:0,
-        key:'1',
+    let option:IMessage = {
+        titles:options.titles || 'Notification',
+        msgType:options.msgType || 'info',
+        offsetTop: options.offsetTop || 10,
+        close:(options.close) || false,
+       // placement:'topCenter',
+        placement:'topRight',
+        customClass: options.customClass,
+        duration: options.duration,
+        key: options.key,
+        onClose: options.onClose,
+        iconPreRender: options.iconPreRender,
+        closeRender:options.closeRender,
     }
-    let notifyInst:INotfiyInst = BeNotify(optionInner)
+    let notifyInst:INotfiyInst = BeNotify(option)
     return {
         message:notifyInst.notify,
         close:notifyInst.close

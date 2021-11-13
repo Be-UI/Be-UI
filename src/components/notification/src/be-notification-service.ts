@@ -176,6 +176,7 @@ const createNotify = function (options:INotifyOption) :INotfiyInst {
     // 初始默认配置
     const defaultOption= {
         isShow:false,
+        close:false,
         style: {},
         placementSelf:'',
         titles:'',//

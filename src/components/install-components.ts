@@ -16,3 +16,4 @@ export { default as BeTag } from './tag';//全局、按需
 export { default as BeNotification } from './notification';//服务
 export { default as BeMsg } from './message-box';//服务
 export { default as BeLoadingSer } from './loading/loading-plugin';//服务
+export { default as BeMessage } from './message';//服务

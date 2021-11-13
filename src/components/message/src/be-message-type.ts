@@ -10,16 +10,13 @@ export type IMessage = {
     customClass?: string,
     msgType?: string,
     offsetTop?: number,
-    offsetBottom?: number,
     placement?: string,
-    description?: string,
     duration?: number,
     key?: string,
     onClose?: () => void
-    onClick?: () => void
-    bodyRender: any,
     iconPreRender: any,
     closeRender: any,
+    close?:boolean
 }
 
 export type ItInstanceMap = {
@@ -35,3 +32,4 @@ export interface IMsgInst {
     message: IMsgInstance,
     close: Function,
 }
+
