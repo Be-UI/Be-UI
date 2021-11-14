@@ -350,16 +350,41 @@ export default {
         this.notify = BeMessage({
           titles:'titles',
           msgType:'warning',
-          offsetTop:120,
           customClass: 'options.customClass',
           duration: 0,
           close:true,
           key: 'options.key',
           onClose:()=>console.log('close'),
-          iconPreRender: ()=><span>🐕</span>,
-          closeRender:()=><span>❀</span>,
+         /* iconPreRender: ()=><span>🐕</span>,
+          closeRender:()=><span>❀</span>,*/
         })
-        for (let i = 0; i < 300; i++) {
+      this.notify = BeMessage({
+        titles:'titl的气味的es',
+        msgType:'warning',
+
+        customClass: 'options.customClass',
+        duration: 0,
+        close:true,
+        key: 'optionsd.key',
+        onClose:()=>console.log('close'),
+        /* iconPreRender: ()=><span>🐕</span>,
+         closeRender:()=><span>❀</span>,*/
+      })
+      this.notify = BeMessage({
+        titles:'titl的气味的es',
+        msgType:'warning',
+
+        customClass: 'options.customClass',
+        duration: 0,
+        close:true,
+        key: 'optiondwqdsd.key',
+        onClose:()=>console.log('close'),
+        /* iconPreRender: ()=><span>🐕</span>,
+         closeRender:()=><span>❀</span>,*/
+      })
+
+
+      for (let i = 0; i < 300; i++) {
             this.pageData.push({num: i})
         }
     },

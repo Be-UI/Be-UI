@@ -13,7 +13,7 @@
 10.自定义前置图标√
 11.自定义后置图标√
 
-1.notification 重构
-2.样式、位置调整
-3.解决css名字为notification问题
+
+
 4.编译jsx和string的html
+1.关闭动画

@@ -9,12 +9,12 @@ import {BeNotify} from "../../notification/src/be-notification-service";
 import {INotfiyInst} from "../../notification/src/be-notification-type";
 const createMessage = function (options:IMessage) :IMsgInst {
     let option:IMessage = {
-        titles:options.titles || 'Notification',
+        titles:options.titles || 'message',
         msgType:options.msgType || 'info',
-        offsetTop: options.offsetTop || 10,
+        offsetTop: options.offsetTop,
         close:(options.close) || false,
-       // placement:'topCenter',
-        placement:'topRight',
+        placement:'topCenter',
+        compType:'message',
         customClass: options.customClass,
         duration: options.duration,
         key: options.key,

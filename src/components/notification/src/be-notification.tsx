@@ -8,6 +8,7 @@
 import {computed,defineComponent, reactive, ref,h,getCurrentInstance} from 'vue'
 import BeIcon from '../../svg-icon/src/be-icon.vue'
 import '../../../assets/style/be-notification.scss';
+import '../../../assets/style/be-message.scss';
 import {INotfiy} from './be-notification-type'
 export default defineComponent({
     name: "BeNotification",
@@ -37,6 +38,10 @@ export default defineComponent({
               //点击回调方法
               onClick:null
           }
+      },
+      compType:{
+          type:String,
+          default:'notification'
       }
     },
     setup(props,ctx){
@@ -45,7 +50,7 @@ export default defineComponent({
 
         /************************************** 根據方向 進行位置偏移設置******************************/
         const offsetTopStyle = computed(() => option.offsetTop)
-        if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight') {
+        if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight' || option.placementSelf === 'topCenter') {
             option.style = {top:offsetTopStyle.value + 'px'}
         }
 
@@ -59,7 +64,7 @@ export default defineComponent({
         if (option.placementSelf === 'bottomLeft' || option.placementSelf === 'bottomRight') {
             option.style = {bottom:option.offsetBottom + 'px'}
         }
-        if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight') {
+        if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight' || option.placementSelf === 'topCenter') {
             option.style = {top:option.offsetTop + 'px'}
         }
         /************************************** 處理 點擊 關閉事件******************************/
@@ -109,13 +114,16 @@ export default defineComponent({
          * 動畫類設置方法
          */
         const setAnimate = ()=>{
-            let classStr = `be-notification be-notification__${option.msgType} be-notification__${option.placement} ${option.customClass}`
+            let classStr = `be-${props.compType} be-${props.compType}__${option.msgType} be-${props.compType}__${option.placement} ${option.customClass}`
             containerClass.value = classStr
             if (option.placement === 'bottomRight' || option.placement === 'topRight') {
-                containerClass.value = classStr + ' be-notification-animation-right-in be-notification-bottom'
+                containerClass.value = classStr + ` be-${props.compType}-animation-right-in be-${props.compType}-bottom`
             }
             if (option.placement === 'bottomLeft' || option.placement === 'topLeft') {
-                containerClass.value = classStr + ' be-notification-animation-left-in be-notification-top'
+                containerClass.value = classStr + ` be-${props.compType}-animation-left-in be-${props.compType}-top`
+            }
+            if (option.placement === 'topCenter') {
+                containerClass.value = classStr + ` be-${props.compType}-animation-top-center-in be-${props.compType}-top`
             }
         }
         setAnimate()
@@ -130,10 +138,10 @@ export default defineComponent({
                 onClick:(event:Event) => close(event)
             }
             return (
-                h(<div class={`be-notification-container be-notification-container__${option.placement}`}>
-                    <div class="be-notification-title">
-                        <div class="be-notification-head"
-                             id={`be_notification_head${uid}`}>
+                h(<div class={`be-${props.compType}-container be-${props.compType}-container__${option.placement}`}>
+                    <div class={`be-${props.compType}-title`}>
+                        <div class={`be-${props.compType}-head`}
+                             id={`be_${props.compType}_head${uid}`}>
                             <div>
                                 {option.iconPreRender ? option.iconPreRender() :
                                     <BeIcon icon={`${option.msgType}`} customClass={`icon-${option.msgType}`}></BeIcon>}
@@ -148,13 +156,14 @@ export default defineComponent({
                         </div>
                     </div>
                     {/**@slot 弹窗主体**/}
-                    <div class='be-notification-body'>
+                    {props.compType === 'notification' ?
+                    <div class={`be-${props.compType}-body`}>
                         {option.bodyRender ? option.bodyRender() :
-                            <p class="be-notification-description">
+                            <p class={`be-${props.compType}-description`}>
                                 {option.description}
                             </p>
                         }
-                    </div>
+                    </div> : ''}
                 </div>)
             )
         }
@@ -167,7 +176,7 @@ export default defineComponent({
              <div
                  style={option.style}
                  onClick={(event)=>{onClick(event)}}
-                 class={containerClass.value} id={`be_notification${uid}`}>
+                 class={containerClass.value} id={`be_${props.compType}${uid}`}>
                  <transition name="be-fade-in-linear">
                      {option.isShow ? renderBody.call(this,h) : ''}
                  </transition>

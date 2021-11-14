@@ -14,6 +14,7 @@ let instanceMap:ItInstanceMap = {
     topLeft:[],
     topRight:[],
     bottomLeft:[],
+    topCenter:[],
     bottomRight:[]
 }
 // 是否缓存标识
@@ -26,11 +27,11 @@ let isCache:boolean = false
 const closeNotify = function (instance:DefineComponent,isAll:boolean = false):void{
     if (!instance) return;
     let index = -1
-    let pacement:string = (instance.props && instance.props.option.placement)
+    let placement:string = (instance.props && instance.props.option.placement)
     const instanceUid:number = (instance.component && instance.component.uid) || instance.uid
     const instanceEl = instance.el || instance.ctx.$el
-    let instancesList = Object(instanceMap)[pacement]
-    let direction = /^top-/.test(pacement) ? 'top' : 'bottom';
+    let instancesList = Object(instanceMap)[placement]
+    let direction = /^top-/.test(placement) ? 'top' : 'bottom';
     let len = instancesList.length
     // 關閉全部
     if(isAll){
@@ -60,7 +61,7 @@ const closeNotify = function (instance:DefineComponent,isAll:boolean = false):vo
             parseInt(instancesList[i].instance.el.style[direction], 10) - removedHeight - 35 + 'px';
     }
     // 根据组件uid过滤组件实例
-    Object(instanceMap)[pacement] = Object(instanceMap)[pacement].filter((val:any) => {
+    Object(instanceMap)[placement] = Object(instanceMap)[placement].filter((val:any) => {
         return val.instance.component.uid !== instanceUid
     })
     // 关闭
@@ -102,23 +103,25 @@ const closeAll = ():void=>{
  */
 const computeOffset = (option:INotifyOption,instanceArr:Array<Object>,isCache:boolean,instance:any):void=>{
     // 计算偏移
+    const offset = 35
     let verticalOffset:number = 0;
     let direction:string = ''
-    if (option.placement === 'topLeft' || option.placement === 'topRight') {
+    if (option.placement === 'topLeft' || option.placement === 'topRight' || option.placement === 'topCenter') {
         verticalOffset = option.offsetTop || 0
-        direction = 'offsetTop'
+        direction = 'top'
     }
     if (option.placement === 'bottomLeft' || option.placement === 'bottomRight') {
         verticalOffset = option.offsetBottom || 0
-        direction = 'offsetBottom'
+        direction = 'bottom'
     }
     if (!isCache) {
-        instanceArr.forEach((item:any) => {
-            verticalOffset += (item.instance.el.offsetHeight || 0 )+ 35;
+        instanceArr.forEach((item:any,index) => {
+            verticalOffset += (item.instance.el.childNodes[0].childNodes[0].offsetHeight || 0 )+ offset;
+            if(index ===0 && option.compType === 'message') verticalOffset = 30
         });
     }
-    verticalOffset += 35;
-    instance.el.style.bottom = verticalOffset + 'px'
+    //verticalOffset += offset;
+    instance.el.style[direction] = verticalOffset + 'px'
 }
 
 /**
@@ -133,7 +136,7 @@ const componentRender = (option:INotifyOption,instanceArr:Array<Object>,isCacheI
     let instanceInner = instance
     // 如果instance 为null，则是没有传入key 或者没有匹配到实例缓存，就创建新的
     if (!instanceInner) {
-        instanceInner = createVNode(beNotifyComponents, {option});
+        instanceInner = createVNode(beNotifyComponents, {option,compType:option.compType});
         instanceInner.props.option.isShow = true;
         elm = document.createElement('div')
         render(instanceInner,elm)

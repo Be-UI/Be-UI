@@ -16,6 +16,7 @@ export type IMessage = {
     onClose?: () => void
     iconPreRender: any,
     closeRender: any,
+    compType:string,
     close?:boolean
 }
 

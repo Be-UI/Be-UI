@@ -16,10 +16,7 @@
     80%{-moz-transform:translateX(10px)}
     100%{-moz-transform:translateX(0)}
 }
-.be-notification-animation-left-in{
-    -webkit-animation:fadeInLeftBig .3s .2s ease both;
-    -moz-animation:fadeInLeftBig .3s .2s ease both;
-}
+
 @-webkit-keyframes fadeInLeftBig{
     0%{opacity:0;
         -webkit-transform:translateX(-2000px)}
@@ -32,6 +29,24 @@
     100%{opacity:1;
         -moz-transform:translateX(0)}
 }
+
+@-webkit-keyframes bounceInTopCenter{
+    0%{opacity:0;
+        -webkit-transform:translateY(-1000px)}
+    60%{opacity:1;
+        -webkit-transform:translateY(30px)}
+    80%{-webkit-transform:translateY(-10px)}
+    100%{-webkit-transform:translateY(0)}
+}
+@-moz-keyframes bounceInTopCenter{
+    0%{opacity:0;
+        -moz-transform:translateY(-1000px)}
+    60%{opacity:1;
+        -moz-transform:translateY(30px)}
+    80%{-moz-transform:translateY(-10px)}
+    100%{-moz-transform:translateY(0)}
+}
+
 /*be-message-box*/
 .be-fadeIn{
     opacity: 1;

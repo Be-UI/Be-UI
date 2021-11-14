@@ -20,6 +20,7 @@ export type INotifyOption = {
     bodyRender?: any,
     iconPreRender?: any,
     closeRender?: any,
+    compType?:string
     close?:boolean
 }
 
@@ -28,6 +29,7 @@ export type ItInstanceMap = {
     topRight?: Array<Object>,
     bottomLeft?: Array<Object>,
     bottomRight?: Array<Object>,
+    topCenter?: Array<Object>,
 }
 export interface INotfiy extends ComponentInternalInstance {
     uid: number
