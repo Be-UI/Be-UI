@@ -149,7 +149,7 @@ export default defineComponent({
                             </div>
                             {/**@slot 弹窗头部按钮**/}
                             <div>
-                                {option.closeRender ? option.closeRender() :
+                                {option.closeRender ? option.closeRender :
                                     option.close ? <BeIcon icon="delete" {...evt}></BeIcon> :''}
                             </div>
                         </div>

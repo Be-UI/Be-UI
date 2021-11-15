@@ -279,6 +279,7 @@
                 </template>
             </be-select>
             {{seletStr}}
+            <panda width="25" height="25"  @click="test"></panda>
 <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
         </div>
     </div>
@@ -356,8 +357,8 @@ export default {
           close:true,
           key: 'options.key',
           onClose:()=>console.log('close'),
-         /* iconPreRender: ()=><span>🐕</span>,
-          closeRender:()=><span>❀</span>,*/
+          iconPreRender: <span>🐕</span>,
+          closeRender:<span>❀</span>,
         })
         setTimeout(()=>{
             this.notify.update({
