@@ -26,11 +26,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
-be-message 
 InputNumber
 样式重构 
 图标修改
-
 ## 长期排期
 1.服务式访问的全局绑定  
 2.组件引用编写
@@ -50,8 +48,9 @@ InputNumber
 12.文本弹出显示 be-toolTip （迁移完成）  
 13.按钮组件 be-button （迁移完成）   
 14.自动补全输入 be-autocomplete （迁移完成）    
-14.tag标签 be-tag （完成）    
-14.选择框 be-select （完成）    
+15.tag标签 be-tag （完成）    
+16.选择框 be-select （完成）    
+17.消息提示 be-message （完成）    
 
 
 

@@ -143,10 +143,9 @@ export default defineComponent({
                              id={`be_${props.compType}_head${uid}`}>
                             <div>
                                 {isLoading.value ?  <BeIcon icon='loading' spin customClass={`icon-${option.msgType}`}></BeIcon> :
-                                    option.iconPreRender ? option.iconPreRender() :
+                                    option.iconPreRender ? option.iconPreRender :
                                     <BeIcon icon={`${option.msgType}`} customClass={`icon-${option.msgType}`}></BeIcon>}
-
-                                <span class={`text-${option.msgType}`}>{option.titles}</span>
+                                <span class={`txt-${option.msgType}`}>{option.titles}</span>
                             </div>
                             {/**@slot 弹窗头部按钮**/}
                             <div>

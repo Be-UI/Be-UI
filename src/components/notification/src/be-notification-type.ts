@@ -17,12 +17,12 @@ export type INotifyOption = {
     key?: string,
     onClose?: () => void
     onClick?: () => void
-    bodyRender?: any,
-    iconPreRender?: any,
-    closeRender?: any,
     compType?:string
     close?:boolean,
     isUpdate?:boolean
+    bodyRender?: any,
+    iconPreRender?: any,
+    closeRender?: any,
 }
 
 export type ItInstanceMap = {

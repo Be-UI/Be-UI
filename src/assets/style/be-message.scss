@@ -6,66 +6,51 @@
 }
 .be-message {
     z-index: 10;
-    min-height: 30px;
+    @apply max-h-12;
     .be-message-container {
-        min-width: 320px;
-        background: $default;
-        padding: 12px;
-        box-shadow: 0 6px 13px rgba(0, 0, 0, 0.16);
-        border-radius: 2px;
-        box-sizing: border-box;
-        position: absolute;
+        @apply min-w-16 bg-default p-2.5 rounded shadow absolute box-border;
         z-index: 998;
         .be-message-title {
-            width: 100%;
-            height: 25px;;
+            @apply w-full h-6;
             .be-message-head {
-                line-height: 25px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+                @apply leading-6 flex justify-between items-center;
                 div:nth-child(1){
-                    display: flex;
-                    align-items: center;
+                    @apply flex items-center;
                     .icon-warning{
-                        fill:$warning;
+                        @apply fill-warning;
                         @include be-message-icon;
                     }
                     .icon-info{
-                        fill:$info;
+                        @apply fill-info;
                         @include be-message-icon;
                     }
                     .icon-success{
-                        fill:$success;
+                        @apply fill-success;
                         @include be-message-icon;
                     }
                     .icon-error{
-                        fill:$error;
+                        @apply fill-error;
                         @include be-message-icon;
                     }
-                    .text-warning{
+                    .txt-warning{
                         @include be-message-tilte;
-                        font-weight: normal;
-                        color:$warning;
+                        @apply text-warning font-normal;
                     }
-                    .text-info{
+                    .txt-info{
                         @include be-message-tilte;
-                        font-weight: normal;
-                        color:$info;
+                        @apply text-info font-normal;
                     }
-                    .text-success{
+                    .txt-success{
                         @include be-message-tilte;
-                        font-weight: normal;
-                        color:$success;
+                        @apply text-success font-normal;
                     }
-                    .text-error{
+                    .txt-error{
                         @include be-message-tilte;
-                        font-weight: normal;
-                        color:$error;
+                        @apply text-error font-normal;
                     }
                 }
                 div:nth-child(2){
-                    cursor: pointer;
+                    @apply cursor-pointer;
                 }
             }
 
@@ -73,30 +58,17 @@
     }
 
     .be-message-container__topCenter{
-        right: 50%;
+        @apply right-1/2;
         transform: translateX(50%);
     }
 }
 .be-message__topCenter{
-    position: fixed;
-    right: 50%;
+    @apply right-1/2 fixed;
     transform: translateX(50%);
 }
 
 .be-message-top{
     transition: top .3s;
-}
-@keyframes MessageMoveOut {
-    0% {
-        max-height: 150px;
-        padding: 8px;
-        opacity: 1;
-    }
-    100% {
-        max-height: 0;
-        padding: 0;
-        opacity: 0;
-    }
 }
 .be-message-animation-top-center-in{
     -webkit-animation:bounceInTopCenter .3s .2s ease both;

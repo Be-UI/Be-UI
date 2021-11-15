@@ -8,60 +8,49 @@
     z-index: 10;
     min-height: 100px;
     .be-notification-container {
-       /* width: 305px;*/
-        background: #FFFFFF;
-        padding: 16px 16px 16px 20px;
-        box-shadow: 0 6px 13px rgba(0, 0, 0, 0.16);
-        border-radius: 2px;
-        box-sizing: border-box;
-        position: absolute;
+        @apply min-w-16 bg-default p-2.5 rounded shadow absolute box-border;
         z-index: 998;
         .be-notification-title {
-            width: 100%;
-            height: 25px;;
+            @apply w-full h-6;
             .be-notification-head {
-                line-height: 25px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+                @apply leading-6 flex justify-between items-center;
                 div:nth-child(1){
-                    display: flex;
-                    align-items: center;
+                    @apply flex items-center;
                     .icon-warning{
-                        fill:$warning;
+                        @apply fill-warning;
                         @include be-notification-icon;
                     }
                     .icon-info{
-                        fill:$info;
+                        @apply fill-info;
                         @include be-notification-icon;
                     }
                     .icon-success{
-                        fill:$success;
+                        @apply fill-success;
                         @include be-notification-icon;
                     }
                     .icon-error{
-                        fill:$error;
+                        @apply fill-error;
                         @include be-notification-icon;
                     }
-                    .text-warning{
+                    .txt-warning{
                         @include be-message-tilte;
-                        color:$warning;
+                        @apply text-warning font-normal;
                     }
-                    .text-info{
+                    .txt-info{
                         @include be-message-tilte;
-                        color:$info;
+                        @apply text-info font-normal;
                     }
-                    .text-success{
+                    .txt-success{
                         @include be-message-tilte;
-                        color:$success;
+                        @apply text-success font-normal;
                     }
-                    .text-error{
+                    .txt-error{
                         @include be-message-tilte;
-                        color:$error;
+                        @apply text-error font-normal;
                     }
                 }
                 div:nth-child(2){
-                    cursor: pointer;
+                    @apply cursor-pointer;
                 }
             }
 
@@ -80,7 +69,7 @@
         margin-top: 10px;
         .be-notification-description{
             font-size: 14px;
-            font-family: Microsoft YaHei;
+            font-family: Microsoft YaHei sans-serif;
             font-weight: 400;
             line-height: 20px;
             color: #000000;
