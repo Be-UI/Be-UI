@@ -7,8 +7,6 @@
 
 import {computed,defineComponent, reactive, ref,h,getCurrentInstance} from 'vue'
 import BeIcon from '../../svg-icon/src/be-icon.vue'
-import '../../../assets/style/be-notification.scss';
-import '../../../assets/style/be-message.scss';
 import {INotfiy} from './be-notification-type'
 export default defineComponent({
     name: "BeNotification",

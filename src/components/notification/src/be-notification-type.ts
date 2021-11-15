@@ -33,7 +33,8 @@ export type ItInstanceMap = {
     topCenter?: Array<Object>,
 }
 export interface INotfiy extends ComponentInternalInstance {
-    uid: number
+    uid: number,
+    el:HTMLElement
 }
 export interface INotfiyInst {
     notify: INotfiy,

@@ -28,10 +28,10 @@ const createMessage = function (options: IMessage): IMsgInst {
     return {
         message: notifyInst.notify,
         close: notifyInst.close,
-        update: (option: IMessage): void => {
+        update: (option: IMessage): INotfiyInst => {
             option.placement = 'topCenter'
             option.compType = 'message'
-            BeNotify(option)
+            return BeNotify(option)
         }
     }
 }

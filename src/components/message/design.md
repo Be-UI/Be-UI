@@ -1,6 +1,6 @@
 插件形式 notification变体  
-1.四种情感  √  
-2.自带loading  √  
+1.四种情感  √  test √
+2.自带loading  √  test √
 3.消息更新  √  
 4.消失延时  √  
 5.自定义样式  √  

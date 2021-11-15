@@ -354,24 +354,17 @@ export default {
           msgType:'warning',
           customClass: 'options.customClass',
           duration: 0,
-          close:true,
+
           key: 'options.key',
           onClose:()=>console.log('close'),
           iconPreRender: <span>🐕</span>,
-          closeRender:<span>❀</span>,
+        /*  closeRender:<span>❀</span>,*/
         })
         setTimeout(()=>{
             this.notify.update({
                 loading:false,
                 key: 'options.key',
             })
-          /*  BeMessage({
-                loading:false,
-                key: 'options.key',
-                /!* iconPreRender: ()=><span>🐕</span>,
-                 closeRender:()=><span>❀</span>,*!/
-            })*/
-            //this.notify.update()
         },1000)
       /*this.notify = BeMessage({
         titles:'titl的气味的es',

@@ -29,6 +29,7 @@ export type ItInstanceMap = {
 }
 export interface IMsgInstance extends ComponentInternalInstance {
     uid: number
+    el:HTMLElement
 }
 export interface IMsgInst {
     message: IMsgInstance,
