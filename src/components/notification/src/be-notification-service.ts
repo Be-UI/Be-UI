@@ -73,13 +73,32 @@ const closeNotify = function (instance: DefineComponent, isAll: boolean = false)
 
 /**
  * 關閉方法
- * @param compInstance 組件實例HTML
+ * @param compInstance 組件實例 dom
  * @param elm 挂載元素dom
  */
 const close = (compInstance: HTMLElement, elm: HTMLElement): void => {
     if (compInstance && compInstance.parentNode) {
-        render(null, elm)
+        setCloseAnimate(compInstance)
+        setTimeout(()=>{
+            render(null, elm)
+        },300)
     }
+}
+/**
+ * 設置關閉動畫
+ * @param compInstance 組件實例 dom
+ */
+const setCloseAnimate = (compInstance: HTMLElement): void => {
+    let className = compInstance.className
+    if(className.indexOf('be-message')  < 0 ){
+        return
+    }
+    if(className.indexOf('-in') >=0 ){
+        className = className.replace(/-in/, "-out")
+    }else {
+        className = className + ' be-message-animation-top-center-out'
+    }
+    compInstance.className = className
 }
 /**
  * 關閉全部方法

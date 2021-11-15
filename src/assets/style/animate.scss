@@ -46,6 +46,42 @@
     80%{-moz-transform:translateY(-10px)}
     100%{-moz-transform:translateY(0)}
 }
+@-webkit-keyframes outTopCenter{
+    0%{
+        opacity:1;
+        -webkit-transform:translateY(0)
+    }
+    60%{
+        opacity:.75;
+        -webkit-transform:translateY(-10px)
+    }
+    80%{
+        opacity:.5;
+        -webkit-transform:translateY(-50px)
+    }
+    100%{
+        opacity:0;
+        -webkit-transform:translateY(-1000px)
+    }
+}
+@-moz-keyframes outTopCenter{
+    0%{
+        opacity:1;
+        -moz-transform:translateY(0)
+    }
+    60%{
+        opacity:.75;
+        -moz-transform:translateY(-10px)
+    }
+    80%{
+        opacity:.5;
+        -moz-transform:translateY(-50px)
+    }
+    100%{
+        opacity:0;
+        -moz-transform:translateY(-1000px)
+    }
+}
 
 /*be-message-box*/
 .be-fadeIn{
