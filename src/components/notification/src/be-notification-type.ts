@@ -21,7 +21,8 @@ export type INotifyOption = {
     iconPreRender?: any,
     closeRender?: any,
     compType?:string
-    close?:boolean
+    close?:boolean,
+    isUpdate?:boolean
 }
 
 export type ItInstanceMap = {

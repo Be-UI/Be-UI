@@ -17,7 +17,8 @@ export type IMessage = {
     iconPreRender: any,
     closeRender: any,
     compType:string,
-    close?:boolean
+    close?:boolean,
+    loading?:boolean,
 }
 
 export type ItInstanceMap = {
@@ -32,5 +33,6 @@ export interface IMsgInstance extends ComponentInternalInstance {
 export interface IMsgInst {
     message: IMsgInstance,
     close: Function,
+    update: Function,
 }
 

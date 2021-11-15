@@ -31,6 +31,7 @@ export default defineComponent({
               closeRender:null,//
               description:'',//
               duration:4500,//
+              loading:false,
               key:'',//
               timer:0,//
               //关闭回调方法
@@ -47,7 +48,7 @@ export default defineComponent({
     setup(props,ctx){
         const internalInstance  = getCurrentInstance() as INotfiy
         let option = props.option
-
+        const isLoading = ref<boolean>(props.option?.loading)
         /************************************** 根據方向 進行位置偏移設置******************************/
         const offsetTopStyle = computed(() => option.offsetTop)
         if (option.placementSelf === 'topLeft' || option.placementSelf === 'topRight' || option.placementSelf === 'topCenter') {
@@ -78,8 +79,6 @@ export default defineComponent({
          */
         const close = (event:Event | null):void=>{
             event && event.stopPropagation()
-            // 關閉回調
-            selfEvent.onClose && selfEvent.onClose(event)
             // 刪除緩存的組件實例，調整位置.关闭销毁
             props.option.closeNotify(internalInstance,false,true)
         }
@@ -116,13 +115,13 @@ export default defineComponent({
         const setAnimate = ()=>{
             let classStr = `be-${props.compType} be-${props.compType}__${option.msgType} be-${props.compType}__${option.placement} ${option.customClass}`
             containerClass.value = classStr
-            if (option.placement === 'bottomRight' || option.placement === 'topRight') {
+            if (option.placement === 'bottomRight' || option.placement === 'topRight' && !option.isUpdate) {
                 containerClass.value = classStr + ` be-${props.compType}-animation-right-in be-${props.compType}-bottom`
             }
-            if (option.placement === 'bottomLeft' || option.placement === 'topLeft') {
+            if (option.placement === 'bottomLeft' || option.placement === 'topLeft' && !option.isUpdate) {
                 containerClass.value = classStr + ` be-${props.compType}-animation-left-in be-${props.compType}-top`
             }
-            if (option.placement === 'topCenter') {
+            if (option.placement === 'topCenter' && !option.isUpdate) {
                 containerClass.value = classStr + ` be-${props.compType}-animation-top-center-in be-${props.compType}-top`
             }
         }
@@ -143,7 +142,8 @@ export default defineComponent({
                         <div class={`be-${props.compType}-head`}
                              id={`be_${props.compType}_head${uid}`}>
                             <div>
-                                {option.iconPreRender ? option.iconPreRender() :
+                                {isLoading.value ?  <BeIcon icon='loading' spin customClass={`icon-${option.msgType}`}></BeIcon> :
+                                    option.iconPreRender ? option.iconPreRender() :
                                     <BeIcon icon={`${option.msgType}`} customClass={`icon-${option.msgType}`}></BeIcon>}
 
                                 <span class={`text-${option.msgType}`}>{option.titles}</span>
@@ -177,9 +177,7 @@ export default defineComponent({
                  style={option.style}
                  onClick={(event)=>{onClick(event)}}
                  class={containerClass.value} id={`be_${props.compType}${uid}`}>
-                 <transition name="be-fade-in-linear">
-                     {option.isShow ? renderBody.call(this,h) : ''}
-                 </transition>
+                 {option.isShow ? renderBody.call(this,h) : ''}
              </div>
          )
      }

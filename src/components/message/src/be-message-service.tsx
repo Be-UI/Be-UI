@@ -7,27 +7,34 @@
 import {IMessage, IMsgInst} from "./be-message-type";
 import {BeNotify} from "../../notification/src/be-notification-service";
 import {INotfiyInst} from "../../notification/src/be-notification-type";
-const createMessage = function (options:IMessage) :IMsgInst {
-    let option:IMessage = {
-        titles:options.titles || 'message',
-        msgType:options.msgType || 'info',
+
+const createMessage = function (options: IMessage): IMsgInst {
+    let option: IMessage = {
+        titles: options.titles || 'message',
+        msgType: options.msgType || 'info',
         offsetTop: options.offsetTop,
-        close:(options.close) || false,
-        placement:'topCenter',
-        compType:'message',
+        close: (options.close) || false,
+        placement: 'topCenter',
+        compType: 'message',
         customClass: options.customClass,
         duration: options.duration,
         key: options.key,
         onClose: options.onClose,
         iconPreRender: options.iconPreRender,
-        closeRender:options.closeRender,
+        closeRender: options.closeRender,
+        loading: options.loading,
     }
-    let notifyInst:INotfiyInst = BeNotify(option)
+    let notifyInst: INotfiyInst = BeNotify(option)
     return {
-        message:notifyInst.notify,
-        close:notifyInst.close
+        message: notifyInst.notify,
+        close: notifyInst.close,
+        update: (option: IMessage): void => {
+            option.placement = 'topCenter'
+            option.compType = 'message'
+            BeNotify(option)
+        }
     }
 }
-export const BeMessage = (options:IMessage):object =>{
+export const BeMessage = (options: IMessage): object => {
     return createMessage(options)
 };
