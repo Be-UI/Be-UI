@@ -8,7 +8,6 @@
 import {createVNode, render, DefineComponent, VNode} from 'vue';
 import beMsgComponents from './be-message-box';
 import type { INMsgOption} from './be-message-box-type'
-const instanceMap = {}
 /**
  * 渲染组件实例
  * @param {Object} option - 配置對象
