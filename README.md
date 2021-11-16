@@ -51,6 +51,7 @@ InputNumber
 15.tag标签 be-tag （完成）    
 16.选择框 be-select （完成）    
 17.消息提示 be-message （完成）    
+18.数字输入 be-input-number （开发中）    
 
 
 

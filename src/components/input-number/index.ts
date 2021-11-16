@@ -7,6 +7,7 @@
 import { App} from 'vue'
 import beInputNumber from './src/be-input-number'
 import type {SFCWithInstall} from "../../utils/types";
+import '../../assets/style/be-input-number.scss'
 /**
  * 组件装载方法
  * @param app

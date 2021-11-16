@@ -273,13 +273,14 @@
             </be-select>-->
 <!--            <be-select  size="medium" v-model="seletStr" clear keyValue = 'id' multiple :list="testList" search>
             </be-select>-->
-            <be-select  size="medium" v-model="seletStr" clear keyValue = 'id' multiple :list="testList" search>
+<!--            <be-select  size="medium" v-model="seletStr" clear keyValue = 'id' multiple :list="testList" search>
                 <template v-slot:tag="slotProps">
                     <span @click="slotProps.close">{{ slotProps.data.label }}  {{slotProps.index}}</span>
                 </template>
             </be-select>
             {{seletStr}}
-            <panda width="25" height="25"  @click="test"></panda>
+            <panda width="25" height="25"  @click="test"></panda>-->
+            <be-input-number></be-input-number>
 <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
         </div>
     </div>
@@ -295,6 +296,7 @@ import BePopover from "./components/popover/src/be-popover.vue";
 import {createPopper} from '@popperjs/core'
 import {BeLoadingSer} from './components'
 import BeIcon from "./components/svg-icon/src/be-icon.vue";
+
 
 export default {
     name: 'App',
@@ -373,7 +375,6 @@ export default {
             /!*  closeRender:<span>❀</span>,*!/
         })*/
         setTimeout(()=>{
-            debugger
             this.notify.update({
                 loading:false,
                 key: 'options.key',
