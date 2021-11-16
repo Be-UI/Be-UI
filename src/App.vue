@@ -354,19 +354,32 @@ export default {
           msgType:'warning',
           customClass: 'options.customClass',
           duration: 0,
-
+          close:true,
           key: 'options.key',
           onClose:()=>console.log('close'),
           iconPreRender: <span>🐕</span>,
         /*  closeRender:<span>❀</span>,*/
         })
+       /* this.notify = BeMessage({
+            loading:true,
+            titles:'titles',
+            msgType:'warning',
+            customClass: 'options.customClass',
+            duration: 0,
+            close:true,
+            key: 'options.kesy',
+            onClose:()=>console.log('close'),
+            iconPreRender: <span>🐕</span>,
+            /!*  closeRender:<span>❀</span>,*!/
+        })*/
         setTimeout(()=>{
+            debugger
             this.notify.update({
                 loading:false,
                 key: 'options.key',
             })
         },1000)
-      /*this.notify = BeMessage({
+      this.notify = BeMessage({
         titles:'titl的气味的es',
         msgType:'warning',
 
@@ -375,8 +388,8 @@ export default {
         close:true,
         key: 'optionsd.key',
         onClose:()=>console.log('close'),
-        /!* iconPreRender: ()=><span>🐕</span>,
-         closeRender:()=><span>❀</span>,*!/
+        /* iconPreRender: ()=><span>🐕</span>,
+         closeRender:()=><span>❀</span>,*/
       })
       this.notify = BeMessage({
         titles:'titl的气a味的es',
@@ -387,9 +400,9 @@ export default {
         close:true,
         key: 'optiondwqdsd.key',
         onClose:()=>console.log('close'),
-        /!* iconPreRender: ()=><span>🐕</span>,
-         closeRender:()=><span>❀</span>,*!/
-      })*/
+        /* iconPreRender: ()=><span>🐕</span>,
+         closeRender:()=><span>❀</span>,*/
+      })
 
 
       for (let i = 0; i < 300; i++) {

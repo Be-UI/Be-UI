@@ -1,8 +1,25 @@
 import {mount} from '@vue/test-utils'
-import {BeMessage} from '../src/be-message-service'
+import {BeMessage, resetMessageInstMap} from '../src/be-message-service'
 import {IMessage, IMsgInst} from "../src/be-message-type";
-import {ComponentInternalInstance} from "vue";
 import {asyncExpect} from "../../../utils/utils";
+import {resetNotifyInstMap} from "../../notification/src/be-notification-service";
+
+interface IMsgInstanceTest {
+    message: {
+        props: {
+            option: {
+                loading: boolean
+                titles: string
+            }
+        }
+        component: {
+            uid: number
+        },
+        el: HTMLElement
+    },
+    update: Function,
+    close: Function,
+}
 
 /**
  * 测试props生效
@@ -27,32 +44,20 @@ describe('test-be-message-props', () => {
         const ElmInfo = compInstInfo.message.el as HTMLElement
         expect(ElmInfo.className.indexOf('be-message__info') > 0).toBeTruthy()
     })
-    // 测试 开启与关闭
+    // 测试loading 开启与关闭
     test('props-loading', async () => {
-        interface IMsgInstanceTest {
-            message: {
-                props: {
-                    option: {
-                        loading: boolean
-                    }
-                }
-                el: HTMLElement
-            },
-            update: Function
-        }
-
-        let compInst = BeMessage({
+        const compInst = BeMessage({
             loading: true,
             msgType: 'warning',
             key: 'test-loading'
         } as IMessage) as IMsgInstanceTest
-        let elm = compInst.message.el as HTMLElement
+        const elm = compInst.message.el as HTMLElement
         expect(compInst.message.props.option.loading as boolean).toBeTruthy()
         expect(elm.querySelectorAll('.be-icon').length === 1).toBeTruthy()
         const loading: Element | undefined = elm.querySelectorAll('.be-icon')[0].children[0]
         expect(loading?.getAttribute('xlink:href')).toBe(`#loading`)
         // 关闭
-        let compInstLoadingClose = compInst.update({
+        const compInstLoadingClose = compInst.update({
             loading: false,
             key: 'test-loading'
         })
@@ -61,170 +66,115 @@ describe('test-be-message-props', () => {
             compInstLoadingClose.notify.el.querySelectorAll('.be-icon').forEach((res: SVGAElement) => {
                 expect(res?.getAttribute('xlink:href') !== '#loading').toBeTruthy()
             })
-
         }, 1000)
-    }
-)
-/*test('props-round-number', () =>
-    {
-        const wrapper = mount(BeTag, {
-            props: {
-                round: 25,
-            },
+    })
+    // 測試样式类
+    test('props-customClass', () => {
+        const compInst = BeMessage({
+            titles: 'test-customClass',
+            customClass: 'test-customClass',
+        } as IMessage) as IMsgInstanceTest
+        const elm = compInst.message.el as HTMLElement
+        expect(elm).toBeTruthy()
+        expect(elm.className.indexOf('test-customClass') > 0).toBeTruthy()
+    })
+    // 測試 是否可手动关闭，关闭按钮显示
+    test('props-close', () => {
+        const compInst = BeMessage({
+            close: true,
+            titles: 'test-close',
+            key: 'test-close',
+        } as IMessage) as IMsgInstanceTest
+        const elm = compInst.message.el as HTMLElement
+        expect((elm.querySelectorAll('.be-icon')[1].childNodes[0] as SVGAElement).getAttribute('xlink:href') === '#delete').toBeTruthy()
+        const compInstUnClose = compInst.update({
+            close: false,
+            titles: 'test-close',
+            key: 'test-close',
         })
-        const Elm = wrapper.element as HTMLElement
-        expect(Elm.style.borderRadius).toBe(`25px`)
-    }
-)
-test('props-round-string', () =>
-    {
-        const wrapper = mount(BeTag, {
-            props: {
-                round: '25',
-            },
+        const elmUnClose = compInstUnClose.notify.el as HTMLElement
+        elmUnClose.querySelectorAll('.be-icon').forEach((res: Element) => {
+            expect((res.childNodes[0] as SVGAElement).getAttribute('xlink:href') !== '#delete').toBeTruthy()
         })
-        const Elm = wrapper.element as HTMLElement
-        expect(Elm.style.borderRadius).toBe(`25px`)
-    }
-)
-test('props-size', () =>
-    {
-        const wrapperMini = mount(BeTag, {
-            props: {
-                size: 'mini',
-            },
-        })
-        const ElmMini = wrapperMini.element as HTMLElement
-        expect(ElmMini.className.indexOf('be-tag__mini') > 0).toBeTruthy()
-        const wrapperMedium = mount(BeTag, {
-            props: {
-                size: 'medium',
-            },
-        })
-        const ElmMedium = wrapperMedium.element as HTMLElement
-        expect(ElmMedium.className.indexOf('be-tag__medium') > 0).toBeTruthy()
-        const wrapperLarge = mount(BeTag, {
-            props: {
-                size: 'large',
-            },
-        })
-        const ElmLarge = wrapperLarge.element as HTMLElement
-        expect(ElmLarge.className.indexOf('be-tag__large') > 0).toBeTruthy()
-    }
-)
-test('props-type', () =>
-    {
-        const wrapperPrimary = mount(BeTag, {
-            props: {
-                type: 'primary',
-            },
-        })
-        const ElmPrimary = wrapperPrimary.element as HTMLElement
-        expect(ElmPrimary.className.indexOf('be-tag__primary') > 0).toBeTruthy()
+    })
+    // 測試 前置图标\关闭图标渲染
+    test('props-iconRender', () => {
+        const compInst = BeMessage({
+            titles: 'test-iconRender',
+            iconPreRender: <span id='test_iconPreRender'>🐕</span>,
+            closeRender: <span id='test_closeRender'>❀</span>
+        } as IMessage) as IMsgInstanceTest
+        const elm = compInst.message.el as HTMLElement
+        expect(elm.querySelectorAll('#test_iconPreRender').length > 0).toBeTruthy()
+        expect(elm.querySelectorAll('#test_closeRender').length > 0).toBeTruthy()
+    })
 
-        const wrapperSuccess = mount(BeTag, {
-            props: {
-                type: 'success',
-            },
-        })
-        const ElmSuccess = wrapperSuccess.element as HTMLElement
-        expect(ElmSuccess.className.indexOf('be-tag__success') > 0).toBeTruthy()
-
-        const wrapperDefault = mount(BeTag, {
-            props: {
-                type: 'default',
-            },
-        })
-        const ElmDefault = wrapperDefault.element as HTMLElement
-        expect(ElmDefault.className.indexOf('be-tag__default') > 0).toBeTruthy()
-
-        const wrapperInfo = mount(BeTag, {
-            props: {
-                type: 'info',
-            },
-        })
-        const ElmInfo = wrapperInfo.element as HTMLElement
-        expect(ElmInfo.className.indexOf('be-tag__info') > 0).toBeTruthy()
-
-        const wrapperWarning = mount(BeTag, {
-            props: {
-                type: 'warning',
-            },
-        })
-        const ElmWarning = wrapperWarning.element as HTMLElement
-        expect(ElmWarning.className.indexOf('be-tag__warning') > 0).toBeTruthy()
-
-        const wrapperError = mount(BeTag, {
-            props: {
-                type: 'error',
-            },
-        })
-        const ElmError = wrapperError.element as HTMLElement
-        expect(ElmError.className.indexOf('be-tag__error') > 0).toBeTruthy()
-    }
-)
-test('props-option', () =>
-    {
-        const wrapper = mount(BeTag, {
-            props: {
-                option: {
-                    border: '1px solid #00ffff',
-                    backgroundColor: 'red',
-                    color: 'green'
-                },
-            },
-        })
-        const Elm = wrapper.element as HTMLElement
-        expect(Elm.style.border).toBe(`1px solid #00ffff`)
-        expect(Elm.style.backgroundColor).toBe(`red`)
-        expect(Elm.style.color).toBe(`green`)
-    }
-)
-test('props-disabled', () =>
-    {
-        const wrapper = mount(BeTag, {
-            props: {
-                disabled: true,
-            },
-        })
-        const Elm = wrapper.element as HTMLElement
-        expect(Elm.className.indexOf('be-tag__disabled') > 0).toBeTruthy()
-    }
-)*/
 })
-/**
-* 关闭方法
-* @param options
-*/
-/*const _mount = (options:any) =>
-mount(
-    {
-        components: {
-            'BeTag'
-        :
-            BeTag,
-        }
-    ,
-    ...
-        options,
-    }
-)
-describe('test-be-tag-close-event', () =>
-    {
-        const handleClick = jest.fn()
-        test('event:close', async () => {
-            const wrapper = _mount({
-                template: `
-                    <BeTag
-                        @close="handleClick" isClose></BeTag>`,
-                setup() {
-                    return {
-                        handleClick,
-                    }
-                },
-            })
-            wrapper.find('.be-tag_close').trigger('click');
-            expect(handleClick).toBeCalled()
+describe('test-be-message-content-update', () => {
+    // 測試内容更新
+    test('props-content-update', async () => {
+        const compInst = BeMessage({
+            titles: 'test-info-example',
+            key: 'test-info'
+        } as IMessage) as IMsgInstanceTest
+        const textContent = compInst.message.el.querySelectorAll('.txt-info')[0].textContent
+        const titles = compInst.message.props.option.titles
+        expect(textContent === titles && textContent === 'test-info-example').toBeTruthy()
+        // 关闭
+        const compInstInfoUpdate = compInst.update({
+            titles: 'test-info-example-update',
+            key: 'test-info'
+        })
+        await asyncExpect(() => {
+            const textContentUpdate = compInstInfoUpdate.notify.el.querySelectorAll('.txt-info')[0].textContent
+            const titlesUpdate = compInstInfoUpdate.notify.props.option.titles
+            expect(textContentUpdate === titlesUpdate && textContentUpdate === 'test-info-example-update').toBeTruthy()
+        }, 1000)
+    })
+})
+describe('test-be-message-close-event', () => {
+        const handleClose = jest.fn()
+        // 測試點擊按鈕關閉
+        test('event:close-manual-click', () => {
+            const compInst = BeMessage({
+                iconPreRender: <span id='test_iconPreRender'>🐕</span>,
+                titles: 'test-close-manual-click',
+                close: true,
+                onClose: handleClose as Function,
+            } as IMessage) as IMsgInstanceTest
+            const closeIcon = document.getElementById(`be_message_close_icon${compInst.message.component.uid}`) as HTMLElement
+            (closeIcon.childNodes[0] as HTMLElement).click()
+            expect(handleClose).toBeCalled()
+            // dom是否銷毀
+            /*await asyncExpect(() => {
+                expect(!document.getElementById(compInst.message.el.id)).toBeTruthy()
+            }, 0)*/
+        })
+        // 自動代碼調用關閉方法測試
+        test('event:close-code-call', () => {
+            const compInst = BeMessage({
+                titles: 'test-close-code-call',
+                close: true,
+                onClose: handleClose as Function,
+            } as IMessage) as IMsgInstanceTest
+            compInst.close()
+            expect(handleClose).toBeCalled()
+            // dom是否銷毀
+            /*await asyncExpect(() => {
+                expect(!document.getElementById(compInst.message.el.id)).toBeTruthy()
+            }, 0)*/
+        })
+        // 西東關閉測試
+        test('event:close-auto', async () => {
+            const compInst = BeMessage({
+                titles: 'test-close-auto',
+                duration:300,
+                onClose: handleClose as Function,
+            } as IMessage) as IMsgInstanceTest
+            // dom是否銷毀
+            await asyncExpect(() => {
+                expect(handleClose).toBeCalled()
+            }, 500)
         })
     }
-)*/
+)

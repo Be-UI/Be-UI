@@ -146,9 +146,9 @@ export default defineComponent({
                                 <span class={`txt-${option.msgType}`}>{option.titles}</span>
                             </div>
                             {/**@slot 弹窗头部按钮**/}
-                            <div>
+                            <div id ={`be_${props.compType}_close_icon${uid}`}>
                                 {option.closeRender ? option.closeRender :
-                                    option.close ? <BeIcon icon="delete" {...evt}></BeIcon> :''}
+                                    option.close ? <BeIcon icon="delete" {...evt} ></BeIcon> :''}
                             </div>
                         </div>
                     </div>

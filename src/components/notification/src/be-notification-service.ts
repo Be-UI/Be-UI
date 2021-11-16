@@ -8,6 +8,7 @@ import {createVNode, render, DefineComponent} from 'vue';
 import beNotifyComponents from './be-notification';
 import type {INotifyOption, ItInstanceMap} from './be-notification-type'
 import {INotfiyInst} from "./be-notification-type";
+import {IOption} from "../../../utils/types";
 
 
 // 各個方向的實例緩存
@@ -103,12 +104,15 @@ const setCloseAnimate = (compInstance: HTMLElement): void => {
 /**
  * 關閉全部方法
  */
-const closeAll = (): void => {
-    Object.keys(instanceMap).forEach((placement: any) => {
-        placement.forEach((val: any) => {
+export const closeAll = (): void => {
+    Object.keys(instanceMap).forEach((placement:string) => {
+        (Object(instanceMap)[placement]).forEach((val: any) => {
             close(val.instance.el, val.elm)
         })
     })
+    resetNotifyInstMap()
+}
+export const resetNotifyInstMap = ():void =>{
     instanceMap = {
         topLeft: [],
         topRight: [],
@@ -190,7 +194,6 @@ const componentRender = (option: INotifyOption, instanceArr: Array<Object>, isCa
         instanceInner = componentRender(option, instanceArr, false, null, true)
     }
     if (!isCacheInner) {
-
         // 缓存组件对象
         instanceArr.push({instance: instanceInner, elm})
     }
@@ -201,6 +204,7 @@ const componentRender = (option: INotifyOption, instanceArr: Array<Object>, isCa
  * @param {Object} options - 配置對象
  */
 const createNotify = function (options: INotifyOption): INotfiyInst {
+    isCache = false
     // 初始默认配置
     const defaultOption = {
         isShow: false,
