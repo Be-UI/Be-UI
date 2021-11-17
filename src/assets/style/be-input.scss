@@ -1,0 +1,257 @@
+
+.be-input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: $default;
+  border-radius: 3px;
+  border: 1px solid $infoHover;
+
+  &:hover {
+    border: 1px solid $infoHover;
+  }
+
+  .be-input-body {
+    display: flex;
+    padding: 0 5px;
+    box-sizing: border-box;
+    align-items: center;
+
+    .be-input__textarea__inner {
+      border: 0;
+      display: block;
+      resize: vertical;
+      padding: 5px 15px;
+      line-height: 1.5;
+      box-sizing: border-box;
+      width: 100%;
+      font-size: inherit;
+      color: $defaultText;
+      background-color: $default;
+      background-image: none;
+      transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+      &:hover {
+        border: 0;
+      }
+    }
+
+    .be-input__inner {
+      height: 30px;
+      line-height: 30px;
+      outline: 0;
+      border: 0;
+      border-radius: 3px;
+      width: 100%;
+    }
+
+    .be-input-nextIcon,
+    .be-input-prevIcon {
+      cursor: pointer;
+      color: $infoHover;
+      width: 12px;
+      height: 12px;
+      line-height: 12px;
+      font-size: 12px;
+
+      &:hover {
+        color: $infoHover
+      }
+    }
+
+    .be-input-prevIcon {
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+
+    .be-input-nextIcon {
+      margin: 0 10px;
+    }
+
+    .be-input-icon {
+      cursor: pointer;
+      color: $infoHover;
+      width: 12px;
+      height: 12px;
+      line-height: 1.5;
+      font-size: 12px;
+      margin: 0 3px;
+
+      .be-icon {
+        fill: $infoHover;
+        vertical-align: 1em;
+      }
+    }
+
+    .be-input-close-body {
+      width: 1em;
+      height: 1em;
+
+      .be-input-close {
+        border-radius: 50px;
+        border: 1px solid $infoHover;
+
+        &:hover {
+          border: 1px solid $infoHover;
+          color: $infoHover
+        }
+      }
+    }
+
+    .be-input-password {
+      height: 18px;
+      font-size: 18px;
+      line-height: 18px;
+    }
+
+    .be-input-select {
+      &::-webkit-scrollbar {
+        margin: 5px;
+        width: 8px;
+        height: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #c1c1c1;
+        border-radius: 5px;
+      }
+
+      background-color: $default;
+      border-radius: 0 0 3px 3px;
+      border: 1px solid $infoHover;
+      border-top: 0;
+      padding: 0;
+      position: absolute;
+      max-height: 300px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      margin: 0;
+
+      .be-input-select__line {
+        height: 1px;
+        background-color: $infoHover;
+        width: 90%;
+        margin: 0 auto;
+        list-style: none;
+      }
+
+      .be-input-select__inner {
+        height: 30px;
+        line-height: 30px;
+        list-style: none;
+        margin: 10px 0;
+        padding-left: 10px;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $infoHover;
+        }
+      }
+    }
+  }
+
+  .be-input-body__expand {
+    border: 1px solid $infoHover;
+    border-bottom: 0;
+    border-radius: 3px 3px 0 0;
+
+    &:hover {
+      border-bottom: 0;
+    }
+  }
+
+}
+
+.be-input__textarea {
+  border: 0;
+
+  &:hover {
+    border: 0;
+  }
+}
+
+.be-input__disabled {
+  cursor: not-allowed;
+  @apply bg-gray-100;
+}
+
+.be-input__mini {
+  .be-input-body {
+    .be-input__inner {
+      font-size: 14px;
+      line-height: 25px;
+      height: 25px;
+    }
+  }
+}
+
+.be-input__medium {
+  .be-input-body {
+    .be-input__inner {
+      font-size: 14px;
+      line-height: 30px;
+      height: 30px;
+    }
+  }
+}
+
+.be-input__large {
+  .be-input-body {
+    .be-input__inner {
+      font-size: 14px;
+      line-height: 36px;
+      height: 36px;
+    }
+  }
+}
+
+
+.be-input-select {
+  &::-webkit-scrollbar {
+    margin: 5px;
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 5px;
+  }
+
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0;
+  z-index: 2077;
+
+  ul {
+    padding: 0;
+  }
+
+  .be-input-select__line {
+    height: 1px;
+    background-color: #dcdfe6;
+    width: 90%;
+    margin: 0 auto;
+    list-style: none;
+  }
+
+  .be-input-select__inner {
+    height: 30px;
+    line-height: 30px;
+    list-style: none;
+    margin: 10px 0;
+    padding-left: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
+
+    &:hover {
+      background-color: #dcdfe6;
+    }
+  }
+}

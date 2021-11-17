@@ -1,0 +1,112 @@
+
+.be-message-box {
+  .be-message-box-container {
+    transition: opacity .5s;
+    width: 305px;
+    min-height: 158px;
+    background: #FFFFFF;
+    padding: 16px 16px 16px 20px;
+    box-shadow: 0 6px 13px rgba(0, 0, 0, 0.16);
+    border-radius: 2px;
+    box-sizing: border-box;
+    align-self: center;
+    z-index: 998;
+
+    .be-message-box-title {
+      width: 100%;
+      height: 25px;;
+
+      .be-message-box-head {
+        line-height: 25px;
+        display: flex;
+        justify-content: space-between;
+
+        div:nth-child(1) {
+          .icon-warning {
+            fill: $warning;
+            line-height: 25px;
+            margin-right: 5px;
+            font-size: 20px;
+          }
+
+          .icon-info {
+            fill: $info;
+            line-height: 25px;
+            margin-right: 5px;
+            font-size: 20px;
+          }
+
+          .icon-success {
+            fill: $success;
+            line-height: 25px;
+            margin-right: 5px;
+            font-size: 20px;
+          }
+
+          .icon-error {
+            fill: $error;
+            line-height: 25px;
+            margin-right: 5px;
+            font-size: 20px;
+          }
+
+          .text-warning {
+            @include be-message-tilte;
+            color: $warning;
+          }
+
+          .text-info {
+            @include be-message-tilte;
+            color: $info;
+          }
+
+          .text-success {
+            @include be-message-tilte;
+            color: $success;
+          }
+
+          .text-error {
+            @include be-message-tilte;
+            color: $error;
+          }
+        }
+
+        div:nth-child(2) {
+          cursor: pointer;
+        }
+      }
+
+    }
+  }
+
+  .be-message-box-body {
+    min-height: 80px;
+  }
+
+  .be-message-box-footer {
+    width: 100%;
+    height: 24px;
+    display: flex;
+  }
+
+  .be-message-box-footer__center {
+    justify-content: center;
+  }
+
+  .be-message-box-footer__right {
+    justify-content: flex-end;
+  }
+
+}
+
+.be-modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2077;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+}

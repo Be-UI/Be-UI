@@ -1,0 +1,92 @@
+@mixin be-message-icon {
+  line-height: 25px;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.be-message {
+  z-index: 10;
+  @apply max-h-12;
+  .be-message-container {
+    @apply min-w-16 bg-default p-2.5 rounded shadow absolute box-border;
+    z-index: 998;
+
+    .be-message-title {
+      @apply w-full h-6;
+      .be-message-head {
+        @apply leading-6 flex justify-between items-center;
+        div:nth-child(1) {
+          @apply flex items-center;
+          .icon-warning {
+            @apply fill-warning;
+            @include be-message-icon;
+          }
+
+          .icon-info {
+            @apply fill-info;
+            @include be-message-icon;
+          }
+
+          .icon-success {
+            @apply fill-success;
+            @include be-message-icon;
+          }
+
+          .icon-error {
+            @apply fill-error;
+            @include be-message-icon;
+          }
+
+          .txt-warning {
+            @include be-message-tilte;
+            @apply text-warning font-normal;
+          }
+
+          .txt-info {
+            @include be-message-tilte;
+            @apply text-info font-normal;
+          }
+
+          .txt-success {
+            @include be-message-tilte;
+            @apply text-success font-normal;
+          }
+
+          .txt-error {
+            @include be-message-tilte;
+            @apply text-error font-normal;
+          }
+        }
+
+        div:nth-child(2) {
+          @apply cursor-pointer;
+        }
+      }
+
+    }
+  }
+
+  .be-message-container__topCenter {
+    @apply right-1/2;
+    transform: translateX(50%);
+  }
+}
+
+.be-message__topCenter {
+  @apply right-1/2 fixed;
+  transform: translateX(50%);
+}
+
+.be-message-top {
+  transition: top .3s;
+}
+
+.be-message-animation-top-center-in {
+  -webkit-animation: bounceInTopCenter .3s .2s ease both;
+  -moz-animation: bounceInTopCenter .3s .2s ease both;
+}
+
+.be-message-animation-top-center-out {
+  -webkit-animation: outTopCenter .3s .2s ease both;
+  -moz-animation: outTopCenter .3s .2s ease both;
+}

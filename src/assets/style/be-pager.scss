@@ -1,0 +1,124 @@
+
+.be-pager-container {
+  display: flex;
+  align-items: center;
+
+  .be-select {
+    .be-select-body.be-pager-select {
+      margin: 0 5px;
+      font-size: 12px;
+      width: 5rem;
+      height: 25px;
+      min-width: 64px;
+
+      .be-select-input__medium {
+        height: 20px;
+        line-height: 20px;
+        font-size: 12px;
+      }
+
+    }
+  }
+}
+
+.be-pager {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  list-style: none;
+  font-size: 0;
+}
+
+
+.be-pager, .be-pager li {
+  vertical-align: top;
+  margin: 0;
+  display: inline-block;
+}
+
+.be-pager, .be-pagination.is-background .btn-next, .be-pagination.is-background .btn-prev {
+  padding: 0;
+}
+
+.be-pager li {
+  padding: 0 4px;
+  font-size: 13px;
+  min-width: 35.5px;
+  height: 28px;
+  line-height: 28px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+
+.be-pager li {
+  background: #FFF;
+  margin: 0 3px;
+  -webkit-box-sizing: border-box;
+}
+
+.be-pager li.btn-quicknext, .be-pager li.btn-quickprev {
+  line-height: 28px;
+  color: $info;
+}
+
+.be-pager li {
+  padding: 0 4px;
+  font-size: 13px;
+  min-width: 25px;
+  height: 25px;
+  line-height: 25px;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 3px;
+}
+
+
+.be-pager li.active {
+  color: $primaryText;
+  cursor: default;
+}
+
+.be-pager li:hover {
+  color: $primaryText;
+}
+
+
+.be-pager li, .be-pager li.btn-quicknext:hover, .be-pager li.btn-quickprev:hover {
+  cursor: pointer;
+}
+
+.be-pager .more::before {
+  line-height: 30px;
+}
+
+.be-pager__disabled li, .be-pager__disabled li.btn-quicknext:hover, .be-pager__disabled li.btn-quickprev:hover {
+  cursor: not-allowed;
+}
+
+.be-pager__disabled li {
+  background: #FFF;
+  -webkit-box-sizing: border-box;
+}
+
+.be-pager-info {
+  font-size: 12px;
+
+}
+
+.be-pager-jump {
+  margin: 0 5px;
+  font-size: 12px;
+}
+
+.be-pager-jump-input {
+  color: $info;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  transition: all .3s;
+  margin: 0 2px;
+  width: 35px;
+}
