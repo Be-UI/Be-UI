@@ -159,6 +159,7 @@
 }
 .be-input__disabled{
   cursor: not-allowed;
+  @apply bg-gray-100;
 }
 .be-input__mini{
   .be-input-body {
@@ -169,7 +170,7 @@
     }
   }
 }
-.be-input__small{
+.be-input__medium{
   .be-input-body {
     .be-input__inner{
       font-size: 14px;
@@ -178,7 +179,7 @@
     }
   }
 }
-.be-input__medium{
+.be-input__large{
   .be-input-body {
     .be-input__inner{
       font-size: 14px;

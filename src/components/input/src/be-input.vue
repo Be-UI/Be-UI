@@ -47,7 +47,7 @@
             <be-icon @click="handleIcon('next')" :icon="nextIcon" class="be-input-nextIcon"
                      v-if="nextIcon"></be-icon>
             <!--清除按钮 v-show="showClearIcon-->
-            <div class="be-input-close-body">
+            <div class="be-input-close-body" v-if="!isInner">
                 <be-icon @click="handleClear" icon="delete" class="be-input-icon be-input-close"
                          v-show="showClearIcon"></be-icon>
             </div>
@@ -103,7 +103,6 @@ export default defineComponent({
         'focus',
         'blur',
         'keydown',
-
         'mouseleave',
         'mouseenter',
     ],
@@ -164,9 +163,12 @@ export default defineComponent({
             default: false
         },
         /**
-         * 输入框尺寸，只在 type!="textarea" 时有效 medium / small / mini （完成）
+         * 输入框尺寸，只在 type!="textarea" 时有效 'mini' | 'medium' | 'large'（完成）
          */
-        size: String,
+        size: {
+            type: String,
+            default: 'medium'
+        },
         /**
          * 前置icon类型（完成）
          */
@@ -213,7 +215,13 @@ export default defineComponent({
             type: [Boolean, Object] as PropType<AutosizeProp>,
             default: false as AutosizeProp,
         },
-
+        /**
+         * 内部引用标识
+         */
+        isInner: {
+            type: Boolean,
+            default: false
+        },
     },
 
 

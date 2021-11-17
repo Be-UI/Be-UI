@@ -280,7 +280,10 @@
             </be-select>
             {{seletStr}}
             <panda width="25" height="25"  @click="test"></panda>-->
-            <be-input-number></be-input-number>
+            <be-input-number>
+                <template #next>next</template>
+                <template #pre>pre</template>
+            </be-input-number>
 <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
         </div>
     </div>

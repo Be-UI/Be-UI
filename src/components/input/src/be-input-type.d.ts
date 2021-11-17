@@ -9,10 +9,12 @@ import {ComponentInternalInstance} from "vue";
 export interface IInputInst extends ComponentInternalInstance {
     uid: number
 }
+
 export interface IInputSelectInst {
-    close:Function
-    changeDisplay:Function
+    close: Function
+    changeDisplay: Function
 }
+
 export type AutosizeProp =
     | {
     minRows?: number
