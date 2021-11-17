@@ -280,7 +280,10 @@
             </be-select>
             {{seletStr}}
             <panda width="25" height="25"  @click="test"></panda>-->
-            <be-input-number>
+            <be-input-number @change="handleClick"
+                             :formatter="formatter"
+                             :parser="parser"
+                             ref="beinputNum">
                 <template #next>next</template>
                 <template #pre>pre</template>
             </be-input-number>
@@ -348,6 +351,7 @@ export default {
         panda
     },
     mounted() {
+        this.$refs.beinputNum.focus()
         /* const tr = document.getElementById('qwq')
          const po = document.getElementById('aaa')
          createPopper(tr, po, {
@@ -414,7 +418,8 @@ export default {
         }
     },
     methods: {
-
+        formatter(value){},
+        parser(value){},
         searchFunc(value:string,ordData:Array<any>,labelValue:string){
             let arr  = value ? ordData.filter(
                 (val:any) => {

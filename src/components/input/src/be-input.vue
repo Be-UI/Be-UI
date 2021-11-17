@@ -374,7 +374,6 @@ export default defineComponent({
          */
         const blur = (): void => {
             inputOrTextarea.value.blur()
-
         }
         /**
          * 手动选择文字方法
