@@ -36,4 +36,8 @@ export interface IInputNumInst {
     close: Function,
     update: Function,
 }
+export interface IInputNumLimit {
+   type:string,
+   val:string | number
+}
 

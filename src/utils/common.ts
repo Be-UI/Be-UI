@@ -65,7 +65,62 @@ export const arrDupRemov = (arr:Array<any>,key:string):Array<any> => {
         return preVal
     }, [])
 };
+/**
+ * 加法
+ */
+export const accAdd = (arg1:number, arg2:number):number =>{
+    let r1:number, r2:number
+    let m:number = 0
+    try {
+        r1 = arg1.toString().split('.')[1].length
+    } catch (e) {
+        r1 = 0
+    }
+    try {
+        r2 = arg2.toString().split('.')[1].length
+    } catch (e) {
+        r2 = 0
+    }
+    m = Math.pow(10, Math.max(r1, r2))
+    return (arg1 * m + arg2 * m) / m
+}
+/*
+   * 获取小数位数
+   */
+export const  getMaxDecimalLength = (val:Array<number>):number =>{
+    // 最大小数位长度
+    let maxDecimalLength = 0
+    val.forEach((x) => {
+        const strVal = x.toString(),
+            dotIndex = strVal.indexOf('.')
+        if (dotIndex > -1) {
+            // 获取当前值小数位长度
+            let curDecimalLength = strVal.length - 1 - dotIndex
 
+            if (curDecimalLength > maxDecimalLength) {
+                maxDecimalLength = curDecimalLength
+            }
+        }
+    })
+    return maxDecimalLength
+}
+/**
+ * 减法
+ */
+export const accSub = (arg:Array<number>):number =>{
+    let sum:number = 0
+    let maxDecimalLength:number = getMaxDecimalLength(arg)
+    arg.forEach((x:number, index:number) => {
+        let nurVal = Math.round(x * Math.pow(10, maxDecimalLength));
+
+        if (index === 0)
+            sum = nurVal
+        else
+            sum -= nurVal
+    })
+
+    return sum / Math.pow(10, maxDecimalLength)
+}
 export const jsonClone = <T>(val: T):T => JSON.parse(JSON.stringify(val))
 export const isBool = (val: unknown) => typeof val === 'boolean'
 export const isString = (val: unknown) => (typeof val=='string')&&val.constructor==String;

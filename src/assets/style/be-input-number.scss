@@ -3,7 +3,13 @@
     .be-input-number__inner {
         @apply border-0;
     }
-
+    .be-input-number__limit{
+        .be-input-body {
+            .be-input__inner {
+                @apply text-error
+            }
+        }
+    }
     .be-input-number__default {
         @apply flex;
         .be-input-number__op {

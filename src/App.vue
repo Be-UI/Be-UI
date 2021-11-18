@@ -283,10 +283,16 @@
             <be-input-number @change="handleClick"
                              :formatter="formatter"
                              :parser="parser"
+                             keyboard
+                             min="2"
+                             max="10"
+                             @step="handleStep"
+                             v-model="testModel"
                              ref="beinputNum">
-                <template #next>next</template>
-                <template #pre>pre</template>
+<!--                <template #next>next</template>
+                <template #pre>pre</template>-->
             </be-input-number>
+            {{testModel}}
 <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
         </div>
     </div>
@@ -325,6 +331,7 @@ export default {
                 pageSize: 200,
                 total: 300
             },
+            testModel:'1000',
              // seletStr:[],
             seletStr:[{label:'落日绣帘卷',id:'落日绣帘卷'},{label:'亭下水连空',id:'亭下水连空'}],
             testList:[
@@ -418,8 +425,12 @@ export default {
         }
     },
     methods: {
-        formatter(value){},
-        parser(value){},
+        formatter(value){
+            return  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        },
+        parser(value){
+            return value.replace(/\$\s?|(,*)/g, '')
+        },
         searchFunc(value:string,ordData:Array<any>,labelValue:string){
             let arr  = value ? ordData.filter(
                 (val:any) => {
@@ -486,9 +497,12 @@ export default {
         customRender() {
             return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)
         },
-      handleClick(){
-          debugger
-      },
+        handleClick(){
+            //this.testModel = 2000
+        },
+        handleStep(val){
+
+        },
         test(qw) {
             this.showDialog = !this.showDialog
             /*this.loadingInst = BeLoadingSer.init({
