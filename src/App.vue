@@ -285,7 +285,7 @@
                              :parser="parser"
                              keyboard
                              min="2"
-                             max="10"
+                             max="10000"
                              @step="handleStep"
                              v-model="testModel"
                              ref="beinputNum">

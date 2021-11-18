@@ -107,15 +107,27 @@ export default defineComponent({
          * @param {String} value - 输入值
          */
         const handleInput = (value: string): void => {
-            let parserRes = props.parser(value)
-            if(!checkNumber(parserRes)){
+            let parserRes:string = props.parser(value)
+            let pointCheck:boolean = false
+            let splitRes:Array<string> = parserRes.split('.')
+            splitRes.forEach((val:string)=>{
+                if(!val) {
+                    pointCheck = true
+                }
+            })
+            if(!pointCheck && !checkNumber(parserRes)){
                 parserRes = ''
             }
             inputInnerVal.value = ''
             nextTick(()=>{
-                const val = (limitValue(parserRes) as IInputNumLimit).val
-                inputInnerVal.value = props.formatter(val)
-                updateInput(val)
+                if(pointCheck){
+                    inputInnerVal.value = props.formatter(parserRes)
+                }else{
+                    const val = (limitValue(parserRes) as IInputNumLimit).val
+                    inputInnerVal.value = props.formatter(val)
+                    updateInput(val)
+                }
+
             })
         }
         /**
@@ -275,7 +287,6 @@ export default defineComponent({
         watch(modelVal,(nVal:string|number)=>{
             if(nVal){
                 inputInnerVal.value = props.formatter(nVal)
-                console.log(inputInnerVal.value)
             }
 
         })

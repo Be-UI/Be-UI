@@ -131,7 +131,7 @@ export const accSub = (arg:Array<number>):number =>{
  * @param str
  */
 export const checkNumber = (str:string):boolean=> {
-    let reg = /^\d+$/
+    let reg = /^(([1-9][0-9]*\.[0-9][0-9]*)|([0]\.[0-9][0-9]*)|([1-9][0-9]*)|([0]{1}))$/
     if (reg.test(str)) {
         return true;
     }
