@@ -13,6 +13,7 @@ import BeIcon from "../../svg-icon/src/be-icon.vue";
 import {IInputSelectFunc} from "../../autocomplete/src/be-autocomplete-type";
 import {arrDupRemov, debounce, getUuid, isFunction, isString, jsonClone, mapToArr} from "../../../utils/common";
 import composition from './be-select-composition'
+
 export default defineComponent({
     name: "be-select",
     components: {BeInputSelect, BePopover, BeIcon},
@@ -264,7 +265,7 @@ export default defineComponent({
          */
         const matchSuggestions = (inputValue: string, ordData: Array<any>): void => {
             // 大于最大数量直接返回
-            if(tagList.value.length >= Number(props.max) && props.max){
+            if (tagList.value.length >= Number(props.max) && props.max) {
                 return
             }
             let value = jsonClone(inputValue)
@@ -284,11 +285,11 @@ export default defineComponent({
             let dataL = jsonClone(ordData)
             // 匹配結果
             let filterRes: Array<any> = []
-            if(value){
+            if (value) {
                 // 字符串包含 ‘，’，进行分割
                 let isHasComma = value.indexOf(',') >= 0
-                if(isHasComma) inputMultiple.value = ''
-                let inputVal = value.split(',').filter((res:any) => res)
+                if (isHasComma) inputMultiple.value = ''
+                let inputVal = value.split(',').filter((res: any) => res)
                 // 輸入去重
                 inputVal = Array.from(new Set(inputVal));
                 // 和 tagList 取并集
@@ -299,14 +300,14 @@ export default defineComponent({
                 // 沒匹配到的
                 let addList: Array<any> = []
                 // 挨个匹配
-                inputVal.forEach((res:any) => {
+                inputVal.forEach((res: any) => {
                     let filterResult = filter(res, dataL, label)
                     let item: IOption = {}
                     item[label] = res
                     if (!filterResult.isHas) {
                         item[keyId] = getUuid()
                         // 有逗号 更新tagList
-                        if(isHasComma){
+                        if (isHasComma) {
                             item.isAutoAdd = true
                             selectMap.set(item[keyId], item)
                             updateValue()
@@ -316,19 +317,19 @@ export default defineComponent({
                         addList.push(item)
                         dataL.push(item)
                     } else {
-                        if (isHasComma){
-                            let isHas:boolean = false
-                            dataList.value.forEach((dataRes:any)=>{
-                                if(res === dataRes[label]){
+                        if (isHasComma) {
+                            let isHas: boolean = false
+                            dataList.value.forEach((dataRes: any) => {
+                                if (res === dataRes[label]) {
                                     isHas = true
-                                    if(!selectMap.has(dataRes[keyId])){
+                                    if (!selectMap.has(dataRes[keyId])) {
                                         selectMap.set(dataRes[keyId], dataRes)
                                     }
                                 }
                             })
                             // 匹配函数匹配到，但是列表中没有
                             // 比如 列表有 ‘ab’。输入‘b’，这里增加
-                            if(!isHas){
+                            if (!isHas) {
                                 item.isAutoAdd = true
                                 item[keyId] = getUuid()
                                 selectMap.set(item[keyId], item)
@@ -338,7 +339,7 @@ export default defineComponent({
                             updateValue()
                         }
                         // 对象去重 合并
-                        hasList = arrDupRemov([...filterResult.data, ...hasList],keyId)
+                        hasList = arrDupRemov([...filterResult.data, ...hasList], keyId)
 
                     }
                 })
@@ -353,14 +354,14 @@ export default defineComponent({
                  */
                 ctx.emit('search', filterRes)
                 // 更新下拉列表 - 選中狀態匹配
-                dataList.value =isHasComma ? dataL : filterRes
-            }else{
+                dataList.value = isHasComma ? dataL : filterRes
+            } else {
                 // 爲空則使用原始數據 - 選中狀態匹配
                 dataList.value = jsonClone(ordData)
             }
 
             tagList.value.forEach((tag: any) => {
-                setSelectState(true,tag[keyId])
+                setSelectState(true, tag[keyId])
             })
         }
         /**
@@ -424,13 +425,13 @@ export default defineComponent({
          */
         const handleSelect = (value: any, index: number): void => {
             // 大于最大数量直接返回
-            if(tagList.value.length >= Number(props.max) && props.max){
+            if (tagList.value.length >= Number(props.max) && props.max) {
                 return
             }
             const itemLabel = value[keyId]
             if (selectMap.has(itemLabel)) {
-                if(value.isAutoAdd){
-                    addItemList.value =  addItemList.value.filter(val=>val[keyId] !== value[keyId])
+                if (value.isAutoAdd) {
+                    addItemList.value = addItemList.value.filter(val => val[keyId] !== value[keyId])
                 }
                 selectMap.delete(itemLabel)
                 value.isSelect = false
@@ -441,7 +442,7 @@ export default defineComponent({
                  */
                 ctx.emit('Deselect', value, index)
             } else {
-                if(value.isAutoAdd){
+                if (value.isAutoAdd) {
                     addItemList.value.push(value)
                 }
                 selectMap.set(itemLabel, value)
@@ -460,11 +461,11 @@ export default defineComponent({
             ctx.emit('change', value)
             inputMultiple.value = ''
             //if(value.isAutoAdd){
-                dataList.value = listCache.concat(addItemList.value)
-           // }
+            dataList.value = listCache.concat(addItemList.value)
+            // }
             updateValue()
             tagList.value.forEach((tag: any) => {
-                setSelectState(tag.isSelect,tag[keyId])
+                setSelectState(tag.isSelect, tag[keyId])
             })
             updatePopover()
         }
@@ -538,11 +539,11 @@ export default defineComponent({
          * @public
          */
         const closeTag = (closeVal: any): void => {
-            const value = closeVal.isNum ? tagList.value.pop(): closeVal
+            const value = closeVal.isNum ? tagList.value.pop() : closeVal
             selectMap.delete(value[keyId])
             setSelectState(false, value[keyId])
-            if(value.isAutoAdd){
-                addItemList.value =  addItemList.value.filter(val=>val[keyId] !== value[keyId])
+            if (value.isAutoAdd) {
+                addItemList.value = addItemList.value.filter(val => val[keyId] !== value[keyId])
                 dataList.value = listCache.concat(addItemList.value)
             }
             updateValue()
@@ -551,7 +552,7 @@ export default defineComponent({
              * @event closeTag
              * @param {Object} value - 关闭的tag数据对象
              */
-            ctx.emit('closeTag',value)
+            ctx.emit('closeTag', value)
         }
         onMounted(() => {
             handleList(props.list)
@@ -568,21 +569,21 @@ export default defineComponent({
             }
             let renderTag = jsonClone(tagList.value)
             // maxTag 实现
-            if(props.maxTag && tagList.value.length > Number(props.maxTag)){
-                renderTag = renderTag.slice(0,Number(props.maxTag))
-                let numTag:IOption = {}
+            if (props.maxTag && tagList.value.length > Number(props.maxTag)) {
+                renderTag = renderTag.slice(0, Number(props.maxTag))
+                let numTag: IOption = {}
                 numTag[keyId] = getUuid()
                 numTag[label] = `+${tagList.value.length - Number(props.maxTag)}`
                 numTag.isNum = true
                 renderTag.push(numTag)
             }
             let list: Array<VNode> = []
-            renderTag.forEach((val,index) => {
+            renderTag.forEach((val, index) => {
                 // 選項列表
                 list.push((
                     <div class='be-select-tag'>
                         {/*tag 自定义插槽*/}
-                        {internalInstance.slots.tag ? internalInstance.slots.tag({data:val, index}) :
+                        {internalInstance.slots.tag ? internalInstance.slots.tag({data: val, index}) :
                             <be-tag key={val.label + 'tag'}
                                     isClose={true}
                                     type='info'
@@ -620,7 +621,10 @@ export default defineComponent({
                             handleSelect(val, index)
                         }}>
                         {/*有插槽就渲染插槽*/}
-                        {internalInstance.slots.default ? internalInstance.slots.default({data:val, index}) : val[props.labelValue]}
+                        {internalInstance.slots.default ? internalInstance.slots.default({
+                            data: val,
+                            index
+                        }) : val[props.labelValue]}
                         {val.isSelect ? <be-icon icon='select' custom-class={`be-select-hook`}></be-icon> : ''}
                     </div>
                 ))

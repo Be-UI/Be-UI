@@ -5,7 +5,7 @@
 * @update (czh 2021/11/12)
 */
 import {IMessage, IMsgInst} from "./be-message-type";
-import {BeNotify,resetNotifyInstMap} from "../../notification/src/be-notification-service";
+import {BeNotify, resetNotifyInstMap} from "../../notification/src/be-notification-service";
 import {INotfiyInst} from "../../notification/src/be-notification-type";
 
 const createMessage = function (options: IMessage): IMsgInst {
@@ -31,7 +31,7 @@ const createMessage = function (options: IMessage): IMsgInst {
         update: (options: IMessage): INotfiyInst => {
             let option: IMessage = {
                 titles: options.titles,
-                msgType: options.msgType ,
+                msgType: options.msgType,
                 offsetTop: options.offsetTop,
                 close: (options.close),
                 placement: 'topCenter',
@@ -48,7 +48,7 @@ const createMessage = function (options: IMessage): IMsgInst {
         }
     }
 }
-export const resetMessageInstMap = ():void =>{
+export const resetMessageInstMap = (): void => {
     resetNotifyInstMap()
 }
 export const BeMessage = (options: IMessage): object => {

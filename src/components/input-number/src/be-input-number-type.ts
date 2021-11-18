@@ -4,7 +4,8 @@
 * @author czh
 * @update (czh 2021/11/12)
 */
-import type { ComponentInternalInstance} from 'vue'
+import type {ComponentInternalInstance} from 'vue'
+
 export type IInputNum = {
     titles?: string,
     customClass?: string,
@@ -16,9 +17,9 @@ export type IInputNum = {
     onClose?: () => void
     iconPreRender: any,
     closeRender: any,
-    compType:string,
-    close?:boolean,
-    loading?:boolean,
+    compType: string,
+    close?: boolean,
+    loading?: boolean,
 }
 
 export type ItInstanceMap = {
@@ -27,10 +28,12 @@ export type ItInstanceMap = {
     bottomLeft?: Array<Object>,
     bottomRight?: Array<Object>,
 }
+
 export interface IInputNumInstance extends ComponentInternalInstance {
     uid: number
-    el:HTMLElement
+    el: HTMLElement
 }
+
 export interface IInputNumInst {
     message: IInputNumInstance,
     close: Function,

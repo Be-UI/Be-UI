@@ -1,4 +1,4 @@
-import { App ,defineComponent} from 'vue'
+import {App, defineComponent} from 'vue'
 import SvgIcon from './src/be-icon.vue'
 import {createCustom} from './src/be-custom-icon'
 import {SFCWithInstall} from "../../utils/types";
@@ -7,29 +7,31 @@ import {SFCWithInstall} from "../../utils/types";
  * 组件装载方法
  * @param app
  */
-SvgIcon.install = (app:App): void => {
-    app.component(SvgIcon.name,SvgIcon)
+SvgIcon.install = (app: App): void => {
+    app.component(SvgIcon.name, SvgIcon)
 }
 const BeIcon = SvgIcon as SFCWithInstall<typeof SvgIcon>
+
 interface template {
-    template?:string
+    template?: string
 }
+
 /**
  * 自定义图标方法,该方法会直接根据参数name构造图名为 name-icon 的图标组件
  * @param name - 组件名称
  * @param option -组件渲染模板
  * @constructor
  */
-BeIcon.BeIconComponets = (name:string,option:template) :object | void => {
-    const tempStr:string | undefined = option.template
-    if(!tempStr){
+BeIcon.BeIconComponets = (name: string, option: template): object | void => {
+    const tempStr: string | undefined = option.template
+    if (!tempStr) {
         console.error('The ‘template’ field in the parameter ‘option’ is required')
         return;
     }
     // 根据模板参数，创建组件对象
-    const compInstance:object = defineComponent(createCustom(tempStr));
-    (compInstance as any).install = (app:App): void => {
-        app.component(name,compInstance)
+    const compInstance: object = defineComponent(createCustom(tempStr));
+    (compInstance as any).install = (app: App): void => {
+        app.component(name, compInstance)
     }
     return compInstance
 }
@@ -39,7 +41,7 @@ BeIcon.BeIconComponets = (name:string,option:template) :object | void => {
  * @param url - 路径地址
  */
 const customCache = new Set();
-BeIcon.createFromIconfontCN = (url:string):void => {
+BeIcon.createFromIconfontCN = (url: string): void => {
     if (
         typeof document !== 'undefined' &&
         typeof window !== 'undefined' &&

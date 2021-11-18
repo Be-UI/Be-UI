@@ -7,24 +7,25 @@
 
 import {createVNode, render, DefineComponent, VNode} from 'vue';
 import beMsgComponents from './be-message-box';
-import type { INMsgOption} from './be-message-box-type'
+import type {INMsgOption} from './be-message-box-type'
+
 /**
  * 渲染组件实例
  * @param {Object} option - 配置對象
  */
-const componentRender = (option:INMsgOption):void=>{
-    let elm:HTMLElement
+const componentRender = (option: INMsgOption): void => {
+    let elm: HTMLElement
     let close = option.onClose as Function
-    let onClose = ()=>{
-        render(null,elm)
+    let onClose = () => {
+        render(null, elm)
         close()
     }
     option.onClose = onClose
-    let instanceInner:VNode = createVNode(beMsgComponents, {...option});
+    let instanceInner: VNode = createVNode(beMsgComponents, {...option});
     instanceInner.props && (instanceInner.props.isShow = true);
     elm = document.createElement('div')
-    render(instanceInner,elm)
-    const bodyElement:Element | null= document.querySelector('body')
+    render(instanceInner, elm)
+    const bodyElement: Element | null = document.querySelector('body')
     if (bodyElement && bodyElement.append) {
         bodyElement.append(instanceInner.el as Node)
     } else {
@@ -35,26 +36,26 @@ const componentRender = (option:INMsgOption):void=>{
  * 創建组件实例
  * @param {Object} options - 配置對象
  */
-const createMsg = (options:INMsgOption) :object => {
+const createMsg = (options: INMsgOption): object => {
     const defaultOption = {
-        isDrag:false,
-        titles:'',
-        customClass:'',
-        msgType:'warning',
-        footerType:'center',
-        footerRender:null,
-        bodyRender:null,
-        iconPreRender:null,
-        iconNextRender:null,
-        isOpenModal:true,
+        isDrag: false,
+        titles: '',
+        customClass: '',
+        msgType: 'warning',
+        footerType: 'center',
+        footerRender: null,
+        bodyRender: null,
+        iconPreRender: null,
+        iconNextRender: null,
+        isOpenModal: true,
     }
     // 合并配置参数
-    let option:INMsgOption = Object.assign({}, defaultOption, options)
+    let option: INMsgOption = Object.assign({}, defaultOption, options)
     // 渲染组件实例
     let instance = componentRender(option)
     return {msg: instance}
 }
-export const BeMsg = (options:INMsgOption):object =>{
+export const BeMsg = (options: INMsgOption): object => {
     return createMsg(options)
 };
 

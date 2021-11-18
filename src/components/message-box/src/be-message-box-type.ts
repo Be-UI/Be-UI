@@ -4,19 +4,20 @@
 * @author czh
 * @update (czh 2021/9/8)
 */
-import type { ComponentInternalInstance,DefineComponent} from 'vue'
+import type {ComponentInternalInstance, DefineComponent} from 'vue'
+
 export type INMsgOption = {
-    isShow?:boolean,
-    isDrag?:boolean,
+    isShow?: boolean,
+    isDrag?: boolean,
     titles?: string,
     customClass?: string,
     msgType?: string,
     footerType?: string,
-    footerRender:any,
+    footerRender: any,
     bodyRender: any,
     iconPreRender: any,
-    iconNextRender:any,
-    isOpenModal?:boolean,
+    iconNextRender: any,
+    isOpenModal?: boolean,
     onConfirm?: () => void,
     onClose?: () => void
 }

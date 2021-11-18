@@ -168,7 +168,7 @@ describe('test-be-message-close-event', () => {
         test('event:close-auto', async () => {
             const compInst = BeMessage({
                 titles: 'test-close-auto',
-                duration:300,
+                duration: 300,
                 onClose: handleClose as Function,
             } as IMessage) as IMsgInstanceTest
             // dom是否銷毀

@@ -115,9 +115,9 @@ export default defineComponent({
         /**
          * 每页显示数量
          */
-        pageNum:{
+        pageNum: {
             type: Array,
-            default: () => [{label:100}, {label:200},{label:300},{label:400}],
+            default: () => [{label: 100}, {label: 200}, {label: 300}, {label: 400}],
         }
     },
     setup(props, ctx) {

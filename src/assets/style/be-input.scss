@@ -10,12 +10,14 @@
   &:hover {
     border: 1px solid $infoHover;
   }
+
   .be-input-body {
     display: flex;
     padding: 0 5px;
     box-sizing: border-box;
     align-items: center;
-    .be-input__textarea__inner{
+
+    .be-input__textarea__inner {
       border: 0;
       display: block;
       resize: vertical;
@@ -27,11 +29,13 @@
       color: $defaultText;
       background-color: $default;
       background-image: none;
-      transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-      &:hover{
+      transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+      &:hover {
         border: 0;
       }
     }
+
     .be-input__inner {
       height: 30px;
       line-height: 30px;
@@ -40,6 +44,7 @@
       border-radius: 3px;
       width: 100%;
     }
+
     .be-input-nextIcon,
     .be-input-prevIcon {
       cursor: pointer;
@@ -48,6 +53,7 @@
       height: 12px;
       line-height: 12px;
       font-size: 12px;
+
       &:hover {
         color: $infoHover
       }
@@ -70,17 +76,21 @@
       line-height: 1.5;
       font-size: 12px;
       margin: 0 3px;
-      .be-icon{
+
+      .be-icon {
         fill: $infoHover;
         vertical-align: 1em;
       }
     }
-    .be-input-close-body{
+
+    .be-input-close-body {
       width: 1em;
       height: 1em;
+
       .be-input-close {
         border-radius: 50px;
         border: 1px solid $infoHover;
+
         &:hover {
           border: 1px solid $infoHover;
           color: $infoHover
@@ -93,6 +103,7 @@
       font-size: 18px;
       line-height: 18px;
     }
+
     .be-input-select {
       &::-webkit-scrollbar {
         margin: 5px;
@@ -151,37 +162,43 @@
   }
 
 }
-.be-input__textarea{
+
+.be-input__textarea {
   border: 0;
-  &:hover{
+
+  &:hover {
     border: 0;
   }
 }
-.be-input__disabled{
+
+.be-input__disabled {
   cursor: not-allowed;
   @apply bg-gray-100;
 }
-.be-input__mini{
+
+.be-input__mini {
   .be-input-body {
-    .be-input__inner{
+    .be-input__inner {
       font-size: 14px;
       line-height: 25px;
       height: 25px;
     }
   }
 }
-.be-input__medium{
+
+.be-input__medium {
   .be-input-body {
-    .be-input__inner{
+    .be-input__inner {
       font-size: 14px;
       line-height: 30px;
       height: 30px;
     }
   }
 }
-.be-input__large{
+
+.be-input__large {
   .be-input-body {
-    .be-input__inner{
+    .be-input__inner {
       font-size: 14px;
       line-height: 36px;
       height: 36px;
@@ -201,11 +218,13 @@
     background-color: #c1c1c1;
     border-radius: 5px;
   }
+
   max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
   margin: 0;
   z-index: 2077;
+
   ul {
     padding: 0;
   }
@@ -230,6 +249,7 @@
     white-space: nowrap;
     overflow: hidden;
     font-size: 14px;
+
     &:hover {
       background-color: #dcdfe6;
     }

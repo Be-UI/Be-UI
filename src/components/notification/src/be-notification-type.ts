@@ -4,7 +4,8 @@
 * @author czh
 * @update (czh 2021/9/8)
 */
-import type { ComponentInternalInstance} from 'vue'
+import type {ComponentInternalInstance} from 'vue'
+
 export type INotifyOption = {
     titles?: string,
     customClass?: string,
@@ -17,9 +18,9 @@ export type INotifyOption = {
     key?: string,
     onClose?: () => void
     onClick?: () => void
-    compType?:string
-    close?:boolean,
-    isUpdate?:boolean
+    compType?: string
+    close?: boolean,
+    isUpdate?: boolean
     bodyRender?: any,
     iconPreRender?: any,
     closeRender?: any,
@@ -32,10 +33,12 @@ export type ItInstanceMap = {
     bottomRight?: Array<Object>,
     topCenter?: Array<Object>,
 }
+
 export interface INotfiy extends ComponentInternalInstance {
     uid: number,
-    el:HTMLElement
+    el: HTMLElement
 }
+
 export interface INotfiyInst {
     notify: INotfiy,
     close: Function,

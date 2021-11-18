@@ -14,7 +14,7 @@ import {dragDirective} from "../../../utils/direactives/custom-direactives/drag-
 
 export default defineComponent({
     name: "BeMessageBox",
-    directives: { drag:dragDirective },
+    directives: {drag: dragDirective},
     components: {
         'be-icon': defineAsyncComponent(() => import("../../svg-icon")),
     },
@@ -186,7 +186,8 @@ export default defineComponent({
                                      id={`be_message_box_head${_uid}`}>
                                     <div>
                                         {props.iconPreRender ? props.iconPreRender() :
-                                            <be-icon icon={`${props.msgType}`} class={`icon-${props.msgType}`}></be-icon>}
+                                            <be-icon icon={`${props.msgType}`}
+                                                     class={`icon-${props.msgType}`}></be-icon>}
                                         <span class={`text-${props.msgType}`}>{props.titles}</span>
                                     </div>
                                     {/**@slot 弹窗头部按钮**/}

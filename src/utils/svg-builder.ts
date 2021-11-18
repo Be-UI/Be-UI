@@ -1,5 +1,6 @@
-import { Plugin } from 'vite'
-import { readFileSync, readdirSync } from 'fs'
+import {Plugin} from 'vite'
+import {readFileSync, readdirSync} from 'fs'
+
 const svgTitle = /<svg([^>+].*?)>/
 const clearHeightWidth = /(width|height)="([^>+].*?)"/g
 
@@ -7,7 +8,7 @@ const hasViewBox = /(viewBox="[^>+].*?")/g
 
 const clearReturn = /(\r)|(\n)/g
 
-function findSvgFile(dir:string): string[] {
+function findSvgFile(dir: string): string[] {
     const svgRes = []
     const dirents = readdirSync(dir, {
         withFileTypes: true
@@ -19,7 +20,7 @@ function findSvgFile(dir:string): string[] {
             const svg = readFileSync(dir + dirent.name)
                 .toString()
                 .replace(clearReturn, '')
-                .replace(svgTitle, ($1:string, $2:string) => {
+                .replace(svgTitle, ($1: string, $2: string) => {
                     // console.log(++i)
                     // console.log(dirent.name)
                     let width = 0

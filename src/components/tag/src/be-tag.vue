@@ -1,7 +1,7 @@
 <template>
-    <div
-        :style="styleOption"
-        :class="`
+  <div
+      :style="styleOption"
+      :class="`
   be-tag
   be-tag__${disabled ? 'disabled' :''}
   be-tag__${type}
@@ -9,92 +9,94 @@
     <span :style="{color:styleOption?.color}">
       <slot></slot>
     </span>
-        <be-icon icon="delete"
-                 class="be-tag_close"
-                 :style="{fill:styleOption?.color}"
-                 v-if="isClose"
-                 @click="($event)=>handleClose($event)"></be-icon>
-    </div>
+    <be-icon icon="delete"
+             class="be-tag_close"
+             :style="{fill:styleOption?.color}"
+             v-if="isClose"
+             @click="($event)=>handleClose($event)"></be-icon>
+  </div>
 </template>
 
 <script lang="ts">
 import {defineComponent, reactive} from "vue";
 import BeIcon from "../../svg-icon/src/be-icon.vue";
-export default defineComponent({
-    name: "BeTag",
-    components: {BeIcon},
-    emits: ['close'],
-    props: {
-        /**
-         * 尺寸
-         * @values 'mini' | 'medium' | 'large'
-         */
-        size:{
-            type:String,
-            default:'medium'
-        },
-        /**
-         * 类型
-         * @values 'default' | 'primary' | 'success' | 'info' | 'warning' | 'error'
-         */
-        type:{
-            type:String,
-            default:'default'
-        },
-        /**
-         * 禁用
-         */
-        disabled:{
-            type:Boolean,
-            default:false
-        },
 
-        /**
-         * 圆角
-         */
-        round:{
-            type:[Number ,String],
-            default:0
-        },
-        /**
-         * 可关闭
-         */
-        isClose:{
-            type:Boolean,
-            default:false
-        },
-        /**
-         * 配置，背景色，边框色，文字色
-         */
-        option:{
-            type:Object,
-            default:()=>{}
-        }
+export default defineComponent({
+  name: "BeTag",
+  components: {BeIcon},
+  emits: ['close'],
+  props: {
+    /**
+     * 尺寸
+     * @values 'mini' | 'medium' | 'large'
+     */
+    size: {
+      type: String,
+      default: 'medium'
     },
-    setup(props,ctx){
-        /**
-         * 关闭回调
-         * @param {Event} event - 事件对象
-         */
-        const handleClose = (event:Event)=>{
-            event.stopPropagation()
-            if(props.disabled){
-                return
-            }
-            ctx.emit('close',event)
-        }
-        let styleOption = reactive({})
-        styleOption = {
-            borderRadius:`${props.round}px`,
-            backgroundColor:props.option?.backgroundColor || '',
-            border:props.option?.border || '',
-            color:props.option?.color || ''
-        }
-        return {
-            handleClose,
-            styleOption
-        }
+    /**
+     * 类型
+     * @values 'default' | 'primary' | 'success' | 'info' | 'warning' | 'error'
+     */
+    type: {
+      type: String,
+      default: 'default'
+    },
+    /**
+     * 禁用
+     */
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+
+    /**
+     * 圆角
+     */
+    round: {
+      type: [Number, String],
+      default: 0
+    },
+    /**
+     * 可关闭
+     */
+    isClose: {
+      type: Boolean,
+      default: false
+    },
+    /**
+     * 配置，背景色，边框色，文字色
+     */
+    option: {
+      type: Object,
+      default: () => {
+      }
     }
+  },
+  setup(props, ctx) {
+    /**
+     * 关闭回调
+     * @param {Event} event - 事件对象
+     */
+    const handleClose = (event: Event) => {
+      event.stopPropagation()
+      if (props.disabled) {
+        return
+      }
+      ctx.emit('close', event)
+    }
+    let styleOption = reactive({})
+    styleOption = {
+      borderRadius: `${props.round}px`,
+      backgroundColor: props.option?.backgroundColor || '',
+      border: props.option?.border || '',
+      color: props.option?.color || ''
+    }
+    return {
+      handleClose,
+      styleOption
+    }
+  }
 
 })
 </script>

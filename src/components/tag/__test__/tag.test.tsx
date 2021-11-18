@@ -1,5 +1,6 @@
 import {mount} from '@vue/test-utils'
 import BeTag from '../src/be-tag.vue'
+
 /**
  * 测试props生效
  * @param options
@@ -55,7 +56,7 @@ describe('test-be-tag-props', () => {
         const ElmPrimary = wrapperPrimary.element as HTMLElement
         expect(ElmPrimary.className.indexOf('be-tag__primary') > 0).toBeTruthy()
 
-        const wrapperSuccess =  mount(BeTag, {
+        const wrapperSuccess = mount(BeTag, {
             props: {
                 type: 'success',
             },
@@ -99,9 +100,9 @@ describe('test-be-tag-props', () => {
         const wrapper = mount(BeTag, {
             props: {
                 option: {
-                    border:'1px solid #00ffff',
-                    backgroundColor:'red',
-                    color:'green'
+                    border: '1px solid #00ffff',
+                    backgroundColor: 'red',
+                    color: 'green'
                 },
             },
         })
@@ -124,7 +125,7 @@ describe('test-be-tag-props', () => {
  * 关闭方法
  * @param options
  */
-const _mount = (options:any) =>
+const _mount = (options: any) =>
     mount({
         components: {
             'BeTag': BeTag,

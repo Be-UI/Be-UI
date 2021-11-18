@@ -15,14 +15,14 @@
             v-for="(item, index) in list"
             :key="item[keyValue]"
             @click="handleSelect(item,index)">
-            <slot name="cus-temp" :item="item">
-                {{ item[labelValue] }}
-            </slot>
+          <slot name="cus-temp" :item="item">
+            {{ item[labelValue] }}
+          </slot>
         </li>
-          <li class="be-input-select__inner"
-              v-if="list.length === 0">
-              暂无数据
-          </li>
+        <li class="be-input-select__inner"
+            v-if="list.length === 0">
+          暂无数据
+        </li>
       </ul>
       <ul v-show="loading" :key="`be-input-select${uid}-loading`">
         <li class="be-input-select__line"></li>
@@ -37,6 +37,7 @@
 <script lang="ts">
 import {computed, defineComponent, getCurrentInstance} from 'vue'
 import {IInputInst} from "../../input/src/be-input-type";
+
 export default defineComponent({
   name: "BeInputSelect",
   props: {
@@ -74,33 +75,33 @@ export default defineComponent({
     /**
      * key
      */
-     keyValue: {
-         type: String,
-         default: 'id'
-     },
-      /**
-       * label
-       */
-     labelValue: {
-         type: String,
-         default: 'label'
-     },
+    keyValue: {
+      type: String,
+      default: 'id'
+    },
+    /**
+     * label
+     */
+    labelValue: {
+      type: String,
+      default: 'label'
+    },
   },
-  setup(props,ctx){
+  setup(props, ctx) {
     const internalInstance = getCurrentInstance() as IInputInst
     /**
      * 下拉搜索选择事件方法
      * @param {String} value - 更新后值
      * @param {Number} index - 点击索引
      */
-    const handleSelect = (value:string, index:number):void =>{
+    const handleSelect = (value: string, index: number): void => {
       ctx.emit('select', value, index)
     }
-    const list = computed(()=>{
-        return props.selectList
+    const list = computed(() => {
+      return props.selectList
     })
     return {
-      uid:internalInstance.uid,
+      uid: internalInstance.uid,
       handleSelect,
       list
     }

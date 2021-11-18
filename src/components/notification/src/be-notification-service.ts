@@ -80,9 +80,9 @@ const closeNotify = function (instance: DefineComponent, isAll: boolean = false)
 const close = (compInstance: HTMLElement, elm: HTMLElement): void => {
     if (compInstance && compInstance.parentNode) {
         setCloseAnimate(compInstance)
-        setTimeout(()=>{
+        setTimeout(() => {
             render(null, elm)
-        },300)
+        }, 300)
     }
 }
 /**
@@ -91,12 +91,12 @@ const close = (compInstance: HTMLElement, elm: HTMLElement): void => {
  */
 const setCloseAnimate = (compInstance: HTMLElement): void => {
     let className = compInstance.className
-    if(className.indexOf('be-message')  < 0 ){
+    if (className.indexOf('be-message') < 0) {
         return
     }
-    if(className.indexOf('-in') >=0 ){
+    if (className.indexOf('-in') >= 0) {
         className = className.replace(/-in/, "-out")
-    }else {
+    } else {
         className = className + ' be-message-animation-top-center-out'
     }
     compInstance.className = className
@@ -105,14 +105,14 @@ const setCloseAnimate = (compInstance: HTMLElement): void => {
  * 關閉全部方法
  */
 export const closeAll = (): void => {
-    Object.keys(instanceMap).forEach((placement:string) => {
+    Object.keys(instanceMap).forEach((placement: string) => {
         (Object(instanceMap)[placement]).forEach((val: any) => {
             close(val.instance.el, val.elm)
         })
     })
     resetNotifyInstMap()
 }
-export const resetNotifyInstMap = ():void =>{
+export const resetNotifyInstMap = (): void => {
     instanceMap = {
         topLeft: [],
         topRight: [],

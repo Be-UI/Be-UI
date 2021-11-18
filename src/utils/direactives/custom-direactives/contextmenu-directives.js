@@ -7,17 +7,17 @@
 * @update (czh 2021/4/16)
 */
 const contextmenuDirectives = {
-  contextmenu:{
-    // 使用 inserted 确保 contentmenu mounted 后才进行 addRef 操作
-    inserted (el, binding, vnode) {
-      //获取绑定 contentmenu 组件
-      const node = vnode.context.$refs[binding.arg] || vnode.context.$refs[binding.value]
-      const contextmenu = Object.prototype.toString.call(node) === '[object Array]' ? node[0] : node
-      //调用组件 addRef 给触发dom添加右键事件，并缓存记录
-      contextmenu.addRef({ el, vnode })
-      //设置组件id
-      contextmenu.$beContextmenuId = contextmenu._uid // eslint-disable-line no-underscore-dangle
+    contextmenu: {
+        // 使用 inserted 确保 contentmenu mounted 后才进行 addRef 操作
+        inserted(el, binding, vnode) {
+            //获取绑定 contentmenu 组件
+            const node = vnode.context.$refs[binding.arg] || vnode.context.$refs[binding.value]
+            const contextmenu = Object.prototype.toString.call(node) === '[object Array]' ? node[0] : node
+            //调用组件 addRef 给触发dom添加右键事件，并缓存记录
+            contextmenu.addRef({el, vnode})
+            //设置组件id
+            contextmenu.$beContextmenuId = contextmenu._uid // eslint-disable-line no-underscore-dangle
+        }
     }
-  }
 }
 export default contextmenuDirectives

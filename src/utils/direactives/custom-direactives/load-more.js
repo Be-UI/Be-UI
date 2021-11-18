@@ -10,7 +10,7 @@ const loadMoreDirectives = {
         // 指令的定义
         bind(el, binding, vnode) {
             const selectWrap = el
-            selectWrap.addEventListener('scroll', function() {
+            selectWrap.addEventListener('scroll', function () {
                 const sign = 100
                 const scrollDistance = this.scrollHeight - this.scrollTop - this.clientHeight
                 if (scrollDistance <= sign) {

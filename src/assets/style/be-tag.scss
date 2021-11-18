@@ -1,10 +1,11 @@
 @mixin be-icon-default($color) {
-  .be-icon{
+  .be-icon {
     use {
       fill: $color;
     }
   }
 }
+
 @mixin be-tag-type($bgColor,$textColor,$hoverColor) {
   background: $bgColor;
   color: $textColor;
@@ -13,18 +14,22 @@
     background: $hoverColor;
   }
 }
-.be-tag{
+
+.be-tag {
   @apply inline-flex justify-center items-center cursor-pointer box-border;
-  span{
+  span {
     @apply mr-1.5;
   }
-  .be-icon-container .be-icon{
+
+  .be-icon-container .be-icon {
     @apply w-4 h-4;
   }
 }
+
 .be-tag__disabled {
   @apply cursor-not-allowed;
 }
+
 .be-tag__mini {
   @apply box-border px-2.5 h-6 leading-6 text-xs;
 }
@@ -38,17 +43,18 @@
 }
 
 .be-tag__error {
-  @include be-tag-type($error,$whiteText,$errorHover);
+  @include be-tag-type($error, $whiteText, $errorHover);
   @include be-icon-default($whiteText);
 }
 
 .be-tag__info {
-  @include be-tag-type($default,$defaultText,$infoHover);
+  @include be-tag-type($default, $defaultText, $infoHover);
   @include be-icon-default($defaultText);
   border: 1px solid $infoHover;
 }
-.be-tag__success{
-  @include be-tag-type($success,$whiteText,$successHover);
+
+.be-tag__success {
+  @include be-tag-type($success, $whiteText, $successHover);
   @include be-icon-default($whiteText);
 }
 
@@ -58,12 +64,14 @@
 }
 
 .be-tag__primary {
-  @include be-tag-type($primary,$primaryText,$primaryHover);
+  @include be-tag-type($primary, $primaryText, $primaryHover);
   @include be-icon-default($primaryText);
+
   &:hover {
     background: $primaryHover;
     color: $whiteText;
     border-color: $primaryText;
+
     .be-icon {
       use {
         fill: $whiteText;
@@ -73,11 +81,13 @@
 }
 
 .be-tag__default {
-  @include be-tag-type($default,$defaultText,$defaultText);
+  @include be-tag-type($default, $defaultText, $defaultText);
   @include be-icon-default($defaultText);
+
   &:hover {
     color: $primaryText;
     background: $primary;
+
     .be-icon {
       use {
         fill: $primaryText;

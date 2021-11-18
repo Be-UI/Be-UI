@@ -1,16 +1,18 @@
 
-.be-popover{
+.be-popover {
   position: fixed;
   background-color: $default;
   border-radius: 3px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
-  .be-popover-body{
+
+  .be-popover-body {
     color: $info;
     text-align: center;
     padding: 8px 14px;
     box-sizing: border-box;
     font-size: 12px;
   }
+
   .be-popover-arrow,
   .be-popover-arrow::before {
     position: absolute;
@@ -31,7 +33,7 @@
 
 }
 
-.be-popover[data-popper-placement^='top']{
+.be-popover[data-popper-placement^='top'] {
   .be-popover-arrow {
     bottom: -4px;
   }
@@ -42,18 +44,21 @@
     top: -4px;
   }
 }
+
 .be-popover[data-popper-placement^='left'] {
   .be-popover-arrow {
     right: -4px;
   }
 }
+
 .be-popover[data-popper-placement^='right'] {
   .be-popover-arrow {
     left: -4px;
   }
 }
-.be-popover.be-input-select-popover{
-  .be-popover-body{
+
+.be-popover.be-input-select-popover {
+  .be-popover-body {
     padding: 0;
   }
 }

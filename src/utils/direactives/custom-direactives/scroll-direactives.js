@@ -6,10 +6,10 @@
 * @update (czh 2021/4/16)
 */
 const scrollDirectives = {
-    scroll:{
+    scroll: {
         bind(el, binding, vnode, oldVnode) {
-             // 判断是否是select组建中的加载更多，用于获取实际滚动元素
-            var isSelect = binding.arg === 'selects' ?  true : false;
+            // 判断是否是select组建中的加载更多，用于获取实际滚动元素
+            var isSelect = binding.arg === 'selects' ? true : false;
             var p = 0;
             var t = 0;
             var down = true;

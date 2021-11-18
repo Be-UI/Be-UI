@@ -100,9 +100,9 @@ export default defineComponent({
             default: ''
         },
     },
-    setup(props,ctx){
+    setup(props, ctx) {
         const internalInstance = getCurrentInstance() as IButtonInst
-        const btnStyle =  computed(()=>{
+        const btnStyle = computed(() => {
             return {
                 'background': props.ghost ? 'transparent !important' : '',
                 'cursor': props.disabled ? "not-allowed" : "pointer",
@@ -111,33 +111,35 @@ export default defineComponent({
                 'display': props.flex ? "flex" : "",
             }
         })
-        const borderStyle =  computed(()=>{
+        const borderStyle = computed(() => {
             return props.bordered ? "__border" : ""
         })
-        const disabledStyle =  computed(()=>{
+        const disabledStyle = computed(() => {
             return (props.disabled || props.loading) ? "be-button__inner__disabled" : ""
         })
-        const prevIconStyle =  computed(()=>{
-            if(props.loading){ return 'refresh'}
-            if(props.prevIcon){
+        const prevIconStyle = computed(() => {
+            if (props.loading) {
+                return 'refresh'
+            }
+            if (props.prevIcon) {
                 return props.prevIcon
-            }else{
+            } else {
                 return ''
             }
         })
-        const nextIconStyle =  computed(()=>{
-            if(props.nextIcon){
-                if(props.loading){
+        const nextIconStyle = computed(() => {
+            if (props.nextIcon) {
+                if (props.loading) {
                     return ''
-                }else{
+                } else {
                     return props.nextIcon
                 }
-            }else{
+            } else {
                 return ''
             }
         })
         return {
-            uid:internalInstance.uid,
+            uid: internalInstance.uid,
             btnStyle,
             borderStyle,
             disabledStyle,
@@ -147,18 +149,20 @@ export default defineComponent({
 
         }
     },
-    render(){
+    render() {
         const prevIconRender = !this.prevIcon ? ''
-            :(<be-icon icon={this.prevIconStyle} spin = {this.loading} custom-class={`be-button-prevIcon be-button-prevIcon__${this.type}`}> </be-icon>);
+            : (<be-icon icon={this.prevIconStyle} spin={this.loading}
+                        custom-class={`be-button-prevIcon be-button-prevIcon__${this.type}`}></be-icon>);
 
         const nextIconRender = !this.nextIcon ? ''
-            :(<be-icon icon={this.nextIconStyle} custom-class={`be-button-nextIcon be-button-nextIcon__${this.type}`}> </be-icon>);
+            : (<be-icon icon={this.nextIconStyle}
+                        custom-class={`be-button-nextIcon be-button-nextIcon__${this.type}`}></be-icon>);
 
         return (
-            <button type = "button"
+            <button type="button"
                     {...this.$attrs}
                     style={this.btnStyle}
-                    id={ `be_button_${this.uid}` }
+                    id={`be_button_${this.uid}`}
                     class={`
                     be-button 
                     be-button__inner ${this.disabledStyle} 
@@ -166,11 +170,11 @@ export default defineComponent({
                     be-button__${this.type}${this.borderStyle} 
                     ${this.customClass}`}
                     disabled={this.disabled || this.loading}>
-                    <div class="be-button-body" style="margin: 0 auto;display: flex">
-                        {prevIconRender}
-                        <div class='be-button-slot' >{this.$slots.default()}</div>
-                        {nextIconRender}
-                    </div>
+                <div class="be-button-body" style="margin: 0 auto;display: flex">
+                    {prevIconRender}
+                    <div class='be-button-slot'>{this.$slots.default()}</div>
+                    {nextIconRender}
+                </div>
             </button>
         )
     },

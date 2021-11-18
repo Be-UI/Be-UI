@@ -201,8 +201,8 @@ export default defineComponent({
                     })
                 }
                 if (props.keyValue) {
-                    list.forEach((val:any) => {
-                        if(!val[props.keyValue || 'id']){
+                    list.forEach((val: any) => {
+                        if (!val[props.keyValue || 'id']) {
                             val[props.keyValue || 'id'] = getUuid()
                         }
                     })

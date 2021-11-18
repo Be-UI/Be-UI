@@ -9,7 +9,7 @@ import {IOption, ISelect} from "./be-select-type";
 import {IInputSelectFunc} from "../../autocomplete/src/be-autocomplete-type";
 import {getUuid, isFunction} from "../../../utils/common";
 
-export default (props:any,ctx:any)=> {
+export default (props: any, ctx: any) => {
     // 當前實例
     const internalInstance = getCurrentInstance() as ISelect
     // 當前實例uid
@@ -148,7 +148,7 @@ export default (props:any,ctx:any)=> {
         dom?.addEventListener('scroll', handleScroll)
     }
     /**************************************** 擴展渲染選項方法 ************************************/
-    // 新增的下拉選項數據
+        // 新增的下拉選項數據
     const addItem = ref<string>('')
     /**
      * 新增的下拉選項數據賦值方法

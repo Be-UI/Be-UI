@@ -1,4 +1,4 @@
-import type { App } from 'vue';
+import type {App} from 'vue';
 // 按需引用
 export * from './install-components';
 /*export * from './plugins';
@@ -6,7 +6,8 @@ export * from './composables';*/
 
 import * as components from './install-components';
 import '../assets/style/tailwind.css'
-const componentList:object = components
+
+const componentList: object = components
 type componentKeyType = keyof typeof componentList;
 export const install = function (app: App) {
     Object.keys(componentList).forEach((key: string) => {
@@ -17,8 +18,8 @@ export const install = function (app: App) {
     });
     return app;
 };
-const version:string = '1.0.0-beta1.0'
-export { version };
+const version: string = '1.0.0-beta1.0'
+export {version};
 export default {
     version,
     install,

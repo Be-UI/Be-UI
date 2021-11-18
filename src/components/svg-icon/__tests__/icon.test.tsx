@@ -1,5 +1,6 @@
 import {mount} from '@vue/test-utils'
 import BeIcon from '../src/be-icon.vue'
+
 /**
  * 测试props生效
  * @param options
@@ -67,7 +68,7 @@ describe('test-be-icon-props', () => {
  * 测试时间响应方法
  * @param options
  */
-const _mount = (options:any) =>
+const _mount = (options: any) =>
     mount({
         components: {
             'BeIcon': BeIcon,
@@ -131,6 +132,7 @@ const pandaIcon: BeIconCust = {
         </svg>,
 };
 import {BeIconComponets} from "../index";
+
 const panda: object = BeIconComponets('panda', pandaIcon)
 const __mount = (options: any) =>
     mount({

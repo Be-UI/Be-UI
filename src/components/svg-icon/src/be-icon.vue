@@ -1,5 +1,5 @@
 <template>
-  <div class='be-icon-container' :class="spinClass" v-on="$attrs" >
+  <div class='be-icon-container' :class="spinClass" v-on="$attrs">
     <svg class="be-icon"
          :width="width"
          :height="height"
@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent ,computed} from "vue";
+import {defineComponent, computed} from "vue";
 /*
 * 旋转
 * */
@@ -61,7 +61,7 @@ export default defineComponent({
   },
   setup(props, context) {
     const iconName = computed(() => `${props.icon}`)
-    const spinClass = computed(() => props.spin ? 'be-icon-spin ' + props.customClass: '' + props.customClass)
+    const spinClass = computed(() => props.spin ? 'be-icon-spin ' + props.customClass : '' + props.customClass)
     return {
       props,
       iconName,

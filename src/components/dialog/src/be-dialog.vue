@@ -8,7 +8,7 @@
 <template>
   <div :class="dialogModels" v-if="isShow"></div>
   <transition name="dialog-fade">
-  <div class="be-dialog" v-if="isShow">
+    <div class="be-dialog" v-if="isShow">
       <div class="be-dialog-container"
            :id="`be_dialog_container$this._uid`"
            v-drag="{isDrag:isDrag}"
@@ -42,7 +42,7 @@
           </slot>
         </div>
       </div>
-  </div>
+    </div>
   </transition>
 </template>
 

@@ -231,26 +231,26 @@ export default defineComponent({
         /**
          * 渲染前置插槽
          */
-        const renderPreSlot = ():string | VNode => {
-            if(internalInstance.slots.pre){
+        const renderPreSlot = (): string | VNode => {
+            if (internalInstance.slots.pre) {
                 return (
                     <div class='be-input-number__pre'>
                         {internalInstance.slots.pre()}
                     </div>
                 )
-            }else{
+            } else {
                 return ''
             }
         }
         /**
          * 渲染后置插槽
          */
-        const renderNextSlot = ():string | VNode => {
-            if(internalInstance.slots.next){
+        const renderNextSlot = (): string | VNode => {
+            if (internalInstance.slots.next) {
                 return (<div class='be-input-number__next'>
                     {internalInstance.slots.next()}
                 </div>)
-            }else{
+            } else {
                 return ''
             }
         }
