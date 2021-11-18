@@ -126,6 +126,17 @@ export const accSub = (arg:Array<number>):number =>{
 
     return sum / Math.pow(10, maxDecimalLength)
 }
+/**
+ * 校验字符纯数字
+ * @param str
+ */
+export const checkNumber = (str:string):boolean=> {
+    let reg = /^\d+$/
+    if (reg.test(str)) {
+        return true;
+    }
+    return false;
+}
 export const jsonClone = <T>(val: T):T => JSON.parse(JSON.stringify(val))
 export const isBool = (val: unknown) => typeof val === 'boolean'
 export const isString = (val: unknown) => (typeof val == 'string') && val.constructor == String;

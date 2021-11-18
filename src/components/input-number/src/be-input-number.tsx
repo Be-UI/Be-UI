@@ -12,7 +12,7 @@ import {
 } from 'vue'
 import {IInputNumInstance, IInputNumLimit} from "./be-input-number-type";
 import {IInputInst} from "../../input/src/be-input-type";
-import {accAdd, accSub, isFunction} from "../../../utils/common";
+import {accAdd, accSub, checkNumber, isFunction} from "../../../utils/common";
 
 export default defineComponent({
     name: 'be-input-number',
@@ -85,7 +85,7 @@ export default defineComponent({
          */
         step:{
             type: Number,
-            default: 0.3
+            default: 1
         }
     },
     setup(props, ctx) {
@@ -107,9 +107,13 @@ export default defineComponent({
          * @param {String} value - 输入值
          */
         const handleInput = (value: string): void => {
+            let parserRes = props.parser(value)
+            if(!checkNumber(parserRes)){
+                parserRes = ''
+            }
             inputInnerVal.value = ''
             nextTick(()=>{
-                const val = (limitValue(props.parser(value)) as IInputNumLimit).val
+                const val = (limitValue(parserRes) as IInputNumLimit).val
                 inputInnerVal.value = props.formatter(val)
                 updateInput(val)
             })
@@ -156,7 +160,7 @@ export default defineComponent({
         const handleReduce = (): void => {
             if (props.disabled) return
             const res = accSub([Number(props.modelValue),Number(props.step)])
-            updateInput(res)
+            updateInput((limitValue(res) as IInputNumLimit).val)
             ctx.emit('step',{value:res,type:'reduce'})
         }
         /**
@@ -165,7 +169,7 @@ export default defineComponent({
         const handleIncrease = (): void => {
             if (props.disabled) return
             const res = accAdd(Number(props.modelValue),Number(props.step))
-            updateInput(res)
+            updateInput((limitValue(res) as IInputNumLimit).val)
             ctx.emit('step',{value:res,type:'increase'})
         }
         let keyBoradDom:HTMLElement
