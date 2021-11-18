@@ -280,7 +280,7 @@
             </be-select>
             {{seletStr}}
             <panda width="25" height="25"  @click="test"></panda>-->
-            <be-input-number @change="handleClick"
+<!--            <be-input-number @change="handleClick"
                              :formatter="formatter"
                              :parser="parser"
                              keyboard
@@ -289,9 +289,11 @@
                              @step="handleStep"
                              v-model="testModel"
                              ref="beinputNum">
-<!--                <template #next>next</template>
-                <template #pre>pre</template>-->
-            </be-input-number>
+&lt;!&ndash;                <template #next>next</template>
+                <template #pre>pre</template>&ndash;&gt;
+            </be-input-number>-->
+        <be-input-number v-model="testModel" min="10" @change="handleChange">
+        </be-input-number>
             {{testModel}}
 <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
         </div>
@@ -331,7 +333,7 @@ export default {
                 pageSize: 200,
                 total: 300
             },
-            testModel:'1000',
+            testModel:10,
              // seletStr:[],
             seletStr:[{label:'落日绣帘卷',id:'落日绣帘卷'},{label:'亭下水连空',id:'亭下水连空'}],
             testList:[
@@ -358,7 +360,8 @@ export default {
         panda
     },
     mounted() {
-        this.$refs.beinputNum.focus()
+       // this.$refs.beinputNum.focus()
+       // console.log(document.activeElement)
         /* const tr = document.getElementById('qwq')
          const po = document.getElementById('aaa')
          createPopper(tr, po, {
@@ -482,6 +485,7 @@ export default {
         },
         handleChange(data) {
             //console.log(data)
+            debugger
         },
         pageChange(data) {
             // console.log(data)

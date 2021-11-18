@@ -39,5 +39,6 @@ module.exports = {
     //roots: ['<rootDir>'],
     // roots: ['<rootDir>/src/components/svg-icon'],
     // roots: ['<rootDir>/src/components/tag'],
-    roots: ['<rootDir>/src/components/message'],
+    // roots: ['<rootDir>/src/components/message'],
+    roots: ['<rootDir>/src/components/input-number'],
 }
