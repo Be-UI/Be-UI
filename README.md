@@ -34,7 +34,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 排期
 
-InputNumber 
+be-switch
+be-Breadcrumb
 样式重构 
 图标修改
 
@@ -65,7 +66,9 @@ InputNumber
 15.tag标签 be-tag （完成）    
 16.选择框 be-select （完成）    
 17.消息提示 be-message （完成）    
-18.数字输入 be-input-number （开发中）    
+18.数字输入 be-input-number （完成）  
+19.开关组件 be-switch
+20.面包屑 be-Breadcrumb
 
 
 
