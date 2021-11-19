@@ -1,12 +1,12 @@
 /*
-* @input-number.test.ts.ts
+* @input-number.test.ts
 * @deprecated be-input-number组件单元测试
 * @author czh
 * @update (czh 2021/11/18)
 */
 import {mount} from '@vue/test-utils'
 import BeInputNumber from '../src/be-input-number'
-import {ComponentInternalInstance, getCurrentInstance, nextTick, ref} from "vue";
+import {ComponentInternalInstance, getCurrentInstance, nextTick, onMounted, ref} from "vue";
 import {asyncExpect} from "../../../utils/utils";
 const mousedown = new Event('mousedown')
 
@@ -137,6 +137,30 @@ describe('test-be-input-number-props', () => {
         wrapper.find('.be-input-number__down').trigger('click')
         expect(wrapper.vm.num).toEqual(10)
     })
+    test('props-render-keyboard', async () => {
+        const handlePressEnterJest = jest.fn()
+        const wrapper = await _mount({
+            template: `
+                <BeInputNumber v-model="num" ref="BeInputNumbers"
+                               @pressEnter="handlePressEnterJest">
+                </BeInputNumber>`,
+            setup() {
+                const curInst = getCurrentInstance()
+                const num = ref(1)
+                return {
+                    num,
+                    curInst,
+                    handlePressEnterJest,
+                }
+            },
+        })
+        debugger
+        await wrapper.vm.curInst.refs.BeInputNumbers.focus()
+        let event = new KeyboardEvent('keydown', {'key': 'Enter'});
+        await wrapper.vm.curInst.refs.BeInputNumbers.$el.dispatchEvent(event);
+        wrapper.find('input').trigger('keydown',{'key': 'Enter'})
+        expect(handlePressEnterJest).toBeCalled()
+    })
 })
 describe('test-be-input-number-event', () => {
     test('event:change', async () => {
@@ -167,46 +191,41 @@ describe('test-be-input-number-event', () => {
             expect(handleChangeJest).toBeCalled()
         }, 500)
     })
-    test('event:step', async () => {
-        debugger
+    test('event:step',  () => {
         const handleStepJest = jest.fn()
-        const wrapper = await _mount({
+        const wrapper =  _mount({
             template: `
                 <BeInputNumber v-model="num" ref="BeInputNumbers"
-                               @step="handleChange">
+                               @step="handleStepJest">
                 </BeInputNumber>`,
             setup() {
                 const num = ref(1)
-                const handleStep = (val:string): void => {
-                    debugger
-                    handleStepJest(val)
-                }
-                debugger
                 return {
                     num,
-                    handleStep,
+                    handleStepJest,
                 }
             },
         })
-        const el = wrapper.find('.be-input-number__up').element
-        const simulateEvent = (event:string) => {
-            el.dispatchEvent(new Event(event))
-        }
-        await simulateEvent('click')
-        nextTick()
+        wrapper.find('.be-input-number__up').trigger('click');
         expect(handleStepJest).toBeCalled()
-       /* await asyncExpect(() => {
-            expect(handleStepJest).toBeCalled()
-        }, 0)*/
-        /*wrapper.find('.be-input-number__down').trigger('click')
-        await nextTick()
-        await asyncExpect(() => {
-            expect(handleStepJest).toBeCalled()
-        }, 500)*/
+        wrapper.find('.be-input-number__down').trigger('click');
+        expect(handleStepJest).toBeCalled()
     })
-   /* test('event:change', async () => {
-
-    })*/
+    test('event:pressEnter', async () => {
+        const handlePressEnterJest = jest.fn()
+        const wrapper = await mount(BeInputNumber, {
+            props: {
+                size: 'mini',
+                keyboard:true,
+                onPressEnter:handlePressEnterJest
+            },
+        })
+        await wrapper.vm.focus()
+        let event = new KeyboardEvent('keydown', {'key': 'Enter'});
+        await wrapper.vm.$el.dispatchEvent(event);
+        wrapper.find('input').trigger('keydown',{'key': 'Enter'})
+        expect(handlePressEnterJest).toBeCalled()
+    })
 })
 /**
  * 测试公共方法

@@ -292,9 +292,14 @@
 &lt;!&ndash;                <template #next>next</template>
                 <template #pre>pre</template>&ndash;&gt;
             </be-input-number>-->
-        <be-input-number v-model="testModel" min="10" @change="handleChange">
+        <be-input-number
+            v-model="testModel"
+            ref="beinputNum"
+            keyboard
+            min="10" @change="handleChange" @pressEnter="handleChange">
         </be-input-number>
             {{testModel}}
+
 <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
         </div>
     </div>
@@ -310,6 +315,7 @@ import BePopover from "./components/popover/src/be-popover.vue";
 import {createPopper} from '@popperjs/core'
 import {BeLoadingSer} from './components'
 import BeIcon from "./components/svg-icon/src/be-icon.vue";
+
 
 
 export default {
@@ -360,6 +366,8 @@ export default {
         panda
     },
     mounted() {
+        this.$refs.beinputNum.focus()
+        this.$refs.beinputNum.$el.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
        // this.$refs.beinputNum.focus()
        // console.log(document.activeElement)
         /* const tr = document.getElementById('qwq')

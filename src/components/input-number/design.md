@@ -18,8 +18,8 @@
 √ step 每次改变步数，可以为小数
 
 √ onChange 变化回调 function(value: number | string | null) test √
-√ onPressEnter 按下回车的回调 function(e)
-√ onStep点击上下箭头的回调(value: number, info: { offset: number, type: 'up' | 'down' }) => void
+√ onPressEnter 按下回车的回调 function(e) test √
+√ onStep点击上下箭头的回调(value: number, info: { offset: number, type: 'up' | 'down' }) => void test √
 
 √ blur() 移除焦点 test √
 √ focus() 获取焦点 test √

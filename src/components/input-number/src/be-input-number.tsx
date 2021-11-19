@@ -205,24 +205,11 @@ export default defineComponent({
             updateInput((limitValue(res) as IInputNumLimit).val)
             ctx.emit('step', {value: res, type: 'increase'})
         }
-        let keyBoradDom: HTMLElement
-        /**
-         * 添加键盘监听事件
-         */
-        const addKeyBoardEvt = (): void => {
-            keyBoradDom = document.getElementById(`be_input_number${uid}`) as HTMLElement
-            keyBoradDom.addEventListener('keydown', handleKeyDown)
-        }
-        /**
-         * 移除键盘监听事件
-         */
-        const removeKeyBoardEvt = (): void => {
-            keyBoradDom.removeEventListener('keydown', handleKeyDown)
-        }
         /**
          * 处理键盘响应事件
          */
         const handleKeyDown = (event: KeyboardEvent): void => {
+            if(!props.keyboard) return
             if (event.key === 'ArrowUp') {
                 handleIncrease()
             }
@@ -303,10 +290,6 @@ export default defineComponent({
             if (props.modelValue || props.modelValue === 0) {
                 inputInnerVal.value = props.formatter(props.modelValue)
             }
-            // 开启键盘事件监听
-            if (props.keyboard) {
-                addKeyBoardEvt()
-            }
         }
         const modelVal = computed(() => props.modelValue)
         watch(modelVal, (nVal: string | number) => {
@@ -321,10 +304,7 @@ export default defineComponent({
         onMounted(() => {
             init()
         })
-        onBeforeUnmount(() => {
-            // 取消事件监听
-            removeKeyBoardEvt()
-        })
+
         return {
             uid,
             attrs,
@@ -342,6 +322,7 @@ export default defineComponent({
             handleIncrease,
             handleReduce,
             renderNextSlot,
+            handleKeyDown,
         }
     },
     render() {
@@ -352,6 +333,7 @@ export default defineComponent({
                  id={`be_input_number${this.uid}`}
                  onFocus={($event) => this.handleFocus($event)}
                  onBlur={($event) => this.handleBlur($event)}
+                 onKeydown={($event) => this.handleKeyDown($event)}
                  tabindex='0'>
                 {this.renderPreSlot()}
                 <div class={`be-input-number__${this.size} be-input-number__default`}>
