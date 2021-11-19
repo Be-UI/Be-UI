@@ -12,7 +12,7 @@ import {
 } from 'vue'
 import {IInputNumInstance, IInputNumLimit} from "./be-input-number-type";
 import {IInputInst} from "../../input/src/be-input-type";
-import {accAdd, accSub, checkNumber, isFunction} from "../../../utils/common";
+import {accAdd, accSub, checkNumber} from "../../../utils/common";
 import beInput from '../../input'
 import beIcon from '../../svg-icon'
 export default defineComponent({
@@ -287,8 +287,10 @@ export default defineComponent({
          * 初始化方法
          */
         const init = (): void => {
-            if (props.modelValue || props.modelValue === 0) {
+            if ((props.modelValue && checkNumber(props.modelValue.toString()) )|| props.modelValue === 0) {
                 inputInnerVal.value = props.formatter(props.modelValue)
+            }else{
+                //console.error('You should pass in numeric or pure numeric string variables, such as 1 or \'12\'')
             }
         }
         const modelVal = computed(() => props.modelValue)

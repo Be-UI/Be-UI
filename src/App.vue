@@ -296,7 +296,7 @@
             v-model="testModel"
             ref="beinputNum"
             keyboard
-            min="10" @change="handleChange" @pressEnter="handleChange">
+            :step="0.3">
         </be-input-number>
             {{testModel}}
 
@@ -339,7 +339,7 @@ export default {
                 pageSize: 200,
                 total: 300
             },
-            testModel:10,
+            testModel:1,
              // seletStr:[],
             seletStr:[{label:'落日绣帘卷',id:'落日绣帘卷'},{label:'亭下水连空',id:'亭下水连空'}],
             testList:[

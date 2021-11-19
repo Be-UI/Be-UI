@@ -5,17 +5,17 @@
 √ 受控超出边界变色 test √
 
 
-√ keyboard 是否启用键盘快捷行为
-√ 聚焦键盘上下建行为
+√ keyboard 是否启用键盘快捷行为 test √
+√ 聚焦键盘上下建行为 test √
 
-√ 输入校验限制
-√ parser 字符串解析 
-√ formatter 格式化
+√ 输入校验限制 test √
+√ parser 字符串解析 test √
+√ formatter 格式化 test √
 √ 绑定值和显示值要分开维护 -- uneedTest
 
 √ max	最大值 test √
 √ min	最小值 test √
-√ step 每次改变步数，可以为小数
+√ step 每次改变步数，可以为小数 test √
 
 √ onChange 变化回调 function(value: number | string | null) test √
 √ onPressEnter 按下回车的回调 function(e) test √

@@ -31,7 +31,8 @@ describe('test-be-input-number-props', () => {
     test('props-size-mini', async () => {
         const wrapper = await mount(BeInputNumber, {
             props: {
-                size: 'mini'
+                size: 'mini',
+                num:0,
             },
         })
 
@@ -40,7 +41,8 @@ describe('test-be-input-number-props', () => {
     test('props-size-medium', async () => {
         const wrapper = await mount(BeInputNumber, {
             props: {
-                size: 'medium'
+                size: 'medium',
+                num:0,
             },
         })
         expect(wrapper.find('.be-input-number__medium').exists()).toBeTruthy()
@@ -48,7 +50,8 @@ describe('test-be-input-number-props', () => {
     test('props-size-large', async () => {
         const wrapper = await mount(BeInputNumber, {
             props: {
-                size: 'large'
+                size: 'large',
+                num:0,
             },
         })
         expect(wrapper.find('.be-input-number__large').exists()).toBeTruthy()
@@ -121,7 +124,7 @@ describe('test-be-input-number-props', () => {
          wrapper.find('.be-input-number__up').trigger('click')
         expect(wrapper.vm.num).toEqual(10)
     })
-    test('props-render-min', async () => {
+    test('props-min', async () => {
         const wrapper = await _mount({
             template: `
                 <BeInputNumber v-model="num" min="10">
@@ -137,11 +140,13 @@ describe('test-be-input-number-props', () => {
         wrapper.find('.be-input-number__down').trigger('click')
         expect(wrapper.vm.num).toEqual(10)
     })
-    test('props-render-keyboard', async () => {
+    test('props-keyboard', async () => {
         const handlePressEnterJest = jest.fn()
         const wrapper = await _mount({
             template: `
-                <BeInputNumber v-model="num" ref="BeInputNumbers"
+                <BeInputNumber v-model="num" 
+                               ref="BeInputNumbers"
+                               keyboard
                                @pressEnter="handlePressEnterJest">
                 </BeInputNumber>`,
             setup() {
@@ -154,12 +159,94 @@ describe('test-be-input-number-props', () => {
                 }
             },
         })
-        debugger
         await wrapper.vm.curInst.refs.BeInputNumbers.focus()
         let event = new KeyboardEvent('keydown', {'key': 'Enter'});
         await wrapper.vm.curInst.refs.BeInputNumbers.$el.dispatchEvent(event);
         wrapper.find('input').trigger('keydown',{'key': 'Enter'})
         expect(handlePressEnterJest).toBeCalled()
+        await wrapper.find('input').trigger('keydown',{'key': 'ArrowUp'})
+        expect(wrapper.vm.num).toEqual(2)
+        await wrapper.find('input').trigger('keydown',{'key': 'ArrowDown'})
+        expect(wrapper.vm.num).toEqual(1)
+    })
+    test('props-step', async () => {
+        const wrapper = await _mount({
+            template: `
+                <BeInputNumber v-model="num" :step="step" keyboard   ref="BeInputNumbers">
+                </BeInputNumber>
+            `,
+            setup() {
+                const step = ref(5)
+                const curInst = getCurrentInstance()
+                const num = ref(10)
+                const changeStep = ():void=>{
+                    step.value = 0.3
+                }
+                return {
+                    changeStep,
+                    curInst,
+                    num,
+                    step,
+                }
+            },
+        })
+        await wrapper.vm.curInst.refs.BeInputNumbers.focus()
+        let event = new KeyboardEvent('keydown', {'key': 'Enter'});
+        await wrapper.vm.curInst.refs.BeInputNumbers.$el.dispatchEvent(event);
+        wrapper.find('input').trigger('keydown',{'key': 'Enter'})
+        await wrapper.find('input').trigger('keydown',{'key': 'ArrowUp'})
+        expect(wrapper.vm.num).toEqual(15)
+        await wrapper.find('input').trigger('keydown',{'key': 'ArrowDown'})
+        expect(wrapper.vm.num).toEqual(10)
+        await wrapper.vm.changeStep()
+        await wrapper.find('input').trigger('keydown',{'key': 'ArrowUp'})
+        await wrapper.find('input').trigger('keydown',{'key': 'ArrowUp'})
+        expect(wrapper.vm.num).toEqual(10.6)
+        await wrapper.find('input').trigger('keydown',{'key': 'ArrowDown'})
+        expect(wrapper.vm.num).toEqual(10.3)
+    })
+    test('props-parser-formatter', async () => {
+        const parserJest = jest.fn()
+        const formatterJest = jest.fn()
+        const wrapper = await _mount({
+            template: `
+                <BeInputNumber v-model="num"
+                               keyboard
+                               :formatter="handleFormatter"
+                               :parser="handleParser"
+                               ref="BeInputNumbers">
+                </BeInputNumber>
+            `,
+            setup() {
+
+                const curInst = getCurrentInstance()
+                const num = ref(10)
+                const handleParser = (value:string):string =>{
+                    parserJest()
+                    return value.replace(/\$\s?|(,*)/g, '')
+                }
+                const handleFormatter = (value:string):string =>{
+                    formatterJest()
+                    return  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                }
+                return {
+                    handleParser,
+                    handleFormatter,
+                    curInst,
+                    num,
+                }
+            },
+        })
+        await wrapper.vm.curInst.refs.BeInputNumbers.focus()
+        let event = new KeyboardEvent('keydown', {'key': 'Enter'});
+        await wrapper.vm.curInst.refs.BeInputNumbers.$el.dispatchEvent(event);
+        wrapper.find('input').trigger('keydown',{'key': 'Enter'})
+        await wrapper.find('input').trigger('keydown',{'key': 'ArrowUp'})
+        expect(wrapper.find('input').element.value).toEqual('$ 11')
+        expect(wrapper.vm.num).toEqual(11)
+        await wrapper.find('input').trigger('keydown',{'key': 'ArrowDown'})
+        expect(wrapper.find('input').element.value).toEqual('$ 10')
+        expect(wrapper.vm.num).toEqual(10)
     })
 })
 describe('test-be-input-number-event', () => {
@@ -171,7 +258,7 @@ describe('test-be-input-number-event', () => {
                                @change="handleChange">
                 </BeInputNumber>`,
             setup() {
-                const num = ref(1)
+                const num = ref<number>(1)
                 const handleChange = (val:string): void => {
                     handleChangeJest(val)
                 }
