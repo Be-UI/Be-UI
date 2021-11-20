@@ -269,40 +269,46 @@
       <!--            <be-select  size="medium" v-model="seletStr" clear search :list="testList" keyValue = 'id' :searchFunc = 'searchFunc' :sortFunc = 'sortFunc'>
 
             </be-select>-->
-<!--            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
-            </be-select>-->
-<!--            <be-select  size="medium" v-model="seletStr" clear keyValue = 'id' multiple :list="testList" search>
-            </be-select>-->
-<!--            <be-select  size="medium" v-model="seletStr" clear keyValue = 'id' multiple :list="testList" search>
-                <template v-slot:tag="slotProps">
-                    <span @click="slotProps.close">{{ slotProps.data.label }}  {{slotProps.index}}</span>
-                </template>
-            </be-select>
-            {{seletStr}}
-            <panda width="25" height="25"  @click="test"></panda>-->
-<!--            <be-input-number @change="handleClick"
-                             :formatter="formatter"
-                             :parser="parser"
-                             keyboard
-                             min="2"
-                             max="10000"
-                             @step="handleStep"
-                             v-model="testModel"
-                             ref="beinputNum">
-&lt;!&ndash;                <template #next>next</template>
-                <template #pre>pre</template>&ndash;&gt;
-            </be-input-number>-->
-        <be-input-number
-            v-model="testModel"
-            ref="beinputNum"
-            keyboard
-            :step="0.3">
-        </be-input-number>
-            {{testModel}}
-
-<!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
-        </div>
+      <!--            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
+                  </be-select>-->
+      <!--            <be-select  size="medium" v-model="seletStr" clear keyValue = 'id' multiple :list="testList" search>
+                  </be-select>-->
+      <!--            <be-select  size="medium" v-model="seletStr" clear keyValue = 'id' multiple :list="testList" search>
+                      <template v-slot:tag="slotProps">
+                          <span @click="slotProps.close">{{ slotProps.data.label }}  {{slotProps.index}}</span>
+                      </template>
+                  </be-select>
+                  {{seletStr}}
+                  <panda width="25" height="25"  @click="test"></panda>-->
+      <!--            <be-input-number @change="handleClick"
+                                   :formatter="formatter"
+                                   :parser="parser"
+                                   keyboard
+                                   min="2"
+                                   max="10000"
+                                   @step="handleStep"
+                                   v-model="testModel"
+                                   ref="beinputNum">
+      &lt;!&ndash;                <template #next>next</template>
+                      <template #pre>pre</template>&ndash;&gt;
+                  </be-input-number>-->
+      <!--      <be-input-number
+                v-model="testModel"
+                ref="beinputNum"
+                keyboard
+                :step="0.3">
+            </be-input-number>
+            {{ testModel }}-->
+      <be-switch
+          v-model="switchModel"
+          @change="testClose"
+          checkedValue="checkedValue"
+          unCheckedValue="unCheckedValue"
+      ></be-switch>
+      <!--      {{switchModel}}-->
+      <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
     </div>
+  </div>
 
 </template>
 
@@ -317,97 +323,97 @@ import {BeLoadingSer} from './components'
 import BeIcon from "./components/svg-icon/src/be-icon.vue";
 
 
-
 export default {
-    name: 'App',
-    data() {
-        return {
-            testOption:{
-              border:'1px solid #00ffff',
-              backgroundColor:'red',
-              color:'green'
-            },
-            num: 0,
-            notify: null,
-            isLoading: true,
-            showDialog: false,
-            loadingInst: null,
-            pageData: [],
-            pageParams: {
-                currentPage: 1,
-                pageNum: 1,
-                pageSize: 200,
-                total: 300
-            },
-            testModel:1,
-             // seletStr:[],
-            seletStr:[{label:'落日绣帘卷',id:'落日绣帘卷'},{label:'亭下水连空',id:'亭下水连空'}],
-            testList:[
-                {label:'落日绣帘卷',id:'落日绣帘卷'},
-                {label:'亭下水连空',id:'亭下水连空'},
-                {label:'知君为我新作',id:'知君为我新作'},
-                {label:'窗户湿青红',id:'窗户湿青红'},
-                {label:'长记平山堂上',id:'欹枕江南烟雨'},
-                {label:'欹枕江南烟雨',id:'长记平山堂上'},
-                {label:'杳杳没孤鸿',id:'杳杳没孤鸿'},
-                {label:'千里快哉風',id:'千里快哉風'},
-                {label:'认得醉翁语',id:'认得醉翁语'},
-                {label:'山色有无中',id:'山色有无中'},
-                {label:'一點浩然氣',id:'一點浩然氣'},
-                {label:'千里快哉風我',id:'fjkhfsdaiuorgga'},
-                {label:'a',id:'fjkhfsdaiuawdorgga'},
-                {label:'ab',id:'fjkhfsadaiuorgga'},
-            ]
-        }
+  name: 'App',
+  data() {
+    return {
+      testOption: {
+        border: '1px solid #00ffff',
+        backgroundColor: 'red',
+        color: 'green'
+      },
+      switchModel: 'checkedValue',
+      num: 0,
+      notify: null,
+      isLoading: true,
+      showDialog: false,
+      loadingInst: null,
+      pageData: [],
+      pageParams: {
+        currentPage: 1,
+        pageNum: 1,
+        pageSize: 200,
+        total: 300
+      },
+      testModel: 1,
+      // seletStr:[],
+      seletStr: [{label: '落日绣帘卷', id: '落日绣帘卷'}, {label: '亭下水连空', id: '亭下水连空'}],
+      testList: [
+        {label: '落日绣帘卷', id: '落日绣帘卷'},
+        {label: '亭下水连空', id: '亭下水连空'},
+        {label: '知君为我新作', id: '知君为我新作'},
+        {label: '窗户湿青红', id: '窗户湿青红'},
+        {label: '长记平山堂上', id: '欹枕江南烟雨'},
+        {label: '欹枕江南烟雨', id: '长记平山堂上'},
+        {label: '杳杳没孤鸿', id: '杳杳没孤鸿'},
+        {label: '千里快哉風', id: '千里快哉風'},
+        {label: '认得醉翁语', id: '认得醉翁语'},
+        {label: '山色有无中', id: '山色有无中'},
+        {label: '一點浩然氣', id: '一點浩然氣'},
+        {label: '千里快哉風我', id: 'fjkhfsdaiuorgga'},
+        {label: 'a', id: 'fjkhfsdaiuawdorgga'},
+        {label: 'ab', id: 'fjkhfsadaiuorgga'},
+      ]
+    }
 
-    },
-    components: {
-        BeIcon,
-        panda
-    },
-    mounted() {
-        this.$refs.beinputNum.focus()
-        this.$refs.beinputNum.$el.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
-       // this.$refs.beinputNum.focus()
-       // console.log(document.activeElement)
-        /* const tr = document.getElementById('qwq')
-         const po = document.getElementById('aaa')
-         createPopper(tr, po, {
-               placement: 'top',
-         })*/
-        this.notify = BeMessage({
-          loading:true,
-          titles:'titles',
-          msgType:'warning',
-          customClass: 'options.customClass',
-          duration: 0,
-          close:true,
-          key: 'options.key',
-          onClose:()=>console.log('close'),
-          iconPreRender: <span>🐕</span>,
-        /*  closeRender:<span>❀</span>,*/
-        })
-       /* this.notify = BeMessage({
-            loading:true,
-            titles:'titles',
-            msgType:'warning',
-            customClass: 'options.customClass',
-            duration: 0,
-            close:true,
-            key: 'options.kesy',
-            onClose:()=>console.log('close'),
-            iconPreRender: <span>🐕</span>,
-            /!*  closeRender:<span>❀</span>,*!/
-        })*/
-        setTimeout(()=>{
-            this.notify.update({
-                loading:false,
-                key: 'options.key',
-            })
-        },1000)
-      this.notify = BeMessage({
-        titles:'titl的气味的es',
-        msgType:'warning',
+  },
+  components: {
+    BeIcon,
+    panda
+  },
+  mounted() {
+    // this.$refs.beinputNum.focus()
+    // this.$refs.beinputNum.$el.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+    // this.$refs.beinputNum.focus()
+    // console.log(document.activeElement)
+    /* const tr = document.getElementById('qwq')
+     const po = document.getElementById('aaa')
+     createPopper(tr, po, {
+           placement: 'top',
+     })*/
+    this.notify = BeMessage({
+      loading: true,
+      titles: 'titles',
+      msgType: 'warning',
+      customClass: 'options.customClass',
+      duration: 0,
+      close: true,
+      key: 'options.key',
+      onClose: () => console.log('close'),
+      iconPreRender: <span>🐕</span>,
+      /*  closeRender:<span>❀</span>,*/
+    })
+    /* this.notify = BeMessage({
+         loading:true,
+         titles:'titles',
+         msgType:'warning',
+         customClass: 'options.customClass',
+         duration: 0,
+         close:true,
+         key: 'options.kesy',
+         onClose:()=>console.log('close'),
+         iconPreRender: <span>🐕</span>,
+         /!*  closeRender:<span>❀</span>,*!/
+     })*/
+    setTimeout(() => {
+      this.notify.update({
+        loading: false,
+        key: 'options.key',
+      })
+    }, 1000)
+    this.notify = BeMessage({
+      titles: 'titl的气味的es',
+      msgType: 'warning',
 
       customClass: 'options.customClass',
       duration: 0,
@@ -431,52 +437,52 @@ export default {
     })
 
 
-      for (let i = 0; i < 300; i++) {
-            this.pageData.push({num: i})
-        }
+    for (let i = 0; i < 300; i++) {
+      this.pageData.push({num: i})
+    }
+  },
+  methods: {
+    formatter(value) {
+      return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     },
-    methods: {
-        formatter(value){
-            return  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-        },
-        parser(value){
-            return value.replace(/\$\s?|(,*)/g, '')
-        },
-        searchFunc(value:string,ordData:Array<any>,labelValue:string){
-            let arr  = value ? ordData.filter(
-                (val:any) => {
-                    return (val[labelValue].toString().toLowerCase().indexOf(value.toLowerCase()) >= 0);
-                }
-            ) : ordData
-            return arr.length > 0 ? arr : ordData
-        },
-        sortFunc(a,b){
-            return a.label.toLowerCase().localeCompare(b.label.toLowerCase())
-        },
-        testInputFunc(){
-          this.$refs.sssinput.select()
-        },
-        getSuggest(cb){
-            setTimeout(()=>{
-                cb(
-                    [
-                        {label:'落日绣帘卷',id:'落日绣帘卷'},
-                        {label:'亭下水连空',id:'亭下水连空'},
-                        {label:'知君为我新作',id:'知君为我新作'},
-                        {label:'窗户湿青红',id:'窗户湿青红'},
-                        {label:'长记平山堂上',id:'欹枕江南烟雨'},
-                        {label:'欹枕江南烟雨',id:'长记平山堂上'},
-                        {label:'杳杳没孤鸿',id:'杳杳没孤鸿'},
-                        {label:'千里快哉風',id:'千里快哉風'},
-                        {label:'千里快哉風千里快哉風',id:'千里快哉風千里快哉風'},
-                        {label:'认得醉翁语',id:'认得醉翁语'},
-                        {label:'山色有无中',id:'山色有无中'},
-                        {label:'一點浩然氣',id:'一點浩然氣'},
-                    ]
-                )
-            },500)
-        },
-        handleblur(){
+    parser(value) {
+      return value.replace(/\$\s?|(,*)/g, '')
+    },
+    searchFunc(value: string, ordData: Array<any>, labelValue: string) {
+      let arr = value ? ordData.filter(
+          (val: any) => {
+            return (val[labelValue].toString().toLowerCase().indexOf(value.toLowerCase()) >= 0);
+          }
+      ) : ordData
+      return arr.length > 0 ? arr : ordData
+    },
+    sortFunc(a, b) {
+      return a.label.toLowerCase().localeCompare(b.label.toLowerCase())
+    },
+    testInputFunc() {
+      this.$refs.sssinput.select()
+    },
+    getSuggest(cb) {
+      setTimeout(() => {
+        cb(
+            [
+              {label: '落日绣帘卷', id: '落日绣帘卷'},
+              {label: '亭下水连空', id: '亭下水连空'},
+              {label: '知君为我新作', id: '知君为我新作'},
+              {label: '窗户湿青红', id: '窗户湿青红'},
+              {label: '长记平山堂上', id: '欹枕江南烟雨'},
+              {label: '欹枕江南烟雨', id: '长记平山堂上'},
+              {label: '杳杳没孤鸿', id: '杳杳没孤鸿'},
+              {label: '千里快哉風', id: '千里快哉風'},
+              {label: '千里快哉風千里快哉風', id: '千里快哉風千里快哉風'},
+              {label: '认得醉翁语', id: '认得醉翁语'},
+              {label: '山色有无中', id: '山色有无中'},
+              {label: '一點浩然氣', id: '一點浩然氣'},
+            ]
+        )
+      }, 500)
+    },
+    handleblur() {
 
     },
     handlefocus() {
@@ -487,45 +493,45 @@ export default {
     },
     handlePrevIcon() {
 
-        },
-        handleinput(data) {
-            //console.log(data)
-        },
-        handleChange(data) {
-            //console.log(data)
-            debugger
-        },
-        pageChange(data) {
-            // console.log(data)
-            this.pageParams.currentPage = data.currentPage
-        },
-        updatePage(data) {
-            //console.log(data)
-        },
-        updateNum(data) {
-            this.pageParams.pageSize = data
-           // console.log(data)
-        },
-        customRender() {
-            return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)
-        },
-        handleClick(){
-            //this.testModel = 2000
-        },
-        handleStep(val){
+    },
+    handleinput(data) {
+      //console.log(data)
+    },
+    handleChange(data) {
+      //console.log(data)
+      debugger
+    },
+    pageChange(data) {
+      // console.log(data)
+      this.pageParams.currentPage = data.currentPage
+    },
+    updatePage(data) {
+      //console.log(data)
+    },
+    updateNum(data) {
+      this.pageParams.pageSize = data
+      // console.log(data)
+    },
+    customRender() {
+      return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)
+    },
+    handleClick() {
+      //this.testModel = 2000
+    },
+    handleStep(val) {
 
-        },
-        test(qw) {
-            this.showDialog = !this.showDialog
-            /*this.loadingInst = BeLoadingSer.init({
-                isBackground:false,
-                bgColor:'#F2F4F5',
-                text:'正在访问中，请稍候…',
-                color:'#b1b1b1',
-            })
-            setTimeout(()=>{
-                BeLoadingSer.close(this.loadingInst)
-            },3000)*/
+    },
+    test(qw) {
+      this.showDialog = !this.showDialog
+      /*this.loadingInst = BeLoadingSer.init({
+          isBackground:false,
+          bgColor:'#F2F4F5',
+          text:'正在访问中，请稍候…',
+          color:'#b1b1b1',
+      })
+      setTimeout(()=>{
+          BeLoadingSer.close(this.loadingInst)
+      },3000)*/
 
       // this.isLoading = !this.isLoading
       /* BeMsg({
@@ -562,8 +568,8 @@ export default {
            key:1
        })*/
     },
-    testclose() {
-      console.log(1111)
+    testClose(data) {
+      console.log(data)
       // this.notify.close()
     }
   }

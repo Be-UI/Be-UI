@@ -36,9 +36,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 be-switch
 be-Breadcrumb
-样式重构 
-图标修改
-
+图标修改 样式重构
 ## 长期排期
 
 1.服务式访问的全局绑定  

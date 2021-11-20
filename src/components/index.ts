@@ -1,9 +1,6 @@
 import type {App} from 'vue';
 // 按需引用
 export * from './install-components';
-/*export * from './plugins';
-export * from './composables';*/
-
 import * as components from './install-components';
 import '../assets/style/tailwind.css'
 
