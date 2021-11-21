@@ -1,6 +1,8 @@
-import {defineComponent, onMounted, ref} from "vue";
+import {defineComponent, getCurrentInstance, onMounted, ref} from "vue";
 import {isBool, isNumber, isString} from "../../../utils/common";
 import BeIcon from '../../svg-icon/src/be-icon.vue'
+import {ISwitchInst} from "./be-switch-type";
+
 
 export default defineComponent({
     name: 'BeSwitch',
@@ -24,7 +26,7 @@ export default defineComponent({
         },
         size: {
             type: String,
-            default: 'large',
+            default: 'default',
         },
         customClass: {
             type: String,
@@ -36,14 +38,18 @@ export default defineComponent({
         },
         checkedValue: {
             type: [Boolean, String, Number],
+            default: '',
         },
         unCheckedValue: {
             type: [Boolean, String, Number],
+            default: '',
         }
     },
     setup(props, ctx) {
         const innerState = ref<boolean>(false)
         const switching = ref<string>('')
+        // 當前實例
+        const internalInstance = getCurrentInstance() as ISwitchInst
         /**
          * 切换状态方法
          */
@@ -76,16 +82,17 @@ export default defineComponent({
          * 点击方法
          * @param {Event} $event - 事件对象
          */
-        const handleClick = ($event?: Event): void => {
+        const handleClick = async ($event?: Event) => {
             if (props.disabled || props.isLoading) return
+            await switchState()
             ctx.emit('click', $event)
-            switchState()
         }
         /**
          * 初始化方法
          */
         const init = (): void => {
             if (props.unCheckedValue !== undefined
+                && props.unCheckedValue !== ''
                 && (isBool(props.unCheckedValue)
                     || isString(props.unCheckedValue)
                     || isNumber(props.unCheckedValue))
@@ -93,6 +100,7 @@ export default defineComponent({
                 innerState.value = false
             }
             if (props.checkedValue !== undefined
+                && props.checkedValue !== ''
                 && (isBool(props.checkedValue)
                     || isString(props.checkedValue)
                     || isNumber(props.checkedValue))
@@ -104,6 +112,12 @@ export default defineComponent({
             init()
         })
         return () => {
+            const unCheckedRender = internalInstance.slots.unCheckedRender ?
+                <div
+                    class={`be-switch__${props.size}_slot_un_checked`}> {internalInstance.slots.unCheckedRender(innerState.value)}</div> : ''
+            const checkedRender = internalInstance.slots.checkedRender ?
+                <div
+                    class={`be-switch__${props.size}_slot_checked`}>{internalInstance.slots.checkedRender(innerState.value)}</div> : ''
             return (
                 <div
                     class={`
@@ -116,12 +130,12 @@ export default defineComponent({
                     `}
                     tabindex='0'
                     onClick={($event) => handleClick($event)}>
-                    {innerState.value ? <span>checked</span> : ''}
+                    {innerState.value ? unCheckedRender : ''}
                     <div class='be-switch-circle'>
                         {props.isLoading ?
                             <be-icon spin icon='loading' customClass='be-switch-circle-icon'></be-icon> : ''}
                     </div>
-                    {!innerState.value ? <span>unChecked</span> : ''}
+                    {!innerState.value ? checkedRender : ''}
                 </div>
             )
         }

@@ -302,9 +302,15 @@
       <be-switch
           v-model="switchModel"
           @change="testClose"
-          checkedValue="checkedValue"
-          unCheckedValue="unCheckedValue"
-      ></be-switch>
+      >
+        <template v-slot:unCheckedRender="slotProps">
+          <span>unChecked</span>
+        </template>
+        <template v-slot:checkedRender="slotProps">
+          <span>checked</span>
+        </template>
+      </be-switch>
+      {{ switchModel }}
       <!--      {{switchModel}}-->
       <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
     </div>
@@ -332,7 +338,7 @@ export default {
         backgroundColor: 'red',
         color: 'green'
       },
-      switchModel: 'checkedValue',
+      switchModel: false,
       num: 0,
       notify: null,
       isLoading: true,
@@ -569,6 +575,7 @@ export default {
        })*/
     },
     testClose(data) {
+      debugger
       console.log(data)
       // this.notify.close()
     }

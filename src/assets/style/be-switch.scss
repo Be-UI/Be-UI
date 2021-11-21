@@ -25,7 +25,7 @@
 }
 
 .be-switch__default {
-  @apply h-5 w-10 leading-5;
+  @apply h-5 leading-5 w-min;
   .be-switch-circle {
     @apply h-4 w-4;
     .be-switch-circle-icon {
@@ -34,10 +34,18 @@
       }
     }
   }
+
+  .be-switch__default_slot_un_checked {
+    @apply mr-5 ml-1;
+  }
+
+  .be-switch__default_slot_checked {
+    @apply ml-5 mr-1;
+  }
 }
 
 .be-switch__small {
-  @apply h-4 w-8 leading-4;
+  @apply h-4 leading-4 w-min;
   .be-switch-circle {
     @apply h-3 w-3;
     .be-switch-circle-icon {
@@ -46,10 +54,18 @@
       }
     }
   }
+
+  .be-switch__small_slot_un_checked {
+    @apply mr-4 ml-1;
+  }
+
+  .be-switch__small_slot_checked {
+    @apply ml-4 mr-1;
+  }
 }
 
 .be-switch__large {
-  @apply h-6 w-12 leading-6;
+  @apply h-6 leading-6 w-min;
   .be-switch-circle {
     @apply h-5 w-5;
     .be-switch-circle-icon {
@@ -57,6 +73,14 @@
         @apply h-4 w-4;
       }
     }
+  }
+
+  .be-switch__large_slot_un_checked {
+    @apply mr-6 ml-1;
+  }
+
+  .be-switch__large_slot_checked {
+    @apply ml-6 mr-1;
   }
 }
 
@@ -71,11 +95,11 @@
     box-shadow: 0 0 0 6px rgb(24 144 255 / 10%);
   }
   100% {
-    box-shadow: 0 0 0 0 rgb(24 144 255 / 20%);
+    box-shadow: 0 0 0 8px rgb(24 144 255 / 5%);
   }
 }
 
 .be-switching {
-  -webkit-animation: switching .5s linear;
-  -moz-animation: switching .5s linear;
+  -webkit-animation: switching .3s linear;
+  -moz-animation: switching .3s linear;
 }
