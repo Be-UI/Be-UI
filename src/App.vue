@@ -505,7 +505,7 @@ export default {
     },
     handleChange(data) {
       //console.log(data)
-      debugger
+
     },
     pageChange(data) {
       // console.log(data)
@@ -575,7 +575,7 @@ export default {
        })*/
     },
     testClose(data) {
-      debugger
+
       console.log(data)
       // this.notify.close()
     }
