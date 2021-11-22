@@ -37,11 +37,11 @@ export default defineComponent({
             default: false,
         },
         checkedValue: {
-            type: [Boolean, String, Number],
+            type: [String, Boolean, Number],
             default: '',
         },
         unCheckedValue: {
-            type: [Boolean, String, Number],
+            type: [String, Boolean, Number],
             default: '',
         }
     },
@@ -58,6 +58,7 @@ export default defineComponent({
             setTimeout(() => {
                 switching.value = ''
             }, 500)
+            debugger
             // 切换状态
             if (innerState.value) {
                 innerState.value = false
