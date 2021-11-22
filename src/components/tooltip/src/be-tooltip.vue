@@ -93,7 +93,7 @@ export default defineComponent({
       default: 'hover'
     },
     /**
-     * 触发方式
+     * 渲染内容
      */
     'content': {
       type: String,
