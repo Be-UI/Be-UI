@@ -4,7 +4,7 @@
 * @author czh
 * @update (czh 2021/11/22)
 */
-import {ComponentInternalInstance} from "vue";
+import {ComponentInternalInstance, VNode} from "vue";
 
 export interface IBreadcrumb {
     install?: Function
@@ -13,4 +13,7 @@ export interface IBreadcrumb {
 
 export interface IBreadcrumbInst extends ComponentInternalInstance {
     uid: number
+}
+export interface IBreadcrumbItemVnode extends VNode {
+    beBreadcrumbIndex?:string
 }

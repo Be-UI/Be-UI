@@ -175,7 +175,7 @@
             </be-button>
             </template>
           </be-dialog>-->
-    <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 280px">
+    <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 320px">
       <!--            <be-button type="primary"
                              bordered
                              @click="testInputFunc"
@@ -299,20 +299,27 @@
                 :step="0.3">
             </be-input-number>
             {{ testModel }}-->
-      <be-switch
+<!--      <be-switch
           v-model="switchModel"
-          @change="testClose"
-      >
+          @change="testClose" >
         <template v-slot:unCheckedRender="slotProps">
           <span>unChecked</span>
         </template>
         <template v-slot:checkedRender="slotProps">
           <span>checked</span>
         </template>
-      </be-switch>
-      {{ switchModel }}
+      </be-switch>-->
       <!--      {{switchModel}}-->
       <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
+        <be-breadcrumb>
+            <be-breadcrumb-item disabled to="/黑色柳丁" separator="#">黑色柳丁</be-breadcrumb-item>
+            <be-breadcrumb-item to="/似曾相识">似曾相识</be-breadcrumb-item>
+            <be-breadcrumb-item to="/小镇姑娘" separator="#">
+                小镇姑娘
+                <template #separator>❀</template>
+            </be-breadcrumb-item>
+            <be-breadcrumb-item to="/普通朋友">普通朋友</be-breadcrumb-item>
+        </be-breadcrumb>
     </div>
   </div>
 
@@ -387,7 +394,7 @@ export default {
      createPopper(tr, po, {
            placement: 'top',
      })*/
-    this.notify = BeMessage({
+ /*   this.notify = BeMessage({
       loading: true,
       titles: 'titles',
       msgType: 'warning',
@@ -397,8 +404,8 @@ export default {
       key: 'options.key',
       onClose: () => console.log('close'),
       iconPreRender: <span>🐕</span>,
-      /*  closeRender:<span>❀</span>,*/
-    })
+      /!*  closeRender:<span>❀</span>,*!/
+    })*/
     /* this.notify = BeMessage({
          loading:true,
          titles:'titles',
@@ -411,7 +418,7 @@ export default {
          iconPreRender: <span>🐕</span>,
          /!*  closeRender:<span>❀</span>,*!/
      })*/
-    setTimeout(() => {
+   /* setTimeout(() => {
       this.notify.update({
         loading: false,
         key: 'options.key',
@@ -426,10 +433,10 @@ export default {
       close: true,
       key: 'optionsd.key',
       onClose: () => console.log('close'),
-      /* iconPreRender: ()=><span>🐕</span>,
-       closeRender:()=><span>❀</span>,*/
-    })
-    this.notify = BeMessage({
+      /!* iconPreRender: ()=><span>🐕</span>,
+       closeRender:()=><span>❀</span>,*!/
+    })*/
+  /*  this.notify = BeMessage({
       titles: 'titl的气a味的es',
       msgType: 'warning',
 
@@ -438,9 +445,9 @@ export default {
       close: true,
       key: 'optiondwqdsd.key',
       onClose: () => console.log('close'),
-      /* iconPreRender: ()=><span>🐕</span>,
-       closeRender:()=><span>❀</span>,*/
-    })
+      /!* iconPreRender: ()=><span>🐕</span>,
+       closeRender:()=><span>❀</span>,*!/
+    })*/
 
 
     for (let i = 0; i < 300; i++) {

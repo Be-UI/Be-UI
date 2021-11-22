@@ -58,7 +58,6 @@ export default defineComponent({
             setTimeout(() => {
                 switching.value = ''
             }, 500)
-            debugger
             // 切换状态
             if (innerState.value) {
                 innerState.value = false
