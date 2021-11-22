@@ -30,3 +30,13 @@
         }
     }
 }
+.be-breadcrumb-popover{
+    .be-popover{
+        .be-popover-body{
+            @apply p-2;
+        }
+    }
+    .be-breadcrumb-item-li{
+        @apply h-6 leading-6 cursor-pointer hover:bg-infoh
+    }
+}

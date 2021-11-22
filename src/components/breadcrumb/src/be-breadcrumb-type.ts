@@ -17,3 +17,9 @@ export interface IBreadcrumbInst extends ComponentInternalInstance {
 export interface IBreadcrumbItemVnode extends VNode {
     beBreadcrumbIndex?:string
 }
+export interface IBreadcrumbPopover {
+    close: Function
+    changeDisplay: Function,
+    computePosition: Function,
+    show: boolean
+}

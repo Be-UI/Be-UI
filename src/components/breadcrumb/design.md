@@ -3,4 +3,4 @@
 √ slot - separator ！
 √ 禁用
 
-hover 下拉
+√ hover 下拉
