@@ -64,8 +64,8 @@ be-Breadcrumb
 16.选择框 be-select （完成）    
 17.消息提示 be-message （完成）    
 18.数字输入 be-input-number （完成）  
-19.开关组件 be-switch （完成）  
-20.面包屑 be-Breadcrumb
+19.开关组件 be-switch （完成）
+20.面包屑 be-breadcrumb
 
 
 

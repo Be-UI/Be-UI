@@ -10,6 +10,7 @@ export default defineComponent({
     },
     emits: [
         'clickOption',
+        'click'
     ],
     props: {
         // 分隔符
@@ -50,6 +51,7 @@ export default defineComponent({
                 || props.disabled) {
                 event.preventDefault()
             }
+            ctx.emit('click',Event)
         }
         /**
          * 下拉点击方法

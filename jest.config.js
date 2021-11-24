@@ -41,5 +41,6 @@ module.exports = {
     // roots: ['<rootDir>/src/components/tag'],
     // roots: ['<rootDir>/src/components/message'],
     // roots: ['<rootDir>/src/components/input-number'],
-    roots: ['<rootDir>/src/components/switch'],
+    // roots: ['<rootDir>/src/components/switch'],
+     roots: ['<rootDir>/src/components/breadcrumb'],
 }

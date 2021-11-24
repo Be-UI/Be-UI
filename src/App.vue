@@ -312,8 +312,8 @@
       <!--      {{switchModel}}-->
       <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
         <be-breadcrumb>
-            <be-breadcrumb-item disabled to="/黑色柳丁" separator="#" :option="testList">柳丁</be-breadcrumb-item>
-            <be-breadcrumb-item to="/似曾相识">似曾相识</be-breadcrumb-item>
+            <be-breadcrumb-item disabled to="/黑色柳丁" separator="#" >柳丁</be-breadcrumb-item>
+            <be-breadcrumb-item to="/似曾相识" :option="testList">似曾相识</be-breadcrumb-item>
             <be-breadcrumb-item to="/小镇姑娘" separator="#">
                 小镇姑娘
                 <template #separator>❀</template>

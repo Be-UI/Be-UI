@@ -2,5 +2,7 @@
 √ props - separator
 √ slot - separator ！
 √ 禁用
+√ to 跳轉
 
-√ hover 下拉
+event:click
+event:clickOption

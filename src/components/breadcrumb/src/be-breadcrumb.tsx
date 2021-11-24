@@ -2,9 +2,6 @@ import {defineComponent, getCurrentInstance, VNode} from "vue";
 import {IBreadcrumb, IBreadcrumbInst, IBreadcrumbItemVnode} from "./be-breadcrumb-type";
 export default defineComponent({
     name:'BeBreadcrumb',
-    props:{
-
-    },
     setup(){
       // 當前實例
       const internalInstance = getCurrentInstance() as IBreadcrumbInst
