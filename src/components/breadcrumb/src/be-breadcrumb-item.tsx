@@ -8,10 +8,7 @@ export default defineComponent({
     components:{
         'be-popover': defineAsyncComponent(() => import("../../popover")),
     },
-    emits: [
-        'clickOption',
-        'click'
-    ],
+
     props: {
         // 分隔符
         separator: {
@@ -32,12 +29,19 @@ export default defineComponent({
             type: Boolean,
             default: false
         },
+        click: {
+            type: Function,
+        },
+        clickOption: {
+            type: Function,
+        },
     },
     setup(props,ctx) {
         // 當前實例
         const internalInstance = getCurrentInstance() as IBreadcrumbInst
+        const uid = internalInstance.uid
         const browserLocationRef = useBrowserLocation()
-        const htmlTag = computed(() => (props.to ? 'a' : 'span'))
+        const htmlTag = computed(() => (props.to && !props.click? 'a' : 'span'))
         const ariaCurrentRef = computed(() =>
             browserLocationRef.value.href === props.to ? 'location' : null
         )
@@ -50,15 +54,22 @@ export default defineComponent({
                 ||optionList.value.length > 0
                 || props.disabled) {
                 event.preventDefault()
+                return
             }
-            ctx.emit('click',Event)
+            if(props.click && !props.disabled){
+                event.preventDefault()
+                props.click(event)
+            }
+
         }
         /**
          * 下拉点击方法
          * @param  val - 事件对象
          */
         const handleClickItem = (val:any): void => {
-           ctx.emit('clickOption',val)
+            if(props.clickOption){
+                props.clickOption(val)
+            }
            const curInstPopover = internalInstance.refs.beBreadcrumbPopover as IBreadcrumbPopover
            curInstPopover.close()
         }
@@ -82,13 +93,14 @@ export default defineComponent({
          * 渲染插槽内容
          */
         const renderContent = ():VNode => {
-           return <div class='be-breadcrumb-item__content' v-slots='trigger'>
+           return <div class='be-breadcrumb-item__content'
+                       id={`be_breadcrumb_item__content${uid}`}
+                       onClick = {($event: Event) => handleClick($event)}>
                {h(
                    htmlTag.value,
                    {
                        'aria-current': ariaCurrentRef.value,
                        href: props.to,
-                       onClick: ($event: Event) => handleClick($event)
                    },
                    internalInstance.slots.default ? internalInstance.slots.default() : ''
                )}
@@ -104,6 +116,7 @@ export default defineComponent({
                         ref="beBreadcrumbPopover"
                         customClass='be-breadcrumb-popover'
                         placement='bottom'
+                        triggerElm={`be_breadcrumb_item__content${uid}`}
                         trigger={props.disabled ? 'none' : 'click'}>
                         {{
                             default: () =>  <ul>{renderOption()}</ul>,

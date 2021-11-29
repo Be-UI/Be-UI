@@ -313,12 +313,12 @@
       <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
         <be-breadcrumb>
             <be-breadcrumb-item disabled to="/黑色柳丁" separator="#" >柳丁</be-breadcrumb-item>
-            <be-breadcrumb-item to="/似曾相识" :option="testList">似曾相识</be-breadcrumb-item>
-            <be-breadcrumb-item to="/小镇姑娘" separator="#">
+            <be-breadcrumb-item  to="/似曾相识" :option="testList">似曾相识</be-breadcrumb-item>
+            <be-breadcrumb-item to="/小镇姑娘" separator="#" :click="testClose">
                 小镇姑娘
                 <template #separator>❀</template>
             </be-breadcrumb-item>
-            <be-breadcrumb-item to="/普通朋友">普通朋友</be-breadcrumb-item>
+            <be-breadcrumb-item :click="testClose">普通朋友</be-breadcrumb-item>
         </be-breadcrumb>
     </div>
   </div>
@@ -582,7 +582,6 @@ export default {
        })*/
     },
     testClose(data) {
-
       console.log(data)
       // this.notify.close()
     }

@@ -1,8 +1,7 @@
 自定义每项分隔符
-√ props - separator
-√ slot - separator ！
-√ 禁用
-√ to 跳轉
-
-event:click
+√ props - separator   test √
+√ slot - separator ！ test √
+event:click 传入click 将不自动跳转 test √
 event:clickOption
+√ to 跳轉
+√ 禁用 差popover、跳转

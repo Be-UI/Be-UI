@@ -1,6 +1,6 @@
 <template>
   <!--  v-click-outside="{handler:close,isDisabled:outsideDisabled}"-->
-  <div :id="`be_popover_trigger${uid}`" aria-describedby="tooltip">
+  <div :id="`be_popover_trigger${uid}`" aria-describedby="tooltip" ref="bePopoverTrigger">
     <slot name="trigger"></slot>
   </div>
 
@@ -339,7 +339,9 @@ export default defineComponent({
       if (props.width) {
         stylePopover.width = props.width + 'px'
       }
-      addEvent()
+      nextTick(()=>{
+          addEvent()
+      })
     })
     onBeforeUnmount(() => {
       // 取消事件监听
