@@ -155,7 +155,6 @@ export default defineComponent({
      * @public
      */
     const changeDisplay = (isShow: boolean): void => {
-      debugger
       let delay: number = 0
       if (isShow) {
         delay = props.delay
