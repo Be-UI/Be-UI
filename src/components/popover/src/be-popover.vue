@@ -155,6 +155,7 @@ export default defineComponent({
      * @public
      */
     const changeDisplay = (isShow: boolean): void => {
+      debugger
       let delay: number = 0
       if (isShow) {
         delay = props.delay
@@ -281,16 +282,18 @@ export default defineComponent({
       'mouseleave': changeDisplay.bind(this, false),
       'manual': changeDisplay.bind(this, !show.value)
     }
-    const addEvent = (): void => {
+    const addEvent = (triggerElm: any = null): void => {
+      const triggerElms = props.triggerElm || triggerElm
       if (ctx.slots.trigger) {
-        if (props.triggerElm) {
-          triggerDom = document.getElementById(props.triggerElm)
+        if (triggerElms) {
+          triggerDom = document.getElementById(triggerElms)
           computeDom = matchDom(internalInstance.refs.bePopoverTrigger)
         } else {
           triggerDom = matchDom(internalInstance.refs.bePopoverTrigger)
           computeDom = triggerDom
         }
         const evt = changeDisplay.bind(this, true)
+
         // 根据触发类型 设置不同的事件监听
         if (triggerDom && props.trigger === 'click') {
           triggerDom.addEventListener('click', evtList['click'], false)
@@ -354,6 +357,7 @@ export default defineComponent({
       }
     })
     return {
+      addEvent,
       uid: internalInstance.uid,
       stylePopover,
       outsideDisabled,
