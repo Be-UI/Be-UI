@@ -1,6 +1,9 @@
 <template>
   <!--  v-click-outside="{handler:close,isDisabled:outsideDisabled}"-->
-  <div :id="`be_popover_trigger${uid}`" aria-describedby="tooltip" ref="bePopoverTrigger">
+  <div :id="`be_popover_trigger${uid}`"
+       class="be-popover-trigger"
+       aria-describedby="tooltip"
+       ref="bePopoverTrigger">
     <slot name="trigger"></slot>
   </div>
 
@@ -282,9 +285,9 @@ export default defineComponent({
       if (ctx.slots.trigger) {
         if (props.triggerElm) {
           triggerDom = document.getElementById(props.triggerElm)
-          computeDom = matchDom(document.getElementById(`be_popover_trigger${internalInstance.uid}`))
+          computeDom = matchDom(internalInstance.refs.bePopoverTrigger)
         } else {
-          triggerDom = matchDom(document.getElementById(`be_popover_trigger${internalInstance.uid}`))
+          triggerDom = matchDom(internalInstance.refs.bePopoverTrigger)
           computeDom = triggerDom
         }
         const evt = changeDisplay.bind(this, true)
