@@ -320,6 +320,12 @@
             </be-breadcrumb-item>
             <be-breadcrumb-item :click="testClose">普通朋友</be-breadcrumb-item>
         </be-breadcrumb>
+        <be-popover trigger="hover" width="300" customClass="asdwq" placement="bottom">
+            <template #trigger>
+                <be-icon icon="delete" style="position: absolute;left: 20%;top: 300px;"></be-icon>
+            </template>
+            <panda width="25" height="25"  @click="test"></panda>
+        </be-popover>
     </div>
   </div>
 
