@@ -20,6 +20,7 @@ export interface IBreadcrumbItemVnode extends VNode {
 export interface IBreadcrumbPopover {
     close: Function
     changeDisplay: Function,
+    addEvent:Function,
     computePosition: Function,
     show: boolean
 }

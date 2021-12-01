@@ -175,7 +175,7 @@
             </be-button>
             </template>
           </be-dialog>-->
-    <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 320px">
+    <div width="25" height="25" v-click-outside="{handler:testClose,isDisabled:false}" style="position: absolute;left: 20%;top: 100px;width: 320px">
       <!--            <be-button type="primary"
                              bordered
                              @click="testInputFunc"
@@ -320,7 +320,7 @@
             </be-breadcrumb-item>
             <be-breadcrumb-item :click="testClose">普通朋友</be-breadcrumb-item>
         </be-breadcrumb>
-        <be-popover trigger="hover" width="300" customClass="asdwq" placement="bottom">
+        <be-popover trigger="click" width="300" customClass="asdwq" placement="bottom">
             <template #trigger>
                 <be-icon icon="delete" style="position: absolute;left: 20%;top: 300px;"></be-icon>
             </template>
@@ -340,10 +340,11 @@ import BePopover from "./components/popover/src/be-popover.vue";
 import {createPopper} from '@popperjs/core'
 import {BeLoadingSer} from './components'
 import BeIcon from "./components/svg-icon/src/be-icon.vue";
-
+import {ClickOutside} from './utils/direactives/custom-direactives/click-outside';
 
 export default {
   name: 'App',
+  directives: {ClickOutside},
   data() {
     return {
       testOption: {

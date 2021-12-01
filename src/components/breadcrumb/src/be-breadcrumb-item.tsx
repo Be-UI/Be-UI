@@ -1,12 +1,13 @@
-import {computed, defineAsyncComponent, defineComponent, getCurrentInstance, h, VNode} from "vue";
+import {computed, defineAsyncComponent, defineComponent, getCurrentInstance, h, nextTick, onMounted, VNode} from "vue";
 import {IBreadcrumbInst, IBreadcrumbItemVnode, IBreadcrumbPopover} from "./be-breadcrumb-type";
 import {useBrowserLocation} from "../../../utils/use-browser-location";
-
+import BePopover from "../../popover";
 
 export default defineComponent({
     name: 'BeBreadcrumbItem',
     components:{
-        'be-popover': defineAsyncComponent(() => import("../../popover")),
+       // 'be-popover': defineAsyncComponent(() => import("../../popover")),
+        'be-popover':BePopover
     },
 
     props: {
@@ -94,6 +95,7 @@ export default defineComponent({
          */
         const renderContent = ():VNode => {
            return <div class='be-breadcrumb-item__content'
+                       ref='BeBreadcrumbItem'
                        id={`be_breadcrumb_item__content${uid}`}
                        onClick = {($event: Event) => handleClick($event)}>
                {h(
@@ -106,6 +108,12 @@ export default defineComponent({
                )}
            </div>
         }
+        onMounted(()=>{
+            nextTick(()=>{
+                const curInstPopover = internalInstance.refs.beBreadcrumbPopover as IBreadcrumbPopover
+                optionList.value.length > 0 && curInstPopover.addEvent(internalInstance.refs.BeBreadcrumbItem)
+            })
+        })
         return () => {
             return (
                 <div class={`
@@ -116,7 +124,6 @@ export default defineComponent({
                         ref="beBreadcrumbPopover"
                         customClass='be-breadcrumb-popover'
                         placement='bottom'
-                        triggerElm={`be_breadcrumb_item__content${uid}`}
                         trigger={props.disabled ? 'none' : 'click'}>
                         {{
                             default: () =>  <ul>{renderOption()}</ul>,
