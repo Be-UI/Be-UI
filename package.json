@@ -1,5 +1,5 @@
 {
-  "name": "Be-UI3",
+  "name": "be-ui",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host",
@@ -7,8 +7,20 @@
     "test": "jest",
     "test-c": "jest --coverage"
   },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/be-ui.umd.js",
+  "module": "./dist/be-ui.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/be-ui.es.js",
+      "require": "./dist/be-ui.umd.js"
+    }
+  },
   "dependencies": {
     "@popperjs/core": "^2.10.1",
+    "@rollup/plugin-babel": "^5.3.0",
     "save": "^2.4.0",
     "vue": "^3.2.0"
   },
