@@ -41,6 +41,7 @@ import {ClickOutside} from '../../../utils/direactives/custom-direactives/click-
 import {createPopper} from '@popperjs/core';
 import type {Options, Placement, PositioningStrategy} from '@popperjs/core';
 import {IPopover, TPopoverStyle, VirtualElement} from './be-popover-type'
+import {isString} from "../../../utils/common";
 
 export default defineComponent({
     name: "BePopover",
@@ -146,11 +147,12 @@ export default defineComponent({
         }
         /**
          * 显示控制方法
-         * @param {Boolean} isShow - 显示变量
+         * @param {Boolean} showParams - 显示变量
          * @public
          */
-        const changeDisplay = (isShow: boolean): void => {
+        const changeDisplay = (showParams: boolean | string): void => {
             let delay: number = 0
+            const isShow = showParams === 'manual' ? !show.value : showParams as boolean
             if (isShow) {
                 delay = props.delay
             } else {
@@ -274,18 +276,18 @@ export default defineComponent({
             'click': changeDisplay.bind(this, true),
             'mouseenter': changeDisplay.bind(this, true),
             'mouseleave': changeDisplay.bind(this, false),
-            'manual': changeDisplay.bind(this, !show.value)
+            'manual': changeDisplay.bind(this, 'manual')
         }
-        const addEvent = (): void => {
+        const addEvent = (trigger?:HTMLElement): void => {
             if (ctx.slots.trigger) {
-                if (props.triggerElm) {
-                    triggerDom = document.getElementById(props.triggerElm)
-                    computeDom = matchDom(document.getElementById(`be_popover_trigger${internalInstance.uid}`))
+                const triggerElm:string | HTMLElement = trigger || props.triggerElm
+                if (triggerElm) {
+                    triggerDom = isString(triggerElm) ? document.getElementById(triggerElm as string) : triggerElm
+                    computeDom = matchDom(internalInstance.refs.bePopoverTrigger) || triggerDom
                 } else {
-                    triggerDom = matchDom(document.getElementById(`be_popover_trigger${internalInstance.uid}`))
+                    triggerDom = matchDom(internalInstance.refs.bePopoverTrigger)
                     computeDom = triggerDom
                 }
-                const evt = changeDisplay.bind(this, true)
                 // 根据触发类型 设置不同的事件监听
                 if (triggerDom && props.trigger === 'click') {
                     triggerDom.addEventListener('click', evtList['click'], false)
@@ -350,6 +352,7 @@ export default defineComponent({
         })
         return {
             uid: internalInstance.uid,
+            addEvent,
             stylePopover,
             outsideDisabled,
             show,
