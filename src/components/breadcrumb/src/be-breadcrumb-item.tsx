@@ -67,7 +67,7 @@ export default defineComponent({
          * 下拉点击方法
          * @param  val - 事件对象
          */
-        const handleClickItem = (val:any): void => {
+        const handleClickItem = (val:any) => {
             if(props.clickOption){
                 props.clickOption(val)
             }
@@ -83,7 +83,7 @@ export default defineComponent({
             optionList.value.forEach((val:any) => {
                 // 選項列表
                 renderList.push((
-                    <li key={val.id} class='be-breadcrumb-item-li' onClick={()=>handleClickItem(val)}>
+                    <li key={val.id} class='be-breadcrumb-item-li' onClick={handleClickItem}>
                         {val.label}
                     </li>
                 ))

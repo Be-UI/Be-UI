@@ -2,6 +2,6 @@
 √ props - separator   test √
 √ slot - separator ！ test √
 event:click 传入click 将不自动跳转 test √
-event:clickOption
-√ to 跳轉
-√ 禁用 差popover、跳转
+event:clickOption test √
+√ to 跳轉 test √
+√ 禁用 test √

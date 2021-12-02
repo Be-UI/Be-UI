@@ -175,7 +175,7 @@
             </be-button>
             </template>
           </be-dialog>-->
-    <div width="25" height="25" v-click-outside="{handler:testClose,isDisabled:false}" style="position: absolute;left: 20%;top: 100px;width: 320px">
+    <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 320px">
       <!--            <be-button type="primary"
                              bordered
                              @click="testInputFunc"
@@ -312,8 +312,8 @@
       <!--      {{switchModel}}-->
       <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
         <be-breadcrumb>
-            <be-breadcrumb-item disabled to="/黑色柳丁" separator="#" >柳丁</be-breadcrumb-item>
-            <be-breadcrumb-item  to="/似曾相识" :option="testList">似曾相识</be-breadcrumb-item>
+            <be-breadcrumb-item  to="/黑色柳丁" separator="#" >柳丁</be-breadcrumb-item>
+            <be-breadcrumb-item  to="/似曾相识" :option="testList" :clickOption="handleClick">似曾相识</be-breadcrumb-item>
             <be-breadcrumb-item to="/小镇姑娘" separator="#" :click="testClose">
                 小镇姑娘
                 <template #separator>❀</template>
