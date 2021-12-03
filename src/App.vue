@@ -1,5 +1,7 @@
 <template>
-  <div id="App" class="app">
+  <div id="App" class="app" >
+
+
     <!--<be-loading
         :show="isLoading"
         text="测试loading"
@@ -175,7 +177,10 @@
             </be-button>
             </template>
           </be-dialog>-->
-    <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 320px">
+    <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 320px;height: 300px" v-contextmenu:contextmenu>
+        <be-contextmenu ref="contextmenu" :theme="'blues'">
+            <be-contextmenu-item >复制</be-contextmenu-item>
+        </be-contextmenu>
       <!--            <be-button type="primary"
                              bordered
                              @click="testInputFunc"
@@ -341,10 +346,12 @@ import {createPopper} from '@popperjs/core'
 import {BeLoadingSer} from './components'
 import BeIcon from "./components/svg-icon/src/be-icon.vue";
 import {ClickOutside} from './utils/direactives/custom-direactives/click-outside';
-
+import {contextmenu} from './utils/direactives/custom-direactives/contextmenu-directives';
+import BeContextmenu from "./components/contextmenu/be-contextmenu.vue";
+import BeContextmenuItem from "./components/contextmenu/be-contextmenu-item.vue";
 export default {
   name: 'App',
-  directives: {ClickOutside},
+  directives: {ClickOutside,contextmenu},
   data() {
     return {
       testOption: {
@@ -388,6 +395,8 @@ export default {
 
   },
   components: {
+      BeContextmenuItem,
+      BeContextmenu,
     BeIcon,
     panda
   },

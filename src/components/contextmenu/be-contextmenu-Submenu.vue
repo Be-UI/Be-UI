@@ -5,13 +5,12 @@
 * @update (czh 2021/4/10)
 */
 <template>
-  <li
-      :class="classname"
+  <li :class="classname"
       @mouseenter="handleMouseenter"
       @mouseleave="handleMouseleave">
-        <span class="Be-contextmenu-submenu__title">
+        <span class="be-contextmenu-submenu__title">
             <slot name="title">{{ title }}</slot>
-          <!-- <span class="Be-contextmenu-iconfont Be-contextmenu-submenu__icon" /> -->
+          <!-- <span class="be-contextmenu-iconfont be-contextmenu-submenu__icon" /> -->
         </span>
     <div v-show="hover" ref="submenu" :class="submenuCls">
       <ul>
@@ -55,14 +54,14 @@ export default {
   computed: {
     classname() {
       return {
-        "Be-contextmenu-item": true,
-        "Be-contextmenu-submenu": true,
-        "Be-contextmenu-item--hover": this.hover,
-        "Be-contextmenu-item--disabled": this.disabled,
+        "be-contextmenu-item": true,
+        "be-contextmenu-submenu": true,
+        "be-contextmenu-item--hover": this.hover,
+        "be-contextmenu-item--disabled": this.disabled,
       };
     },
     submenuCls() {
-      return ["Be-contextmenu", ...this.submenuPlacement];
+      return ["be-contextmenu", ...this.submenuPlacement];
     },
   },
 
@@ -126,29 +125,29 @@ export default {
 };
 </script>
 <style lang="scss">
-.Be-contextmenu {
-  .Be-contextmenu-divider {
+.be-contextmenu {
+  .be-contextmenu-divider {
     height: 0;
     margin: 5px 0;
     border-bottom: 1px solid #e8e8e8;
   }
 
-  .Be-contextmenu-group__menus {
+  .be-contextmenu-group__menus {
     padding: 0 5px;
     margin: 0;
     list-style: none;
 
-    .Be-contextmenu-item {
+    .be-contextmenu-item {
       display: inline-block;
       padding: 5px 11px;
     }
   }
 
-  .Be-contextmenu-submenu {
+  .be-contextmenu-submenu {
     position: relative;
     text-align: center;
 
-    & > .Be-contextmenu {
+    & > .be-contextmenu {
       position: absolute;
       text-align: center;
       display: flex;
@@ -223,7 +222,7 @@ export default {
       }
     }
 
-    .Be-contextmenu-submenu__icon {
+    .be-contextmenu-submenu__icon {
       position: absolute;
       right: 5px;
 
@@ -234,19 +233,3 @@ export default {
   }
 }
 </style>
-<docs>
-## 事例
-配合be-contextmenu-item、be-contextmenu使用实现右键菜单:
-```jsx
-<be-context-menu ref="contextmenu" :theme="'violet'">
-  <be-contextmenu-item @click='copy'>复制</be-contextmenu-item>
-  <be-contextmenu-submenu title="发送" v-show="menuConfig.send">
-    <be-contextmenu-item @click="jumpToOther('/browser','browser')">浏览器</be-contextmenu-item>
-    <be-contextmenu-item @click="jumpToOther('/analysis','analysis')">调查分析</be-contextmenu-item>
-    <be-contextmenu-item @click="openTrack">地址监控</be-contextmenu-item>
-    <be-contextmenu-item @click="jumpToOther('/investigation','investigation')">调证分析</be-contextmenu-item>
-    <be-contextmenu-item @click="jumpToOther('/debug/createDebug','createDebug')">一键调证</be-contextmenu-item>
-  </be-contextmenu-submenu>
-</be-context-menu>
-```
-</docs>

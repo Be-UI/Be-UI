@@ -12,9 +12,6 @@ declare module '*.vue' {
         // $Message: any;
         // $Modal: any;
     }
-
     const component: DefineComponent<{}, {}, Vue, any>
-    // const component: DefineComponent<{}, {}, any>
     export default component
 }
-

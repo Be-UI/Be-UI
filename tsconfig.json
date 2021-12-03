@@ -17,7 +17,7 @@
     ],
     "types": [
       "vite/client",
-      "jest"
+      "jest",
     ]
   },
   "include": [

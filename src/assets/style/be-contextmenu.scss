@@ -1,0 +1,112 @@
+.be-contextmenu{
+  position: absolute;
+  margin: 0;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 2px 2px 8px 0 rgba(150, 150, 150, 0.2);
+  list-style: none;
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+  z-index: 2800;
+  -webkit-tap-highlight-color: transparent;
+  .be-contextmenu-item {
+    text-align: center;
+    padding: 9px 36px;
+    line-height: 1;
+    color: #333;
+    &.be-contextmenu-item--hover {
+      color: #fff;
+    //   border-radius: 4px;
+    }
+    &.be-contextmenu-item--disabled {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+  .be-contextmenu-divider{
+    height: 0;
+    margin: 5px 0;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .be-contextmenu-group__menus{
+    padding: 0 5px;
+    margin: 0;
+    list-style: none;
+    .be-contextmenu-item{
+      display: inline-block;
+      padding: 5px 11px;
+      }
+  }
+  .be-contextmenu-submenu{
+    position: relative;
+    text-align: center;
+    & > .be-contextmenu{
+      position: absolute;
+      text-align: center;
+      &.left{
+        left: 0;
+        transform: translateX(-100%);
+      }
+      &.right{
+        right: 0;
+        transform: translateX(100%);
+      }
+      &.top{
+        top: -(5px) - 1;
+      }
+      &.bottom{
+        bottom: -(5px) - 1;
+      }
+    }
+    .be-contextmenu-submenu__title{
+      margin-right: 0px;
+    }
+    .be-contextmenu-submenu__icon{
+      position: absolute;
+      right: 5px;
+      &::before{
+        content: ">";
+      }
+    }
+  }
+}
+.be-contextmenu--default{
+  .be-contextmenu-item--hover{
+    background-color:  #46a0fc;
+    }
+}
+
+.be-contextmenu--bright{
+  .be-contextmenu-item--hover{
+    background-color: #ef5350;
+  }
+}
+.be-contextmenu--dark{
+  .be-contextmenu-item--hover{
+    background-color: #2d3035;
+    }
+}
+.be-contextmenu--violet{
+  .be-contextmenu-item{
+    color: #7D8397;
+  }
+  .be-contextmenu-item--hover{
+    background-color: #6A7DC4
+  }
+}
+.be-contextmenu--blues{
+  .be-contextmenu-item{
+    color: #7D8397;
+  }
+  .be-contextmenu-item--hover{
+    background-color: #206596
+  }
+}
+.be-contextmenu-iconfont{
+  font-size: inherit;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

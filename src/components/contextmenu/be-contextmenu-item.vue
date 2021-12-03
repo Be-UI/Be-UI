@@ -6,7 +6,7 @@
 */
 <template>
   <!--分隔符-->
-  <li v-if="divider" class="Be-contextmenu-divider"/>
+  <li v-if="divider" class="be-contextmenu-divider"/>
   <!--菜单内容-->
   <li v-else
       :class="classname"
@@ -59,9 +59,9 @@ export default {
   computed: {
     classname() {
       return {
-        'Be-contextmenu-item': !this.divider,
-        'Be-contextmenu-item--hover': this.hover,
-        'Be-contextmenu-item--disabled': this.disabled,
+        'be-contextmenu-item': !this.divider,
+        'be-contextmenu-item--hover': this.hover,
+        'be-contextmenu-item--disabled': this.disabled,
       }
     },
   },
@@ -125,19 +125,3 @@ export default {
   },
 }
 </script>
-<docs>
-## 事例
-配合be-contextmenu、be-contextmenu-submenu使用实现右键菜单:
-```jsx
-<be-context-menu ref="contextmenu" :theme="'violet'">
-  <be-contextmenu-item @click='copy'>复制</be-contextmenu-item>
-  <be-contextmenu-submenu title="发送" v-show="menuConfig.send">
-    <be-contextmenu-item @click="jumpToOther('/browser','browser')">浏览器</be-contextmenu-item>
-    <be-contextmenu-item @click="jumpToOther('/analysis','analysis')">调查分析</be-contextmenu-item>
-    <be-contextmenu-item @click="openTrack">地址监控</be-contextmenu-item>
-    <be-contextmenu-item @click="jumpToOther('/investigation','investigation')">调证分析</be-contextmenu-item>
-    <be-contextmenu-item @click="jumpToOther('/debug/createDebug','createDebug')">一键调证</be-contextmenu-item>
-  </be-contextmenu-submenu>
-</be-context-menu>
-```
-</docs>
