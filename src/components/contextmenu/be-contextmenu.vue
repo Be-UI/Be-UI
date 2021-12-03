@@ -107,8 +107,8 @@ export default defineComponent({
             //在window上根据 $beContextmenuId 设置当前组件实例上下文
             //多个右键菜单 和 动态菜单时用于区分
             nextTick(() => {
-                if (Window.$BeContextmenu) {
-                    Window.$BeContextmenu[beContextmenuId] = internalInstance
+                if (window.$BeContextmenu) {
+                    window.$BeContextmenu[beContextmenuId] = internalInstance
                 } else {
                     window.$BeContextmenu = {[beContextmenuId]: internalInstance}
                 }
@@ -233,7 +233,7 @@ export default defineComponent({
          */
         const hideAll = ():void =>{
             // 根据window.$BeContextmenu 获取 $beContextmenuId缓存 隐藏所有菜单
-            Object.keys(Window.$BeContextmenu)
+            Object.keys(window.$BeContextmenu)
                 .forEach((key) => {
                     window.$BeContextmenu[key].hide()
                 })
