@@ -22,7 +22,11 @@ export interface IPositionStr{
     top:number
     left:number
 }
-export interface refNode{
-    vnode:VNode
-    el:Node
+export interface refNode {
+    vnode: VNode
+    el: Node
+}
+
+export interface MyWindow extends Window {
+    $BeContextmenu: any;
 }

@@ -16,27 +16,28 @@
 
 <script lang="ts">
 import {
-    computed,
-    defineComponent, getCurrentInstance,
-    nextTick,
-    onBeforeUnmount,
-    onMounted, provide,
-    reactive,
-    ref,
-    watch
+  computed,
+  defineComponent, getCurrentInstance,
+  nextTick,
+  onBeforeUnmount,
+  onMounted, provide,
+  reactive,
+  ref,
+  watch
 } from "vue";
-import {IPosition, IContextMenu, IPositionStr, refNode} from "./be-contextmenu-type";
+import {IPosition, IContextMenu, IPositionStr, refNode, MyWindow} from "./be-contextmenu-type";
 
+declare var window: MyWindow
 
 /**
  * 右键菜单-菜单容器组件
  */
 export default defineComponent({
-    name: 'BeContextmenu',
-    props: {
-        /**
-         * 触发显示事件类型，默认是右键触发类型
-         */
+  name: 'BeContextmenu',
+  props: {
+    /**
+     * 触发显示事件类型，默认是右键触发类型
+     */
         eventType: {
             type: String,
             default: 'contextmenu',
