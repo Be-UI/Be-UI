@@ -20,13 +20,26 @@
   </li>
 </template>
 
-<script>
+<script lang="ts">
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  inject,
+  ref,
+} from "vue";
+
 /**
  * 右键菜单公共组件-菜单内容组件
  */
-export default {
+export default defineComponent({
   name: 'BeContextmenuItem',
   inject: ['$$contextmenu'],
+  emits: [
+    'mouseenter',
+    'mouseleave',
+    'click',
+  ],
   props: {
     /**
      * 是否显示分隔符
@@ -50,32 +63,26 @@ export default {
       default: true,
     },
   },
-
-  data() {
-    return {
-      hover: false,
-    }
-  },
-  computed: {
-    classname() {
+  setup(props, ctx) {
+    const hover = ref<boolean>(false)
+    const internalInstance = getCurrentInstance()
+    const $$contextmenu = inject('$$contextmenu')
+    const classname = computed(() => {
       return {
-        'be-contextmenu-item': !this.divider,
-        'be-contextmenu-item--hover': this.hover,
-        'be-contextmenu-item--disabled': this.disabled,
+        'be-contextmenu-item': !props.divider,
+        'be-contextmenu-item--hover': hover.value,
+        'be-contextmenu-item--disabled': props.disabled,
       }
-    },
-  },
-
-  methods: {
+    })
     /**
      * 鼠标移入
-     * @param {Event} event 事件对象
+     * @param {MouseEvent} event 事件对象
      */
-    handleMouseenter(event) {
+    const handleMouseenter = (event: MouseEvent): void => {
       //禁用返回
-      if (this.disabled) return
+      if (props.disabled) return
       //hover效果
-      this.hover = true
+      hover.value = true
       /** 用户的自定义 contextmenu触发事件
        * @event contextmenu
        * @param {Object} 出发的虚拟节点对象
@@ -86,42 +93,49 @@ export default {
        * @param {Object} 当前节点上下文
        * @param {Event} 事件对象
        */
-      this.$emit('mouseenter', this, event)
-    },
+      ctx.emit('mouseenter', internalInstance, event)
+    }
     /**
      * 鼠标移出
-     * @param {Event} event 事件对象
+     * @param {MouseEvent} event 事件对象
      */
-    handleMouseleave(event) {
+    const handleMouseleave = (event: MouseEvent): void => {
       //禁用返回
-      if (this.disabled) return
+      if (props.disabled) return
       //hover效果
-      this.hover = false
+      hover.value = false
       /**
        * 菜单鼠标移出事件
        * @event mouseleave
        * @param {Object} 当前节点上下文
        * @param {Event} 事件对象
        */
-      this.$emit('mouseleave', this, event)
-    },
+      ctx.emit('mouseleave', internalInstance, event)
+    }
     /**
      * 处理点击
-     * @param {Event} event 事件对象
+     * @param {MouseEvent} event 事件对象
      */
-    handleClick(event) {
+    const handleClick = (event: MouseEvent): void => {
       //禁用返回
-      if (this.disabled) return
+      if (props.disabled) return
       /**
        * 右键菜单点击事件
        * @event click
        * @param {Object} 当前节点上下文
        * @param {Event} 事件对象
        */
-      this.$emit('click', this, event)
+      ctx.emit('click', internalInstance, event)
       //如果没有自动隐藏设置，就调用父组件隐藏方法
-      this.autoHide && this.$$contextmenu.hide()
-    },
-  },
-}
+      props.autoHide && $$contextmenu.hide()
+    }
+    return {
+      classname,
+      handleClick,
+      handleMouseleave,
+      handleMouseenter,
+    }
+  }
+})
+
 </script>
