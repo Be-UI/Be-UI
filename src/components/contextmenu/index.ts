@@ -7,7 +7,7 @@
 import {App} from 'vue'
 import beContextmenu from './src/be-contextmenu.vue'
 import beContextmenuItem from './src/be-contextmenu-item.vue'
-import beContextmenuSubmenu from './src/be-contextmenu-Submenu.vue'
+import beContextmenuSubMenu from './src/be-contextmenu-sub-menu.vue'
 import '../../assets/style/be-contextmenu.scss'
 import {SFCWithInstall} from "../../utils/types";
 /**
@@ -32,7 +32,7 @@ export const BeContextmenuItem = beContextmenuItem as SFCWithInstall<typeof beCo
  * 组件装载方法
  * @param app
  */
-beContextmenuSubmenu.install = (app: App): void => {
-    app.component(beContextmenuSubmenu.name || '', beContextmenuSubmenu)
+beContextmenuSubMenu.install = (app: App): void => {
+    app.component(beContextmenuSubMenu.name || '', beContextmenuSubMenu)
 }
-export const BeContextmenuSubmenu = beContextmenuSubmenu as SFCWithInstall<typeof beContextmenuSubmenu>;
+export const BeContextmenuSubMenu = beContextmenuSubMenu as SFCWithInstall<typeof beContextmenuSubMenu>;

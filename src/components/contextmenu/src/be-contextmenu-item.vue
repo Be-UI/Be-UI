@@ -14,7 +14,7 @@
       @mouseenter="handleMouseenter"
       @mouseleave="handleMouseleave">
     <!-- @slot 插槽内容可以使用常规标签，
-    也可以嵌套使用组件 be-contextmenu-item、be-contextmenu-Submenu
+    也可以嵌套使用组件 be-contextmenu-item、be-contextmenu-SubMenu
     -->
     <slot/>
   </li>
@@ -126,7 +126,7 @@ export default defineComponent({
        * @param {Event} 事件对象
        */
       ctx.emit('click', internalInstance, event)
-      //如果没有自动隐藏设置，就调用父组件隐藏方法
+      //如果自动隐藏设置，就调用父组件隐藏方法
       props.autoHide && $$contextmenu.proxy.hide()
     }
     return {

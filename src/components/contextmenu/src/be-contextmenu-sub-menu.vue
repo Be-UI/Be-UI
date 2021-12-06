@@ -1,5 +1,5 @@
 /*
-* @be-contextmenu-Submenu.vue
+* @be-contextmenu-SubMenu.vue
 * @deprecated 右键菜单-菜单子菜单容器组件 使用时配合Contextmenu.vue和ContextmenuItem.vue
 * @author czh
 * @update (czh 2021/4/10)
@@ -15,7 +15,7 @@
     <div v-show="hover" ref="submenu" :class="submenuCls">
       <ul>
         <!-- @slot 插槽内容可以使用常规标签，
-        也可以嵌套使用组件 be-contextmenu-item、be-contextmenu-Submenu-->
+        也可以嵌套使用组件 be-contextmenu-item、be-contextmenu-SubMenu-->
         <slot/>
       </ul>
     </div>
@@ -36,7 +36,7 @@ import {IContextMenu} from "./be-contextmenu-type";
  * 右键菜单公共组件-子菜单内容容器组件
  */
 export default defineComponent({
-  name: "BeContextmenuSubmenu",
+  name: "BeContextmenuSubMenu",
   emits: [
     'mouseenter',
     'mouseleave',
@@ -92,9 +92,9 @@ export default defineComponent({
 
       nextTick(() => {
         //获取submenu Ul标签宽高
-        const internalInstanceSubmenu = internalInstance.refs.submenu as Element
-        const submenuWidth = internalInstanceSubmenu.clientWidth;
-        const submenuHeight = internalInstanceSubmenu.clientHeight;
+        const internalInstanceSubMenu = internalInstance.refs.submenu as Element
+        const submenuWidth = internalInstanceSubMenu.clientWidth;
+        const submenuHeight = internalInstanceSubMenu.clientHeight;
         const submenuPlacementInner = [];
         //适应展示不同位置的子菜单 并设置相应的class样式
         if (targetDimension.right + submenuWidth >= window.innerWidth) {

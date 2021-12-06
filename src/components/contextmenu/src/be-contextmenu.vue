@@ -68,7 +68,6 @@ export default defineComponent({
     setup(props, ctx) {
         const internalInstance = getCurrentInstance() as IContextMenu
         const beContextmenuId = internalInstance.uid
-        debugger
         //是否显示
         const visible = ref<boolean>(false)
         //上下文缓存

@@ -180,7 +180,8 @@
       <div style="position: absolute;left: 25%;top: 100px;width: 320px;height: 300px;background-color: #7D8397" ></div>
     <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 320px;height: 300px" v-contextmenu:contextmenu>
         <be-contextmenu ref="contextmenu" :theme="'blues'" id="wqdw">
-            <be-contextmenu-item >复制</be-contextmenu-item>
+            <be-contextmenu-item disabled>复制</be-contextmenu-item>
+            <be-contextmenu-item divider>复制</be-contextmenu-item>
         </be-contextmenu>
 
       <!--            <be-button type="primary"

@@ -1,18 +1,4 @@
-/**
- * 1.be-contextmenu - props √
- * 2.be-contextmenu - 事件觸發  'show','hide', 'contextmenu' √
- * 3.be-contextmenu - 插槽渲染
- *
- * 4.be-contextmenu -  props校驗
- * 5.be-contextmenu - 事件觸發 'mouseenter', 'mouseleave', 'click',
- * 6.be-contextmenu - 插槽渲染
- *
- * 7.be-contextmenu -  props校驗
- * 8.be-contextmenu - 事件觸發 'mouseenter', 'mouseleave', 'click',
- * 9.be-contextmenu - 插槽渲染
- */
 import {mount} from '@vue/test-utils'
-import BeContextmenuSubmenu from '../src/be-contextmenu-Submenu.vue'
 import BeContextmenuItem from '../src/be-contextmenu-item.vue'
 import BeContextmenu from '../src/be-contextmenu.vue'
 import {contextmenu} from '../../../utils/direactives/custom-direactives/contextmenu-directives';
@@ -23,7 +9,6 @@ const _mount = (options: any) =>
         components: {
             'BeContextmenu': BeContextmenu,
             'BeContextmenuItem': BeContextmenuItem,
-            'BeContextmenuSubmenu': BeContextmenuSubmenu,
         },
         directives: {contextmenu},
         ...options,
