@@ -11,7 +11,6 @@ import {ClickOutside} from '../../../utils/direactives/custom-direactives/click-
 import {ref} from "vue";
 import {asyncExpect} from "../../../utils/utils";
 
-const clickEvt = new Event('click')
 const _mount = (options: any) =>
     mount({
         components: {
@@ -104,7 +103,7 @@ describe('test-be-breadcrumb-props', () => {
             expect(document.body.querySelectorAll('.be-popover').length).toBe(1)
         }, 1000)
         // 模拟点击其他div 关闭 popover
-        await document.body.dispatchEvent(clickEvt)
+        await document.body.dispatchEvent(new Event('click'))
         await asyncExpect(() => {
             expect(document.body.querySelectorAll('.be-popover').length).toBe(0)
 
@@ -147,7 +146,7 @@ describe('test-be-breadcrumb-event', () => {
         const handleClick = jest.fn()
         const wrapper = await _mount({
             template: `
-                
+
                 <be-breadcrumb>
                 <be-breadcrumb-item :option="testList" :clickOption="handleClick">似曾相识</be-breadcrumb-item>
                 </be-breadcrumb>

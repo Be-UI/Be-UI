@@ -4,15 +4,19 @@
 * @author czh
 * @update (czh 2021/12/3)
 */
-import {ComponentInternalInstance, VNode} from "vue";
-import {IOption} from "../../utils/types";
+import {ComponentInternalInstance, Ref, VNode} from "vue";
+import {IOption} from "../../../utils/types";
 
 
 export interface IContextMenu extends ComponentInternalInstance {
     uid: number,
     addRef:Function,
+    hide:Function,
     clientWidth:number,
-    clientHeight:number
+    clientHeight:number,
+    install?: Function
+    proxy:any
+    name: string
 }
 export interface IPosition {
     top:number | string
@@ -26,7 +30,6 @@ export interface refNode {
     vnode: VNode
     el: Node
 }
-
 export interface MyWindow extends Window {
     $BeContextmenu: any;
 }

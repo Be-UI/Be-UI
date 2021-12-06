@@ -30,6 +30,7 @@ import {
   nextTick,
   ref,
 } from "vue";
+import {IContextMenu} from "./be-contextmenu-type";
 
 /**
  * 右键菜单公共组件-子菜单内容容器组件
@@ -59,7 +60,7 @@ export default defineComponent({
   setup(props, ctx) {
     const hover = ref<boolean>(false)
     const submenuPlacement = ref<Array<any>>([])
-    const internalInstance = getCurrentInstance()
+    const internalInstance = getCurrentInstance() as IContextMenu
     const classname = computed(() => {
       return {
         "be-contextmenu-item": true,
@@ -80,7 +81,7 @@ export default defineComponent({
       if (props.disabled) return;
       const {target} = event;
       //获取事件元素相对于浏览器视窗位置
-      const targetDimension = target.getBoundingClientRect();
+      const targetDimension = (target as HTMLElement).getBoundingClientRect();
       //hover效果
       hover.value = true;
       /** 鼠标移入方法
@@ -91,8 +92,9 @@ export default defineComponent({
 
       nextTick(() => {
         //获取submenu Ul标签宽高
-        const submenuWidth = internalInstance.refs.submenu.clientWidth;
-        const submenuHeight = internalInstance.refs.submenu.clientHeight;
+        const internalInstanceSubmenu = internalInstance.refs.submenu as Element
+        const submenuWidth = internalInstanceSubmenu.clientWidth;
+        const submenuHeight = internalInstanceSubmenu.clientHeight;
         const submenuPlacementInner = [];
         //适应展示不同位置的子菜单 并设置相应的class样式
         if (targetDimension.right + submenuWidth >= window.innerWidth) {

@@ -47,7 +47,8 @@ be-Breadcrumb
 
 1.布局容器组件 be-container
 
-2.右键菜单组件 be-contextmenu （等待测试..） 3.对话框组件 be-dialog （迁移完成）  
+2.右键菜单组件 be-contextmenu （等待测试..） 
+3.对话框组件 be-dialog （迁移完成）  
 4.输入框组件 be-input （迁移完成）    
 5.loading组件 be-loading （迁移完成）  
 6.消息对话组件 be-message-box （迁移完成）  

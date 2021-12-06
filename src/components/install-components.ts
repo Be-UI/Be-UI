@@ -12,8 +12,11 @@ export {default as BeSelect} from './select/';//全局、按需
 export {default as BeTag} from './tag/';//全局、按需
 export {default as BeInputNumber} from './input-number/';//全局、按需
 export {default as BeSwitch} from './switch/';//全局、按需
-export { BeBreadcrumb} from './breadcrumb/';//全局、按需
-export { BeBreadcrumbItem} from './breadcrumb/';//全局、按需
+export { BeBreadcrumb } from './breadcrumb/';//全局、按需
+export { BeBreadcrumbItem } from './breadcrumb/';//全局、按需
+export { BeContextmenu } from './contextmenu/';//全局、按需
+export { BeContextmenuItem } from './contextmenu/';//全局、按需
+export { BeContextmenuSubmenu } from './contextmenu/';//全局、按需
 // plugins
 export {default as BeNotification} from './notification/';//服务
 export {default as BeMsg} from './message-box/';//服务

@@ -36,11 +36,12 @@ module.exports = {
     // u can change this option to a more specific folder for test single component or util when dev
     // for example, ['<rootDir>/packages/input']
 
-    //roots: ['<rootDir>'],
+    // roots: ['<rootDir>'],
     // roots: ['<rootDir>/src/components/svg-icon'],
     // roots: ['<rootDir>/src/components/tag'],
     // roots: ['<rootDir>/src/components/message'],
     // roots: ['<rootDir>/src/components/input-number'],
     // roots: ['<rootDir>/src/components/switch'],
-    roots: ['<rootDir>/src/components/breadcrumb'],
+    // roots: ['<rootDir>/src/components/breadcrumb'],
+    roots: ['<rootDir>/src/components/contextmenu'],
 }

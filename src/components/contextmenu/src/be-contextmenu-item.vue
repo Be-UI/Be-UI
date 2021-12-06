@@ -28,13 +28,13 @@ import {
   inject,
   ref,
 } from "vue";
+import {IContextMenu} from "./be-contextmenu-type";
 
 /**
  * 右键菜单公共组件-菜单内容组件
  */
 export default defineComponent({
   name: 'BeContextmenuItem',
-  inject: ['$$contextmenu'],
   emits: [
     'mouseenter',
     'mouseleave',
@@ -66,7 +66,7 @@ export default defineComponent({
   setup(props, ctx) {
     const hover = ref<boolean>(false)
     const internalInstance = getCurrentInstance()
-    const $$contextmenu = inject('$$contextmenu')
+    const $$contextmenu = inject('$$contextmenu') as IContextMenu
     const classname = computed(() => {
       return {
         'be-contextmenu-item': !props.divider,
@@ -127,7 +127,7 @@ export default defineComponent({
        */
       ctx.emit('click', internalInstance, event)
       //如果没有自动隐藏设置，就调用父组件隐藏方法
-      props.autoHide && $$contextmenu.hide()
+      props.autoHide && $$contextmenu.proxy.hide()
     }
     return {
       classname,

@@ -177,10 +177,12 @@
             </be-button>
             </template>
           </be-dialog>-->
+      <div style="position: absolute;left: 25%;top: 100px;width: 320px;height: 300px;background-color: #7D8397" ></div>
     <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 320px;height: 300px" v-contextmenu:contextmenu>
-        <be-contextmenu ref="contextmenu" :theme="'blues'">
+        <be-contextmenu ref="contextmenu" :theme="'blues'" id="wqdw">
             <be-contextmenu-item >复制</be-contextmenu-item>
         </be-contextmenu>
+
       <!--            <be-button type="primary"
                              bordered
                              @click="testInputFunc"
@@ -347,8 +349,8 @@ import {BeLoadingSer} from './components'
 import BeIcon from "./components/svg-icon/src/be-icon.vue";
 import {ClickOutside} from './utils/direactives/custom-direactives/click-outside';
 import {contextmenu} from './utils/direactives/custom-direactives/contextmenu-directives';
-import BeContextmenu from "./components/contextmenu/be-contextmenu.vue";
-import BeContextmenuItem from "./components/contextmenu/be-contextmenu-item.vue";
+import BeContextmenu from "./components/contextmenu/src/be-contextmenu.vue";
+import BeContextmenuItem from "./components/contextmenu/src/be-contextmenu-item.vue";
 export default {
   name: 'App',
   directives: {ClickOutside,contextmenu},
@@ -548,7 +550,7 @@ export default {
       //this.testModel = 2000
     },
     handleStep(val) {
-
+debugger
     },
     test(qw) {
       this.showDialog = !this.showDialog
