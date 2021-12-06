@@ -180,8 +180,13 @@
       <div style="position: absolute;left: 25%;top: 100px;width: 320px;height: 300px;background-color: #7D8397" ></div>
     <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 320px;height: 300px" v-contextmenu:contextmenu>
         <be-contextmenu ref="contextmenu" :theme="'blues'" id="wqdw">
-            <be-contextmenu-item disabled>复制</be-contextmenu-item>
-            <be-contextmenu-item divider>复制</be-contextmenu-item>
+            <be-contextmenu-sub-menu title="宋词">
+                <span>临安小雨初霁</span>
+                <be-contextmenu-item>陆游</be-contextmenu-item>
+                <be-contextmenu-sub-menu title="詞句">
+                    <be-contextmenu-item>谁家客马过京华</be-contextmenu-item>
+                </be-contextmenu-sub-menu>
+            </be-contextmenu-sub-menu>
         </be-contextmenu>
 
       <!--            <be-button type="primary"
@@ -352,6 +357,7 @@ import {ClickOutside} from './utils/direactives/custom-direactives/click-outside
 import {contextmenu} from './utils/direactives/custom-direactives/contextmenu-directives';
 import BeContextmenu from "./components/contextmenu/src/be-contextmenu.vue";
 import BeContextmenuItem from "./components/contextmenu/src/be-contextmenu-item.vue";
+import BeContextmenuSubMenu from "./components/contextmenu/src/be-contextmenu-sub-menu.vue";
 export default {
   name: 'App',
   directives: {ClickOutside,contextmenu},
@@ -398,6 +404,7 @@ export default {
 
   },
   components: {
+      BeContextmenuSubMenu,
       BeContextmenuItem,
       BeContextmenu,
     BeIcon,

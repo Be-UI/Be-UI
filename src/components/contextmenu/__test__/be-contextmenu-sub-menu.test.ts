@@ -1,11 +1,12 @@
 /**
- * 7.be-contextmenu -  props校驗
- * 8.be-contextmenu - 事件觸發 'mouseenter', 'mouseleave', 'click',
+ * 7.be-contextmenu -  props -> disabled √,title √
+ * 8.be-contextmenu - 事件觸發 'mouseenter' √, 'mouseleave' √
  * 9.be-contextmenu - 插槽渲染
  */
 import {mount} from '@vue/test-utils'
 import BeContextmenuItem from '../src/be-contextmenu-item.vue'
 import BeContextmenu from '../src/be-contextmenu.vue'
+import BeContextmenuSubMenu from "../src/be-contextmenu-sub-menu.vue";
 import {contextmenu} from '../../../utils/direactives/custom-direactives/contextmenu-directives';
 import {asyncExpect} from "../../../utils/utils";
 
@@ -14,6 +15,7 @@ const _mount = (options: any) =>
         components: {
             'BeContextmenu': BeContextmenu,
             'BeContextmenuItem': BeContextmenuItem,
+            'BeContextmenuSubMenu': BeContextmenuSubMenu,
         },
         directives: {contextmenu},
         ...options,
@@ -22,130 +24,90 @@ const _mount = (options: any) =>
  * 测试props生效
  * @param options
  */
-describe('test-be-contextmenu-item-props', () => {
-    test('props-divider', async () => {
+describe('test-be-contextmenu-sub-menu-props', () => {
+    test('props-title', async () => {
          const wrapper = _mount({
              template: `
-                 <div id="test_props_divider" v-contextmenu:contextmenuEvt>
-                    <be-contextmenu ref="contextmenuEvt"  id="contextmenuEvt_divider">
-                       <be-contextmenu-item >临安小雨初霁</be-contextmenu-item>
-                       <be-contextmenu-item divider></be-contextmenu-item>
-                        <be-contextmenu-item divider>陆游</be-contextmenu-item>
+                 <div id="test_props_title" v-contextmenu:contextmenuTitle>
+                    <be-contextmenu ref="contextmenuTitle"  id="contextmenuEvt_title">
+                        <be-contextmenu-sub-menu title="宋词">
+                            <be-contextmenu-item >临安小雨初霁</be-contextmenu-item>
+                            <be-contextmenu-item divider></be-contextmenu-item>
+                            <be-contextmenu-item>陆游</be-contextmenu-item>
+                        </be-contextmenu-sub-menu>
                     </be-contextmenu>
-                 </div>
-             `,
+                 </div>`,
          })
-         const contextMenuElm:HTMLElement | null = document.getElementById('contextmenuEvt_divider')
+         const contextMenuElm:HTMLElement | null = document.getElementById('contextmenuEvt_title')
          expect(contextMenuElm && contextMenuElm.style.display === 'none').toBeTruthy()
          await asyncExpect(()=>{
-             wrapper.find('#test_props_divider').trigger('contextmenu')
+             wrapper.find('#test_props_title').trigger('contextmenu')
          },null)
          await asyncExpect(()=>{
              expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
-             expect(contextMenuElm && contextMenuElm?.querySelectorAll('.be-contextmenu-divider').length > 0).toBeTruthy()
+             const titleElm =  contextMenuElm?.querySelector('.be-contextmenu-submenu__title')
+             expect(titleElm && titleElm.innerHTML.indexOf('宋词') > -1).toBeTruthy()
          },null)
      })
-   test('props-autoHide', async () => {
-       const wrapper = _mount({
-           template: `
-                <div id="test_eventType_autoHide" v-contextmenu:contextmenuEvtAutoHide>
-                    <be-contextmenu ref="contextmenuEvtAutoHide"  id="contextmenuEvt_autoHide">
-                        <be-contextmenu-item :autoHide="false">临安小雨初霁</be-contextmenu-item>
-                        <be-contextmenu-item divider>陆游</be-contextmenu-item>
-                    </be-contextmenu>
-                </div>
-            `
-       })
-       const contextMenuElm: HTMLElement | null = document.getElementById('contextmenuEvt_autoHide')
-       expect(contextMenuElm && contextMenuElm.style.display === 'none').toBeTruthy()
-       await asyncExpect(() => {
-           wrapper.find('#test_eventType_autoHide').trigger('contextmenu')
-       }, null)
-       await asyncExpect(() => {
-           expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
-       }, null)
-       await asyncExpect(() => {
-           contextMenuElm?.querySelectorAll('.be-contextmenu-item')[0].dispatchEvent(new Event('click'))
-       }, null)
-       await asyncExpect(() => {
-           expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
-       }, null)
-    })
      test('props-disabled', async () => {
-         const handleEvent = jest.fn()
+         const handleEventEnter = jest.fn()
+         const handleEventLeave = jest.fn()
          const wrapper = _mount({
              template: `
-                <div id="test_eventType_disabled" v-contextmenu:contextmenuEvtDisabled>
-                    <be-contextmenu ref="contextmenuEvtDisabled"  id="contextmenuEvt_disabled">
-                        <be-contextmenu-item @click="handleEvent" disabled>临安小雨初霁</be-contextmenu-item>
-                        <be-contextmenu-item divider></be-contextmenu-item>
-                        <be-contextmenu-item divider>陆游</be-contextmenu-item>
+                <div id="test_Sub_disabled" v-contextmenu:contextmenuEvtSubDisabled>
+                    <be-contextmenu ref="contextmenuEvtSubDisabled"  id="contextmenuEvt_Sub_disabled">
+                        <be-contextmenu-sub-menu @mouseleave="handleEventLeave"
+                                                 disabled
+                                                 @mouseenter="handleEventEnter" 
+                                                 title="宋词">
+                            <be-contextmenu-item >临安小雨初霁</be-contextmenu-item>
+                            <be-contextmenu-item divider></be-contextmenu-item>
+                            <be-contextmenu-item divider>陆游</be-contextmenu-item>
+                        </be-contextmenu-sub-menu>
                     </be-contextmenu>
                 </div>
             `,
              setup(){
                  return{
-                     handleEvent
+                     handleEventLeave,
+                     handleEventEnter
                  }
              }
          })
-         const contextMenuElm: HTMLElement | null = document.getElementById('contextmenuEvt_disabled')
+         const contextMenuElm: HTMLElement | null = document.getElementById('contextmenuEvt_Sub_disabled')
          expect(contextMenuElm && contextMenuElm.style.display === 'none').toBeTruthy()
          await asyncExpect(() => {
-             wrapper.find('#test_eventType_disabled').trigger('contextmenu')
+             wrapper.find('#test_Sub_disabled').trigger('contextmenu')
          }, null)
          await asyncExpect(() => {
              expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
+             expect(contextMenuElm &&
+                 contextMenuElm?.querySelectorAll('.be-contextmenu-submenu')[0].className.indexOf('be-contextmenu-item--disabled') > -1).toBeTruthy()
          }, null)
          await asyncExpect(() => {
-             expect(contextMenuElm
-                 && contextMenuElm?.querySelectorAll('.be-contextmenu-item')[0].className.indexOf('be-contextmenu-item--disabled') > 0).toBeTruthy()
-             contextMenuElm?.querySelectorAll('.be-contextmenu-item')[0].dispatchEvent(new Event('click'))
-             expect(handleEvent).not.toBeCalled()
+             contextMenuElm?.querySelectorAll('.be-contextmenu-submenu')[0].dispatchEvent(new MouseEvent('mouseenter'))
+             expect(handleEventEnter).not.toBeCalled()
+         }, null)
+         await asyncExpect(() => {
+             contextMenuElm?.querySelectorAll('.be-contextmenu-submenu')[0].dispatchEvent(new MouseEvent('mouseleave'))
+             expect(handleEventLeave).not.toBeCalled()
          }, null)
     })
 })
-describe('test-be-contextmenu-item-event', () => {
-    test('event:click',async ()=>{
-        const handleEvent = jest.fn()
-        const wrapper = _mount({
-            template: `
-                <div id="test_eventType_click" v-contextmenu:contextmenuEvtClick>
-                    <be-contextmenu ref="contextmenuEvtClick"  id="contextmenuEvt_click">
-                        <be-contextmenu-item @click="handleEvent">临安小雨初霁</be-contextmenu-item>
-                        <be-contextmenu-item divider></be-contextmenu-item>
-                        <be-contextmenu-item divider>陆游</be-contextmenu-item>
-                    </be-contextmenu>
-                </div>
-            `,
-            setup(){
-                return{
-                    handleEvent
-                }
-            }
-        })
-        const contextMenuElm: HTMLElement | null = document.getElementById('contextmenuEvt_click')
-        expect(contextMenuElm && contextMenuElm.style.display === 'none').toBeTruthy()
-        await asyncExpect(() => {
-            wrapper.find('#test_eventType_click').trigger('contextmenu')
-        }, null)
-        await asyncExpect(() => {
-            expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
-        }, null)
-        await asyncExpect(() => {
-            contextMenuElm?.querySelectorAll('.be-contextmenu-item')[0].dispatchEvent(new Event('click'))
-            expect(handleEvent).toBeCalled()
-        }, null)
-
-    })
+describe('test-be-contextmenu-sub-menu-event', () => {
   test('event:mouseenter - mouseleave',async ()=>{
         const handleEventEnter = jest.fn()
         const handleEventLeave = jest.fn()
         const wrapper = _mount({
             template: `
-                <div id="test_evt_EL" v-contextmenu:contextmenuEvtEL>
-                     <be-contextmenu ref="contextmenuEvtEL" id="contextmenuEvt_EL" > 
-                         <be-contextmenu-item @mouseleave="handleEventLeave" @mouseenter="handleEventEnter">临安小雨初霁</be-contextmenu-item>
+                <div id="test_evt_Sub_EL" v-contextmenu:contextmenuEvtSubEL>
+                     <be-contextmenu ref="contextmenuEvtSubEL" id="contextmenuEvt_Sub_EL" >
+                         <be-contextmenu-sub-menu @mouseleave="handleEventLeave"
+                                                  @mouseenter="handleEventEnter" title="宋词">
+                             <be-contextmenu-item >临安小雨初霁</be-contextmenu-item>
+                             <be-contextmenu-item divider></be-contextmenu-item>
+                             <be-contextmenu-item>陆游</be-contextmenu-item>
+                         </be-contextmenu-sub-menu>
                     </be-contextmenu>
                 </div>
             `,
@@ -156,43 +118,56 @@ describe('test-be-contextmenu-item-event', () => {
                 }
             }
         })
-        const contextMenuElm: HTMLElement | null = document.getElementById('contextmenuEvt_EL')
+        const contextMenuElm: HTMLElement | null = document.getElementById('contextmenuEvt_Sub_EL')
         expect(contextMenuElm && contextMenuElm.style.display === 'none').toBeTruthy()
         await asyncExpect(() => {
-            wrapper.find('#test_evt_EL').trigger('contextmenu')
+            wrapper.find('#test_evt_Sub_EL').trigger('contextmenu')
         }, null)
         await asyncExpect(() => {
             expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
         }, null)
       await asyncExpect(() => {
-          contextMenuElm?.querySelectorAll('.be-contextmenu-item')[0].dispatchEvent(new MouseEvent('mouseenter'))
-          expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
+          contextMenuElm?.querySelectorAll('.be-contextmenu-submenu')[0].dispatchEvent(new MouseEvent('mouseenter'))
           expect(handleEventEnter).toBeCalled()
       }, null)
       await asyncExpect(() => {
-          contextMenuElm?.querySelectorAll('.be-contextmenu-item')[0].dispatchEvent(new MouseEvent('mouseleave'))
+          contextMenuElm?.querySelectorAll('.be-contextmenu-submenu')[0].dispatchEvent(new MouseEvent('mouseleave'))
           expect(handleEventLeave).toBeCalled()
       }, null)
     })
 })
-describe('test-be-contextmenu-slot', () => {
+describe('test-be-contextmenu-sub-menu-slot', () => {
     test('slot',async ()=>{
         const wrapper = _mount({
             template: `
-                <div id="test_slot" v-contextmenu:contextmenuSlots>
-                     <be-contextmenu ref="contextmenuSlots" id="contextmenu_slot"> 
-                         <be-contextmenu-item ><span id="swnlbss">世味年来薄似纱</span></be-contextmenu-item>
+                <div id="test_sub_slot" v-contextmenu:contextmenuSubSlots>
+                    <be-contextmenu ref="contextmenuSubSlots" id="contextmenuEvt_Sub_Slot" >
+                         <be-contextmenu-sub-menu title="宋词">
+                             <span id="laxycj">临安小雨初霁</span>
+                             <be-contextmenu-item>陆游</be-contextmenu-item>
+                             <be-contextmenu-sub-menu title="詞句"> 
+                                  <be-contextmenu-item>谁家客马过京华</be-contextmenu-item>
+                             </be-contextmenu-sub-menu>
+                         </be-contextmenu-sub-menu>
                     </be-contextmenu>
                 </div>
             `,
         })
-        const contextMenuElm: HTMLElement | null = document.getElementById('contextmenu_slot')
+        const contextMenuElm: HTMLElement | null = document.getElementById('contextmenuEvt_Sub_Slot')
         expect(contextMenuElm && contextMenuElm.style.display === 'none').toBeTruthy()
         await asyncExpect(() => {
-            wrapper.find('#test_slot').trigger('contextmenu')
+            wrapper.find('#test_sub_slot').trigger('contextmenu')
         }, null)
         await asyncExpect(() => {
-            expect(document.getElementById('swnlbss')).toBeTruthy()
-        }, 1000)
+            expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
+        }, null)
+        await asyncExpect(() => {
+            contextMenuElm?.querySelectorAll('.be-contextmenu-submenu')[0].dispatchEvent(new MouseEvent('mouseenter'))
+            expect(document.getElementById('laxycj')).toBeTruthy()
+            const itemLi = contextMenuElm?.querySelectorAll('.be-contextmenu-submenu')[0].querySelectorAll('.be-contextmenu-item')[0].innerHTML
+            expect(itemLi && itemLi.indexOf('陆游') > -1).toBeTruthy()
+            const submenu = contextMenuElm?.querySelectorAll('.be-contextmenu-submenu')[1].innerHTML
+            expect(submenu && submenu.indexOf('詞句') > -1).toBeTruthy()
+        }, null)
     })
 })
