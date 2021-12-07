@@ -33,7 +33,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
-be-contextmenu 改tailwind.css
 be-ellipsis 单元测试
 图标修改   
 样式重构  
@@ -52,7 +51,7 @@ be-ellipsis 单元测试
 |7| 分页  | be-pager | <font color=#07c160 size=5>√</font>  | <font color=red size=5>×</font> |
 |8| 图标  | be-icon | <font color=#07c160 size=5>√</font>  | <font color=#07c160 size=5>√</font> |
 |9| 消息通知  | be-notification | <font color=#07c160 size=5>√</font>  | <font color=red size=5>×</font> |
-|10| 文本省略  | be-ellipsis | <font color=#07c160 size=5>√</font>  | <font color=red size=5>×</font> |
+|10| 文本省略  | be-ellipsis | <font color=#07c160 size=5>√</font>  | <font color=#07c160 size=5>√</font> |
 |11| 弹出显示  | be-popover | <font color=#07c160 size=5>√</font>  | <font color=red size=5>×</font> |
 |12| 文本弹出显示  | be-toolTip | <font color=#07c160 size=5>√</font>  | <font color=red size=5>×</font> |
 |13| 按钮  | be-button | <font color=#07c160 size=5>√</font>  | <font color=red size=5>×</font> |

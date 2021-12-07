@@ -1,6 +1,7 @@
 <template>
-  <be-tooltip :content="content" :placement="placement">
+  <be-tooltip :content="content" placement="top">
      <span
+         v-bind="attrs"
          @click="expandTriggerFunc"
          :style="styleStr"
          v-html="state.textInner">
@@ -11,17 +12,18 @@
 <script lang="ts">
 
 import {
-  defineComponent,
-  defineAsyncComponent,
-  reactive,
-  watchEffect,
-  ref
+    defineComponent,
+    reactive,
+    watchEffect,
+    ref, getCurrentInstance
 } from "vue";
+import tooltip from '../../tooltip/src/be-tooltip.vue'
+import {IEllipsis} from "./be-ellipsis-type";
 
 export default defineComponent({
   name: "BeEllipsis",
   components: {
-    'be-tooltip': defineAsyncComponent(() => import("../../tooltip")),
+    'be-tooltip': tooltip,
   },
   props: {
     /**
@@ -50,7 +52,7 @@ export default defineComponent({
      */
     'lineClamp': {
       type: Number,
-      default: 3
+      default: null
     },
     /**
      * 缩略字符数
@@ -68,29 +70,30 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const internalInstance = getCurrentInstance() as IEllipsis
     // 定义state
     const state = reactive({
       isExpand: false,
       textCache: '',
-      textInner: ''
+      textInner: props.text
     })
     /**
      * 监听文字变化，根据方向处理文字
      */
     const handleText = (): void => {
+      if(props.elpNum === 0) return
       if (props.placement === 'left') {
         state.textInner = props.text.slice(0, props.text.length - props.elpNum) + '...'
       }
       if (props.placement === 'center') {
         let elpNumCenter = props.elpNum / 2
         let lenCenter = props.text.length / 2
-        let subStr1 = props.text.substr(0, lenCenter - elpNumCenter);
-        let subStr2 = props.text.substr(lenCenter + elpNumCenter, props.text.length);
-        let subStr = subStr1 + "..." + subStr2;
-        state.textInner = subStr;
+        let subStrHead = props.text.substr(0, lenCenter - elpNumCenter);
+        let subStrFoot = props.text.substr(lenCenter + elpNumCenter, props.text.length);
+        state.textInner = subStrHead + "..." + subStrFoot;
       }
       if (props.placement === 'right') {
-        state.textInner = '...' + props.text.slice(0, props.text.length - props.elpNum)
+        state.textInner = '...' + props.text.substring(props.elpNum,props.text.length)
       }
     }
     watchEffect(() => {
@@ -100,19 +103,29 @@ export default defineComponent({
     /**
      * 展开方法
      */
-    const styleStr = ref(`-webkit-line-clamp:${props.lineClamp};display:-webkit-inline-box;-webkit-box-orient:vertical;overflow:hidden;`)
+    const styleStr = ref(``)
+      styleStr.value = !props.lineClamp ? '' : `
+      -webkit-line-clamp:${props.lineClamp};
+      display:-webkit-inline-box;
+      -webkit-box-orient:vertical;
+      overflow:hidden;`
     const expandTriggerFunc = (): void => {
       if (!props.expandTrigger) return
       state.isExpand = !state.isExpand
-      styleStr.value = state.isExpand ? '' : `-webkit-line-clamp:${props.lineClamp};display:-webkit-inline-box;-webkit-box-orient:vertical;overflow:hidden;`
+      styleStr.value = state.isExpand ? '' : `
+      -webkit-line-clamp:${props.lineClamp};
+      display:-webkit-inline-box;
+      -webkit-box-orient:vertical;
+      overflow:hidden;`
       state.isExpand && (state.textInner = state.textCache)
       !state.isExpand && handleText()
     }
     return {
       state,
-      handleText,
       styleStr,
+      handleText,
       expandTriggerFunc,
+      attrs:internalInstance.attrs,
     };
   },
 })

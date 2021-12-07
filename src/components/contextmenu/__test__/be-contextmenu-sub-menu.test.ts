@@ -82,7 +82,7 @@ describe('test-be-contextmenu-sub-menu-props', () => {
          await asyncExpect(() => {
              expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
              expect(contextMenuElm &&
-                 contextMenuElm?.querySelectorAll('.be-contextmenu-submenu')[0].className.indexOf('be-contextmenu-item--disabled') > -1).toBeTruthy()
+                 contextMenuElm?.querySelectorAll('.be-contextmenu-submenu')[0].className.indexOf('be-contextmenu-item__disabled') > -1).toBeTruthy()
          }, null)
          await asyncExpect(() => {
              contextMenuElm?.querySelectorAll('.be-contextmenu-submenu')[0].dispatchEvent(new MouseEvent('mouseenter'))

@@ -99,7 +99,7 @@ describe('test-be-contextmenu-item-props', () => {
          }, null)
          await asyncExpect(() => {
              expect(contextMenuElm
-                 && contextMenuElm?.querySelectorAll('.be-contextmenu-item')[0].className.indexOf('be-contextmenu-item--disabled') > 0).toBeTruthy()
+                 && contextMenuElm?.querySelectorAll('.be-contextmenu-item')[0].className.indexOf('be-contextmenu-item__disabled') > 0).toBeTruthy()
              contextMenuElm?.querySelectorAll('.be-contextmenu-item')[0].dispatchEvent(new Event('click'))
              expect(handleEvent).not.toBeCalled()
          }, null)

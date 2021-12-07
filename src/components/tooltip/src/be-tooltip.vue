@@ -17,12 +17,12 @@
   </be-popover>
 </template>
 <script lang="ts">
-import {defineAsyncComponent, defineComponent} from "vue";
-
+import {defineComponent} from "vue";
+import popover from '../../popover/src/be-popover.vue'
 export default defineComponent({
   name: "BeTooltip",
   components: {
-    'be-popover': defineAsyncComponent(() => import("../../popover")),
+    'be-popover': popover,
   },
   props: {
     /**

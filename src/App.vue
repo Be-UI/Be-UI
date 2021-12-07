@@ -10,7 +10,7 @@
             </be-contextmenu-sub-menu>
         </be-contextmenu-sub-menu>
         </be-contextmenu>
-        <be-container style="margin-bottom: 60px">
+<!--        <be-container style="margin-bottom: 60px">
             <be-header style="background-color: #FFFFFF;text-align: center;line-height: 60px;">Header</be-header>
             <be-main style="background-color:#f0f9eb;line-height: 160px;text-align: center">Main</be-main>
         </be-container>
@@ -66,7 +66,9 @@
                 <be-main style="background-color:#f0f9eb;line-height: 160px;text-align: center">Main</be-main>
                 <be-footer style="background-color: #FFFFFF;text-align: center;line-height: 60px;">Footer</be-footer>
             </be-container>
-        </be-container>
+        </be-container>-->
+
+        <be-ellipsis content="自古逢秋悲寂寥" :elpNum = '3' placement="right"   text="我言秋日胜春朝" id="be_ellipsis_test_content"></be-ellipsis>
         <!--<be-loading
             :show="isLoading"
             text="测试loading"

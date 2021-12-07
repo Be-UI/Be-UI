@@ -283,10 +283,10 @@ export default defineComponent({
                 const triggerElm:string | HTMLElement = trigger || props.triggerElm
                 if (triggerElm) {
                     triggerDom = isString(triggerElm) ? document.getElementById(triggerElm as string) : triggerElm
-                    computeDom = matchDom(internalInstance.refs.bePopoverTrigger) || triggerDom
+                    computeDom = matchDom(internalInstance.refs.bePopoverTrigger) || triggerDom || internalInstance.refs.bePopoverTrigger
                 } else {
-                    triggerDom = matchDom(internalInstance.refs.bePopoverTrigger)
-                    computeDom = triggerDom
+                    triggerDom = matchDom(internalInstance.refs.bePopoverTrigger) || internalInstance.refs.bePopoverTrigger
+                    computeDom = triggerDom || internalInstance.refs.bePopoverTrigger
                 }
                 // 根据触发类型 设置不同的事件监听
                 if (triggerDom && props.trigger === 'click') {

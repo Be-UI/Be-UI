@@ -88,7 +88,7 @@ describe('test-be-contextmenu-props', () => {
             `,
         })
         const contextMenuElm: HTMLElement | null = document.getElementById('contextmenu_theme')
-        expect(contextMenuElm && contextMenuElm.className.indexOf('--blues') > 0).toBeTruthy()
+        expect(contextMenuElm && contextMenuElm.className.indexOf('__blues') > 0).toBeTruthy()
     })
 })
 describe('test-be-contextmenu-event', () => {
