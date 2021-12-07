@@ -67,22 +67,18 @@ export default defineComponent({
     },
     setup(props, ctx) {
         const internalInstance = getCurrentInstance() as IContextMenu
-        const beContextmenuId = internalInstance.uid
-        //是否显示
-        const visible = ref<boolean>(false)
-        //上下文缓存
-        const references = ref<Array<any>>([])
-        //位置设置
-        let style = reactive<IPosition>({top: 0, left: 0})
-        //点击空白关闭
-        const clickOutsideHandler = computed(() => visible.value ? hide : () => {
-        })
-        // 是否点击
-        const isClick = computed(() => props.eventType === 'click')
-        //主题内容class 设置
-        const contextmenuCls = computed(() => ['be-contextmenu', `be-contextmenu--${props.theme}`])
+        const beContextmenuId:number = internalInstance.uid
         //把当前组件实例上下文传递给子组件使用
         provide('$$contextmenu', internalInstance)
+        //主题内容class 设置
+        const contextmenuCls = computed(() => ['be-contextmenu', `be-contextmenu--${props.theme}`])
+        //点击空白关闭
+        const clickOutsideHandler = computed(() => visible.value ? hide : () => {})
+        /************************************ 事件添加與移除 *****************************/
+            //是否显示
+        const visible = ref<boolean>(false)
+        //上下文缓存
+        const references = ref<Array<refNode>>([])
         watch(visible, (nVal) => {
             if (nVal) {
                 /** 显示时提交触发show事件
@@ -116,13 +112,14 @@ export default defineComponent({
                 }
             })
         })
+
         onBeforeUnmount(() => {
             //销毁是移除节点
             document.body.removeChild(internalInstance.vnode.el as Node)
             //销毁是移除 window上指向
             delete window.$BeContextmenu[beContextmenuId]
             //遍历references 移除右键事件
-            references.value.forEach((ref) => {
+            references.value.forEach((ref:refNode) => {
                 ref.el.removeEventListener(props.eventType, handleReferenceContextmenu)
             })
             //销毁是移除 点击空白事件监听
@@ -137,21 +134,26 @@ export default defineComponent({
         const addRef = (ref: refNode): void => {
             // 给触发dom添加 右键事件，并缓存记录
             references.value.push(ref)
-            ref.el.addEventListener(props.eventType, (event) => handleReferenceContextmenu(event as MouseEvent))
+            ref.el.addEventListener(props.eventType, handleReferenceContextmenu)
         }
+        /************************************ 菜單位置計算方法 *****************************/
+        //位置设置
+        let style = reactive<IPosition>({top: 0, left: 0})
         /**
          * 处理右键点击方法
-         * @param {Event} event - 事件对象
+         * @param {Event} evt - 事件对象
          */
-        const handleReferenceContextmenu = (event: MouseEvent): void => {
+        const handleReferenceContextmenu = (evt:Event): void => {
+            const event = evt as MouseEvent
             event.preventDefault()
             if (props.disabled) return
+            const target:EventTarget | null = event.target
             const rootDom: HTMLElement = document.getElementById('app') || document.body
             //根据事件对象元素 获取到缓存的事件对象元素的vnode 和 dom对象
-            const reference = references.value.find(ref => {
+            const reference:refNode | undefined = references.value.find(ref => {
                 // 这里是兼容ie
                 ref.el.contains = rootDom.contains
-                return ref.el.contains(event.target)
+                return ref.el.contains(target as Node)
             })
             /** 用户的自定义 contextmenu触发事件
              * @event contextmenu
@@ -159,8 +161,8 @@ export default defineComponent({
              */
             ctx.emit('contextmenu', reference ? reference.vnode : null)
             //获取事件位置坐标
-            const eventX = event.pageX
-            const eventY = event.pageY
+            const eventX:number = event.pageX
+            const eventY:number = event.pageY
             //显示
             show()
             nextTick(() => {
@@ -170,8 +172,8 @@ export default defineComponent({
                 }
                 //设置自动布局显示则计算布局位置 并更新
                 const curInst = internalInstance.refs.contextmenu as IContextMenu
-                const contextmenuWidth = curInst.clientWidth
-                const contextmenuHeight = curInst.clientHeight
+                const contextmenuWidth:number = curInst.clientWidth
+                const contextmenuHeight:number  = curInst.clientHeight
 
                 if (contextmenuHeight + eventY >= window.innerHeight) {
                     contextmenuPosition.top -= contextmenuHeight
@@ -184,20 +186,7 @@ export default defineComponent({
 
             })
         }
-        /**
-         * 处理点击其他dom 关闭菜单
-         * @param {Event} event - 事件对象
-         * @public
-         */
-        const handleBodyClick = (event: Event): void => {
-            // 判断菜单组件下dom树是否包含点击事件触发dom元素
-            const target = event.target as HTMLElement
-            const notOutside = (internalInstance.vnode.el as Node).contains(target) ||
-                (isClick && references.value.some(ref => ref.el.contains(target)))
-            if (!notOutside) {
-                visible.value = false
-            }
-        }
+        /************************************ 顯示與隱藏方法 *****************************/
         /**
          * 显示菜单
          * @param {Object} position - 位置对象
@@ -220,6 +209,23 @@ export default defineComponent({
             // 显示菜单
             visible.value = true
         }
+
+        // 是否点击
+        const isClick = computed(() => props.eventType === 'click')
+        /**
+         * 处理点击其他dom 关闭菜单
+         * @param {Event} event - 事件对象
+         * @public
+         */
+        const handleBodyClick = (event: Event): void => {
+            // 判断菜单组件下dom树是否包含点击事件触发dom元素
+            const target = event.target as HTMLElement
+            const notOutside:boolean = (internalInstance.vnode.el as Node).contains(target) ||
+                (isClick && references.value.some(ref => ref.el.contains(target)))
+            if (!notOutside) {
+                visible.value = false
+            }
+        }
         /**
          * 隐藏菜单
          * @public
@@ -241,6 +247,7 @@ export default defineComponent({
         return {
             addRef,
             hide,
+            hideAll,
             beContextmenuId,
             visible,
             style,

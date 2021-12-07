@@ -93,9 +93,9 @@ export default defineComponent({
       nextTick(() => {
         //获取submenu Ul标签宽高
         const internalInstanceSubMenu = internalInstance.refs.submenu as Element
-        const submenuWidth = internalInstanceSubMenu.clientWidth;
-        const submenuHeight = internalInstanceSubMenu.clientHeight;
-        const submenuPlacementInner = [];
+        const submenuWidth:number = internalInstanceSubMenu.clientWidth;
+        const submenuHeight:number = internalInstanceSubMenu.clientHeight;
+        const submenuPlacementInner:Array<string> = [];
         //适应展示不同位置的子菜单 并设置相应的class样式
         if (targetDimension.right + submenuWidth >= window.innerWidth) {
           submenuPlacementInner.push("left");
