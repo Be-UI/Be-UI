@@ -71,7 +71,7 @@ export default defineComponent({
         //把当前组件实例上下文传递给子组件使用
         provide('$$contextmenu', internalInstance)
         //主题内容class 设置
-        const contextmenuCls = computed(() => ['be-contextmenu', `be-contextmenu--${props.theme}`])
+        const contextmenuCls = computed(() => ['be-contextmenu', `be-contextmenu__${props.theme}`])
         //点击空白关闭
         const clickOutsideHandler = computed(() => visible.value ? hide : () => {})
         /************************************ 事件添加與移除 *****************************/

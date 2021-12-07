@@ -1,107 +1,82 @@
 .be-contextmenu{
-  position: absolute;
-  margin: 0;
-  background-color: #fff;
-  border-radius: 4px;
-  border: 1px solid #e8e8e8;
-  box-shadow: 2px 2px 8px 0 rgba(150, 150, 150, 0.2);
-  list-style: none;
-  font-size: 14px;
-  white-space: nowrap;
-  cursor: pointer;
+  @apply absolute m-0 bg-default shadow cursor-pointer rounded border border-infoh text-sm list-none whitespace-nowrap;
   z-index: 2800;
   -webkit-tap-highlight-color: transparent;
+
   .be-contextmenu-item {
-    text-align: center;
-    padding: 9px 36px;
-    line-height: 1;
-    color: #333;
-    &.be-contextmenu-item--hover {
-      color: #fff;
-    //   border-radius: 4px;
+    @apply text-center text-info px-9 py-2.5 leading-none;
+
+    &.be-contextmenu-item__hover {
+      @apply text-default;
     }
-    &.be-contextmenu-item--disabled {
-      color: #ccc;
-      cursor: not-allowed;
+
+    &.be-contextmenu-item__disabled {
+      @apply text-info cursor-not-allowed;
     }
   }
   .be-contextmenu-divider{
-    height: 0;
-    margin: 5px 0;
-    border-bottom: 1px solid #e8e8e8;
-  }
-  .be-contextmenu-group__menus{
-    padding: 0 5px;
-    margin: 0;
-    list-style: none;
-    .be-contextmenu-item{
-      display: inline-block;
-      padding: 5px 11px;
-      }
+    @apply h-0 border-b border-infoh;
   }
   .be-contextmenu-submenu{
-    position: relative;
-    text-align: center;
+    @apply relative text-center;
     & > .be-contextmenu{
-      position: absolute;
-      text-align: center;
+      @apply absolute text-center;
       &.left{
-        left: 0;
-        transform: translateX(-100%);
+        @apply left-0 transform -translate-x-full;
+
       }
       &.right{
-        right: 0;
-        transform: translateX(100%);
+        @apply right-0 transform translate-x-full;
       }
       &.top{
-        top: -(5px) - 1;
+        @apply -top-px;
       }
       &.bottom{
-        bottom: -(5px) - 1;
+        @apply -bottom-7;
       }
     }
     .be-contextmenu-submenu__title{
-      margin-right: 0px;
+      @apply mr-0;
     }
     .be-contextmenu-submenu__icon{
-      position: absolute;
-      right: 5px;
+      @apply absolute right-1.5;
       &::before{
         content: ">";
       }
     }
   }
 }
-.be-contextmenu--default{
-  .be-contextmenu-item--hover{
-    background-color:  #46a0fc;
+
+.be-contextmenu__default{
+  .be-contextmenu-item__hover{
+      @apply bg-blue-400;
     }
 }
 
-.be-contextmenu--bright{
-  .be-contextmenu-item--hover{
-    background-color: #ef5350;
+.be-contextmenu__bright{
+  .be-contextmenu-item__hover{
+    @apply bg-red-400;
   }
 }
-.be-contextmenu--dark{
-  .be-contextmenu-item--hover{
-    background-color: #2d3035;
+.be-contextmenu__dark{
+  .be-contextmenu-item__hover{
+    @apply bg-black;
     }
 }
-.be-contextmenu--violet{
+.be-contextmenu__violet{
   .be-contextmenu-item{
-    color: #7D8397;
+    @apply text-info;
   }
-  .be-contextmenu-item--hover{
-    background-color: #6A7DC4
+  .be-contextmenu-item__hover{
+    @apply bg-purple-200;
   }
 }
-.be-contextmenu--blues{
+.be-contextmenu__blues{
   .be-contextmenu-item{
-    color: #7D8397;
+    @apply text-info;
   }
-  .be-contextmenu-item--hover{
-    background-color: #206596
+  .be-contextmenu-item__hover{
+    @apply bg-blue-700;
   }
 }
 .be-contextmenu-iconfont{

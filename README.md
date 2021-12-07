@@ -33,6 +33,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
+be-contextmenu 改tailwind.css
+be-ellipsis 单元测试
 图标修改   
 样式重构  
 ## 长期排期

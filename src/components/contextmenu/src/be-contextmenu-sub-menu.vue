@@ -14,8 +14,7 @@
         </span>
     <div v-show="hover" ref="submenu" :class="submenuCls">
       <ul>
-        <!-- @slot 插槽内容可以使用常规标签，
-        也可以嵌套使用组件 be-contextmenu-item、be-contextmenu-SubMenu-->
+        <!-- @slot 插槽 嵌套使用组件 be-contextmenu-item、be-contextmenu-SubMenu-->
         <slot/>
       </ul>
     </div>
@@ -65,8 +64,8 @@ export default defineComponent({
       return {
         "be-contextmenu-item": true,
         "be-contextmenu-submenu": true,
-        "be-contextmenu-item--hover": hover.value,
-        "be-contextmenu-item--disabled": props.disabled,
+        "be-contextmenu-item__hover": hover.value,
+        "be-contextmenu-item__disabled": props.disabled,
       }
     })
     const submenuCls = computed(() => {

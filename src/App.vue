@@ -1,5 +1,15 @@
 <template>
-    <div id="App" class="app">
+    <div id="App" class="app" v-contextmenu:contextmenu>
+        <be-contextmenu ref="contextmenu" id="wqdw">
+        <be-contextmenu-sub-menu title="宋词">
+            <be-contextmenu-item><span>临安小雨初霁</span></be-contextmenu-item>
+            <be-contextmenu-item>陆游</be-contextmenu-item>
+            <be-contextmenu-item divider>陆游</be-contextmenu-item>
+            <be-contextmenu-sub-menu title="詞句">
+                <be-contextmenu-item>谁家客马过京华</be-contextmenu-item>
+            </be-contextmenu-sub-menu>
+        </be-contextmenu-sub-menu>
+        </be-contextmenu>
         <be-container style="margin-bottom: 60px">
             <be-header style="background-color: #FFFFFF;text-align: center;line-height: 60px;">Header</be-header>
             <be-main style="background-color:#f0f9eb;line-height: 160px;text-align: center">Main</be-main>

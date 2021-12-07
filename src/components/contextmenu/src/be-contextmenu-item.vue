@@ -70,8 +70,8 @@ export default defineComponent({
     const classname = computed(() => {
       return {
         'be-contextmenu-item': !props.divider,
-        'be-contextmenu-item--hover': hover.value,
-        'be-contextmenu-item--disabled': props.disabled,
+        'be-contextmenu-item__hover': hover.value,
+        'be-contextmenu-item__disabled': props.disabled,
       }
     })
     /**
