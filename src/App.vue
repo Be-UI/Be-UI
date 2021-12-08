@@ -246,9 +246,10 @@
               </be-dialog>-->
             <div  style="position: absolute;left: 20%;top: 100px;width: 320px;height: 300px" >
                 <be-button
-                    loading
                     @click="test"
-                    type="warning"
+                    prevIcon="delete"
+                    nextIcon="delete"
+
                     size="large">
                     测试
                 </be-button>
