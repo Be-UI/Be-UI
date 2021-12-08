@@ -18,7 +18,7 @@ const componentRender = (option: INMsgOption): void => {
     let close = option.onClose as Function
     let onClose = () => {
         render(null, elm)
-        close()
+        close && close()
     }
     option.onClose = onClose
     let instanceInner: VNode = createVNode(beMsgComponents, {...option});

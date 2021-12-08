@@ -1,5 +1,5 @@
 <template>
-    <div id="App" class="app" v-contextmenu:contextmenu>
+    <div id="App" class="app" >
 <!--        <be-contextmenu ref="contextmenu" id="wqdw">
         <be-contextmenu-sub-menu title="宋词">
             <be-contextmenu-item><span>临安小雨初霁</span></be-contextmenu-item>
@@ -68,7 +68,7 @@
             </be-container>
         </be-container>-->
 
-        <be-ellipsis content="自古逢秋悲寂寥" :elpNum = '3' placement="right"   text="我言秋日胜春朝" id="be_ellipsis_test_content"></be-ellipsis>
+<!--        <be-ellipsis content="自古逢秋悲寂寥" :elpNum = '3' placement="right"   text="我言秋日胜春朝" id="be_ellipsis_test_content"></be-ellipsis>-->
         <!--<be-loading
             :show="isLoading"
             text="测试loading"
@@ -496,6 +496,32 @@ export default {
         panda
     },
     mounted() {
+        BeMsg({
+           /* isDrag:true,
+            titles:'MessageBox',
+            customClass:'q1qwdsaddddddd',
+            msgType:'warning',
+            footerType:'center',
+            footerRender:null,
+            bodyRender:()=>{
+                return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
+                    您的体验时间仅剩
+                </p>
+            },
+            onConfirm:()=>console.log('click'),
+            onClose:()=>console.log('close'),
+            iconPreRender:null,
+            iconNextRender:null,
+            isOpenModal:true,*/
+            customClass:'props-titles',
+            titles:'test-titles',
+           // isOpenModal:false,
+            footerRender:null,
+            bodyRender:null,
+            iconPreRender:null,
+            footerType:'right',
+            iconNextRender:null,
+        })
         // this.$refs.beinputNum.focus()
         // this.$refs.beinputNum.$el.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
         // this.$refs.beinputNum.focus()

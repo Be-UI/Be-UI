@@ -1,11 +1,19 @@
 
 .be-message-box {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2077;
+  display: flex;
+  justify-content: center;
   .be-message-box-container {
     transition: opacity .5s;
     width: 305px;
     min-height: 158px;
     background: #FFFFFF;
-    padding: 16px 16px 16px 20px;
+    padding: 16px;
     box-shadow: 0 6px 13px rgba(0, 0, 0, 0.16);
     border-radius: 2px;
     box-sizing: border-box;
@@ -22,6 +30,8 @@
         justify-content: space-between;
 
         div:nth-child(1) {
+          display: flex;
+          align-items: center;
           .icon-warning {
             fill: $warning;
             line-height: 25px;
@@ -72,6 +82,8 @@
         }
 
         div:nth-child(2) {
+          display: flex;
+          align-items: center;
           cursor: pointer;
         }
       }
@@ -100,13 +112,5 @@
 }
 
 .be-modal {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 2077;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
 }
