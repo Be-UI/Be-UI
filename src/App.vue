@@ -1,6 +1,6 @@
 <template>
     <div id="App" class="app" v-contextmenu:contextmenu>
-        <be-contextmenu ref="contextmenu" id="wqdw">
+<!--        <be-contextmenu ref="contextmenu" id="wqdw">
         <be-contextmenu-sub-menu title="宋词">
             <be-contextmenu-item><span>临安小雨初霁</span></be-contextmenu-item>
             <be-contextmenu-item>陆游</be-contextmenu-item>
@@ -9,7 +9,7 @@
                 <be-contextmenu-item>谁家客马过京华</be-contextmenu-item>
             </be-contextmenu-sub-menu>
         </be-contextmenu-sub-menu>
-        </be-contextmenu>
+        </be-contextmenu>-->
 <!--        <be-container style="margin-bottom: 60px">
             <be-header style="background-color: #FFFFFF;text-align: center;line-height: 60px;">Header</be-header>
             <be-main style="background-color:#f0f9eb;line-height: 160px;text-align: center">Main</be-main>
@@ -244,8 +244,15 @@
                 </be-button>
                 </template>
               </be-dialog>-->
-        <!--    <div width="25" height="25" style="position: absolute;left: 20%;top: 100px;width: 320px;height: 300px" v-contextmenu:contextmenu>
-                <be-contextmenu ref="contextmenu" :theme="'blues'" id="wqdw">
+            <div  style="position: absolute;left: 20%;top: 100px;width: 320px;height: 300px" >
+                <be-button
+                    loading
+                    @click="test"
+                    type="warning"
+                    size="large">
+                    测试
+                </be-button>
+<!--                <be-contextmenu ref="contextmenu" :theme="'blues'" id="wqdw">
                     <be-contextmenu-sub-menu title="宋词">
                         <span>临安小雨初霁</span>
                         <be-contextmenu-item>陆游</be-contextmenu-item>
@@ -253,14 +260,14 @@
                             <be-contextmenu-item>谁家客马过京华</be-contextmenu-item>
                         </be-contextmenu-sub-menu>
                     </be-contextmenu-sub-menu>
-                </be-contextmenu>
+                </be-contextmenu>-->
 
-              &lt;!&ndash;            <be-button type="primary"
+              <!--            <be-button type="primary"
                                      bordered
                                      @click="testInputFunc"
                                      round="3">确定
-                          </be-button>&ndash;&gt;
-              &lt;!&ndash;            <be-input
+                          </be-button>-->
+              <!--            <be-input
                               ref="sssinput"
                               type="test"
                               placeholder="测试文本域"
@@ -292,9 +299,9 @@
                                       测试
                                   </be-button>
                               </template>&ndash;&gt;
-                          </be-input>&ndash;&gt;
-              &lt;!&ndash;           :focusTrigger="false"   :suggestionList="testList" :fetchSuggestions="getSuggest"&ndash;&gt;
-              &lt;!&ndash;            <be-autocomplete
+                          </be-input>-->
+              <!--           :focusTrigger="false"   :suggestionList="testList" :fetchSuggestions="getSuggest"-->
+              <!--            <be-autocomplete
                               clearable
                               size="mini"
                               prevIcon="delete"
@@ -336,30 +343,30 @@
                                   </div>
 
                               </template>
-                          </be-autocomplete>&ndash;&gt;
-              &lt;!&ndash;            <be-icon icon="error" @click="showDialog = false" width="25" height="25" color="#00ffff" custom-class="asdqw" spin></be-icon>&ndash;&gt;
+                          </be-autocomplete>-->
+              <!--            <be-icon icon="error" @click="showDialog = false" width="25" height="25" color="#00ffff" custom-class="asdqw" spin></be-icon>-->
 
 
-              &lt;!&ndash;        <be-select  size="medium" v-model="seletStr" clear group>
+              <!--        <be-select  size="medium" v-model="seletStr" clear group>
                           <template v-slot="slotProps">
                               <span >{{ slotProps.label }}</span>
                           </template>
-                      </be-select>&ndash;&gt;
-              &lt;!&ndash;            <be-select  size="medium" v-model="seletStr" clear search :list="testList" keyValue = 'id' :searchFunc = 'searchFunc' :sortFunc = 'sortFunc'>
+                      </be-select>-->
+              <!--            <be-select  size="medium" v-model="seletStr" clear search :list="testList" keyValue = 'id' :searchFunc = 'searchFunc' :sortFunc = 'sortFunc'>
 
-                    </be-select>&ndash;&gt;
-              &lt;!&ndash;            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
-                          </be-select>&ndash;&gt;
-              &lt;!&ndash;            <be-select  size="medium" v-model="seletStr" clear keyValue = 'id' multiple :list="testList" search>
-                          </be-select>&ndash;&gt;
-              &lt;!&ndash;            <be-select  size="medium" v-model="seletStr" clear keyValue = 'id' multiple :list="testList" search>
+                    </be-select>-->
+              <!--            <be-select  size="medium" v-model="seletStr" clear search keyValue = 'id' remote :remoteFunc="getSuggest" @scroll="testclose">
+                          </be-select>-->
+              <!--            <be-select  size="medium" v-model="seletStr" clear keyValue = 'id' multiple :list="testList" search>
+                          </be-select>-->
+              <!--            <be-select  size="medium" v-model="seletStr" clear keyValue = 'id' multiple :list="testList" search>
                               <template v-slot:tag="slotProps">
                                   <span @click="slotProps.close">{{ slotProps.data.label }}  {{slotProps.index}}</span>
                               </template>
                           </be-select>
                           {{seletStr}}
-                          <panda width="25" height="25"  @click="test"></panda>&ndash;&gt;
-              &lt;!&ndash;            <be-input-number @change="handleClick"
+                          <panda width="25" height="25"  @click="test"></panda>-->
+              <!--            <be-input-number @change="handleClick"
                                            :formatter="formatter"
                                            :parser="parser"
                                            keyboard
@@ -370,15 +377,15 @@
                                            ref="beinputNum">
               &lt;!&ndash;                <template #next>next</template>
                               <template #pre>pre</template>&ndash;&gt;
-                          </be-input-number>&ndash;&gt;
-              &lt;!&ndash;      <be-input-number
+                          </be-input-number>-->
+              <!--      <be-input-number
                         v-model="testModel"
                         ref="beinputNum"
                         keyboard
                         :step="0.3">
                     </be-input-number>
-                    {{ testModel }}&ndash;&gt;
-        &lt;!&ndash;      <be-switch
+                    {{ testModel }}-->
+        <!--      <be-switch
                   v-model="switchModel"
                   @change="testClose" >
                 <template v-slot:unCheckedRender="slotProps">
@@ -387,10 +394,10 @@
                 <template v-slot:checkedRender="slotProps">
                   <span>checked</span>
                 </template>
-              </be-switch>&ndash;&gt;
-              &lt;!&ndash;      {{switchModel}}&ndash;&gt;
-              &lt;!&ndash;          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>&ndash;&gt;
-        &lt;!&ndash;        <be-breadcrumb>
+              </be-switch>-->
+              <!--      {{switchModel}}-->
+              <!--          <be-tag type="warning" @close="handleClick" isClose>asdw</be-tag>-->
+        <!--        <be-breadcrumb>
                     <be-breadcrumb-item  to="/黑色柳丁" separator="#" >柳丁</be-breadcrumb-item>
                     <be-breadcrumb-item  to="/似曾相识" :option="testList" :clickOption="handleClick">似曾相识</be-breadcrumb-item>
                     <be-breadcrumb-item to="/小镇姑娘" separator="#" :click="testClose">
@@ -404,8 +411,8 @@
                         <be-icon icon="delete" style="position: absolute;left: 20%;top: 300px;"></be-icon>
                     </template>
                     <panda width="25" height="25"  @click="test"></panda>
-                </be-popover>&ndash;&gt;
-            </div>-->
+                </be-popover>-->
+            </div>
     </div>
 
 </template>

@@ -56,7 +56,7 @@ be-ellipsis 单元测试
 |12| 文本弹出显示  | be-toolTip | <font color=#07c160 size=5>√</font>  | <font color=red size=5>×</font> |
 |13| 按钮  | be-button | <font color=#07c160 size=5>√</font>  | <font color=red size=5>×</font> |
 |14| 自动补全输入 | be-autocomplete  | <font color=#07c160 size=5>√</font>  | <font color=red size=5>×</font> |
-|15| 标签  | be-tag | <font color=#07c160 size=5>√</font>  | <font color=red size=5>×</font> |
+|15| 标签  | be-tag | <font color=#07c160 size=5>√</font>  | <font color=#07c160 size=5>√</font> |
 |16| 选择框  | be-select | <font color=#07c160 size=5>√</font>  | <font color=red size=5>×</font> |
 |17| 消息提示  | be-message | <font color=#07c160 size=5>√</font>  | <font color=#07c160 size=5>√</font> |
 |18| 数字输入  | be-input-number | <font color=#07c160 size=5>√</font>  | <font color=#07c160 size=5>√</font> |

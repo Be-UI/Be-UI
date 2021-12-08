@@ -46,5 +46,6 @@ module.exports = {
     // roots: ['<rootDir>/src/components/breadcrumb'],
     // roots: ['<rootDir>/src/components/contextmenu'],
     // roots: ['<rootDir>/src/components/container'],
-     roots: ['<rootDir>/src/components/ellipsis'],
+    // roots: ['<rootDir>/src/components/ellipsis'],
+    roots: ['<rootDir>/src/components/button'],
 }

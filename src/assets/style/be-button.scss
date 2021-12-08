@@ -94,12 +94,16 @@
     }
 
     .be-button-prevIcon {
+      display: flex;
+      align-items: center;
       .be-icon {
         vertical-align: -0.1em;
       }
     }
 
     .be-button-nextIcon {
+      display: flex;
+      align-items: center;
       .be-icon {
         vertical-align: -0.1em;
       }

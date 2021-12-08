@@ -12,8 +12,8 @@ describe('test-be-tag-props', () => {
                 round: 25,
             },
         })
-        const Elm = wrapper.element as HTMLElement
-        expect(Elm.style.borderRadius).toBe(`25px`)
+        const elm = wrapper.element as HTMLElement
+        expect(elm.style.borderRadius).toBe(`25px`)
     })
     test('props-round-string', () => {
         const wrapper = mount(BeTag, {
@@ -21,8 +21,8 @@ describe('test-be-tag-props', () => {
                 round: '25',
             },
         })
-        const Elm = wrapper.element as HTMLElement
-        expect(Elm.style.borderRadius).toBe(`25px`)
+        const elm = wrapper.element as HTMLElement
+        expect(elm.style.borderRadius).toBe(`25px`)
     })
     test('props-size', () => {
         const wrapperMini = mount(BeTag, {
@@ -106,10 +106,10 @@ describe('test-be-tag-props', () => {
                 },
             },
         })
-        const Elm = wrapper.element as HTMLElement
-        expect(Elm.style.border).toBe(`1px solid #00ffff`)
-        expect(Elm.style.backgroundColor).toBe(`red`)
-        expect(Elm.style.color).toBe(`green`)
+        const elm = wrapper.element as HTMLElement
+        expect(elm.style.border).toBe(`1px solid #00ffff`)
+        expect(elm.style.backgroundColor).toBe(`red`)
+        expect(elm.style.color).toBe(`green`)
     })
     test('props-disabled', () => {
         const wrapper = mount(BeTag, {
@@ -117,8 +117,8 @@ describe('test-be-tag-props', () => {
                 disabled: true,
             },
         })
-        const Elm = wrapper.element as HTMLElement
-        expect(Elm.className.indexOf('be-tag__disabled') > 0).toBeTruthy()
+        const elm = wrapper.element as HTMLElement
+        expect(elm.className.indexOf('be-tag__disabled') > 0).toBeTruthy()
     })
 })
 /**
