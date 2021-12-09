@@ -10,7 +10,6 @@
   "files": [
     "dist"
   ],
-  "type": "module",
   "main": "./dist/be-ui.umd.js",
   "module": "./dist/be-ui.es.js",
   "exports": {
