@@ -440,50 +440,53 @@ import BeFooter from "./components/container/src/be-footer.vue";
 import BeAside from "./components/container/src/be-aside.vue";
 
 export default {
-    name: 'App',
-    directives: {ClickOutside, contextmenu},
-    data() {
-        return {
-            testOption: {
-                border: '1px solid #00ffff',
-                backgroundColor: 'red',
-                color: 'green'
-            },
-            switchModel: false,
-            num: 0,
-            notify: null,
-            isLoading: true,
-            showDialog: false,
-            loadingInst: null,
-            pageData: [],
-            pageParams: {
-                currentPage: 1,
-                pageNum: 1,
-                pageSize: 200,
-                total: 300
-            },
-            testModel: 1,
-            // seletStr:[],
-            seletStr: [{label: '落日绣帘卷', id: '落日绣帘卷'}, {label: '亭下水连空', id: '亭下水连空'}],
-            testList: [
-                {label: '落日绣帘卷', id: '落日绣帘卷'},
-                {label: '亭下水连空', id: '亭下水连空'},
-                {label: '知君为我新作', id: '知君为我新作'},
-                {label: '窗户湿青红', id: '窗户湿青红'},
-                {label: '长记平山堂上', id: '欹枕江南烟雨'},
-                {label: '欹枕江南烟雨', id: '长记平山堂上'},
-                {label: '杳杳没孤鸿', id: '杳杳没孤鸿'},
-                {label: '千里快哉風', id: '千里快哉風'},
-                {label: '认得醉翁语', id: '认得醉翁语'},
-                {label: '山色有无中', id: '山色有无中'},
-                {label: '一點浩然氣', id: '一點浩然氣'},
-                {label: '千里快哉風我', id: 'fjkhfsdaiuorgga'},
-                {label: 'a', id: 'fjkhfsdaiuawdorgga'},
-                {label: 'ab', id: 'fjkhfsadaiuorgga'},
-            ]
-        }
+  name: 'App',
+  directives: {ClickOutside, contextmenu},
+  setup() {
+    return {}
+  },
+  /* data() {
+       return {
+           testOption: {
+               border: '1px solid #00ffff',
+               backgroundColor: 'red',
+               color: 'green'
+           },
+           switchModel: false,
+           num: 0,
+           notify: null,
+           isLoading: true,
+           showDialog: false,
+           loadingInst: null,
+           pageData: [],
+           pageParams: {
+               currentPage: 1,
+               pageNum: 1,
+               pageSize: 200,
+               total: 300
+           },
+           testModel: 1,
+           // seletStr:[],
+           seletStr: [{label: '落日绣帘卷', id: '落日绣帘卷'}, {label: '亭下水连空', id: '亭下水连空'}],
+           testList: [
+               {label: '落日绣帘卷', id: '落日绣帘卷'},
+               {label: '亭下水连空', id: '亭下水连空'},
+               {label: '知君为我新作', id: '知君为我新作'},
+               {label: '窗户湿青红', id: '窗户湿青红'},
+               {label: '长记平山堂上', id: '欹枕江南烟雨'},
+               {label: '欹枕江南烟雨', id: '长记平山堂上'},
+               {label: '杳杳没孤鸿', id: '杳杳没孤鸿'},
+               {label: '千里快哉風', id: '千里快哉風'},
+               {label: '认得醉翁语', id: '认得醉翁语'},
+               {label: '山色有无中', id: '山色有无中'},
+               {label: '一點浩然氣', id: '一點浩然氣'},
+               {label: '千里快哉風我', id: 'fjkhfsdaiuorgga'},
+               {label: 'a', id: 'fjkhfsdaiuawdorgga'},
+               {label: 'ab', id: 'fjkhfsadaiuorgga'},
+           ]
+       }
 
-    },
+   },*/
     components: {
         BeAside,
         BeFooter,
@@ -496,234 +499,234 @@ export default {
         BeIcon,
         panda
     },
-    mounted() {
-        BeMsg({
-           /* isDrag:true,
-            titles:'MessageBox',
-            customClass:'q1qwdsaddddddd',
-            msgType:'warning',
-            footerType:'center',
-            footerRender:null,
-            bodyRender:()=>{
-                return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
-                    您的体验时间仅剩
-                </p>
-            },
-            onConfirm:()=>console.log('click'),
-            onClose:()=>console.log('close'),
-            iconPreRender:null,
-            iconNextRender:null,
-            isOpenModal:true,*/
-            customClass:'props-titles',
-            titles:'test-titles',
-           // isOpenModal:false,
-            footerRender:null,
-            bodyRender:null,
-            iconPreRender:null,
-            footerType:'right',
-            iconNextRender:null,
-        })
-        // this.$refs.beinputNum.focus()
-        // this.$refs.beinputNum.$el.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
-        // this.$refs.beinputNum.focus()
-        // console.log(document.activeElement)
-        /* const tr = document.getElementById('qwq')
-         const po = document.getElementById('aaa')
-         createPopper(tr, po, {
-               placement: 'top',
-         })*/
-        /*   this.notify = BeMessage({
-             loading: true,
-             titles: 'titles',
-             msgType: 'warning',
-             customClass: 'options.customClass',
-             duration: 0,
-             close: true,
-             key: 'options.key',
-             onClose: () => console.log('close'),
-             iconPreRender: <span>🐕</span>,
-             /!*  closeRender:<span>❀</span>,*!/
-           })*/
-        /* this.notify = BeMessage({
-             loading:true,
-             titles:'titles',
+  /*   mounted() {
+         BeMsg({
+            /!* isDrag:true,
+             titles:'MessageBox',
+             customClass:'q1qwdsaddddddd',
              msgType:'warning',
-             customClass: 'options.customClass',
-             duration: 0,
-             close:true,
-             key: 'options.kesy',
+             footerType:'center',
+             footerRender:null,
+             bodyRender:()=>{
+                 return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
+                     您的体验时间仅剩
+                 </p>
+             },
+             onConfirm:()=>console.log('click'),
              onClose:()=>console.log('close'),
-             iconPreRender: <span>🐕</span>,
-             /!*  closeRender:<span>❀</span>,*!/
-         })*/
-        /* setTimeout(() => {
-           this.notify.update({
-             loading: false,
-             key: 'options.key',
-           })
-         }, 1000)
-         this.notify = BeMessage({
-           titles: 'titl的气味的es',
-           msgType: 'warning',
-
-           customClass: 'options.customClass',
-           duration: 0,
-           close: true,
-           key: 'optionsd.key',
-           onClose: () => console.log('close'),
-           /!* iconPreRender: ()=><span>🐕</span>,
-            closeRender:()=><span>❀</span>,*!/
-         })*/
-        /*  this.notify = BeMessage({
-            titles: 'titl的气a味的es',
+             iconPreRender:null,
+             iconNextRender:null,
+             isOpenModal:true,*!/
+             customClass:'props-titles',
+             titles:'test-titles',
+            // isOpenModal:false,
+             footerRender:null,
+             bodyRender:null,
+             iconPreRender:null,
+             footerType:'right',
+             iconNextRender:null,
+         })
+         // this.$refs.beinputNum.focus()
+         // this.$refs.beinputNum.$el.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+         // this.$refs.beinputNum.focus()
+         // console.log(document.activeElement)
+         /!* const tr = document.getElementById('qwq')
+          const po = document.getElementById('aaa')
+          createPopper(tr, po, {
+                placement: 'top',
+          })*!/
+         /!*   this.notify = BeMessage({
+              loading: true,
+              titles: 'titles',
+              msgType: 'warning',
+              customClass: 'options.customClass',
+              duration: 0,
+              close: true,
+              key: 'options.key',
+              onClose: () => console.log('close'),
+              iconPreRender: <span>🐕</span>,
+              /!*  closeRender:<span>❀</span>,*!/
+            })*!/
+         /!* this.notify = BeMessage({
+              loading:true,
+              titles:'titles',
+              msgType:'warning',
+              customClass: 'options.customClass',
+              duration: 0,
+              close:true,
+              key: 'options.kesy',
+              onClose:()=>console.log('close'),
+              iconPreRender: <span>🐕</span>,
+              /!*  closeRender:<span>❀</span>,*!/
+          })*!/
+         /!* setTimeout(() => {
+            this.notify.update({
+              loading: false,
+              key: 'options.key',
+            })
+          }, 1000)
+          this.notify = BeMessage({
+            titles: 'titl的气味的es',
             msgType: 'warning',
 
             customClass: 'options.customClass',
             duration: 0,
             close: true,
-            key: 'optiondwqdsd.key',
+            key: 'optionsd.key',
             onClose: () => console.log('close'),
             /!* iconPreRender: ()=><span>🐕</span>,
              closeRender:()=><span>❀</span>,*!/
-          })*/
+          })*!/
+         /!*  this.notify = BeMessage({
+             titles: 'titl的气a味的es',
+             msgType: 'warning',
+
+             customClass: 'options.customClass',
+             duration: 0,
+             close: true,
+             key: 'optiondwqdsd.key',
+             onClose: () => console.log('close'),
+             /!* iconPreRender: ()=><span>🐕</span>,
+              closeRender:()=><span>❀</span>,*!/
+           })*!/
 
 
-        for (let i = 0; i < 300; i++) {
-            this.pageData.push({num: i})
-        }
-    },
-    methods: {
-        formatter(value) {
-            return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-        },
-        parser(value) {
-            return value.replace(/\$\s?|(,*)/g, '')
-        },
-        searchFunc(value: string, ordData: Array<any>, labelValue: string) {
-            let arr = value ? ordData.filter(
-                (val: any) => {
-                    return (val[labelValue].toString().toLowerCase().indexOf(value.toLowerCase()) >= 0);
-                }
-            ) : ordData
-            return arr.length > 0 ? arr : ordData
-        },
-        sortFunc(a, b) {
-            return a.label.toLowerCase().localeCompare(b.label.toLowerCase())
-        },
-        testInputFunc() {
-            this.$refs.sssinput.select()
-        },
-        getSuggest(cb) {
-            setTimeout(() => {
-                cb(
-                    [
-                        {label: '落日绣帘卷', id: '落日绣帘卷'},
-                        {label: '亭下水连空', id: '亭下水连空'},
-                        {label: '知君为我新作', id: '知君为我新作'},
-                        {label: '窗户湿青红', id: '窗户湿青红'},
-                        {label: '长记平山堂上', id: '欹枕江南烟雨'},
-                        {label: '欹枕江南烟雨', id: '长记平山堂上'},
-                        {label: '杳杳没孤鸿', id: '杳杳没孤鸿'},
-                        {label: '千里快哉風', id: '千里快哉風'},
-                        {label: '千里快哉風千里快哉風', id: '千里快哉風千里快哉風'},
-                        {label: '认得醉翁语', id: '认得醉翁语'},
-                        {label: '山色有无中', id: '山色有无中'},
-                        {label: '一點浩然氣', id: '一點浩然氣'},
-                    ]
-                )
-            }, 500)
-        },
-        handleblur() {
+         for (let i = 0; i < 300; i++) {
+             this.pageData.push({num: i})
+         }
+     },
+     methods: {
+         formatter(value) {
+             return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+         },
+         parser(value) {
+             return value.replace(/\$\s?|(,*)/g, '')
+         },
+         searchFunc(value: string, ordData: Array<any>, labelValue: string) {
+             let arr = value ? ordData.filter(
+                 (val: any) => {
+                     return (val[labelValue].toString().toLowerCase().indexOf(value.toLowerCase()) >= 0);
+                 }
+             ) : ordData
+             return arr.length > 0 ? arr : ordData
+         },
+         sortFunc(a, b) {
+             return a.label.toLowerCase().localeCompare(b.label.toLowerCase())
+         },
+         testInputFunc() {
+             this.$refs.sssinput.select()
+         },
+         getSuggest(cb) {
+             setTimeout(() => {
+                 cb(
+                     [
+                         {label: '落日绣帘卷', id: '落日绣帘卷'},
+                         {label: '亭下水连空', id: '亭下水连空'},
+                         {label: '知君为我新作', id: '知君为我新作'},
+                         {label: '窗户湿青红', id: '窗户湿青红'},
+                         {label: '长记平山堂上', id: '欹枕江南烟雨'},
+                         {label: '欹枕江南烟雨', id: '长记平山堂上'},
+                         {label: '杳杳没孤鸿', id: '杳杳没孤鸿'},
+                         {label: '千里快哉風', id: '千里快哉風'},
+                         {label: '千里快哉風千里快哉風', id: '千里快哉風千里快哉風'},
+                         {label: '认得醉翁语', id: '认得醉翁语'},
+                         {label: '山色有无中', id: '山色有无中'},
+                         {label: '一點浩然氣', id: '一點浩然氣'},
+                     ]
+                 )
+             }, 500)
+         },
+         handleblur() {
 
-        },
-        handlefocus() {
+         },
+         handlefocus() {
 
-        },
-        handlenextIcon() {
+         },
+         handlenextIcon() {
 
-        },
-        handlePrevIcon() {
+         },
+         handlePrevIcon() {
 
-        },
-        handleinput(data) {
-            //console.log(data)
-        },
-        handleChange(data) {
-            //console.log(data)
+         },
+         handleinput(data) {
+             //console.log(data)
+         },
+         handleChange(data) {
+             //console.log(data)
 
-        },
-        pageChange(data) {
-            // console.log(data)
-            this.pageParams.currentPage = data.currentPage
-        },
-        updatePage(data) {
-            //console.log(data)
-        },
-        updateNum(data) {
-            this.pageParams.pageSize = data
-            // console.log(data)
-        },
-        customRender() {
-            return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)
-        },
-        handleClick() {
-            //this.testModel = 2000
-        },
-        handleStep(val) {
-            debugger
-        },
-        test(qw) {
-            this.showDialog = !this.showDialog
-            /*this.loadingInst = BeLoadingSer.init({
-                isBackground:false,
-                bgColor:'#F2F4F5',
-                text:'正在访问中，请稍候…',
-                color:'#b1b1b1',
-            })
-            setTimeout(()=>{
-                BeLoadingSer.close(this.loadingInst)
-            },3000)*/
+         },
+         pageChange(data) {
+             // console.log(data)
+             this.pageParams.currentPage = data.currentPage
+         },
+         updatePage(data) {
+             //console.log(data)
+         },
+         updateNum(data) {
+             this.pageParams.pageSize = data
+             // console.log(data)
+         },
+         customRender() {
+             return (<be-icon icon="delete" style="position: absolute;left: 20%;top: 100px;"></be-icon>)
+         },
+         handleClick() {
+             //this.testModel = 2000
+         },
+         handleStep(val) {
+             debugger
+         },
+         test(qw) {
+             this.showDialog = !this.showDialog
+             /!*this.loadingInst = BeLoadingSer.init({
+                 isBackground:false,
+                 bgColor:'#F2F4F5',
+                 text:'正在访问中，请稍候…',
+                 color:'#b1b1b1',
+             })
+             setTimeout(()=>{
+                 BeLoadingSer.close(this.loadingInst)
+             },3000)*!/
 
-            // this.isLoading = !this.isLoading
-            /* BeMsg({
-               isDrag:true,
-               titles:'MessageBox',
-               customClass:'q1qwdsaddddddd',
-               msgType:'warning',
-               footerType:'center',
-               footerRender:null,
-               bodyRender:()=>{
-                 return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
-                   您的体验时间仅剩
-                 </p>
-               },
-               onConfirm:()=>console.log('click'),
-               onClose:()=>console.log('close'),
-               iconPreRender:null,
-               iconNextRender:null,
-               isOpenModal:true,
-             })*/
-            /* this.notify = BeNotify({
-                 titles:'Notification',
-                 bodyRender:()=>{
-                     return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
-                         您的体验时间仅剩
-                     </p>
-                 },
-                 msgType:'info',
-                 onClick:()=>console.log('click'),
-                 onClose:()=>console.log('close'),
-                 offsetBottom:10,
-                 placement:'bottomRight',
-                 duration:0,
-                 key:1
-             })*/
-        },
-        testClose(data) {
-            console.log(data)
-            // this.notify.close()
-        }
-    }
+             // this.isLoading = !this.isLoading
+             /!* BeMsg({
+                isDrag:true,
+                titles:'MessageBox',
+                customClass:'q1qwdsaddddddd',
+                msgType:'warning',
+                footerType:'center',
+                footerRender:null,
+                bodyRender:()=>{
+                  return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
+                    您的体验时间仅剩
+                  </p>
+                },
+                onConfirm:()=>console.log('click'),
+                onClose:()=>console.log('close'),
+                iconPreRender:null,
+                iconNextRender:null,
+                isOpenModal:true,
+              })*!/
+             /!* this.notify = BeNotify({
+                  titles:'Notification',
+                  bodyRender:()=>{
+                      return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
+                          您的体验时间仅剩
+                      </p>
+                  },
+                  msgType:'info',
+                  onClick:()=>console.log('click'),
+                  onClose:()=>console.log('close'),
+                  offsetBottom:10,
+                  placement:'bottomRight',
+                  duration:0,
+                  key:1
+              })*!/
+         },
+         testClose(data) {
+             console.log(data)
+             // this.notify.close()
+         }
+     }*/
 }
 </script>
 <style lang="scss">
