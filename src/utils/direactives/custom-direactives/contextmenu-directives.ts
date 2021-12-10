@@ -23,7 +23,7 @@ export const contextmenu:ObjectDirective= {
             children.forEach((childVNode)=>{
                 let cVNode:VNode = childVNode as VNode
                 let refs = cVNode.ref as VNodeNormalizedRefAtom
-                if(refs.r && (refs.r === binding.arg || refs.r === binding.value)){
+                if (refs.r && (refs.r === binding.arg || refs.r === binding.value)) {
                     contextmenu = cVNode
                     throw new Error('EndIterative');
                 }
@@ -31,7 +31,9 @@ export const contextmenu:ObjectDirective= {
         } catch (e) {
             if (e.message !== "EndIterative") throw e;
         }
-        if(!contextmenu) return
+        if (!contextmenu) return
+        debugger
+        console.log(contextmenu)
         //调用组件 addRef 给触发dom添加右键事件，并缓存记录
         contextmenu.component.ctx.addRef({el, vnode})
     }

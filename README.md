@@ -33,9 +33,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
+contextmenu 打包后指令报错 图标修改   
+样式重构
 
-图标修改   
-样式重构  
 ## 长期排期
 1.服务式访问的全局绑定  
 2.组件引用编写
