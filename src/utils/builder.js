@@ -1,4 +1,10 @@
-import {Plugin} from 'vite'
+/*
+* @builder.js
+* @deprecated 
+* @author czh
+* @update (czh 2021/12/8)
+*/
+
 import {readFileSync, readdirSync} from 'fs'
 
 const svgTitle = /<svg([^>+].*?)>/
@@ -8,7 +14,7 @@ const hasViewBox = /(viewBox="[^>+].*?")/g
 
 const clearReturn = /(\r)|(\n)/g
 
-function findSvgFile(dir: string): string[] {
+function findSvgFile(dir) {
     const svgRes = []
     const dirents = readdirSync(dir, {
         withFileTypes: true
@@ -20,7 +26,7 @@ function findSvgFile(dir: string): string[] {
             const svg = readFileSync(dir + dirent.name)
                 .toString()
                 .replace(clearReturn, '')
-                .replace(svgTitle, ($1: string, $2: string) => {
+                .replace(svgTitle, ($1, $2) => {
                     // console.log(++i)
                     // console.log(dirent.name)
                     let width = 0
@@ -52,15 +58,15 @@ function findSvgFile(dir: string): string[] {
 }
 
 export const svgBuilder = (
-    path: string,
-): Plugin | void => {
-    if (path === '') return
+    path,
+) => {
     const res = findSvgFile(path)
+    debugger
     // console.log(res.length)
     // const res = []
     return {
         name: 'svg-transform',
-        transformIndexHtml(html): string {
+        transformIndexHtml(html) {
             return html.replace(
                 '<body>',
                 `
@@ -73,3 +79,4 @@ export const svgBuilder = (
         }
     }
 }
+svgBuilder('../assets/icon/')

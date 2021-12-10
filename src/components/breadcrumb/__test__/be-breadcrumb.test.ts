@@ -11,8 +11,8 @@ import {ClickOutside} from '../../../utils/direactives/custom-direactives/click-
 import {ref} from "vue";
 import {asyncExpect} from "../../../utils/utils";
 
-const _mount = (options: any) =>
-    mount({
+const _mount = (options: any) =>{
+    return mount({
         components: {
             'BeBreadcrumb': BeBreadcrumb,
             'BeBreadcrumbItem': BeBreadcrumbItem,
@@ -20,6 +20,8 @@ const _mount = (options: any) =>
         directives: {ClickOutside},
         ...options,
     })
+}
+
 
 interface IOptionItem {
     label: string

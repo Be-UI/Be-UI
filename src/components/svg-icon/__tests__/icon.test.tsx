@@ -65,7 +65,7 @@ describe('test-be-icon-props', () => {
     })
 })
 /**
- * 测试时间响应方法
+ * 测试响应方法
  * @param options
  */
 const _mount = (options: any) =>

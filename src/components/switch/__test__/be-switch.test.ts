@@ -20,8 +20,8 @@ describe('test-be-switch-props', () => {
                 size: 'small',
             },
         })
-        const Elm = wrapper.element as HTMLElement
-        expect(Elm.className.indexOf('be-switch__small') > 0).toBeTruthy()
+        const elm = wrapper.element as HTMLElement
+        expect(elm.className.indexOf('be-switch__small') > 0).toBeTruthy()
     })
     test('props-size-default', () => {
         const wrapper = mount(BeSwitch, {
@@ -29,8 +29,8 @@ describe('test-be-switch-props', () => {
                 size: 'default',
             },
         })
-        const Elm = wrapper.element as HTMLElement
-        expect(Elm.className.indexOf('be-switch__default') > 0).toBeTruthy()
+        const elm = wrapper.element as HTMLElement
+        expect(elm.className.indexOf('be-switch__default') > 0).toBeTruthy()
     })
     test('props-size-large', () => {
         const wrapper = mount(BeSwitch, {
@@ -38,8 +38,8 @@ describe('test-be-switch-props', () => {
                 size: 'large',
             },
         })
-        const Elm = wrapper.element as HTMLElement
-        expect(Elm.className.indexOf('be-switch__large') > 0).toBeTruthy()
+        const elm = wrapper.element as HTMLElement
+        expect(elm.className.indexOf('be-switch__large') > 0).toBeTruthy()
     })
     test('props-disabled', async () => {
         const wrapper = _mount({
@@ -77,8 +77,8 @@ describe('test-be-switch-props', () => {
                 customClass: 'customClass',
             },
         })
-        const Elm = wrapper.element as HTMLElement
-        expect(Elm.className.indexOf('customClass') > 0).toBeTruthy()
+        const elm = wrapper.element as HTMLElement
+        expect(elm.className.indexOf('customClass') > 0).toBeTruthy()
     })
     test('props-checkedValue-unCheckedValue', async () => {
         const wrapper = _mount({

@@ -7,8 +7,6 @@ import {
     onMounted,
     defineAsyncComponent
 } from 'vue'
-import '../../../assets/style/be-message-box.scss';
-import '../../../assets/style/be-button.scss';
 import {IMsg} from "./be-message-box-type";
 import {dragDirective} from "../../../utils/direactives/custom-direactives/drag-directives";
 
@@ -19,13 +17,6 @@ export default defineComponent({
         'be-icon': defineAsyncComponent(() => import("../../svg-icon")),
     },
     props: {
-        /**
-         * 是否拖拽(完成)
-         */
-        'isDrag': {
-            type: Boolean,
-            default: false
-        },
         /**
          * 标题(完成)
          */
@@ -70,7 +61,6 @@ export default defineComponent({
             type: String,
             default: 'center'
         },
-
         /**
          * 底部渲染
          */
@@ -99,6 +89,19 @@ export default defineComponent({
             type: Function,
             default: null,
         },
+
+
+
+
+
+        /**
+         * 是否拖拽(完成)
+         */
+        'isDrag': {
+            type: Boolean,
+            default: false
+        },
+
         /**
          * 关闭事件
          */
@@ -191,7 +194,7 @@ export default defineComponent({
                                         <span class={`text-${props.msgType}`}>{props.titles}</span>
                                     </div>
                                     {/**@slot 弹窗头部按钮**/}
-                                    <div>
+                                    <div class='be-message-box-head-close'>
                                         {props.iconNextRender ?
                                             <div onClick={() => close()}>{props.iconNextRender()}</div> :
                                             <be-icon icon="delete" onClick={() => close()}></be-icon>}

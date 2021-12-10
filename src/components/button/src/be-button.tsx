@@ -1,13 +1,16 @@
-import {computed, defineComponent, getCurrentInstance, nextTick, onMounted} from "vue";
-import '../../../assets/style/be-button.scss';
+import {computed, defineComponent, getCurrentInstance, VNode} from "vue";
+import BeIcon from "../../svg-icon/src/be-icon.vue";
 import {IButtonInst} from "./be-button-type";
 
 export default defineComponent({
 
     name: "BeButton",
+    components:{
+        BeIcon
+    },
     props: {
         /**
-         * 按钮大小 （完成）
+         * 按钮大小
          * @values 'mini' | 'medium' | 'large'
          */
         size: {
@@ -15,73 +18,60 @@ export default defineComponent({
             default: 'medium'
         },
         /**
-         * 按钮圆角 （完成）
+         * 按钮圆角
          */
         round: {
             type: [Number, String],
             default: 2
         },
         /**
-         * 定义情感颜色 （完成）
+         * 定义情感颜色
          * @values 'default' | 'primary' | 'success' | 'info' | 'warning' | 'error'
          */
         type: {
             type: String,
             default: 'default'
         },
+
         /**
-         * 开启图标按钮（完成）
-         */
-        isIcon: {
-            type: Boolean,
-            default: false
-        },
-        /**
-         * 自定义样式类（完成）
-         */
-        customClass: {
-            type: String,
-            default: ''
-        },
-        /**
-         * loading 按钮
-         */
-        loading: {
-            type: Boolean,
-            default: false
-        },
-        /**
-         * 禁用 （完成）
-         */
-        disabled: {
-            type: Boolean,
-            default: false
-        },
-        /**
-         * 边框 （完成）
+         * 边框
          */
         bordered: {
             type: Boolean,
             default: false
         },
         /**
-         * 透明 （完成）
+         * 透明
          */
         ghost: {
             type: Boolean,
             default: false
         },
         /**
-         * flex显示 （完成）
+         * 虚线
+         */
+        dashed: {
+            type: Boolean,
+            default: false
+        },
+        /**
+         * 自定义样式类
+         */
+        customClass: {
+            type: String,
+            default: ''
+        },
+        /**
+         * flex显示
          */
         flex: {
             type: Boolean,
             default: false
         },
         /**
-         * 虚线 （完成）
+         * 禁用
          */
-        dashed: {
+        disabled: {
             type: Boolean,
             default: false
         },
@@ -99,6 +89,15 @@ export default defineComponent({
             type: String,
             default: ''
         },
+
+        /**
+         * loading 按钮
+         */
+        loading: {
+            type: Boolean,
+            default: false
+        },
+
     },
     setup(props, ctx) {
         const internalInstance = getCurrentInstance() as IButtonInst
@@ -119,7 +118,7 @@ export default defineComponent({
         })
         const prevIconStyle = computed(() => {
             if (props.loading) {
-                return 'refresh'
+                return 'loading'
             }
             if (props.prevIcon) {
                 return props.prevIcon
@@ -138,48 +137,37 @@ export default defineComponent({
                 return ''
             }
         })
-        return {
-            uid: internalInstance.uid,
-            btnStyle,
-            borderStyle,
-            disabledStyle,
-            prevIconStyle,
-            nextIconStyle,
-            //listeners,
-
+        const prevIconRender = ():VNode | '' =>{
+            return props.prevIcon || props.loading ? (<be-icon icon={prevIconStyle.value}
+                                                      spin={props.loading}
+                                                      custom-class={`be-button-prevIcon be-button-prevIcon__${props.type}`}></be-icon>) :''
         }
-    },
-    render() {
-        const prevIconRender = !this.prevIcon ? ''
-            : (<be-icon icon={this.prevIconStyle} spin={this.loading}
-                        custom-class={`be-button-prevIcon be-button-prevIcon__${this.type}`}></be-icon>);
-
-        const nextIconRender = !this.nextIcon ? ''
-            : (<be-icon icon={this.nextIconStyle}
-                        custom-class={`be-button-nextIcon be-button-nextIcon__${this.type}`}></be-icon>);
-
-        return (
-            <button type="button"
-                    {...this.$attrs}
-                    style={this.btnStyle}
-                    id={`be_button_${this.uid}`}
-                    class={`
+        const nextIconRender = ():VNode | '' =>{
+            return !props.nextIcon ? '' : (<be-icon icon={nextIconStyle.value}
+                                                       custom-class={`be-button-nextIcon be-button-nextIcon__${props.type}`}></be-icon>);
+        }
+        return ()=>{
+            return (
+                <button type="button"
+                        {...ctx.attrs}
+                        style={btnStyle.value}
+                        id={`be_button_${internalInstance.uid}`}
+                        class={`
                     be-button 
-                    be-button__inner ${this.disabledStyle} 
-                    be-button__${this.size} 
-                    be-button__${this.type}${this.borderStyle} 
-                    ${this.customClass}`}
-                    disabled={this.disabled || this.loading}>
-                <div class="be-button-body" style="margin: 0 auto;display: flex">
-                    {prevIconRender}
-                    <div class='be-button-slot'>{this.$slots.default()}</div>
-                    {nextIconRender}
-                </div>
-            </button>
-        )
-    },
-
-
+                    be-button__inner ${disabledStyle.value} 
+                    be-button__${props.size} 
+                    be-button__${props.type}${borderStyle.value} 
+                    ${props.customClass}`}
+                        disabled={props.disabled || props.loading}>
+                    <div class="be-button-body" style="margin: 0 auto;display: flex">
+                         {prevIconRender()}
+                        <div class='be-button-slot'>{ctx.slots.default && ctx.slots.default()}</div>
+                        {nextIconRender()}
+                    </div>
+                </button>
+            )
+        }
+    }
 })
 
 

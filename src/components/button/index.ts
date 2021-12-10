@@ -1,7 +1,7 @@
 import {App} from 'vue'
 import Button from './src/be-button'
 import {IButton} from "./src/be-button-type";
-
+import '../../assets/style/be-button.scss';
 const button = Button as IButton
 /**
  * 组件装载方法

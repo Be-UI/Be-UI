@@ -900,7 +900,7 @@ module.exports = {
         divideStyle: ['responsive'],
         divideWidth: ['responsive'],
         dropShadow: ['responsive'],
-        fill: ['responsive'],
+        fill: ['responsive','hover'],
         filter: ['responsive'],
         flex: ['responsive'],
         flexDirection: ['responsive'],

@@ -1,4 +1,4 @@
-import {h, defineComponent, computed, mergeProps, PropType} from 'vue'
+import {h, computed} from 'vue'
 
 export const createCustom = (template: string): object => {
     return {
