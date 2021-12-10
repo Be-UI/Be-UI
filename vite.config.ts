@@ -68,7 +68,7 @@ export default defineConfig({
             }
         }
     },
-    build: {
+    /*build: {
         outDir: 'BeUI',
         lib: {
             entry: path.resolve(__dirname, './src/components/index.ts'),
@@ -82,7 +82,7 @@ export default defineConfig({
                 })
             ]
         }
-    },
+    },*/
     esbuild: {
         jsxFactory: 'h',
         jsxFragment: 'Fragment'
