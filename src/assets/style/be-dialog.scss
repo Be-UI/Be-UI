@@ -20,7 +20,7 @@
   top: 0;
   z-index: 2077;
 
-  .be-dialog-contanter-head {
+  .be-dialog-container-head {
     border-radius: 5px;
     border-bottom: none;
     height: 50px;
@@ -78,8 +78,8 @@
     }
 
     .be-dialog-footer {
-      height: 40px;
-      line-height: 40px;
+      height: 50px;
+      line-height: 50px;
       padding: 10px 30px;
 
       .be-dialog-footer-btn {

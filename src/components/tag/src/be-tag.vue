@@ -9,7 +9,7 @@
     <span :style="{color:styleOption?.color}">
       <slot></slot>
     </span>
-    <be-icon icon="delete"
+    <be-icon icon="deleteIc"
              class="be-tag_close"
              :style="{fill:styleOption?.color}"
              v-if="isClose"

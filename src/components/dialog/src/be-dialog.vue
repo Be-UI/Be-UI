@@ -10,16 +10,18 @@
   <transition name="dialog-fade">
     <div class="be-dialog" v-if="isShow">
       <div class="be-dialog-container"
-           :id="`be_dialog_container$this._uid`"
+           :id="`be_dialog_container${uid}`"
            v-drag="{isDrag:isDrag}"
            :class="customClassStyle">
         <div class="be-dialog-title">
-          <div class="be-dialog-contanter-head" :id="`be_head$this._uid`">
+          <div class="be-dialog-container-head" :id="`be_head${uid}`">
             <span>{{ titles }}</span>
             <!-- @slot 弹窗头部按钮 -->
             <div class="be-dialog-close">
               <slot name="headerIcon">
-                <be-icon icon='delete' @click="close"></be-icon>
+                <be-icon icon='deleteIc'
+                         custom-class="be-dialog-close-btn"
+                         @click="handleClose('btn')"></be-icon>
               </slot>
             </div>
           </div>
@@ -36,7 +38,7 @@
             <be-button type="primary"
                        bordered
                        round="3"
-                       @click="confirm"
+                       @click="handleConfirm"
                        customClass="be-dialog-footer-btn">确定
             </be-button>
           </slot>
@@ -49,16 +51,27 @@
 <script lang="ts">
 import {
   defineComponent,
-  ref, computed, onMounted, onUnmounted
+  ref, computed, onMounted, onUnmounted, getCurrentInstance, nextTick, watch
 } from "vue";
 import {dragDirective} from '../../../utils/direactives/custom-direactives/drag-directives';
+import BeButton from "../../button/src/be-button";
+import BeIcon from "../../svg-icon/src/be-icon.vue";
+import {IContextMenu} from "../../contextmenu/src/be-contextmenu-type";
 
 /**
  * 可拖拽、放大、缩小弹窗
  */
 export default defineComponent({
   name: "BeDialog",
+  components: {BeIcon, BeButton},
   directives: {drag: dragDirective},
+  emits: [
+    'confirm',
+    'close',
+
+    'update:isShow',
+    'escEvt'
+  ],
   props: {
     /**
      * 是否拖拽 （完成）
@@ -112,44 +125,52 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const customClassStyle = computed(() => props.customClass)
+    const internalInstance = getCurrentInstance() as IContextMenu
     /**
      * 关闭组件
      */
-    const confirm = (): void => {
-      if (ctx.attrs.onConfirm) {
-        /** 弹窗确认事件
-         * @event close
-         */
-        ctx.emit('confirm')
-      } else {
-        close()
-      }
+    const handleConfirm = (): void => {
+      /** 弹窗确认事件
+       * @event confirm
+       */
+      ctx.emit('confirm')
+      handleClose()
     }
     /**
      * 关闭组件
+     * @param {string} type 类型
      */
-    const close = (): void => {
-      if (ctx.attrs.onClose) {
+    const handleClose = (type?: string): void => {
+      if (type === 'btn' || type === 'keyboard') {
         /** 弹窗关闭事件
          * @event close
          */
         ctx.emit('close')
-      } else {
-        ctx.emit('update:isShow', false)
       }
+      ctx.emit('update:isShow', false)
     }
+    const show = computed(() => props.isShow)
+    watch(show, (nVal) => {
+      if (nVal) {
+        nextTick(() => {
+          listenerEscExitFunc()
+        })
+      } else {
+        removeEscExitFunc()
+      }
+    })
     /**
      * 键盘esc 退出的监听
      */
     const listenerEscExitFunc = (): void => {
       if (props.escExit) {
-        document.onkeydown = (e) => {
-          if (e && e.key === 'Esc') {
+        document.body.onkeydown = (e) => {
+          if (e && e.key === 'Escape') {
             /** esc按键弹窗关闭事件
-             * @event escCb
+             * @event escEvt
              */
-            ctx.emit('escCb')
-            close()
+            ctx.emit('escEvt')
+            handleClose('keyboard')
           }
         }
       }
@@ -158,7 +179,7 @@ export default defineComponent({
      * 键盘esc退出的监听取消
      */
     const removeEscExitFunc = (): void => {
-      document.onkeydown = null
+      document.body.onkeydown = null
     }
     const dialogModels = ref('')
     // 开启遮罩与键盘监听
@@ -166,7 +187,9 @@ export default defineComponent({
       if (props.isOpenModal) {
         dialogModels.value = 'be-dialog-modal'
       }
-      listenerEscExitFunc()
+      if (props.isShow) {
+        listenerEscExitFunc()
+      }
     })
     onUnmounted(() => {
       removeEscExitFunc()
@@ -174,8 +197,9 @@ export default defineComponent({
     return {
       dialogModels,
       customClassStyle,
-      close,
-      confirm,
+      handleClose,
+      handleConfirm,
+      uid: internalInstance.uid
     }
   }
 })

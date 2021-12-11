@@ -48,7 +48,7 @@
                      v-if="nextIcon"></be-icon>
             <!--清除按钮 v-show="showClearIcon-->
             <div class="be-input-close-body" v-if="!isInner">
-                <be-icon @click="handleClear" icon="delete" class="be-input-icon be-input-close"
+                <be-icon @click="handleClear" icon="deleteIc" class="be-input-icon be-input-close"
                          v-show="showClearIcon"></be-icon>
             </div>
             <!--密碼按鈕-->

@@ -151,7 +151,7 @@ export default defineComponent({
                             {/**@slot 弹窗头部按钮**/}
                             <div id={`be_${props.compType}_close_icon${uid}`}>
                                 {option.closeRender ? option.closeRender :
-                                    option.close ? <BeIcon icon="delete" {...evt} ></BeIcon> : ''}
+                                    option.close ? <BeIcon icon="deleteIc" {...evt} ></BeIcon> : ''}
                             </div>
                         </div>
                     </div>

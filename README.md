@@ -33,8 +33,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
-
-样式重构
+be-dialog 样式改tailwindcss  
+stylelint配置 样式重构
 
 ## 长期排期
 1.服务式访问的全局绑定  
@@ -44,7 +44,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 |  ---- |  ----  | ----  | ----  | ----  |
 |1| 布局容器  | be-container |<font color=#07c160 size=5>√</font>|<font color=#07c160 size=5>√</font>|
 |2| 右键菜单  | be-contextmenu |<font color=#07c160 size=5>√</font>|<font color=#07c160 size=5>√</font>|
-|3| 对话框  | be-dialog | <font color=#07c160 size=5>√</font>|<font color=red size=5>×</font> |
+|3| 对话框  | be-dialog | <font color=#07c160 size=5>√</font>|<font color=#07c160 size=5>√</font> |
 |4| 输入框  | be-input | <font color=#07c160 size=5>√</font>|<font color=red size=5>×</font> |
 |5| 载入  | be-loading | <font color=#07c160 size=5>√</font>|<font color=red size=5>×</font>|
 |6| 消息对话  | be-message-box | <font color=#07c160 size=5>√</font>  | <font color=#07c160 size=5>√</font>|

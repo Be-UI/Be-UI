@@ -197,7 +197,7 @@ export default defineComponent({
                                     <div class='be-message-box-head-close'>
                                         {props.iconNextRender ?
                                             <div onClick={() => close()}>{props.iconNextRender()}</div> :
-                                            <be-icon icon="delete" onClick={() => close()}></be-icon>}
+                                            <be-icon icon="deleteIc" onClick={() => close()}></be-icon>}
                                     </div>
                                 </div>
                             </div>
