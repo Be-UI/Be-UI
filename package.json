@@ -5,7 +5,8 @@
     "dev": "vite --host",
     "build": "vite build",
     "test": "jest",
-    "test-c": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "lint:style": "stylelint src/**/*.scss"
   },
   "files": [
     "dist"
@@ -44,6 +45,11 @@
     "jest": "26.0.0",
     "postcss": "^7.0.39",
     "sass": "^1.38.0",
+    "stylelint": "^14.1.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-standard": "^24.0.0",
+    "stylelint-scss": "^4.0.1",
     "svg-sprite-loader": "^6.0.9",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "ts-jest": "26.4.4",

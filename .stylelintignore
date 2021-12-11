@@ -1,0 +1,11 @@
+# 其他类型文件
+*.js
+*.jsx
+*.ts
+*.tsx
+*.jpg
+*.woff
+
+# 依赖和打包目录
+/dist/
+/node_modules/

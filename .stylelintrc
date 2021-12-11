@@ -1,0 +1,28 @@
+{
+  "root": true,
+  "plugins": ["stylelint-scss"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recess-order",
+    "stylelint-config-prettier"],
+  "rules": {
+    "comment-empty-line-before": "always",
+    "declaration-empty-line-before": "never",
+    "function-comma-newline-after": "never-multi-line",
+    "function-name-case": "lower",
+    "function-parentheses-newline-inside": "never-multi-line",
+    "function-max-empty-lines": null,
+    "function-whitespace-after": null,
+    "indentation": null,
+    "number-leading-zero": null,
+    "number-no-trailing-zeros": null,
+    "rule-empty-line-before": null,
+    "selector-combinator-space-after": null,
+    "selector-list-comma-newline-after": null,
+    "selector-pseudo-element-colon-notation": null,
+    "unit-no-unknown": null,
+    "value-list-max-empty-lines": null,
+    "font-family-no-missing-generic-family-keyword": null,
+    "no-descending-specificity": null
+  }
+}
