@@ -33,7 +33,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
-contextmenu 打包后指令报错,binding.instance.$refs 去访问吧 图标修改   
+图标修改   
 样式重构
 
 ## 长期排期

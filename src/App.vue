@@ -10,7 +10,7 @@
             </be-contextmenu-sub-menu>
         </be-contextmenu-sub-menu>
         </be-contextmenu>
-      <be-icon icon="delete" @click="testclose"></be-icon>
+      <be-icon icon="delete" ref="beIcon"></be-icon>
 <!--        <be-container style="margin-bottom: 60px">
             <be-header style="background-color: #FFFFFF;text-align: center;line-height: 60px;">Header</be-header>
             <be-main style="background-color:#f0f9eb;line-height: 160px;text-align: center">Main</be-main>

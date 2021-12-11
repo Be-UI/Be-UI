@@ -11,31 +11,14 @@ import {
     ObjectDirective,
     VNode,
 } from 'vue'
-import {VNodeArrayChildren, VNodeChild, VNodeNormalizedChildren} from "@vue/runtime-core";
-import {VNodeNormalizedRefAtom} from "../../types";
+import {IContextMenu} from "../../../components/contextmenu/src/be-contextmenu-type";
 export const contextmenu:ObjectDirective= {
-    // 使用 inserted 确保 contentmenu mounted 后才进行 addRef 操作
     mounted(el, binding:DirectiveBinding, vnode:VNode) {
         //获取绑定 contentmenu 组件
-        const children:VNodeNormalizedChildren = vnode.children as Array<VNodeArrayChildren>
-        let contextmenu:any = null
-        try {
-            children.forEach((childVNode)=>{
-                let cVNode:VNode = childVNode as VNode
-                let refs = cVNode.ref as VNodeNormalizedRefAtom
-                if (refs.r && (refs.r === binding.arg || refs.r === binding.value)) {
-                    contextmenu = cVNode
-                    throw new Error('EndIterative');
-                }
-            })
-        } catch (e) {
-            if (e.message !== "EndIterative") throw e;
-        }
+        const contextmenu = binding.instance?.$refs[binding.arg || binding.value] as IContextMenu
         if (!contextmenu) return
-        debugger
-        console.log(contextmenu)
         //调用组件 addRef 给触发dom添加右键事件，并缓存记录
-        contextmenu.component.ctx.addRef({el, vnode})
+        contextmenu.addRef({el, vnode})
     }
 }
 

@@ -53,8 +53,7 @@ function findSvgFile(dir: string): string[] {
 
 export const svgBuilder = (
     path: string,
-): Plugin | void => {
-    if (path === '') return
+): Plugin => {
     const res = findSvgFile(path)
     // console.log(res.length)
     // const res = []
