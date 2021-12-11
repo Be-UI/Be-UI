@@ -1,7 +1,7 @@
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import {svgBuilder} from './src/utils/svg-builder';
+//import {svgBuilder} from './src/utils/svg-builder';
 const {babel} = require('@rollup/plugin-babel')
 import path from 'path'
 // https://vitejs.dev/config/
@@ -9,7 +9,7 @@ export default defineConfig({
     plugins: [
         vue(),
         vueJsx(),
-        svgBuilder('./src/assets/icon/')
+       // svgBuilder('./src/assets/icon/')
     ],
 
     /**
@@ -68,8 +68,9 @@ export default defineConfig({
             }
         }
     },
+    // 配置库打包
     build: {
-        outDir: 'BeUI',
+        outDir: 'be-ui',
         lib: {
             entry: path.resolve(__dirname, './src/components/index.ts'),
             name: 'be-ui',
