@@ -1,5 +1,7 @@
 @mixin be-icon-default($color) {
+
   .be-icon {
+
     use {
       fill: $color;
     }
@@ -7,16 +9,18 @@
 }
 
 @mixin be-tag-type($bgColor,$textColor,$hoverColor) {
-  background: $bgColor;
   color: $textColor;
+  background-color: $bgColor;
   border: 0;
+
   &:hover {
-    background: $hoverColor;
+    background-color: $hoverColor;
   }
 }
 
 .be-tag {
   @apply inline-flex justify-center items-center cursor-pointer box-border;
+
   span {
     @apply mr-1.5;
   }
@@ -68,11 +72,12 @@
   @include be-icon-default($primaryText);
 
   &:hover {
-    background: $primaryHover;
     color: $whiteText;
+    background-color: $primaryHover;
     border-color: $primaryText;
 
     .be-icon {
+
       use {
         fill: $whiteText;
       }
@@ -86,9 +91,10 @@
 
   &:hover {
     color: $primaryText;
-    background: $primary;
+    background-color: $primary;
 
     .be-icon {
+
       use {
         fill: $primaryText;
       }

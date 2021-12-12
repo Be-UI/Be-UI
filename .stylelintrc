@@ -10,19 +10,30 @@
     "declaration-empty-line-before": "never",
     "function-comma-newline-after": "never-multi-line",
     "function-name-case": "lower",
-    "function-parentheses-newline-inside": "never-multi-line",
-    "function-max-empty-lines": null,
-    "function-whitespace-after": null,
-    "indentation": null,
-    "number-leading-zero": null,
-    "number-no-trailing-zeros": null,
-    "rule-empty-line-before": null,
-    "selector-combinator-space-after": null,
-    "selector-list-comma-newline-after": null,
-    "selector-pseudo-element-colon-notation": null,
-    "unit-no-unknown": null,
-    "value-list-max-empty-lines": null,
-    "font-family-no-missing-generic-family-keyword": null,
-    "no-descending-specificity": null
+    "comment-no-empty": true,
+    "function-whitespace-after": "always",
+    "indentation": 2,
+    "number-leading-zero": "never",
+    "number-no-trailing-zeros": true,
+    "rule-empty-line-before": "always-multi-line",
+    "selector-combinator-space-after": "always",
+    "selector-pseudo-element-colon-notation": "double",
+    "unit-no-unknown": true,
+    "value-list-max-empty-lines": 0,
+    "font-family-no-missing-generic-family-keyword": true,
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "mixin",
+          "include"
+        ]
+      }
+    ],
+    "no-descending-specificity": null,
+    "selector-class-pattern": null,
+    "value-no-vendor-prefix": null,
+    "property-no-vendor-prefix": null,
+    "at-rule-no-vendor-prefix": null
   }
 }

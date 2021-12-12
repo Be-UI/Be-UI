@@ -1,22 +1,26 @@
 @mixin be-message-icon {
-  line-height: 25px;
   margin-right: 10px;
   font-size: 20px;
+  line-height: 25px;
 }
 
 .be-message {
   z-index: 10;
   @apply max-h-12;
+
   .be-message-container {
     @apply min-w-16 bg-default p-2.5 rounded shadow absolute box-border;
     z-index: 998;
 
     .be-message-title {
       @apply w-full h-6;
+
       .be-message-head {
         @apply leading-6 flex justify-between items-center;
+
         div:nth-child(1) {
           @apply flex items-center;
+
           .icon-warning {
             @apply fill-warning;
             @include be-message-icon;
@@ -38,22 +42,22 @@
           }
 
           .txt-warning {
-            @include be-message-tilte;
+            @include be-message-title;
             @apply text-warning font-mono;
           }
 
           .txt-info {
-            @include be-message-tilte;
+            @include be-message-title;
             @apply text-info font-mono;
           }
 
           .txt-success {
-            @include be-message-tilte;
+            @include be-message-title;
             @apply text-success font-mono;
           }
 
           .txt-error {
-            @include be-message-tilte;
+            @include be-message-title;
             @apply text-error font-mono;
           }
         }
@@ -82,11 +86,11 @@
 }
 
 .be-message-animation-top-center-in {
-  -webkit-animation: bounceInTopCenter .3s .2s ease both;
-  -moz-animation: bounceInTopCenter .3s .2s ease both;
+  -webkit-animation: bounce-in-top-center .3s .2s ease both;
+  -moz-animation: bounce-in-top-center .3s .2s ease both;
 }
 
 .be-message-animation-top-center-out {
-  -webkit-animation: outTopCenter .3s .2s ease both;
-  -moz-animation: outTopCenter .3s .2s ease both;
+  -webkit-animation: out-top-center .3s .2s ease both;
+  -moz-animation: out-top-center .3s .2s ease both;
 }

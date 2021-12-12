@@ -1,16 +1,16 @@
 
 .be-popover {
+  @apply shadow;
   position: fixed;
   background-color: $default;
   border-radius: 3px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
 
   .be-popover-body {
+    box-sizing: border-box;
+    padding: 8px 14px;
+    font-size: 12px;
     color: $info;
     text-align: center;
-    padding: 8px 14px;
-    box-sizing: border-box;
-    font-size: 12px;
   }
 
   .be-popover-arrow,
@@ -34,30 +34,35 @@
 }
 
 .be-popover[data-popper-placement^='top'] {
+
   .be-popover-arrow {
     bottom: -4px;
   }
 }
 
 .be-popover[data-popper-placement^='bottom'] {
+
   .be-popover-arrow {
     top: -4px;
   }
 }
 
 .be-popover[data-popper-placement^='left'] {
+
   .be-popover-arrow {
     right: -4px;
   }
 }
 
 .be-popover[data-popper-placement^='right'] {
+
   .be-popover-arrow {
     left: -4px;
   }
 }
 
 .be-popover.be-input-select-popover {
+
   .be-popover-body {
     padding: 0;
   }

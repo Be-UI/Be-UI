@@ -1,4 +1,4 @@
-.be-contextmenu{
+.be-contextmenu {
   @apply font-mono absolute m-0 bg-default shadow cursor-pointer rounded border border-infoh text-sm list-none whitespace-nowrap;
   z-index: 2800;
   -webkit-tap-highlight-color: transparent;
@@ -14,72 +14,93 @@
       @apply text-info font-mono cursor-not-allowed;
     }
   }
-  .be-contextmenu-divider{
+
+  .be-contextmenu-divider {
     @apply h-0 border-b border-infoh;
   }
-  .be-contextmenu-submenu{
+
+  .be-contextmenu-submenu {
     @apply relative text-center font-mono;
-    & > .be-contextmenu{
+
+    & > .be-contextmenu {
       @apply absolute text-center font-mono;
-      &.left{
+
+      &.left {
         @apply left-0 transform -translate-x-full;
 
       }
-      &.right{
+
+      &.right {
         @apply right-0 transform translate-x-full;
       }
-      &.top{
+
+      &.top {
         @apply -top-px;
       }
-      &.bottom{
+
+      &.bottom {
         @apply -bottom-7;
       }
     }
-    .be-contextmenu-submenu__title{
+
+    .be-contextmenu-submenu__title {
       @apply mr-0;
     }
-    .be-contextmenu-submenu__icon{
+
+    .be-contextmenu-submenu__icon {
       @apply absolute right-1.5;
-      &::before{
+
+      &::before {
         content: ">";
       }
     }
   }
 }
 
-.be-contextmenu__default{
-  .be-contextmenu-item__hover{
-      @apply bg-blue-400;
-    }
+.be-contextmenu__default {
+
+  .be-contextmenu-item__hover {
+    @apply bg-blue-400;
+  }
 }
 
-.be-contextmenu__bright{
-  .be-contextmenu-item__hover{
+.be-contextmenu__bright {
+
+  .be-contextmenu-item__hover {
     @apply bg-red-400;
   }
 }
-.be-contextmenu__dark{
-  .be-contextmenu-item__hover{
+
+.be-contextmenu__dark {
+
+  .be-contextmenu-item__hover {
     @apply bg-black;
-    }
+  }
 }
-.be-contextmenu__violet{
-  .be-contextmenu-item{
+
+.be-contextmenu__violet {
+
+  .be-contextmenu-item {
     @apply text-info font-mono;
   }
-  .be-contextmenu-item__hover{
+
+  .be-contextmenu-item__hover {
     @apply bg-purple-200;
   }
 }
-.be-contextmenu__blues{
-  .be-contextmenu-item{
+
+.be-contextmenu__blues {
+
+  .be-contextmenu-item {
     @apply text-info font-mono;
   }
-  .be-contextmenu-item__hover{
+
+  .be-contextmenu-item__hover {
     @apply bg-blue-700;
   }
 }
-.be-contextmenu-iconfont{
+
+.be-contextmenu-iconfont {
   font-size: inherit;
   font-style: normal;
   -webkit-font-smoothing: antialiased;

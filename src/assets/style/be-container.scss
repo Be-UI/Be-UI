@@ -1,7 +1,8 @@
 .be-container{
-    @apply flex flex-1 flex-row box-border min-w-0;
-    flex-basis: auto;
+  @apply flex flex-1 flex-row box-border min-w-0;
+  flex-basis: auto;
 }
+
 .be-container__vertical{
-    @apply flex-col;
+  @apply flex-col;
 }

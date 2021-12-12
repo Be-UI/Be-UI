@@ -271,6 +271,7 @@
           </be-dialog>-->
     <div style="position: absolute;left: 20%;top: 100px;width: 320px;height: 300px">
       <be-button
+          bordered
           prevIcon="deleteIc"
           nextIcon="deleteIc"
           @click="openDialog"

@@ -1,82 +1,84 @@
 
 .be-message-box {
-  width: 100%;
-  height: 100%;
   position: fixed;
-  left: 0;
   top: 0;
+  left: 0;
   z-index: 2077;
   display: flex;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+
   .be-message-box-container {
-    transition: opacity .5s;
-    width: 305px;
-    min-height: 158px;
-    background: #FFFFFF;
-    padding: 16px;
-    box-shadow: 0 6px 13px rgba(0, 0, 0, 0.16);
-    border-radius: 2px;
+    @apply shadow;
+    z-index: 998;
     box-sizing: border-box;
     align-self: center;
-    z-index: 998;
+    width: 305px;
+    min-height: 158px;
+    padding: 16px;
+    background-color: $default;
+    border-radius: 2px;
+    transition: opacity .5s;
 
     .be-message-box-title {
       width: 100%;
       height: 25px;;
 
       .be-message-box-head {
-        line-height: 25px;
         display: flex;
         justify-content: space-between;
+        line-height: 25px;
 
         div:nth-child(1) {
           display: flex;
           align-items: center;
+
           .icon-warning {
-            fill: $warning;
-            line-height: 25px;
             margin-right: 5px;
             font-size: 20px;
+            line-height: 25px;
+            fill: $warning;
           }
 
           .icon-info {
-            fill: $info;
-            line-height: 25px;
             margin-right: 5px;
             font-size: 20px;
+            line-height: 25px;
+            fill: $info;
           }
 
           .icon-success {
-            fill: $success;
-            line-height: 25px;
             margin-right: 5px;
             font-size: 20px;
+            line-height: 25px;
+            fill: $success;
           }
 
           .icon-error {
-            fill: $error;
-            line-height: 25px;
             margin-right: 5px;
             font-size: 20px;
+            line-height: 25px;
+            fill: $error;
           }
 
           .text-warning {
-            @include be-message-tilte;
+            @include be-message-title;
             color: $warning;
           }
 
           .text-info {
-            @include be-message-tilte;
+            @include be-message-title;
             color: $info;
           }
 
           .text-success {
-            @include be-message-tilte;
+            @include be-message-title;
             color: $success;
           }
 
           .text-error {
-            @include be-message-tilte;
+            @include be-message-title;
             color: $error;
           }
         }
@@ -96,9 +98,9 @@
   }
 
   .be-message-box-footer {
+    display: flex;
     width: 100%;
     height: 24px;
-    display: flex;
   }
 
   .be-message-box-footer__center {
@@ -112,5 +114,5 @@
 }
 
 .be-modal {
-  background-color: rgba(0, 0, 0, 0.5);
+  @apply bg-modal;
 }

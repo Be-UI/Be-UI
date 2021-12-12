@@ -4,31 +4,31 @@
   align-items: center;
   width: 100%;
   background-color: $default;
-  border-radius: 3px;
   border: 1px solid $infoHover;
+  border-radius: 3px;
 
   &:hover {
     border: 1px solid $infoHover;
   }
 
   .be-input-body {
-    display: flex;
-    padding: 0 5px;
     box-sizing: border-box;
+    display: flex;
     align-items: center;
+    padding: 0 5px;
 
     .be-input__textarea__inner {
-      border: 0;
-      display: block;
-      resize: vertical;
-      padding: 5px 15px;
-      line-height: 1.5;
       box-sizing: border-box;
+      display: block;
       width: 100%;
+      padding: 5px 15px;
       font-size: inherit;
+      line-height: 1.5;
       color: $defaultText;
+      resize: vertical;
       background-color: $default;
       background-image: none;
+      border: 0;
       transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
 
       &:hover {
@@ -37,22 +37,22 @@
     }
 
     .be-input__inner {
+      width: 100%;
       height: 30px;
       line-height: 30px;
-      outline: 0;
       border: 0;
       border-radius: 3px;
-      width: 100%;
+      outline: 0;
     }
 
     .be-input-nextIcon,
     .be-input-prevIcon {
-      cursor: pointer;
-      color: $infoHover;
       width: 12px;
       height: 12px;
-      line-height: 12px;
       font-size: 12px;
+      line-height: 12px;
+      color: $infoHover;
+      cursor: pointer;
 
       &:hover {
         color: $infoHover
@@ -69,17 +69,17 @@
     }
 
     .be-input-icon {
-      cursor: pointer;
-      color: $infoHover;
       width: 12px;
       height: 12px;
-      line-height: 1.5;
-      font-size: 12px;
       margin: 0 3px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: $infoHover;
+      cursor: pointer;
 
       .be-icon {
-        fill: $infoHover;
         vertical-align: 1em;
+        fill: $infoHover;
       }
     }
 
@@ -88,12 +88,12 @@
       height: 1em;
 
       .be-input-close {
-        border-radius: 50px;
         border: 1px solid $infoHover;
+        border-radius: 50px;
 
         &:hover {
+          color: $infoHover;
           border: 1px solid $infoHover;
-          color: $infoHover
         }
       }
     }
@@ -105,10 +105,21 @@
     }
 
     .be-input-select {
+      position: absolute;
+      max-height: 300px;
+      padding: 0;
+      margin: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background-color: $default;
+      border: 1px solid $infoHover;
+      border-top: 0;
+      border-radius: 0 0 3px 3px;
+
       &::-webkit-scrollbar {
-        margin: 5px;
         width: 8px;
         height: 8px;
+        margin: 5px;
       }
 
       &::-webkit-scrollbar-thumb {
@@ -116,32 +127,21 @@
         border-radius: 5px;
       }
 
-      background-color: $default;
-      border-radius: 0 0 3px 3px;
-      border: 1px solid $infoHover;
-      border-top: 0;
-      padding: 0;
-      position: absolute;
-      max-height: 300px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      margin: 0;
-
       .be-input-select__line {
-        height: 1px;
-        background-color: $infoHover;
         width: 90%;
+        height: 1px;
         margin: 0 auto;
         list-style: none;
+        background-color: $infoHover;
       }
 
       .be-input-select__inner {
+        box-sizing: border-box;
         height: 30px;
+        padding-left: 10px;
+        margin: 10px 0;
         line-height: 30px;
         list-style: none;
-        margin: 10px 0;
-        padding-left: 10px;
-        box-sizing: border-box;
         cursor: pointer;
 
         &:hover {
@@ -177,41 +177,53 @@
 }
 
 .be-input__mini {
+
   .be-input-body {
+
     .be-input__inner {
+      height: 25px;
       font-size: 14px;
       line-height: 25px;
-      height: 25px;
     }
   }
 }
 
 .be-input__medium {
+
   .be-input-body {
+
     .be-input__inner {
+      height: 30px;
       font-size: 14px;
       line-height: 30px;
-      height: 30px;
     }
   }
 }
 
 .be-input__large {
+
   .be-input-body {
+
     .be-input__inner {
+      height: 36px;
       font-size: 14px;
       line-height: 36px;
-      height: 36px;
     }
   }
 }
 
 
 .be-input-select {
+  z-index: 2077;
+  max-height: 300px;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+
   &::-webkit-scrollbar {
-    margin: 5px;
     width: 8px;
     height: 8px;
+    margin: 5px;
   }
 
   &::-webkit-scrollbar-thumb {
@@ -219,36 +231,30 @@
     border-radius: 5px;
   }
 
-  max-height: 300px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  margin: 0;
-  z-index: 2077;
-
   ul {
     padding: 0;
   }
 
   .be-input-select__line {
-    height: 1px;
-    background-color: #dcdfe6;
     width: 90%;
+    height: 1px;
     margin: 0 auto;
     list-style: none;
+    background-color: #dcdfe6;
   }
 
   .be-input-select__inner {
-    height: 30px;
-    line-height: 30px;
-    list-style: none;
-    margin: 10px 0;
-    padding-left: 10px;
     box-sizing: border-box;
-    cursor: pointer;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    height: 30px;
+    padding-left: 10px;
+    margin: 10px 0;
     overflow: hidden;
     font-size: 14px;
+    line-height: 30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    list-style: none;
+    cursor: pointer;
 
     &:hover {
       background-color: #dcdfe6;

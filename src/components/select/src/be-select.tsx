@@ -375,7 +375,7 @@ export default defineComponent({
                                 <div style={selectStyle} class='be-select-option-body'>
                                     <div class={`
                                     be-select-option-container 
-                                    scrollDiy 
+                                    scroll-diy 
                                     ${loading.value ? 'be-select-loading ' : ''}`}
                                          id={`be_select_option_container_${uid}`}>
                                         {/*渲染loading 或者列表 */}

@@ -4,58 +4,41 @@
   align-items: center;
 
   .be-select {
+
     .be-select-body.be-pager-select {
+      width: 5rem;
+      min-width: 64px;
+      height: 25px;
       margin: 0 5px;
       font-size: 12px;
-      width: 5rem;
-      height: 25px;
-      min-width: 64px;
 
       .be-select-input__medium {
         height: 20px;
-        line-height: 20px;
         font-size: 12px;
+        line-height: 20px;
       }
-
     }
   }
 }
 
 .be-pager {
+  font-size: 0;
+  list-style: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  list-style: none;
-  font-size: 0;
 }
 
 
 .be-pager, .be-pager li {
-  vertical-align: top;
-  margin: 0;
   display: inline-block;
+  margin: 0;
+  vertical-align: top;
 }
 
 .be-pager, .be-pagination.is-background .btn-next, .be-pagination.is-background .btn-prev {
   padding: 0;
-}
-
-.be-pager li {
-  padding: 0 4px;
-  font-size: 13px;
-  min-width: 35.5px;
-  height: 28px;
-  line-height: 28px;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-
-.be-pager li {
-  background: #FFF;
-  margin: 0 3px;
-  -webkit-box-sizing: border-box;
 }
 
 .be-pager li.btn-quicknext, .be-pager li.btn-quickprev {
@@ -64,13 +47,16 @@
 }
 
 .be-pager li {
-  padding: 0 4px;
-  font-size: 13px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   min-width: 25px;
   height: 25px;
+  padding: 0 4px;
+  margin: 0 3px;
+  font-size: 13px;
   line-height: 25px;
-  box-sizing: border-box;
   text-align: center;
+  background-color: $default;
   border-radius: 3px;
 }
 
@@ -80,26 +66,29 @@
   cursor: default;
 }
 
-.be-pager li:hover {
-  color: $primaryText;
-}
-
-
-.be-pager li, .be-pager li.btn-quicknext:hover, .be-pager li.btn-quickprev:hover {
-  cursor: pointer;
-}
-
-.be-pager .more::before {
-  line-height: 30px;
-}
-
-.be-pager__disabled li, .be-pager__disabled li.btn-quicknext:hover, .be-pager__disabled li.btn-quickprev:hover {
+.be-pager__disabled li,
+.be-pager__disabled li.btn-quicknext:hover,
+.be-pager__disabled li.btn-quickprev:hover {
   cursor: not-allowed;
 }
 
 .be-pager__disabled li {
-  background: #FFF;
   -webkit-box-sizing: border-box;
+  background: $default;
+}
+
+.be-pager li,
+.be-pager li.btn-quicknext:hover,
+.be-pager li.btn-quickprev:hover {
+  cursor: pointer;
+}
+
+.be-pager li:hover {
+  color: $primaryText;
+}
+
+.be-pager .more::before {
+  line-height: 30px;
 }
 
 .be-pager-info {
@@ -113,12 +102,13 @@
 }
 
 .be-pager-jump-input {
+  width: 35px;
+  margin: 0 2px;
   color: $info;
   background-color: #fff;
   background-image: none;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
   transition: all .3s;
-  margin: 0 2px;
-  width: 35px;
+
 }

@@ -13,8 +13,10 @@
 
     .be-dialog-title {
       @apply bg-default rounded-lg;
+
       .be-dialog-container-head {
         @apply box-border py-4 px-5;
+
         .be-dialog-close {
           @apply text-txt font-mono cursor-pointer float-right leading-8;
         }
@@ -27,6 +29,7 @@
 
     .be-dialog-body {
       @apply box-border py-4 px-5;
+
       .be-dialog-body__inner {
         @apply bg-default;
       }
@@ -34,6 +37,7 @@
 
     .be-dialog-footer {
       @apply h-16 py-4 px-5;
+
       .be-dialog-footer-btn {
         @apply w-20;
       }

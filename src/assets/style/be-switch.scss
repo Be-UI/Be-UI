@@ -1,5 +1,6 @@
 .be-switch {
   @apply rounded-full cursor-pointer relative flex items-center;
+
   .be-switch-circle {
     @apply bg-default rounded-full shadow flex items-center justify-center;
   }
@@ -7,6 +8,7 @@
 
 .be-switch__checked {
   @apply bg-primaryh;
+
   .be-switch-circle {
     left: calc(100% - 2px);
     @apply absolute transform -translate-x-full;
@@ -15,6 +17,7 @@
 
 .be-switch__unChecked {
   @apply bg-infoh;
+
   .be-switch-circle {
     @apply ml-px absolute left-px;
   }
@@ -26,9 +29,12 @@
 
 .be-switch__default {
   @apply h-5 leading-5 w-min;
+
   .be-switch-circle {
     @apply h-4 w-4;
+
     .be-switch-circle-icon {
+
       .be-icon {
         @apply h-3 w-3;
       }
@@ -46,9 +52,12 @@
 
 .be-switch__small {
   @apply h-4 leading-4 w-min;
+
   .be-switch-circle {
     @apply h-3 w-3;
+
     .be-switch-circle-icon {
+
       .be-icon {
         @apply h-2 w-2;
       }
@@ -66,9 +75,12 @@
 
 .be-switch__large {
   @apply h-6 leading-6 w-min;
+
   .be-switch-circle {
     @apply h-5 w-5;
+
     .be-switch-circle-icon {
+
       .be-icon {
         @apply h-4 w-4;
       }
@@ -85,15 +97,19 @@
 }
 
 @keyframes switching {
+
   0% {
     box-shadow: 0 0 0 2px rgb(24 144 255 / 40%);
   }
+
   60% {
     box-shadow: 0 0 0 4px rgb(24 144 255 / 20%);
   }
+
   80% {
     box-shadow: 0 0 0 6px rgb(24 144 255 / 10%);
   }
+
   100% {
     box-shadow: 0 0 0 8px rgb(24 144 255 / 5%);
   }
