@@ -1,4 +1,4 @@
-{
+module.exports = {
   "root": true,
   "plugins": ["stylelint-scss"],
   "extends": [
@@ -18,7 +18,6 @@
     "rule-empty-line-before": "always-multi-line",
     "selector-combinator-space-after": "always",
     "selector-pseudo-element-colon-notation": "double",
-    "unit-no-unknown": true,
     "value-list-max-empty-lines": 0,
     "font-family-no-missing-generic-family-keyword": true,
     "at-rule-no-unknown": [
@@ -30,6 +29,8 @@
         ]
       }
     ],
+    "unit-no-unknown": true,
+
     "no-descending-specificity": null,
     "selector-class-pattern": null,
     "value-no-vendor-prefix": null,
