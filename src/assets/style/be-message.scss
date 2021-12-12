@@ -39,22 +39,22 @@
 
           .txt-warning {
             @include be-message-tilte;
-            @apply text-warning font-normal;
+            @apply text-warning font-mono;
           }
 
           .txt-info {
             @include be-message-tilte;
-            @apply text-info font-normal;
+            @apply text-info font-mono;
           }
 
           .txt-success {
             @include be-message-tilte;
-            @apply text-success font-normal;
+            @apply text-success font-mono;
           }
 
           .txt-error {
             @include be-message-tilte;
-            @apply text-error font-normal;
+            @apply text-error font-mono;
           }
         }
 

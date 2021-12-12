@@ -20,20 +20,20 @@
         escExit
         @close="test"
         :is-open-modal="true">
-      <!--      <template #headerIcon>
+            <template #headerIcon>
               <be-icon icon="error" @click="show = false"></be-icon>
-            </template>-->
+            </template>
       <template #body>
         <div slot="body" class="plus-dialog-body">
           这是一个弹窗哦
         </div>
       </template>
-      <template #footer>
-        <be-button type="primary"
-                   bordered
-                   round="3">确定
-        </be-button>
-      </template>
+      <!--      <template #footer>
+              <be-button type="primary"
+                         bordered
+                         round="3">确定
+              </be-button>
+            </template>-->
     </be-dialog>
     <!--        <be-container style="margin-bottom: 60px">
                 <be-header style="background-color: #FFFFFF;text-align: center;line-height: 60px;">Header</be-header>
@@ -484,7 +484,6 @@ export default {
       show.value = !show.value
     }
     const test = (): void => {
-      debugger
     }
     return {
       show,

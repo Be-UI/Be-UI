@@ -27,7 +27,8 @@ module.exports = {
             primaryh: '#4098fc',
             default: '#FFFFFF',
             defaulth: '#ecf5ff',
-
+            modal: 'rgba(0, 0, 0, 0.5)',
+            txt: '#333',
             black: colors.black,
             white: colors.white,
             gray: colors.coolGray,
@@ -570,6 +571,7 @@ module.exports = {
         minWidth: {
             0: '0px',
             16: '16rem',
+            24: '24rem',
             '1/4': '25%',
             '1/2': '50%',
             '3/4': '75%',

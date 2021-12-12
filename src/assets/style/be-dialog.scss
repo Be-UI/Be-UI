@@ -1,162 +1,54 @@
 .be-dialog-modal {
-  background-color: $modal;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
+  @apply bg-modal flex justify-center fixed h-full w-full top-0 left-0;
   z-index: 2076;
 }
 
 .be-dialog {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
+  @apply flex justify-center fixed h-full w-full top-0 left-0;
   z-index: 2077;
 
-  .be-dialog-container-head {
-    border-radius: 5px;
-    border-bottom: none;
-    height: 50px;
-    color: $defaultText;
-    margin: 0 0 10px 0;
-    text-align: left;
-    font-weight: bold;
-    /* cursor: move;*/
-    font-size: 18px;
-    padding: 15px 20px;
-    line-height: 30px;
-    box-sizing: border-box;
-
-    .be-dialog-close {
-      line-height: 35px;
-      color: $defaultText;
-      cursor: pointer;
-      float: right;
-    }
-
-  }
-
   .be-dialog-container {
-    align-self: center;
-    min-width: 400px;
-    background: $default;
-    /*box-shadow: 0 6px 13px rgba(0, 0, 0, 0.16);*/
-    border-radius: 5px;
+    @apply bg-default rounded-lg min-w-24 self-center;
     z-index: 998;
 
     .be-dialog-title {
-      border-radius: 5px;
-      background: $default;
+      @apply bg-default rounded-lg;
+      .be-dialog-container-head {
+        @apply box-border py-4 px-5;
+        .be-dialog-close {
+          @apply text-txt font-mono cursor-pointer float-right leading-8;
+        }
 
-      span {
-        color: $defaultText;
-        font-size: 16px;
-        font-family: Microsoft YaHei sans-serif;
-      }
-
-      span:nth-child(2) {
-        font-size: 20px;
-        font-weight: 400;
+        span {
+          @apply text-txt font-mono font-bold text-lg;
+        }
       }
     }
 
     .be-dialog-body {
-      box-sizing: border-box;
-      margin-bottom: 10px;
-      padding: 15px 20px;
-
+      @apply box-border py-4 px-5;
       .be-dialog-body__inner {
-        background: $default;
+        @apply bg-default;
       }
     }
 
     .be-dialog-footer {
-      height: 50px;
-      line-height: 50px;
-      padding: 10px 30px;
-
+      @apply h-16 py-4 px-5;
       .be-dialog-footer-btn {
-        width: 80px;
+        @apply w-20;
       }
     }
 
     .be-dialog-footer__center {
-      display: flex;
-      justify-content: center;
+      @apply flex justify-center
     }
 
     .be-dialog-footer__right {
-      display: flex;
-      justify-content: flex-end;
+      @apply flex justify-end
     }
   }
 }
 
-.dialog-fade-enter-active {
-  -webkit-animation: dialog-fade-in .3s;
-  animation: dialog-fade-in .3s
-}
 
-.dialog-fade-leave-active {
-  -webkit-animation: dialog-fade-out .3s;
-  animation: dialog-fade-out .3s
-}
 
-@-webkit-keyframes dialog-fade-in {
-  0% {
-    -webkit-transform: translate3d(0, -20px, 0);
-    transform: translate3d(0, -20px, 0);
-    opacity: 0
-  }
-  100% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    opacity: 1
-  }
-}
 
-@keyframes dialog-fade-in {
-  0% {
-    -webkit-transform: translate3d(0, -20px, 0);
-    transform: translate3d(0, -20px, 0);
-    opacity: 0
-  }
-  100% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    opacity: 1
-  }
-}
-
-@-webkit-keyframes dialog-fade-out {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    opacity: 1
-  }
-  100% {
-    -webkit-transform: translate3d(0, -20px, 0);
-    transform: translate3d(0, -20px, 0);
-    opacity: 0
-  }
-}
-
-@keyframes dialog-fade-out {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    opacity: 1
-  }
-  100% {
-    -webkit-transform: translate3d(0, -20px, 0);
-    transform: translate3d(0, -20px, 0);
-    opacity: 0
-  }
-}

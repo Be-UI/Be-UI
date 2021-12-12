@@ -1,26 +1,26 @@
 .be-contextmenu{
-  @apply absolute m-0 bg-default shadow cursor-pointer rounded border border-infoh text-sm list-none whitespace-nowrap;
+  @apply font-mono absolute m-0 bg-default shadow cursor-pointer rounded border border-infoh text-sm list-none whitespace-nowrap;
   z-index: 2800;
   -webkit-tap-highlight-color: transparent;
 
   .be-contextmenu-item {
-    @apply text-center text-info px-9 py-2.5 leading-none;
+    @apply font-mono text-center text-info px-9 py-2.5 leading-none;
 
     &.be-contextmenu-item__hover {
-      @apply text-default;
+      @apply text-default font-mono;
     }
 
     &.be-contextmenu-item__disabled {
-      @apply text-info cursor-not-allowed;
+      @apply text-info font-mono cursor-not-allowed;
     }
   }
   .be-contextmenu-divider{
     @apply h-0 border-b border-infoh;
   }
   .be-contextmenu-submenu{
-    @apply relative text-center;
+    @apply relative text-center font-mono;
     & > .be-contextmenu{
-      @apply absolute text-center;
+      @apply absolute text-center font-mono;
       &.left{
         @apply left-0 transform -translate-x-full;
 
@@ -65,7 +65,7 @@
 }
 .be-contextmenu__violet{
   .be-contextmenu-item{
-    @apply text-info;
+    @apply text-info font-mono;
   }
   .be-contextmenu-item__hover{
     @apply bg-purple-200;
@@ -73,7 +73,7 @@
 }
 .be-contextmenu__blues{
   .be-contextmenu-item{
-    @apply text-info;
+    @apply text-info font-mono;
   }
   .be-contextmenu-item__hover{
     @apply bg-blue-700;

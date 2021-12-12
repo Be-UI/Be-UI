@@ -31,7 +31,7 @@
 }
 
 .be-button {
-  @apply inline-block border-0 text-default rounded focus:outline-none;
+  @apply font-mono inline-block border-0 text-default rounded focus:outline-none;
   .be-button-body {
     @apply flex justify-center mx-auto my-0;
     .be-button-slot {
@@ -99,37 +99,37 @@
 }
 
 .be-button__error {
-  @apply bg-error text-default border-0 hover:bg-errorh;
+  @apply font-mono bg-error text-default border-0 hover:bg-errorh;
   button {
-    @apply text-default;
+    @apply font-mono text-default;
   }
 }
 
 .be-button__info {
-  @apply bg-default text-info border-0 hover:bg-infoh;
+  @apply font-mono bg-default text-info border-0 hover:bg-infoh;
   button {
-    @apply text-info;
+    @apply font-mono text-info;
   }
 }
 
 .be-button__success {
-  @apply bg-success text-default border-0 hover:bg-successh;
+  @apply font-mono bg-success text-default border-0 hover:bg-successh;
   button {
-    @apply text-default;
+    @apply font-mono text-default;
   }
 }
 
 .be-button__warning {
-  @apply bg-warning text-default border-0 hover:bg-warningh;
+  @apply font-mono bg-warning text-default border-0 hover:bg-warningh;
   button {
-    @apply text-default;
+    @apply font-mono text-default;
   }
 }
 
 .be-button__primary {
-  @apply bg-defaulth text-primaryh border-0 hover:text-default hover:bg-primaryh hover:border-primary;
+  @apply font-mono bg-defaulth text-primaryh border-0 hover:text-default hover:bg-primaryh hover:border-primary;
   button {
-    @apply text-primary hover:text-default;
+    @apply font-mono text-primary hover:text-default;
   }
   &:hover{
     .be-button-prevIcon__primary,
@@ -144,10 +144,10 @@
 }
 
 .be-button__default {
-  @apply bg-default text-info border-0 hover:text-primaryh hover:bg-defaulth;
+  @apply font-mono bg-default text-info border-0 hover:text-primaryh hover:bg-defaulth;
   &:hover {
     button {
-      @apply text-primary;
+      @apply font-mono text-primary;
     }
     .be-button-prevIcon__default,
     .be-button-nextIcon__default {

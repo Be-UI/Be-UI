@@ -1,12 +1,12 @@
 .be-breadcrumb{
     @apply flex w-full;
     .be-breadcrumb-item{
-        @apply flex flex-shrink items-center cursor-pointer hover:text-primaryh;
+        @apply font-mono flex flex-shrink items-center cursor-pointer hover:text-primaryh;
         .be-breadcrumb-item__separator{
-            @apply font-sans text-info mx-2 text-sm;
+            @apply font-mono text-info mx-2 text-sm;
         }
         .be-breadcrumb-item__content{
-            @apply font-sans text-info hover:text-primaryh text-sm;
+            @apply font-mono text-info hover:text-primaryh text-sm;
         }
     }
     .be-breadcrumb-item__disabled{
@@ -24,7 +24,7 @@
 .be-breadcrumb .be-breadcrumb-item:last-child {
     @apply cursor-default;
     .be-breadcrumb-item__content{
-        @apply text-black;
+        @apply font-mono text-black;
         a,span{
             @apply cursor-default;
         }
