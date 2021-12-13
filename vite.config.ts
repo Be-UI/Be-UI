@@ -55,6 +55,10 @@ export default defineConfig({
              mixins: path.resolve(__dirname, "./src/mixins")*/
         },
     },
+    define: {
+        __DEV__: process.env.NODE_ENV !== 'production',
+        __PROD__: process.env.NODE_ENV === 'production'
+    },
     css: {
         // css预处理器
         preprocessorOptions: {
