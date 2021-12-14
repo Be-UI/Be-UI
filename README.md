@@ -33,7 +33,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 已知问题
 
 ## 排期
-be-dialog 样式改tailwindcss  
+be-loading 单元测试，样式修改
 stylelint配置 样式重构
 
 ## 长期排期
