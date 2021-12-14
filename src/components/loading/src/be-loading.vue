@@ -254,8 +254,8 @@ export default defineComponent({
         }
         return
       }
-      getParentDomAttr(internalInstance.ctx.$el.parentElement)
-      parentElement.value = internalInstance.ctx.$el.parentElement
+      getParentDomAttr(internalInstance?.proxy.$el.parentElement)
+      parentElement.value = internalInstance?.proxy.$el.parentElement
       const elem: HTMLElement | null = parentElement.value
       window.onresize = () => {
         if (elem) {
@@ -327,6 +327,3 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
-@import "../../../assets/style/be-loading";
-</style>

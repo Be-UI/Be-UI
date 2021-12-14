@@ -19,7 +19,8 @@ export interface ILoadingPlg {
 export interface ILoadingInst extends ComponentInternalInstance {
     uid: number
     attrs: any
-    ctx: any
+    ctx: any,
+    proxy:any,
 }
 
 export interface IPosStyle {

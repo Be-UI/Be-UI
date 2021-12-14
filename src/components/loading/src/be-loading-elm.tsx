@@ -4,7 +4,7 @@
 * @author czh
 * @update (czh 2021/06/06)
 */
-import '../../../assets/style/be-loading.scss'
+
 import {defineComponent, VNode} from 'vue'
 
 const renderCircle = function (color: string): VNode {

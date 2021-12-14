@@ -12,7 +12,6 @@ import {
 import BeIcon from "../../svg-icon/src/be-icon.vue";
 import {IButtonInst} from "./be-button-type";
 function useComponentId(Instance:ComponentInternalInstance) {
-    console.log(Instance.uid)
     return Instance.uid
 }
 export default defineComponent({

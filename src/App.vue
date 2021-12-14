@@ -11,7 +11,7 @@
           </be-contextmenu-sub-menu>
         </be-contextmenu>-->
     <!--    <be-icon icon="deleteIc" ref="beIcon"></be-icon>-->
-    <be-dialog
+<!--    <be-dialog
         id="wqdsad"
         titles="测试Dialog"
         ref='moreNodeDialog'
@@ -28,13 +28,13 @@
           这是一个弹窗哦
         </div>
       </template>
-      <!--      <template #footer>
+      &lt;!&ndash;      <template #footer>
               <be-button type="primary"
                          bordered
                          round="3">确定
               </be-button>
-            </template>-->
-    </be-dialog>
+            </template>&ndash;&gt;
+    </be-dialog>-->
     <!--        <be-container style="margin-bottom: 60px">
                 <be-header style="background-color: #FFFFFF;text-align: center;line-height: 60px;">Header</be-header>
                 <be-main style="background-color:#f0f9eb;line-height: 160px;text-align: center">Main</be-main>
@@ -269,7 +269,11 @@
             </be-button>
             </template>
           </be-dialog>-->
-    <div style="position: absolute;left: 20%;top: 100px;width: 320px;height: 300px">
+
+
+
+            <div style="position: absolute;left: 20%;top: 100px;width: 320px;height: 300px;background-color: #FFFFFF">
+                <be-loading show :round="10"></be-loading>
       <be-button
           bordered
           prevIcon="deleteIc"
@@ -439,6 +443,7 @@
                   <panda width="25" height="25"  @click="test"></panda>
               </be-popover>-->
     </div>
+
   </div>
 
 </template>

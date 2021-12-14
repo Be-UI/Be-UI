@@ -49,5 +49,6 @@ module.exports = {
     // roots: ['<rootDir>/src/components/ellipsis'],
     //roots: ['<rootDir>/src/components/button'],
     // roots: ['<rootDir>/src/components/message-box/'],
-    roots: ['<rootDir>/src/components/dialog'],
+   // roots: ['<rootDir>/src/components/dialog'],
+   roots: ['<rootDir>/src/components/loading'],
 }

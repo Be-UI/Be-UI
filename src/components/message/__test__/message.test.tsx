@@ -1,4 +1,4 @@
-import {mount} from '@vue/test-utils'
+
 import {BeMessage, resetMessageInstMap} from '../src/be-message-service'
 import {IMessage, IMsgInst} from "../src/be-message-type";
 import {asyncExpect} from "../../../utils/utils";
