@@ -31,10 +31,15 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
-
+internalInstance.ctx 禁止使用  proxy.$el.
 ## 排期
-be-loading 单元测试，样式修改
-stylelint配置 样式重构
+
+be-loading  
+使用了internalInstance.ctx 要修改  
+单元测试，  
+样式修改  
+be.notification 使用了internalInstance.ctx 要修改  
+样式重构  
 
 ## 长期排期
 1.服务式访问的全局绑定  

@@ -1,7 +1,20 @@
-import {computed, defineComponent, getCurrentInstance, VNode} from "vue";
+import {
+    Component,
+    ComponentInternalInstance,
+    computed,
+    defineComponent,
+    getCurrentInstance,
+    nextTick,
+    onMounted,
+    ref,
+    VNode
+} from "vue";
 import BeIcon from "../../svg-icon/src/be-icon.vue";
 import {IButtonInst} from "./be-button-type";
-
+function useComponentId(Instance:ComponentInternalInstance) {
+    console.log(Instance.uid)
+    return Instance.uid
+}
 export default defineComponent({
 
     name: "BeButton",
@@ -101,6 +114,7 @@ export default defineComponent({
     },
     setup(props, ctx) {
         const internalInstance = getCurrentInstance() as IButtonInst
+        const uid = ref<number>(useComponentId(internalInstance))
         const btnStyle = computed(() => {
             return {
                 'background': props.ghost ? 'transparent !important' : '',
@@ -151,7 +165,7 @@ export default defineComponent({
                 <button type="button"
                         {...ctx.attrs}
                         style={btnStyle.value}
-                        id={`be_button_${internalInstance.uid}`}
+                        id={`be_button_${uid.value}`}
                         class={`
                     be-button 
                     be-button__inner ${disabledStyle.value} 
