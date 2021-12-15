@@ -273,24 +273,37 @@
 
 
             <div style="position: absolute;left: 20%;top: 100px;width: 320px;height: 300px;background-color: #FFFFFF">
-                <be-loading show :round="10"></be-loading>
-      <be-button
-          bordered
-          prevIcon="deleteIc"
-          nextIcon="deleteIc"
-          @click="openDialog"
-          size="large">
-        测试
-      </be-button>
-      <!--                <be-contextmenu ref="contextmenu" :theme="'blues'" id="wqdw">
-                          <be-contextmenu-sub-menu title="宋词">
-                              <span>临安小雨初霁</span>
-                              <be-contextmenu-item>陆游</be-contextmenu-item>
-                              <be-contextmenu-sub-menu title="詞句">
-                                  <be-contextmenu-item>谁家客马过京华</be-contextmenu-item>
-                              </be-contextmenu-sub-menu>
-                          </be-contextmenu-sub-menu>
-                      </be-contextmenu>-->
+              <be-popover trigger="click" width="300" customClass="asdwq" placement="bottom" ref="qwdwqdwqd">
+                <template #trigger>
+                  <be-icon icon="deleteIc" style="position: absolute;left: 20%;top: 300px;"></be-icon>
+                </template>
+                <panda width="25" height="25" @click="test"></panda>
+              </be-popover>
+
+              <be-popover trigger="click" width="300" customClass="asdwq" placement="bottom" ref="qwdddddwqdwqd">
+                <template #trigger>
+                  <be-icon icon="deleteIc" style="position: absolute;left: 25%;top: 300px;"></be-icon>
+                </template>
+                <panda width="25" height="25" @click="test"></panda>
+              </be-popover>
+              <!--                <be-loading show :round="10"></be-loading>-->
+              <be-button
+                  bordered
+                  prevIcon="deleteIc"
+                  nextIcon="deleteIc"
+                  @click="openDialog"
+                  size="large">
+                测试
+              </be-button>
+              <!--                <be-contextmenu ref="contextmenu" :theme="'blues'" id="wqdw">
+                                  <be-contextmenu-sub-menu title="宋词">
+                                      <span>临安小雨初霁</span>
+                                      <be-contextmenu-item>陆游</be-contextmenu-item>
+                                      <be-contextmenu-sub-menu title="詞句">
+                                          <be-contextmenu-item>谁家客马过京华</be-contextmenu-item>
+                                      </be-contextmenu-sub-menu>
+                                  </be-contextmenu-sub-menu>
+                              </be-contextmenu>-->
 
       <!--            <be-button type="primary"
                              bordered
@@ -467,7 +480,7 @@ import BeHeader from "./components/container/src/be-header.vue";
 import BeMain from "./components/container/src/be-main.vue";
 import BeFooter from "./components/container/src/be-footer.vue";
 import BeAside from "./components/container/src/be-aside.vue";
-import {ref} from "vue";
+import {getCurrentInstance, ref} from "vue";
 
 export default {
   name: 'App',
@@ -485,11 +498,15 @@ export default {
     panda
   },
   setup() {
+    const curInst = getCurrentInstance()
     const show = ref<boolean>(true)
     const openDialog = (): void => {
       show.value = !show.value
     }
     const test = (): void => {
+      console.log(111)
+      curInst?.refs.qwdwqdwqd.close()
+      curInst?.refs.qwdddddwqdwqd.close()
     }
     return {
       show,
