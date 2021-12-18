@@ -32,7 +32,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
 internalInstance.ctx 禁止使用  proxy.$el.
-下拉菜單打包后無法使用
+
 ## 排期
 be-loading  
 使用了internalInstance.ctx 要修改  
