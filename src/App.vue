@@ -512,6 +512,13 @@ export default {
       curInst?.refs.qwdwqdwqd.close()
       curInst?.refs.qwdddddwqdwqd.close()
     }
+      BeMessage({
+          titles: 'asd',
+          msgType: 'success',
+          duration: 2000,
+          offsetTop:300,
+          close: true,
+      })
     const testList = [
       {label: '落日绣帘卷', id: '落日绣帘卷'},
       {label: '亭下水连空', id: '亭下水连空'},

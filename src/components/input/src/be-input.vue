@@ -328,7 +328,6 @@ export default defineComponent({
                 areaStyle.value = {
                     minHeight: compTextareaHeight(curInstAreaRefs, props.rows).minHeight,
                 }
-                console.log(areaStyle.value)
             }
         }
         const computedTextareaStyle = computed(() => ({

@@ -143,7 +143,10 @@ const computeOffset = (option: INotifyOption, instanceArr: Array<Object>, isCach
     if (!isCache) {
         instanceArr.forEach((item: any, index: number) => {
             verticalOffset += (item.instance.el.childNodes[0].offsetHeight || 0) + offset;
-            if (index === 0 && option?.compType === 'message') verticalOffset = 30
+            if (index === 0 && option?.compType === 'message') {
+                const offsetInit:number = /top/.test(String(option.placement)) ?  (option.offsetTop || 0)  : (option.offsetBottom || 0)
+                verticalOffset = 30 + offsetInit
+            }
         });
     }
     //verticalOffset += offset;
