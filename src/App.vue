@@ -295,6 +295,10 @@
                   size="large">
                 测试
               </be-button>
+              <be-select size="medium" v-model="seletStr" search :list="testList">
+
+              </be-select>
+              <be-tag type="info" @close="handleClick" isClose>asdw</be-tag>
               <!--                <be-contextmenu ref="contextmenu" :theme="'blues'" id="wqdw">
                                   <be-contextmenu-sub-menu title="宋词">
                                       <span>临安小雨初霁</span>
@@ -508,10 +512,29 @@ export default {
       curInst?.refs.qwdwqdwqd.close()
       curInst?.refs.qwdddddwqdwqd.close()
     }
+    const testList = [
+      {label: '落日绣帘卷', id: '落日绣帘卷'},
+      {label: '亭下水连空', id: '亭下水连空'},
+      {label: '知君为我新作', id: '知君为我新作'},
+      {label: '窗户湿青红', id: '窗户湿青红'},
+      {label: '长记平山堂上', id: '欹枕江南烟雨'},
+      {label: '欹枕江南烟雨', id: '长记平山堂上'},
+      {label: '杳杳没孤鸿', id: '杳杳没孤鸿'},
+      {label: '千里快哉風', id: '千里快哉風'},
+      {label: '认得醉翁语', id: '认得醉翁语'},
+      {label: '山色有无中', id: '山色有无中'},
+      {label: '一點浩然氣', id: '一點浩然氣'},
+      {label: '千里快哉風我', id: 'fjkhfsdaiuorgga'},
+      {label: 'a', id: 'fjkhfsdaiuawdorgga'},
+      {label: 'ab', id: 'fjkhfsadaiuorgga'},
+    ]
+    const seletStr = ref([])
     return {
       show,
       test,
-      openDialog
+      openDialog,
+      seletStr,
+      testList
     }
   },
   /* data() {

@@ -5,7 +5,9 @@
   be-tag
   be-tag__${disabled ? 'disabled' :''}
   be-tag__${type}
-  be-tag__${size}`">
+  be-tag__${size}
+  ${customClass}
+  `">
     <span :style="{color:styleOption?.color}">
       <slot></slot>
     </span>
@@ -71,7 +73,14 @@ export default defineComponent({
       type: Object,
       default: () => {
       }
-    }
+    },
+    /**
+     * 自定义主题样式类 (完成)
+     */
+    customClass: {
+      type: String,
+      default: '',
+    },
   },
   setup(props, ctx) {
     /**

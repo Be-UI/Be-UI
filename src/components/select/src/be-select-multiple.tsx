@@ -10,13 +10,14 @@ import {IOption} from "../src/be-select-type";
 import BeInputSelect from "../../autocomplete/src/be-input-select.vue";
 import BePopover from "../../popover/src/be-popover.vue";
 import BeIcon from "../../svg-icon/src/be-icon.vue";
+import BeTag from "../../tag/src/be-tag.vue";
 import {IInputSelectFunc} from "../../autocomplete/src/be-autocomplete-type";
 import {arrDupRemov, debounce, getUuid, isFunction, isString, jsonClone, mapToArr} from "../../../utils/common";
 import composition from './be-select-composition'
 
 export default defineComponent({
     name: "be-select",
-    components: {BeInputSelect, BePopover, BeIcon},
+    components: {BeInputSelect, BePopover, BeIcon, BeTag},
     emits: [
         'update:modelValue',
         'select',
@@ -145,13 +146,6 @@ export default defineComponent({
         customClass: {
             type: String,
             default: ''
-        },
-        /**
-         * 開啓多選
-         */
-        multiple: {
-            type: Boolean,
-            default: false
         },
         /**
          * 最大tag数
@@ -588,7 +582,7 @@ export default defineComponent({
                                     isClose={true}
                                     type='info'
                                     size='mini'
-                                    className='ellipsis'
+                                    customClass='ellipsis'
                                     onClose={() => closeTag(val)}>
                                 {val[label]}
                             </be-tag>
