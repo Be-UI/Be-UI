@@ -16,7 +16,7 @@ import {arrDupRemov, debounce, getUuid, isFunction, isString, jsonClone, mapToAr
 import composition from './be-select-composition'
 
 export default defineComponent({
-    name: "be-select",
+    name: "be-select-multiple",
     components: {BeInputSelect, BePopover, BeIcon, BeTag},
     emits: [
         'update:modelValue',
