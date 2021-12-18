@@ -15,6 +15,7 @@
       "esnext",
       "dom"
     ],
+    // 类型文件声明位置
     "types": [
       "vite/client",
       "jest",
