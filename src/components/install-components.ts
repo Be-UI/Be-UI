@@ -8,19 +8,20 @@ export {default as BeLoading} from './loading/';//全局、按需
 export {default as BePagination} from './pagination/';//全局、按需
 export {default as BeInput} from './input/';//全局、按需
 export {default as BeAutocomplete} from './autocomplete/';//全局、按需
-export {default as BeSelect} from './select/';//全局、按需
 export {default as BeTag} from './tag/';//全局、按需
 export {default as BeInputNumber} from './input-number/';//全局、按需
+export {BeSelect} from './select/';//全局、按需
+export {BeSelectMultiple} from './select/';//全局、按需
 export {default as BeSwitch} from './switch/';//全局、按需
-export { BeBreadcrumb } from './breadcrumb/';//全局、按需
-export { BeBreadcrumbItem } from './breadcrumb/';//全局、按需
-export { BeContextmenu } from './contextmenu/';//全局、按需
-export { BeContextmenuItem } from './contextmenu/';//全局、按需
-export { BeMain } from './container/';//全局、按需
-export { BeFooter } from './container/';//全局、按需
-export { BeAside } from './container/';//全局、按需
-export { BeHeader } from './container/';//全局、按需
-export { BeContainer } from './container/';//全局、按需
+export {BeBreadcrumb} from './breadcrumb/';//全局、按需
+export {BeBreadcrumbItem} from './breadcrumb/';//全局、按需
+export {BeContextmenu} from './contextmenu/';//全局、按需
+export {BeContextmenuItem} from './contextmenu/';//全局、按需
+export {BeMain} from './container/';//全局、按需
+export {BeFooter} from './container/';//全局、按需
+export {BeAside} from './container/';//全局、按需
+export {BeHeader} from './container/';//全局、按需
+export {BeContainer} from './container/';//全局、按需
 
 // plugins
 export {default as BeNotification} from './notification/';//服务
