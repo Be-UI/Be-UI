@@ -24,9 +24,9 @@ describe('test-be-loading-props', () => {
     test('props-show', async () => {
         const wrapper = _mount({
             template: `
-                <div id="test_esc">
-                <be-loading :show="show"></be-loading>
-                </div>
+              <div>
+              <be-loading :show="show"></be-loading>
+              </div>
             `,
             setup() {
                 const show = ref<boolean>(false)
@@ -51,7 +51,7 @@ describe('test-be-loading-props', () => {
     test('props-customClass', async () => {
         _mount({
             template: `
-                <div id="test_esc">
+                <div >
                 <be-loading show customClass='test-beloading-custom-class'></be-loading>
                 </div>
             `,
@@ -63,7 +63,7 @@ describe('test-be-loading-props', () => {
     test('props-round', async () => {
          _mount({
              template: `
-                <div id="test_esc">
+                <div >
                 <be-loading show customClass='test-beloading-round' :round="5"></be-loading>
                 </div>
             `,

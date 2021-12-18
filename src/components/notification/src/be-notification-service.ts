@@ -31,7 +31,7 @@ const closeNotify = function (instance: DefineComponent, isAll: boolean = false)
     let index = -1
     let placement: string = (instance.props && instance.props.option.placement)
     const instanceUid: number = (instance.component && instance.component.uid) || instance.uid
-    const instanceEl = instance.el || instance.ctx.$el
+    const instanceEl = instance.el || instance.proxy.$el
     let instancesList = Object(instanceMap)[placement]
     let direction = /^top-/.test(placement) ? 'top' : 'bottom';
     let len = instancesList.length

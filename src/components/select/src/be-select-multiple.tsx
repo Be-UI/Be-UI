@@ -366,7 +366,7 @@ export default defineComponent({
             // 更新值
             const $eventDom = (event.target as HTMLInputElement)
             inputMultiple.value = $eventDom.value
-            // 改变文字宽度
+            // 输入时改变宽度
             txtWidth.value = textWidth($eventDom.value);
             updatePopover()
             /** 选中 change 事件

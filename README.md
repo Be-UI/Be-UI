@@ -31,20 +31,24 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 已知问题
-internalInstance.ctx 禁止使用  proxy.$el.
+
+internalInstance.ctx 禁止使用 proxy.$el.
 
 ## 排期
-be-loading  
-使用了internalInstance.ctx 要修改  
-单元测试，  
-样式修改  
-be.notification 使用了internalInstance.ctx 要修改  
-样式重构  
+
+be-loading 单元测试， 样式修改
+
+修改层级：loading 》 notification = message-box = message = popover 》 dialog
+
+样式重构
 
 ## 长期排期
+
 1.服务式访问的全局绑定  
 2.组件引用编写
+
 ## 内容
+
 |  序号   |  名称   | 组件  | 完成状态  | 单元测试  |
 |  ---- |  ----  | ----  | ----  | ----  |
 |1| 布局容器  | be-container |<font color=#07c160 size=5>√</font>|<font color=#07c160 size=5>√</font>|
