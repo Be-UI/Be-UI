@@ -9,7 +9,8 @@
   @apply max-h-12;
 
   .be-message-container {
-    @apply min-w-16 bg-default p-2.5 rounded shadow absolute box-border;
+    width: max-content;
+    @apply  bg-default p-2.5 rounded shadow absolute box-border;
     z-index: 998;
 
     .be-message-title {
@@ -43,7 +44,7 @@
 
           .txt-warning {
             @include be-message-title;
-            @apply text-warning font-mono;
+            @apply text-warning font-mono mr-2;
           }
 
           .txt-info {

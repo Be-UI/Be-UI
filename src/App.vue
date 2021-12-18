@@ -491,6 +491,13 @@ export default {
     }
     const test = (): void => {
     }
+      BeMessage({
+          titles: 'asd',
+          msgType: 'success',
+          duration: 2000,
+          offsetTop:300,
+          close: true,
+      })
     return {
       show,
       test,
