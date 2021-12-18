@@ -5,13 +5,12 @@
 }
 
 .be-message {
-  z-index: 10;
+  z-index: 9999;
   @apply max-h-12;
 
   .be-message-container {
     width: max-content;
     @apply  bg-default p-2.5 rounded shadow absolute box-border;
-    z-index: 998;
 
     .be-message-title {
       @apply w-full h-6;
