@@ -36,7 +36,7 @@ internalInstance.ctx 禁止使用 proxy.$el.
 
 ## 排期
 
-be-loading 单元测试， 样式修改
+be-loading 样式修改
 
 修改层级：loading 》 notification = message-box = message = popover 》 dialog
 
