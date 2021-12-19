@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.antdv.com/">
-    <img width="200" src="/public/favicon.ico">
+    <img width="200" src="/public/logo.png">
   </a>
 </p>
 
