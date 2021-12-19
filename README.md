@@ -1,4 +1,10 @@
-# be-ui3
+<p align="center">
+  <a href="https://www.antdv.com/">
+    <img width="200" src="/public/favicon.ico">
+  </a>
+</p>
+
+# Be-UI3
 
 基于vue3.0的简单ui组件库
 
@@ -36,10 +42,8 @@ internalInstance.ctx 禁止使用 proxy.$el.
 
 ## 排期
 
-be-loading 样式修改
-
-修改层级：loading 》 notification = message-box = message = popover 》 dialog
-
+be-loading 样式修改 修改层级：loading 》 notification = message-box = message = popover 》 dialog  
+be-notification 单元测试  
 样式重构
 
 ## 长期排期
