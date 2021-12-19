@@ -9,21 +9,23 @@
     <div :id="`be_load_${uid}`"
          :style="`position: fixed;height: ${containerHeight};width: ${containerWidth};left: ${containerLeft};top: ${containerTop};`">
       <transition name="be-fade-in-linear">
-        <div class="be-load-container"
+        <div class="be-load-container flex-col"
              :class="`${customClass} ${isFullScreenStyle}`"
              :style="`
-                 background-color: ${bgColor};
+                 background-color: ${mdColor};
                  left: ${leftLoader};
                  top: ${topLoader};
                  width:${loaderWidth};
                  height:${loaderHeight}`"
              v-if="isShowLoader">
           <!--loading动画-->
+
           <BeLoadingAnimate></BeLoadingAnimate>
           <span class="be-loader-text"
                 v-if="text"
-                :style="`color:${colorText};left:${leftTxt};top:${topTxt}`"
+                :style="`color:${colorText};`"
                 :class="`be-loader-text__${sizeLoader}`">{{ text }}</span>
+
         </div>
       </transition>
     </div>
@@ -41,8 +43,7 @@ import {
   nextTick,
   getCurrentInstance,
   watch,
-  onMounted,
-  Ref,
+  ComputedRef,
   watchEffect,
   onUnmounted
 } from 'vue'
@@ -100,7 +101,7 @@ export default defineComponent({
       default: '',
     },
     /**
-     * 尺寸 (完成)
+     * 尺寸 (完成) large  default small
      */
     size: {
       type: String,
@@ -130,7 +131,7 @@ export default defineComponent({
     /**
      * 背景颜色 (完成)
      */
-    bgColor: {
+    mdColor: {
       type: String,
       default: 'rgba(255,255,255,.5)',
     },
@@ -161,7 +162,7 @@ export default defineComponent({
     const containerLeft = ref('50%')
     const containerTop = ref('50%')
     const isBackgroundStyle = computed(() => props.isBackground ? 'be-loader__bg' : '')
-    const isFullScreenStyle = computed(() => props.isFullScreen ? 'be-load-container__fullScreen' : '')
+    const isFullScreenStyle = ref<string | ComputedRef>('')
 
 
     /******************************************** loading位置、宽高设置 ************************************/
@@ -246,12 +247,9 @@ export default defineComponent({
      * 初始化组件
      */
     const initComp = (): void => {
+      isFullScreenStyle.value = computed(() => props.isFullScreen ? 'be-load-container__fullScreen' : '').value
       // 全屏显示时
       if (props.isFullScreen) {
-        computePosition(document.querySelector('body'))
-        window.onresize = () => {
-          computePosition(document.querySelector('body'))
-        }
         return
       }
       getParentDomAttr(internalInstance?.proxy.$el.parentElement)
@@ -280,10 +278,12 @@ export default defineComponent({
       setText()
     }
     /************************************* 延迟显示 ************************************/
+    const isShowLoader = ref<boolean | ComputedRef>(false)
     const delayShow = (show: boolean) => {
       if (show) {
         timer.value = setTimeout(() => {
           nextTick(() => {
+            isShowLoader.value = computed(() => props.show)
             initComp()
           })
         }, props.delay)
@@ -293,9 +293,8 @@ export default defineComponent({
         window.onresize = null
       }
     }
-    const isShowLoader = computed(() => props.show)
     watchEffect(() => {
-      let show: boolean = isShowLoader.value
+      let show: boolean = props.show
       delayShow(show)
     })
     watch(isShowLoader, (nVal: any) => {

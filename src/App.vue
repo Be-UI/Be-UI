@@ -272,7 +272,7 @@
 
 
 
-            <div style="position: absolute;left: 20%;top: 100px;width: 320px;height: 300px;background-color: #FFFFFF">
+            <div style="position: absolute;left: 20%;top: 100px;width: 320px;height: 50%;background-color: #FFFFFF">
               <be-popover trigger="click" width="300" customClass="asdwq" placement="bottom" ref="qwdwqdwqd">
                 <template #trigger>
                   <be-icon icon="deleteIc" style="position: absolute;left: 20%;top: 300px;"></be-icon>
@@ -286,7 +286,14 @@
                 </template>
                 <panda width="25" height="25" @click="test"></panda>
               </be-popover>
-              <!--                <be-loading show :round="10"></be-loading>-->
+              <be-loading
+                  show
+                  :round="10"
+                  color="red"
+                  size="large"
+                  :isBackground="true"
+                  customClass='test-beloading-round'
+                  text="testText"></be-loading>
               <be-button
                   bordered
                   prevIcon="deleteIc"
@@ -541,7 +548,8 @@ export default {
       test,
       openDialog,
       seletStr,
-      testList
+      testList,
+      re: () => <div id='test_beloading_customRender'>asd</div>
     }
   },
   /* data() {
@@ -818,9 +826,9 @@ export default {
 </script>
 <style lang="scss">
 body {
-  height: 100%;
-  position: fixed;
-  width: 100%;
+  /*  height: 100%;
+    position: fixed;
+    width: 100%;*/
 }
 
 #App {
