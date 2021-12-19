@@ -272,7 +272,8 @@
 
 
 
-            <div style="position: absolute;left: 20%;top: 100px;width: 320px;height: 50%;background-color: #FFFFFF">
+            <div style="position: absolute;left: 20%;top: 100px;width: 320px;height: 50%;background-color: #FFFFFF"
+                 @click="show = true">
               <be-popover trigger="click" width="300" customClass="asdwq" placement="bottom" ref="qwdwqdwqd">
                 <template #trigger>
                   <be-icon icon="deleteIc" style="position: absolute;left: 20%;top: 300px;"></be-icon>
@@ -291,6 +292,7 @@
                   :round="10"
                   color="red"
                   size="large"
+                  :delay="10000"
                   :isBackground="true"
                   customClass='test-beloading-round'
                   text="testText"></be-loading>
@@ -510,7 +512,7 @@ export default {
   },
   setup() {
     const curInst = getCurrentInstance()
-    const show = ref<boolean>(true)
+    const show = ref<boolean>(false)
     const openDialog = (): void => {
       show.value = !show.value
     }
