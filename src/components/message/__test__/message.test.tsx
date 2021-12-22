@@ -86,7 +86,7 @@ describe('test-be-message-props', () => {
             key: 'test-close',
         } as IMessage) as IMsgInstanceTest
         const elm = compInst.message.el as HTMLElement
-        expect((elm.querySelectorAll('.be-icon')[1].childNodes[0] as SVGAElement).getAttribute('xlink:href') === '#delete').toBeTruthy()
+        expect((elm.querySelectorAll('.be-icon')[1].childNodes[0] as SVGAElement).getAttribute('xlink:href') === '#deleteIc').toBeTruthy()
         const compInstUnClose = compInst.update({
             close: false,
             titles: 'test-close',
@@ -94,7 +94,7 @@ describe('test-be-message-props', () => {
         })
         const elmUnClose = compInstUnClose.notify.el as HTMLElement
         elmUnClose.querySelectorAll('.be-icon').forEach((res: Element) => {
-            expect((res.childNodes[0] as SVGAElement).getAttribute('xlink:href') !== '#delete').toBeTruthy()
+            expect((res.childNodes[0] as SVGAElement).getAttribute('xlink:href') !== '#deleteIc').toBeTruthy()
         })
     })
     // 測試 前置图标\关闭图标渲染

@@ -1,6 +1,7 @@
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import dts from 'vite-dts'
 //import {svgBuilder} from './src/utils/svg-builder';
 const {babel} = require('@rollup/plugin-babel')
 import path from 'path'
@@ -9,6 +10,7 @@ export default defineConfig({
     plugins: [
         vue(),
         vueJsx(),
+        dts()
        // svgBuilder('./src/assets/icon/')
     ],
 
@@ -74,13 +76,11 @@ export default defineConfig({
     },
     // 配置库打包
     build: {
-        outDir: 'be-ui',
         lib: {
-            entry: path.resolve(__dirname, './src/components/index.ts'),
-            name: 'be-ui',
-            fileName: (format) => `be-ui.${format}.js`,
+            entry: './src/components/index.ts',
+            formats: ['es', 'cjs'],
         },
-        rollupOptions: {
+         rollupOptions: {
             // 确保外部化处理那些你不想打包进库的依赖
             external: ['vue'],
             output: {
@@ -90,13 +90,6 @@ export default defineConfig({
                 }
             }
         }
-      /*  rollupOptions: {
-            plugins: [
-                babel({
-                    babelHelpers: 'bundled'
-                })
-            ]
-        }*/
     },
     esbuild: {
         jsxFactory: 'h',
