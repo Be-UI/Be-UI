@@ -46,6 +46,7 @@
     "babel-jest": "26.0.0",
     "jest": "26.0.0",
     "postcss": "^7.0.39",
+    "rollup-plugin-cleanup": "^3.2.1",
     "sass": "^1.38.0",
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^9.0.3",

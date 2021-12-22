@@ -2,7 +2,7 @@ import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import dts from 'vite-dts'
-//import {svgBuilder} from './src/utils/svg-builder';
+import cleanup from 'rollup-plugin-cleanup';
 const {babel} = require('@rollup/plugin-babel')
 import path from 'path'
 // https://vitejs.dev/config/
@@ -10,8 +10,8 @@ export default defineConfig({
     plugins: [
         vue(),
         vueJsx(),
-        dts()
-       // svgBuilder('./src/assets/icon/')
+        dts(),
+        cleanup()
     ],
 
     /**
@@ -75,7 +75,7 @@ export default defineConfig({
         }
     },
     // 配置库打包
-    build: {
+   /* build: {
         lib: {
             entry: './src/components/index.ts',
             formats: ['es', 'cjs'],
@@ -90,7 +90,7 @@ export default defineConfig({
                 }
             }
         }
-    },
+    },*/
     esbuild: {
         jsxFactory: 'h',
         jsxFragment: 'Fragment'
