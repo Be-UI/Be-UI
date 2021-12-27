@@ -17,11 +17,12 @@ const createMessage = function (options: IMessage): IMsgInst {
         placement: 'topCenter',
         compType: 'message',
         customClass: options.customClass,
-        duration: options.duration,
+        duration: options.duration || 4500,
         key: options.key,
         onClose: options.onClose,
         iconPreRender: options.iconPreRender,
         closeRender: options.closeRender,
+
         loading: options.loading,
     }
     let notifyInst: INotfiyInst = BeNotify(option)

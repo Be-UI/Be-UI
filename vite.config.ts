@@ -75,7 +75,7 @@ export default defineConfig({
         }
     },
     // 配置库打包
-   /* build: {
+    build: {
         lib: {
             entry: './src/components/index.ts',
             formats: ['es', 'cjs'],
@@ -90,7 +90,7 @@ export default defineConfig({
                 }
             }
         }
-    },*/
+    },
     esbuild: {
         jsxFactory: 'h',
         jsxFragment: 'Fragment'
