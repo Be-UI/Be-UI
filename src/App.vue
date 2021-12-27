@@ -281,7 +281,7 @@
                 <panda width="25" height="25" @click="test"></panda>
               </be-popover>
 
-              <be-popover trigger="click" width="300" customClass="asdwq" placement="bottom" ref="qwdddddwqdwqd">
+              <be-popover trigger="click" width="300" customClass="asdwq" placement="top" ref="qwdddddwqdwqd">
                 <template #trigger>
                   <be-icon icon="deleteIc" style="position: absolute;left: 25%;top: 300px;"></be-icon>
                 </template>

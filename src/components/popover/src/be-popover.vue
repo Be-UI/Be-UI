@@ -96,6 +96,7 @@ export default defineComponent({
             type: Boolean,
             default: false
         },
+
         /**
          * 延时显示(完成)
          */

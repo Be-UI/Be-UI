@@ -29,7 +29,6 @@
     visibility: visible;
     content: '';
     transform: rotate(45deg);
-    box-shadow: 1px 1px 3px -1px rgba(0, 0, 0, .37);
   }
 
 }
@@ -38,6 +37,10 @@
 
   .be-popover-arrow {
     bottom: -4px;
+
+    &::before {
+      box-shadow: 1px 1px 3px -1px rgba(0, 0, 0, .37);
+    }
   }
 }
 
@@ -45,6 +48,10 @@
 
   .be-popover-arrow {
     top: -4px;
+
+    &::before {
+      box-shadow: -1px -1px 3px -1px rgba(0, 0, 0, .37);
+    }
   }
 }
 
@@ -52,6 +59,10 @@
 
   .be-popover-arrow {
     right: -4px;
+
+    &::before {
+      box-shadow: 1px -1px 3px -1px rgba(0, 0, 0, .37);
+    }
   }
 }
 
@@ -59,6 +70,10 @@
 
   .be-popover-arrow {
     left: -4px;
+
+    &::before {
+      box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, .37);
+    }
   }
 }
 

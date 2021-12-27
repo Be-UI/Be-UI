@@ -68,7 +68,6 @@ export default defineComponent({
   emits: [
     'confirm',
     'close',
-
     'update:isShow',
     'escEvt'
   ],
