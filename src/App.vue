@@ -325,15 +325,33 @@
                     </template>
                 </be-switch>
                 {{showSwitch}}
-              <!--                <be-contextmenu ref="contextmenu" :theme="'blues'" id="wqdw">
-                                  <be-contextmenu-sub-menu title="宋词">
-                                      <span>临安小雨初霁</span>
-                                      <be-contextmenu-item>陆游</be-contextmenu-item>
-                                      <be-contextmenu-sub-menu title="詞句">
-                                          <be-contextmenu-item>谁家客马过京华</be-contextmenu-item>
-                                      </be-contextmenu-sub-menu>
-                                  </be-contextmenu-sub-menu>
-                              </be-contextmenu>-->
+                 <be-input-number @change="handleClick"
+                                  :formatter="formatter"
+                                  :parser="parser"
+                                  keyboard
+                                  min="2"
+                                  max="10000"
+                                  @step="handleStep"
+                                  v-model="testModel"
+                                  ref="beinputNum">
+<!--                   <template #next>next</template>
+                     <template #pre>pre</template>-->
+                 </be-input-number>
+                  <be-input-number
+                          v-model="testModel"
+                          ref="beinputNum"
+                          keyboard
+                          :step="0.3">
+                      </be-input-number>
+                        <!--                <be-contextmenu ref="contextmenu" :theme="'blues'" id="wqdw">
+                                            <be-contextmenu-sub-menu title="宋词">
+                                                <span>临安小雨初霁</span>
+                                                <be-contextmenu-item>陆游</be-contextmenu-item>
+                                                <be-contextmenu-sub-menu title="詞句">
+                                                    <be-contextmenu-item>谁家客马过京华</be-contextmenu-item>
+                                                </be-contextmenu-sub-menu>
+                                            </be-contextmenu-sub-menu>
+                                        </be-contextmenu>-->
 
       <!--            <be-button type="primary"
                              bordered
