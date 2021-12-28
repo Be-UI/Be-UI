@@ -28,6 +28,7 @@
 }
 
 .be-switch__default {
+  min-width: 35px;
   @apply h-5 leading-5 w-min;
 
   .be-switch-circle {
@@ -51,6 +52,7 @@
 }
 
 .be-switch__small {
+  min-width: 30px;
   @apply h-4 leading-4 w-min;
 
   .be-switch-circle {
@@ -74,6 +76,7 @@
 }
 
 .be-switch__large {
+  min-width: 40px;
   @apply h-6 leading-6 w-min;
 
   .be-switch-circle {

@@ -273,7 +273,7 @@
 
 
             <div style="position: absolute;left: 20%;top: 100px;width: 320px;height: 50%;background-color: #FFFFFF"
-                 @click="show = true">
+                 >
               <be-popover trigger="click" width="300" customClass="asdwq" placement="bottom" ref="qwdwqdwqd">
                 <template #trigger>
                   <be-icon icon="deleteIc" style="position: absolute;left: 20%;top: 300px;"></be-icon>
@@ -287,7 +287,7 @@
                 </template>
                 <panda width="25" height="25" @click="test"></panda>
               </be-popover>
-              <be-loading
+<!--              <be-loading
                   show
                   :round="10"
                   color="red"
@@ -295,7 +295,7 @@
                   :delay="10000"
                   :isBackground="true"
                   customClass='test-beloading-round'
-                  text="testText"></be-loading>
+                  text="testText"></be-loading>-->
               <be-button
                   bordered
                   prevIcon="deleteIc"
@@ -316,6 +316,15 @@
                         <template #separator>❀</template>
                     </be-breadcrumb-item>
                     </be-breadcrumb>
+                <be-switch  v-model="showSwitch" @change="handleClick">
+                    <template v-slot:unCheckedRender="slotProps">
+                        <span>unChecked</span>
+                    </template>
+                    <template v-slot:checkedRender="slotProps">
+                        <span>checked</span>
+                    </template>
+                </be-switch>
+                {{showSwitch}}
               <!--                <be-contextmenu ref="contextmenu" :theme="'blues'" id="wqdw">
                                   <be-contextmenu-sub-menu title="宋词">
                                       <span>临安小雨初霁</span>
@@ -501,7 +510,7 @@ import BeHeader from "./components/container/src/be-header.vue";
 import BeMain from "./components/container/src/be-main.vue";
 import BeFooter from "./components/container/src/be-footer.vue";
 import BeAside from "./components/container/src/be-aside.vue";
-import {getCurrentInstance, ref} from "vue";
+import {computed, getCurrentInstance, ref, watch} from "vue";
 
 export default {
   name: 'App',
@@ -521,9 +530,17 @@ export default {
   setup() {
     const curInst = getCurrentInstance()
     const show = ref<boolean>(false)
+    const showSwitch = ref<boolean>(false)
     const openDialog = (): void => {
       show.value = !show.value
     }
+    let asdqwd =  computed(()=>{
+        debugger
+        return showSwitch.value
+    })
+    watch(asdqwd,(nVal)=>{
+        debugger
+    })
     const test = (): void => {
       console.log(111)
       curInst?.refs.qwdwqdwqd.close()
@@ -552,7 +569,6 @@ export default {
       {label: 'ab', id: 'fjkhfsadaiuorgga'},
     ]
     const handleClick = (p):void =>{
-        debugger
         console.log(p)
       }
     const seletStr = ref([])
@@ -563,6 +579,7 @@ export default {
       seletStr,
         handleClick,
       testList,
+        showSwitch,
       re: () => <div id='test_beloading_customRender'>asd</div>
     }
   },
