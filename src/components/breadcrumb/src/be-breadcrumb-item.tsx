@@ -83,7 +83,7 @@ export default defineComponent({
             optionList.value.forEach((val:any) => {
                 // 選項列表
                 renderList.push((
-                    <li key={val.id} class='be-breadcrumb-item-li' onClick={handleClickItem}>
+                    <li key={val.id} class='be-breadcrumb-item-li' onClick={()=>handleClickItem(val)}>
                         {val.label}
                     </li>
                 ))

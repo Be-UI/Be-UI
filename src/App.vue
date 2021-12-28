@@ -308,6 +308,14 @@
 
               </be-select>
               <be-tag type="info" @close="handleClick" isClose>asdw</be-tag>
+                <be-breadcrumb>
+                    <be-breadcrumb-item  to="/黑色柳丁" separator="#" >柳丁</be-breadcrumb-item>
+                    <be-breadcrumb-item  to="/似曾相识" :option="testList" :clickOption="handleClick">似曾相识</be-breadcrumb-item>
+                    <be-breadcrumb-item to="/小镇姑娘" separator="#" :click="testClose">
+                        小镇姑娘
+                        <template #separator>❀</template>
+                    </be-breadcrumb-item>
+                    </be-breadcrumb>
               <!--                <be-contextmenu ref="contextmenu" :theme="'blues'" id="wqdw">
                                   <be-contextmenu-sub-menu title="宋词">
                                       <span>临安小雨初霁</span>
@@ -458,7 +466,7 @@
                   <be-breadcrumb-item  to="/似曾相识" :option="testList" :clickOption="handleClick">似曾相识</be-breadcrumb-item>
                   <be-breadcrumb-item to="/小镇姑娘" separator="#" :click="testClose">
                       小镇姑娘
-                      <template #separator>❀</template>
+                              <template #separator>❀</template>
                   </be-breadcrumb-item>
                   <be-breadcrumb-item :click="testClose">普通朋友</be-breadcrumb-item>
               </be-breadcrumb>
@@ -536,7 +544,6 @@ export default {
       {label: '长记平山堂上', id: '欹枕江南烟雨'},
       {label: '欹枕江南烟雨', id: '长记平山堂上'},
       {label: '杳杳没孤鸿', id: '杳杳没孤鸿'},
-      {label: '千里快哉風', id: '千里快哉風'},
       {label: '认得醉翁语', id: '认得醉翁语'},
       {label: '山色有无中', id: '山色有无中'},
       {label: '一點浩然氣', id: '一點浩然氣'},
@@ -544,12 +551,17 @@ export default {
       {label: 'a', id: 'fjkhfsdaiuawdorgga'},
       {label: 'ab', id: 'fjkhfsadaiuorgga'},
     ]
+    const handleClick = (p):void =>{
+        debugger
+        console.log(p)
+      }
     const seletStr = ref([])
     return {
       show,
       test,
       openDialog,
       seletStr,
+        handleClick,
       testList,
       re: () => <div id='test_beloading_customRender'>asd</div>
     }
