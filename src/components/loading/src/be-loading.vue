@@ -5,31 +5,30 @@
 * @update (czh 2021/6/11)
 */
 <template>
-  <teleport to="body">
-    <div :id="`be_load_${uid}`"
-         :style="`position: fixed;height: ${containerHeight};width: ${containerWidth};left: ${containerLeft};top: ${containerTop};`">
-      <transition name="be-fade-in-linear">
-        <div class="be-load-container flex-col"
-             :class="`${customClass} ${isFullScreenStyle}`"
-             :style="`
+    <div class="be-load-container_relative">
+        <div :id="`be_load_${uid}`"
+             :style="`position: absolute;height: ${containerHeight};width: ${containerWidth};left: ${containerLeft};top: ${containerTop};`">
+            <transition name="be-fade-in-linear">
+                <div class="be-load-container flex-col"
+                     :class="`${customClass} ${isFullScreenStyle}`"
+                     :style="`
                  background-color: ${mdColor};
                  left: ${leftLoader};
                  top: ${topLoader};
                  width:${loaderWidth};
                  height:${loaderHeight}`"
-             v-if="isShowLoader">
-          <!--loading动画-->
+                     v-if="isShowLoader">
+                    <!--loading动画-->
+                    <BeLoadingAnimate></BeLoadingAnimate>
+                    <span class="be-loader-text"
+                          v-if="text"
+                          :style="`color:${colorText};`"
+                          :class="`be-loader-text__${sizeLoader}`">{{ text }}</span>
 
-          <BeLoadingAnimate></BeLoadingAnimate>
-          <span class="be-loader-text"
-                v-if="text"
-                :style="`color:${colorText};`"
-                :class="`be-loader-text__${sizeLoader}`">{{ text }}</span>
-
+                </div>
+            </transition>
         </div>
-      </transition>
     </div>
-  </teleport>
 </template>
 <script lang="ts">
 /**
@@ -63,7 +62,7 @@ export default defineComponent({
      */
     round: {
       type: [Number, String],
-      default: 2
+      default: 5
     },
     /**
      * 延时loading (完成)
@@ -253,13 +252,6 @@ export default defineComponent({
         return
       }
       getParentDomAttr(internalInstance?.proxy.$el.parentElement)
-      parentElement.value = internalInstance?.proxy.$el.parentElement
-      const elem: HTMLElement | null = parentElement.value
-      window.onresize = () => {
-        if (elem) {
-          getParentDomAttr(elem)
-        }
-      }
     }
     /************************************* 不扩展全屏时，使用父节点进行定位 ************************************/
     /**
@@ -272,8 +264,8 @@ export default defineComponent({
       containerWidth.value = window.getComputedStyle(parentDom).width
       containerHeight.value = window.getComputedStyle(parentDom).height
       if (parentStylr) {
-        containerLeft.value = parentStylr.left + 'px'
-        containerTop.value = parentStylr.top + 'px'
+          containerLeft.value =  '0px'
+          containerTop.value = '0px'
       }
       setText()
     }
@@ -290,7 +282,6 @@ export default defineComponent({
       } else {
         clearTimeout(timer)
         timer.value = null
-        window.onresize = null
       }
     }
     watchEffect(() => {
@@ -299,9 +290,6 @@ export default defineComponent({
     })
     watch(isShowLoader, (nVal: any) => {
       delayShow(nVal)
-    })
-    onUnmounted(() => {
-      window.onresize = null
     })
     return {
       uid: internalInstance.uid,

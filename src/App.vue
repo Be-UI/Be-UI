@@ -271,7 +271,7 @@
               </be-dialog>-->
 
 
-        <div style="position: absolute;left: 20%;top: 100px;width: 320px;height: 50%;background-color: #FFFFFF"
+        <div style="position: absolute;left: 20%;top: 100px;width: 45%;height:45%;background-color: #FFFFFF"
         >
             <be-popover trigger="click" width="300" customClass="asdwq" placement="bottom" ref="qwdwqdwqd">
                 <template #trigger>
@@ -286,15 +286,14 @@
                 </template>
                 <panda width="25" height="25" @click="test"></panda>
             </be-popover>
-            <!--              <be-loading
+                          <be-loading
                               show
                               :round="10"
                               color="red"
                               size="large"
-                              :delay="10000"
                               :isBackground="true"
                               customClass='test-beloading-round'
-                              text="testText"></be-loading>-->
+                              text="testText"></be-loading>
             <be-button
                 bordered
                 prevIcon="deleteIc"
@@ -553,7 +552,6 @@ export default {
             show.value = !show.value
         }
         let asdqwd = computed(() => {
-            debugger
             return showSwitch.value
         })
         watch(asdqwd, (nVal) => {
@@ -895,11 +893,12 @@ body {
     /* background: $info;*/
     height: 100%;
     width: 100%;
-    position: fixed;
+
 }
 
-.app {
+#app {
     overflow-y: auto;
+    height: 200vh;
     @apply bg-green-100
 }
 
