@@ -5,8 +5,8 @@
 * @update (czh 2021/6/11)
 */
 <template>
-    <div class="be-load-container_relative">
-        <div :id="`be_load_${uid}`"
+
+<div :id="`be_load_${uid}`"
              :style="`position: absolute;height: ${containerHeight};width: ${containerWidth};left: ${containerLeft};top: ${containerTop};`">
             <transition name="be-fade-in-linear">
                 <div class="be-load-container flex-col"
@@ -28,7 +28,6 @@
                 </div>
             </transition>
         </div>
-    </div>
 </template>
 <script lang="ts">
 /**
