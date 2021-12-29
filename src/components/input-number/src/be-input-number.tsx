@@ -104,13 +104,15 @@ export default defineComponent({
          * @param {Event} event - 事件对象
          */
         const handleFocus = (event?: Event): void => {
+            ctx.emit('focus',event)
             tabindex.value = -1
         }
         /**
          * Blur 事件处理方法
          * @param {string} val - 事件对象
          */
-        const handleBlur = (val?: string): void => {
+        const handleBlur = (val?: string | Event): void => {
+            ctx.emit('blur',val)
             tabindex.value = 1
         }
         // 内部维护输入框
