@@ -41,6 +41,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 internalInstance.ctx 禁止使用 proxy.$el.
 
 ## 排期
+loading flex 与 gird 布局偏移问题
 message 偏移bug  
 be-loading 样式修改 修改层级：loading 》 notification = message-box = message = popover 》 dialog  
 be-notification 单元测试  

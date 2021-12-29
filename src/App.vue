@@ -287,10 +287,11 @@
                 <panda width="25" height="25" @click="test"></panda>
             </be-popover>
                           <be-loading
-                              show
+                              :show="showSwitch"
                               :round="10"
                               color="red"
                               size="large"
+                              isFullScreen
                               :isBackground="true"
                               customClass='test-beloading-round'
                               text="testText"></be-loading>
@@ -547,7 +548,7 @@ export default {
     setup() {
         const curInst = getCurrentInstance()
         const show = ref<boolean>(false)
-        const showSwitch = ref<boolean>(false)
+        const showSwitch = ref<boolean>(true)
         const openDialog = (): void => {
             show.value = !show.value
         }
@@ -555,7 +556,7 @@ export default {
             return showSwitch.value
         })
         watch(asdqwd, (nVal) => {
-            debugger
+
         })
         const test = (): void => {
             console.log(111)
@@ -585,7 +586,9 @@ export default {
             {label: 'ab', id: 'fjkhfsadaiuorgga'},
         ]
         const handleClick = (p): void => {
-            console.log(p)
+            setTimeout(()=>{
+                showSwitch.value = false
+            },3000)
         }
         const seletStr = ref([])
         const testModel = ref(0)
