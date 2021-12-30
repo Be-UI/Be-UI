@@ -51,7 +51,7 @@ export default defineComponent({
          */
         'msgType': {
             type: String,
-            default: 'warning'
+            default: 'info'
         },
         /**
          * 底部类型 (完成)
@@ -209,7 +209,7 @@ export default defineComponent({
                             <div class={`be-message-box-footer be-message-box-footer__${props.footerType}`}>
                                 {props.footerRender ?
                                     <div onClick={() => confirmFunc()}>{props.footerRender()}</div> :
-                                    <button class={`be-button be-button__mini be-button__${props.msgType}`}
+                                    <button class={`be-button be-button__mini be-button__${props.msgType} ${props.msgType === 'info' ? 'border' :''}`}
                                             onClick={() => confirmFunc()}>
                                         知道了
                                     </button>
