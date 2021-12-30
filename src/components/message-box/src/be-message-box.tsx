@@ -127,7 +127,6 @@ export default defineComponent({
          * 关闭方法，销毁组件
          */
         const close = (): void => {
-            show.value = false
             /** close事件
              * @event close
              */
@@ -139,7 +138,7 @@ export default defineComponent({
         const confirmFunc = (): void => {
             // this.$selfEvent.confirm && this.$selfEvent.confirm()
             props.onConfirm && props.onConfirm()
-            close()
+            show.value = false
         }
         /************************************** 监听设置遮罩 ******************************/
         const dialogModels = ref('')
