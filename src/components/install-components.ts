@@ -28,3 +28,7 @@ export {default as BeNotification} from './notification/';//服务
 export {default as BeMsg} from './message-box/';//服务
 export {default as BeLoadingSer} from './loading/loading-plugin';//服务
 export {default as BeMessage} from './message/';//服务
+// 指令
+export {ClickOutside} from '../utils/direactives/custom-direactives/click-outside';
+export {contextmenu} from '../utils/direactives/custom-direactives/contextmenu-directives';
+export {dragDirective} from '../utils/direactives/custom-direactives/drag-directives';
