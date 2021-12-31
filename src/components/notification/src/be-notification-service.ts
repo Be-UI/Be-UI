@@ -9,6 +9,7 @@ import beNotifyComponents from './be-notification';
 import type {INotifyOption, ItInstanceMap} from './be-notification-type'
 import {INotfiyInst} from "./be-notification-type";
 import {IOption} from "../../../utils/types";
+import {jsonClone} from "../../../utils/common";
 
 
 // 各個方向的實例緩存
@@ -231,7 +232,7 @@ const createNotify = function (options: INotifyOption): INotfiyInst {
         onClick: undefined,  //点击回调方法
         closeNotify
     }
-    const optCopy = JSON.parse(JSON.stringify(options))
+    const optCopy = jsonClone(options)
     // 合并配置参数
     let option: INotifyOption = Object.assign({}, defaultOption, options)
     // 根据方向，获取缓存实例列表
