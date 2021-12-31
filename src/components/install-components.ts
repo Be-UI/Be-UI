@@ -17,6 +17,7 @@ export {BeBreadcrumb} from './breadcrumb/';//全局、按需
 export {BeBreadcrumbItem} from './breadcrumb/';//全局、按需
 export {BeContextmenu} from './contextmenu/';//全局、按需
 export {BeContextmenuItem} from './contextmenu/';//全局、按需
+export {BeContextmenuSubMenu} from './contextmenu/'
 export {BeMain} from './container/';//全局、按需
 export {BeFooter} from './container/';//全局、按需
 export {BeAside} from './container/';//全局、按需
