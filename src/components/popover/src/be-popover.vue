@@ -283,7 +283,7 @@ export default defineComponent({
             if (ctx.slots.trigger) {
                 const triggerElm:string | HTMLElement = trigger || props.triggerElm
                 if (triggerElm) {
-                    triggerDom = isString(triggerElm) ? document.getElementById(triggerElm as string) : triggerElm
+                    triggerDom = isString(triggerElm) ? document.getElementById(triggerElm) : triggerElm
                     computeDom = matchDom(internalInstance.refs.bePopoverTrigger) || triggerDom || internalInstance.refs.bePopoverTrigger
                 } else {
                     triggerDom = matchDom(internalInstance.refs.bePopoverTrigger) || internalInstance.refs.bePopoverTrigger

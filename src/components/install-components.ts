@@ -17,6 +17,7 @@ export {BeBreadcrumb} from './breadcrumb/';//全局、按需
 export {BeBreadcrumbItem} from './breadcrumb/';//全局、按需
 export {BeContextmenu} from './contextmenu/';//全局、按需
 export {BeContextmenuItem} from './contextmenu/';//全局、按需
+export {BeContextmenuSubMenu} from './contextmenu/'
 export {BeMain} from './container/';//全局、按需
 export {BeFooter} from './container/';//全局、按需
 export {BeAside} from './container/';//全局、按需
@@ -28,3 +29,7 @@ export {default as BeNotification} from './notification/';//服务
 export {default as BeMsg} from './message-box/';//服务
 export {default as BeLoadingSer} from './loading/loading-plugin';//服务
 export {default as BeMessage} from './message/';//服务
+// 指令
+export {ClickOutside} from '../utils/direactives/custom-direactives/click-outside';
+export {contextmenu} from '../utils/direactives/custom-direactives/contextmenu-directives';
+export {dragDirective} from '../utils/direactives/custom-direactives/drag-directives';

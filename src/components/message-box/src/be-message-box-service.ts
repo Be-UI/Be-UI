@@ -41,7 +41,7 @@ const createMsg = (options: INMsgOption): object => {
         isDrag: false,
         titles: '',
         customClass: '',
-        msgType: 'warning',
+        msgType: 'info',
         footerType: 'center',
         footerRender: null,
         bodyRender: null,
