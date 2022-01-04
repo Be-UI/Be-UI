@@ -33,7 +33,7 @@ export interface IPagerEvt {
     onGetPageCount: Function
 }
 
-export interface IPagerRenderLsit {
+export interface IPagerrenderList {
     page: VNode
     jump?: VNode
     info?: VNode

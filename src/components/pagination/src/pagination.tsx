@@ -17,11 +17,12 @@ import {
     IPagerEvt,
     IPagerInst,
     IPagerMix,
-    IPagerRenderLsit
+    IPagerrenderList
 } from "./be-pagenation-type";
 
 export default defineComponent({
     name: 'BePagination',
+    emits: ['updateNum','updatePage','changePage'],
     components: {
         Pager,
         beAutocomplete
@@ -244,7 +245,7 @@ export default defineComponent({
             const prevSlot: Function = curInst.slots.prev ? curInst.slots.prev : () => {
             }
             // 定义布局渲染列表
-            let renderLsit: IPagerRenderLsit = {
+            let renderList: IPagerrenderList = {
                 page: (<Pager ref='pager' {...onEvt}></Pager>),
                 jump: pageJumpComponent.call(this),
                 info: pageInfoComponent.call(this),
@@ -254,7 +255,7 @@ export default defineComponent({
             }
             // 非动态布局才支持页面数量显示设置
             if (!props.isDynamic) {
-                renderLsit.pNum = (
+                renderList.pNum = (
                     <be-select
                         v-model={pageNumVal.value}
                         keyValue="id"
@@ -268,7 +269,7 @@ export default defineComponent({
                 <div class="be-pager-container">
                     {/*根据渲染布局props渲染renderList，实现自定义布局*/}
                     {props.layout.map((v: any) => {
-                        return Object(renderLsit)[v]
+                        return Object(renderList)[v]
                     })}
                 </div>
             )

@@ -118,6 +118,7 @@ import {IPageData, IPageProvide, IPagesFront} from "./be-pagenation-type";
 
 export default defineComponent({
   name: 'BePager',
+  //emits: ['changePage','updatePage','getPageCount'],
   setup(props, ctx) {
     /************************************** 翻页事件方法 ******************************/
     const $$BePaginMix = inject('$$BePaginMix') as IPageProvide
