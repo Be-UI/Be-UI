@@ -217,7 +217,7 @@ const createNotify = function (options: INotifyOption): INotfiyInst {
         placementSelf: '',
         titles: '',//
         customClass: '',//
-        msgType: 'warning',//
+        msgType: 'info',//
         offsetTop: 0,//
         offsetBottom: 0,//
         placement: 'topRight',//
