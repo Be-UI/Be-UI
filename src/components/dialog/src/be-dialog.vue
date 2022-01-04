@@ -66,8 +66,8 @@ export default defineComponent({
   components: {BeIcon, BeButton},
   directives: {drag: dragDirective},
   emits: [
-    'confirm',
-    'close',
+    'confirm',// 插槽下无效
+    'close',// 插槽下无效
     'update:isShow',
     'escEvt'
   ],
@@ -77,7 +77,7 @@ export default defineComponent({
      */
     'isDrag': {
       type: Boolean,
-      default: true
+      default: false
     },
     /**
      * 标题 （完成）
