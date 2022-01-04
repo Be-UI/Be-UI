@@ -32,9 +32,10 @@
 
 
 .be-pager, .be-pager li {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
-  vertical-align: top;
 }
 
 .be-pager, .be-pagination.is-background .btn-next, .be-pagination.is-background .btn-prev {
@@ -66,13 +67,13 @@
   cursor: default;
 }
 
-.be-pager__disabled li,
-.be-pager__disabled li.btn-quicknext:hover,
-.be-pager__disabled li.btn-quickprev:hover {
+.be-pager.be-pager__disabled li,
+.be-pager.be-pager__disabled li.btn-quicknext:hover,
+.be-pager.be-pager__disabled li.btn-quickprev:hover {
   cursor: not-allowed;
 }
 
-.be-pager__disabled li {
+.be-pager.be-pager__disabled li {
   -webkit-box-sizing: border-box;
   background: $default;
 }

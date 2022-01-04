@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="display: flex">
     <!--***************** 上页按钮 **********************-->
     <ul class="be-pager" :class="{'be-pager__disabled':pagerProps.disabled}">
       <li @click="prePage">

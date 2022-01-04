@@ -50,6 +50,7 @@ export type IPageData = {
     currentPage: number
     pageCount: number
     pageSize: number
+    total?:number
 }
 
 export interface IPageParamsFront {

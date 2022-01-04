@@ -55,6 +55,14 @@ export default defineComponent({
             type: Number,
         },
         /**
+         * 是否禁用
+         */
+        disabled: Boolean,
+        /**
+         * 是否禁用输入跳转
+         */
+        disabledJump: Boolean,
+        /**
          * 页数过多时，显示的页数
          * 例如3 则显示第一第二和最后页
          * 参数有效必须大于2
@@ -67,36 +75,11 @@ export default defineComponent({
             }
         },
         /**
-         * 是否禁用
+         * 每页显示数量
          */
-        disabled: Boolean,
-        /**
-         * 是否禁用输入跳转
-         */
-        disabledJump: Boolean,
-        /**
-         * 是否开启动态分页
-         * 开启后类似于百度分页
-         * 适用于分页总页数未知或动态变化场景
-         */
-        isDynamic: {
-            type: Boolean,
-            default: false,
-        },
-        /**
-         * 常規分頁
-         */
-        isOrdianry: {
-            type: Boolean,
-            default: true,
-        },
-        /**
-         * 前端分页数据，开启前端分页后，会针对这些数据进行切片
-         * 每翻页，则会返回对于页数据
-         */
-        pageData: {
+        pageNum: {
             type: Array,
-            default: () => [],
+            default: () => [{label: 100}, {label: 200}, {label: 300}, {label: 400}],
         },
         /**
          * 自定义布局
@@ -107,6 +90,24 @@ export default defineComponent({
             default: () => ['prev', 'page', 'jump', 'info', 'next', 'pNum'],
         },
         /**
+         * 常規分頁
+         */
+        isOrdianry: {
+            type: Boolean,
+            default: true,
+        },
+        /**
+         * 是否开启动态分页
+         * 开启后类似于百度分页
+         * 适用于分页总页数未知或动态变化场景
+         */
+        isDynamic: {
+            type: Boolean,
+            default: false,
+        },
+
+
+        /**
          * 是否开启前端分页
          */
         isFront: {
@@ -114,12 +115,13 @@ export default defineComponent({
             default: false,
         },
         /**
-         * 每页显示数量
+         * 前端分页数据，开启前端分页后，会针对这些数据进行切片
+         * 每翻页，则会返回对于页数据
          */
-        pageNum: {
+        pageData: {
             type: Array,
-            default: () => [{label: 100}, {label: 200}, {label: 300}, {label: 400}],
-        }
+            default: () => [],
+        },
     },
     setup(props, ctx) {
         const curInst = getCurrentInstance() as IPage
@@ -259,6 +261,7 @@ export default defineComponent({
                     <be-select
                         v-model={pageNumVal.value}
                         keyValue="id"
+                        disabled={props.disabled}
                         labelValue="label"
                         custom-class={'be-pager-select'}
                         list={props.pageNum}
