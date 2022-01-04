@@ -5138,10 +5138,13 @@ postcss-selector-parser@^6.0.5:
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
 
-postcss-sorting@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.npmmirror.com/postcss-sorting/download/postcss-sorting-7.0.1.tgz#923b5268451cf2d93ebf8835e17a6537757049a5"
-  integrity sha1-kjtSaEUc8tk+v4g14XplN3VwSaU=
+postcss-sorting@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.npmmirror.com/postcss-sorting/download/postcss-sorting-5.0.1.tgz#10d5d0059eea8334dacc820c0121864035bc3f11"
+  integrity sha1-ENXQBZ7qgzTazIIMASGGQDW8PxE=
+  dependencies:
+    lodash "^4.17.14"
+    postcss "^7.0.17"
 
 postcss-syntax@^0.36.2:
   version "0.36.2"
@@ -5177,7 +5180,7 @@ postcss@^6.0.9:
     source-map "^0.6.1"
     supports-color "^5.4.0"
 
-postcss@^7, postcss@^7.0.14, postcss@^7.0.18, postcss@^7.0.2, postcss@^7.0.21, postcss@^7.0.26, postcss@^7.0.32, postcss@^7.0.35, postcss@^7.0.39, postcss@^7.0.6:
+postcss@^7, postcss@^7.0.14, postcss@^7.0.17, postcss@^7.0.18, postcss@^7.0.2, postcss@^7.0.21, postcss@^7.0.26, postcss@^7.0.31, postcss@^7.0.32, postcss@^7.0.35, postcss@^7.0.39, postcss@^7.0.6:
   version "7.0.39"
   resolved "https://registry.npmjs.org/postcss/-/postcss-7.0.39.tgz"
   integrity sha512-yioayjNbHn6z1/Bywyb2Y4s3yvDAeXGOyxqD+LnVOinq6Mdmd++SW2wUNVzavyyHxd6+DxzWGIuosg6P1Rj8uA==
@@ -5185,7 +5188,7 @@ postcss@^7, postcss@^7.0.14, postcss@^7.0.18, postcss@^7.0.2, postcss@^7.0.21, p
     picocolors "^0.2.1"
     source-map "^0.6.1"
 
-postcss@^8.1.10, postcss@^8.3.11, postcss@^8.3.5, postcss@^8.3.6:
+postcss@^8.1.10, postcss@^8.3.5, postcss@^8.3.6:
   version "8.4.4"
   resolved "https://registry.npmjs.org/postcss/-/postcss-8.4.4.tgz"
   integrity sha512-joU6fBsN6EIer28Lj6GDFoC/5yOZzLCfn0zHAn/MYXI7aPt4m4hK5KC5ovEZXy+lnCjmYIbQWngvju2ddyEr8Q==
@@ -6044,12 +6047,12 @@ stylelint-config-prettier@^9.0.3:
   resolved "https://registry.npmmirror.com/stylelint-config-prettier/download/stylelint-config-prettier-9.0.3.tgz#0dccebeff359dcc393c9229184408b08964d561c"
   integrity sha1-Dczr7/NZ3MOTySKRhECLCJZNVhw=
 
-stylelint-config-recess-order@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npmmirror.com/stylelint-config-recess-order/download/stylelint-config-recess-order-3.0.0.tgz?cache=0&sync_timestamp=1636650218405&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fstylelint-config-recess-order%2Fdownload%2Fstylelint-config-recess-order-3.0.0.tgz#f6f378179becd3e0842101cf652a30733aac25b1"
-  integrity sha512-uNXrlDz570Q7HJlrq8mNjgfO/xlKIh2hKVKEFMTG1/ih/6tDLcTbuvO1Zoo2dnQay990OAkWLDpTDOorB+hmBw==
+stylelint-config-recess-order@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.npmmirror.com/stylelint-config-recess-order/download/stylelint-config-recess-order-2.6.0.tgz#84b5cff4975739b8c24ab1fb08e282e262d607f2"
+  integrity sha512-s5+2sCEb+/3NzcBHjqLUJRt9JXl+o8pvWEVfAC0mKDrFbuftZJ53hKW1VAMjRvRk1nDJRB/rnFMtFbXb5xB8SA==
   dependencies:
-    stylelint-order "5.x"
+    stylelint-order "4.1.x"
 
 stylelint-config-recommended@^5.0.0:
   version "5.0.0"
@@ -6063,13 +6066,14 @@ stylelint-config-standard@^22.0.0:
   dependencies:
     stylelint-config-recommended "^5.0.0"
 
-stylelint-order@5.x:
-  version "5.0.0"
-  resolved "https://registry.npmmirror.com/stylelint-order/download/stylelint-order-5.0.0.tgz?cache=0&sync_timestamp=1634869735737&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fstylelint-order%2Fdownload%2Fstylelint-order-5.0.0.tgz#abd20f6b85ac640774cbe40e70d3fe9c6fdf4400"
-  integrity sha1-q9IPa4WsZAd0y+QOcNP+nG/fRAA=
+stylelint-order@4.1.x:
+  version "4.1.0"
+  resolved "https://registry.npmmirror.com/stylelint-order/download/stylelint-order-4.1.0.tgz?cache=0&sync_timestamp=1634869724289&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fstylelint-order%2Fdownload%2Fstylelint-order-4.1.0.tgz#692d05b7d0c235ac66fcf5ea1d9e5f08a76747f6"
+  integrity sha1-aS0Ft9DCNaxm/PXqHZ5fCKdnR/Y=
   dependencies:
-    postcss "^8.3.11"
-    postcss-sorting "^7.0.1"
+    lodash "^4.17.15"
+    postcss "^7.0.31"
+    postcss-sorting "^5.0.1"
 
 stylelint-scss@^3.19.0:
   version "3.21.0"
