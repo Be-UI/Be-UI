@@ -565,12 +565,26 @@ export default {
       curInst?.refs.qwdwqdwqd.close()
       curInst?.refs.qwdddddwqdwqd.close()
     }
-    BeMessage({
-      titles: 'asd',
-      msgType: 'success',
-      duration: 2000,
-      offsetTop: 300,
-      close: true,
+    /* BeMessage({
+       titles: 'asd',
+       msgType: 'success',
+       duration: 2000,
+       offsetTop: 300,
+       close: true,
+     })*/
+    BeNotify({
+      titles: 'Notification',
+      bodyRender: () => {
+        return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
+          您的体验时间仅剩
+        </p>
+      },
+      msgType: 'info',
+      onClick: () => console.log('click'),
+      onClose: () => console.log('close'),
+      offsetBottom: 10,
+      placement: 'bottomRight',
+      duration: 0,
     })
     const testList = [
       {label: '落日绣帘卷', id: '落日绣帘卷'},
