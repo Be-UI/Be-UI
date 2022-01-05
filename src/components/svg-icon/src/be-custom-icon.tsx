@@ -1,4 +1,4 @@
-import {h, computed} from 'vue'
+import {h, computed, useAttrs} from 'vue'
 
 export const createCustom = (template: string): object => {
     return {
@@ -13,18 +13,14 @@ export const createCustom = (template: string): object => {
             }
         },
         setup(props: any) {
+            const attrs = useAttrs()
             const customClass = props.customClass ? props.customClass : ''
             const spinClass = computed(() => props.spin ? 'be-icon-spin ' + customClass : '' + customClass)
-            return {
-                spinClass
-            }
-        },
-        render() {
-            return h(
-                <div class={`be-icon-container ${this.spinClass}`} {...this.$attrs}>
+            return () => {
+                return <div class={`be-icon-container ${spinClass.value}`} {...attrs}>
                     {template}
                 </div>
-            )
-        }
+            }
+        },
     }
 };

@@ -149,6 +149,7 @@ describe('test-be-icon-custom', () => {
                 spin: true
             },
         })
+        debugger
         expect(wrapper.element.className.indexOf('be-icon-spin') > 0).toBeTruthy()
     })
 

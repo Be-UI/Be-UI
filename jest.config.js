@@ -38,7 +38,7 @@ module.exports = {
 
     // roots: ['<rootDir>'],
 
-    // roots: ['<rootDir>/src/components/svg-icon'],
+    roots: ['<rootDir>/src/components/svg-icon'],
     // roots: ['<rootDir>/src/components/tag'],
     //roots: ['<rootDir>/src/components/message'],
     // roots: ['<rootDir>/src/components/input-number'],
@@ -49,6 +49,6 @@ module.exports = {
     // roots: ['<rootDir>/src/components/ellipsis'],
     //roots: ['<rootDir>/src/components/button'],
     // roots: ['<rootDir>/src/components/message-box/'],
-   // roots: ['<rootDir>/src/components/dialog'],
-    roots: ['<rootDir>/src/components/loading'],
+    // roots: ['<rootDir>/src/components/dialog'],
+    // roots: ['<rootDir>/src/components/loading'],
 }
