@@ -16,7 +16,9 @@
         ${customClass}`">
         <!-- @slot 前置插槽-->
         <slot name="prev"></slot>
-        <div class="be-input-body" v-if="inputType !== 'textarea'">
+        <div class="be-input-body" v-if="inputType !== 'textarea'"
+             @mouseenter="handleEnter('noInputElm')"
+             @mouseleave="handleLeave('noInputElm')">
             <!--  <div class="be-input" v-click-outside="closeDisplay" :class="customClass">
                 <div class="be-input-body" :class="expandStyle">-->
             <!--前置图标-->
@@ -52,8 +54,10 @@
                          v-show="showClearIcon"></be-icon>
             </div>
             <!--密碼按鈕-->
-            <be-icon @click="handlePassword" :icon="`${isPassWord ? 'no-eye' :'eye'}`"
-                     class="be-input-icon be-input-password" v-show="showPassword"></be-icon>
+            <div class="be-input-close-body" v-show="showPassword">
+                <be-icon @click="handlePassword" :icon="`${isPassWord ? 'noEye' :'eye'}`"
+                         class="be-input-icon be-input-password"></be-icon>
+            </div>
         </div>
         <!-- @slot 后置插槽-->
         <slot name="next"></slot>
@@ -94,26 +98,26 @@ export default defineComponent({
     name: "BeInput",
     components: {BeIcon},
     emits: [
-        'prevIconClick',
-        'nextIconClick',
+        'prevIconClick',// √
+        'nextIconClick',// √
         'update:modelValue',
-        'input',
-        'change',
-        'clear',
-        'focus',
-        'blur',
-        'keydown',
-        'mouseleave',
-        'mouseenter',
+        'input',// √
+        'change',// √
+        'clear',// √
+        'focus',// √
+        'blur',// √
+        'keydown',// √
+        'mouseleave',// √
+        'mouseenter',// √
     ],
     // 原生属性 readonly autocomplete name max min step autofocus form
     props: {
         /**
-         * id
+         * id // 不写
          */
         id: String,
         /**
-         * 绑定值 （完成）
+         * 绑定值 （完成） // 不写 ok
          */
         modelValue: {
             type: [String, Number],
@@ -127,22 +131,22 @@ export default defineComponent({
             default: ''
         },
         /**
-         * 最大长度限制 （完成）
+         * 最大长度限制 （完成） // 不写
          */
         maxlength: {
             type: Number,
             default: null
         },
         /**
-         * 输入框占位文本（完成）
+         * 输入框占位文本（完成） // 不写
          */
         placeholder: String,
         /**
-         * 是否禁用（完成）
+         * 是否禁用（完成） ok
          */
         disabled: Boolean,
         /**
-         * 是否可以清除（完成）
+         * 是否可以清除（完成） ok
          */
         clearable: {
             type: Boolean,
@@ -156,14 +160,14 @@ export default defineComponent({
             default: 'text'
         },
         /**
-         * 是否显示密码按鈕（完成）
+         * 是否显示密码按鈕（完成）ok
          */
         showPassword: {
             type: Boolean,
             default: false
         },
         /**
-         * 输入框尺寸，只在 type!="textarea" 时有效 'mini' | 'medium' | 'large'（完成）
+         * 输入框尺寸，只在 type!="textarea" 时有效 'mini' | 'medium' | 'large'（完成） ok
          */
         size: {
             type: String,
@@ -190,7 +194,7 @@ export default defineComponent({
             type: String,
         },
         /**
-         * 输入框的tabindex
+         * 输入框的tabindex // 不写
          */
         tabindex: {
             type: [Number, String],
@@ -209,7 +213,7 @@ export default defineComponent({
             default: 2
         },
         /**
-         * 文本域自动调整
+         * 文本域自动调整 // 不写
          */
         autosize: {
             type: [Boolean, Object] as PropType<AutosizeProp>,
@@ -217,6 +221,7 @@ export default defineComponent({
         },
         /**
          * 内部引用标识
+         * private
          */
         isInner: {
             type: Boolean,
@@ -304,13 +309,21 @@ export default defineComponent({
             }
         }
         let showClearIcon = ref<boolean>(false)
-        const handleEnter = (): void => {
-            if (props.clearable) {
+        const handleEnter = (type?: string): void => {
+            if (type !== 'noInputElm') {
+                ctx.emit('mouseenter')
+            }
+            if (props.clearable && type === 'noInputElm') {
                 showClearIcon.value = true
             }
         }
-        const handleLeave = (): void => {
-            showClearIcon.value = false
+        const handleLeave = (type?: string): void => {
+            if (type !== 'noInputElm') {
+                ctx.emit('mouseleave')
+            }
+            if (props.clearable && type === 'noInputElm') {
+                showClearIcon.value = false
+            }
         }
         /**************************************** 文本域相关方法 *******************************************/
         const areaStyle = ref({})
