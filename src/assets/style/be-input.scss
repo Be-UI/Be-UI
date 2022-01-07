@@ -48,10 +48,10 @@
 
     .be-input-nextIcon,
     .be-input-prevIcon {
-      width: 12px;
-      height: 12px;
-      font-size: 12px;
-      line-height: 12px;
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+      line-height: 16px;
       color: $infoHover;
       cursor: pointer;
 
@@ -61,12 +61,12 @@
     }
 
     .be-input-prevIcon {
-      margin-right: 10px;
-      margin-left: 10px;
+      margin-right: 5px;
+      margin-left: 5px;
     }
 
     .be-input-nextIcon {
-      margin: 0 10px;
+      margin: 0 5px;
     }
 
     .be-input-icon {
@@ -176,10 +176,10 @@
 }
 
 .be-input__textarea {
-  border: 0;
+  border: 1px solid $infoHover;
 
   &:hover {
-    border: 0;
+    border: 1px solid #b3d8ff;
   }
 }
 

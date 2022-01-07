@@ -34,9 +34,10 @@
                 :aria-label="label"
                 :type="inputType"
                 :id="id"
+                :style="computedTextareaStyle"
                 v-bind="attrs"
                 @focus="handleFocus($event.target.value,$event)"
-                @blur="handleBlur($event.target.value)"
+                @blur="handleBlur($event.target.value,$event)"
                 @change='handleChange'
                 @keydown="handleKeydown"
                 @mouseenter="handleEnter"
@@ -49,9 +50,8 @@
             <be-icon @click="handleIcon('next')" :icon="nextIcon" class="be-input-nextIcon"
                      v-if="nextIcon"></be-icon>
             <!--清除按钮 v-show="showClearIcon-->
-            <div class="be-input-close-body" v-if="!isInner">
-                <be-icon @click="handleClear" icon="deleteIc" class="be-input-icon be-input-close"
-                         v-show="showClearIcon"></be-icon>
+            <div class="be-input-close-body" v-if="!isInner && showClearIcon">
+                <be-icon @click="handleClear" icon="deleteIc" class="be-input-icon be-input-close"></be-icon>
             </div>
             <!--密碼按鈕-->
             <div class="be-input-close-body" v-show="showPassword">
@@ -73,7 +73,7 @@
                 :disabled="disabled"
                 :placeholder="placeholder"
                 @focus="handleFocus($event.target.value,$event)"
-                @blur="handleBlur($event.target.value)"
+                @blur="handleBlur($event.target.value,$event)"
                 @change='handleChange'
                 @keydown="handleKeydown"
                 @input="handleInput($event.target.value)">
@@ -98,26 +98,26 @@ export default defineComponent({
     name: "BeInput",
     components: {BeIcon},
     emits: [
-        'prevIconClick',// √
-        'nextIconClick',// √
+        'prevIconClick',
+        'nextIconClick',
         'update:modelValue',
-        'input',// √
-        'change',// √
-        'clear',// √
-        'focus',// √
-        'blur',// √
-        'keydown',// √
-        'mouseleave',// √
-        'mouseenter',// √
+        'input',
+        'change',
+        'clear',
+        'focus',
+        'blur',
+        'keydown',
+        'mouseleave',
+        'mouseenter',
     ],
     // 原生属性 readonly autocomplete name max min step autofocus form
     props: {
         /**
-         * id // 不写
+         * id
          */
         id: String,
         /**
-         * 绑定值 （完成） // 不写 ok
+         * 绑定值 （完成）
          */
         modelValue: {
             type: [String, Number],
@@ -131,22 +131,22 @@ export default defineComponent({
             default: ''
         },
         /**
-         * 最大长度限制 （完成） // 不写
+         * 最大长度限制 （完成）
          */
         maxlength: {
             type: Number,
             default: null
         },
         /**
-         * 输入框占位文本（完成） // 不写
+         * 输入框占位文本（完成）
          */
         placeholder: String,
         /**
-         * 是否禁用（完成） ok
+         * 是否禁用（完成）
          */
         disabled: Boolean,
         /**
-         * 是否可以清除（完成） ok
+         * 是否可以清除（完成）
          */
         clearable: {
             type: Boolean,
@@ -160,14 +160,14 @@ export default defineComponent({
             default: 'text'
         },
         /**
-         * 是否显示密码按鈕（完成）ok
+         * 是否显示密码按鈕（完成）
          */
         showPassword: {
             type: Boolean,
             default: false
         },
         /**
-         * 输入框尺寸，只在 type!="textarea" 时有效 'mini' | 'medium' | 'large'（完成） ok
+         * 输入框尺寸，只在 type!="textarea" 时有效 'mini' | 'medium' | 'large'（完成）
          */
         size: {
             type: String,
@@ -200,7 +200,7 @@ export default defineComponent({
             type: [Number, String],
         },
         /**
-         * input元素或textarea元素的style
+         * input元素或textarea元素的style ok
          */
         inputStyle: {
             type: Object
@@ -210,7 +210,7 @@ export default defineComponent({
          */
         rows: {
             type: Number,
-            default: 2
+            default: 3
         },
         /**
          * 文本域自动调整 // 不写
@@ -267,13 +267,14 @@ export default defineComponent({
         /**
          * blur 事件处理方法
          * @param {String | Number} value - 更新后值
+         * @param {Event} event - 事件对象
          */
-        const handleBlur = (value: string | number): void => {
+        const handleBlur = (value: string | number,event: Event): void => {
             /** 输入 blur 事件
              * @event blur
              * @param {String | Number} value - 输入框值
              */
-            ctx.emit('blur', value)
+            ctx.emit('blur', value,event)
         }
         /**
          * focus 事件处理方法
