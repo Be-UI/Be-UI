@@ -1,5 +1,5 @@
 <template>
-  <div id="App" class="app" v-contextmenu:contextmenu>
+  <div id="App" class="app" v-contextmenu:contextmenu >
     <!--    <be-contextmenu ref="contextmenu" id="wqdw">
           <be-contextmenu-sub-menu title="宋词">
             <be-contextmenu-item><span>临安小雨初霁</span></be-contextmenu-item>
@@ -287,7 +287,7 @@
               </template>
               <panda width="25" height="25" @click="test"></panda>
             </be-popover>-->
-      <be-loading
+<!--      <be-loading
           :show="showSwitch"
           :round="10"
           color="red"
@@ -295,7 +295,7 @@
           :delay="3000"
           :isBackground="true"
           customClass='test-beloading-round'
-          text="testText"></be-loading>
+          text="testText"></be-loading>-->
       <be-button
           bordered
           prevIcon="deleteIc"
@@ -504,6 +504,18 @@
                   </template>
                   <panda width="25" height="25"  @click="test"></panda>
               </be-popover>-->
+
+        <be-autocomplete
+            clearable
+            size="mini"
+            prevIcon="delete"
+            nextIcon="delete"
+            :fetchSuggestions="fetchSuggestions"
+            keyValue="id"
+            labelValue="label"
+            v-model="autoVal">
+        </be-autocomplete>
+        {{autoVal}}
     </div>
 
   </div>
@@ -601,6 +613,7 @@ export default {
       {label: 'a', id: 'fjkhfsdaiuawdorgga'},
       {label: 'ab', id: 'fjkhfsadaiuorgga'},
     ]
+      const autoVal = ref( {label: '山色有无中', id: '山色有无中'},)
     const handleClick = (p): void => {
       setTimeout(() => {
         showSwitch.value = false
@@ -614,7 +627,18 @@ export default {
     const parser = (value: string): string => {
       return value.replace(/\$\s?|(,*)/g, '')
     }
+      const fetchSuggestions = (cb:Function):void =>{
+          setTimeout(()=>{
+              cb([
+                  {id:'赵客缦胡缨，吴钩霜雪明。',label:'赵客缦胡缨，吴钩霜雪明。'},
+                  {id:'银鞍照白马，飒沓如流星。',label:'银鞍照白马，飒沓如流星。'},
+                  {id:'十步杀一人，千里不留行。',label:'十步杀一人，千里不留行。'},
+                  {id:'事了拂衣去，深藏身与名。',label:'事了拂衣去，深藏身与名。'},
+              ])
+          },2000)
+      }
     return {
+        fetchSuggestions,
       formatter,
       parser,
       testModel,
@@ -623,6 +647,7 @@ export default {
       openDialog,
       seletStr,
       handleClick,
+      autoVal,
       testList,
       showSwitch,
       re: () => <div id='test_beloading_customRender'>asd</div>

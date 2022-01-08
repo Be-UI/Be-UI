@@ -86,8 +86,11 @@
     }
 
     .be-input-close-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 1em;
-      height: 1em;
+      height: 100%;
 
       .be-input-close {
         border: 1px solid $infoHover;
@@ -151,7 +154,6 @@
         box-sizing: border-box;
         height: 30px;
         padding-left: 10px;
-        margin: 10px 0;
         line-height: 30px;
         list-style: none;
         cursor: pointer;
@@ -259,7 +261,6 @@
     box-sizing: border-box;
     height: 30px;
     padding-left: 10px;
-    margin: 10px 0;
     overflow: hidden;
     font-size: 14px;
     line-height: 30px;
