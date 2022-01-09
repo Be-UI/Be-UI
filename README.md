@@ -42,7 +42,7 @@ internalInstance.ctx 禁止使用 proxy.$el.
 
 ## 排期
 
-be-autocomplete 远程加载防抖
+be-select 支持绑定对象;禁用背景色
 
 be-loading 样式修改 修改层级：loading 》 notification = message-box = message = popover 》 dialog  
 be-notification 单元测试  

@@ -12,4 +12,4 @@
 
 - √ onDeselect 取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效 function(string | number | LabeledValue)    -
 
-多选 be-select-multiple 单选 be-select be-select-composition 是mixin 理论上多选和单选只有多选单选区别，其他props一样，需要写文档测试
+多选 be-select-multiple ；单选 be-select ；be-select-composition 是mixin 理论上多选和单选只有多选单选区别，其他props一样，需要写文档测试

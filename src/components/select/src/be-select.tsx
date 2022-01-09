@@ -44,7 +44,7 @@ export default defineComponent({
             default: 'medium'
         },
         /**
-         * 數據list
+         * 數據list //不写
          */
         list: {
             type: Array,
@@ -55,20 +55,20 @@ export default defineComponent({
          */
         modelValue: {},
         /**
-         * 下拉label
+         * 下拉label //不写
          */
         labelValue: {
             type: String,
             default: 'label'
         },
         /**
-         * 下拉key
+         * 下拉key //不写
          */
         keyValue: {
             type: String,
         },
         /**
-         * placeholder
+         * placeholder //不写
          */
         placeholder: {
             type: String,

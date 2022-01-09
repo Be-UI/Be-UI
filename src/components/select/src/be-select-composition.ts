@@ -164,7 +164,7 @@ export default (props: any, ctx: any) => {
         if (addItem.value) {
             let item: IOption = {}
             let keyValue = props.keyValue || 'id'
-            let labelValue = props.keyValue || 'label'
+            let labelValue = props.labelValue || 'label'
             item[keyValue] = getUuid()
             item[labelValue] = addItem.value
             dataList.value.push(item)

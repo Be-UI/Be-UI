@@ -102,28 +102,6 @@
       text-align: left;
     }
 
-    .be-select-option__extend {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 10px;
-      margin-top: 5px;
-
-      .be-input {
-        flex: 8;
-        width: 70%;
-      }
-
-      .be-icon-container {
-        flex: 2;
-
-        .be-icon {
-          cursor: pointer;
-        }
-      }
-
-    }
-
     .be-select-option__choice {
       @apply bg-blue-50;
 
@@ -156,6 +134,29 @@
         background-color: transparent;
       }
     }
+  }
+
+  .be-select-option__extend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    margin-top: 5px;
+
+    .be-input {
+      flex: 8;
+      width: 70%;
+    }
+
+    .be-icon-container {
+      flex: 2;
+
+      .be-icon {
+        margin: 0 auto;
+        cursor: pointer;
+      }
+    }
+
   }
 }
 
