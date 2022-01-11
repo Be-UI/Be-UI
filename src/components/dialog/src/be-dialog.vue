@@ -29,10 +29,10 @@
         <div class="be-dialog-body">
           <!-- @slot 弹窗主体-->
           <div class="be-dialog-body__inner">
-            <slot name="body"></slot>
+            <slot></slot>
           </div>
         </div>
-        <div :class="`be-dialog-footer be-dialog-footer__${layout}`">
+        <div :class="`be-dialog-footer be-dialog-footer__${layout}`" v-if="showFooter">
           <!-- @slot 弹窗底部-->
           <slot name="footer">
             <be-button type="primary"
@@ -78,6 +78,13 @@ export default defineComponent({
     'isDrag': {
       type: Boolean,
       default: false
+    },
+      /**
+       * 是否显示底部 （完成）
+       */
+    'showFooter': {
+        type: Boolean,
+        default: true
     },
     /**
      * 标题 （完成）
