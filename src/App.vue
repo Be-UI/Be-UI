@@ -273,7 +273,7 @@
     <!--  position: absolute;left: 20%;top: 100px;width: 45%;height:45%;background-color: #FFFFFF      -->
     <div
         class="bg-pink-50 flex items-center justify-center"
-        style=" width: 300px;height: 300px;">
+        style=" width: 900px;height: 300px;">
       <!--      <be-popover trigger="click" width="300" customClass="asdwq" placement="bottom" ref="qwdwqdwqd">
               <template #trigger>
                 <be-icon icon="deleteIc" style="position: absolute;left: 20%;top: 300px;"></be-icon>
@@ -510,9 +510,10 @@
             size="mini"
             prevIcon="delete"
             nextIcon="delete"
+            :focusTrigger="false"
             :fetchSuggestions="fetchSuggestions"
             keyValue="id"
-            labelValue="label"
+            labelValue="name"
             v-model="autoVal">
         </be-autocomplete>
         {{autoVal}}
@@ -613,7 +614,7 @@ export default {
       {label: 'a', id: 'fjkhfsdaiuawdorgga'},
       {label: 'ab', id: 'fjkhfsadaiuorgga'},
     ]
-      const autoVal = ref( {label: '山色有无中', id: '山色有无中'},)
+    const autoVal = ref({id: '赵客缦胡缨，吴钩霜雪明。id', name: '赵客缦胡缨，吴钩霜雪明。'})
     const handleClick = (p): void => {
       setTimeout(() => {
         showSwitch.value = false
@@ -630,10 +631,10 @@ export default {
       const fetchSuggestions = (cb:Function):void =>{
           setTimeout(()=>{
               cb([
-                  {id:'赵客缦胡缨，吴钩霜雪明。',label:'赵客缦胡缨，吴钩霜雪明。'},
-                  {id:'银鞍照白马，飒沓如流星。',label:'银鞍照白马，飒沓如流星。'},
-                  {id:'十步杀一人，千里不留行。',label:'十步杀一人，千里不留行。'},
-                  {id:'事了拂衣去，深藏身与名。',label:'事了拂衣去，深藏身与名。'},
+                {id: '赵客缦胡缨，吴钩霜雪明。id', name: '赵客缦胡缨，吴钩霜雪明。', asd: 'wqd'},
+                {id: '银鞍照白马，飒沓如流星。id', name: '银鞍照白马，飒沓如流星。', asd: 'wqd'},
+                {id: '十步杀一人，千里不留行。id', name: '十步杀一人，千里不留行。', asd: 'wqd'},
+                {id: '事了拂衣去，深藏身与名。id', name: '事了拂衣去，深藏身与名。', asd: 'wqd'},
               ])
           },2000)
       }

@@ -264,7 +264,7 @@ export default defineComponent({
              * @param {Object} value - 点击对象数据
              * @param {Number} index - 点击的对应列表索引
              */
-            valInner.value = value.label
+            valInner.value = value[props.labelValue]
             ctx.emit('update:modelValue', value)
             handleChange()
             ctx.emit('select', value, index)
@@ -279,7 +279,7 @@ export default defineComponent({
                 valInner.value = nVal
             }
             if(isObject(nVal)){
-                valInner.value = Object(nVal[props.keyValue])
+              valInner.value = Object(nVal[props.labelValue])
             }
         })
         const initInnerVal = (nVal:any):void =>{
@@ -287,7 +287,7 @@ export default defineComponent({
                 valInner.value = nVal
             }
             if(isObject(nVal)){
-                valInner.value = Object(nVal[props.keyValue])
+              valInner.value = Object(nVal[props.labelValue])
             }
         }
         onMounted(() => {
