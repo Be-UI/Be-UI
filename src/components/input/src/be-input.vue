@@ -11,6 +11,7 @@
         :class="`
         be-input
         be-input__${size}
+        ${isFocusClass}
         ${disabled ? 'be-input__disabled ' :''}
         ${inputType === 'textarea' ? 'be-input__textarea' : ''}
         ${customClass}`">
@@ -263,13 +264,14 @@ export default defineComponent({
             ctx.emit('update:modelValue', val)
             ctx.emit('input', val)
         }
-
+        const isFocusClass = ref<string>('')
         /**
          * blur 事件处理方法
          * @param {String | Number} value - 更新后值
          * @param {Event} event - 事件对象
          */
         const handleBlur = (value: string | number,event: Event): void => {
+            isFocusClass.value = ''
             /** 输入 blur 事件
              * @event blur
              * @param {String | Number} value - 输入框值
@@ -282,6 +284,7 @@ export default defineComponent({
          * @param {Event} event - 事件对象
          */
         const handleFocus = (value: string | number, event: Event): void => {
+            isFocusClass.value = 'be-input__focus'
             ctx.emit('focus', value, event)
         }
         /**
@@ -399,6 +402,7 @@ export default defineComponent({
             nextTick(resizeTextarea)
         })
         return {
+            isFocusClass,
             uid: internalInstance.uid,
             attrs,
             beInputInner,

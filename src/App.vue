@@ -296,14 +296,14 @@
           :isBackground="true"
           customClass='test-beloading-round'
           text="testText"></be-loading>-->
-      <be-button
+<!--      <be-button
           bordered
           prevIcon="deleteIc"
           nextIcon="deleteIc"
           @click="openDialog"
           size="large">
         测试
-      </be-button>
+      </be-button>-->
       <!--      <be-select size="medium" v-model="seletStr" search :list="testList">
 
             </be-select>
@@ -359,19 +359,14 @@
                              @click="testInputFunc"
                              round="3">确定
                   </be-button>-->
-      <!--            <be-input
+                  <be-input
                       ref="sssinput"
                       type="test"
                       placeholder="测试文本域"
                       @keydown="handleChange"
                       @change="handleChange"
-                      clearable
-                      showPassword
-                      @input="handleinput"
-                      @focus="handlefocus"
-                      @blur="handleblur"
-                      v-model="num">
-      &lt;!&ndash;                <template #prev>
+                      v-model="val">
+      <!--                <template #prev>
                           <be-button
                               @click="test"
                               prevIcon="delete"
@@ -390,8 +385,8 @@
                               size="large">
                               测试
                           </be-button>
-                      </template>&ndash;&gt;
-                  </be-input>-->
+                      </template>-->
+                  </be-input>
       <!--           :focusTrigger="false"   :suggestionList="testList" :fetchSuggestions="getSuggest"-->
       <!--            <be-autocomplete
                       clearable
@@ -505,7 +500,7 @@
                   <panda width="25" height="25"  @click="test"></panda>
               </be-popover>-->
 
-        <be-autocomplete
+<!--        <be-autocomplete
             clearable
             size="mini"
             prevIcon="delete"
@@ -515,7 +510,7 @@
             keyValue="id"
             labelValue="name"
             v-model="autoVal">
-        </be-autocomplete>
+        </be-autocomplete>-->
         {{autoVal}}
     </div>
 
@@ -562,6 +557,7 @@ export default {
   setup() {
     const curInst = getCurrentInstance()
     const show = ref<boolean>(false)
+      const val = ref<string>('')
     const showSwitch = ref<boolean>(true)
     const openDialog = (): void => {
       // show.value = !show.value
@@ -639,6 +635,7 @@ export default {
           },2000)
       }
     return {
+        val,
         fetchSuggestions,
       formatter,
       parser,

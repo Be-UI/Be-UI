@@ -7,8 +7,9 @@
   border: 1px solid $infoHover;
   border-radius: 3px;
 
-  &:hover {
-    border: 1px solid $infoHover;
+  &:hover{
+    border:1px solid $pinkHoverBorder;
+    border-radius: 3px;
   }
 
   .be-input-body {
@@ -17,6 +18,7 @@
     align-items: center;
     width: 100%;
     padding: 0 5px;
+
 
     .be-input__textarea__inner {
       box-sizing: border-box;
@@ -44,6 +46,7 @@
       border: 0;
       border-radius: 3px;
       outline: 0;
+
     }
 
     .be-input-nextIcon,
@@ -188,6 +191,12 @@
 .be-input__disabled {
   cursor: not-allowed;
   @apply bg-gray-100;
+}
+
+.be-input__focus{
+  border:1px solid $pinkHoverBorder;
+  outline: 0;
+  box-shadow: 0 0 0 2px $pinkHoverBorder-02;
 }
 
 .be-input__mini {
