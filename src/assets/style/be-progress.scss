@@ -1,0 +1,47 @@
+.be-progress{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 6px;
+  line-height: 30px;
+
+  .be-progress-body{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .percent{
+      @apply font-mono;
+      font-size: 14px;
+      color:$defaultText
+    }
+
+    .be-progress-line{
+      width: 100%;
+      margin-right: 10px;
+      background-color: $defaultGray;
+    }
+
+    .be-progress-inner{
+      height: 100%;
+    }
+
+    .be-progress-inner__round{
+      border-radius: 50px;
+    }
+
+    .be-progress-inner__normal{
+      background-color: $primaryText;
+    }
+
+    .be-progress-inner__success{
+      background-color: $success;
+    }
+
+    .be-progress-inner__error{
+      background-color: $error;
+    }
+  }
+
+}

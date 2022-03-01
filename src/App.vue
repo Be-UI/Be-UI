@@ -359,14 +359,14 @@
                              @click="testInputFunc"
                              round="3">确定
                   </be-button>-->
-                  <be-input
+<!--                  <be-input
                       ref="sssinput"
                       type="test"
                       placeholder="测试文本域"
                       @keydown="handleChange"
                       @change="handleChange"
                       v-model="val">
-      <!--                <template #prev>
+      &lt;!&ndash;                <template #prev>
                           <be-button
                               @click="test"
                               prevIcon="delete"
@@ -385,8 +385,8 @@
                               size="large">
                               测试
                           </be-button>
-                      </template>-->
-                  </be-input>
+                      </template>&ndash;&gt;
+                  </be-input>-->
       <!--           :focusTrigger="false"   :suggestionList="testList" :fetchSuggestions="getSuggest"-->
       <!--            <be-autocomplete
                       clearable
@@ -511,7 +511,7 @@
             labelValue="name"
             v-model="autoVal">
         </be-autocomplete>-->
-        {{autoVal}}
+        <be-progress></be-progress>
     </div>
 
   </div>
@@ -538,11 +538,13 @@ import BeMain from "./components/container/src/be-main.vue";
 import BeFooter from "./components/container/src/be-footer.vue";
 import BeAside from "./components/container/src/be-aside.vue";
 import {computed, getCurrentInstance, ref, watch} from "vue";
+import BeProgress from "./components/progress/src/be-progress";
 
 export default {
   name: 'App',
   directives: {ClickOutside, contextmenu},
   components: {
+      BeProgress,
     BeAside,
     BeFooter,
     BeMain,

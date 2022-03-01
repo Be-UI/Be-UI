@@ -23,6 +23,7 @@ export {BeFooter} from './container/';//全局、按需
 export {BeAside} from './container/';//全局、按需
 export {BeHeader} from './container/';//全局、按需
 export {BeContainer} from './container/';//全局、按需
+export {default as BeProgress} from './progress/';//全局、按需
 
 // plugins
 export {default as BeNotification} from './notification/';//服务
