@@ -15,3 +15,11 @@ export interface IProgress {
 export interface IProgressInst extends ComponentInternalInstance {
     uid: number
 }
+export interface IProgressColor{
+    to:string
+    from:string
+}
+export interface IProgressSuccess{
+    percent:number
+    color:string
+}

@@ -1,7 +1,7 @@
-import {computed, defineComponent, getCurrentInstance, onMounted, ref} from "vue";
-import {ISwitchInst} from "../../switch/src/be-switch-type";
-import {isBool, isNumber, isString} from "../../../utils/common";
-
+import {computed, defineComponent, getCurrentInstance,PropType} from "vue";
+import {IProgressColor, IProgressInst, IProgressSuccess} from "./be-progress-type";
+import {isObject} from '@vue/shared'
+import {IOption} from "../../../utils/types";
 export default defineComponent({
     name: 'BeProgress',
     props: {
@@ -14,7 +14,7 @@ export default defineComponent({
             default: ''
         },
         color: {
-            type: String,
+            type: [String, Object] as PropType<IProgressColor>,
             default: ''
         },
         showInfo: {
@@ -23,7 +23,7 @@ export default defineComponent({
         },
         percent: {
             type: Number,
-            default: 35
+            default: 0
         },
         status: {
             type: String,
@@ -35,20 +35,29 @@ export default defineComponent({
         },
         strokeWidth:{
             type: Number,
-            default: 50
+            default: 10
         },
+        success:{
+            type: Object as PropType<IProgressSuccess>,
+        }
     },
     setup(props, ctx) {
 
         // 當前實例
-        const internalInstance = getCurrentInstance() as ISwitchInst
+        const internalInstance = getCurrentInstance() as IProgressInst
+        // 根据props 设置相关样式
         const innerStyleTypeLine = computed(()=>{
+            const styleIns:IOption = {}
+            // type="line"
             if(props.type === 'line'){
-                return {
-                    backgroundColor:props.color,
-                    width:`${props.percent >= 100 ? 100 : props.percent}%`,
-                    height:`${props.strokeWidth}px`,
+                if(isObject(props.color)){
+                    styleIns.backgroundImage = `linear-gradient(to right, ${props.color.from} 0%, ${props.color.to} 100%)`
+                }else{
+                    styleIns.backgroundColor = props.color
                 }
+                styleIns.width = `${props.percent >= 100 ? 100 : props.percent}%`
+                styleIns.height = `${props.strokeWidth}px`
+                return styleIns
             }
             return {
                 backgroundColor:props.color,
@@ -56,11 +65,43 @@ export default defineComponent({
                 height:`${props.strokeWidth}px`,
             }
         })
+        /**
+         * 超过一百显示为 success 的status
+         */
         const innerStyleStatus = computed(()=>{
             if(props.percent >= 100){
                 return 'success'
             }else{
                 return props.status
+            }
+        })
+        const renderSuccess = ():JSX.Element | undefined=>{
+            if(isObject(props.success) && props.success.color && props.success.percent){
+                return (
+                    <div class={`
+                                            be-progress-inner  
+                                            be-progress-inner-suc  
+                                            ${props.strokeLinecap === 'round' ? 'be-progress-inner__round' :''}  
+                                            `}
+                         style={innerStyleTypeLineSuccess.value}>
+                    </div>
+                )
+            }
+            return
+        }
+        const innerStyleTypeLineSuccess = computed(()=>{
+            const styleIns:IOption = {}
+            // type="line"
+            if(props.type === 'line'){
+                styleIns.backgroundColor = props.success?.color
+                styleIns.width = `${props.success?.percent! >= 100 ? 100 : props.success?.percent}%`
+                styleIns.height = `${props.strokeWidth}px`
+                return styleIns
+            }
+            return {
+                backgroundColor:props.color,
+                width:`${props.percent}%`,
+                height:`${props.strokeWidth}px`,
             }
         })
         return () => {
@@ -80,6 +121,11 @@ export default defineComponent({
                                             be-progress-inner__${innerStyleStatus.value}`}
                                          style={innerStyleTypeLine.value}>
                                     </div>
+                                    {/*
+                                    传入了success配置时渲染
+                                    分段success部分颜色不受color、status控制，根据percent的显示独立。100时也不用变色
+                                    */}
+                                    {renderSuccess()}
                                 </div>
                                 {/*slot - right*/}
                                 {props.showInfo ? rightRender : ''}

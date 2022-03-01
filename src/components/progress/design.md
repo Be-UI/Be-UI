@@ -5,8 +5,8 @@
 ing....   percent	百分比	number	0
 ing....   showInfo	是否显示进度数值或状态图标	boolean	true
 ing....   status	状态，可选：success error normal
-pending....   success	成功进度条相关配置	{ percent: number, strokeColor: string } 
-ing....   color	进度条的色彩	string	-
+ing....   success	成功进度条相关配置	{ percent: number, strokeColor: string } 
+ing....   color	进度条的色彩	string	- (颜色优先级最高！！！！！！！！！！！！！！！！)
 ing....   strokeLinecap	进度条的样式	round | rect	round
 ing....   trailColor	未完成的分段的颜色	string	-
 ing....   type	类型，可选 line circle dashboard	string	line

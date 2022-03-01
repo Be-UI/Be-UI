@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0 6px;
   line-height: 30px;
 
   .be-progress-body{
@@ -21,6 +20,9 @@
       width: 100%;
       margin-right: 10px;
       background-color: $defaultGray;
+      position: relative;
+      left: 0;
+      top: 0;
     }
 
     .be-progress-inner{
@@ -29,6 +31,12 @@
 
     .be-progress-inner__round{
       border-radius: 50px;
+    }
+
+    .be-progress-inner-suc{
+      position: absolute;
+      top: 0;
+      left: 0;
     }
 
     .be-progress-inner__normal{

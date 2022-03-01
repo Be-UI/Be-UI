@@ -511,7 +511,11 @@
             labelValue="name"
             v-model="autoVal">
         </be-autocomplete>-->
-        <be-progress></be-progress>
+        <be-progress
+            :success="{percent:10,color:'red'}"
+            :color="{  from: '#108ee9',to: '#87d068'}"
+            percent="60">
+        </be-progress>
     </div>
 
   </div>
