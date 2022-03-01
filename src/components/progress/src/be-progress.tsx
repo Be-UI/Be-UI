@@ -75,6 +75,9 @@ export default defineComponent({
                 return props.status
             }
         })
+        /**
+         * 渲染success配置进度条部分
+         */
         const renderSuccess = ():JSX.Element | undefined=>{
             if(isObject(props.success) && props.success.color && props.success.percent){
                 return (
@@ -89,6 +92,9 @@ export default defineComponent({
             }
             return
         }
+        /**
+         * 设置success配置进度条部分样式
+         */
         const innerStyleTypeLineSuccess = computed(()=>{
             const styleIns:IOption = {}
             // type="line"
