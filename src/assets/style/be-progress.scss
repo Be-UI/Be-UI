@@ -1,9 +1,12 @@
+.be-progress.be-progress-circle-dashboard{
+  width: initial;
+}
+
 .be-progress{
   display: flex;
   align-items: center;
   width: 100%;
   line-height: 30px;
-  background-color: wheat;
 
   .be-progress-circle{
     position: relative;
@@ -48,6 +51,7 @@
 
     .be-progress-inner{
       height: 100%;
+      transition: width .3s;
     }
 
     .be-progress-inner__round{

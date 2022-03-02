@@ -68,7 +68,6 @@ export default defineComponent({
                 return 6
             }
             return props.strokeWidth
-
         })
 
         /******************************* type="line" *************************/
@@ -117,6 +116,7 @@ export default defineComponent({
 
         const radius = computed(() => {
             if (props.type === 'circle' || props.type === 'dashboard') {
+                console.log(relativeStrokeWidth.value)
                 return parseInt(`${50 - parseFloat(relativeStrokeWidth.value) / 2}`, 10)
             } else {
                 return 0
@@ -142,7 +142,7 @@ export default defineComponent({
             }
 
         })
-
+        // 计算周长
         const perimeter = computed(() => {
             return 2 * Math.PI * radius.value
         })
@@ -222,7 +222,7 @@ export default defineComponent({
                           stroke={innerStyleTypeLineSuccess.value.color}
                           fill="none"
                           stroke-linecap={props.strokeLinecap as 'round' | 'square'}
-                          stroke-width={innerStrokeWidth.value}
+                          stroke-width={relativeStrokeWidth.value}
                           style={circleSuccessPathStyle.value}>
                     </path>
                 )
@@ -257,7 +257,7 @@ export default defineComponent({
             const centerRender = internalInstance.slots.center ? internalInstance.slots.center() : (
                 <span class='percent'>{`${props.percent}%`}</span>)
             return (
-                <div class={`be-progress`} style={setCircleContainerStyle.value}>
+                <div class={`${props.type === 'line' ? 'be-progress' :"be-progress be-progress-circle-dashboard"}`}>
                     {props.type === 'line' ?
                         (
                             <div class='be-progress-body'>
@@ -284,13 +284,13 @@ export default defineComponent({
                         : ''}
                     {props.type === 'circle' || props.type === 'dashboard' ?
                         (
-                            <div class='be-progress-body be-progress-circle'>
+                            <div class='be-progress-body be-progress-circle' style={setCircleContainerStyle.value}>
                                 <svg viewBox="0 0 100 100">
                                     <path class="be-progress-circle__track"
                                           d={trackPath.value}
                                           stroke-linecap={props.strokeLinecap as 'round' | 'square'}
                                           stroke={props.trailColor ? props.trailColor : '#f5f5f5'}
-                                          stroke-width={innerStrokeWidth.value}
+                                          stroke-width={relativeStrokeWidth.value}
                                           fill="none"
                                           style={trailPathStyle.value}>
 
@@ -300,7 +300,7 @@ export default defineComponent({
                                           stroke={circlePathColor.value}
                                           fill="none"
                                           stroke-linecap={props.strokeLinecap as 'round' | 'square'}
-                                          stroke-width={innerStrokeWidth.value}
+                                          stroke-width={relativeStrokeWidth.value}
                                           style={circlePathStyle.value}>
                                     </path>
                                     {/*

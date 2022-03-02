@@ -55,6 +55,3 @@
 circle | dashboard- 'center (默认百分比值)'  
 
 
-bug
-width的显示不全
-strokeWidth的显示不全
