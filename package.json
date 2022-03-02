@@ -1,6 +1,6 @@
 {
-  "name": "be-ui",
-  "version": "0.0.0",
+  "name": "be-ui3",
+  "version": "1.0.2",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
