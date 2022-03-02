@@ -15,7 +15,7 @@ export const install = function (app: App) {
     });
     return app;
 };
-const version: string = '1.0.0-beta1.0'
+const version: string = '1.0.2'
 export {version};
 export default {
     version,
