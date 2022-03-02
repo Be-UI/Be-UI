@@ -511,11 +511,14 @@
             labelValue="name"
             v-model="autoVal">
         </be-autocomplete>-->
+<!-- :success="{percent:10,color:'red'}"
+            :color="{  from: '#108ee9',to: '#87d068'}"       -->
         <be-progress
-            :success="{percent:10,color:'red'}"
-            :color="{  from: '#108ee9',to: '#87d068'}"
-            percent="60">
+            type="circle"
+            :showInfo="false"
+            :percent="progress">
         </be-progress>
+        <div   @click="progress++">{{ progress }}</div>
     </div>
 
   </div>
@@ -564,6 +567,7 @@ export default {
     const curInst = getCurrentInstance()
     const show = ref<boolean>(false)
       const val = ref<string>('')
+      const progress = ref<number>(60)
     const showSwitch = ref<boolean>(true)
     const openDialog = (): void => {
       // show.value = !show.value
@@ -654,6 +658,7 @@ export default {
       autoVal,
       testList,
       showSwitch,
+        progress,
       re: () => <div id='test_beloading_customRender'>asd</div>
     }
   },
