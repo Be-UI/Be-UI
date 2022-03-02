@@ -77,6 +77,7 @@ be-notification 单元测试
 |18| 数字输入  | be-input-number | <font color=#07c160 size=5>√</font>  | <font color=#07c160 size=5>√</font> |
 |19| 开关  | be-switch | <font color=#07c160 size=5>√</font>  | <font color=#07c160 size=5>√</font> |
 |20| 面包屑  | be-breadcrumb | <font color=#07c160 size=5>√</font>  | <font color=#07c160 size=5>√</font> |
+|21| 进度条  | be-progress | <font color=#07c160 size=5>√</font>  | <font color=#07c160 size=5>√</font> |
 
 
 
