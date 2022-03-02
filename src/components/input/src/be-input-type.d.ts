@@ -15,12 +15,7 @@ export interface IInputSelectInst {
     changeDisplay: Function
 }
 
-export type AutosizeProp =
-    | {
-    minRows?: number
-    maxRows?: number
-}
-    | boolean
+export type AutosizeProp = | {  minRows?: number,maxRows?: number } | boolean
 
 export type NodeStyle = {
     contextStyle: string

@@ -514,7 +514,10 @@
 <!-- :success="{percent:10,color:'red'}"
             :color="{  from: '#108ee9',to: '#87d068'}"       -->
         <be-progress
-            type="dashboard"
+            type="circle"
+            status="success"
+            strokeWidth="20"
+            :color="{  from: '#108ee9',to: '#87d068'}"
             gapPosition="top"
             :percent="progress">
         </be-progress>

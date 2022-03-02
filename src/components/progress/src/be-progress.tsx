@@ -16,7 +16,7 @@ export default defineComponent({
         },
         color: {
             type: [String, Object] as PropType<IProgressColor>,// 漸變支支持line
-            default: ''
+            default: '' as IProgressColor
         },
         showInfo: {
             type: Boolean,
