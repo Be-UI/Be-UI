@@ -514,8 +514,8 @@
 <!-- :success="{percent:10,color:'red'}"
             :color="{  from: '#108ee9',to: '#87d068'}"       -->
         <be-progress
-            type="circle"
-            :showInfo="false"
+            type="dashboard"
+            gapPosition="top"
             :percent="progress">
         </be-progress>
         <div   @click="progress++">{{ progress }}</div>

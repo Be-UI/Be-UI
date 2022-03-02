@@ -28,11 +28,11 @@ export default defineComponent({
         },
         status: {
             type: String,
-            default: 'normal'
+            default: 'normal'// error | normal | success
         },
         strokeLinecap: {
             type: String,
-            default: 'round'// square
+            default: 'round'// square | round
         },
         strokeWidth: {
             type: Number,
@@ -44,7 +44,15 @@ export default defineComponent({
         width: {
             type: Number,
             default: 132
-        }
+        },
+        gap: {
+            type: Number,
+            default: 75
+        },
+        gapPosition: {
+            type: String,
+            default: 'bottom'// top | bottom | left | right
+        },
     },
     setup(props, ctx) {
 
@@ -90,12 +98,12 @@ export default defineComponent({
             }
         })
 
-        /******************************* type="circle" *************************/
+        /******************************* type="circle"  | type="dashboard" *************************/
         /**
          * 設置畫布大小
          */
         const setCircleContainerStyle = computed(() => {
-            if (props.type === 'circle') {
+            if (props.type === 'circle' || props.type === 'dashboard') {
                 return {
                     width: `${props.width}px`,
                     height: `${props.width}px`,
@@ -118,12 +126,21 @@ export default defineComponent({
         const trackPath = computed(() => {
             const r = radius.value
             const isDashboard = props.type === 'dashboard'
-            return `
-          M 50 50
-          m 0 ${isDashboard ? '' : '-'}${r}
-          a ${r} ${r} 0 1 1 0 ${isDashboard ? '-' : ''}${r * 2}
-          a ${r} ${r} 0 1 1 0 ${isDashboard ? '' : '-'}${r * 2}
-          `
+            let pathM = `M 50 50`
+            let pathA = `a ${r} ${r} 0 1 1`
+            if(isDashboard && props.gapPosition === 'bottom'){
+                return `${pathM} m 0 ${r} ${pathA} 0 -${r * 2} ${pathA} 0 ${r * 2}`
+            }
+            if((isDashboard && props.gapPosition === 'top') || !isDashboard){
+                return `${pathM} m 0 -${r} ${pathA} 0 ${r * 2} ${pathA} 0 -${r * 2}`
+            }
+            if(isDashboard && props.gapPosition === 'left'){
+                return `${pathM} m -${r} 0 ${pathA} ${r * 2} 0 ${pathA} -${r * 2} 0`
+            }
+            if(isDashboard && props.gapPosition === 'right'){
+                return `${pathM} m ${r} 0 ${pathA} -${r * 2} 0 ${pathA} ${r * 2} 0`
+            }
+
         })
 
         const perimeter = computed(() => {
@@ -131,7 +148,7 @@ export default defineComponent({
         })
 
         const rate = computed(() => {
-            return props.type === 'dashboard' ? 0.75 : 1
+            return props.type === 'dashboard' ? (props.gap / 100) : 1
         })
 
         const strokeDashoffset = computed(() => {
@@ -197,7 +214,8 @@ export default defineComponent({
                     </div>
                 )
             }
-            if (isObject(props.success) && props.success.color && props.success.percent && props.type === 'circle') {
+            if (isObject(props.success) && props.success.color
+                && props.success.percent && (props.type === 'circle' || props.type === 'dashboard')) {
                 return (
                     <path class="be-progress-circle__success"
                           d={trackPath.value}
@@ -229,17 +247,9 @@ export default defineComponent({
                 styleIns.height = `${innerStrokeWidth.value}px`
                 return styleIns
             }
-            // type="circle"
-            if (props.type === 'circle') {
-                styleIns.color = props.success?.color
-                return styleIns
-            }
-            // type="dashboard"
-            return {
-                backgroundColor: props.color,
-                width: `${props.percent}%`,
-                height: `${innerStrokeWidth.value}px`,
-            }
+            // type="circle" | type="dashboard"
+            styleIns.color = props.success?.color
+            return styleIns
         })
         return () => {
             const rightRender = internalInstance.slots.default ? internalInstance.slots.default() : (
@@ -272,12 +282,13 @@ export default defineComponent({
                             </div>
                         )
                         : ''}
-                    {props.type === 'circle' ?
+                    {props.type === 'circle' || props.type === 'dashboard' ?
                         (
                             <div class='be-progress-body be-progress-circle'>
                                 <svg viewBox="0 0 100 100">
                                     <path class="be-progress-circle__track"
                                           d={trackPath.value}
+                                          stroke-linecap={props.strokeLinecap as 'round' | 'square'}
                                           stroke={props.trailColor ? props.trailColor : '#f5f5f5'}
                                           stroke-width={innerStrokeWidth.value}
                                           fill="none"
