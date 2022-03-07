@@ -2,7 +2,7 @@ import type {App} from 'vue';
 // 按需引用
 export * from './install-components';
 import * as components from './install-components';
-import '../assets/style/tailwind.css'
+import '../assets/style/common/tailwind.css'
 
 const componentList: object = components
 type componentKeyType = keyof typeof componentList;

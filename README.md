@@ -41,7 +41,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 internalInstance.ctx 禁止使用 proxy.$el.
 
 ## 排期
-
+1.样式重构
+be-progress 完成 √
 be-select 支持绑定对象;禁用背景色
 
 be-loading 样式修改 修改层级：loading 》 notification = message-box = message = popover 》 dialog  
@@ -49,7 +50,6 @@ be-notification 单元测试
 样式重构
 
 ## 长期排期
-
 1.服务式访问的全局绑定  
 2.组件引用编写
 

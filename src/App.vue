@@ -516,6 +516,14 @@
         <be-progress
             width="250"
             stroke-width="20"
+            status="success"
+            strokeLinecap="square"
+            :percent="progress">
+        </be-progress>
+
+        <be-progress
+            type="dashboard"
+            status="success"
             :percent="progress">
         </be-progress>
         <div   @click="progress = progress+ 10" style="margin-left: 30px">{{ progress }}</div>

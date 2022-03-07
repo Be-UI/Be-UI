@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import dts from 'vite-dts'
 import cleanup from 'rollup-plugin-cleanup';
+
 const {babel} = require('@rollup/plugin-babel')
 import path from 'path'
 // https://vitejs.dev/config/
@@ -67,9 +68,11 @@ export default defineConfig({
             scss: {
                 // 引入 var.scss 这样就可以在全局中使用 var.scss中预定义的变量了
                 additionalData: `
-            @import "./src/assets/style/common.scss";
-            @import "./src/assets/style/var.scss";
-            @import "./src/assets/style/animate.scss";
+            @import "./src/assets/style/common/var.scss";
+            @import "./src/assets/style/common/config.scss";
+            @import "./src/assets/style/common/mixin.scss";
+            @import "./src/assets/style/common/common.scss";
+            @import "./src/assets/style/common/animate.scss";
             `
             }
         }
@@ -80,7 +83,7 @@ export default defineConfig({
             entry: './src/components/index.ts',
             formats: ['es', 'cjs'],
         },
-         rollupOptions: {
+        rollupOptions: {
             // 确保外部化处理那些你不想打包进库的依赖
             external: ['vue'],
             output: {

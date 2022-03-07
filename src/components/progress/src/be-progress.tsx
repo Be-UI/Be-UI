@@ -116,7 +116,6 @@ export default defineComponent({
 
         const radius = computed(() => {
             if (props.type === 'circle' || props.type === 'dashboard') {
-                console.log(relativeStrokeWidth.value)
                 return parseInt(`${50 - parseFloat(relativeStrokeWidth.value) / 2}`, 10)
             } else {
                 return 0
@@ -206,9 +205,9 @@ export default defineComponent({
             if (isObject(props.success) && props.success.color && props.success.percent && props.type === 'line') {
                 return (
                     <div class={`
-                                            be-progress-inner  
-                                            be-progress-inner-suc  
-                                            ${props.strokeLinecap === 'round' ? 'be-progress-inner__round' : ''}  
+                                            be-progress-line-path  
+                                            be-progress-line-path__success
+                                            ${props.strokeLinecap === 'round' ? 'be-progress-line-path__round' : ''}  
                                             `}
                          style={innerStyleTypeLineSuccess.value}>
                     </div>
@@ -260,15 +259,15 @@ export default defineComponent({
                 <div class={`${props.type === 'line' ? 'be-progress' :"be-progress be-progress-circle-dashboard"}`}>
                     {props.type === 'line' ?
                         (
-                            <div class='be-progress-body'>
+                            <div class='be-progress-body be-progress-line'>
                                 <div class={`
-                                        be-progress-line
-                                        ${props.strokeLinecap === 'round' ? 'be-progress-inner__round' : ''}`}
+                                        be-progress-line--track
+                                        ${props.strokeLinecap === 'round' ? 'be-progress-line-path__round' : ''}`}
                                      style={`background-color:${props.trailColor}`}>
                                     <div class={`
-                                            be-progress-inner  
-                                            ${props.strokeLinecap === 'round' ? 'be-progress-inner__round' : ''}  
-                                            be-progress-inner__${innerStyleStatus.value}`}
+                                            be-progress-line-path  
+                                            ${props.strokeLinecap === 'round' ? 'be-progress-line-path__round' : ''}  
+                                            be-progress__${innerStyleStatus.value}`}
                                          style={innerStyleTypeLine.value}>
                                     </div>
                                     {/*
@@ -309,7 +308,7 @@ export default defineComponent({
                                     */}
                                     {renderSuccess()}
                                 </svg>
-                                <div class='be-progress-circle__text'>
+                                <div class='be-progress-circle--text'>
                                     {/*slot - center*/}
                                     {props.showInfo ? centerRender : ''}
                                 </div>

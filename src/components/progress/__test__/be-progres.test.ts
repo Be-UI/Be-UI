@@ -21,7 +21,7 @@ describe('test-be-progress-type-line', () => {
             },
         })
         const elm = wrapper.element as HTMLElement
-        const percentElm = elm.querySelectorAll('.be-progress-inner')[0] as HTMLElement
+        const percentElm = elm.querySelectorAll('.be-progress-line-path')[0] as HTMLElement
         expect(percentElm.style.width === '60%').toBeTruthy()
     })
     test('props-showInfo', () => {
@@ -43,7 +43,7 @@ describe('test-be-progress-type-line', () => {
             },
         })
         const elm = wrapper.element as HTMLElement
-        const trailColorElm = elm.querySelector('.be-progress-line') as HTMLElement
+        const trailColorElm = elm.querySelector('.be-progress-line--track') as HTMLElement
         expect(trailColorElm.style.backgroundColor === 'red').toBeTruthy()
     })
     test('props-strokeLinecap', () => {
@@ -54,7 +54,7 @@ describe('test-be-progress-type-line', () => {
             },
         })
         const elm = wrapper.element as HTMLElement
-        const strokeLinecapElm = elm.querySelectorAll('.be-progress-inner__round')
+        const strokeLinecapElm = elm.querySelectorAll('.be-progress-line-path__round')
         expect(strokeLinecapElm.length === 0).toBeTruthy()
     })
     test('props-status', () => {
@@ -65,7 +65,7 @@ describe('test-be-progress-type-line', () => {
             },
         })
         const elmSuccess = wrapperSuccess.element as HTMLElement
-        const statusElmSuccess = elmSuccess.querySelectorAll('.be-progress-inner__success')
+        const statusElmSuccess = elmSuccess.querySelectorAll('.be-progress__success')
         expect(statusElmSuccess.length === 1).toBeTruthy()
         const wrapperError = mount(BeProgress, {
             props: {
@@ -74,7 +74,7 @@ describe('test-be-progress-type-line', () => {
             },
         })
         const elmError = wrapperError.element as HTMLElement
-        const statusElmError = elmError.querySelectorAll('.be-progress-inner__error')
+        const statusElmError = elmError.querySelectorAll('.be-progress__error')
         expect(statusElmError.length === 1).toBeTruthy()
     })
     test('props-color',  () => {
@@ -85,7 +85,7 @@ describe('test-be-progress-type-line', () => {
             },
         })
         const elmRed = wrapperRed.element as HTMLElement
-        const colorElmRed = elmRed.querySelector('.be-progress-inner') as HTMLElement
+        const colorElmRed = elmRed.querySelector('.be-progress-line-path') as HTMLElement
         expect(colorElmRed.style.backgroundColor === 'red').toBeTruthy()
     })
     test('props-strokeWidth', () => {
@@ -96,7 +96,7 @@ describe('test-be-progress-type-line', () => {
             },
         })
         const elm = wrapper.element as HTMLElement
-        const strokeWidthElm = elm.querySelector('.be-progress-inner') as HTMLElement
+        const strokeWidthElm = elm.querySelector('.be-progress-line-path') as HTMLElement
         expect(strokeWidthElm.style.height === '30px').toBeTruthy()
     })
     test('props-success', () => {
@@ -107,7 +107,7 @@ describe('test-be-progress-type-line', () => {
             },
         })
         const elm = wrapper.element as HTMLElement
-        const successElm = elm.querySelector('.be-progress-inner-suc') as HTMLElement
+        const successElm = elm.querySelector('.be-progress-line-path__success') as HTMLElement
         expect(successElm && successElm.style.backgroundColor === 'red').toBeTruthy()
         expect(successElm && successElm.style.width === '10%').toBeTruthy()
     })
@@ -195,7 +195,7 @@ describe('test-be-progress-type-circle', () => {
         })
         const elm = wrapper.element as HTMLElement
         const strokeWidthElm = elm.querySelector('.be-progress-circle__path') as HTMLElement
-        expect(strokeWidthElm.getAttribute('stroke-width') === '30').toBeTruthy()
+        expect(strokeWidthElm.getAttribute('stroke-width') === ((30 / 132) * 100).toFixed(1)).toBeTruthy()
     })
     test('props-success', () => {
         const wrapper = mount(BeProgress, {

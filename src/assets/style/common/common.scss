@@ -1,0 +1,120 @@
+@use "sass:map";
+@import "var";
+@import "mixin";
+
+input:focus-visible {
+  outline-offset: 0;
+}
+
+:focus-visible {
+  outline: 0;
+}
+
+.line {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  padding-right: calc(100% - 3px);
+  padding-left: calc(100% - 3px);
+  background-color: $infoHover;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
+
+.scroll-diy::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  margin: 5px;
+}
+
+/* 定义滑块 */
+
+.scroll-diy::-webkit-scrollbar-thumb {
+  background-color: $infoBorder;
+  border-radius: 5px;
+}
+
+@mixin be-message-title {
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+
+
+:root {
+  $--emo-color: () !default;
+    $--emo-color: map.deep-merge(
+    (
+      'warning--color': $warning,
+      'success--color': $success,
+      'error--color': $error,
+      'link--color': $link,
+    ),$--emo-color
+  );
+  // 生成情感色变量
+  @each $type in (warning--color, success--color, error--color,link--color) {
+    @include set-css-var-type('emo', $type, $--emo-color);
+  }
+
+  $--percentage: () !default;
+  $--percentage: map.deep-merge(
+    (
+      'zero': 0,
+      '25': 25%,
+      '50': 50%,
+      '75': 75%,
+      'full': 100%,
+    ),$--percentage
+  );
+  // 百分比變量
+  @each $type in (zero, '25', '50','75',full) {
+    @include set-css-var-type('percentage', $type, $--percentage);
+  }
+
+  $--text-color: () !default;
+  $--text-color: map.merge(
+    (
+      'primary': #303133,
+      'regular': #606266,
+      'secondary': #909399,
+      'placeholder': #c0c4cc,
+    ),$--text-color
+  );
+  // 文字顔色
+  @each $type in (primary, regular, secondary, placeholder) {
+    @include set-css-var-type('text-color', $type, $--text-color);
+  }
+
+  $--color: () !default;
+  $--color: map.merge(
+    (
+      'white': #fff,
+      'black': #000,
+    ),$--color
+  );
+  // 其他基础色
+  @each $type in (white, black) {
+    @include set-css-var-type('base-color', $type, $--color);
+  }
+}
+
+
+// 生成 be-progress 类型颜色变量
+$--progress: () !default;
+$--progress: map.deep-merge(
+  (
+    'normal-color': var(--be-emo-link--color),
+    'success-color': var(--be-emo-success--color),
+    'error-color': var(--be-emo-error--color),
+  ),$--progress
+);
+
+
