@@ -3,15 +3,15 @@
 
 
 
-@include create-component-class(progress){
+@include create-B(progress){
   // --be-progress-normal-color
   // 生成 .--be-progress-normal-color 顔色
   @include set-component-style-var('progress', $--progress);
 }
 
 // 生成 .be-progress
-@include create-component-class(progress){
-  $componentsClass:$name + $element-separator + 'progress' !global;
+@include create-B(progress){
+  $componentsClass:$name + '-' + 'progress' !global;
   display: flex;
   align-items: center;
   width: var(--be-percentage-full);
@@ -23,7 +23,7 @@
     top: var(--be-percentage-zero);
     left: var(--be-percentage-zero);
 
-    .#{$componentsClass}-circle#{$sub-element-separator}text {
+    .#{$componentsClass}-circle#{$element-separator}text {
       position: absolute;
       top: var(--be-percentage-50);
       left: var(--be-percentage-50);
@@ -41,7 +41,7 @@
 
   .#{$componentsClass}-line{
 
-    .#{$componentsClass}-line#{$sub-element-separator}track{
+    .#{$componentsClass}-line#{$element-separator}track{
       position: relative;
       top: var(--be-percentage-zero);
       left: var(--be-percentage-zero);

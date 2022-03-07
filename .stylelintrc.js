@@ -25,6 +25,10 @@ module.exports = {
             true,
             {
                 "ignoreAtRules": [
+                    "if",
+                    "else",
+                    "function",
+                    "return",
                     "mixin",
                     "include",
                     "import",

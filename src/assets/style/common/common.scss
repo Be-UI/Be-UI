@@ -51,7 +51,7 @@ input:focus-visible {
 
 :root {
   $--emo-color: () !default;
-    $--emo-color: map.deep-merge(
+  $--emo-color: map.deep-merge(
     (
       'warning--color': $warning,
       'success--color': $success,
