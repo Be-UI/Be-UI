@@ -8,7 +8,7 @@
     "test:coverage": "jest --coverage",
     "lint:style": "stylelint src/**/*.scss",
     "lint:style-fix": "stylelint --fix src/**/*.scss",
-    "prepare": "husky install"
+    "prepare": "husky install && rm -rf .git/hooks && ln -s ../.husky .git/hooks"
   },
   "files": [
     "dist"
