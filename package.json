@@ -15,7 +15,9 @@
   ],
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "pre-commit": "checking your commit message",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "code will push. .."
     }
   },
   "main": "./dist/be-ui.umd.js",

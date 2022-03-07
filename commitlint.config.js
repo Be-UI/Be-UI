@@ -1,5 +1,5 @@
 /**
- * feature：新功能
+ * feats：新功能
  * update：更新某功能
  * fixbug：修补某功能的bug
  * refactor：重构某个功能
@@ -14,7 +14,7 @@ module.exports = {
   ],
   rules: {
     'type-enum': [2, 'always', [
-      'feature', 'update', 'fixbug', 'refactor', 'optimize', 'style', 'docs', 'chore'
+      'feats', 'update', 'fixbug', 'refactor', 'optimize', 'style', 'docs', 'chore'
     ]],
     'type-case': [0],
     'type-empty': [0],
