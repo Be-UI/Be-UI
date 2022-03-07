@@ -1,4 +1,4 @@
-// 已经按照官网进行配置 但是不生效，使用webstorm插件作为本地校验吧
+// 已经按照官网进行配置 但是不生效，使用webstorm插件做本地校验吧
 module.exports = {
   extends: ['@commitlint/config-conventional'],
   rules: {
