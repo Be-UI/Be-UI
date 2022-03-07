@@ -174,6 +174,7 @@ export default defineComponent({
         let stylePopover: TPopoverStyle = reactive({
                 left: '0px',
                 top: '0px',
+                zIndex:'2000'
             })
         // popover.js 实例缓存
         let popperJS: any = null

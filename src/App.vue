@@ -513,7 +513,7 @@
         </be-autocomplete>-->
 <!-- :success="{percent:10,color:'red'}"
             :color="{  from: '#108ee9',to: '#87d068'}"       -->
-        <be-progress
+<!--        <be-progress
             width="250"
             stroke-width="20"
             status="success"
@@ -526,7 +526,36 @@
             status="success"
             :percent="progress">
         </be-progress>
-        <div   @click="progress = progress+ 10" style="margin-left: 30px">{{ progress }}</div>
+        <div   @click="progress = progress+ 10" style="margin-left: 30px">{{ progress }}</div>-->
+
+        <be-pagination
+            :pageSize="pageParams.pageSize"
+            :pageCount="pageParams.total"
+            :pagerShowCount="5"
+            @updateNum="updateNum"
+            @changePage="pageChange"
+            :currentPage="pageParams.currentPage">
+             <template #prev>
+            <be-button
+                @click="test"
+                prevIcon="delete"
+                nextIcon="delete"
+                type="warning "
+                size="large">
+                测试
+            </be-button>
+        </template>
+            <template #next>
+                <be-button
+                    @click="test"
+                    prevIcon="delete"
+                    nextIcon="delete"
+                    type="warning "
+                    size="large">
+                    测试
+                </be-button>
+            </template>&ndash;&gt;
+        </be-pagination>
     </div>
 
   </div>
@@ -652,7 +681,24 @@ export default {
               ])
           },2000)
       }
+      const pageParams = ref({
+          currentPage: 1,
+          pageNum: 1,
+          pageSize: 10,
+          total: 300
+      })
+      const   pageChange = (data):void =>{
+          // console.log(data)
+          pageParams.value.currentPage = data.currentPage
+      }
+
+      const updateNum = (data):void =>{
+          pageParams.value.pageSize = data
+      }
     return {
+        updateNum,
+        pageChange,
+        pageParams,
         val,
         fetchSuggestions,
       formatter,
