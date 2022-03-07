@@ -1,5 +1,5 @@
 import Pager from './be-pager.vue';
-import beAutocomplete from '../../autocomplete/src/be-autocomplete.vue';
+import BeSelect from '../../select/src/be-select';
 import '../../../assets/style/be-pager.scss';
 import {getUuid} from "../../../utils/common"
 import {
@@ -25,7 +25,7 @@ export default defineComponent({
     emits: ['updateNum','updatePage','changePage'],
     components: {
         Pager,
-        beAutocomplete
+        BeSelect
     },
     props: {
         /**
@@ -122,6 +122,10 @@ export default defineComponent({
             type: Array,
             default: () => [],
         },
+        pageUnit:{
+            type: String,
+            default: '/页',
+        }
     },
     setup(props, ctx) {
         const curInst = getCurrentInstance() as IPage
@@ -164,11 +168,11 @@ export default defineComponent({
          * @public
          */
         const getPageNum = (data: any): void => {
-            pageNumVal.value = data.label + '/页'
+            pageNumVal.value = data.label + props.pageUnit
             ctx.emit('updateNum', data.label)
         }
         onMounted(() => {
-            pageNumVal.value = props.pageSize + '/页' //disabled
+            pageNumVal.value = props.pageSize + props.pageUnit //disabled
         })
         /********************************* 分页事件emit *****************************************/
         /**

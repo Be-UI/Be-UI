@@ -115,10 +115,11 @@ import {pagersDynamicList} from "./pager-dynamic";
 import {pagersList} from "./pager-ordinary";
 import {pagerFront} from "./pager-front";
 import {IPageData, IPageProvide, IPagesFront} from "./be-pagenation-type";
-
+import BeIcon from "../../svg-icon";
 export default defineComponent({
   name: 'BePager',
-  //emits: ['changePage','updatePage','getPageCount'],
+  components:{BeIcon},
+  emits: ['changePage','updatePage'],
   setup(props, ctx) {
     /************************************** 翻页事件方法 ******************************/
     const $$BePaginMix = inject('$$BePaginMix') as IPageProvide
