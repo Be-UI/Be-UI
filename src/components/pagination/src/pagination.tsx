@@ -168,11 +168,18 @@ export default defineComponent({
          * @public
          */
         const getPageNum = (data: any): void => {
+            const pageCount: number = props.pageCount ? props.pageCount : 0
+            const maxPageNum: number = Math.ceil(pageCount / Number(data.label))
+            const total: number = props.isFront ? pageParamsFront.maxPageNum : maxPageNum
             pageNumVal.value = data.label + props.pageUnit
-            ctx.emit('updateNum', data.label)
+            ctx.emit('updateNum', {pageSize:data.label,currentPage:props.currentPage > total ? total : props.currentPage})
         }
+        const pageNumInner  = ref(props.pageNum)
         onMounted(() => {
             pageNumVal.value = props.pageSize + props.pageUnit //disabled
+            // 把pagesize加到下拉选择pageNum中
+            props.pageNum.unshift({label: props.pageSize})
+            pageNumInner.value  = props.pageNum
         })
         /********************************* 分页事件emit *****************************************/
         /**
@@ -268,7 +275,7 @@ export default defineComponent({
                         disabled={props.disabled}
                         labelValue="label"
                         custom-class={'be-pager-select'}
-                        list={props.pageNum}
+                        list={pageNumInner.value}
                         onSelect={getPageNum}>
                     </be-select>)
             }

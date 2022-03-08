@@ -693,7 +693,8 @@ export default {
       }
 
       const updateNum = (data):void =>{
-          pageParams.value.pageSize = data
+          pageParams.value.pageSize = data.pageSize
+          pageParams.value.currentPage = data.currentPage
       }
     return {
         updateNum,
