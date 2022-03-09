@@ -138,6 +138,7 @@ export default defineComponent({
         const close = (): void => {
             setTimeout(() => {
                 show.value = false
+                isEnterPopover.value = false
                 //show.value = false
                 /** 提交触发 显示跟新 事件
                  * @event update
