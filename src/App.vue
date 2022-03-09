@@ -528,7 +528,7 @@
         </be-progress>
         <div   @click="progress = progress+ 10" style="margin-left: 30px">{{ progress }}</div>-->
 
-        <be-pagination
+        <!--        <be-pagination
             :pageSize="pageParams.pageSize"
             :pageCount="pageParams.total"
             :pagerShowCount="5"
@@ -555,7 +555,14 @@
                     测试
                 </be-button>
             </template>&ndash;&gt;
-        </be-pagination>
+        </be-pagination>-->
+
+        <be-popover trigger="hover" width="300" customClass="asdwq" placement="bottom">
+            <template #trigger>
+                <be-icon icon="deleteIc" style="position: absolute;left: 20%;top: 300px;"></be-icon>
+            </template>
+            <panda width="25" height="25"  @click="test"></panda>
+        </be-popover>
     </div>
 
   </div>

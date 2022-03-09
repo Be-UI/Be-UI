@@ -5,7 +5,7 @@
     </div>
 
     <teleport to="body">
-        <div :class="customClass">
+        <div :class="customClass" @mouseenter="handlePopoverDomEnter" @mouseleave="handlePopoverDomLeave">
             <transition name="be-fade-in-linear">
                 <div class="be-popover"
                      v-click-outside="{handler:close,isDisabled:outsideDisabled}"
@@ -160,7 +160,13 @@ export default defineComponent({
                 delay = props.duration
             }
             setTimeout(() => {
+                // 关闭时如果鼠标移入了popover的dom，则不关闭
+                if(isEnterPopover.value && !isShow && props.trigger === 'hover'){
+                    return
+                }
+                // 设置 false 时通过 v-if 关闭卸载
                 show.value = isShow
+
                 nextTick(() => {
                     if (show.value) {
                         computePosition(props.placement)
@@ -352,7 +358,19 @@ export default defineComponent({
                 popperJS.destroy();
             }
         })
+        /******************************************** popover元素 dom 操作相关 ************************************/
+        const isEnterPopover = ref<boolean>(false)
+        const handlePopoverDomEnter = ():void =>{
+            isEnterPopover.value = true
+        }
+        const handlePopoverDomLeave = ():void =>{
+            isEnterPopover.value = false
+            changeDisplay(false)
+
+        }
         return {
+            handlePopoverDomLeave,
+            handlePopoverDomEnter,
             uid: internalInstance.uid,
             addEvent,
             stylePopover,
@@ -361,8 +379,6 @@ export default defineComponent({
             close,
             changeDisplay,
             computePosition,
-            raw: props.raw,
-            customClass: props.customClass,
         }
     }
 })
