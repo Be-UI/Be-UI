@@ -1,4 +1,4 @@
-import {computed, defineAsyncComponent, defineComponent, getCurrentInstance, h, nextTick, onMounted, VNode} from "vue";
+import {computed, defineComponent, getCurrentInstance, h, nextTick, onMounted, VNode} from "vue";
 import {IBreadcrumbInst, IBreadcrumbItemVnode, IBreadcrumbPopover} from "./be-breadcrumb-type";
 import {useBrowserLocation} from "../../../utils/use-browser-location";
 import BePopover from "../../popover";

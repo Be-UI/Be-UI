@@ -1,11 +1,8 @@
 import {
-    Component,
     ComponentInternalInstance,
     computed,
     defineComponent,
     getCurrentInstance,
-    nextTick,
-    onMounted,
     ref,
     VNode
 } from "vue";

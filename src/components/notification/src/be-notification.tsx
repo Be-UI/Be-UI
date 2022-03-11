@@ -11,6 +11,7 @@ import {INotfiy} from './be-notification-type'
 
 export default defineComponent({
     name: "BeNotification",
+    components:{BeIcon},
     props: {
         option: {
             type: Object,
