@@ -362,11 +362,16 @@ export default defineComponent({
         /******************************************** popover元素 dom 操作相关 ************************************/
         const isEnterPopover = ref<boolean>(false)
         const handlePopoverDomEnter = ():void =>{
-            isEnterPopover.value = true
+            if(props.trigger === 'hover'){
+                isEnterPopover.value = true
+            }
+
         }
         const handlePopoverDomLeave = ():void =>{
-            isEnterPopover.value = false
-            changeDisplay(false)
+            if(props.trigger === 'hover'){
+                isEnterPopover.value = false
+                changeDisplay(false)
+            }
 
         }
         return {
