@@ -13,7 +13,8 @@
     @apply  bg-default p-2.5 rounded shadow absolute box-border;
 
     .be-message-title {
-      @apply w-full h-6;
+      height: initial;
+      @apply w-full;
 
       .be-message-head {
         @apply leading-6 flex justify-between items-center;
@@ -71,6 +72,7 @@
   }
 
   .be-message-container__topCenter {
+    max-width: calc(100vw - 10vw);
     @apply right-1/2;
     transform: translateX(50%);
   }
