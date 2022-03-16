@@ -28,14 +28,16 @@ let isCache: boolean = false
  * @param {Boolean} isAll - 是否关闭全部
  */
 const closeNotify = function (instance: DefineComponent, isAll: boolean = false): void {
+
     if (!instance) return;
     let index = -1
     let placement: string = (instance.props && instance.props.option.placement)
     const instanceUid: number = (instance.component && instance.component.uid) || instance.uid
     const instanceEl = instance.el || instance.proxy.$el
     let instancesList = Object(instanceMap)[placement]
-    let direction = /^top-/.test(placement) ? 'top' : 'bottom';
+    let direction = /top/.test(placement) ? 'top' : 'bottom';
     let len = instancesList.length
+
     // 關閉全部
     if (isAll) {
         closeAll()
@@ -52,6 +54,9 @@ const closeNotify = function (instance: DefineComponent, isAll: boolean = false)
     } catch (e) {
         if (e.message !== "EndIterative") throw e;
     }
+    console.log(index)
+    // 小於0 沒有找到組件實例，説明可能被手動刪除
+     if(index < 0 ) return;
     // 獲取要關閉的組件實例
     let currentInstance = instancesList[index]
     // 从缓存中删除
@@ -59,10 +64,13 @@ const closeNotify = function (instance: DefineComponent, isAll: boolean = false)
     if (len < 1) return;
     // 計算刪除後的其他組件偏移
     const removedHeight = instanceEl.offsetHeight;
-    for (let i = index; i < len - 1; i++) {
-        instancesList[i].instance.el.style[direction] =
-            parseInt(instancesList[i].instance.el.style[direction], 10) - removedHeight - 35 + 'px';
-    }
+
+   for (let i = index; i < len - 1; i++) {
+       instancesList[i].instance.el.style[direction] =
+           parseInt(instancesList[i].instance.el.style[direction], 10) - removedHeight - 35 + 'px';
+   }
+
+
     // 根据组件uid过滤组件实例
     Object(instanceMap)[placement] = Object(instanceMap)[placement].filter((val: any) => {
         return val.instance.component.uid !== instanceUid

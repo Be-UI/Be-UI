@@ -83,6 +83,14 @@ export default defineComponent({
             props.option.closeNotify(internalInstance, false, true)
         }
         /**
+         * 點擊關閉方法
+         * @param event
+         */
+        const handleClickClose = (event: Event | null):void =>{
+            clearTimer()
+            close(event)
+        }
+        /**
          * 點擊方法
          * @param event
          */
@@ -134,7 +142,7 @@ export default defineComponent({
          */
         const renderBody = function (h: any) {
             const evt = {
-                onClick: (event: Event) => close(event)
+                onClick: (event: Event) => handleClickClose(event)
             }
             return (
                 h(<div class={`be-${props.compType}-container be-${props.compType}-container__${option.placement}`}>
