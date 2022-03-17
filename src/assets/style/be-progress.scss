@@ -1,8 +1,6 @@
-
-
-
-
-
+@import "./common/config";
+$componentsClass:$name + '-' + 'progress' !global;
+// BEM是一种前端命名方法论，主要是针对CSS，意思是块（Block）、元素（Element）、修饰符（Modifier）的简写。
 @include create-B(progress){
   // --be-progress-normal-color
   // 生成 .--be-progress-normal-color 顔色
@@ -11,19 +9,19 @@
 
 // 生成 .be-progress
 @include create-B(progress){
-  $componentsClass:$name + '-' + 'progress' !global;
+
   display: flex;
   align-items: center;
   width: var(--be-percentage-full);
   line-height: 30px;
 
   // 环形样式
-  .#{$componentsClass}-circle {
+  .#{ $componentsClass }-circle {
     position: relative;
     top: var(--be-percentage-zero);
     left: var(--be-percentage-zero);
 
-    .#{$componentsClass}-circle#{$element-separator}text {
+    .#{$componentsClass}-circle#{$modifier-separator}text {
       position: absolute;
       top: var(--be-percentage-50);
       left: var(--be-percentage-50);
@@ -39,9 +37,9 @@
 
   // 条形样式
 
-  .#{$componentsClass}-line{
+  .#{ $componentsClass }-line{
 
-    .#{$componentsClass}-line#{$element-separator}track{
+    .#{$componentsClass}-line#{$modifier-separator}track{
       position: relative;
       top: var(--be-percentage-zero);
       left: var(--be-percentage-zero);
@@ -61,11 +59,11 @@
       transition: width .3s;
     }
 
-    .#{$componentsClass}-line-path#{$modifier-separator}round{
+    .#{$componentsClass}-line-path#{$element-separator}round{
       border-radius: 50px;
     }
 
-    .#{$componentsClass}-line-path#{$modifier-separator}success{
+    .#{$componentsClass}-line-path#{$element-separator}success{
       position: absolute;
       top: var(--be-percentage-zero);
       left: var(--be-percentage-zero);
@@ -77,15 +75,15 @@
     width: var(--be-percentage-full);
     height: var(--be-percentage-full);
 
-    .#{$componentsClass}#{$modifier-separator}normal{
+    .#{$componentsClass}#{$element-separator}normal{
       background-color: var(--be-progress-normal-color);
     }
 
-    .#{$componentsClass}#{$modifier-separator}success{
+    .#{$componentsClass}#{$element-separator}success{
       background-color: var(--be-progress-success-color);
     }
 
-    .#{$componentsClass}#{$modifier-separator}error{
+    .#{$componentsClass}#{$element-separator}error{
       background-color: var(--be-progress-error-color);
     }
   }

@@ -557,12 +557,19 @@
             </template>&ndash;&gt;
         </be-pagination>-->
 
-        <be-popover trigger="hover" width="300" customClass="asdwq" placement="bottom">
+        <be-popover trigger="manual" width="300" customClass="asdwq" placement="bottom">
             <template #trigger>
                 <be-icon icon="deleteIc" style="position: absolute;left: 20%;top: 300px;"></be-icon>
             </template>
             <panda width="25" height="25"  @click="test"></panda>
         </be-popover>
+
+        <be-button @click="openMsg">test Msg</be-button>
+        <be-progress
+
+            status="error"
+            :percent="progress">
+        </be-progress>
     </div>
 
   </div>
@@ -590,11 +597,13 @@ import BeFooter from "./components/container/src/be-footer.vue";
 import BeAside from "./components/container/src/be-aside.vue";
 import {computed, getCurrentInstance, ref, watch} from "vue";
 import BeProgress from "./components/progress/src/be-progress";
+import BeButton from "./components/button/src/be-button";
 
 export default {
   name: 'App',
   directives: {ClickOutside, contextmenu},
   components: {
+      BeButton,
       BeProgress,
     BeAside,
     BeFooter,
@@ -610,8 +619,8 @@ export default {
   setup() {
     const curInst = getCurrentInstance()
     const show = ref<boolean>(false)
-      const val = ref<string>('')
-      const progress = ref<number>(60)
+    const val = ref<string>('')
+    const progress = ref<number>(60)
     const showSwitch = ref<boolean>(true)
     const openDialog = (): void => {
       // show.value = !show.value
@@ -624,18 +633,20 @@ export default {
 
     })
     const test = (): void => {
-      console.log(111)
+
       curInst?.refs.qwdwqdwqd.close()
       curInst?.refs.qwdddddwqdwqd.close()
     }
-    /* BeMessage({
-       titles: 'asd',
-       msgType: 'success',
-       duration: 2000,
-       offsetTop: 300,
-       close: true,
-     })*/
-    BeNotify({
+    const openMsg = ()=>{
+        BeMessage({
+            titles: 'as啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊d',
+            msgType: 'success',
+            duration: 3000,
+            offsetTop: 300,
+            close: true,
+        })
+    }
+    /*BeNotify({
       titles: 'Notification',
       bodyRender: () => {
         return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
@@ -648,7 +659,7 @@ export default {
       offsetBottom: 10,
       placement: 'bottomRight',
       duration: 0,
-    })
+    })*/
     const testList = [
       {label: '落日绣帘卷', id: '落日绣帘卷'},
       {label: '亭下水连空', id: '亭下水连空'},
@@ -704,6 +715,7 @@ export default {
           pageParams.value.currentPage = data.currentPage
       }
     return {
+        openMsg,
         updateNum,
         pageChange,
         pageParams,
