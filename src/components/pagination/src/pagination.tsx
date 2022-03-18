@@ -1,7 +1,5 @@
 import Pager from './be-pager.vue';
 import BeSelect from '../../select/src/be-select';
-import '../../../assets/style/be-pager.scss';
-import {getUuid} from "../../../utils/common"
 import {
     defineComponent,
     getCurrentInstance,

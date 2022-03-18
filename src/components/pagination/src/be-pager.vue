@@ -234,10 +234,13 @@ export default defineComponent({
         // 点击缩略翻页时的偏移量
         const pagerCountOffset = $$BePaginProps.pagerShowCount;
         // 判断点击的元素class 是否为缩略翻页，并设置对应偏移页码 newPage
-        if (target.className && Object.prototype.toString.call(target.className) === '[object String]' && target.className.indexOf('more') !== -1) {
-          if (target.className.indexOf('quickprev') !== -1) {
+        if (target.className && Object.prototype.toString.call(target.className) === '[object String]'
+            && ((target.className.indexOf('pageLast') !== -1)
+            || (target.className.indexOf('pageFirst') !== -1))) {
+            const childNodes = target.childNodes[0] as HTMLElement
+          if (childNodes.className.indexOf('quickprev') !== -1) {
             newPage = currentPage - pagerCountOffset;
-          } else if (target.className.indexOf('quicknext') !== -1) {
+          } else if (childNodes.className.indexOf('quicknext') !== -1) {
             newPage = currentPage + pagerCountOffset;
           }
         }
@@ -316,10 +319,10 @@ export default defineComponent({
       if ($$BePaginProps.disabled) return;
       if (direction === 'left') {
         hoverprevIconClass.value = '#409EFF'
-        quickprevIconClass.value = 'page-first';
+        quickprevIconClass.value = 'pageFirst';
       } else {
         hoverNextIconClass.value = '#409EFF'
-        quicknextIconClass.value = 'page-last';
+        quicknextIconClass.value = 'pageLast';
       }
     }
     onMounted(() => {

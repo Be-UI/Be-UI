@@ -528,10 +528,11 @@
         </be-progress>
         <div   @click="progress = progress+ 10" style="margin-left: 30px">{{ progress }}</div>-->
 
-        <!--        <be-pagination
+        {{pageParams.currentPage}}
+                <be-pagination
             :pageSize="pageParams.pageSize"
             :pageCount="pageParams.total"
-            :pagerShowCount="5"
+            :pagerShowCount="6"
             @updateNum="updateNum"
             @changePage="pageChange"
             :currentPage="pageParams.currentPage">
@@ -554,10 +555,10 @@
                     size="large">
                     测试
                 </be-button>
-            </template>&ndash;&gt;
-        </be-pagination>-->
+            </template>-->
+        </be-pagination>
 
-        <be-popover trigger="manual" width="300" customClass="asdwq" placement="bottom">
+<!--        <be-popover trigger="manual" width="300" customClass="asdwq" placement="bottom">
             <template #trigger>
                 <be-icon icon="deleteIc" style="position: absolute;left: 20%;top: 300px;"></be-icon>
             </template>
@@ -569,7 +570,7 @@
 
             status="error"
             :percent="progress">
-        </be-progress>
+        </be-progress>-->
     </div>
 
   </div>
@@ -701,9 +702,8 @@ export default {
       }
       const pageParams = ref({
           currentPage: 1,
-          pageNum: 1,
-          pageSize: 10,
-          total: 300
+          pageSize: 2,
+          total: 100
       })
       const   pageChange = (data):void =>{
           // console.log(data)
