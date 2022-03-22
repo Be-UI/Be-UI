@@ -240,8 +240,12 @@ export default defineComponent({
             const childNodes = target.childNodes[0] as HTMLElement
           if (childNodes.className.indexOf('quickprev') !== -1) {
             newPage = currentPage - pagerCountOffset;
+            // 小于第一页 修正
+            newPage = newPage < 1 ? 1 : newPage
           } else if (childNodes.className.indexOf('quicknext') !== -1) {
             newPage = currentPage + pagerCountOffset;
+            // 大于第末页 修正
+            newPage = newPage > maxPageNum.value ? maxPageNum.value : newPage
           }
         }
         const classNameSVG = event?.target as SVGAElement;
@@ -249,8 +253,12 @@ export default defineComponent({
             && classNameSVG.className.baseVal && classNameSVG.className.baseVal.toString().indexOf('be-icon') !== -1) {
           if (target.parentElement && target.parentElement.className.indexOf('quickprev') !== -1) {
             newPage = currentPage - pagerCountOffset;
+              // 小于第一页 修正
+              newPage = newPage < 1 ? 1 : newPage
           } else if (target.parentElement && target.parentElement.className.indexOf('quicknext') !== -1) {
             newPage = currentPage + pagerCountOffset;
+              // 大于第末页 修正
+              newPage = newPage > maxPageNum.value ? maxPageNum.value : newPage
           }
         }
       }
