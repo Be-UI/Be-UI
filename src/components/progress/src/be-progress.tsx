@@ -250,15 +250,11 @@ export default defineComponent({
      * 设置success配置进度条部分样式
      */
     const innerStyleTypeLineSuccess = computed(() => {
-      if (!props.success?.percent) {
-        console.error('Please set the property "percent" ')
-        return
-      }
       const styleIns: IOption = {}
       // type="line"
       if (props.type === 'line') {
         styleIns.backgroundColor = props.success?.color
-        styleIns.width = `${props.success?.percent >= 100 ? 100 : props.success?.percent}%`
+        styleIns.width = `${props.success?.percent! >= 100 ? 100 : props.success?.percent}%`
         styleIns.height = `${innerStrokeWidth.value}px`
         return styleIns
       }
