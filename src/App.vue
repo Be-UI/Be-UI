@@ -524,45 +524,7 @@
             :percent="progress">
         </be-progress>
         <div   @click="progress = progress+ 10" style="margin-left: 30px">{{ progress }}</div>-->
-        <be-progress
-            type="circle"
-            :success="{percent:10,color:'red'}"
-            :percent="progress">
-        </be-progress>
-        <be-progress
-            :success="{percent:10,color:'red'}"
-            type="dashboard"
-            :percent="progress">
-        </be-progress>
-      {{ pageParams.currentPage }}
-      <be-pagination
-        :page-size="pageParams.pageSize"
-        :page-count="pageParams.total"
-        :pager-show-count="6"
-        :current-page="pageParams.currentPage"
-        @updateNum="updateNum"
-        @changePage="pageChange">
-        <template #prev>
-          <be-button
-            prev-icon="delete"
-            next-icon="delete"
-            type="warning "
-            size="large"
-            @click="test">
-            测试
-          </be-button>
-        </template>
-        <template #next>
-          <be-button
-            prev-icon="delete"
-            next-icon="delete"
-            type="warning "
-            size="large"
-            @click="test">
-            测试
-          </be-button> </template
-        >-->
-      </be-pagination>
+
 
       <!--        <be-popover trigger="manual" width="300" customClass="asdwq" placement="bottom">
             <template #trigger>
@@ -577,6 +539,13 @@
             status="error"
             :percent="progress">
         </be-progress>-->
+        <be-select
+            :list="testList"
+            clear
+            keyValue="id"
+            labelValue="label"
+            v-model="seletStr">
+        </be-select>
     </div>
   </div>
 </template>
@@ -683,7 +652,8 @@
           showSwitch.value = false
         }, 3000)
       }
-      const seletStr = ref([])
+      // const seletStr = ref([])
+      const seletStr = ref('a')
       const testModel = ref(0)
       const formatter = (value: string): string => {
         return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -715,7 +685,7 @@
         pageParams.value.pageSize = data.pageSize
         pageParams.value.currentPage = data.currentPage
       }
-        BeMsg({
+       /* BeMsg({
             isDrag:true,
             titles:'MessageBox',
             customClass:'q1qwdsaddddddd',
@@ -732,7 +702,7 @@
             iconPreRender:null,
             iconNextRender:null,
             isOpenModal:true,
-        })
+        })*/
       return {
         openMsg,
         updateNum,

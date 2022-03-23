@@ -166,6 +166,7 @@ export default defineComponent({
   ],
   setup(props, ctx) {
     const {
+      focusClass,
       internalInstance,
       uid,
       dataList,
@@ -663,7 +664,7 @@ export default defineComponent({
               ),
               trigger: (
                 <div
-                  class={`be-select-body ${props.customClass}`}
+                  class={`be-select-body ${focusClass.value} ${props.customClass}`}
                   id={`be-select-body${uid}`}
                   style={{
                     cursor: cursor,

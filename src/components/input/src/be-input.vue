@@ -382,8 +382,7 @@
       let curInstInputRefs = null
       let curInstAreaRefs: any = null
       nextTick(() => {
-        curInstInputRefs =
-          internalInstance.refs.beInputInner &&
+        curInstInputRefs = internalInstance.refs.beInputInner &&
           reactive(internalInstance.refs.beInputInner as IInputInst)
         curInstAreaRefs =
           internalInstance.refs.beInputAreaInner &&

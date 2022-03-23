@@ -10,6 +10,7 @@
     overflow: hidden;
     border: 0;
     outline: 0;
+    color: $defaultText;
   }
 
   .be-select-input__mini {
@@ -46,11 +47,19 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    padding: 3px 30px 0 8px;
+    padding: 0 30px 0 8px;
     background-color: $default;
     border: 1px solid $infoBorder;
     border-radius: 3px;
     outline: 0;
+    &:hover{
+      border-color: $pinkHoverBorder;
+    }
+  }
+  .be-select-body__focus{
+    border:1px solid $pinkHoverBorder;
+    outline: 0;
+    box-shadow: 0 0 0 2px $pinkHoverBorder-02;
   }
 
   .be-select-icon {
@@ -89,7 +98,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: $infoHover;
+        background-color: $defaultGray;
       }
     }
 
@@ -103,8 +112,9 @@
     }
 
     .be-select-option__choice {
-      @apply bg-blue-50;
-
+      background-color: $defaultGray;
+      color: $pinkHoverBorder;
+      font-weight: bold;
       .be-select-hook {
         @apply float-right;
 
@@ -114,7 +124,7 @@
       }
 
       &:hover {
-        @apply bg-blue-100;
+        background-color: $defaultGray;
       }
     }
 

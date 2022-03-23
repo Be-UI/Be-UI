@@ -161,6 +161,7 @@ export default defineComponent({
       selectOpenChange,
       handleBlur,
       handleFocus,
+      focusClass,
       changeIcon,
     } = composition(props, ctx)
     let { listCache } = composition(props, ctx)
@@ -178,6 +179,7 @@ export default defineComponent({
       if (props.group) {
         const arr: Array<any> = []
         list.forEach((res: any) => {
+          res.isSelect = false
           const group = { ...res }
           delete group.children
           arr.push(group)
@@ -192,11 +194,13 @@ export default defineComponent({
         // 沒有指定key，則生成
         if (!props.keyValue) {
           list.forEach(val => {
+            val.isSelect = false
             val.id = getUuid()
           })
         }
         if (props.keyValue) {
           list.forEach((val: any) => {
+            val.isSelect = false
             if (!val[props.keyValue || 'id']) {
               val[props.keyValue || 'id'] = getUuid()
             }
@@ -212,6 +216,7 @@ export default defineComponent({
      * @param {Number} index - 点击索引
      */
     const handleSelect = (value: any, index: number): void => {
+      resetSelect()
       updateValue(value)
       /** 选中 select 事件
        * @event select
@@ -236,9 +241,16 @@ export default defineComponent({
     }
     /**************************************** 各種事件方法 ************************************/
     /**
+     * 重置选中状态
+     */
+    const resetSelect = ():void=>{
+      dataList.value.map((val)=>val.isSelect = false)
+    }
+    /**
      * 清除方法
      */
     const handleClear = (): void => {
+
       updateValue('')
       /** 输入 clear 事件
        * @event clear
@@ -246,6 +258,7 @@ export default defineComponent({
       ctx.emit('clear')
       changeIcon(props.selectIcon)
       dataList.value = listCache
+      resetSelect()
     }
     /**************************************** 擴展渲染選項方法 ************************************/
     /**
@@ -336,12 +349,16 @@ export default defineComponent({
       const keyValue = props?.keyValue || 'id'
       const optionList: Array<VNode> = []
       dataList.value.forEach((val, index) => {
+        if(props.modelValue === val[props.labelValue]){
+          val.isSelect = true
+        }
         // 選項列表
         optionList.push(
           <div
             class={`
                         ellipsis
                         ${val.type === 'group' && index !== 0 ? 'be-select-option__line' : ''}
+                        ${val.isSelect ? 'be-select-option__choice' : ''}
                         ${val.type === 'group' ? 'be-select-option__group' : 'be-select-option'}
                         ${val.disabled ? 'be-select-option__disabled' : ''}`}
             key={val[keyValue]}
@@ -390,7 +407,7 @@ export default defineComponent({
               ),
               trigger: (
                 <div
-                  class={`be-select-body ${props.customClass}`}
+                  class={`be-select-body ${focusClass.value} ${props.customClass}`}
                   id={`be-select-body${uid}`}
                   style={{
                     cursor: cursor,
@@ -404,6 +421,7 @@ export default defineComponent({
                     readonly={readonlyInput.value}
                     tabindex={`-1`}
                     onFocus={computedPosition}
+
                     value={props.modelValue}
                     placeholder={props.placeholder}
                     disabled={props.disabled}
