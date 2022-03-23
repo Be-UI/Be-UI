@@ -5,21 +5,16 @@
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
+    "noImplicitAny": false,
     "sourceMap": true,
     // 忽略 this 的类型检查, Raise error on this expressions with an implied any type.
     "noImplicitThis": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     // 类型文件声明位置
-    "types": [
-      "vite/client",
-      "jest",
-    ]
+    "types": ["vite/client", "jest"]
   },
   "include": [
     "/src/**/*.ts",
@@ -29,8 +24,5 @@
     "node_modules/@types/jest/index.d.ts"
   ],
   // ts 排除的文件
-  "exclude": [
-    "node_modules",
-    "**/__tests__/"
-  ]
+  "exclude": ["node_modules", "**/__tests__/"]
 }

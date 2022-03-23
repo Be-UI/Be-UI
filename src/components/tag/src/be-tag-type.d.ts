@@ -1,4 +1,4 @@
 export interface ITag {
-    install?: Function
-    name: string
+  install?: Function
+  name: string
 }

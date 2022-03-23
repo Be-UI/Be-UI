@@ -1,13 +1,13 @@
 /*
-* @index.ts
-* @deprecated 
-* @author czh
-* @update (czh 2021/11/22)
-*/
-import {App} from 'vue'
+ * @index.ts
+ * @deprecated
+ * @author czh
+ * @update (czh 2021/11/22)
+ */
+import { App } from 'vue'
 import beBreadcrumb from './src/be-breadcrumb'
 import beBreadcrumbItem from './src/be-breadcrumb-item'
-import {IBreadcrumb} from "./src/be-breadcrumb-type";
+import { IBreadcrumb } from './src/be-breadcrumb-type'
 import '../../assets/style/be-breadcrumb.scss'
 
 const breadcrumbComp = beBreadcrumb as IBreadcrumb
@@ -16,7 +16,7 @@ const breadcrumbComp = beBreadcrumb as IBreadcrumb
  * @param app
  */
 breadcrumbComp.install = (app: App): void => {
-    app.component(breadcrumbComp.name || '', breadcrumbComp)
+  app.component(breadcrumbComp.name || '', breadcrumbComp)
 }
 
 const breadcrumbItemComp = beBreadcrumbItem as IBreadcrumb
@@ -26,6 +26,6 @@ export const BeBreadcrumb: IBreadcrumb = breadcrumbComp
  * @param app
  */
 breadcrumbItemComp.install = (app: App): void => {
-    app.component(breadcrumbItemComp.name || '', breadcrumbItemComp)
+  app.component(breadcrumbItemComp.name || '', breadcrumbItemComp)
 }
-export const BeBreadcrumbItem: IBreadcrumb = breadcrumbItemComp;
+export const BeBreadcrumbItem: IBreadcrumb = breadcrumbItemComp

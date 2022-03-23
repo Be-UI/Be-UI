@@ -1,6 +1,6 @@
-import {App} from 'vue'
+import { App } from 'vue'
 import Tag from './src/be-tag.vue'
-import {ITag} from "./src/be-tag-type";
+import { ITag } from './src/be-tag-type'
 
 const tag = Tag as ITag
 /**
@@ -8,7 +8,7 @@ const tag = Tag as ITag
  * @param app
  */
 tag.install = (app: App): void => {
-    app.component(tag.name || '', tag)
+  app.component(tag.name || '', tag)
 }
 const BeTag: ITag = tag
-export default BeTag;
+export default BeTag

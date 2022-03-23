@@ -1,15 +1,15 @@
 /*
-* @index.ts
-* @deprecated 
-* @author czh
-* @update (czh 2021/10/13)
-*/
+ * @index.ts
+ * @deprecated
+ * @author czh
+ * @update (czh 2021/10/13)
+ */
 import beAutocomplete from './src/be-autocomplete.vue'
-import {App} from 'vue'
-import type {SFCWithInstall} from '../../utils/types'
+import { App } from 'vue'
+import type { SFCWithInstall } from '../../utils/types'
 
 beAutocomplete.install = (app: App): void => {
-    app.component(beAutocomplete.name, beAutocomplete)
+  app.component(beAutocomplete.name, beAutocomplete)
 }
 const BeAutocomplete = beAutocomplete as SFCWithInstall<typeof beAutocomplete>
 export default BeAutocomplete

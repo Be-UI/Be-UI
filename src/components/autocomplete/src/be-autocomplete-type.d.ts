@@ -1,18 +1,18 @@
 /*
-* @be-autocomplete-type.d.ts.ts
-* @deprecated 
-* @author czh
-* @update (czh 2021/10/15)
-*/
-import {ComponentInternalInstance} from "vue";
+ * @be-autocomplete-type.d.ts.ts
+ * @deprecated
+ * @author czh
+ * @update (czh 2021/10/15)
+ */
+import { ComponentInternalInstance } from 'vue'
 
 export interface IInputSelectInst extends ComponentInternalInstance {
-    uid: number
+  uid: number
 }
 
 export interface IInputSelectFunc {
-    close: Function
-    changeDisplay: Function,
-    computePosition: Function,
-    show: boolean
+  close: Function
+  changeDisplay: Function
+  computePosition: Function
+  show: boolean
 }

@@ -1,6 +1,6 @@
-import {App} from 'vue'
+import { App } from 'vue'
 import beProgress from './src/be-progress'
-import {IProgress} from "./src/be-progress-type";
+import { IProgress } from './src/be-progress-type'
 import '../../assets/style/be-progress.scss'
 
 const progressComp = beProgress as IProgress
@@ -9,7 +9,7 @@ const progressComp = beProgress as IProgress
  * @param app
  */
 progressComp.install = (app: App): void => {
-    app.component(progressComp.name || '', progressComp)
+  app.component(progressComp.name || '', progressComp)
 }
 const BeProgress: IProgress = progressComp
-export default BeProgress;
+export default BeProgress

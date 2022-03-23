@@ -13,21 +13,10 @@ export interface IWindowLocation {
   search?: string
 }
 
-export const useBrowserLocation = (
-  customWindow = defaultWindow
-): Ref<IWindowLocation> => {
+export const useBrowserLocation = (customWindow = defaultWindow): Ref<IWindowLocation> => {
   const getWindowLocation = (): IWindowLocation => {
-    const {
-      hash,
-      host,
-      hostname,
-      href,
-      origin,
-      pathname,
-      port,
-      protocol,
-      search
-    } = customWindow?.location || {}
+    const { hash, host, hostname, href, origin, pathname, port, protocol, search } =
+      customWindow?.location || {}
 
     return {
       hash,
@@ -38,7 +27,7 @@ export const useBrowserLocation = (
       pathname,
       port,
       protocol,
-      search
+      search,
     }
   }
   const updateLocation = (): void => {

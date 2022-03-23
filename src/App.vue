@@ -1,5 +1,5 @@
 <template>
-  <div id="App" class="app" v-contextmenu:contextmenu >
+  <div id="App" v-contextmenu:contextmenu class="app">
     <!--    <be-contextmenu ref="contextmenu" id="wqdw">
           <be-contextmenu-sub-menu title="宋词">
             <be-contextmenu-item><span>临安小雨初霁</span></be-contextmenu-item>
@@ -271,9 +271,7 @@
           </be-dialog>-->
 
     <!--  position: absolute;left: 20%;top: 100px;width: 45%;height:45%;background-color: #FFFFFF      -->
-    <div
-        class="bg-pink-50 flex items-center justify-center"
-        style=" width: 900px;height: 300px;">
+    <div class="bg-pink-50 flex items-center justify-center" style="width: 900px; height: 300px">
       <!--      <be-popover trigger="click" width="300" customClass="asdwq" placement="bottom" ref="qwdwqdwqd">
               <template #trigger>
                 <be-icon icon="deleteIc" style="position: absolute;left: 20%;top: 300px;"></be-icon>
@@ -287,7 +285,7 @@
               </template>
               <panda width="25" height="25" @click="test"></panda>
             </be-popover>-->
-<!--      <be-loading
+      <!--      <be-loading
           :show="showSwitch"
           :round="10"
           color="red"
@@ -296,7 +294,7 @@
           :isBackground="true"
           customClass='test-beloading-round'
           text="testText"></be-loading>-->
-<!--      <be-button
+      <!--      <be-button
           bordered
           prevIcon="deleteIc"
           nextIcon="deleteIc"
@@ -359,7 +357,7 @@
                              @click="testInputFunc"
                              round="3">确定
                   </be-button>-->
-<!--                  <be-input
+      <!--                  <be-input
                       ref="sssinput"
                       type="test"
                       placeholder="测试文本域"
@@ -433,7 +431,6 @@
                   </be-autocomplete>-->
       <!--            <be-icon icon="error" @click="showDialog = false" width="25" height="25" color="#00ffff" custom-class="asdqw" spin></be-icon>-->
 
-
       <!--        <be-select  size="medium" v-model="seletStr" clear group>
                   <template v-slot="slotProps">
                       <span >{{ slotProps.label }}</span>
@@ -500,7 +497,7 @@
                   <panda width="25" height="25"  @click="test"></panda>
               </be-popover>-->
 
-<!--        <be-autocomplete
+      <!--        <be-autocomplete
             clearable
             size="mini"
             prevIcon="delete"
@@ -511,9 +508,9 @@
             labelValue="name"
             v-model="autoVal">
         </be-autocomplete>-->
-<!-- :success="{percent:10,color:'red'}"
+      <!-- :success="{percent:10,color:'red'}"
             :color="{  from: '#108ee9',to: '#87d068'}"       -->
-<!--        <be-progress
+      <!--        <be-progress
             width="250"
             stroke-width="20"
             status="success"
@@ -527,38 +524,47 @@
             :percent="progress">
         </be-progress>
         <div   @click="progress = progress+ 10" style="margin-left: 30px">{{ progress }}</div>-->
-
-        {{pageParams.currentPage}}
-                <be-pagination
-            :pageSize="pageParams.pageSize"
-            :pageCount="pageParams.total"
-            :pagerShowCount="6"
-            @updateNum="updateNum"
-            @changePage="pageChange"
-            :currentPage="pageParams.currentPage">
-             <template #prev>
-            <be-button
-                @click="test"
-                prevIcon="delete"
-                nextIcon="delete"
-                type="warning "
-                size="large">
-                测试
-            </be-button>
+        <be-progress
+            type="circle"
+            :success="{percent:10,color:'red'}"
+            :percent="progress">
+        </be-progress>
+        <be-progress
+            :success="{percent:10,color:'red'}"
+            type="dashboard"
+            :percent="progress">
+        </be-progress>
+      {{ pageParams.currentPage }}
+      <be-pagination
+        :page-size="pageParams.pageSize"
+        :page-count="pageParams.total"
+        :pager-show-count="6"
+        :current-page="pageParams.currentPage"
+        @updateNum="updateNum"
+        @changePage="pageChange">
+        <template #prev>
+          <be-button
+            prev-icon="delete"
+            next-icon="delete"
+            type="warning "
+            size="large"
+            @click="test">
+            测试
+          </be-button>
         </template>
-            <template #next>
-                <be-button
-                    @click="test"
-                    prevIcon="delete"
-                    nextIcon="delete"
-                    type="warning "
-                    size="large">
-                    测试
-                </be-button>
-            </template>-->
-        </be-pagination>
+        <template #next>
+          <be-button
+            prev-icon="delete"
+            next-icon="delete"
+            type="warning "
+            size="large"
+            @click="test">
+            测试
+          </be-button> </template
+        >-->
+      </be-pagination>
 
-<!--        <be-popover trigger="manual" width="300" customClass="asdwq" placement="bottom">
+      <!--        <be-popover trigger="manual" width="300" customClass="asdwq" placement="bottom">
             <template #trigger>
                 <be-icon icon="deleteIc" style="position: absolute;left: 20%;top: 300px;"></be-icon>
             </template>
@@ -572,82 +578,77 @@
             :percent="progress">
         </be-progress>-->
     </div>
-
   </div>
-
 </template>
 
 <script lang="tsx">
-import {panda} from './icon-testing'
-import {BeNotify} from "./components/notification/src/be-notification-service";
-import {BeMessage} from "./components/message/src/be-message-service";
-import {BeMsg} from "./components/message-box/src/be-message-box-service";
-import BePopover from "./components/popover/src/be-popover.vue";
-import {createPopper} from '@popperjs/core'
-import {BeLoadingSer} from './components'
-import BeIcon from "./components/svg-icon/src/be-icon.vue";
-import {ClickOutside} from './utils/direactives/custom-direactives/click-outside';
-import {contextmenu} from './utils/direactives/custom-direactives/contextmenu-directives';
-import BeContextmenu from "./components/contextmenu/src/be-contextmenu.vue";
-import BeContextmenuItem from "./components/contextmenu/src/be-contextmenu-item.vue";
-import BeContextmenuSubMenu from "./components/contextmenu/src/be-contextmenu-sub-menu.vue";
-import BeContainer from "./components/container/src/be-container.vue";
-import BeHeader from "./components/container/src/be-header.vue";
-import BeMain from "./components/container/src/be-main.vue";
-import BeFooter from "./components/container/src/be-footer.vue";
-import BeAside from "./components/container/src/be-aside.vue";
-import {computed, getCurrentInstance, ref, watch} from "vue";
-import BeProgress from "./components/progress/src/be-progress";
-import BeButton from "./components/button/src/be-button";
+  import { panda } from './icon-testing'
+  import { BeNotify } from './components/notification/src/be-notification-service'
+  import { BeMessage } from './components/message/src/be-message-service'
+  import { BeMsg } from './components/message-box/src/be-message-box-service'
+  import BePopover from './components/popover/src/be-popover.vue'
+  import { createPopper } from '@popperjs/core'
+  import { BeLoadingSer } from './components'
+  import BeIcon from './components/svg-icon/src/be-icon.vue'
+  import { ClickOutside } from './utils/direactives/custom-direactives/click-outside'
+  import { contextmenu } from './utils/direactives/custom-direactives/contextmenu-directives'
+  import BeContextmenu from './components/contextmenu/src/be-contextmenu.vue'
+  import BeContextmenuItem from './components/contextmenu/src/be-contextmenu-item.vue'
+  import BeContextmenuSubMenu from './components/contextmenu/src/be-contextmenu-sub-menu.vue'
+  import BeContainer from './components/container/src/be-container.vue'
+  import BeHeader from './components/container/src/be-header.vue'
+  import BeMain from './components/container/src/be-main.vue'
+  import BeFooter from './components/container/src/be-footer.vue'
+  import BeAside from './components/container/src/be-aside.vue'
+  import { computed, getCurrentInstance, ref, watch } from 'vue'
+  import BeProgress from './components/progress/src/be-progress'
+  import BeButton from './components/button/src/be-button'
 
-export default {
-  name: 'App',
-  directives: {ClickOutside, contextmenu},
-  components: {
+  export default {
+    name: 'App',
+    directives: { ClickOutside, contextmenu },
+    components: {
       BeButton,
       BeProgress,
-    BeAside,
-    BeFooter,
-    BeMain,
-    BeHeader,
-    BeContainer,
-    BeContextmenuSubMenu,
-    BeContextmenuItem,
-    BeContextmenu,
-    BeIcon,
-    panda
-  },
-  setup() {
-    const curInst = getCurrentInstance()
-    const show = ref<boolean>(false)
-    const val = ref<string>('')
-    const progress = ref<number>(60)
-    const showSwitch = ref<boolean>(true)
-    const openDialog = (): void => {
-      // show.value = !show.value
-      showSwitch.value = true
-    }
-    let asdqwd = computed(() => {
-      return showSwitch.value
-    })
-    watch(asdqwd, (nVal) => {
-
-    })
-    const test = (): void => {
-
-      curInst?.refs.qwdwqdwqd.close()
-      curInst?.refs.qwdddddwqdwqd.close()
-    }
-    const openMsg = ()=>{
+      BeAside,
+      BeFooter,
+      BeMain,
+      BeHeader,
+      BeContainer,
+      BeContextmenuSubMenu,
+      BeContextmenuItem,
+      BeContextmenu,
+      BeIcon,
+      panda,
+    },
+    setup() {
+      const curInst = getCurrentInstance()
+      const show = ref<boolean>(false)
+      const val = ref<string>('')
+      const progress = ref<number>(60)
+      const showSwitch = ref<boolean>(true)
+      const openDialog = (): void => {
+        // show.value = !show.value
+        showSwitch.value = true
+      }
+      let asdqwd = computed(() => {
+        return showSwitch.value
+      })
+      watch(asdqwd, nVal => {})
+      const test = (): void => {
+        curInst?.refs.qwdwqdwqd.close()
+        curInst?.refs.qwdddddwqdwqd.close()
+      }
+      const openMsg = () => {
         BeMessage({
-            titles: 'as啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊d',
-            msgType: 'success',
-            duration: 3000,
-            offsetTop: 300,
-            close: true,
+          titles: 'as啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊d',
+          msgType: 'success',
+          duration: 3000,
+          offsetTop: 300,
+          close: true,
         })
-    }
-    /*BeNotify({
+      }
+      /*BeNotify({
       titles: 'Notification',
       bodyRender: () => {
         return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
@@ -661,82 +662,100 @@ export default {
       placement: 'bottomRight',
       duration: 0,
     })*/
-    const testList = [
-      {label: '落日绣帘卷', id: '落日绣帘卷'},
-      {label: '亭下水连空', id: '亭下水连空'},
-      {label: '知君为我新作', id: '知君为我新作'},
-      {label: '窗户湿青红', id: '窗户湿青红'},
-      {label: '长记平山堂上', id: '欹枕江南烟雨'},
-      {label: '欹枕江南烟雨', id: '长记平山堂上'},
-      {label: '杳杳没孤鸿', id: '杳杳没孤鸿'},
-      {label: '认得醉翁语', id: '认得醉翁语'},
-      {label: '山色有无中', id: '山色有无中'},
-      {label: '一點浩然氣', id: '一點浩然氣'},
-      {label: '千里快哉風我', id: 'fjkhfsdaiuorgga'},
-      {label: 'a', id: 'fjkhfsdaiuawdorgga'},
-      {label: 'ab', id: 'fjkhfsadaiuorgga'},
-    ]
-    const autoVal = ref({id: '赵客缦胡缨，吴钩霜雪明。id', name: '赵客缦胡缨，吴钩霜雪明。'})
-    const handleClick = (p): void => {
-      setTimeout(() => {
-        showSwitch.value = false
-      }, 3000)
-    }
-    const seletStr = ref([])
-    const testModel = ref(0)
-    const formatter = (value: string): string => {
-      return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    }
-    const parser = (value: string): string => {
-      return value.replace(/\$\s?|(,*)/g, '')
-    }
-      const fetchSuggestions = (cb:Function):void =>{
-          setTimeout(()=>{
-              cb([
-                {id: '赵客缦胡缨，吴钩霜雪明。id', name: '赵客缦胡缨，吴钩霜雪明。', asd: 'wqd'},
-                {id: '银鞍照白马，飒沓如流星。id', name: '银鞍照白马，飒沓如流星。', asd: 'wqd'},
-                {id: '十步杀一人，千里不留行。id', name: '十步杀一人，千里不留行。', asd: 'wqd'},
-                {id: '事了拂衣去，深藏身与名。id', name: '事了拂衣去，深藏身与名。', asd: 'wqd'},
-              ])
-          },2000)
+      const testList = [
+        { label: '落日绣帘卷', id: '落日绣帘卷' },
+        { label: '亭下水连空', id: '亭下水连空' },
+        { label: '知君为我新作', id: '知君为我新作' },
+        { label: '窗户湿青红', id: '窗户湿青红' },
+        { label: '长记平山堂上', id: '欹枕江南烟雨' },
+        { label: '欹枕江南烟雨', id: '长记平山堂上' },
+        { label: '杳杳没孤鸿', id: '杳杳没孤鸿' },
+        { label: '认得醉翁语', id: '认得醉翁语' },
+        { label: '山色有无中', id: '山色有无中' },
+        { label: '一點浩然氣', id: '一點浩然氣' },
+        { label: '千里快哉風我', id: 'fjkhfsdaiuorgga' },
+        { label: 'a', id: 'fjkhfsdaiuawdorgga' },
+        { label: 'ab', id: 'fjkhfsadaiuorgga' },
+      ]
+      const autoVal = ref({ id: '赵客缦胡缨，吴钩霜雪明。id', name: '赵客缦胡缨，吴钩霜雪明。' })
+      const handleClick = (p): void => {
+        setTimeout(() => {
+          showSwitch.value = false
+        }, 3000)
+      }
+      const seletStr = ref([])
+      const testModel = ref(0)
+      const formatter = (value: string): string => {
+        return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      }
+      const parser = (value: string): string => {
+        return value.replace(/\$\s?|(,*)/g, '')
+      }
+      const fetchSuggestions = (cb: Function): void => {
+        setTimeout(() => {
+          cb([
+            { id: '赵客缦胡缨，吴钩霜雪明。id', name: '赵客缦胡缨，吴钩霜雪明。', asd: 'wqd' },
+            { id: '银鞍照白马，飒沓如流星。id', name: '银鞍照白马，飒沓如流星。', asd: 'wqd' },
+            { id: '十步杀一人，千里不留行。id', name: '十步杀一人，千里不留行。', asd: 'wqd' },
+            { id: '事了拂衣去，深藏身与名。id', name: '事了拂衣去，深藏身与名。', asd: 'wqd' },
+          ])
+        }, 2000)
       }
       const pageParams = ref({
-          currentPage: 1,
-          pageSize: 2,
-          total: 100
+        currentPage: 1,
+        pageSize: 2,
+        total: 100,
       })
-      const   pageChange = (data):void =>{
-          // console.log(data)
-          pageParams.value.currentPage = data.currentPage
+      const pageChange = (data): void => {
+        // console.log(data)
+        pageParams.value.currentPage = data.currentPage
       }
 
-      const updateNum = (data):void =>{
-          pageParams.value.pageSize = data.pageSize
-          pageParams.value.currentPage = data.currentPage
+      const updateNum = (data): void => {
+        pageParams.value.pageSize = data.pageSize
+        pageParams.value.currentPage = data.currentPage
       }
-    return {
+        BeMsg({
+            isDrag:true,
+            titles:'MessageBox',
+            customClass:'q1qwdsaddddddd',
+            msgType:'warning',
+            footerType:'center',
+            footerRender:null,
+            bodyRender:()=>{
+                return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
+                    您的体验时间仅剩
+                </p>
+            },
+            onConfirm:()=>console.log('click'),
+            onClose:()=>console.log('close'),
+            iconPreRender:null,
+            iconNextRender:null,
+            isOpenModal:true,
+        })
+      return {
         openMsg,
         updateNum,
         pageChange,
         pageParams,
         val,
         fetchSuggestions,
-      formatter,
-      parser,
-      testModel,
-      show,
-      test,
-      openDialog,
-      seletStr,
-      handleClick,
-      autoVal,
-      testList,
-      showSwitch,
+        formatter,
+        parser,
+        testModel,
+        show,
+        test,
+        openDialog,
+        seletStr,
+        handleClick,
+        autoVal,
+        testList,
+        showSwitch,
         progress,
-      re: () => <div id='test_beloading_customRender'>asd</div>
-    }
-  },
-  /* data() {
+        re: () => <div id="test_beloading_customRender">asd</div>,
+      }
+    },
+    /* data() {
      return {
          testOption: {
              border: '1px solid #00ffff',
@@ -778,7 +797,7 @@ export default {
      }
 
  },*/
-  /*   mounted() {
+    /*   mounted() {
         BeMsg({
            /!* isDrag:true,
             titles:'MessageBox',
@@ -1006,31 +1025,28 @@ export default {
             // this.notify.close()
         }
     }*/
-}
+  }
 </script>
 <style lang="scss">
-body {
-  /*  height: 100%;
+  body {
+    /*  height: 100%;
     position: fixed;
     width: 100%;*/
-}
+  }
 
-#App {
+  #App {
+    /* background: $info;*/
+    height: 100%;
+    width: 100%;
+  }
 
-  /* background: $info;*/
-  height: 100%;
-  width: 100%;
+  #app {
+    overflow-y: auto;
+    height: 200vh;
+    @apply bg-green-100;
+  }
 
-}
-
-#app {
-  overflow-y: auto;
-  height: 200vh;
-  @apply bg-green-100
-}
-
-.asdwq {
-  background-color: red;
-}
-
+  .asdwq {
+    background-color: red;
+  }
 </style>

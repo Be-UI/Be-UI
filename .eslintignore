@@ -1,0 +1,7 @@
+node_modules
+/src/**/*.scss
+/src/**/svg-dict.ts
+public
+/src/App.vue
+/src/**/*.test.ts
+/src/**/*.test.tsx

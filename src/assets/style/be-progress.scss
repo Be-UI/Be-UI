@@ -9,7 +9,6 @@ $componentsClass:$name + '-' + 'progress' !global;
 
 // 生成 .be-progress
 @include create-B(progress){
-
   display: flex;
   align-items: center;
   width: var(--be-percentage-full);
