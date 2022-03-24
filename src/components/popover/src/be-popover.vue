@@ -41,11 +41,10 @@
     computed,
   } from 'vue'
   import { ClickOutside } from '../../../utils/direactives/custom-direactives/click-outside'
-  import { createPopper,Instance } from '@popperjs/core'
+  import { createPopper, Instance } from '@popperjs/core'
   import type { Options, Placement, PositioningStrategy } from '@popperjs/core'
   import { IPopover, TPopoverStyle, VirtualElement } from './be-popover-type'
   import { isString } from '../../../utils/common'
-
 
   export default defineComponent({
     name: 'BePopover',
@@ -199,7 +198,7 @@
         }
         // 使用popover.js 对popover进行定位
         if (popperJS.value && popperJS.value.destroy) {
-            popperJS.value.destroy()
+          popperJS.value.destroy()
         }
         const popover: HTMLElement = document.getElementById(
           `be_popover_${internalInstance.uid}`
@@ -211,7 +210,6 @@
           placement: placement as Placement,
 
           modifiers: [
-
             {
               name: 'arrow',
               options: {
@@ -238,21 +236,21 @@
           let VNodeTrigger: VirtualElement = {
             getBoundingClientRect: generateGetBoundingClientRect(),
           }
-            popperJS.value = createPopper(VNodeTrigger, popover, popoverOption)
+          popperJS.value = createPopper(VNodeTrigger, popover, popoverOption)
           VNodeTrigger.getBoundingClientRect = generateGetBoundingClientRect(props.x, props.y)
-            popperJS.value.update()
+          popperJS.value.update()
         } else {
-            popperJS.value = createPopper(computeDom, popover, popoverOption)
+          popperJS.value = createPopper(computeDom, popover, popoverOption)
         }
-          observer.observe(popover,{
-              attributes:true,
-              attributeFilter:["style"]
-          })
+        observer.observe(popover, {
+          attributes: true,
+          attributeFilter: ['style'],
+        })
       }
-        // 监听popover元素变化，强制更新，某些边界情况  @popperjs/core 位置定位是错误的
-        let observer = new MutationObserver((MutationRecord)=>{
-            popperJS.value?.update()
-        });
+      // 监听popover元素变化，强制更新，某些边界情况  @popperjs/core 位置定位是错误的
+      let observer = new MutationObserver(MutationRecord => {
+        popperJS.value?.update()
+      })
       /**
        * 用户传入指定坐标，创建vnode，用于popover.js定位
        * @param {number} x - 位置
@@ -374,7 +372,7 @@
         // 取消事件监听
         removeEvt()
         if (popperJS.value && popperJS.value.destroy) {
-            popperJS.value.destroy()
+          popperJS.value.destroy()
         }
         observer.disconnect()
       })
