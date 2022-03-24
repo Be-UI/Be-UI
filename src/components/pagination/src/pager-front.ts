@@ -69,7 +69,7 @@ export const pagerFront = (
       }
       // 根据 showNextMore 和 showPrevMore 也就是上下页缩略翻页的现实情况
       // 设置生成页码列表，循环渲染，值得注意的是第一页和最后一页永远都是显示的
-      const array:Array<number>= []
+      const array: Array<number> = []
       if (showPrevMore && !showNextMore) {
         // 只显示上页缩略翻页
         const startPage: number = maxPageNum.value - (pagerShowCount - 2)
