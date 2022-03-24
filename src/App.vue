@@ -547,7 +547,7 @@
             labelValue="label"
             v-model="seletStr">
         </be-select>
- <!--        <be-pagination
+         <be-pagination
             :page-size="pageParams.pageSize"
             :page-count="pageParams.total"
             :pager-show-count="6"
@@ -574,8 +574,8 @@
                     @click="test">
                     测试
                 </be-button> </template
-            >&ndash;&gt;
-        </be-pagination>-->
+            >-->
+        </be-pagination>
     </div>
   </div>
 </template>

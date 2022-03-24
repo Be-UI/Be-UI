@@ -248,7 +248,7 @@
         })
       }
       // 监听popover元素变化，强制更新，某些边界情况  @popperjs/core 位置定位是错误的
-      let observer = new MutationObserver(MutationRecord => {
+      let observer = new MutationObserver(() => {
         popperJS.value?.update()
       })
       /**

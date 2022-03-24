@@ -113,7 +113,7 @@ export default defineComponent({
     },
     pageUnit: {
       type: String,
-      default: '/页',
+      default: '页',
     },
   },
   emits: ['updateNum', 'updatePage', 'changePage'],
@@ -161,19 +161,22 @@ export default defineComponent({
       const pageCount: number = props.pageCount ? props.pageCount : 0
       const maxPageNum: number = Math.ceil(pageCount / Number(data.label))
       const total: number = props.isFront ? pageParamsFront.maxPageNum : maxPageNum
-      pageNumVal.value = data.label + props.pageUnit
+      pageNumVal.value = data.label
       ctx.emit('updateNum', {
-        pageSize: data.label,
+        pageSize: Number(data.label.split(' / ')[0]),
         currentPage: props.currentPage > total ? total : props.currentPage,
       })
     }
     const pageNumInner = ref(props.pageNum)
     onMounted(() => {
-      pageNumVal.value = props.pageSize + props.pageUnit //disabled
+      pageNumVal.value = props.pageSize + ' / ' + props.pageUnit //disabled
       // 把pagesize加到下拉选择pageNum中
       //props.pageNum.unshift({ label: props.pageSize })
       pageNumInner.value = props.pageNum
       pageNumInner.value.unshift({ label: props.pageSize })
+      pageNumInner.value.map((val: any) => {
+        val.label = val.label + ' / ' + props.pageUnit
+      })
     })
     /********************************* 分页事件emit *****************************************/
     /**
