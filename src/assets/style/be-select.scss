@@ -8,9 +8,9 @@
     min-width: 1px;
     max-width: 100%;
     overflow: hidden;
+    color: $defaultText;
     border: 0;
     outline: 0;
-    color: $defaultText;
   }
 
   .be-select-input__mini {
@@ -52,10 +52,12 @@
     border: 1px solid $infoBorder;
     border-radius: 3px;
     outline: 0;
+
     &:hover{
       border-color: $pinkHoverBorder;
     }
   }
+
   .be-select-body__focus{
     border:1px solid $pinkHoverBorder;
     outline: 0;
@@ -112,9 +114,10 @@
     }
 
     .be-select-option__choice {
-      background-color: $defaultGray;
-      color: $pinkHoverBorder;
       font-weight: bold;
+      color: $pinkHoverBorder;
+      background-color: $defaultGray;
+
       .be-select-hook {
         @apply float-right;
 

@@ -243,14 +243,13 @@ export default defineComponent({
     /**
      * 重置选中状态
      */
-    const resetSelect = ():void=>{
-      dataList.value.map((val)=>val.isSelect = false)
+    const resetSelect = (): void => {
+      dataList.value.map(val => (val.isSelect = false))
     }
     /**
      * 清除方法
      */
     const handleClear = (): void => {
-
       updateValue('')
       /** 输入 clear 事件
        * @event clear
@@ -349,7 +348,7 @@ export default defineComponent({
       const keyValue = props?.keyValue || 'id'
       const optionList: Array<VNode> = []
       dataList.value.forEach((val, index) => {
-        if(props.modelValue === val[props.labelValue]){
+        if (props.modelValue === val[props.labelValue]) {
           val.isSelect = true
         }
         // 選項列表
@@ -421,7 +420,6 @@ export default defineComponent({
                     readonly={readonlyInput.value}
                     tabindex={`-1`}
                     onFocus={computedPosition}
-
                     value={props.modelValue}
                     placeholder={props.placeholder}
                     disabled={props.disabled}

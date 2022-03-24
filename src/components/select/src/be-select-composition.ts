@@ -37,7 +37,6 @@ export default (props: any, ctx: any) => {
    * 计算输入建议下拉框位置
    */
   const computedPosition = (): void => {
-
     const $eventDom: HTMLElement | null = document.getElementById(`be-select-body${uid}`)
     if (!$eventDom) return
     selectStyle.width = Number(window.getComputedStyle($eventDom).width.split('px')[0]) + 'px'
@@ -60,7 +59,6 @@ export default (props: any, ctx: any) => {
    * @param {Event} event - 事件对象
    */
   const handleFocus = (event: Event): void => {
-
     ;(event.target as HTMLInputElement).querySelector('input')?.focus()
     /** focus 事件
      * @event focus
@@ -73,7 +71,6 @@ export default (props: any, ctx: any) => {
    * @param {Event} event - 事件对象
    */
   const handleBlur = (event: Event): void => {
-
     /** 输入 blur 事件
      * @event blur
      * @param {Event} event - 事件对象
@@ -85,10 +82,9 @@ export default (props: any, ctx: any) => {
    * @param {Boolean} showPopover - popover展開狀態
    */
   const selectOpenChange = (showPopover: boolean): void => {
-
-    if(showPopover){
+    if (showPopover) {
       focusClass.value = 'be-select-body__focus'
-    }else{
+    } else {
       focusClass.value = ''
     }
     // 增加滾動監聽
