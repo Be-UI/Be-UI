@@ -1354,10 +1354,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@popperjs/core@^2.10.1":
-  version "2.10.1"
-  resolved "https://registry.npmmirror.com/@popperjs/core/download/@popperjs/core-2.10.1.tgz?cache=0&sync_timestamp=1633001301871&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40popperjs%2Fcore%2Fdownload%2F%40popperjs%2Fcore-2.10.1.tgz"
-  integrity sha1-co7NlasgequKmk5CHwQi2zKSMr4=
+"@popperjs/core@^2.11.4":
+  version "2.11.4"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.4.tgz#d8c7b8db9226d2d7664553a0741ad7d0397ee503"
+  integrity sha512-q/ytXxO5NKvyT37pmisQAItCFqA7FD/vNb8dgaJy3/630Fsc+Mz9/9f2SziBoIZ30TJooXyTwZmhi1zjXmObYg==
 
 "@rollup/plugin-babel@^5.3.0":
   version "5.3.0"

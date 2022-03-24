@@ -101,7 +101,7 @@ export default (props: any, ctx: any) => {
     ctx.emit('openChange', showPopover)
   }
   /**
-   * 修改圖標方法。鼠標移入 變成清楚圖標
+   * 修改圖標方法。鼠標移入 變成清除圖標
    * @param {String} type - 圖標類型
    */
   const changeIcon = (type: string | undefined): void => {

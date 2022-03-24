@@ -41,10 +41,11 @@
     computed,
   } from 'vue'
   import { ClickOutside } from '../../../utils/direactives/custom-direactives/click-outside'
-  import { createPopper } from '@popperjs/core'
+  import { createPopper,Instance } from '@popperjs/core'
   import type { Options, Placement, PositioningStrategy } from '@popperjs/core'
   import { IPopover, TPopoverStyle, VirtualElement } from './be-popover-type'
   import { isString } from '../../../utils/common'
+
 
   export default defineComponent({
     name: 'BePopover',
@@ -168,7 +169,8 @@
           }
           // 设置 false 时通过 v-if 关闭卸载
           show.value = isShow
-
+          // 关闭 observer
+          observer.disconnect()
           nextTick(() => {
             if (show.value) {
               computePosition(props.placement)
@@ -185,19 +187,19 @@
         zIndex: '2000',
       })
       // popover.js 实例缓存
-      let popperJS: any = null
+      let popperJS = ref<Instance>()
       /**
        * 计算显示位置
        * @param {String} placement - 位置
        */
       const computePosition = (placement: string, type = ''): void => {
         if (type === 'update') {
-          popperJS.update()
+          popperJS.value?.update()
           return
         }
         // 使用popover.js 对popover进行定位
-        if (popperJS && popperJS.destroy) {
-          popperJS.destroy()
+        if (popperJS.value && popperJS.value.destroy) {
+            popperJS.value.destroy()
         }
         const popover: HTMLElement = document.getElementById(
           `be_popover_${internalInstance.uid}`
@@ -207,7 +209,9 @@
         ) as HTMLElement
         let popoverOption: Options = {
           placement: placement as Placement,
+
           modifiers: [
+
             {
               name: 'arrow',
               options: {
@@ -234,13 +238,21 @@
           let VNodeTrigger: VirtualElement = {
             getBoundingClientRect: generateGetBoundingClientRect(),
           }
-          popperJS = createPopper(VNodeTrigger, popover, popoverOption)
+            popperJS.value = createPopper(VNodeTrigger, popover, popoverOption)
           VNodeTrigger.getBoundingClientRect = generateGetBoundingClientRect(props.x, props.y)
-          popperJS.update()
+            popperJS.value.update()
         } else {
-          popperJS = createPopper(computeDom, popover, popoverOption)
+            popperJS.value = createPopper(computeDom, popover, popoverOption)
         }
+          observer.observe(popover,{
+              attributes:true,
+              attributeFilter:["style"]
+          })
       }
+        // 监听popover元素变化，强制更新，某些边界情况  @popperjs/core 位置定位是错误的
+        let observer = new MutationObserver((MutationRecord)=>{
+            popperJS.value?.update()
+        });
       /**
        * 用户传入指定坐标，创建vnode，用于popover.js定位
        * @param {number} x - 位置
@@ -361,9 +373,10 @@
       onBeforeUnmount(() => {
         // 取消事件监听
         removeEvt()
-        if (popperJS && popperJS.destroy) {
-          popperJS.destroy()
+        if (popperJS.value && popperJS.value.destroy) {
+            popperJS.value.destroy()
         }
+        observer.disconnect()
       })
       /******************************************** popover元素 dom 操作相关 ************************************/
       const isEnterPopover = ref<boolean>(false)

@@ -271,7 +271,7 @@
           </be-dialog>-->
 
     <!--  position: absolute;left: 20%;top: 100px;width: 45%;height:45%;background-color: #FFFFFF      -->
-    <div class="bg-pink-50 flex items-center justify-center" style="width: 900px; height: 300px">
+    <div class="bg-pink-50 flex items-center justify-center" style="width: 900px; height: 100%">
       <!--      <be-popover trigger="click" width="300" customClass="asdwq" placement="bottom" ref="qwdwqdwqd">
               <template #trigger>
                 <be-icon icon="deleteIc" style="position: absolute;left: 20%;top: 300px;"></be-icon>
@@ -526,26 +526,56 @@
         <div   @click="progress = progress+ 10" style="margin-left: 30px">{{ progress }}</div>-->
 
 
-      <!--        <be-popover trigger="manual" width="300" customClass="asdwq" placement="bottom">
+           <be-popover trigger="manual" width="300" customClass="asdwq" placement="bottom">
             <template #trigger>
-                <be-icon icon="deleteIc" style="position: absolute;left: 20%;top: 300px;"></be-icon>
+                <be-icon icon="deleteIc" style="position: absolute;left: 50%;bottom: 0px;"></be-icon>
             </template>
-            <panda width="25" height="25"  @click="test"></panda>
+            <div style="height: 300px"><panda width="25" height="25"  @click="test"></panda></div>
+
         </be-popover>
 
-        <be-button @click="openMsg">test Msg</be-button>
-        <be-progress
+        <!--  <be-button @click="openMsg">test Msg</be-button>
+    --       <be-progress
 
-            status="error"
-            :percent="progress">
-        </be-progress>-->
-        <be-select
+              status="error"
+              :percent="progress">
+          </be-progress>-->
+       <be-select
             :list="testList"
             clear
             keyValue="id"
             labelValue="label"
             v-model="seletStr">
         </be-select>
+ <!--        <be-pagination
+            :page-size="pageParams.pageSize"
+            :page-count="pageParams.total"
+            :pager-show-count="6"
+            :current-page="pageParams.currentPage"
+            :layout="['prev', 'pNum', 'page']"
+            @updateNum="updateNum"
+            @changePage="pageChange">
+            <template #prev>
+                <be-button
+                    prev-icon="delete"
+                    next-icon="delete"
+                    type="warning "
+                    size="large"
+                    @click="test">
+                    测试
+                </be-button>
+            </template>
+            <template #next>
+                <be-button
+                    prev-icon="delete"
+                    next-icon="delete"
+                    type="warning "
+                    size="large"
+                    @click="test">
+                    测试
+                </be-button> </template
+            >&ndash;&gt;
+        </be-pagination>-->
     </div>
   </div>
 </template>
