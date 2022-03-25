@@ -1,6 +1,10 @@
 <template>
   <!--  v-click-outside="{handler:close,isDisabled:outsideDisabled}"-->
-  <div :id="`be_popover_trigger${uid}`" ref="bePopoverTrigger" aria-describedby="tooltip" class="be-popover--trigger">
+  <div
+    :id="`be_popover_trigger${uid}`"
+    ref="bePopoverTrigger"
+    aria-describedby="tooltip"
+    class="be-popover--trigger">
     <slot name="trigger"></slot>
   </div>
 
