@@ -1,101 +1,140 @@
-.be-switch {
-  @apply rounded-full cursor-pointer relative flex items-center;
+@import "./common/config";
+$componentsClass:$name + '-' + 'switch' !global;
+@include create-B(switch){
+  @include set-component-style-var('switch', $--switch);
+}
 
-  .be-switch-circle {
-    @apply bg-default rounded-full shadow flex items-center justify-center;
+
+@include create-B(switch){
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: var(--be-rounded-full);
+  .#{ $componentsClass }#{$modifier-separator}circle {
+    @include flex-center;
+    @include be-shadow;;
+    background-color: var(--be-switch-bg-w);
+    border-radius: var(--be-rounded-full);
   }
 }
 
-.be-switch__checked {
-  @apply bg-primaryh;
+.#{ $componentsClass }#{$element-separator}checked {
+  background-color: var(--be-switch-bg-checked);
 
-  .be-switch-circle {
+  .#{ $componentsClass }#{$modifier-separator}circle {
+    position: absolute;
     left: calc(100% - 2px);
-    @apply absolute transform -translate-x-full;
+    transform: var(--be-switch-trans-);
   }
 }
 
-.be-switch__unChecked {
-  @apply bg-infoh;
+.#{ $componentsClass }#{$element-separator}unChecked {
+  background-color: var(--be-switch-bg-un-checked);
 
-  .be-switch-circle {
-    @apply ml-px absolute left-px;
+  .#{ $componentsClass }#{$modifier-separator}circle {
+    position: absolute;
+    left: 1px;
+    margin-left: 1px;
   }
 }
 
-.be-switch__disabled {
-  @apply cursor-not-allowed bg-opacity-50;
+.#{ $componentsClass }#{$element-separator}disabled {
+  cursor: not-allowed;
 }
 
-.be-switch__default {
-  min-width: 35px;
-  @apply h-5 leading-5 w-min;
+.#{ $componentsClass }#{$element-separator}default {
+  width: 35px;
+  min-width: min-content;
+  height: 1.25rem;
+  line-height: 1.25rem;
 
-  .be-switch-circle {
-    @apply h-4 w-4;
+  .#{ $componentsClass }#{$modifier-separator}circle {
+    width: 1rem;
+    height: 1rem;
 
-    .be-switch-circle-icon {
+    .#{ $componentsClass }#{$modifier-separator}circle#{$modifier-separator}icon {
 
       .be-icon {
-        @apply h-3 w-3;
+        width: .75rem;
+        height: .75rem;
       }
     }
   }
 
-  .be-switch__default_slot_un_checked {
-    @apply mr-5 ml-1;
+  .#{ $componentsClass }#{$element-separator}default_slot#{$element-separator}unChecked {
+    margin-right: 1.25rem;
+    margin-left: .25rem;
   }
 
-  .be-switch__default_slot_checked {
-    @apply ml-5 mr-1;
+  .#{ $componentsClass }#{$element-separator}default_slot#{$element-separator}checked {
+    margin-right: .25rem;
+    margin-left:  1.25rem;
   }
 }
 
-.be-switch__small {
-  min-width: 30px;
-  @apply h-4 leading-4 w-min;
+.#{ $componentsClass }#{$element-separator}small {
+  width: 30px;
+  min-width: min-content;
+  height: 1rem;
+  line-height: 1rem;
 
-  .be-switch-circle {
-    @apply h-3 w-3;
 
-    .be-switch-circle-icon {
+  .#{ $componentsClass }#{$modifier-separator}circle {
+    width: .75rem;
+    height: .75rem;
+
+
+    .#{ $componentsClass }#{$modifier-separator}circle#{$modifier-separator}icon {
 
       .be-icon {
-        @apply h-2 w-2;
+        width: .5rem;
+        height: .5rem;
       }
     }
   }
 
-  .be-switch__small_slot_un_checked {
-    @apply mr-4 ml-1;
+  .#{ $componentsClass }#{$element-separator}small_slot#{$element-separator}unChecked {
+    margin-right: 1rem;
+    margin-left: .25rem;
+
   }
 
-  .be-switch__small_slot_checked {
-    @apply ml-4 mr-1;
+  .#{ $componentsClass }#{$element-separator}small_slot#{$element-separator}checked {
+    margin-right: .25rem;
+    margin-left: 1rem;
   }
 }
 
-.be-switch__large {
-  min-width: 40px;
-  @apply h-6 leading-6 w-min;
+.#{ $componentsClass }#{$element-separator}large {
+  width: 40px;
+  min-width: min-content;
+  height: 1.5rem;
+  line-height: 1.5rem;
 
-  .be-switch-circle {
-    @apply h-5 w-5;
+  .#{ $componentsClass }#{$modifier-separator}circle {
+    width: 1.25rem;
+    height: 1.25rem;
 
-    .be-switch-circle-icon {
+
+    .#{ $componentsClass }#{$modifier-separator}circle#{$modifier-separator}icon {
 
       .be-icon {
-        @apply h-4 w-4;
+        width: 1rem;
+        height: 1rem;
       }
     }
   }
 
-  .be-switch__large_slot_un_checked {
-    @apply mr-6 ml-1;
+  .#{ $componentsClass }#{$element-separator}large_slot#{$element-separator}unChecked {
+    margin-right: 1.5rem;
+    margin-left: .25rem;
+
   }
 
-  .be-switch__large_slot_checked {
-    @apply ml-6 mr-1;
+  .#{ $componentsClass }#{$element-separator}large_slot#{$element-separator}checked {
+    margin-right: .25rem;
+    margin-left: 1.5rem;
   }
 }
 

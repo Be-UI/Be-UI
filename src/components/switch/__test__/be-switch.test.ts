@@ -66,8 +66,8 @@ describe('test-be-switch-props', () => {
         }
       },
     })
-    const loadingIcon = wrapper.element.querySelector('.be-switch-circle-icon') as HTMLElement
-    expect(loadingIcon.className.indexOf('be-icon-spin be-switch-circle-icon') > 0).toBeTruthy()
+    const loadingIcon = wrapper.element.querySelector('.be-switch--circle--icon') as HTMLElement
+    expect(loadingIcon.className.indexOf('be-icon-spin be-switch--circle--icon') > 0).toBeTruthy()
     await wrapper.find('.be-switch').trigger('click')
     expect(!wrapper.vm.varSwitch).toBeTruthy()
   })

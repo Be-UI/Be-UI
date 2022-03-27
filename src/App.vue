@@ -524,7 +524,11 @@
             :percent="progress">
         </be-progress>
         <div   @click="progress = progress+ 10" style="margin-left: 30px">{{ progress }}</div>-->
-
+      <be-progress
+          type="dashboard"
+          status="success"
+          :percent="progress">
+      </be-progress>
 
            <be-popover trigger="manual" width="300" customClass="asdwq" placement="bottom">
             <template #trigger>
@@ -540,6 +544,18 @@
               status="error"
               :percent="progress">
           </be-progress>-->
+      <be-switch
+
+          v-model="switchModel"
+          @change="testClose" >
+        <template v-slot:unCheckedRender="slotProps">
+          <span>unChecked</span>
+        </template>
+        <template v-slot:checkedRender="slotProps">
+          <span>checked</span>
+        </template>
+      </be-switch>
+
        <be-select
             :list="testList"
             clear
@@ -733,7 +749,14 @@
             iconNextRender:null,
             isOpenModal:true,
         })*/
+      const switchModel = ref(false)
+      const testClose = (data)=> {
+        console.log(data)
+        // this.notify.close()
+      }
       return {
+        testClose,
+        switchModel,
         openMsg,
         updateNum,
         pageChange,

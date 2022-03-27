@@ -26,9 +26,3 @@
 }
 
 
-// 基于flex 的水平垂直居中
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}

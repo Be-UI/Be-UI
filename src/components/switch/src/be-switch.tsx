@@ -111,7 +111,7 @@ export default defineComponent({
     })
     return () => {
       const unCheckedRender = internalInstance.slots.unCheckedRender ? (
-        <div class={`be-switch__${props.size}_slot_un_checked`}>
+        <div class={`be-switch__${props.size}_slot__unChecked`}>
           {' '}
           {internalInstance.slots.unCheckedRender(innerState.value)}
         </div>
@@ -119,7 +119,7 @@ export default defineComponent({
         ''
       )
       const checkedRender = internalInstance.slots.checkedRender ? (
-        <div class={`be-switch__${props.size}_slot_checked`}>
+        <div class={`be-switch__${props.size}_slot__checked`}>
           {internalInstance.slots.checkedRender(innerState.value)}
         </div>
       ) : (
@@ -138,9 +138,9 @@ export default defineComponent({
           tabindex="0"
           onClick={$event => handleClick($event)}>
           {innerState.value ? unCheckedRender : ''}
-          <div class="be-switch-circle">
+          <div class="be-switch--circle">
             {props.isLoading ? (
-              <be-icon spin icon="loading" customClass="be-switch-circle-icon"></be-icon>
+              <be-icon spin icon="loading" customClass="be-switch--circle--icon"></be-icon>
             ) : (
               ''
             )}

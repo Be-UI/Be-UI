@@ -47,6 +47,15 @@ input:focus-visible {
   vertical-align: top;
 }
 
+// 基于flex 的水平垂直居中
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin be-shadow {
+  box-shadow: var(--be-shadow-md, 0 0 #000), var(--be-shadow-md, 0 0 #000), var(--be-shadow-md);
+}
 
 
 :root {
@@ -94,15 +103,57 @@ input:focus-visible {
   }
 
   $--color: () !default;
-  $--color: map.merge(
+  $--color: map.deep-merge(
     (
-      'white': #fff,
-      'black': #000,
+      'w': $white,
+      'b': $black,
+      'grays': #c0c4cc
     ),$--color
   );
   // 其他基础色
-  @each $type in (white, black) {
+  @each $type in (w, b,grays) {
     @include set-css-var-type('base-color', $type, $--color);
+  }
+
+  // 圆角
+  $--rounded: () !default;
+  $--rounded: map.merge(
+    (
+      'full': 9999px,
+    ),$--rounded
+  );
+
+  @each $type in (full) {
+    @include set-css-var-type('rounded', $type, $--rounded);
+  }
+
+  // 阴影
+  $--shadow: () !default;
+  $--shadow: map.merge(
+    (
+      'md': (1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06))
+    ),$--shadow
+  );
+  @each $type in (md) {
+    @include set-css-var-type('shadow', $type, $--shadow);
+  }
+
+  // transform
+  $--transform: () !default;
+  $--transform: map.merge(
+    (
+      'translate-x-full-':-100%,
+      'translate-x': 0,
+      'translate-y': 0,
+      'rotate': 0,
+      'skew-x': 0,
+      'skew-y': 0,
+      'scale-x': 1,
+      'scale-y': 1,
+    ),$--transform
+  );
+  @each $type in ('translate-x','translate-y','rotate','skew-x','skew-y','scale-x','scale-y','translate-x-full-') {
+    @include set-css-var-type('transform', $type, $--transform);
   }
 }
 
@@ -115,6 +166,18 @@ $--progress: map.deep-merge(
     'success-color': var(--be-emo-success--color),
     'error-color': var(--be-emo-error--color),
   ),$--progress
+);
+// 生成 be-switch 颜色变量
+$--switch: () !default;
+$--switch: map.deep-merge(
+  (
+    
+    'bg-w': var(--be-base-color-w),
+    'bg-b': var(--be-base-color-b),
+    'bg-checked':$link,
+    'bg-un-checked':var(--be-base-color-grays),
+    'trans-': translateX(var(--be-transform-translate-x-full-)) translateY(var(--be-transform-translate-y)) rotate(var(--be-transform-rotate)) skewX(var(--be-transform-skew-x)) skewY(var(--be-transform-skew-y)) scaleX(var(--be-transform-scale-x)) scaleY(var(--be-transform-scale-y))
+  ),$--switch
 );
 
 
