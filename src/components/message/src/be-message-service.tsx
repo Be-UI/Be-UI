@@ -17,7 +17,7 @@ const createMessage = function (options: IMessage): IMsgInst {
     placement: 'topCenter',
     compType: 'message',
     customClass: options.customClass,
-    duration: options.duration || 4500,
+    duration: options.duration || options.duration === null ? options.duration : 4500,
     key: options.key,
     onClose: options.onClose,
     iconPreRender: options.iconPreRender,

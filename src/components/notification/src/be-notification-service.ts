@@ -51,7 +51,7 @@ const closeNotify = function (instance: DefineComponent, isAll = false): void {
   } catch (e) {
     if (e.message !== 'EndIterative') throw e
   }
-  console.log(index)
+
   // 小於0 沒有找到組件實例，説明可能被手動刪除
   if (index < 0) return
   // 獲取要關閉的組件實例
@@ -157,9 +157,7 @@ const computeOffset = (
     instanceArr.forEach((item: any, index: number) => {
       verticalOffset += (item.instance.el.childNodes[0].offsetHeight || 0) + offset
       if (index === 0 && option?.compType === 'message') {
-        const offsetInit: number = /top/.test(String(option.placement))
-          ? option.offsetTop || 0
-          : option.offsetBottom || 0
+        const offsetInit: number = /top/.test(String(option.placement)) ? option.offsetTop || 0 : option.offsetBottom || 0
         verticalOffset = 30 + offsetInit
       }
     })
@@ -246,7 +244,6 @@ const createNotify = function (options: INotifyOption): INotfiyInst {
     description: '', //
     duration: 4500, //
     key: '', //
-    timer: 0, //
     onClose: undefined, //关闭回调方法
     onClick: undefined, //点击回调方法
     closeNotify,

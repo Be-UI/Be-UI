@@ -537,13 +537,12 @@
             <div style="height: 300px"><panda width="25" height="25"  @click="test"></panda></div>
 
         </be-popover>
-
-        <!--  <be-button @click="openMsg">test Msg</be-button>
-    --       <be-progress
+        <be-button @click="openMsg">test Msg</be-button>
+        <!-- <be-progress
 
               status="error"
               :percent="progress">
-          </be-progress>-->
+          </be-progress> -->
       <be-switch
 
           v-model="switchModel"
@@ -589,8 +588,7 @@
                     size="large"
                     @click="test">
                     测试
-                </be-button> </template
-            >-->
+                </be-button> </template>
         </be-pagination>
     </div>
   </div>
@@ -654,14 +652,16 @@
         curInst?.refs.qwdwqdwqd.close()
         curInst?.refs.qwdddddwqdwqd.close()
       }
+        let asd = 0
       const openMsg = () => {
         BeMessage({
-          titles: 'as啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊d',
+          titles: 'as啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊d'+ asd,
           msgType: 'success',
-          duration: 3000,
-          offsetTop: 300,
+          duration: 2000,
+          offsetTop: 80,
           close: true,
         })
+          asd++
       }
       /*BeNotify({
       titles: 'Notification',

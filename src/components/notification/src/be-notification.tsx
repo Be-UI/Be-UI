@@ -34,7 +34,6 @@ export default defineComponent({
           duration: 4500, // √
           loading: false, // √
           key: '', //√
-          timer: 0, // private
           //关闭回调方法
           onClose: null, // √
           //点击回调方法
@@ -50,6 +49,7 @@ export default defineComponent({
   setup(props) {
     const internalInstance = getCurrentInstance() as INotfiy
     const option = ref(props.option)
+    let timer = 0
     const isLoading = ref<boolean>(props.option?.loading)
     /************************************** 根據方向 進行位置偏移設置******************************/
     const offsetTopStyle = computed(() => option.value.offsetTop)
@@ -118,16 +118,16 @@ export default defineComponent({
      * 關閉定時器清除方法
      */
     const clearTimer = () => {
-      clearTimeout(option.value.timer)
-      option.value.timer = 0
+      clearTimeout(timer)
+      timer = 0
     }
     /**
      * 開啓定時關閉方法
      */
     const startTimer = () => {
       if (option.value.duration > 0) {
-        option.value.timer = setTimeout(() => {
-          close(null)
+        timer = setTimeout(() => {
+           close(null)
         }, option.value.duration) //sad
       }
     }
@@ -137,7 +137,8 @@ export default defineComponent({
      * 動畫類設置方法
      */
     const setAnimate = () => {
-      const classStr = `be-${props.compType} be-${props.compType}__${option.value.msgType} be-${props.compType}__${option.value.placement} ${option.value.customClass}`
+      const classStr = `be-${props.compType} be-${props.compType}__${option.value.msgType} be-${props.compType}__${option.value.placement} 
+      ${option.value.customClass ? option.value.customClass : ''}`
       containerClass.value = classStr
       if (
         option.value.placement === 'bottomRight' ||
@@ -220,6 +221,7 @@ export default defineComponent({
       startTimer()
       return (
         <div
+          key={`be_${props.compType}${uid}`}
           style={option.value.style}
           onClick={event => {
             onClick(event)
