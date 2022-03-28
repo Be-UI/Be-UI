@@ -127,7 +127,7 @@ export default defineComponent({
     const startTimer = () => {
       if (option.value.duration > 0) {
         timer = setTimeout(() => {
-           close(null)
+          close(null)
         }, option.value.duration) //sad
       }
     }
@@ -137,7 +137,9 @@ export default defineComponent({
      * 動畫類設置方法
      */
     const setAnimate = () => {
-      const classStr = `be-${props.compType} be-${props.compType}__${option.value.msgType} be-${props.compType}__${option.value.placement} 
+      const classStr = `be-${props.compType} be-${props.compType}__${option.value.msgType} be-${
+        props.compType
+      }__${option.value.placement} 
       ${option.value.customClass ? option.value.customClass : ''}`
       containerClass.value = classStr
       if (
