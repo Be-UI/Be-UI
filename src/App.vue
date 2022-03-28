@@ -654,29 +654,29 @@
       }
         let asd = 0
       const openMsg = () => {
-        BeMessage({
+       /* BeMessage({
           titles: 'as啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊d'+ asd,
           msgType: 'success',
           duration: 2000,
           offsetTop: 80,
           close: true,
-        })
+        })*/
           asd++
+          BeNotify({
+              titles: 'Notification',
+              bodyRender: () => {
+                  return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
+                      您的体验时间仅剩
+                  </p>
+              },
+              msgType: 'info',
+              onClick: () => console.log('click'),
+              onClose: () => console.log('close'),
+              offsetBottom: 10,
+              placement: 'topRight',
+          })
       }
-      /*BeNotify({
-      titles: 'Notification',
-      bodyRender: () => {
-        return <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
-          您的体验时间仅剩
-        </p>
-      },
-      msgType: 'info',
-      onClick: () => console.log('click'),
-      onClose: () => console.log('close'),
-      offsetBottom: 10,
-      placement: 'bottomRight',
-      duration: 0,
-    })*/
+
       const testList = [
         { label: '落日绣帘卷', id: '落日绣帘卷' },
         { label: '亭下水连空', id: '亭下水连空' },

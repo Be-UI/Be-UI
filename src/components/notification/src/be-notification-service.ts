@@ -60,8 +60,7 @@ const closeNotify = function (instance: DefineComponent, isAll = false): void {
   instancesList.splice(index, 1)
   if (len < 1) return
   // 計算刪除後的其他組件偏移
-  const removedHeight = instanceEl.offsetHeight
-
+  const removedHeight = instanceEl.children[0].offsetHeight
   for (let i = index; i < len - 1; i++) {
     instancesList[i].instance.el.style[direction] =
       parseInt(instancesList[i].instance.el.style[direction], 10) - removedHeight - 35 + 'px'
