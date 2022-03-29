@@ -22,10 +22,10 @@
           class="be-popover"
           role="tooltip"
           :style="stylePopover">
-          <div :id="`be_popover_body${uid}`" class="be-popover-body">
+          <div :id="`be_popover_body${uid}`" class="be-popover--body">
             <slot></slot>
           </div>
-          <div v-if="raw" :id="`be_popover_arrow${uid}`" :class="`be-popover-arrow`"></div>
+          <div v-if="raw" :id="`be_popover_arrow${uid}`" :class="`be-popover--arrow`"></div>
         </div>
       </transition>
     </div>
