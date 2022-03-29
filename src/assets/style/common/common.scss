@@ -3,194 +3,194 @@
 @import "mixin";
 
 input:focus-visible {
-    outline-offset: 0;
+  outline-offset: 0;
 }
 
 :focus-visible {
-    outline: 0;
+  outline: 0;
 }
 
 .line {
-    position: relative;
-    width: 100%;
-    height: 2px;
-    padding-right: calc(100% - 3px);
-    padding-left: calc(100% - 3px);
-    background-color: $infoHover;
+  position: relative;
+  width: 100%;
+  height: 2px;
+  padding-right: calc(100% - 3px);
+  padding-left: calc(100% - 3px);
+  background-color: $infoHover;
 }
 
 .ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
 
 .scroll-diy::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    margin: 5px;
+  width: 8px;
+  height: 8px;
+  margin: 5px;
 }
 
 /* 定义滑块 */
 
 .scroll-diy::-webkit-scrollbar-thumb {
-    background-color: $infoBorder;
-    border-radius: 5px;
+  background-color: $infoBorder;
+  border-radius: 5px;
 }
 
 @mixin be-message-title {
-    font-family: "Microsoft YaHei", sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    vertical-align: top;
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  vertical-align: top;
 }
 
 // 基于flex 的水平垂直居中
 @mixin flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @mixin be-shadow {
-    box-shadow: var(--be-shadow-md, 0 0 #000), var(--be-shadow-md, 0 0 #000), var(--be-shadow-md);
+  box-shadow: var(--be-shadow-md, 0 0 #000), var(--be-shadow-md, 0 0 #000), var(--be-shadow-md);
 }
 @mixin be-radius {
-    border-radius: 3px;
+  border-radius: 3px;
 }
 
 
 :root {
-    $--emo-color: () !default;
-    $--emo-color: map.deep-merge(
-                    (
-                            'warning--color': $warning,
-                            'success--color': $success,
-                            'error--color': $error,
-                            'link--color': $link,
-                    ), $--emo-color
-    );
-    // 生成情感色变量
-    @each $type in (warning--color, success--color, error--color, link--color) {
-        @include set-css-var-type('emo', $type, $--emo-color);
-    }
+  $--emo-color: () !default;
+  $--emo-color: map.deep-merge(
+    (
+      'warning--color': $warning,
+      'success--color': $success,
+      'error--color': $error,
+      'link--color': $link,
+    ),$--emo-color
+  );
+  // 生成情感色变量
+  @each $type in (warning--color, success--color, error--color, link--color) {
+    @include set-css-var-type('emo', $type, $--emo-color);
+  }
 
-    $--percentage: () !default;
-    $--percentage: map.deep-merge(
-                    (
-                            'zero': 0,
-                            '25': 25%,
-                            '50': 50%,
-                            '75': 75%,
-                            'full': 100%,
-                    ), $--percentage
-    );
-    // 百分比變量
-    @each $type in (zero, '25', '50', '75', full) {
-        @include set-css-var-type('percentage', $type, $--percentage);
-    }
+  $--percentage: () !default;
+  $--percentage: map.deep-merge(
+    (
+      'zero': 0,
+      '25': 25%,
+      '50': 50%,
+      '75': 75%,
+      'full': 100%,
+    ),$--percentage
+  );
+  // 百分比變量
+  @each $type in (zero, '25', '50', '75', full) {
+    @include set-css-var-type('percentage', $type, $--percentage);
+  }
 
-    $--text-color: () !default;
-    $--text-color: map.merge(
-                    (
-                            'primary': #303133,
-                            'regular': #606266,
-                            'secondary': #909399,
-                            'placeholder': #c0c4cc,
-                    ), $--text-color
-    );
-    // 文字顔色
-    @each $type in (primary, regular, secondary, placeholder) {
-        @include set-css-var-type('text-color', $type, $--text-color);
-    }
+  $--text-color: () !default;
+  $--text-color: map.merge(
+    (
+      'primary': #303133,
+      'regular': #606266,
+      'secondary': #909399,
+      'placeholder': #c0c4cc,
+    ),$--text-color
+  );
+  // 文字顔色
+  @each $type in (primary, regular, secondary, placeholder) {
+    @include set-css-var-type('text-color', $type, $--text-color);
+  }
 
-    $--color: () !default;
-    $--color: map.deep-merge(
-                    (
-                            'w': $white,
-                            'b': $black,
-                            'grays': #c0c4cc
-                    ), $--color
-    );
-    // 其他基础色
-    @each $type in (w, b, grays) {
-        @include set-css-var-type('base-color', $type, $--color);
-    }
+  $--color: () !default;
+  $--color: map.deep-merge(
+    (
+      'w': $white,
+      'b': $black,
+      'grays': #c0c4cc
+    ),$--color
+  );
+  // 其他基础色
+  @each $type in (w, b, grays) {
+    @include set-css-var-type('base-color', $type, $--color);
+  }
 
-    // 圆角
-    $--rounded: () !default;
-    $--rounded: map.merge(
-                    (
-                            'full': 9999px,
-                    ), $--rounded
-    );
+  // 圆角
+  $--rounded: () !default;
+  $--rounded: map.merge(
+    (
+      'full': 9999px,
+    ),$--rounded
+  );
 
-    @each $type in (full) {
-        @include set-css-var-type('rounded', $type, $--rounded);
-    }
+  @each $type in (full) {
+    @include set-css-var-type('rounded', $type, $--rounded);
+  }
 
-    // 阴影
-    $--shadow: () !default;
-    $--shadow: map.merge(
-                    (
-                            'md': (1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06))
-                    ), $--shadow
-    );
-    @each $type in (md) {
-        @include set-css-var-type('shadow', $type, $--shadow);
-    }
+  // 阴影
+  $--shadow: () !default;
+  $--shadow: map.merge(
+    (
+      'md': (1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06))
+    ),$--shadow
+  );
+  @each $type in (md) {
+    @include set-css-var-type('shadow', $type, $--shadow);
+  }
 
-    // transform
-    $--transform: () !default;
-    $--transform: map.merge(
-                    (
-                            'translate-x-full-':-100%,
-                            'translate-x': 0,
-                            'translate-y': 0,
-                            'rotate': 0,
-                            'skew-x': 0,
-                            'skew-y': 0,
-                            'scale-x': 1,
-                            'scale-y': 1,
-                    ), $--transform
-    );
-    @each $type in ('translate-x', 'translate-y', 'rotate', 'skew-x', 'skew-y', 'scale-x', 'scale-y', 'translate-x-full-') {
-        @include set-css-var-type('transform', $type, $--transform);
-    }
+  // transform
+  $--transform: () !default;
+  $--transform: map.merge(
+    (
+      'translate-x-full-':-100%,
+      'translate-x': 0,
+      'translate-y': 0,
+      'rotate': 0,
+      'skew-x': 0,
+      'skew-y': 0,
+      'scale-x': 1,
+      'scale-y': 1,
+    ),$--transform
+  );
+  @each $type in ('translate-x', 'translate-y', 'rotate', 'skew-x', 'skew-y', 'scale-x', 'scale-y', 'translate-x-full-') {
+    @include set-css-var-type('transform', $type, $--transform);
+  }
 }
 
 
 // 生成 be-progress 类型颜色变量
 $--progress: () !default;
 $--progress: map.deep-merge(
-                (
-                        'normal-color': var(--be-emo-link--color),
-                        'success-color': var(--be-emo-success--color),
-                        'error-color': var(--be-emo-error--color),
-                ), $--progress
+  (
+    'normal-color': var(--be-emo-link--color),
+    'success-color': var(--be-emo-success--color),
+    'error-color': var(--be-emo-error--color),
+  ),$--progress
 );
 // 生成 be-switch 颜色变量
 $--switch: () !default;
 $--switch: map.deep-merge(
-                (
-                        'bg-w': var(--be-base-color-w),
-                        'bg-b': var(--be-base-color-b),
-                        'bg-checked':$link,
-                        'bg-un-checked':var(--be-base-color-grays),
-                        'trans-': translateX(var(--be-transform-translate-x-full-)) translateY(var(--be-transform-translate-y)) rotate(var(--be-transform-rotate)) skewX(var(--be-transform-skew-x)) skewY(var(--be-transform-skew-y)) scaleX(var(--be-transform-scale-x)) scaleY(var(--be-transform-scale-y))
-                ), $--switch
+  (
+    'bg-w': var(--be-base-color-w),
+    'bg-b': var(--be-base-color-b),
+    'bg-checked':$link,
+    'bg-un-checked':var(--be-base-color-grays),
+    'trans-': translateX(var(--be-transform-translate-x-full-)) translateY(var(--be-transform-translate-y)) rotate(var(--be-transform-rotate)) skewX(var(--be-transform-skew-x)) skewY(var(--be-transform-skew-y)) scaleX(var(--be-transform-scale-x)) scaleY(var(--be-transform-scale-y))
+  ),$--switch
 );
 // 生成 be-popover 变量
 $--popover: () !default;
 $--popover: map.deep-merge(
-                (
-                        'bg-w': var(--be-base-color-w),
-                        'bg-b': var(--be-base-color-b),
-                        'shadow-top': 1px 1px 3px -1px rgba(0, 0, 0, .37),
-                        'shadow-right': 1px -1px 3px -1px rgba(0, 0, 0, .37),
-                        'shadow-bottom': -1px -1px 3px -1px rgba(0, 0, 0, .37),
-                        'shadow-left': -1px 1px 3px -1px rgba(0, 0, 0, .37),
-                ), $--popover
+  (
+    'bg-w': var(--be-base-color-w),
+    'bg-b': var(--be-base-color-b),
+    'shadow-top': 1px 1px 3px -1px rgba(0, 0, 0, .37),
+    'shadow-right': 1px -1px 3px -1px rgba(0, 0, 0, .37),
+    'shadow-bottom': -1px -1px 3px -1px rgba(0, 0, 0, .37),
+    'shadow-left': -1px 1px 3px -1px rgba(0, 0, 0, .37),
+  ),$--popover
 );

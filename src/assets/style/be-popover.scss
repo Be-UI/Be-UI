@@ -56,7 +56,7 @@ $componentsClass:$name + '-' + 'popover' !global;
     top: -4px;
 
     &::before {
-       box-shadow: var(--be-popover-shadow-bottom);
+      box-shadow: var(--be-popover-shadow-bottom);
     }
   }
 }
