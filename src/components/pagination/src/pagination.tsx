@@ -214,7 +214,7 @@ export default defineComponent({
       const maxPageNum: number = Math.ceil(pageCount / Number(props.pageSize))
       const total: number = props.isFront ? pageParamsFront.maxPageNum : maxPageNum
       return (
-        <span class="be-pager-info">
+        <span class="be-pager--info">
           第{props.currentPage > total ? total : props.currentPage}页/共{total}页
         </span>
       )
@@ -226,11 +226,11 @@ export default defineComponent({
     const pageJumpComponent = (): JSX.Element | undefined => {
       const disabled: boolean = props.disabled ? true : props.disabledJump ? true : false
       return (
-        <div class="be-pager-jump">
+        <div class="be-pager--jump">
           跳至
           <input
             disabled={disabled}
-            class="be-pager-jump-input"
+            class="be-pager--jump__input"
             type="text"
             value={jumpPage.value}
             onKeyup={handleEnterEvn}

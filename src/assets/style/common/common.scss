@@ -60,6 +60,9 @@ input:focus-visible {
 @mixin be-radius {
   border-radius: 3px;
 }
+@mixin be-pointer {
+  cursor: pointer;
+}
 
 
 :root {
@@ -193,4 +196,14 @@ $--popover: map.deep-merge(
     'shadow-bottom': -1px -1px 3px -1px rgba(0, 0, 0, .37),
     'shadow-left': -1px 1px 3px -1px rgba(0, 0, 0, .37),
   ),$--popover
+);
+// 生成 be-pager 变量
+$--pager: () !default;
+$--pager: map.deep-merge(
+                (
+                        'bg-w': var(--be-base-color-w),
+                        'bg-b': var(--be-base-color-b),
+                        'text-active': $link,
+                         'border':1px solid var(--be-base-color-grays)
+                ),$--pager
 );

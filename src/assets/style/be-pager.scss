@@ -1,10 +1,16 @@
+@import "./common/config";
+$componentsClass:$name + '-' + 'pager' !global;
+@include create-B(pager){
+  @include set-component-style-var('pager', $--pager);
+}
+
+
 
 .be-pager-container {
   display: flex;
   align-items: center;
 
   .be-select {
-
     .be-select-body.be-pager-select {
       width: 5rem;
       min-width: 64px;
@@ -21,95 +27,71 @@
   }
 }
 
-.be-pager {
+@include create-B(pager){
   font-size: 0;
   list-style: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-
-.be-pager, .be-pager li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-}
-
-.be-pager, .be-pagination.is-background .btn-next, .be-pagination.is-background .btn-prev {
   padding: 0;
-}
-
-.be-pager li.btn-quicknext, .be-pager li.btn-quickprev {
-  line-height: 28px;
-  color: $info;
-}
-
-.be-pager li {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  min-width: 25px;
-  height: 25px;
-  padding: 0 4px;
-  margin: 0 3px;
-  font-size: 13px;
-  line-height: 25px;
-  text-align: center;
-  background-color: $default;
-  border-radius: 3px;
-}
-
-
-.be-pager li.active {
-  color: $primaryText;
-  cursor: default;
-}
-
-.be-pager.be-pager__disabled li,
-.be-pager.be-pager__disabled li.btn-quicknext:hover,
-.be-pager.be-pager__disabled li.btn-quickprev:hover {
-  cursor: not-allowed;
-}
-
-.be-pager.be-pager__disabled li {
-  -webkit-box-sizing: border-box;
-  background: $default;
-}
-
-.be-pager li,
-.be-pager li.btn-quicknext:hover,
-.be-pager li.btn-quickprev:hover {
-  cursor: pointer;
-}
-
-.be-pager li:hover {
-  color: $primaryText;
-}
-
-.be-pager .more::before {
-  line-height: 30px;
-}
-
-.be-pager-info {
-  font-size: 12px;
-
-}
-
-.be-pager-jump {
-  margin: 0 5px;
-  font-size: 12px;
-}
-
-.be-pager-jump-input {
-  width: 35px;
-  margin: 0 2px;
-  color: $info;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  transition: all .3s;
-
+  @include flex-center;
+  margin: 0;
+  li {
+    @include flex-center;
+    @include be-pointer;
+    @include be-radius;
+    box-sizing: border-box;
+    min-width: 25px;
+    height: 25px;
+    padding: 0 4px;
+    margin: 0 3px;
+    font-size: 13px;
+    line-height: 25px;
+    text-align: center;
+    background-color: var(--be-pager-bg-w);
+    &.btn-quicknext,&.btn-quickprev{
+      line-height: 28px;
+      color:  var(--be-text-color-regular);
+    }
+    &.active {
+      color: var(--be-pager-text-active);
+      cursor: default;
+    }
+    &:hover{
+      color: var(--be-pager-text-active);
+    }
+  }
+  .#{ $componentsClass }#{$element-separator}disabled{
+    li{
+      cursor: not-allowed;
+      -webkit-box-sizing: border-box;
+      background: var(--be-pager-bg-w);
+      &.btn-quicknext,&.btn-quickprev{
+       &:hover{
+         cursor: not-allowed;
+       }
+      }
+    }
+  }
+  .more::before {
+    line-height: 30px;
+  }
+  .#{ $componentsClass }#{$modifier-separator}info{
+    font-size: 12px;
+  }
+  .#{ $componentsClass }#{$modifier-separator}jump{
+    margin: 0 5px;
+    font-size: 12px;
+  }
+  .#{ $componentsClass }#{$modifier-separator}jump#{$element-separator}input{
+    width: 35px;
+    margin: 0 2px;
+    color:  var(--be-text-color-regular);
+    background-color: var(--be-pager-bg-w);
+    background-image: none;
+    border: 1px solid var(--be-pager-border);
+    @include be-radius;
+    transition: all .3s;
+  }
 }
