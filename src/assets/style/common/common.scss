@@ -200,10 +200,10 @@ $--popover: map.deep-merge(
 // 生成 be-pager 变量
 $--pager: () !default;
 $--pager: map.deep-merge(
-                (
-                        'bg-w': var(--be-base-color-w),
-                        'bg-b': var(--be-base-color-b),
-                        'text-active': $link,
-                         'border':1px solid var(--be-base-color-grays)
-                ),$--pager
+  (
+    'bg-w': var(--be-base-color-w),
+    'bg-b': var(--be-base-color-b),
+    'text-active': $link,
+    'border':1px solid var(--be-base-color-grays)
+  ),$--pager
 );
