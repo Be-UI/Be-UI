@@ -524,7 +524,7 @@
             :percent="progress">
         </be-progress>
         <div   @click="progress = progress+ 10" style="margin-left: 30px">{{ progress }}</div>-->
-      <be-progress
+<!--      <be-progress
           type="dashboard"
           status="success"
           :percent="progress">
@@ -538,11 +538,11 @@
 
         </be-popover>
         <be-button @click="openMsg">test Msg</be-button>
-        <!-- <be-progress
+        &lt;!&ndash; <be-progress
 
               status="error"
               :percent="progress">
-          </be-progress> -->
+          </be-progress> &ndash;&gt;
       <be-switch
 
           v-model="switchModel"
@@ -561,16 +561,18 @@
             keyValue="id"
             labelValue="label"
             v-model="seletStr">
-        </be-select>
+        </be-select>-->
          <be-pagination
+             v-if="pageParams.total > 0"
             :page-size="pageParams.pageSize"
             :page-count="pageParams.total"
-            :pager-show-count="6"
+            :pager-show-count="5"
+            :page-num="[{ label: 5 },{ label: 20 }, { label: 40 }, { label: 80 }, { label: 100 }]"
             :current-page="pageParams.currentPage"
             :layout="['prev', 'pNum', 'page']"
             @updateNum="updateNum"
             @changePage="pageChange">
-            <template #prev>
+<!--            <template #prev>
                 <be-button
                     prev-icon="delete"
                     next-icon="delete"
@@ -588,7 +590,7 @@
                     size="large"
                     @click="test">
                     测试
-                </be-button> </template>
+                </be-button> </template>-->
         </be-pagination>
     </div>
   </div>
@@ -719,8 +721,8 @@
       }
       const pageParams = ref({
         currentPage: 1,
-        pageSize: 2,
-        total: 100,
+        pageSize: 5,
+        total: 15,
       })
       const pageChange = (data): void => {
         // console.log(data)
@@ -728,8 +730,14 @@
       }
 
       const updateNum = (data): void => {
-        pageParams.value.pageSize = data.pageSize
-        pageParams.value.currentPage = data.currentPage
+          pageParams.value.total = 0
+          pageParams.value.pageSize = data.pageSize
+          pageParams.value.currentPage = data.currentPage
+          setTimeout(()=>{
+              pageParams.value.total = 15
+          },300)
+
+
       }
        /* BeMsg({
             isDrag:true,

@@ -10,6 +10,7 @@ import {
   IPagerMix,
   IPagerrenderList,
 } from './be-pagenation-type'
+import {arrayDeduplicationt, getUuid} from "../../../utils/common";
 
 export default defineComponent({
   name: 'BePagination',
@@ -167,17 +168,24 @@ export default defineComponent({
         currentPage: props.currentPage > total ? total : props.currentPage,
       })
     }
-    const pageNumInner = ref(props.pageNum)
-    onMounted(() => {
+    /**
+     * 初始化下拉
+     */
+    const pageNumInner = ref<Array<any>>([])
+    const initPageSelect = ():void =>{
       pageNumVal.value = props.pageSize + ' / ' + props.pageUnit //disabled
       // 把pagesize加到下拉选择pageNum中
-      //props.pageNum.unshift({ label: props.pageSize })
       pageNumInner.value = props.pageNum
-      pageNumInner.value.unshift({ label: props.pageSize })
+      pageNumInner.value.unshift({ label: props.pageSize})
+      pageNumInner.value = arrayDeduplicationt(pageNumInner.value,'label')
+      pageNumInner.value.sort((a,b)=>a.label - b.label)
       pageNumInner.value.map((val: any) => {
         val.label = val.label + ' / ' + props.pageUnit
       })
-    })
+    }
+    if(props.layout?.includes('pNum')){
+      initPageSelect()
+    }
     /********************************* 分页事件emit *****************************************/
     /**
      * 前端分页 数据传递方法
@@ -249,6 +257,7 @@ export default defineComponent({
     provide('$$BePaginMix', pagerMix)
 
     return () => {
+
       // 定义传入事件（必须on开头，原因请阅读vue3 v-bind 解析）
       const onEvt: IPagerEvt = {
         onUpdatePage: handleUpdatePage,
@@ -267,7 +276,7 @@ export default defineComponent({
         pNum: undefined,
       }
       // 非动态布局才支持页面数量显示设置
-      if (!props.isDynamic) {
+      if (!props.isDynamic && props.layout?.includes('pNum')) {
         renderList.pNum = (
           <be-select
             v-model={pageNumVal.value}
