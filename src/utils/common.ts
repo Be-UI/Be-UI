@@ -131,11 +131,11 @@ export const isNumber = (val: unknown): val is number => typeof val === 'number'
 export const isHTMLElement = (val: unknown) => toRawType(val).startsWith('HTML')
 export const isFunction = (val: unknown) =>
   Object.prototype.toString.call(val) === '[object Function]'
-export const arrayDeduplicationSet = (val: Array<any>): Array<any> => Array.from(new Set(val));
-export const arrayDeduplicationt = (val: Array<any>,key:string): Array<any> => {
-  let obj = {};
-  return  val.reduce((cur,next) => {
-    obj[next[key]] ? "" : (obj[next[key]] = true && cur.push(next));
-    return cur;
-  },[])
-};
+export const arrayDeduplicationSet = (val: Array<any>): Array<any> => Array.from(new Set(val))
+export const arrayDeduplicationt = (val: Array<any>, key: string): Array<any> => {
+  const obj = {}
+  return val.reduce((cur, next) => {
+    obj[next[key]] ? '' : (obj[next[key]] = true && cur.push(next))
+    return cur
+  }, [])
+}
