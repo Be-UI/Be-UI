@@ -27,6 +27,7 @@ input:focus-visible {
 @mixin font-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
 /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
 
 .scroll-diy::-webkit-scrollbar {
@@ -174,11 +175,11 @@ input:focus-visible {
   // height
   $--h: () !default;
   $--h: map.merge(
-                  (
-                          'mini':1.5rem,
-                          'medium':2rem,
-                          'large':2.5rem,
-                  ),$--h
+    (
+      'mini':1.5rem,
+      'medium':2rem,
+      'large':2.5rem,
+    ),$--h
   );
   @each $type in (mini,medium,large) {
     @include set-css-var-type('h', $type, $--h);
@@ -232,26 +233,21 @@ $--pager: map.deep-merge(
 // 生成 be-tag
 $--tag: () !default;
 $--tag: map.deep-merge(
-                (
-                        'px':0.625rem,
-                        'h-mini':var(--be-h-mini),
-                        'h-medium':var(--be-h-medium),
-                        'h-large':var(--be-h-large),
-
-                        'normal-color': var(--be-emo-link-color),
-                        'success-color': var(--be-emo-success-color),
-                        'error-color': var(--be-emo-error-color),
-                        'warning-color': var(--be-emo-warning-color),
-                        'primary-color': $primary,
-
-
-                        'normal-color--hover': var(--be-emo-link-color--hover),
-                        'success-color--hover': var(--be-emo-success-color--hover),
-                        'error-color--hover': var(--be-emo-error-color--hover),
-                        'warning-color--hover': var(--be-emo-warning-color--hover),
-                        'primary-color--hover': var(--be-emo-link-color),
-
-                        'border':1px solid var(--be-base-color-grays)
-
-                ),$--tag
+  (
+    'px':.625rem,
+    'h-mini':var(--be-h-mini),
+    'h-medium':var(--be-h-medium),
+    'h-large':var(--be-h-large),
+    'normal-color': var(--be-emo-link-color),
+    'success-color': var(--be-emo-success-color),
+    'error-color': var(--be-emo-error-color),
+    'warning-color': var(--be-emo-warning-color),
+    'primary-color': $primary,
+    'normal-color--hover': var(--be-emo-link-color--hover),
+    'success-color--hover': var(--be-emo-success-color--hover),
+    'error-color--hover': var(--be-emo-error-color--hover),
+    'warning-color--hover': var(--be-emo-warning-color--hover),
+    'primary-color--hover': var(--be-emo-link-color),
+    'border':1px solid var(--be-base-color-grays)
+  ),$--tag
 );

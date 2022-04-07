@@ -4,7 +4,9 @@ $componentsClass:$name + '-' + 'tag' !global;
   @include set-component-style-var('tag', $--tag);
 }
 @mixin be-icon-default($color) {
+
   .be-icon {
+
     use {
       fill: $color;
     }
@@ -40,23 +42,23 @@ $componentsClass:$name + '-' + 'tag' !global;
 
 .#{ $componentsClass }#{$element-separator}mini {
   box-sizing: border-box;
-  padding: var(--be-tag-px);
   height: var(--be-tag-h-mini);
+  padding: var(--be-tag-px);
+  font-size: .75rem;
   line-height: var(--be-tag-h-mini);
-  font-size: 0.75rem;
 }
 
 .#{ $componentsClass }#{$element-separator}medium {
   box-sizing: border-box;
-  padding: var(--be-tag-px);
   height: var(--be-tag-h-medium);
+  padding: var(--be-tag-px);
   line-height: var(--be-tag-h-medium);
 }
 
 .#{ $componentsClass }#{$element-separator}large {
   box-sizing: border-box;
-  padding: var(--be-tag-px);
   height: var(--be-tag-h-medium);
+  padding: var(--be-tag-px);
   line-height: var(--be-tag-h-medium);
 }
 

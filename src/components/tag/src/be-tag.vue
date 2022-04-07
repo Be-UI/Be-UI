@@ -8,7 +8,7 @@
   be-tag__${size}
   ${customClass}
   `">
-    <span :style="{ color: styleOption?.color }" :class="{'be—tag--close':isClose}">
+    <span :style="{ color: styleOption?.color }" :class="{ 'be—tag--close': isClose }">
       <slot></slot>
     </span>
     <be-icon
