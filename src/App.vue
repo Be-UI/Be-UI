@@ -562,7 +562,7 @@
             labelValue="label"
             v-model="seletStr">
         </be-select>-->
-         <be-pagination
+<!--         <be-pagination
              v-if="pageParams.total > 0"
             :page-size="pageParams.pageSize"
             :page-count="pageParams.total"
@@ -572,7 +572,7 @@
             :layout="['prev', 'pNum', 'page']"
             @updateNum="updateNum"
             @changePage="pageChange">
-<!--            <template #prev>
+            <template #prev>
                 <be-button
                     prev-icon="delete"
                     next-icon="delete"
@@ -590,8 +590,9 @@
                     size="large"
                     @click="test">
                     测试
-                </be-button> </template>-->
-        </be-pagination>
+                </be-button> </template>
+        </be-pagination>-->
+        <be-tag  @close="handleClick" size="medium">be-tag</be-tag>
     </div>
   </div>
 </template>

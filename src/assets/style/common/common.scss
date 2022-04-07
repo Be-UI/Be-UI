@@ -24,7 +24,9 @@ input:focus-visible {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
+@mixin font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
 /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
 
 .scroll-diy::-webkit-scrollbar {
@@ -63,20 +65,27 @@ input:focus-visible {
 @mixin be-pointer {
   cursor: pointer;
 }
+@mixin be-disabled {
+  cursor: not-allowed;
+}
 
 
 :root {
   $--emo-color: () !default;
   $--emo-color: map.deep-merge(
     (
-      'warning--color': $warning,
-      'success--color': $success,
-      'error--color': $error,
-      'link--color': $link,
+      'warning-color': $warning,
+      'success-color': $success,
+      'error-color': $error,
+      'link-color': $link,
+      'warning-color--hover': $warningHover,
+      'success-color--hover': $successHover,
+      'error-color--hover': $errorHover,
+      'link-color--hover': $linkHover,
     ),$--emo-color
   );
   // 生成情感色变量
-  @each $type in (warning--color, success--color, error--color, link--color) {
+  @each $type in (warning-color, success-color, error-color, link-color,warning-color--hover, success-color--hover, error-color--hover, link-color--hover) {
     @include set-css-var-type('emo', $type, $--emo-color);
   }
 
@@ -162,6 +171,18 @@ input:focus-visible {
   @each $type in ('translate-x', 'translate-y', 'rotate', 'skew-x', 'skew-y', 'scale-x', 'scale-y', 'translate-x-full-') {
     @include set-css-var-type('transform', $type, $--transform);
   }
+  // height
+  $--h: () !default;
+  $--h: map.merge(
+                  (
+                          'mini':1.5rem,
+                          'medium':2rem,
+                          'large':2.5rem,
+                  ),$--h
+  );
+  @each $type in (mini,medium,large) {
+    @include set-css-var-type('h', $type, $--h);
+  }
 }
 
 
@@ -169,9 +190,9 @@ input:focus-visible {
 $--progress: () !default;
 $--progress: map.deep-merge(
   (
-    'normal-color': var(--be-emo-link--color),
-    'success-color': var(--be-emo-success--color),
-    'error-color': var(--be-emo-error--color),
+    'normal-color': var(--be-emo-link-color),
+    'success-color': var(--be-emo-success-color),
+    'error-color': var(--be-emo-error-color),
   ),$--progress
 );
 // 生成 be-switch 颜色变量
@@ -206,4 +227,31 @@ $--pager: map.deep-merge(
     'text-active': $link,
     'border':1px solid var(--be-base-color-grays)
   ),$--pager
+);
+
+// 生成 be-tag
+$--tag: () !default;
+$--tag: map.deep-merge(
+                (
+                        'px':0.625rem,
+                        'h-mini':var(--be-h-mini),
+                        'h-medium':var(--be-h-medium),
+                        'h-large':var(--be-h-large),
+
+                        'normal-color': var(--be-emo-link-color),
+                        'success-color': var(--be-emo-success-color),
+                        'error-color': var(--be-emo-error-color),
+                        'warning-color': var(--be-emo-warning-color),
+                        'primary-color': $primary,
+
+
+                        'normal-color--hover': var(--be-emo-link-color--hover),
+                        'success-color--hover': var(--be-emo-success-color--hover),
+                        'error-color--hover': var(--be-emo-error-color--hover),
+                        'warning-color--hover': var(--be-emo-warning-color--hover),
+                        'primary-color--hover': var(--be-emo-link-color),
+
+                        'border':1px solid var(--be-base-color-grays)
+
+                ),$--tag
 );
