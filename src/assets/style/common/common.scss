@@ -43,13 +43,17 @@ input:focus-visible {
   border-radius: 5px;
 }
 
-@mixin be-message-title {
+@mixin be-message--title {
   font-family: "Microsoft YaHei", sans-serif;
   font-size: 18px;
   font-weight: bold;
   vertical-align: top;
 }
-
+@mixin be-notification--icon {
+  margin-right: 10px;
+  font-size: 20px;
+  line-height: 25px;
+}
 // 基于flex 的水平垂直居中
 @mixin flex-center {
   display: flex;
@@ -57,9 +61,6 @@ input:focus-visible {
   justify-content: center;
 }
 
-@mixin be-shadow {
-  box-shadow: var(--be-shadow-md, 0 0 #000), var(--be-shadow-md, 0 0 #000), var(--be-shadow-md);
-}
 @mixin be-radius {
   border-radius: 3px;
 }
@@ -69,7 +70,9 @@ input:focus-visible {
 @mixin be-disabled {
   cursor: not-allowed;
 }
-
+@mixin be-shadow {
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, var(--be-shadow-md);
+}
 
 :root {
   $--emo-color: () !default;
@@ -79,14 +82,20 @@ input:focus-visible {
       'success-color': $success,
       'error-color': $error,
       'link-color': $link,
+      'info-color': $info,
       'warning-color--hover': $warningHover,
       'success-color--hover': $successHover,
       'error-color--hover': $errorHover,
       'link-color--hover': $linkHover,
+      'info-color--hover': $infoHover,
     ),$--emo-color
   );
   // 生成情感色变量
-  @each $type in (warning-color, success-color, error-color, link-color,warning-color--hover, success-color--hover, error-color--hover, link-color--hover) {
+  @each $type in (warning-color, success-color,
+  error-color, link-color,warning-color--hover,
+  info-color--hover,
+  info-color,
+  success-color--hover, error-color--hover, link-color--hover) {
     @include set-css-var-type('emo', $type, $--emo-color);
   }
 
@@ -250,4 +259,37 @@ $--tag: map.deep-merge(
     'primary-color--hover': var(--be-emo-link-color),
     'border':1px solid var(--be-base-color-grays)
   ),$--tag
+);
+
+// 生成 be-message
+$--message: () !default;
+$--message: map.deep-merge(
+                (
+                        'px':.625rem,
+                        'bg-w': var(--be-base-color-w),
+                        'success-color': var(--be-emo-success-color),
+                        'error-color': var(--be-emo-error-color),
+                        'warning-color': var(--be-emo-warning-color),
+                        'info-color': var(--be-emo-info-color),
+                        'text-success-color': var(--be-emo-success-color),
+                        'text-error-color': var(--be-emo-error-color),
+                        'text-warning-color': var(--be-emo-warning-color),
+                        'text-info-color': var(--be-emo-info-color),
+                ),$--message
+);
+// 生成 be-notification
+$--notification: () !default;
+$--notification: map.deep-merge(
+                (
+                        'px':.625rem,
+                        'bg-w': var(--be-base-color-w),
+                        'success-color': var(--be-emo-success-color),
+                        'error-color': var(--be-emo-error-color),
+                        'warning-color': var(--be-emo-warning-color),
+                        'info-color': var(--be-emo-info-color),
+                        'text-success-color': var(--be-emo-success-color),
+                        'text-error-color': var(--be-emo-error-color),
+                        'text-warning-color': var(--be-emo-warning-color),
+                        'text-info-color': var(--be-emo-info-color),
+                ),$--notification
 );

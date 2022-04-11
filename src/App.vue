@@ -543,17 +543,7 @@
               status="error"
               :percent="progress">
           </be-progress> &ndash;&gt;
-      <be-switch
 
-          v-model="switchModel"
-          @change="testClose" >
-        <template v-slot:unCheckedRender="slotProps">
-          <span>unChecked</span>
-        </template>
-        <template v-slot:checkedRender="slotProps">
-          <span>checked</span>
-        </template>
-      </be-switch>
 
        <be-select
             :list="testList"
@@ -592,7 +582,18 @@
                     测试
                 </be-button> </template>
         </be-pagination>-->
-        <be-tag  @close="handleClick" size="medium">be-tag</be-tag>
+        <be-switch
+
+            v-model="switchModel"
+            @change="testClose" >
+            <template v-slot:unCheckedRender="slotProps">
+                <span>unChecked</span>
+            </template>
+            <template v-slot:checkedRender="slotProps">
+                <span>checked</span>
+            </template>
+        </be-switch>
+        <be-tag  @close="handleClick" size="medium" @click="openMsg">be-tag</be-tag>
     </div>
   </div>
 </template>
@@ -656,14 +657,15 @@
         curInst?.refs.qwdddddwqdwqd.close()
       }
         let asd = 0
-      const openMsg = () => {
        /* BeMessage({
-          titles: 'as啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊d'+ asd,
-          msgType: 'success',
-          duration: 2000,
-          offsetTop: 80,
-          close: true,
+            titles: 'as啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊d'+ asd,
+            msgType: 'info',
+            duration: null,
+            offsetTop: 80,
+            close: true,
         })*/
+      const openMsg = () => {
+
           asd++
           BeNotify({
               titles: 'Notification',
@@ -672,11 +674,12 @@
                       您的体验时间仅剩
                   </p>
               },
-              msgType: 'info',
+              msgType: 'warning',
               onClick: () => console.log('click'),
               onClose: () => console.log('close'),
               offsetBottom: 10,
               placement: 'topRight',
+              duration:999999,
           })
       }
 

@@ -1,98 +1,120 @@
-@mixin be-message-icon {
+@import "./common/config";
+$componentsClass:$name + '-' + 'message' !global;
+@include create-B(message){
+  @include set-component-style-var('message', $--message);
+}
+
+@mixin be-notification--icon {
   margin-right: 10px;
   font-size: 20px;
   line-height: 25px;
 }
+@include create-B(message){
+    z-index: 9999;
+    max-height: 3rem;
+  .#{ $componentsClass }#{$modifier-separator}container {
+      width: max-content;
+      position: absolute;
+      box-sizing: border-box;
+      @include be-radius;
+      @include be-shadow;
+      background-color: var(--be-message-bg-w);
+      z-index: 998;
+      padding: var(--be-notification-px);
 
-.be-message {
-  z-index: 9999;
-  @apply max-h-12;
 
-  .be-message-container {
-    width: max-content;
-    @apply  bg-default p-2.5 rounded shadow absolute box-border;
+    .#{ $componentsClass }#{$modifier-separator}title {
+        height: initial;
+        width: 100%;
 
-    .be-message-title {
-      height: initial;
-      @apply w-full;
+      .#{ $componentsClass }#{$modifier-separator}head {
+          @include  flex-center;
+          justify-content: space-between;
+          line-height: 1.5rem;
+          div:nth-child(1) {
+              display: flex;
+              align-items: center;
 
-      .be-message-head {
-        @apply leading-6 flex justify-between items-center;
+            .icon#{$element-separator}warning {
+                fill: var(--be-message-warning-color);
+              @include be-notification--icon;
+            }
 
-        div:nth-child(1) {
-          @apply flex items-center;
+            .icon#{$element-separator}info {
+                fill: var(--be-message-info-color);
+              @include be-notification--icon;
+            }
 
-          .icon-warning {
-            @apply fill-warning;
-            @include be-message-icon;
+            .icon#{$element-separator}success {
+                fill: var(--be-message-success-color);
+              @include be-notification--icon;
+            }
+
+            .icon#{$element-separator}error {
+                fill: var(--be-message-error-color);
+              @include be-notification--icon;
+            }
+
+            .txt#{$element-separator}warning {
+              @include be-message--title;
+              @include  font-mono;
+              color:var(--be-message-text-warning-color);
+              margin-right: 0.5rem;
+            }
+
+            .txt#{$element-separator}info {
+              @include be-message--title;
+              @include  font-mono;
+              color:var(--be-message-text-info-color);
+
+            }
+
+            .txt#{$element-separator}success {
+              @include be-message--title;
+              @include  font-mono;
+              color:var(--be-message-text-success-color);
+            }
+
+            .txt#{$element-separator}error {
+              @include be-message--title;
+              @include  font-mono;
+              color:var(--be-message-text-error-color);
+            }
           }
 
-          .icon-info {
-            @apply fill-info;
-            @include be-message-icon;
-          }
-
-          .icon-success {
-            @apply fill-success;
-            @include be-message-icon;
-          }
-
-          .icon-error {
-            @apply fill-error;
-            @include be-message-icon;
-          }
-
-          .txt-warning {
-            @include be-message-title;
-            @apply text-warning font-mono mr-2;
-          }
-
-          .txt-info {
-            @include be-message-title;
-            @apply text-info font-mono;
-          }
-
-          .txt-success {
-            @include be-message-title;
-            @apply text-success font-mono;
-          }
-
-          .txt-error {
-            @include be-message-title;
-            @apply text-error font-mono;
+          div:nth-child(2) {
+              @include be-pointer;
           }
         }
 
-        div:nth-child(2) {
-          @apply cursor-pointer;
-        }
       }
-
     }
-  }
 
-  .be-message-container__topCenter {
-    max-width: calc(100vw - 10vw);
-    @apply right-1/2;
-    transform: translateX(50%);
-  }
+  .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}topCenter {
+      max-width: calc(100vw - 10vw);
+      right: 50%;
+      transform: translateX(50%);
+    }
 }
 
-.be-message__topCenter {
-  @apply right-1/2 fixed;
+
+.#{ $componentsClass }#{$element-separator}topCenter {
+
+  right: 50%;
+    position: fixed;
   transform: translateX(50%);
 }
 
-.be-message-top {
+.#{ $componentsClass }#{$element-separator}top {
   transition: top .3s;
 }
 
-.be-message-animation-top-center-in {
+.#{ $componentsClass }-animation-top-center-in {
   -webkit-animation: bounce-in-top-center .3s .2s ease both;
   -moz-animation: bounce-in-top-center .3s .2s ease both;
 }
 
-.be-message-animation-top-center-out {
+.#{ $componentsClass }-animation-top-center-out {
   -webkit-animation: out-top-center .3s .2s ease both;
   -moz-animation: out-top-center .3s .2s ease both;
 }

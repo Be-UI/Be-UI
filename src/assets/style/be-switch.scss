@@ -13,7 +13,7 @@ $componentsClass:$name + '-' + 'switch' !global;
   border-radius: var(--be-rounded-full);
   .#{ $componentsClass }#{$modifier-separator}circle {
     @include flex-center;
-    @include be-shadow;;
+    @include be-shadow;
     background-color: var(--be-switch-bg-w);
     border-radius: var(--be-rounded-full);
   }

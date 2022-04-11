@@ -147,18 +147,18 @@ export default defineComponent({
         (option.value.placement === 'topRight' && !option.value.isUpdate)
       ) {
         containerClass.value =
-          classStr + ` be-${props.compType}-animation-right-in be-${props.compType}-bottom`
+          classStr + ` be-${props.compType}-animation-right-in be-${props.compType}__bottom`
       }
       if (
         option.value.placement === 'bottomLeft' ||
         (option.value.placement === 'topLeft' && !option.value.isUpdate)
       ) {
         containerClass.value =
-          classStr + ` be-${props.compType}-animation-left-in be-${props.compType}-top`
+          classStr + ` be-${props.compType}-animation-left-in be-${props.compType}__top`
       }
       if (option.value.placement === 'topCenter' && !option.value.isUpdate) {
         containerClass.value =
-          classStr + ` be-${props.compType}-animation-top-center-in be-${props.compType}-top`
+          classStr + ` be-${props.compType}-animation-top-center-in be-${props.compType}__top`
       }
     }
     setAnimate()
@@ -174,20 +174,20 @@ export default defineComponent({
       }
       return h(
         <div
-          class={`be-${props.compType}-container be-${props.compType}-container__${option.value.placement}`}>
-          <div class={`be-${props.compType}-title`}>
-            <div class={`be-${props.compType}-head`} id={`be_${props.compType}_head${uid}`}>
+          class={`be-${props.compType}--container be-${props.compType}--container__${option.value.placement}`}>
+          <div class={`be-${props.compType}--title`}>
+            <div class={`be-${props.compType}--head`} id={`be_${props.compType}_head${uid}`}>
               <div>
                 {isLoading.value ? (
-                  <BeIcon icon="loading" spin customClass={`icon-${option.value.msgType}`}></BeIcon>
+                  <BeIcon icon="loading" spin customClass={`icon__${option.value.msgType}`}></BeIcon>
                 ) : option.value.iconPreRender ? (
                   option.value.iconPreRender
                 ) : (
                   <BeIcon
                     icon={`${option.value.msgType}`}
-                    customClass={`icon-${option.value.msgType}`}></BeIcon>
+                    customClass={`icon__${option.value.msgType}`}></BeIcon>
                 )}
-                <span class={`txt-${option.value.msgType}`}>{option.value.titles}</span>
+                <span class={`txt__${option.value.msgType}`}>{option.value.titles}</span>
               </div>
               {/**@slot 弹窗头部按钮**/}
               <div id={`be_${props.compType}_close_icon${uid}`}>
@@ -203,11 +203,11 @@ export default defineComponent({
           </div>
           {/**@slot 弹窗主体**/}
           {props.compType === 'notification' ? (
-            <div class={`be-${props.compType}-body`}>
+            <div class={`be-${props.compType}--body`}>
               {option.value.bodyRender ? (
                 option.value.bodyRender()
               ) : (
-                <p class={`be-${props.compType}-description`}>{option.value.description}</p>
+                <p class={`be-${props.compType}--description`}>{option.value.description}</p>
               )}
             </div>
           ) : (

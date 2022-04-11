@@ -64,22 +64,22 @@
           }
 
           .text-warning {
-            @include be-message-title;
+            @include be-message--title;
             color: $warning;
           }
 
           .text-info {
-            @include be-message-title;
+            @include be-message--title;
             color: $info;
           }
 
           .text-success {
-            @include be-message-title;
+            @include be-message--title;
             color: $success;
           }
 
           .text-error {
-            @include be-message-title;
+            @include be-message--title;
             color: $error;
           }
         }
