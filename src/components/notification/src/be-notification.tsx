@@ -179,7 +179,10 @@ export default defineComponent({
             <div class={`be-${props.compType}--head`} id={`be_${props.compType}_head${uid}`}>
               <div>
                 {isLoading.value ? (
-                  <BeIcon icon="loading" spin customClass={`icon__${option.value.msgType}`}></BeIcon>
+                  <BeIcon
+                    icon="loading"
+                    spin
+                    customClass={`icon__${option.value.msgType}`}></BeIcon>
                 ) : option.value.iconPreRender ? (
                   option.value.iconPreRender
                 ) : (

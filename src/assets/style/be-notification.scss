@@ -5,107 +5,107 @@ $componentsClass:$name + '-' + 'notification' !global;
 }
 
 @include create-B(notification){
-
-    z-index: 10;
-    min-height: 100px;
+  z-index: 10;
+  min-height: 100px;
 
   .#{ $componentsClass }#{$modifier-separator}container {
-      position: absolute;
-      min-width: 16rem;
-      box-sizing: border-box;
-      @include be-radius;
-      @include be-shadow;
-      background-color: var(--be-notification-bg-w);
-      z-index: 998;
-      padding: var(--be-notification-px);
+    position: absolute;
+    z-index: 998;
+    box-sizing: border-box;
+    min-width: 16rem;
+    padding: var(--be-notification-px);
+    background-color: var(--be-notification-bg-w);
+    @include be-radius;
+    @include be-shadow;
 
 
     .#{ $componentsClass }#{$modifier-separator}title {
-        width: 100%;
-        height: 1.5rem;
+      width: 100%;
+      height: 1.5rem;
       .#{ $componentsClass }#{$modifier-separator}head {
-          @include  flex-center;
-          justify-content: space-between;
-          line-height: 1.5rem;
-          div:nth-child(1) {
-            display: flex;
-            align-items: center;
-            .icon#{$element-separator}warning {
-              fill: var(--be-notification-warning-color);
-              @include be-notification--icon;
-            }
+        @include  flex-center;
+        justify-content: space-between;
+        line-height: 1.5rem;
 
-            .icon#{$element-separator}info {
-                fill: var(--be-notification-info-color);
-              @include be-notification--icon;
-            }
-
-            .icon#{$element-separator}success {
-                fill: var(--be-notification-success-color);
-              @include be-notification--icon;
-            }
-
-            .icon#{$element-separator}error {
-              fill: var(--be-notification-error-color);
-              @include be-notification--icon;
-            }
-
-            .txt#{$element-separator}warning {
-              color:var(--be-notification-text-warning-color);
-              @include be-message--title;
-              @include  font-mono;
-            }
-
-            .txt#{$element-separator}info {
-               color:var(--be-notification-text-info-color);
-              @include be-message--title;
-              @include  font-mono;
-            }
-
-            .txt#{$element-separator}success {
-              color:var(--be-notification-text-success-color);
-              @include be-message--title;
-              @include  font-mono;
-            }
-
-            .txt#{$element-separator}error {
-              color:var(--be-notification-text-error-color);
-              @include be-message--title;
-              @include  font-mono;
-            }
+        div:nth-child(1) {
+          display: flex;
+          align-items: center;
+          .icon#{$element-separator}warning {
+            fill: var(--be-notification-warning-color);
+            @include be-notification--icon;
           }
 
-          div:nth-child(2) {
-              @include be-pointer;
+          .icon#{$element-separator}info {
+            fill: var(--be-notification-info-color);
+            @include be-notification--icon;
+          }
+
+          .icon#{$element-separator}success {
+            fill: var(--be-notification-success-color);
+            @include be-notification--icon;
+          }
+
+          .icon#{$element-separator}error {
+            fill: var(--be-notification-error-color);
+            @include be-notification--icon;
+          }
+
+          .txt#{$element-separator}warning {
+            color:var(--be-notification-text-warning-color);
+            @include be-message--title;
+            @include  font-mono;
+          }
+
+          .txt#{$element-separator}info {
+            color:var(--be-notification-text-info-color);
+            @include be-message--title;
+            @include  font-mono;
+          }
+
+          .txt#{$element-separator}success {
+            color:var(--be-notification-text-success-color);
+            @include be-message--title;
+            @include  font-mono;
+          }
+
+          .txt#{$element-separator}error {
+            color:var(--be-notification-text-error-color);
+            @include be-message--title;
+            @include  font-mono;
           }
         }
 
+        div:nth-child(2) {
+          @include be-pointer;
+        }
       }
-    }
 
-    .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}topLeft,
-    .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}bottomLeft {
-      left: 5px;
     }
+  }
 
-    .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}bottomRight,
-    .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}topRight {
-      right: 5px;
-    }
+  .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}topLeft,
+  .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}bottomLeft {
+    left: 5px;
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}bottomRight,
+  .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}topRight {
+    right: 5px;
+  }
 
   .#{ $componentsClass }#{$modifier-separator}body {
-      min-height: 50px;
-      margin-top: 10px;
+    min-height: 50px;
+    margin-top: 10px;
 
     .#{ $componentsClass }#{$modifier-separator}description {
-        @include font-mono;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        color: var(--be-text-color-primary);
-        letter-spacing: 3px;
-      }
+      @include font-mono;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--be-text-color-primary);
+      letter-spacing: 3px;
     }
+  }
 }
 
 

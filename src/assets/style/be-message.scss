@@ -10,98 +10,98 @@ $componentsClass:$name + '-' + 'message' !global;
   line-height: 25px;
 }
 @include create-B(message){
-    z-index: 9999;
-    max-height: 3rem;
+  z-index: 9999;
+  max-height: 3rem;
   .#{ $componentsClass }#{$modifier-separator}container {
-      width: max-content;
-      position: absolute;
-      box-sizing: border-box;
-      @include be-radius;
-      @include be-shadow;
-      background-color: var(--be-message-bg-w);
-      z-index: 998;
-      padding: var(--be-notification-px);
+    position: absolute;
+    z-index: 998;
+    box-sizing: border-box;
+    width: max-content;
+    padding: var(--be-notification-px);
+    background-color: var(--be-message-bg-w);
+    @include be-radius;
+    @include be-shadow;
 
 
     .#{ $componentsClass }#{$modifier-separator}title {
-        height: initial;
-        width: 100%;
+      width: 100%;
+      height: initial;
 
       .#{ $componentsClass }#{$modifier-separator}head {
-          @include  flex-center;
-          justify-content: space-between;
-          line-height: 1.5rem;
-          div:nth-child(1) {
-              display: flex;
-              align-items: center;
+        @include  flex-center;
+        justify-content: space-between;
+        line-height: 1.5rem;
 
-            .icon#{$element-separator}warning {
-                fill: var(--be-message-warning-color);
-              @include be-notification--icon;
-            }
+        div:nth-child(1) {
+          display: flex;
+          align-items: center;
 
-            .icon#{$element-separator}info {
-                fill: var(--be-message-info-color);
-              @include be-notification--icon;
-            }
-
-            .icon#{$element-separator}success {
-                fill: var(--be-message-success-color);
-              @include be-notification--icon;
-            }
-
-            .icon#{$element-separator}error {
-                fill: var(--be-message-error-color);
-              @include be-notification--icon;
-            }
-
-            .txt#{$element-separator}warning {
-              @include be-message--title;
-              @include  font-mono;
-              color:var(--be-message-text-warning-color);
-              margin-right: 0.5rem;
-            }
-
-            .txt#{$element-separator}info {
-              @include be-message--title;
-              @include  font-mono;
-              color:var(--be-message-text-info-color);
-
-            }
-
-            .txt#{$element-separator}success {
-              @include be-message--title;
-              @include  font-mono;
-              color:var(--be-message-text-success-color);
-            }
-
-            .txt#{$element-separator}error {
-              @include be-message--title;
-              @include  font-mono;
-              color:var(--be-message-text-error-color);
-            }
+          .icon#{$element-separator}warning {
+            fill: var(--be-message-warning-color);
+            @include be-notification--icon;
           }
 
-          div:nth-child(2) {
-              @include be-pointer;
+          .icon#{$element-separator}info {
+            fill: var(--be-message-info-color);
+            @include be-notification--icon;
+          }
+
+          .icon#{$element-separator}success {
+            fill: var(--be-message-success-color);
+            @include be-notification--icon;
+          }
+
+          .icon#{$element-separator}error {
+            fill: var(--be-message-error-color);
+            @include be-notification--icon;
+          }
+
+          .txt#{$element-separator}warning {
+            @include be-message--title;
+            @include  font-mono;
+            margin-right: .5rem;
+            color:var(--be-message-text-warning-color);
+          }
+
+          .txt#{$element-separator}info {
+            @include be-message--title;
+            @include  font-mono;
+            color:var(--be-message-text-info-color);
+
+          }
+
+          .txt#{$element-separator}success {
+            @include be-message--title;
+            @include  font-mono;
+            color:var(--be-message-text-success-color);
+          }
+
+          .txt#{$element-separator}error {
+            @include be-message--title;
+            @include  font-mono;
+            color:var(--be-message-text-error-color);
           }
         }
 
+        div:nth-child(2) {
+          @include be-pointer;
+        }
       }
+
     }
+  }
 
   .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}topCenter {
-      max-width: calc(100vw - 10vw);
-      right: 50%;
-      transform: translateX(50%);
-    }
+    right: 50%;
+    max-width: calc(100vw - 10vw);
+    transform: translateX(50%);
+  }
 }
 
 
 .#{ $componentsClass }#{$element-separator}topCenter {
-
+  position: fixed;
   right: 50%;
-    position: fixed;
   transform: translateX(50%);
 }
 
