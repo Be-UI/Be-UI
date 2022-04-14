@@ -149,7 +149,7 @@ export default defineComponent({
      * 设置动画、样式类
      */
     const setAnimate = (): void => {
-      const containerCls = `be-message-box-container`
+      const containerCls = `be-message-box--container`
       const animateClass = ' be-fadeOut'
       containerClass.value = containerCls + animateClass
       setTimeout(() => {
@@ -172,8 +172,8 @@ export default defineComponent({
               class={containerstyle.value}
               v-drag={{ isDrag: props.isDrag }}
               id={`be_message_box_container${_uid}`}>
-              <div class="be-message-box-title">
-                <div class="be-message-box-head" id={`be_message_box_head${_uid}`}>
+              <div class="be-message-box--title">
+                <div class="be-message-box--head" id={`be_message_box_head${_uid}`}>
                   <div>
                     {props.iconPreRender ? (
                       props.iconPreRender()
@@ -183,7 +183,7 @@ export default defineComponent({
                     <span class={`text-${props.msgType}`}>{props.titles}</span>
                   </div>
                   {/**@slot 弹窗头部按钮**/}
-                  <div class="be-message-box-head-close">
+                  <div class="be-message-box--head-close">
                     {props.iconNextRender ? (
                       <div onClick={() => close()}>{props.iconNextRender()}</div>
                     ) : (
@@ -193,9 +193,9 @@ export default defineComponent({
                 </div>
               </div>
               {/**@slot 弹窗主体**/}
-              <div class="be-message-box-body">{props.bodyRender ? props.bodyRender() : ''}</div>
+              <div class="be-message-box--body">{props.bodyRender ? props.bodyRender() : ''}</div>
               {/**@slot 弹窗底部**/}
-              <div class={`be-message-box-footer be-message-box-footer__${props.footerType}`}>
+              <div class={`be-message-box--footer be-message-box--footer__${props.footerType}`}>
                 {props.footerRender ? (
                   <div onClick={() => confirmFunc()}>{props.footerRender()}</div>
                 ) : (

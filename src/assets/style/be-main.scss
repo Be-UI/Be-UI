@@ -2,9 +2,9 @@
 $componentsClass:$name + '-' + 'main' !global;
 
 @include create-B(main){
-  display: block;
   box-sizing: border-box;
+  display: block;
   flex: 1 1 0%;
-  padding: 1.25rem;
   flex-basis: auto;
+  padding: 1.25rem;
 }

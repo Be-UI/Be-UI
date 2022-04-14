@@ -1,32 +1,41 @@
-
-.be-message-box {
+@import "./common/config";
+$componentsClass:$name + '-' + 'message-box' !global;
+@include create-B(message-box){
+  @include set-component-style-var('message-box', $--message-box);
+}
+@mixin be-message-box--icon {
+  margin-right: 5px;
+  font-size: 20px;
+  line-height: 25px;
+}
+@include create-B(message-box){
   position: fixed;
   top: 0;
   left: 0;
   z-index: 2077;
   display: flex;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  width: var(--be-message-box-h-full);
+  height: var(--be-message-box-h-full);
 
 
-  .be-message-box-container {
+  .#{ $componentsClass }#{$modifier-separator}container {
     @apply shadow;
     z-index: 998;
     box-sizing: border-box;
     align-self: center;
-    width: 305px;
+    width: 306px;
     min-height: 158px;
     padding: 16px;
-    background-color: $default;
-    border-radius: 2px;
+    background-color: var(--be-message-box-bg-w);
+    @include be-radius;
     transition: opacity .5s;
 
-    .be-message-box-title {
-      width: 100%;
+    .#{ $componentsClass }#{$modifier-separator}title {
+      width: var(--be-message-box-h-full);
       height: 25px;;
 
-      .be-message-box-head {
+      .#{ $componentsClass }#{$modifier-separator}head {
         display: flex;
         justify-content: space-between;
         line-height: 25px;
@@ -36,84 +45,72 @@
           align-items: center;
 
           .icon-warning {
-            margin-right: 5px;
-            font-size: 20px;
-            line-height: 25px;
-            fill: $warning;
+            @include be-message-box--icon;
+            fill: var(--be-message-box-warning-color);
           }
 
           .icon-info {
-            margin-right: 5px;
-            font-size: 20px;
-            line-height: 25px;
-            fill: $info;
+            @include be-message-box--icon;
+            fill: var(--be-message-box-info-color);
           }
 
           .icon-success {
-            margin-right: 5px;
-            font-size: 20px;
-            line-height: 25px;
-            fill: $success;
+            @include be-message-box--icon;
+            fill: var(--be-message-box-success-color);
           }
 
           .icon-error {
-            margin-right: 5px;
-            font-size: 20px;
-            line-height: 25px;
-            fill: $error;
+           @include be-message-box--icon;
+            fill: var(--be-message-box-error-color);
           }
 
           .text-warning {
             @include be-message--title;
-            color: $warning;
+            color: var(--be-message-box-warning-color);
           }
 
           .text-info {
             @include be-message--title;
-            color: $info;
+            color: var(--be-message-box-info-color);
           }
 
           .text-success {
             @include be-message--title;
-            color: $success;
+            color: var(--be-message-box-success-color);
           }
 
           .text-error {
             @include be-message--title;
-            color: $error;
+            color: var(--be-message-box-error-color);
           }
         }
 
         div:nth-child(2) {
           display: flex;
           align-items: center;
-          cursor: pointer;
+          @include be-pointer;
         }
       }
 
     }
   }
 
-  .be-message-box-body {
+  .#{ $componentsClass }#{$modifier-separator}body {
     min-height: 80px;
   }
 
-  .be-message-box-footer {
+  .#{ $componentsClass }#{$modifier-separator}footer {
     display: flex;
-    width: 100%;
+    width: var(--be-message-box-h-full);
     height: 24px;
   }
 
-  .be-message-box-footer__center {
+  .#{ $componentsClass }#{$modifier-separator}footer#{$element-separator}center {
     justify-content: center;
   }
 
-  .be-message-box-footer__right {
+  .#{ $componentsClass }#{$modifier-separator}footer#{$element-separator}right {
     justify-content: flex-end;
   }
 
-}
-
-.be-modal {
-  @apply bg-modal;
 }

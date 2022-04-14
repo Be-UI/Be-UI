@@ -5,28 +5,29 @@ $componentsClass:$name + '-' + 'breadcrumb' !global;
 }
 
 @include create-B(breadcrumb){
-  width: var(--be-breadcrumb-w-full);
   display: flex;
+  width: var(--be-breadcrumb-w-full);
   .#{ $componentsClass }#{$modifier-separator}item {
     @include font-mono;
     @include be-pointer;
-    flex-shrink: 1;
     display: flex;
+    flex-shrink: 1;
     align-items: center;
     .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}separator {
       @include font-mono;
-      color: var(--be-breadcrumb-text-default);
-      font-size: 0.875rem;
+      margin-right: .5rem;
+      margin-left: .5rem;
+      font-size: .875rem;
       line-height: 1.25rem;
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
+      color: var(--be-breadcrumb-text-default);
     }
 
     .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}content {
       @include font-mono;
-      color: var(--be-breadcrumb-text-default);
-      font-size: 0.875rem;
+      font-size: .875rem;
       line-height: 1.25rem;
+      color: var(--be-breadcrumb-text-default);
+
       &:hover{
         color: var(--be-breadcrumb-text-hover);
       }
@@ -46,6 +47,7 @@ $componentsClass:$name + '-' + 'breadcrumb' !global;
     .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}content {
       @include font-mono;
       color: var(--be-breadcrumb-text-primary);
+
       a, span {
         cursor: default;
       }
@@ -64,14 +66,15 @@ $componentsClass:$name + '-' + 'breadcrumb' !global;
   .be-popover {
 
     .be-popover--body {
-      padding: 0.5rem;
+      padding: .5rem;
     }
   }
 
   .#{ $componentsClass }#{$modifier-separator}li {
     @include be-pointer;
-    line-height: 1.5rem;
     height: 1.5rem;
+    line-height: 1.5rem;
+
     &:hover{
       background-color: var(--be-breadcrumb-bg-g);
     }

@@ -133,7 +133,7 @@ describe('test-be-message-box-props', () => {
     })
 
     const elm: HTMLElement = document.body.querySelector('.props-footerType') as HTMLElement
-    const elmFooter: HTMLElement = elm.querySelector('.be-message-box-footer__right') as HTMLElement
+    const elmFooter: HTMLElement = elm.querySelector('.be-message-box--footer__right') as HTMLElement
     asyncExpect(() => {
       expect(elmFooter).toBeTruthy()
     }, null)
@@ -196,7 +196,7 @@ describe('test-be-message-box-event', () => {
       iconNextRender: null,
     })
     const elm = document.body.querySelector('.msg-event-onClose') as HTMLElement
-    const closeElm = elm.querySelector('.be-message-box-head-close') as HTMLElement
+    const closeElm = elm.querySelector('.be-message-box--head-close') as HTMLElement
     const closeIcon = closeElm.querySelector('.be-icon-container') as HTMLElement
     closeIcon.dispatchEvent(new Event('click'))
     asyncExpect(() => {
@@ -214,7 +214,7 @@ describe('test-be-message-box-event', () => {
       onConfirm: handleClick,
     })
     const elm = document.body.querySelector('.msg-event-onConfirm') as HTMLElement
-    const confirmElm = elm.querySelector('.be-message-box-footer')?.childNodes[0] as HTMLElement
+    const confirmElm = elm.querySelector('.be-message-box--footer')?.childNodes[0] as HTMLElement
     confirmElm.dispatchEvent(new Event('click'))
     asyncExpect(() => {
       expect(handleClick).toBeCalled()
