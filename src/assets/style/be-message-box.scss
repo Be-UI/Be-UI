@@ -60,7 +60,7 @@ $componentsClass:$name + '-' + 'message-box' !global;
           }
 
           .icon-error {
-           @include be-message-box--icon;
+            @include be-message-box--icon;
             fill: var(--be-message-box-error-color);
           }
 
