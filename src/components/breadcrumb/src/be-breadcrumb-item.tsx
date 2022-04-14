@@ -84,7 +84,7 @@ export default defineComponent({
       optionList.value.forEach((val: any) => {
         // 選項列表
         renderList.push(
-          <li key={val.id} class="be-breadcrumb-item-li" onClick={() => handleClickItem(val)}>
+          <li key={val.id} class="be-breadcrumb--li" onClick={() => handleClickItem(val)}>
             {val.label}
           </li>
         )
@@ -97,7 +97,7 @@ export default defineComponent({
     const renderContent = (): VNode => {
       return (
         <div
-          class="be-breadcrumb-item__content"
+          class="be-breadcrumb--item__content"
           ref="BeBreadcrumbItem"
           id={`be_breadcrumb_item__content${uid}`}
           onClick={($event: Event) => handleClick($event)}>
@@ -123,13 +123,13 @@ export default defineComponent({
       return (
         <div
           class={`
-                     be-breadcrumb-item
-                     ${props.disabled ? 'be-breadcrumb-item__disabled' : ''} `}
+                     be-breadcrumb--item
+                     ${props.disabled ? 'be-breadcrumb--item__disabled' : ''} `}
           aria-label="BeBreadcrumbItem">
           {optionList.value.length > 0 ? (
             <be-popover
               ref="beBreadcrumbPopover"
-              customClass="be-breadcrumb-popover"
+              customClass="be-breadcrumb--popover"
               placement="bottom"
               trigger={props.disabled ? 'none' : 'click'}>
               {{
@@ -140,7 +140,7 @@ export default defineComponent({
           ) : (
             renderContent()
           )}
-          <div class="be-breadcrumb-item__separator">
+          <div class="be-breadcrumb--item__separator">
             {internalInstance.slots.separator
               ? internalInstance.slots.separator()
               : props.separator}

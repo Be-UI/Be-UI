@@ -81,7 +81,7 @@ input:focus-visible {
       'warning-color': $warning,
       'success-color': $success,
       'error-color': $error,
-      'link-color': $link,
+        'link-color': $link,
       'info-color': $info,
       'warning-color--hover': $warningHover,
       'success-color--hover': $successHover,
@@ -121,10 +121,11 @@ input:focus-visible {
       'regular': #606266,
       'secondary': #909399,
       'placeholder': #c0c4cc,
+       'link':#409eff
     ),$--text-color
   );
   // 文字顔色
-  @each $type in (primary, regular, secondary, placeholder) {
+  @each $type in (primary, regular, secondary, placeholder,link) {
     @include set-css-var-type('text-color', $type, $--text-color);
   }
 
@@ -133,11 +134,12 @@ input:focus-visible {
     (
       'w': $white,
       'b': $black,
-      'grays': #c0c4cc
+      'grays': #c0c4cc,
+      'bg-hover':#f5f5f5
     ),$--color
   );
   // 其他基础色
-  @each $type in (w, b, grays) {
+  @each $type in (w, b, grays,bg-hover) {
     @include set-css-var-type('base-color', $type, $--color);
   }
 
@@ -292,4 +294,16 @@ $--notification: map.deep-merge(
     'text-warning-color': var(--be-emo-warning-color),
     'text-info-color': var(--be-emo-info-color),
   ),$--notification
+);
+// 生成 be-breadcrumb
+$--breadcrumb: () !default;
+$--breadcrumb: map.deep-merge(
+                (
+                        'w-full':var(--be-percentage-full),
+                        'text-hover': var(--be-text-color-link),
+                        'text-default': var(--be-text-color-regular),
+                        'text-primary': var(--be-text-color-primary),
+                        'bg-g': var(--be-base-color-bg-hover),
+
+                ),$--breadcrumb
 );

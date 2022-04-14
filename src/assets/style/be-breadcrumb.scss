@@ -1,54 +1,79 @@
-.be-breadcrumb {
-  @apply flex w-full;
+@import "./common/config";
+$componentsClass:$name + '-' + 'breadcrumb' !global;
+@include create-B(breadcrumb){
+  @include set-component-style-var('breadcrumb', $--breadcrumb);
+}
 
-  .be-breadcrumb-item {
-    @apply font-mono flex flex-shrink items-center cursor-pointer hover:text-primaryh;
-
-    .be-breadcrumb-item__separator {
-      @apply font-mono text-info mx-2 text-sm;
+@include create-B(breadcrumb){
+  width: var(--be-breadcrumb-w-full);
+  display: flex;
+  .#{ $componentsClass }#{$modifier-separator}item {
+    @include font-mono;
+    @include be-pointer;
+    flex-shrink: 1;
+    display: flex;
+    align-items: center;
+    .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}separator {
+      @include font-mono;
+      color: var(--be-breadcrumb-text-default);
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
     }
 
-    .be-breadcrumb-item__content {
-      @apply font-mono text-info hover:text-primaryh text-sm;
+    .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}content {
+      @include font-mono;
+      color: var(--be-breadcrumb-text-default);
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      &:hover{
+        color: var(--be-breadcrumb-text-hover);
+      }
     }
   }
 
-  .be-breadcrumb-item__disabled {
-    @apply cursor-not-allowed;
+  .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}disabled {
+    @include be-disabled;
 
     a, span {
-      @apply cursor-not-allowed;
+      @include be-disabled;
     }
   }
-
-}
-
-.be-breadcrumb .be-breadcrumb-item:last-child .be-breadcrumb-item__separator {
-  display: none;
-}
-
-.be-breadcrumb .be-breadcrumb-item:last-child {
-  @apply cursor-default;
-
-  .be-breadcrumb-item__content {
-    @apply font-mono text-black;
-
-    a, span {
-      @apply cursor-default;
+  
+  .#{ $componentsClass }#{$modifier-separator}item:last-child {
+    cursor: default;
+    .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}content {
+      @include font-mono;
+      color: var(--be-breadcrumb-text-primary);
+      a, span {
+        cursor: default;
+      }
+    }
+    .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}separator {
+      display: none;
     }
   }
 }
 
-.be-breadcrumb-popover {
+
+
+
+.#{ $componentsClass }#{$modifier-separator}popover {
 
   .be-popover {
 
     .be-popover--body {
-      @apply p-2;
+      padding: 0.5rem;
     }
   }
 
-  .be-breadcrumb-item-li {
-    @apply h-6 leading-6 cursor-pointer hover:bg-infoh
+  .#{ $componentsClass }#{$modifier-separator}li {
+    @include be-pointer;
+    line-height: 1.5rem;
+    height: 1.5rem;
+    &:hover{
+      background-color: var(--be-breadcrumb-bg-g);
+    }
   }
 }

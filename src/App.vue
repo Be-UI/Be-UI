@@ -582,18 +582,26 @@
                     测试
                 </be-button> </template>
         </be-pagination>-->
-        <be-switch
+    <!--        <be-switch
 
-            v-model="switchModel"
-            @change="testClose" >
-            <template v-slot:unCheckedRender="slotProps">
-                <span>unChecked</span>
-            </template>
-            <template v-slot:checkedRender="slotProps">
-                <span>checked</span>
-            </template>
-        </be-switch>
-        <be-tag  @close="handleClick" size="medium" @click="openMsg">be-tag</be-tag>
+                v-model="switchModel"
+                @change="testClose" >
+                <template v-slot:unCheckedRender="slotProps">
+                    <span>unChecked</span>
+                </template>
+                <template v-slot:checkedRender="slotProps">
+                    <span>checked</span>
+                </template>
+            </be-switch>
+            <be-tag  @close="handleClick" size="medium" @click="openMsg">be-tag</be-tag>-->
+        <be-breadcrumb>
+            <be-breadcrumb-item to="/黑色柳丁" separator="#">柳丁</be-breadcrumb-item>
+            <be-breadcrumb-item to="/似曾相识" :option="testList" :clickOption="handleClick">似曾相识</be-breadcrumb-item>
+            <be-breadcrumb-item to="/小镇姑娘" separator="#" :click="testClose">
+                小镇姑娘
+                <template #separator>❀</template>
+            </be-breadcrumb-item>
+        </be-breadcrumb>
     </div>
   </div>
 </template>
