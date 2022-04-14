@@ -5,3 +5,4 @@ public
 /src/App.vue
 /src/**/*.test.ts
 /src/**/*.test.tsx
+package.json
