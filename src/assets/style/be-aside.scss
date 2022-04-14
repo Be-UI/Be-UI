@@ -1,4 +1,9 @@
+@import "./common/config";
+$componentsClass:$name + '-' + 'aside' !global;
 
-.be-aside {
-  @apply box-border flex-shrink-0 overflow-auto w-72;
+@include create-B(aside){
+  box-sizing: border-box;
+  flex-shrink: 0;
+  overflow: auto;
+  width: 18rem;
 }

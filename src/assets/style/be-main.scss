@@ -1,4 +1,10 @@
-.be-main{
-  @apply block flex-1 box-border overflow-auto p-5;
+@import "./common/config";
+$componentsClass:$name + '-' + 'main' !global;
+
+@include create-B(main){
+  display: block;
+  box-sizing: border-box;
+  flex: 1 1 0%;
+  padding: 1.25rem;
   flex-basis: auto;
 }

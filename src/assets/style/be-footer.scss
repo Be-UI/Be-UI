@@ -1,3 +1,9 @@
-.be-footer {
-  @apply box-border px-5 py-0 flex-shrink-0 h-14;
+@import "./common/config";
+$componentsClass:$name + '-' + 'footer' !global;
+
+@include create-B(footer){
+  box-sizing: border-box;
+  height: 3.5rem;
+  padding: 0 1.25rem 0 1.25rem;
+  flex-shrink: 0;
 }
