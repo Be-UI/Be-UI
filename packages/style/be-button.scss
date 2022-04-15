@@ -1,0 +1,272 @@
+@mixin be-button-border(
+  $bgColor,
+  $textColor,
+  $borderColor,
+  $hoverBgColor,
+  $HoverBorderColor,
+  $hoverIconColor
+) {
+  color: $textColor;
+  background-color: $bgColor;
+  border-color: $borderColor;
+  border-width: 1px;
+
+  button {
+    color: $textColor;
+  }
+
+  &:hover {
+    background-color: $hoverBgColor;
+    border-color: $HoverBorderColor;
+
+    .be-button-prevIcon__primary,
+    .be-button-nextIcon__primary {
+      .be-icon {
+        use {
+          fill: $hoverIconColor;
+        }
+      }
+    }
+  }
+}
+
+.be-button__inner {
+  @apply border-0 cursor-pointer p-0 bg-transparent align-bottom focus:outline-none;
+}
+
+.be-button__inner__disabled {
+  @apply cursor-not-allowed;
+}
+
+.be-button {
+  @apply font-mono inline-block border-0 text-default rounded focus:outline-none;
+
+  .be-button-body {
+    @apply flex justify-center mx-auto my-0;
+
+    .be-button-slot {
+      @apply mx-1 my-0 font-mono;
+    }
+
+    .be-button-prevIcon__error,
+    .be-button-nextIcon__error,
+    .be-button-prevIcon__warning,
+    .be-button-nextIcon__warning,
+    .be-button-prevIcon__success,
+    .be-button-nextIcon__success {
+      .be-icon {
+        use {
+          @apply fill-default;
+        }
+      }
+    }
+
+    .be-button-prevIcon__info,
+    .be-button-nextIcon__info,
+    .be-button-prevIcon__default,
+    .be-button-nextIcon__default {
+      .be-icon {
+        use {
+          @apply fill-info;
+        }
+      }
+    }
+
+    .be-button-prevIcon__primary,
+    .be-button-nextIcon__primary {
+      .be-icon {
+        use {
+          @apply fill-primaryh;
+        }
+      }
+    }
+
+    .be-button-prevIcon,
+    .be-button-nextIcon {
+      @apply flex items-center;
+    }
+  }
+}
+
+.be-button__mini {
+  @apply box-border py-0 px-2.5 h-6 leading-6;
+
+  button {
+    @apply leading-6;
+  }
+}
+
+.be-button__medium {
+  @apply box-border py-0 px-2.5 h-8 leading-8;
+
+  button {
+    @apply leading-8;
+  }
+}
+
+.be-button__large {
+  @apply box-border py-0 px-2.5 h-9 leading-9;
+
+  button {
+    @apply leading-9;
+  }
+}
+
+.be-button__error {
+  @apply font-mono bg-error text-default border-0 hover:bg-errorh;
+
+  button {
+    @apply font-mono text-default;
+  }
+}
+
+.be-button__info {
+  @apply font-mono bg-default text-info border-0 hover:bg-infoh;
+
+  button {
+    @apply font-mono text-info;
+  }
+}
+
+.be-button__success {
+  @apply font-mono bg-success text-default border-0 hover:bg-successh;
+
+  button {
+    @apply font-mono text-default;
+  }
+}
+
+.be-button__warning {
+  @apply font-mono bg-warning text-default border-0 hover:bg-warningh;
+
+  button {
+    @apply font-mono text-default;
+  }
+}
+
+.be-button__primary {
+  @apply font-mono bg-defaulth text-primaryh border-0 hover:text-default hover:bg-primaryh hover:border-primary;
+
+  button {
+    @apply font-mono text-primary hover:text-default;
+  }
+
+  &:hover {
+    .be-button-prevIcon__primary,
+    .be-button-nextIcon__primary {
+      .be-icon {
+        use {
+          @apply fill-default;
+        }
+      }
+    }
+  }
+}
+
+.be-button__default {
+  @apply font-mono bg-default text-info border-0 hover:text-primaryh hover:bg-defaulth;
+
+  &:hover {
+    button {
+      @apply font-mono text-primary;
+    }
+
+    .be-button-prevIcon__default,
+    .be-button-nextIcon__default {
+      .be-icon {
+        use {
+          @apply fill-primaryh;
+        }
+      }
+    }
+  }
+}
+
+/* 带边框 */
+
+.be-button__error__border {
+  @include be-button-border(
+    $error,
+    $whiteText,
+    $errorBorder,
+    $errorHover,
+    $errorHoverBorder,
+    $whiteText
+  );
+}
+
+.be-button__info__border {
+  @include be-button-border(
+    $default,
+    $defaultText,
+    $infoBorder,
+    $infoHover,
+    $infoHoverBorder,
+    $defaultText
+  );
+}
+
+.be-button__success__border {
+  @include be-button-border(
+    $success,
+    $whiteText,
+    $successBorder,
+    $successHover,
+    $successHoverBorder,
+    $whiteText
+  );
+}
+
+.be-button__warning__border {
+  @include be-button-border(
+    $warning,
+    $whiteText,
+    $warningBorder,
+    $warningHover,
+    $warningHoverBorder,
+    $whiteText
+  );
+}
+
+.be-button__primary__border {
+  @include be-button-border(
+    $primary,
+    $primaryText,
+    $primaryBorder,
+    $primaryHover,
+    $primaryHoverBorder,
+    $whiteText
+  );
+
+  &:hover {
+    color: $whiteText;
+  }
+}
+
+.be-button__default__border {
+  @include be-button-border(
+    $default,
+    $defaultText,
+    $infoBorder,
+    $primary,
+    $primaryBorder,
+    $whiteText
+  );
+
+  &:hover {
+    color: $primaryText;
+
+    button {
+      color: $primaryText;
+    }
+
+    .be-button-prevIcon__default,
+    .be-button-nextIcon__default {
+      .be-icon {
+        use {
+          @apply fill-primaryh;
+        }
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@
  * refactor：重构某个功能
  * optimize: 优化构建工具或运行时性能
  * style：仅样式改动
- * doc：仅文档新增/改动
+ * docs：仅文档新增/改动
  * chore：构建过程或辅助工具的变动
  */
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
     'type-enum': [
       2,
       'always',
-      ['feat', 'update', 'fix', 'refactor', 'optimize', 'style', 'doc', 'chore'],
+      ['feat', 'update', 'fix', 'refactor', 'optimize', 'style', 'docs', 'chore'],
     ],
   },
 }

@@ -1,40 +1,51 @@
 {
   "name": "be-ui",
-  "version": "1.0.2",
+  "version": "3.0.2",
+  "packageManager": "pnpm@6.32.4",
+  "workspaces": [
+    "packages/*",
+    "docs"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "lint:ts": "eslint ./src --ext .vue,.js,.ts,.jsx,.tsx",
-    "lint:ts-fix": "eslint --fix ./src --ext .vue,.js,.ts,.jsx,.tsx ",
+    "lint:ts": "eslint ./packages --ext .vue,.js,.ts,.jsx,.tsx",
+    "lint:ts-fix": "eslint --fix ./packages --ext .vue,.js,.ts,.jsx,.tsx",
+    "docs:dev": "pnpm run -C docs docs:dev",
+    "docs:build": "pnpm run -C docs docs:build",
+    "docs:serve": "pnpm run -C docs docs:serve",
     "prettier:fix": "prettier --write .",
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{vue,js,ts,jsx,tsx,md,json}": [
+    "./packages --ext .vue,.js,.ts,.jsx,.tsx": [
       "pretty-quick --staged",
       "eslint --fix",
       "git add"
     ]
   },
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/be-ui.umd.js",
-  "module": "./dist/be-ui.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/be-ui.es.js",
-      "require": "./dist/be-ui.umd.js"
+  "pnpm": {
+    "overrides": {
+      "jsdom": "16.4.0"
     }
+  },
+  "engines": {
+    "node": ">= 16"
+  },
+  "browserslist": [
+    "> 1%",
+    "not ie 11",
+    "not op_mini all"
+  ],
+  "peerDependencies": {
+    "vue": "^3.2.23"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.4",
     "@rollup/plugin-babel": "^5.3.0",
-    "save": "^2.4.0",
-    "vite-dts": "^1.0.4",
-    "vue": "^3.2.23"
+    "vite-dts": "^1.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -47,7 +58,6 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@types/jest": "^27.0.2",
     "@types/marked": "^2.0.2",
-    "@types/node": "^16.7.4",
     "@vitejs/plugin-vue": "^2.3.1",
     "@vitejs/plugin-vue-jsx": "^1.3.9",
     "@vue/babel-plugin-jsx": "^1.1.1",
@@ -57,8 +67,6 @@
     "babel-jest": "26.0.0",
     "husky": "^7.0.4",
     "jest": "26.0.0",
-    "postcss": "^7.0.39",
-    "rollup-plugin-cleanup": "^3.2.1",
     "sass": "^1.38.0",
     "svg-sprite-loader": "^6.0.9",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
@@ -78,6 +86,17 @@
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
     "@vue/eslint-config-prettier": "^7.0.0",
-    "@vue/eslint-config-typescript": "^10.0.0"
+    "@vue/eslint-config-typescript": "^10.0.0",
+    "@pnpm/find-workspace-packages": "^4.0.0",
+    "@pnpm/logger": "^4.0.0",
+    "@pnpm/types": "^8.0.0",
+    "@types/fs-extra": "^9.0.13",
+    "@types/gulp": "^4.0.9",
+    "@types/node": "*",
+    "@types/sass": "^1.43.1",
+    "@vue/tsconfig": "^0.1.3",
+    "lint-staged": "^12.3.7",
+    "postcss": "^7.0.39",
+    "rollup-plugin-cleanup": "^3.2.1"
   }
 }

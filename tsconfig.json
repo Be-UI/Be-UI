@@ -17,13 +17,12 @@
     "types": ["vite/client", "jest"]
   },
   "include": [
-    "/src/**/*.ts",
-    "/src/**/*.d.ts",
-    "/src/**/*.tsx",
-    "/src/**/*.vue",
+    "packages/**/*.ts",
+    "packages/**/*.d.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.vue",
     "node_modules/@types/jest/index.d.ts"
   ],
   // ts 排除的文件
-  "exclude": ["node_modules", "**/__tests__/"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["node_modules", "**/__tests__/"]
 }

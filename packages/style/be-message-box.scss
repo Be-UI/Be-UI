@@ -1,0 +1,113 @@
+@import 'common/config';
+$componentsClass: $name + '-' + 'message-box' !global;
+@include create-B(message-box) {
+  @include set-component-style-var('message-box', $--message-box);
+}
+@mixin be-message-box--icon {
+  margin-right: 5px;
+  font-size: 20px;
+  line-height: 25px;
+}
+@include create-B(message-box) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2077;
+  display: flex;
+  justify-content: center;
+  width: var(--be-message-box-h-full);
+  height: var(--be-message-box-h-full);
+
+  .#{ $componentsClass }#{$modifier-separator}container {
+    @apply shadow;
+    z-index: 998;
+    box-sizing: border-box;
+    align-self: center;
+    width: 306px;
+    min-height: 158px;
+    padding: 16px;
+    background-color: var(--be-message-box-bg-w);
+    @include be-radius;
+    transition: opacity 0.5s;
+
+    .#{ $componentsClass }#{$modifier-separator}title {
+      width: var(--be-message-box-h-full);
+      height: 25px;
+
+      .#{ $componentsClass }#{$modifier-separator}head {
+        display: flex;
+        justify-content: space-between;
+        line-height: 25px;
+
+        div:nth-child(1) {
+          display: flex;
+          align-items: center;
+
+          .icon-warning {
+            @include be-message-box--icon;
+            fill: var(--be-message-box-warning-color);
+          }
+
+          .icon-info {
+            @include be-message-box--icon;
+            fill: var(--be-message-box-info-color);
+          }
+
+          .icon-success {
+            @include be-message-box--icon;
+            fill: var(--be-message-box-success-color);
+          }
+
+          .icon-error {
+            @include be-message-box--icon;
+            fill: var(--be-message-box-error-color);
+          }
+
+          .text-warning {
+            @include be-message--title;
+            color: var(--be-message-box-warning-color);
+          }
+
+          .text-info {
+            @include be-message--title;
+            color: var(--be-message-box-info-color);
+          }
+
+          .text-success {
+            @include be-message--title;
+            color: var(--be-message-box-success-color);
+          }
+
+          .text-error {
+            @include be-message--title;
+            color: var(--be-message-box-error-color);
+          }
+        }
+
+        div:nth-child(2) {
+          display: flex;
+          align-items: center;
+          @include be-pointer;
+        }
+      }
+    }
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}body {
+    min-height: 80px;
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}footer {
+    display: flex;
+    width: var(--be-message-box-h-full);
+    height: 24px;
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}footer#{$element-separator}center {
+    justify-content: center;
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}footer#{$element-separator}right {
+    justify-content: flex-end;
+  }
+}

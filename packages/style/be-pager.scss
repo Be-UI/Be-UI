@@ -1,0 +1,103 @@
+@import 'common/config';
+$componentsClass: $name + '-' + 'pager' !global;
+@include create-B(pager) {
+  @include set-component-style-var('pager', $--pager);
+}
+
+.be-pager-container {
+  display: flex;
+  align-items: center;
+
+  .be-select {
+    .be-select-body.be-pager-select {
+      width: 5rem;
+      min-width: 64px;
+      height: 25px;
+      margin: 0 5px;
+      font-size: 12px;
+
+      .be-select-input__medium {
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+      }
+    }
+  }
+}
+
+@include create-B(pager) {
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  list-style: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  @include flex-center;
+
+  li {
+    @include flex-center;
+    @include be-pointer;
+    @include be-radius;
+    box-sizing: border-box;
+    min-width: 25px;
+    height: 25px;
+    padding: 0 4px;
+    margin: 0 3px;
+    font-size: 13px;
+    line-height: 25px;
+    text-align: center;
+    background-color: var(--be-pager-bg-w);
+
+    &.btn-quicknext,
+    &.btn-quickprev {
+      line-height: 28px;
+      color: var(--be-text-color-regular);
+    }
+
+    &.active {
+      color: var(--be-pager-text-active);
+      cursor: default;
+    }
+
+    &:hover {
+      color: var(--be-pager-text-active);
+    }
+  }
+  .#{ $componentsClass }#{$element-separator}disabled {
+    li {
+      -webkit-box-sizing: border-box;
+      cursor: not-allowed;
+      background: var(--be-pager-bg-w);
+
+      &.btn-quicknext,
+      &.btn-quickprev {
+        &:hover {
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  .more::before {
+    line-height: 30px;
+  }
+  .#{ $componentsClass }#{$modifier-separator}info {
+    font-size: 12px;
+  }
+  .#{ $componentsClass }#{$modifier-separator}jump {
+    margin: 0 5px;
+    font-size: 12px;
+  }
+  .#{ $componentsClass }#{$modifier-separator}jump#{$element-separator}input {
+    width: 35px;
+    margin: 0 2px;
+    color: var(--be-text-color-regular);
+    background-color: var(--be-pager-bg-w);
+    background-image: none;
+    border: 1px solid var(--be-pager-border);
+    transition: all 0.3s;
+    @include be-radius;
+  }
+}

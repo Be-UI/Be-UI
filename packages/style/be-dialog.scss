@@ -1,0 +1,54 @@
+.be-dialog-modal {
+  @apply bg-modal flex justify-center fixed h-full w-full top-0 left-0;
+  z-index: 2076;
+}
+
+.be-dialog {
+  @apply flex justify-center fixed h-full w-full top-0 left-0;
+  z-index: 2077;
+
+  .be-dialog-container {
+    @apply bg-default rounded-lg min-w-24 self-center;
+    z-index: 998;
+
+    .be-dialog-title {
+      @apply bg-default rounded-lg;
+
+      .be-dialog-container-head {
+        @apply box-border py-4 px-5;
+
+        .be-dialog-close {
+          @apply text-txt font-mono cursor-pointer float-right leading-8;
+        }
+
+        span {
+          @apply text-txt font-mono font-bold text-lg;
+        }
+      }
+    }
+
+    .be-dialog-body {
+      @apply box-border py-4 px-5;
+
+      .be-dialog-body__inner {
+        @apply bg-default;
+      }
+    }
+
+    .be-dialog-footer {
+      @apply h-16 py-4 px-5;
+
+      .be-dialog-footer-btn {
+        @apply w-20;
+      }
+    }
+
+    .be-dialog-footer__center {
+      @apply flex justify-center;
+    }
+
+    .be-dialog-footer__right {
+      @apply flex justify-end;
+    }
+  }
+}

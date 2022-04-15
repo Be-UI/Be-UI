@@ -1,0 +1,79 @@
+@import 'common/config';
+$componentsClass: $name + '-' + 'breadcrumb' !global;
+@include create-B(breadcrumb) {
+  @include set-component-style-var('breadcrumb', $--breadcrumb);
+}
+
+@include create-B(breadcrumb) {
+  display: flex;
+  width: var(--be-breadcrumb-w-full);
+  .#{ $componentsClass }#{$modifier-separator}item {
+    @include font-mono;
+    @include be-pointer;
+    display: flex;
+    flex-shrink: 1;
+    align-items: center;
+    .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}separator {
+      @include font-mono;
+      margin-right: 0.5rem;
+      margin-left: 0.5rem;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      color: var(--be-breadcrumb-text-default);
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}content {
+      @include font-mono;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      color: var(--be-breadcrumb-text-default);
+
+      &:hover {
+        color: var(--be-breadcrumb-text-hover);
+      }
+    }
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}disabled {
+    @include be-disabled;
+
+    a,
+    span {
+      @include be-disabled;
+    }
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}item:last-child {
+    cursor: default;
+    .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}content {
+      @include font-mono;
+      color: var(--be-breadcrumb-text-primary);
+
+      a,
+      span {
+        cursor: default;
+      }
+    }
+    .#{ $componentsClass }#{$modifier-separator}item#{$element-separator}separator {
+      display: none;
+    }
+  }
+}
+
+.#{ $componentsClass }#{$modifier-separator}popover {
+  .be-popover {
+    .be-popover--body {
+      padding: 0.5rem;
+    }
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}li {
+    @include be-pointer;
+    height: 1.5rem;
+    line-height: 1.5rem;
+
+    &:hover {
+      background-color: var(--be-breadcrumb-bg-g);
+    }
+  }
+}
