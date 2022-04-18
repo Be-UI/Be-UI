@@ -9,10 +9,18 @@
   },
   "author": "baiwusanyu",
   "license": "ISC",
+  "dependencies": {
+    "@vueuse/core": "^8.2.5",
+    "@docsearch/js": "^3.0.0",
+    "@docsearch/css": "^3.0.0",
+    "@docsearch/react": "^3.0.0"
+  },
   "devDependencies": {
-    "vitepress": "^0.22.3",
     "vite": "^2.9.1",
     "vite-plugin-inspect": "^0.4.3",
-    "vite-plugin-pwa": "^0.11.13"
+    "vite-plugin-pwa": "^0.11.13",
+    "vite-plugin-windicss": "^1.8.4",
+    "vitepress": "^0.22.3",
+    "windicss": "^3.5.1"
   }
 }
