@@ -1,14 +1,14 @@
 <template>
     <div class="flex flex-1 items-center">
         <div class="flex h-10 items-center cursor-pointer md:w-64 sm:w-12" @click="routerPush(navs[0].link)">
-            <img src="../../src/assets/img/logo.png" class="h-10 w-10 mr-4 "/>
+            <img src="../assets/img/logo.png" class="h-10 w-10 mr-4 "/>
             <div class="font-mono text-2xl md:flex sm:hidden">
                 Be-UI3
             </div>
         </div>
 
         <div class="h-10 flex items-center justify-between ml-10">
-            <div class="w-28 cursor-pointer font-mono md:flex sm:hidden"
+            <div class="w-12 cursor-pointer font-mono md:flex sm:hidden"
                  v-for="(item) in navs"
                  :key="item.link + item.text"
                  @click="routerPush(item.link)">

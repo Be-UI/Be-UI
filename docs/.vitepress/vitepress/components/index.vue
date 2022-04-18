@@ -21,15 +21,30 @@ export default defineComponent({
 
 <template>
     <div class="App">
+        <be-container class="be-ui-doc-container h-full" style="overflow-y: hidden">
         <be-header class="flex items-center justify-between fixed w-full bg-default shadow">
             <vp-header></vp-header>
         </be-header>
         <!--  渲染mkd内容    -->
-        <Content ref="content"/>
+            <be-main class="be-ui-doc-main scroll-diy relative" >
+                <Content ref="content" class="content-body"/>
+            </be-main>
+        </be-container>
     </div>
 </template>
-<style>
+<style lang="scss">
 .App .be-header{
     @apply px-8;
 }
+.be-ui-doc-main{
+    height: calc(100vh - 60px);
+    top: 60px;
+}
+.content-body{
+    @apply w-full h-full absolute left-0 top-0;
+    & >div:first-child{
+        @apply w-full h-full;
+    }
+}
+
 </style>

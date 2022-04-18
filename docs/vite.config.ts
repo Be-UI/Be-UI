@@ -15,6 +15,7 @@ export default {
       scss: {
         additionalData: `
                 @import "./.vitepress/vitepress/styles/mixins.scss";
+                @import "./.vitepress/vitepress/styles/common.css";
                 @import "./.vitepress/vitepress/styles/vars.scss";`, // 添加公共样式
       },
     },

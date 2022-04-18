@@ -148,6 +148,7 @@ function initialize(userOptions: any) {
 .DocSearch {
     --docsearch-primary-color: #ec4899;
     --docsearch-searchbox-shadow: inset 0 0 0 2px #ec4899;
+    --docsearch-searchbox-shadow-de: inset 0 0 0 2px #f2f2f2;
     --docsearch-key-gradient: rgba(125, 125, 125, 0.1);
     --docsearch-footer-height: 44px;
     --docsearch-footer-background: #fff;
@@ -162,6 +163,10 @@ function initialize(userOptions: any) {
 
     &.DocSearch-Button {
         margin-right: 8px;
+        box-shadow: var(--docsearch-searchbox-shadow-de);
+        &:hover{
+            box-shadow: var(--docsearch-searchbox-shadow);
+        }
     }
 
     @media (max-width: 749px) {
