@@ -1,6 +1,6 @@
 @use 'sass:map';
 
-@use './vars' as *;
+@import './vars' ;
 $breakpoints: (
         'sm': #{$breakpoint-sm},
         'md': #{$breakpoint-md},

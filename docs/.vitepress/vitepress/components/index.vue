@@ -27,7 +27,7 @@ export default defineComponent({
         </be-header>
         <!--  渲染mkd内容    -->
             <be-main class="be-ui-doc-main scroll-diy relative" >
-                <Content ref="content" class="content-body"/>
+                <Content ref="content" class="doc-content content-body"/>
             </be-main>
         </be-container>
     </div>
@@ -44,6 +44,16 @@ export default defineComponent({
     @apply w-full h-full absolute left-0 top-0;
     & >div:first-child{
         @apply w-full h-full;
+    }
+    & h2::after{
+        content: '';
+        width: 100%;
+        height: 2px;
+        background-color: $mainColor;
+        border-radius: 4px;
+        position: absolute;
+        top: 40px;
+
     }
 }
 

@@ -13,7 +13,9 @@
     "@vueuse/core": "^8.2.5",
     "@docsearch/js": "^3.0.0",
     "@docsearch/css": "^3.0.0",
-    "@docsearch/react": "^3.0.0"
+    "@docsearch/react": "^3.0.0",
+    "normalize.css": "^8.0.1",
+    "prism-theme-vars": "^0.2.2"
   },
   "devDependencies": {
     "vite": "^2.9.1",
