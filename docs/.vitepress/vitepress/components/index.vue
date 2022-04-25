@@ -33,7 +33,7 @@ export default defineComponent({
                 <!--  侧边导航    -->
                 <be-aside class="scroll-diy bg-default shadow md:block sm:hidden"
                           v-if="showSidebar"
-                          style="height: 882px;overflow-y: auto">
+                          style="overflow-y: auto">
                           <vp-sidebar></vp-sidebar>
                 </be-aside>
                 <be-main class="be-ui-doc-main scroll-diy relative">
