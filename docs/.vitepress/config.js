@@ -5,7 +5,7 @@
  * @update (czh 2022/4/14)
  */
 import {defineConfigWithTheme} from 'vitepress'
-
+import { mdPlugin } from './plugin/plugins'
 export default defineConfigWithTheme({
     repo: 'xinlei3166/vitepress-theme-demoblock',
     head: [
@@ -15,6 +15,11 @@ export default defineConfigWithTheme({
     base: '/',
     title: 'Be-UI3', // 浏览器tab的title和head的title
     description: 'be-ui3 Vue3组件库',
+    markdown: {
+        config: (md) => {
+            return mdPlugin(md)
+        }
+    },
     themeConfig: {
         docsDir: 'docs',
         editLinkText: 'Edit this page on GitHub',

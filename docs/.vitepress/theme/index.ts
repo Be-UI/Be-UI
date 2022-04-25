@@ -5,6 +5,7 @@ import type { Theme } from 'vitepress'
 import 'virtual:windi.css'
 import '../../public/be-ui/style.css'
 import BeUI from '../../public/be-ui/be-ui.es.js'
+import  '../../public/be-ui/style.css'
 export const define = <T>(value: T): T => value
 export default define<Theme>({
   Layout: index,

@@ -10,7 +10,7 @@
                 @click="handleClick"
                 :class="{link: true,'aside-active': handleActive(child),'flex items-center': item.promotion,}"
                  class="hover:shadow hover:text-pink-500 hover:font-bold"
-                :href="`#${pageFlag === 'introduction' ? child.text : child.link}`">
+                :href="`${pageFlag === 'introduction' ? `#${child.text}` : child.link}`">
                 <p class="link-text">{{ child.text }}</p>
             </a>
         </section>
