@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col items-start w-full py-4 sidebar">
+    <div class="flex flex-col items-start w-full py-4 sidebar scroll-diy">
         <section v-for="(item) in list"
              style="height: 45px"
              class="sidebar-groups font-mono bg-default w-full mb-2 flex flex-col px-8"
@@ -83,6 +83,8 @@ export default defineComponent({
 .sidebar{
     position: fixed;
     width: inherit;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
 }
 .sidebar .sidebar-groups .sidebar-group__title{
     font-size: 1.3rem;

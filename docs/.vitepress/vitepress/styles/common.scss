@@ -1,5 +1,5 @@
 /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
-
+body::-webkit-scrollbar,
 .scroll-diy::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -7,7 +7,7 @@
 }
 
 /* 定义滑块 */
-
+body::-webkit-scrollbar-thumb,
 .scroll-diy::-webkit-scrollbar-thumb {
     background-color: #fce7f3 !important;
     border-radius: 5px;
