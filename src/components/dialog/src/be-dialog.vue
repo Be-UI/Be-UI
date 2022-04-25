@@ -1,25 +1,24 @@
-/*
-* be-dialog.vue
-* @deprecated 可拖拽弹窗
-* @author czh
-* @create (czh 2021/5/8)
-* @update (czh 2021/5/8)
-*/
+/* * be-dialog.vue * @deprecated 可拖拽弹窗 * @author czh * @create (czh 2021/5/8) * @update (czh
+2021/5/8) */
 <template>
-  <div :class="dialogModels" v-if="isShow"></div>
+  <div v-if="isShow" :class="dialogModels"></div>
   <transition name="dialog-fade">
-    <div class="be-dialog" v-if="isShow">
-      <div class="be-dialog-container"
-           :id="`be_dialog_container$this._uid`"
-           v-drag="{isDrag:isDrag}"
-           :class="customClassStyle">
+    <div v-if="isShow" class="be-dialog">
+      <div
+        :id="`be_dialog_container${uid}`"
+        v-drag="{ isDrag: isDrag }"
+        class="be-dialog-container"
+        :class="customClassStyle">
         <div class="be-dialog-title">
-          <div class="be-dialog-contanter-head" :id="`be_head$this._uid`">
+          <div :id="`be_head${uid}`" class="be-dialog-container-head">
             <span>{{ titles }}</span>
             <!-- @slot 弹窗头部按钮 -->
             <div class="be-dialog-close">
               <slot name="headerIcon">
-                <be-icon icon='delete' @click="close"></be-icon>
+                <be-icon
+                  icon="deleteIc"
+                  custom-class="be-dialog-close-btn"
+                  @click="handleClose('btn')"></be-icon>
               </slot>
             </div>
           </div>
@@ -27,17 +26,19 @@
         <div class="be-dialog-body">
           <!-- @slot 弹窗主体-->
           <div class="be-dialog-body__inner">
-            <slot name="body"></slot>
+            <slot></slot>
           </div>
         </div>
-        <div :class="`be-dialog-footer be-dialog-footer__${layout}`">
+        <div v-if="showFooter" :class="`be-dialog-footer be-dialog-footer__${layout}`">
           <!-- @slot 弹窗底部-->
           <slot name="footer">
-            <be-button type="primary"
-                       bordered
-                       round="3"
-                       @click="confirm"
-                       customClass="be-dialog-footer-btn">确定
+            <be-button
+              type="primary"
+              bordered
+              round="3"
+              custom-class="be-dialog-footer-btn"
+              @click="handleConfirm"
+              >确定
             </be-button>
           </slot>
         </div>
@@ -47,140 +48,174 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref, computed, onMounted, onUnmounted
-} from "vue";
-import {dragDirective} from '../../../utils/direactives/custom-direactives/drag-directives';
+  import {
+    defineComponent,
+    ref,
+    computed,
+    onMounted,
+    onUnmounted,
+    getCurrentInstance,
+    nextTick,
+    watch,
+  } from 'vue'
+  import { dragDirective } from '../../../utils/direactives/custom-direactives/drag-directives'
+  import BeButton from '../../button/src/be-button'
+  import BeIcon from '../../svg-icon/src/be-icon.vue'
+  import { IContextMenu } from '../../contextmenu/src/be-contextmenu-type'
 
-/**
- * 可拖拽、放大、缩小弹窗
- */
-export default defineComponent({
-  name: "BeDialog",
-  directives: {drag: dragDirective},
-  props: {
-    /**
-     * 是否拖拽 （完成）
-     */
-    'isDrag': {
-      type: Boolean,
-      default: true
+  /**
+   * 可拖拽、放大、缩小弹窗
+   */
+  export default defineComponent({
+    name: 'BeDialog',
+    components: { BeIcon, BeButton },
+    directives: { drag: dragDirective },
+    props: {
+      /**
+       * 是否拖拽 （完成）
+       */
+      isDrag: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * 是否显示底部 （完成）
+       */
+      showFooter: {
+        type: Boolean,
+        default: true,
+      },
+      /**
+       * 标题 （完成）
+       */
+      titles: {
+        type: String,
+        default: '',
+      },
+      /**
+       * 弹窗显示（完成）
+       */
+      isShow: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * 自定义样式类（完成）
+       */
+      customClass: {
+        type: String,
+        default: '',
+      },
+      /**
+       * 是否开启遮罩层（完成）
+       */
+      isOpenModal: {
+        type: Boolean,
+        default: true,
+      },
+      /**
+       * 是否开启esc退出 （完成）
+       */
+      escExit: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * 底部布局 （完成）
+       */
+      layout: {
+        type: String,
+        default: 'center',
+      },
     },
-    /**
-     * 标题 （完成）
-     */
-    'titles': {
-      type: String,
-      default: ''
-    },
-    /**
-     * 弹窗显示（完成）
-     */
-    'isShow': {
-      type: Boolean,
-      default: false
-    },
-    /**
-     * 自定义样式类（完成）
-     */
-    'customClass': {
-      type: String,
-      default: ''
-    },
-    /**
-     * 是否开启遮罩层（完成）
-     */
-    'isOpenModal': {
-      type: Boolean,
-      default: true
-    },
-    /**
-     * 是否开启esc退出 （完成）
-     */
-    'escExit': {
-      type: Boolean,
-      default: false
-    },
-    /**
-     * 底部布局 （完成）
-     */
-    'layout': {
-      type: String,
-      default: 'center'
-    }
-  },
-  setup(props, ctx) {
-    const customClassStyle = computed(() => props.customClass)
-    /**
-     * 关闭组件
-     */
-    const confirm = (): void => {
-      if (ctx.attrs.onConfirm) {
+    emits: [
+      'confirm', // 插槽下无效
+      'close', // 插槽下无效
+      'update:isShow',
+      'escEvt',
+    ],
+    setup(props, ctx) {
+      const customClassStyle = computed(() => props.customClass)
+      const internalInstance = getCurrentInstance() as IContextMenu
+      /**
+       * 关闭组件
+       */
+      const handleConfirm = (): void => {
         /** 弹窗确认事件
-         * @event close
+         * @event confirm
          */
         ctx.emit('confirm')
-      } else {
-        close()
+        handleClose()
       }
-    }
-    /**
-     * 关闭组件
-     */
-    const close = (): void => {
-      if (ctx.attrs.onClose) {
-        /** 弹窗关闭事件
-         * @event close
-         */
-        ctx.emit('close')
-      } else {
+      /**
+       * 关闭组件
+       * @param {string} type 类型
+       */
+      const handleClose = (type?: string): void => {
+        if (type === 'btn' || type === 'keyboard') {
+          /** 弹窗关闭事件
+           * @event close
+           */
+          ctx.emit('close')
+        }
         ctx.emit('update:isShow', false)
       }
-    }
-    /**
-     * 键盘esc 退出的监听
-     */
-    const listenerEscExitFunc = (): void => {
-      if (props.escExit) {
-        document.onkeydown = (e) => {
-          if (e && e.key === 'Esc') {
-            /** esc按键弹窗关闭事件
-             * @event escCb
-             */
-            ctx.emit('escCb')
-            close()
+      const show = computed(() => props.isShow)
+      watch(show, nVal => {
+        if (nVal) {
+          nextTick(() => {
+            listenerEscExitFunc()
+          })
+        } else {
+          removeEscExitFunc()
+        }
+      })
+      /**
+       * 键盘esc 退出的监听
+       */
+      const listenerEscExitFunc = (): void => {
+        if (props.escExit) {
+          document.body.onkeydown = e => {
+            if (e && e.key === 'Escape') {
+              /** esc按键弹窗关闭事件
+               * @event escEvt
+               */
+              ctx.emit('escEvt')
+              handleClose('keyboard')
+            }
           }
         }
       }
-    }
-    /**
-     * 键盘esc退出的监听取消
-     */
-    const removeEscExitFunc = (): void => {
-      document.onkeydown = null
-    }
-    const dialogModels = ref('')
-    // 开启遮罩与键盘监听
-    onMounted(() => {
-      if (props.isOpenModal) {
-        dialogModels.value = 'be-dialog-modal'
+      /**
+       * 键盘esc退出的监听取消
+       */
+      const removeEscExitFunc = (): void => {
+        document.body.onkeydown = null
       }
-      listenerEscExitFunc()
-    })
-    onUnmounted(() => {
-      removeEscExitFunc()
-    })
-    return {
-      dialogModels,
-      customClassStyle,
-      close,
-      confirm,
-    }
-  }
-})
+      const dialogModels = ref('')
+      // 开启遮罩与键盘监听
+      onMounted(() => {
+        if (props.isOpenModal) {
+          dialogModels.value = 'be-dialog-modal'
+        }
+        if (props.isShow) {
+          listenerEscExitFunc()
+        }
+      })
+      onUnmounted(() => {
+        removeEscExitFunc()
+      })
+      return {
+        dialogModels,
+        customClassStyle,
+        handleClose,
+        handleConfirm,
+        uid: internalInstance.uid,
+      }
+    },
+  })
 </script>
 
 <style lang="scss">
-@import "../../../assets/style/be-dialog";
+  @import '../../../assets/style/be-dialog';
 </style>

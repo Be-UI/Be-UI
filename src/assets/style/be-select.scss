@@ -1,14 +1,16 @@
 .be-select {
+
   .be-select-tag {
     padding: 0 7px 3px 0;
   }
 
   .be-select-input {
-    outline: 0;
-    border: 0;
-    max-width: 100%;
     min-width: 1px;
+    max-width: 100%;
     overflow: hidden;
+    color: $defaultText;
+    border: 0;
+    outline: 0;
   }
 
   .be-select-input__mini {
@@ -41,37 +43,47 @@
 
   .be-select-body {
     position: relative;
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    outline: 0;
+    width: 100%;
+    padding: 0 30px 0 8px;
+    background-color: $default;
     border: 1px solid $infoBorder;
     border-radius: 3px;
-    width: 100%;
-    background-color: $default;
-    padding: 3px 30px 0 8px;
-    box-sizing: border-box;
+    outline: 0;
+
+    &:hover{
+      border-color: $pinkHoverBorder;
+    }
+  }
+
+  .be-select-body__focus{
+    border:1px solid $pinkHoverBorder;
+    outline: 0;
+    box-shadow: 0 0 0 2px $pinkHoverBorder-02;
   }
 
   .be-select-icon {
-    fill: $defaultText;
-    cursor: pointer;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
     right: 10px;
+    cursor: pointer;
+    fill: $defaultText;
+    transform: translateY(-50%);
   }
 
 }
 
 .be-select-option-body {
-  padding: .5em 0;
   box-sizing: border-box;
+  padding: .5em 0;
 
   .be-select-loading {
-    min-height: 50px;
-    align-items: center;
     display: flex;
+    align-items: center;
     justify-content: center;
+    min-height: 50px;
   }
 
   .be-select-option-container {
@@ -79,49 +91,52 @@
     overflow-y: auto;
 
     .be-select-option {
-      height: 30px;
-      line-height: 30px;
-      text-align: left;
-      padding: 0 15px;
       box-sizing: border-box;
+      height: 30px;
+      padding: 0 15px;
+      line-height: 30px;
       color: $defaultText;
+      text-align: left;
       cursor: pointer;
 
       &:hover {
-        background-color: $infoHover;
+        background-color: $defaultGray;
       }
     }
 
     .be-select-option__group {
-      color: $info;
-      height: 30px;
-      line-height: 30px;
-      text-align: left;
-      padding-left: 6px;
       box-sizing: border-box;
-
+      height: 30px;
+      padding-left: 6px;
+      line-height: 30px;
+      color: $info;
+      text-align: left;
     }
 
     .be-select-option__choice {
-      @apply bg-blue-50;
+      font-weight: bold;
+      color: $pinkHoverBorder;
+      background-color: $defaultGray;
+
       .be-select-hook {
         @apply float-right;
+
         .be-icon {
           @apply h-8 leading-8 fill-blue;
         }
       }
 
       &:hover {
-        @apply bg-blue-100;
+        background-color: $defaultGray;
       }
     }
 
     .be-select-option__line::before {
-      content: ' ';
+      position: absolute;
       width: 93%;
       height: 1px;
+      content: ' ';
       background-color: $infoHover;
-      position: absolute;
     }
 
     .be-select-option__disabled {
@@ -136,20 +151,21 @@
 
   .be-select-option__extend {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-top: 5px;
+    justify-content: space-between;
     padding: 0 10px;
+    margin-top: 5px;
 
     .be-input {
-      width: 70%;
       flex: 8;
+      width: 70%;
     }
 
     .be-icon-container {
       flex: 2;
 
       .be-icon {
+        margin: 0 auto;
         cursor: pointer;
       }
     }
@@ -158,10 +174,11 @@
 }
 
 .be-select-popover {
+
   .be-popover {
-    .be-popover-body {
+
+    .be-popover--body {
       padding: 0;
     }
   }
-
 }

@@ -1,124 +1,106 @@
+@import "./common/config";
+$componentsClass:$name + '-' + 'pager' !global;
+@include create-B(pager){
+  @include set-component-style-var('pager', $--pager);
+}
+
+
 
 .be-pager-container {
   display: flex;
   align-items: center;
 
   .be-select {
+
     .be-select-body.be-pager-select {
+      width: 5rem;
+      min-width: 64px;
+      height: 25px;
       margin: 0 5px;
       font-size: 12px;
-      width: 5rem;
-      height: 25px;
-      min-width: 64px;
 
       .be-select-input__medium {
         height: 20px;
-        line-height: 20px;
         font-size: 12px;
+        line-height: 20px;
       }
-
     }
   }
 }
 
-.be-pager {
+@include create-B(pager){
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  list-style: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  list-style: none;
-  font-size: 0;
-}
+  @include flex-center;
 
+  li {
+    @include flex-center;
+    @include be-pointer;
+    @include be-radius;
+    box-sizing: border-box;
+    min-width: 25px;
+    height: 25px;
+    padding: 0 4px;
+    margin: 0 3px;
+    font-size: 13px;
+    line-height: 25px;
+    text-align: center;
+    background-color: var(--be-pager-bg-w);
 
-.be-pager, .be-pager li {
-  vertical-align: top;
-  margin: 0;
-  display: inline-block;
-}
+    &.btn-quicknext,&.btn-quickprev{
+      line-height: 28px;
+      color:  var(--be-text-color-regular);
+    }
 
-.be-pager, .be-pagination.is-background .btn-next, .be-pagination.is-background .btn-prev {
-  padding: 0;
-}
+    &.active {
+      color: var(--be-pager-text-active);
+      cursor: default;
+    }
 
-.be-pager li {
-  padding: 0 4px;
-  font-size: 13px;
-  min-width: 35.5px;
-  height: 28px;
-  line-height: 28px;
-  box-sizing: border-box;
-  text-align: center;
-}
+    &:hover{
+      color: var(--be-pager-text-active);
+    }
+  }
+  .#{ $componentsClass }#{$element-separator}disabled{
 
+    li{
+      -webkit-box-sizing: border-box;
+      cursor: not-allowed;
+      background: var(--be-pager-bg-w);
 
-.be-pager li {
-  background: #FFF;
-  margin: 0 3px;
-  -webkit-box-sizing: border-box;
-}
+      &.btn-quicknext,&.btn-quickprev{
 
-.be-pager li.btn-quicknext, .be-pager li.btn-quickprev {
-  line-height: 28px;
-  color: $info;
-}
+        &:hover{
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
 
-.be-pager li {
-  padding: 0 4px;
-  font-size: 13px;
-  min-width: 25px;
-  height: 25px;
-  line-height: 25px;
-  box-sizing: border-box;
-  text-align: center;
-  border-radius: 3px;
-}
-
-
-.be-pager li.active {
-  color: $primaryText;
-  cursor: default;
-}
-
-.be-pager li:hover {
-  color: $primaryText;
-}
-
-
-.be-pager li, .be-pager li.btn-quicknext:hover, .be-pager li.btn-quickprev:hover {
-  cursor: pointer;
-}
-
-.be-pager .more::before {
-  line-height: 30px;
-}
-
-.be-pager__disabled li, .be-pager__disabled li.btn-quicknext:hover, .be-pager__disabled li.btn-quickprev:hover {
-  cursor: not-allowed;
-}
-
-.be-pager__disabled li {
-  background: #FFF;
-  -webkit-box-sizing: border-box;
-}
-
-.be-pager-info {
-  font-size: 12px;
-
-}
-
-.be-pager-jump {
-  margin: 0 5px;
-  font-size: 12px;
-}
-
-.be-pager-jump-input {
-  color: $info;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  transition: all .3s;
-  margin: 0 2px;
-  width: 35px;
+  .more::before {
+    line-height: 30px;
+  }
+  .#{ $componentsClass }#{$modifier-separator}info{
+    font-size: 12px;
+  }
+  .#{ $componentsClass }#{$modifier-separator}jump{
+    margin: 0 5px;
+    font-size: 12px;
+  }
+  .#{ $componentsClass }#{$modifier-separator}jump#{$element-separator}input{
+    width: 35px;
+    margin: 0 2px;
+    color:  var(--be-text-color-regular);
+    background-color: var(--be-pager-bg-w);
+    background-image: none;
+    border: 1px solid var(--be-pager-border);
+    transition: all .3s;
+    @include be-radius;
+  }
 }

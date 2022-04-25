@@ -1,4 +1,5 @@
 @keyframes spin {
+
   100% {
     transform: rotate(360deg);
   }
@@ -8,8 +9,8 @@
   display: inline-block;
 
   .be-icon {
-    vertical-align: -0.15em;
     overflow: hidden;
+    vertical-align: 0;
   }
 
 }

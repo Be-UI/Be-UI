@@ -1,32 +1,33 @@
 /*
-* @be-loading-type.d.ts
-* @deprecated 
-* @author czh
-* @update (czh 2021/10/8)
-*/
-import type {ComponentInternalInstance,} from 'vue'
+ * @be-loading-type.d.ts
+ * @deprecated
+ * @author czh
+ * @update (czh 2021/10/8)
+ */
+import type { ComponentInternalInstance } from 'vue'
 
 export interface ILoading {
-    install?: Function
-    name: string
+  install?: Function
+  name: string
 }
 
 export interface ILoadingPlg {
-    close: Function
-    init: Function
+  close: Function
+  init: Function
 }
 
 export interface ILoadingInst extends ComponentInternalInstance {
-    uid: number
-    attrs: any
-    ctx: any
+  uid: number
+  attrs: any
+  ctx: any
+  proxy: any
 }
 
 export interface IPosStyle {
-    width: string | number
-    height: string | number
-    top: string | number
-    left: string | number
-    right: number
-    bottom: number
+  width: string | number
+  height: string | number
+  top: string | number
+  left: string | number
+  right: number
+  bottom: number
 }

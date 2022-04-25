@@ -1,38 +1,23 @@
-@mixin be-icon-default($color) {
-  .be-icon {
-    use {
-      fill: $color;
-    }
-  }
-}
-
-@mixin be-button-type($bgColor,$textColor,$hoverColor) {
-  background: $bgColor;
-  color: $textColor;
-  button {
-    color: $textColor;
-  }
-  border: 0;
-  &:hover {
-    background: $hoverColor;
-  }
-}
 
 @mixin be-button-border($bgColor,$textColor,$borderColor,$hoverBgColor,$HoverBorderColor,$hoverIconColor) {
-  background: $bgColor;
   color: $textColor;
+  background-color: $bgColor;
   border-color: $borderColor;
   border-width: 1px;
+
   button {
     color: $textColor;
   }
+
   &:hover {
-    background: $hoverBgColor;
+    background-color: $hoverBgColor;
     border-color: $HoverBorderColor;
 
     .be-button-prevIcon__primary,
     .be-button-nextIcon__primary {
+
       .be-icon {
+
         use {
           fill: $hoverIconColor;
         }
@@ -42,34 +27,21 @@
 }
 
 .be-button__inner {
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-  padding: 0;
-  background: transparent;
-  vertical-align: bottom;
-  /*  margin-left: 5px;
-    margin-right: 5px;*/
+  @apply border-0 cursor-pointer p-0 bg-transparent align-bottom focus:outline-none;
 }
 
 .be-button__inner__disabled {
-  cursor: not-allowed;
+  @apply cursor-not-allowed;
 }
 
 .be-button {
-  border-radius: 2px;
-  outline: 0;
-  border: 0;
-  color: white;
-  display: inline-block;
+  @apply font-mono inline-block border-0 text-default rounded focus:outline-none;
 
   .be-button-body {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
+    @apply flex justify-center mx-auto my-0;
 
     .be-button-slot {
-      margin: 0 3px;
+      @apply mx-1 my-0 font-mono;
     }
 
     .be-button-prevIcon__error,
@@ -78,31 +50,41 @@
     .be-button-nextIcon__warning,
     .be-button-prevIcon__success,
     .be-button-nextIcon__success {
-      @include be-icon-default($whiteText);
+
+      .be-icon {
+
+        use {
+          @apply fill-default;
+        }
+      }
     }
 
     .be-button-prevIcon__info,
     .be-button-nextIcon__info,
     .be-button-prevIcon__default,
     .be-button-nextIcon__default {
-      @include be-icon-default($defaultText);
+
+      .be-icon {
+
+        use {
+          @apply fill-info;
+        }
+      }
     }
 
     .be-button-prevIcon__primary,
     .be-button-nextIcon__primary {
-      @include be-icon-default($primaryText);
-    }
 
-    .be-button-prevIcon {
       .be-icon {
-        vertical-align: -0.1em;
+
+        use {
+          @apply fill-primaryh;
+        }
       }
     }
 
-    .be-button-nextIcon {
-      .be-icon {
-        vertical-align: -0.1em;
-      }
+    .be-button-prevIcon,.be-button-nextIcon {
+      @apply flex items-center;
     }
   }
 
@@ -110,101 +92,107 @@
 }
 
 .be-button__mini {
-  height: 24px;
-  line-height: 24px;
-  padding: 0 10px;
-  box-sizing: border-box;
+  @apply box-border py-0 px-2.5 h-6 leading-6;
 
   button {
-    line-height: 24px;
+    @apply leading-6;
   }
 }
 
 .be-button__medium {
-  height: 30px;
-  line-height: 30px;
-  padding: 0 10px;
-  box-sizing: border-box;
+  @apply box-border py-0 px-2.5 h-8 leading-8;
 
   button {
-    line-height: 30px;
+    @apply leading-8;
   }
 }
 
 .be-button__large {
-  height: 40px;
-  line-height: 40px;
-  padding: 0 10px;
-  box-sizing: border-box;
+  @apply box-border py-0 px-2.5 h-9 leading-9;
 
   button {
-    line-height: 40px;
+    @apply leading-9;
   }
 }
 
 .be-button__error {
-  @include be-button-type($error, $whiteText, $errorHover);
+  @apply font-mono bg-error text-default border-0 hover:bg-errorh;
+
+  button {
+    @apply font-mono text-default;
+  }
 }
 
 .be-button__info {
-  @include be-button-type($default, $defaultText, $infoHover);
+  @apply font-mono bg-default text-info border-0 hover:bg-infoh;
+
+  button {
+    @apply font-mono text-info;
+  }
 }
 
 .be-button__success {
-  @include be-button-type($success, $whiteText, $successHover);
+  @apply font-mono bg-success text-default border-0 hover:bg-successh;
+
+  button {
+    @apply font-mono text-default;
+  }
 }
 
 .be-button__warning {
-  @include be-button-type($warning, $whiteText, $warningHover);
+  @apply font-mono bg-warning text-default border-0 hover:bg-warningh;
+
+  button {
+    @apply font-mono text-default;
+  }
 }
 
 .be-button__primary {
-  @include be-button-type($primary, $primaryText, $primaryHover);
+  @apply font-mono bg-defaulth text-primaryh border-0 hover:text-default hover:bg-primaryh hover:border-primary;
 
-  &:hover {
-    background: $primaryHover;
-    color: $whiteText;
+  button {
+    @apply font-mono text-primary hover:text-default;
+  }
 
-    button {
-      color: $whiteText;
-    }
+  &:hover{
 
     .be-button-prevIcon__primary,
     .be-button-nextIcon__primary {
+
       .be-icon {
+
         use {
-          fill: $whiteText;
+          @apply fill-default;
         }
       }
     }
-
-    border-color: $primaryText;
   }
 }
 
 .be-button__default {
-  @include be-button-type($default, $defaultText, $defaultText);
+  @apply font-mono bg-default text-info border-0 hover:text-primaryh hover:bg-defaulth;
 
   &:hover {
-    color: $primaryText;
 
     button {
-      color: $primaryText;
+      @apply font-mono text-primary;
     }
 
     .be-button-prevIcon__default,
     .be-button-nextIcon__default {
+
       .be-icon {
+
         use {
-          fill: $primaryText;
+          @apply fill-primaryh;
         }
       }
     }
-
-    background: $primary;
   }
 }
 
+
+/* 带边框 */
 
 .be-button__error__border {
   @include be-button-border($error, $whiteText, $errorBorder, $errorHover, $errorHoverBorder, $whiteText);
@@ -233,16 +221,23 @@
 .be-button__default__border {
   @include be-button-border($default, $defaultText, $infoBorder, $primary, $primaryBorder, $whiteText);
 
-  button {
-    color: $defaultText;
-  }
-
   &:hover {
+    color: $primaryText;
+
     button {
       color: $primaryText;
     }
 
-    color: $primaryText;
+    .be-button-prevIcon__default,
+    .be-button-nextIcon__default {
+
+      .be-icon {
+
+        use {
+          @apply fill-primaryh;
+        }
+      }
+    }
   }
 }
 

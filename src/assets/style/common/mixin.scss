@@ -1,0 +1,28 @@
+// set all css var for component by map
+@use "sass:map";
+
+// 生成变量
+@mixin set-css-var-type($name, $type, $--variables) {
+  --be-#{$name}-#{$type}: #{map.get($--variables, $type)};
+}
+
+// 生成组件内变量
+@mixin set-component-style-var($name, $--variables) {
+  @each $attribute, $value in $--variables {
+    --be-#{$name}-#{$attribute}: #{$value};
+  }
+}
+// 生成组件类 BEM=>B
+//  air-table{} /* 块 */
+//  air-table__footer{} /* 元素 */
+//  air-table--full{} /* 修饰符 */
+// E 和 M 自己写算了
+@mixin create-B($block) {
+  // !global 語法使用全局變量覆蓋 即把$B: $name + '-' + $block 定義的變量提升到了全局
+  $B: $name + '-' + $block !global;
+  .#{$B} {
+    @content;
+  }
+}
+
+

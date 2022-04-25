@@ -1,121 +1,140 @@
-@mixin be-notification-icon {
-  line-height: 25px;
-  margin-right: 10px;
-  font-size: 20px;
+@import "./common/config";
+$componentsClass:$name + '-' + 'notification' !global;
+@include create-B(notification){
+  @include set-component-style-var('notification', $--notification);
 }
 
-.be-notification {
+@include create-B(notification){
   z-index: 10;
   min-height: 100px;
 
-  .be-notification-container {
-    @apply min-w-16 bg-default p-2.5 rounded shadow absolute box-border;
+  .#{ $componentsClass }#{$modifier-separator}container {
+    position: absolute;
     z-index: 998;
+    box-sizing: border-box;
+    min-width: 16rem;
+    padding: var(--be-notification-px);
+    background-color: var(--be-notification-bg-w);
+    @include be-radius;
+    @include be-shadow;
 
-    .be-notification-title {
-      @apply w-full h-6;
-      .be-notification-head {
-        @apply leading-6 flex justify-between items-center;
+
+    .#{ $componentsClass }#{$modifier-separator}title {
+      width: 100%;
+      height: 1.5rem;
+      .#{ $componentsClass }#{$modifier-separator}head {
+        @include  flex-center;
+        justify-content: space-between;
+        line-height: 1.5rem;
+
         div:nth-child(1) {
-          @apply flex items-center;
-          .icon-warning {
-            @apply fill-warning;
-            @include be-notification-icon;
+          display: flex;
+          align-items: center;
+          .icon#{$element-separator}warning {
+            fill: var(--be-notification-warning-color);
+            @include be-notification--icon;
           }
 
-          .icon-info {
-            @apply fill-info;
-            @include be-notification-icon;
+          .icon#{$element-separator}info {
+            fill: var(--be-notification-info-color);
+            @include be-notification--icon;
           }
 
-          .icon-success {
-            @apply fill-success;
-            @include be-notification-icon;
+          .icon#{$element-separator}success {
+            fill: var(--be-notification-success-color);
+            @include be-notification--icon;
           }
 
-          .icon-error {
-            @apply fill-error;
-            @include be-notification-icon;
+          .icon#{$element-separator}error {
+            fill: var(--be-notification-error-color);
+            @include be-notification--icon;
           }
 
-          .txt-warning {
-            @include be-message-tilte;
-            @apply text-warning font-normal;
+          .txt#{$element-separator}warning {
+            color:var(--be-notification-text-warning-color);
+            @include be-message--title;
+            @include  font-mono;
           }
 
-          .txt-info {
-            @include be-message-tilte;
-            @apply text-info font-normal;
+          .txt#{$element-separator}info {
+            color:var(--be-notification-text-info-color);
+            @include be-message--title;
+            @include  font-mono;
           }
 
-          .txt-success {
-            @include be-message-tilte;
-            @apply text-success font-normal;
+          .txt#{$element-separator}success {
+            color:var(--be-notification-text-success-color);
+            @include be-message--title;
+            @include  font-mono;
           }
 
-          .txt-error {
-            @include be-message-tilte;
-            @apply text-error font-normal;
+          .txt#{$element-separator}error {
+            color:var(--be-notification-text-error-color);
+            @include be-message--title;
+            @include  font-mono;
           }
         }
 
         div:nth-child(2) {
-          @apply cursor-pointer;
+          @include be-pointer;
         }
       }
 
     }
   }
 
-  .be-notification-container__topLeft,
-  .be-notification-container__bottomLeft {
+  .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}topLeft,
+  .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}bottomLeft {
     left: 5px;
   }
 
-  .be-notification-container__bottomRight,
-  .be-notification-container__topRight {
+  .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}bottomRight,
+  .#{ $componentsClass }#{$modifier-separator}container#{$element-separator}topRight {
     right: 5px;
   }
 
-  .be-notification-body {
+  .#{ $componentsClass }#{$modifier-separator}body {
     min-height: 50px;
     margin-top: 10px;
 
-    .be-notification-description {
+    .#{ $componentsClass }#{$modifier-separator}description {
+      @include font-mono;
       font-size: 14px;
-      font-family: Microsoft YaHei sans-serif;
       font-weight: 400;
       line-height: 20px;
-      color: #000000;
+      color: var(--be-text-color-primary);
       letter-spacing: 3px;
     }
   }
 }
 
-.be-notification__topLeft, .be-notification__bottomLeft {
+
+.#{ $componentsClass }#{$element-separator}topLeft,
+.#{ $componentsClass }#{$element-separator}bottomLeft {
   position: fixed;
   left: 5px;
 }
 
-.be-notification__topRight, .be-notification__bottomRight {
+.#{ $componentsClass }#{$element-separator}topRight,
+.#{ $componentsClass }#{$element-separator}bottomRight {
   position: fixed;
   right: 5px;
 }
 
-.be-notification-bottom {
+.#{ $componentsClass }#{$element-separator}bottom {
   transition: bottom .3s;
 }
 
-.be-notification-top {
+.#{ $componentsClass }#{$element-separator}top {
   transition: bottom .3s;
 }
 
-.be-notification-animation-right-in {
-  -webkit-animation: bounceInRight .3s .2s ease both;
-  -moz-animation: bounceInRight .3s .2s ease both;
+.#{ $componentsClass }-animation-right-in {
+  -webkit-animation: bounce-in-right .3s .2s ease both;
+  -moz-animation: bounce-in-right .3s .2s ease both;
 }
 
-.be-notification-animation-left-in {
-  -webkit-animation: fadeInLeftBig .3s .2s ease both;
-  -moz-animation: fadeInLeftBig .3s .2s ease both;
+.#{ $componentsClass }-animation-left-in {
+  -webkit-animation: fade-in-left-big .3s .2s ease both;
+  -moz-animation: fade-in-left-big .3s .2s ease both;
 }

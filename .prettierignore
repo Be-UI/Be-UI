@@ -1,0 +1,10 @@
+public
+/src/**/*.scss
+dist
+node_modules
+coverage
+/src/**/svg-dict.ts
+/src/App.vue
+/src/**/*.test.ts
+/src/**/*.test.tsx
+

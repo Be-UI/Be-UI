@@ -1,0 +1,108 @@
+.be-contextmenu {
+  @apply font-mono absolute m-0 bg-default shadow cursor-pointer rounded border border-infoh text-sm list-none whitespace-nowrap;
+  z-index: 2800;
+  -webkit-tap-highlight-color: transparent;
+
+  .be-contextmenu-item {
+    @apply font-mono text-center text-info px-9 py-2.5 leading-none;
+
+    &.be-contextmenu-item__hover {
+      @apply text-default font-mono;
+    }
+
+    &.be-contextmenu-item__disabled {
+      @apply text-info font-mono cursor-not-allowed;
+    }
+  }
+
+  .be-contextmenu-divider {
+    @apply h-0 border-b border-infoh;
+  }
+
+  .be-contextmenu-submenu {
+    @apply relative text-center font-mono;
+
+    & > .be-contextmenu {
+      @apply absolute text-center font-mono;
+
+      &.left {
+        @apply left-0 transform -translate-x-full;
+
+      }
+
+      &.right {
+        @apply right-0 transform translate-x-full;
+      }
+
+      &.top {
+        @apply -top-px;
+      }
+
+      &.bottom {
+        @apply -bottom-7;
+      }
+    }
+
+    .be-contextmenu-submenu__title {
+      @apply mr-0;
+    }
+
+    .be-contextmenu-submenu__icon {
+      @apply absolute right-1.5;
+
+      &::before {
+        content: ">";
+      }
+    }
+  }
+}
+
+.be-contextmenu__default {
+
+  .be-contextmenu-item__hover {
+    @apply bg-blue-400;
+  }
+}
+
+.be-contextmenu__bright {
+
+  .be-contextmenu-item__hover {
+    @apply bg-red-400;
+  }
+}
+
+.be-contextmenu__dark {
+
+  .be-contextmenu-item__hover {
+    @apply bg-black;
+  }
+}
+
+.be-contextmenu__violet {
+
+  .be-contextmenu-item {
+    @apply text-info font-mono;
+  }
+
+  .be-contextmenu-item__hover {
+    @apply bg-purple-200;
+  }
+}
+
+.be-contextmenu__blues {
+
+  .be-contextmenu-item {
+    @apply text-info font-mono;
+  }
+
+  .be-contextmenu-item__hover {
+    @apply bg-blue-700;
+  }
+}
+
+.be-contextmenu-iconfont {
+  font-size: inherit;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

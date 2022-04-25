@@ -1,96 +1,121 @@
+@import "./common/config";
+$componentsClass:$name + '-' + 'tag' !global;
+@include create-B(tag){
+  @include set-component-style-var('tag', $--tag);
+}
 @mixin be-icon-default($color) {
+
   .be-icon {
+
     use {
       fill: $color;
     }
   }
 }
 
-@mixin be-tag-type($bgColor,$textColor,$hoverColor) {
-  background: $bgColor;
+@mixin be-tag--type($bgColor,$textColor,$hoverColor) {
   color: $textColor;
+  background-color: $bgColor;
   border: 0;
+
   &:hover {
-    background: $hoverColor;
+    background-color: $hoverColor;
   }
 }
 
-.be-tag {
-  @apply inline-flex justify-center items-center cursor-pointer box-border;
-  span {
+@include create-B(tag){
+  @include flex-center;
+  @include be-pointer;
+  @include font-mono;
+  box-sizing: border-box;
+  .#{ $componentsClass }#{$modifier-separator}close {
     @apply mr-1.5;
   }
-
-  .be-icon-container .be-icon {
+  .#{ $componentsClass }#{$modifier-separator}container {
     @apply w-4 h-4;
   }
 }
 
 .be-tag__disabled {
-  @apply cursor-not-allowed;
+  @include be-disabled;
 }
 
-.be-tag__mini {
-  @apply box-border px-2.5 h-6 leading-6 text-xs;
+.#{ $componentsClass }#{$element-separator}mini {
+  box-sizing: border-box;
+  height: var(--be-tag-h-mini);
+  padding: var(--be-tag-px);
+  font-size: .75rem;
+  line-height: var(--be-tag-h-mini);
 }
 
-.be-tag__medium {
-  @apply box-border px-2.5 h-8 leading-8;
+.#{ $componentsClass }#{$element-separator}medium {
+  box-sizing: border-box;
+  height: var(--be-tag-h-medium);
+  padding: var(--be-tag-px);
+  line-height: var(--be-tag-h-medium);
 }
 
-.be-tag__large {
-  @apply box-border px-2.5 h-10 leading-10;
+.#{ $componentsClass }#{$element-separator}large {
+  box-sizing: border-box;
+  height: var(--be-tag-h-medium);
+  padding: var(--be-tag-px);
+  line-height: var(--be-tag-h-medium);
 }
 
-.be-tag__error {
-  @include be-tag-type($error, $whiteText, $errorHover);
-  @include be-icon-default($whiteText);
+.#{ $componentsClass }#{$element-separator}error {
+  @include be-tag--type(var(--be-tag-error-color), var(--be-base-color-w), var(--be-tag-error-color--hover));
+  @include be-icon-default(var(--be-base-color-w));
 }
 
-.be-tag__info {
-  @include be-tag-type($default, $defaultText, $infoHover);
-  @include be-icon-default($defaultText);
-  border: 1px solid $infoHover;
+.#{ $componentsClass }#{$element-separator}info {
+  @include be-tag--type(var(--be-base-color-w), var(--be-text-color-primary), var(--be-base-color-grays));
+  @include be-icon-default(var(--be-text-color-primary));
+  border: var(--be-tag-border);
 }
 
-.be-tag__success {
-  @include be-tag-type($success, $whiteText, $successHover);
-  @include be-icon-default($whiteText);
+.#{ $componentsClass }#{$element-separator}success {
+  @include be-tag--type(var(--be-tag-success-color), var(--be-base-color-w), var(--be-tag-success-color--hover));
+  @include be-icon-default(var(--be-base-color-w));
 }
 
-.be-tag__warning {
-  @apply bg-warning border-0 text-white hover:bg-warningh;
-  @include be-icon-default($whiteText);
+.#{ $componentsClass }#{$element-separator}warning {
+  @include be-tag--type(var(--be-tag-warning-color), var(--be-base-color-w), var(--be-tag-warning-color--hover));
+  @include be-icon-default(var(--be-base-color-w));
 }
 
-.be-tag__primary {
-  @include be-tag-type($primary, $primaryText, $primaryHover);
-  @include be-icon-default($primaryText);
+
+
+.#{ $componentsClass }#{$element-separator}primary {
+  @include be-tag--type(var(--be-tag-primary-color), var(--be-tag-primary-color--hover), var(--be-tag-primary-color--hover));
+  @include be-icon-default(var(--be-tag-primary-color--hover));
 
   &:hover {
-    background: $primaryHover;
-    color: $whiteText;
-    border-color: $primaryText;
+    color: var(--be-base-color-w);
+    background-color: var(--be-tag-primary-color--hover);
+    border-color: var(--be-tag-primary-color--hover);
 
     .be-icon {
+
       use {
-        fill: $whiteText;
+        fill: var(--be-base-color-w);
       }
     }
   }
 }
 
-.be-tag__default {
-  @include be-tag-type($default, $defaultText, $defaultText);
-  @include be-icon-default($defaultText);
+.#{ $componentsClass }#{$element-separator}default {
+  @include be-tag--type(var(--be-base-color-w), var(--be-text-color-primary), var(--be-tag-primary-color));
+  @include be-icon-default(var(--be-text-color-primary));
+  border: var(--be-tag-border);
 
   &:hover {
-    color: $primaryText;
-    background: $primary;
+    color: var(--be-tag-primary-color--hover);
+    background-color: var(--be-tag-primary-color);
 
     .be-icon {
+
       use {
-        fill: $primaryText;
+        fill: var(--be-tag-primary-color--hover);
       }
     }
   }

@@ -1,31 +1,37 @@
+@import "./common/config";
+$componentsClass:$name + '-' + 'popover' !global;
+@include create-B(popover){
+  @include set-component-style-var('popover', $--popover);
+}
 
-.be-popover {
+
+@include create-B(popover){
+  @apply shadow;
   position: fixed;
-  background-color: $default;
-  border-radius: 3px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
+  background-color: var(--be-popover-bg-w);
+  @include be-radius;
 
-  .be-popover-body {
-    color: $info;
-    text-align: center;
-    padding: 8px 14px;
+  .#{ $componentsClass }#{$modifier-separator}body {
     box-sizing: border-box;
+    padding: 8px 14px;
     font-size: 12px;
+    color: var(--be-text-color-regular);
+    text-align: center;
   }
 
-  .be-popover-arrow,
-  .be-popover-arrow::before {
+  .#{ $componentsClass }#{$modifier-separator}arrow,
+  .#{ $componentsClass }#{$modifier-separator}arrow::before {
     position: absolute;
     width: 8px;
     height: 8px;
     background: inherit;
   }
 
-  .be-popover-arrow {
+  .#{ $componentsClass }#{$modifier-separator}arrow {
     visibility: hidden;
   }
 
-  .be-popover-arrow::before {
+  .#{ $componentsClass }#{$modifier-separator}arrow::before {
     visibility: visible;
     content: '';
     transform: rotate(45deg);
@@ -33,32 +39,53 @@
 
 }
 
-.be-popover[data-popper-placement^='top'] {
-  .be-popover-arrow {
+.#{ $componentsClass }[data-popper-placement^='top'] {
+
+  .#{ $componentsClass }#{$modifier-separator}arrow {
     bottom: -4px;
+
+    &::before {
+      box-shadow: var(--be-popover-shadow-top);
+    }
   }
 }
 
-.be-popover[data-popper-placement^='bottom'] {
-  .be-popover-arrow {
+.#{ $componentsClass }[data-popper-placement^='bottom'] {
+
+  .#{ $componentsClass }#{$modifier-separator}arrow {
     top: -4px;
+
+    &::before {
+      box-shadow: var(--be-popover-shadow-bottom);
+    }
   }
 }
 
-.be-popover[data-popper-placement^='left'] {
-  .be-popover-arrow {
+.#{ $componentsClass }[data-popper-placement^='left'] {
+
+  .#{ $componentsClass }#{$modifier-separator}arrow {
     right: -4px;
+
+    &::before {
+      box-shadow: var(--be-popover-shadow-left);
+    }
   }
 }
 
-.be-popover[data-popper-placement^='right'] {
-  .be-popover-arrow {
+.#{ $componentsClass }[data-popper-placement^='right'] {
+
+  .#{ $componentsClass }#{$modifier-separator}arrow {
     left: -4px;
+
+    &::before {
+      box-shadow: var(--be-popover-shadow-right);
+    }
   }
 }
 
-.be-popover.be-input-select-popover {
-  .be-popover-body {
+.#{ $componentsClass }.be-input-select-popover {
+
+  .#{ $componentsClass }#{$modifier-separator}body {
     padding: 0;
   }
 }
