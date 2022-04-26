@@ -7,16 +7,17 @@
 <template>
     <ClientOnly>
         <div class="text-lg my-6 rounded p-6 border-t-8 border-l-2 border-r-2 border-b-2"
+             @click="showCode = !showCode"
              style="border-top-color: #ec4899;">
             <p class="text-lg my-6" v-html="decodeURIComponent(description)"></p>
              <vp-example :file="path" :demo="formatPathDemos(path)"></vp-example>
-             <vp-source-code :source="source"></vp-source-code>
+             <vp-source-code :source="source" v-if="showCode"></vp-source-code>
         </div>
     </ClientOnly>
 </template>
 
 <script lang="ts">
-import {defineComponent, computed} from 'vue'
+import {defineComponent, computed, ref} from 'vue'
 import VpExample from "./demo/vp-example.vue";
 import VpSourceCode from "./demo/vp-source-code.vue";
 
@@ -58,7 +59,9 @@ export default defineComponent({
                 return demos
             }
         })
+        const showCode = ref<boolean>(false)
         return {
+            showCode,
             formatPathDemos
         }
     }
