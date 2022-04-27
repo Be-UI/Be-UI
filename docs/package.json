@@ -1,11 +1,12 @@
 {
-  "name": "be-ui-docs",
+  "name": "@be-ui/docs",
   "version": "1.0.0",
   "description": "be-ui文档",
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
-    "docs:serve": "vitepress serve"
+    "docs:serve": "vitepress serve",
+    "docs:install": "pnpm install"
   },
   "author": "baiwusanyu",
   "license": "ISC",
