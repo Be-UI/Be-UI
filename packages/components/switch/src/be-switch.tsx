@@ -1,4 +1,4 @@
-import { defineComponent, getCurrentInstance, onMounted, ref } from 'vue'
+import { defineComponent, getCurrentInstance, onMounted, ref, watch } from 'vue'
 import { isBool, isNumber, isString } from '../../../utils/common'
 import BeIcon from '../../svg-icon/src/be-icon.vue'
 import { ISwitchInst } from './be-switch-type'
@@ -32,11 +32,11 @@ export default defineComponent({
     },
     checkedValue: {
       type: [String, Boolean, Number],
-      default: '',
+      default: true,
     },
     unCheckedValue: {
       type: [String, Boolean, Number],
-      default: '',
+      default: false,
     },
   },
   emits: ['update:modelValue', 'change', 'click'],
@@ -48,29 +48,54 @@ export default defineComponent({
     /**
      * 切换状态方法
      */
+    let changeData = {}
+    let isUpdateModel = false
     const switchState = (): void => {
+      changeClass()
+      // 切换状态
+      const modelValue = setInnerState()
+      emitChangeEvt()
+      ctx.emit('update:modelValue', modelValue)
+      isUpdateModel = true
+    }
+    const setInnerState = (): string | number | boolean => {
+      if (innerState.value) {
+        innerState.value = false
+        changeData = {
+          newVal: props.unCheckedValue ? props.unCheckedValue : false,
+          oldVal: props.checkedValue ? props.checkedValue : true,
+        }
+        return props.unCheckedValue ? props.unCheckedValue : false
+      }
+      innerState.value = true
+      changeData = {
+        newVal: props.checkedValue ? props.checkedValue : true,
+        oldVal: props.unCheckedValue ? props.unCheckedValue : false,
+      }
+      return props.checkedValue ? props.checkedValue : true
+    }
+    watch(
+      () => props.modelValue,
+      () => {
+        if (isUpdateModel) {
+          isUpdateModel = false
+          return
+        }
+        setInnerState()
+        emitChangeEvt()
+      }
+    )
+    const emitChangeEvt = (): void => {
+      ctx.emit('change', changeData)
+    }
+    /**
+     * 设置动画样式类
+     */
+    const changeClass = (): void => {
       switching.value = 'be-switching'
       setTimeout(() => {
         switching.value = ''
       }, 500)
-      // 切换状态
-      if (innerState.value) {
-        innerState.value = false
-        const changeData = {
-          newVal: props.unCheckedValue ? props.unCheckedValue : false,
-          oldVal: props.checkedValue ? props.checkedValue : true,
-        }
-        ctx.emit('change', changeData)
-        ctx.emit('update:modelValue', props.unCheckedValue ? props.unCheckedValue : false)
-      } else {
-        innerState.value = true
-        const changeData = {
-          newVal: props.checkedValue ? props.checkedValue : true,
-          oldVal: props.unCheckedValue ? props.unCheckedValue : false,
-        }
-        ctx.emit('change', changeData)
-        ctx.emit('update:modelValue', props.checkedValue ? props.checkedValue : true)
-      }
     }
     /**
      * 点击方法

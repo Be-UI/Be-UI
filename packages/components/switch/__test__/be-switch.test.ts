@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import BeSwitch from '../src/be-switch'
 import { ref } from 'vue'
+import {asyncExpect} from "../../../utils/utils";
 
 const _mount = (options: any) =>
   mount({
@@ -14,6 +15,30 @@ const _mount = (options: any) =>
  * @param options
  */
 describe('test-be-switch-props', () => {
+
+  test('init-value', async () => {
+    const wrapper = _mount({
+      template: `
+              <div @click="varSwitch = false" id="test_click"></div>  
+              <BeSwitch v-model="varSwitch"></BeSwitch>`,
+      setup() {
+        const varSwitch = ref<boolean>(true)
+        return {
+          varSwitch,
+        }
+      },
+    })
+    asyncExpect(()=>{
+      expect(wrapper.find('.be-switch__checked').exists()).toBeTruthy()
+      wrapper.find('#test_click').trigger('click')
+      asyncExpect(()=>{
+        expect(wrapper.find('.be-switch__unChecked').exists()).toBeTruthy()
+      },null)
+    },null)
+
+
+  })
+
   test('props-size-small', () => {
     const wrapper = mount(BeSwitch, {
       props: {
