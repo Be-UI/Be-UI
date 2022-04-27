@@ -2,11 +2,12 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import dts from 'vite-dts'
+import WindiCSS from 'vite-plugin-windicss'
 import cleanup from 'rollup-plugin-cleanup'
 import * as path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueJsx(), dts(), cleanup()],
+  plugins: [vue(), vueJsx(), dts(), cleanup(), WindiCSS()],
 
   /**
    * 在生产中服务时的基本公共路径。

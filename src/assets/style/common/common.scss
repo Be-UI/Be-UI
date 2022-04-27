@@ -1,7 +1,7 @@
 @use "sass:map";
 @import "var";
 @import "mixin";
-
+$componentsClass:null;
 input:focus-visible {
   outline-offset: 0;
 }
