@@ -1,6 +1,6 @@
 import Pager from './be-pager.vue'
 import BeSelect from '../../select/src/be-select'
-import { defineComponent, getCurrentInstance, provide, ref, onMounted, reactive } from 'vue'
+import { defineComponent, getCurrentInstance, provide, ref, reactive } from 'vue'
 import {
   IPage,
   IPageData,
@@ -10,7 +10,7 @@ import {
   IPagerMix,
   IPagerrenderList,
 } from './be-pagenation-type'
-import { arrayDeduplicationt, getUuid } from '../../../utils/common'
+import { arrayDeduplicationt } from '../../../utils/common'
 
 export default defineComponent({
   name: 'BePagination',

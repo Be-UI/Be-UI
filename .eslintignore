@@ -6,3 +6,4 @@ public
 /src/**/*.test.ts
 /src/**/*.test.tsx
 package.json
+jest.config.js
