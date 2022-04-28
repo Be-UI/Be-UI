@@ -21,7 +21,7 @@ const _mount = (options: any) =>
  */
 describe('test-be-ellipsis-props', () => {
   // 提示内容
-  test('props-content', async () => {
+  test('props-content', async function (){
     const wrapper = _mount({
       template: `
                 <be-ellipsis 
@@ -37,13 +37,15 @@ describe('test-be-ellipsis-props', () => {
       .parentElement
     await asyncExpect(() => {
       elm && elm.dispatchEvent(new Event('mouseenter'))
+
     }, null)
     await asyncExpect(() => {
       expect(document.body.innerHTML.indexOf('自古逢秋悲寂寥') > 0).toBeTruthy()
+
     }, 300)
   })
   // 显示内容
-  test('props-text', async () => {
+ /* test('props-text', async () => {
     const wrapper = _mount({
       template: `
                 <be-ellipsis
@@ -158,5 +160,5 @@ describe('test-be-ellipsis-props', () => {
     await asyncExpect(() => {
       expect(elm.innerHTML === '...日胜春朝').toBeTruthy()
     }, null)
-  })
+  })*/
 })
