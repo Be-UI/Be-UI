@@ -322,3 +322,15 @@ $--message-box: map.deep-merge(
     'info-color': var(--be-emo-info-color),
   ),$--message-box
 );
+
+// 生成 be-dialog
+$--dialog: () !default;
+$--dialog: map.deep-merge(
+                (
+                        'w-full':var(--be-percentage-full),
+                        'h-full':var(--be-percentage-full),
+                        'bg-w': var(--be-base-color-w),
+                        'p': 1rem 1.25rem,
+                        'text-primary': var(--be-text-color-primary),
+                ),$--dialog
+);

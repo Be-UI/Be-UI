@@ -614,6 +614,13 @@
             </be-breadcrumb-item>
         </be-breadcrumb>-->
     </div>
+      <be-dialog
+
+          titles="方珍珠"
+
+          v-model:is-show="showSwitch">
+            sadddddddaaa
+      </be-dialog>
   </div>
 </template>
 

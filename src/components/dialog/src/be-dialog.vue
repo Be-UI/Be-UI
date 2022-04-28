@@ -7,36 +7,36 @@
       <div
         :id="`be_dialog_container${uid}`"
         v-drag="{ isDrag: isDrag }"
-        class="be-dialog-container"
+        class="be-dialog--container"
         :class="customClassStyle">
-        <div class="be-dialog-title">
-          <div :id="`be_head${uid}`" class="be-dialog-container-head">
+        <div class="be-dialog--title">
+          <div :id="`be_head${uid}`" class="be-dialog--container__head">
             <span>{{ titles }}</span>
             <!-- @slot 弹窗头部按钮 -->
-            <div class="be-dialog-close">
+            <div class="be-dialog--icon__close">
               <slot name="headerIcon">
                 <be-icon
                   icon="deleteIc"
-                  custom-class="be-dialog-close-btn"
+                  custom-class="be-dialog--icon__close-btn"
                   @click="handleClose('btn')"></be-icon>
               </slot>
             </div>
           </div>
         </div>
-        <div class="be-dialog-body">
+        <div class="be-dialog--body">
           <!-- @slot 弹窗主体-->
-          <div class="be-dialog-body__inner">
+          <div class="be-dialog--body__inner">
             <slot></slot>
           </div>
         </div>
-        <div v-if="showFooter" :class="`be-dialog-footer be-dialog-footer__${layout}`">
+        <div v-if="showFooter" :class="`be-dialog--footer be-dialog--footer__${layout}`">
           <!-- @slot 弹窗底部-->
           <slot name="footer">
             <be-button
               type="primary"
               bordered
               round="3"
-              custom-class="be-dialog-footer-btn"
+              custom-class="be-dialog--footer__btn"
               @click="handleConfirm"
               >确定
             </be-button>
@@ -196,7 +196,7 @@
       // 开启遮罩与键盘监听
       onMounted(() => {
         if (props.isOpenModal) {
-          dialogModels.value = 'be-dialog-modal'
+          dialogModels.value = 'be-dialog--modal be-modal'
         }
         if (props.isShow) {
           listenerEscExitFunc()
