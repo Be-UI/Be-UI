@@ -43,10 +43,10 @@ module.exports = {
   // roots: ['<rootDir>/packages/components/message'],
    //roots: ['<rootDir>/packages/components/input-number'],
    //roots: ['<rootDir>/packages/components/switch'],
-   //roots: ['<rootDir>/packages/components/breadcrumb'],  // f popover导致？
+   //roots: ['<rootDir>/packages/components/breadcrumb'],  // f popover fix: @popperjs/core 边界问题bug修复 导致
   // roots: ['<rootDir>/packages/components/contextmenu'],
   // roots: ['<rootDir>/packages/components/container'],
-    roots: ['<rootDir>/packages/components/ellipsis'], // f popover导致？
+    roots: ['<rootDir>/packages/components/ellipsis'], // f popover导致 fix: @popperjs/core 边界问题bug修复 导致
   // roots: ['<rootDir>/packages/components/button'],
   // roots: ['<rootDir>/packages/components/message-box/'],
   // roots: ['<rootDir>/packages/components/dialog'],
