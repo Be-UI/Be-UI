@@ -121,7 +121,8 @@ describe('test-be-message-content-update', () => {
       titles: 'test-info-example',
       key: 'test-info',
     } as IMessage) as IMsgInstanceTest
-    const textContent = compInst.message.el.querySelectorAll('.txt-info')[0].textContent
+    debugger
+    const textContent = compInst.message.el.querySelectorAll('.txt__info')[0].textContent
     const titles = compInst.message.props.option.titles
     expect(textContent === titles && textContent === 'test-info-example').toBeTruthy()
     // 关闭
@@ -131,7 +132,7 @@ describe('test-be-message-content-update', () => {
     })
     await asyncExpect(() => {
       const textContentUpdate =
-        compInstInfoUpdate.notify.el.querySelectorAll('.txt-info')[0].textContent
+        compInstInfoUpdate.notify.el.querySelectorAll('.txt__info')[0].textContent
       const titlesUpdate = compInstInfoUpdate.notify.props.option.titles
       expect(
         textContentUpdate === titlesUpdate && textContentUpdate === 'test-info-example-update'
