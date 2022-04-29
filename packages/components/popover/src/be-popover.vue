@@ -49,7 +49,7 @@
   import {createPopper, Instance} from '@popperjs/core'
   import {IPopover, TPopoverStyle, VirtualElement} from './be-popover-type'
   import {isString} from '../../../utils/common'
-  // test commit
+
   export default defineComponent({
     name: 'BePopover',
     directives: { ClickOutside },
