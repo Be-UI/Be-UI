@@ -2,6 +2,10 @@
   "name": "be-ui",
   "version": "3.0.2",
   "packageManager": "pnpm@6.32.4",
+  "repository": {
+       "type": "git",
+       "url": "git+https://github.com/baiwusanyu-c/Be-UI.git"
+   },
   "workspaces": [
     "packages/*",
     "docs"
@@ -9,7 +13,7 @@
   "scripts": {
     "init": "pnpm install",
     "dev": "vite --host",
-    "build": "rollup -c rollup.config.js",
+    "build": "rollup -c rollup.config.js && pnpm run release",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint:ts": "eslint ./packages --ext .vue,.js,.ts,.jsx,.tsx",
@@ -17,6 +21,7 @@
     "docs:dev": "pnpm run -C docs docs:dev",
     "docs:build": "pnpm run -C docs docs:build",
     "docs:serve": "pnpm run -C docs docs:serve",
+    "release": "cp package.json README.md dist",
     "prettier:fix": "prettier --write .",
     "prepare": "husky install"
   },
