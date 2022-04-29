@@ -1,4 +1,4 @@
-@import 'common/mixin';
+
 $componentsClass: $name+ '-' + 'switch' !global;
 @include create-B(switch) {
   @include set-component-style-var('switch', $--switch);

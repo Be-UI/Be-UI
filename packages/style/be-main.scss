@@ -1,4 +1,4 @@
-@import 'common/mixin';
+
 $componentsClass: $name+ '-' + 'main' !global;
 
 @include create-B(main) {

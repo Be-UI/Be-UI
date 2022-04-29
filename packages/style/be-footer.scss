@@ -1,4 +1,4 @@
-@import 'common/mixin';
+
 $componentsClass: $name+ '-' + 'footer' !global;
 
 @include create-B(footer) {

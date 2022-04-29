@@ -1,5 +1,4 @@
-@import 'common/var';
-@import 'common/mixin';
+
 @mixin be-button-border(
   $bgColor,
   $textColor,
@@ -188,78 +187,78 @@
 
 .be-button__error__border {
   @include be-button-border(
-    var($error),
-    var($whiteText),
-    var($errorBorder),
-    var($errorHover),
-    var($errorHoverBorder),
-    var($whiteText)
+    $error,
+    $whiteText,
+    $errorBorder,
+    $errorHover,
+    $errorHoverBorder,
+    $whiteText
   );
 }
 
 .be-button__info__border {
   @include be-button-border(
-    var($default),
-    var($defaultText),
-    var($infoBorder),
-    var($infoHover),
-    var($infoHoverBorder),
-    var($defaultText)
+    $default,
+    $defaultText,
+    $infoBorder,
+    $infoHover,
+    $infoHoverBorder,
+    $defaultText
   );
 }
 
 .be-button__success__border {
   @include be-button-border(
-    var($success),
-    var($whiteText),
-    var($successBorder),
-    var($successHover),
-    var($successHoverBorder),
-    var($whiteText)
+    $success,
+    $whiteText,
+    $successBorder,
+    $successHover,
+    $successHoverBorder,
+    $whiteText
   );
 }
 
 .be-button__warning__border {
   @include be-button-border(
-    var($warning),
-    var($whiteText),
-    var($warningBorder),
-    var($warningHover),
-    var($warningHoverBorder),
-    var($whiteText)
+    $warning,
+    $whiteText,
+    $warningBorder,
+    $warningHover,
+    $warningHoverBorder,
+    $whiteText
   );
 }
 
 .be-button__primary__border {
   @include be-button-border(
-    var($primary),
-    var($primaryText),
-    var($primaryBorder),
-    var($primaryHover),
-    var($primaryHoverBorder),
-    var($whiteText),
+    $primary,
+    $primaryText,
+    $primaryBorder,
+    $primaryHover,
+    $primaryHoverBorder,
+    $whiteText,
   );
 
   &:hover {
-    color: var($whiteText);
+    color: $whiteText;
   }
 }
 
 .be-button__default__border {
   @include be-button-border(
-    var($default),
-    var($defaultText),
-    var($infoBorder),
-    var($primary),
-    var($primaryBorder),
-    var($whiteText)
+    $default,
+    $defaultText,
+    $infoBorder,
+    $primary,
+    $primaryBorder,
+    $whiteText
   );
 
   &:hover {
-    color: var($primaryText);
+    color: $primaryText;
 
     button {
-      color: var($primaryText);
+      color: $primaryText;
     }
 
     .be-button-prevIcon__default,

@@ -1,4 +1,4 @@
-@import 'common/mixin';
+
 $componentsClass: $name+ '-' + 'progress' !global;
 // BEM是一种前端命名方法论，主要是针对CSS，意思是块（Block）、元素（Element）、修饰符（Modifier）的简写。
 @include create-B(progress) {

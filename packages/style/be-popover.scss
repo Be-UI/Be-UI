@@ -1,4 +1,4 @@
-@import 'common/mixin';
+
 $componentsClass: $name+ '-' + 'popover' !global;
 @include create-B(popover) {
   @include set-component-style-var('popover', $--popover);

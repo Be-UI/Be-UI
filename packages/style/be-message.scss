@@ -1,4 +1,4 @@
-@import 'common/mixin';
+
 $componentsClass: $name+ '-' + 'message' !global;
 @include create-B(message) {
   @include set-component-style-var('message', $--message);

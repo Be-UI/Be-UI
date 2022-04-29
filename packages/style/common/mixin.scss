@@ -1,8 +1,5 @@
 // set all css var for component by map
 @use 'sass:map';
-@import "var";
-@import "config";
-$componentsClass:null;
 // 生成变量
 @mixin set-css-var-type($name, $type, $--variables) {
   --be-#{$name}-#{$type}: #{map.get($--variables, $type)};

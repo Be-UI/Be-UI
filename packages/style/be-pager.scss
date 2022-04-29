@@ -1,4 +1,4 @@
-@import 'common/mixin';
+
 $componentsClass: $name+ '-' + 'pager' !global;
 @include create-B(pager) {
   @include set-component-style-var('pager', $--pager);
