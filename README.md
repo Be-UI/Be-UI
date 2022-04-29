@@ -42,7 +42,7 @@ internalInstance.ctx 禁止使用 proxy.$el.
 
 ## 排期
 
-打包  
+打包：css去重，保留readme，types，package.json
 monorepo
 文档
 

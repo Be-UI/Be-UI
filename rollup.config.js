@@ -14,7 +14,8 @@ import postcss from 'rollup-plugin-postcss'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
-import collectSass from 'rollup-plugin-collect-sass'
+import cleanup from 'rollup-plugin-cleanup';
+import {terser} from 'rollup-plugin-terser';
 const config = {
     external: ['@popperjs/core',id => /.test.js/.test(id),'vue'],
     input: "./packages/components/index.ts", // 必须，入口文件
@@ -26,7 +27,6 @@ const config = {
             globals: {
                 vue: "vue" // 告诉rollup全局变量Vue即是vue
             },
-
 
         },
         {
@@ -69,6 +69,8 @@ const config = {
            // presets: ["@vue/babel-plugin-jsx"]
         }),
         commonjs(),
+        terser(),
+        cleanup({comments:'none'}),
     ]
 }
 
