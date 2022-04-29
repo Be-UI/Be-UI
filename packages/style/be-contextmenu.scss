@@ -1,3 +1,4 @@
+@import 'common/mixin';
 .be-contextmenu {
   @apply font-mono absolute m-0 bg-default shadow cursor-pointer rounded border border-infoh text-sm list-none whitespace-nowrap;
   z-index: 2800;

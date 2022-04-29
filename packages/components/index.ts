@@ -3,7 +3,7 @@ import type { App } from 'vue'
 export * from './install-components'
 import * as components from './install-components'
 import 'virtual:windi.css'
-
+import '../style/index.scss'
 const componentList: object = components
 type componentKeyType = keyof typeof componentList
 export const install = function (app: App) {

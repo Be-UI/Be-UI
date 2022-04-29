@@ -1,4 +1,4 @@
-@import "./common/config";
+@import 'common/mixin';
 $componentsClass:$name + '-' + 'dialog' !global;
 @include create-B(dialog){
   @include set-component-style-var('dialog', $--dialog);

@@ -1,6 +1,6 @@
-import { App } from 'vue'
+import type { App } from 'vue'
 import Tag from './src/be-tag.vue'
-import { ITag } from './src/be-tag-type'
+import type { ITag } from './src/be-tag-type'
 
 const tag = Tag as ITag
 /**

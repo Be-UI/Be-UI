@@ -1,5 +1,5 @@
-@import 'common/config';
-$componentsClass: $name + '-' + 'popover' !global;
+@import 'common/mixin';
+$componentsClass: $name+ '-' + 'popover' !global;
 @include create-B(popover) {
   @include set-component-style-var('popover', $--popover);
 }

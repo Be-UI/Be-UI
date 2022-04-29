@@ -1,5 +1,5 @@
-@import 'common/config';
-$componentsClass: $name + '-' + 'header' !global;
+@import 'common/mixin';
+$componentsClass: $name+ '-' + 'header' !global;
 
 @include create-B(header) {
   box-sizing: border-box;

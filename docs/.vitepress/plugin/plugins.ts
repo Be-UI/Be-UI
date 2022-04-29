@@ -1,5 +1,5 @@
-import path from 'path'
-import fs from 'fs'
+import * as path from 'path'
+import * as fs from 'fs'
 import MarkdownIt from 'markdown-it'
 import mdContainer from 'markdown-it-container'
 import type Token from 'markdown-it/lib/token'

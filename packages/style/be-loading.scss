@@ -1,3 +1,4 @@
+@import 'common/mixin';
 .be-load-container {
   z-index: 9999;
   display: flex;
@@ -25,7 +26,7 @@
       span {
         width: 6px;
         height: 6px;
-        background-color: $primaryText;
+        background-color: var(--be-emo-link-color);
         border-radius: 50%;
         -webkit-animation: move 1.04s ease infinite;
       }
