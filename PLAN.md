@@ -98,3 +98,6 @@ be-notification 单元测试
 - npx husky add .husky/commit-msg "npx --no -- commitlint --edit $1"
 - 在 package.json 的 script 里面配置"commit": "这里面添加 eslint、单测、stylelint 等"
 - 提交时执行命令例如 git commit -am "optimize: 项目添加 commitlint 本地校验配置" 或 git commit -m "optimize: 项目添加 commitlint 本地校验配置"
+
+### m
+pnpm install @be-ui/docs -w

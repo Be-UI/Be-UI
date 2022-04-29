@@ -2,6 +2,7 @@
   "name": "@be-ui/docs",
   "version": "1.0.0",
   "description": "be-ui文档",
+  "packageManager": "pnpm@6.32.4",
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
@@ -10,6 +11,11 @@
   },
   "author": "baiwusanyu",
   "license": "ISC",
+  "pnpm": {
+    "overrides": {
+      "jsdom": "16.4.0"
+    }
+  },
   "dependencies": {
     "@vueuse/core": "^8.2.5",
     "@docsearch/js": "^3.0.0",
@@ -20,17 +26,14 @@
   },
   "devDependencies": {
     "@types/markdown-it": "^12.2.3",
-    "vite": "^2.9.1",
     "vite-plugin-inspect": "^0.4.3",
     "vite-plugin-pwa": "^0.11.13",
     "vite-plugin-windicss": "^1.8.4",
     "vitepress": "^0.22.3",
-    "windicss": "^3.5.1",
     "escape-html": "^1.0.3",
     "consola": "^2.15.3",
     "prismjs":"1.27.0",
     "markdown-it": "^12.3.2",
-    "markdown-it-container": "^3.0.0",
-    "@types/node": "*"
+    "markdown-it-container": "^3.0.0"
   }
 }
