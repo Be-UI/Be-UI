@@ -43,7 +43,7 @@ internalInstance.ctx 禁止使用 proxy.$el.
 ## 排期
 
 打包：types
-monorepo
+monorepo 
 文档
 
 
