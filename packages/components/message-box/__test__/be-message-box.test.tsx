@@ -197,7 +197,7 @@ describe('test-be-message-box-event', () => {
     })
     const elm = document.body.querySelector('.msg-event-onClose') as HTMLElement
     const closeElm = elm.querySelector('.be-message-box--head-close') as HTMLElement
-    const closeIcon = closeElm.querySelector('.be-icon-container') as HTMLElement
+    const closeIcon = closeElm.querySelector('.be-icon--container') as HTMLElement
     closeIcon.dispatchEvent(new Event('click'))
     asyncExpect(() => {
       expect(handleClick).toBeCalled()

@@ -16,11 +16,11 @@ export const createCustom = (template: string): object => {
       const attrs = useAttrs()
       const customClass = props.customClass ? props.customClass : ''
       const spinClass = computed(() =>
-        props.spin ? 'be-icon-spin ' + customClass : '' + customClass
+        props.spin ? 'be-icon__spin ' + customClass : '' + customClass
       )
       return () => {
         return (
-          <div class={`be-icon-container ${spinClass.value}`} {...attrs}>
+          <div class={`be-icon ${spinClass.value}`} {...attrs}>
             {template}
           </div>
         )

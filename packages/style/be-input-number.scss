@@ -29,7 +29,7 @@
         }
       }
 
-      .be-icon-container {
+      .be-icon--container {
         @apply bg-default flex justify-center items-center flex-1;
 
         .be-icon {
@@ -69,7 +69,7 @@
   }
 
   .be-input-number__op {
-    .be-icon-container {
+    .be-icon--container {
       .be-icon {
         @apply w-2.5 h-2.5;
       }

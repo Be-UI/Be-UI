@@ -1,21 +1,22 @@
+$componentsClass: $name+ '-' + 'icon' !global;
 
-@keyframes spin {
+@keyframes be-animate-icon-spin {
   100% {
     transform: rotate(360deg);
   }
 }
 
-.be-icon-container {
+@include create-B(icon) {
   display: inline-block;
 
-  .be-icon {
+  .#{ $componentsClass }#{$modifier-separator}container  {
     overflow: hidden;
     vertical-align: 0;
   }
 }
 
-.be-icon-spin {
+.#{ $componentsClass }#{$element-separator}spin {
   display: inline-block;
-  -webkit-animation: spin 1s infinite linear;
-  animation: spin 1s infinite linear;
+  -webkit-animation: be-animate-icon-spin 1s infinite linear;
+  animation: be-animate-icon-spin 1s infinite linear;
 }

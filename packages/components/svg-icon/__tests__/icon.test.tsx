@@ -63,7 +63,7 @@ describe('test-be-icon-props', () => {
         spin: true,
       },
     })
-    expect(wrapper.element.className.indexOf('be-icon-spin') > 0).toBeTruthy()
+    expect(wrapper.element.className.indexOf('be-icon__spin') > 0).toBeTruthy()
   })
 })
 /**
@@ -169,7 +169,7 @@ describe('test-be-icon-custom', () => {
         spin: true,
       },
     })
-    expect(wrapper.element.className.indexOf('be-icon-spin') > 0).toBeTruthy()
+    expect(wrapper.element.className.indexOf('be-icon__spin') > 0).toBeTruthy()
   })
 
   const handleClick = jest.fn()
