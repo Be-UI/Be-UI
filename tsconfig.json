@@ -14,7 +14,7 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["esnext", "dom"],
     // 类型文件声明位置
-    "types": ["vite/client", "jest"]
+    "types": ["vite/client", "jest","packages/utils/types.ts"]
   },
   "include": [
     "packages/**/*.ts",
