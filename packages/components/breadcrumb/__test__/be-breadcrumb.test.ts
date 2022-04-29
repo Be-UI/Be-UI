@@ -32,7 +32,7 @@ interface IOptionItem {
  * @param options
  */
 describe('test-be-breadcrumb-props', () => {
-  /*test('props-to', () => {
+  test('props-to', () => {
     const wrapper = _mount({
       template: `
                 <be-breadcrumb>
@@ -67,14 +67,14 @@ describe('test-be-breadcrumb-props', () => {
     const itemList = wrapper.findAll('.be-breadcrumb--item__separator')
     expect(itemList[0].element.innerHTML === '#').toBeTruthy()
     expect(itemList[1].element.innerHTML === '❀').toBeTruthy()
-  })*/
+  })
   test('props-disabled', async () => {
     const handleClick = jest.fn()
     const wrapper = await _mount({
       template: `
                 <be-breadcrumb>
                 <be-breadcrumb-item disabled :click="handleClick">普通朋友</be-breadcrumb-item>
-                <be-breadcrumb-item :disabled="isDisabled" :option="testList">似曾相识</be-breadcrumb-item>
+                <be-breadcrumb-item :disabled="isDisabled" :option="testList" :forceUpdate="false">似曾相识</be-breadcrumb-item>
                 </be-breadcrumb>
             `,
       setup() {
@@ -95,15 +95,13 @@ describe('test-be-breadcrumb-props', () => {
     // 测试禁用 popover
     // 模拟点击开启 popover
     await asyncExpect(() => {
-      debugger
       itemList[1].trigger('click')
     }, null)
     await asyncExpect(() => {
-      debugger
       expect(document.body.querySelectorAll('.be-popover').length).toBe(1)
     }, 1000)
     // 模拟点击其他div 关闭 popover
-    /*await document.body.dispatchEvent(new Event('click'))
+    await document.body.dispatchEvent(new Event('click'))
     await asyncExpect(() => {
       expect(document.body.querySelectorAll('.be-popover').length).toBe(0)
     }, 1000)
@@ -114,10 +112,10 @@ describe('test-be-breadcrumb-props', () => {
     }, null)
     await asyncExpect(() => {
       expect(document.body.querySelectorAll('.be-popover').length).toBe(0)
-    }, null)*/
+    }, null)
   })
 })
-/*describe('test-be-breadcrumb-event', () => {
+describe('test-be-breadcrumb-event', () => {
   test('event:click', async () => {
     const handleClick = jest.fn()
     const wrapper = _mount({
@@ -147,7 +145,7 @@ describe('test-be-breadcrumb-props', () => {
       template: `
 
                 <be-breadcrumb>
-                <be-breadcrumb-item :option="testList" :clickOption="handleClick">似曾相识</be-breadcrumb-item>
+                <be-breadcrumb-item :option="testList" :clickOption="handleClick" :forceUpdate="false">似曾相识</be-breadcrumb-item>
                 </be-breadcrumb>
             `,
       setup() {
@@ -170,10 +168,10 @@ describe('test-be-breadcrumb-props', () => {
       expect(document.body.querySelectorAll('.be-popover').length).toBe(2)
     }, 1000)
     const popover = document.body.querySelectorAll('.be-popover')[1]
-    const popoverItemElm = popover.querySelector('.be-breadcrumb--item-li') as HTMLElement
+    const popoverItemElm = popover.querySelector('.be-breadcrumb--li') as HTMLElement
     popoverItemElm.dispatchEvent(new Event('click'))
     await asyncExpect(() => {
       expect(handleClick).toBeCalled()
     }, 1000)
   })
-})*/
+})

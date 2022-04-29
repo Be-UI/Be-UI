@@ -25,7 +25,7 @@ describe('test-be-ellipsis-props', () => {
     const wrapper = _mount({
       template: `
                 <be-ellipsis 
-                
+                    :forceUpdate = 'false'
                     data-test ="be_ellipsis_test_content"
                     content="自古逢秋悲寂寥" 
                     :elpNum = '0' 
@@ -45,10 +45,11 @@ describe('test-be-ellipsis-props', () => {
     }, 300)
   })
   // 显示内容
- /* test('props-text', async () => {
+  test('props-text', async () => {
     const wrapper = _mount({
       template: `
                 <be-ellipsis
+                    :forceUpdate = 'false'
                     data-test ="be_ellipsis_test_text"
                     content="自古逢秋悲寂寥" 
                     :elpNum = '0' 
@@ -66,6 +67,7 @@ describe('test-be-ellipsis-props', () => {
     const wrapper = _mount({
       template: `
                 <be-ellipsis
+                    :forceUpdate = 'false'
                     data-test ="be_ellipsis_test_elpNum"
                     content="自古逢秋悲寂寥" 
                     :elpNum = '3' 
@@ -83,6 +85,7 @@ describe('test-be-ellipsis-props', () => {
     const wrapper = _mount({
       template: `
                 <be-ellipsis
+                    :forceUpdate = 'false'
                     data-test ="be_ellipsis_test_expandTrigger"
                     content="自古逢秋悲寂寥" 
                      expandTrigger
@@ -112,6 +115,7 @@ describe('test-be-ellipsis-props', () => {
     const wrapper = _mount({
       template: `
                 <be-ellipsis
+                  :forceUpdate = 'false'
                     data-test ="be_ellipsis_test_elpNum"
                     content="自古逢秋悲寂寥" 
                     expandTrigger
@@ -133,6 +137,7 @@ describe('test-be-ellipsis-props', () => {
     const wrapper = _mount({
       template: `
                 <be-ellipsis
+                    :forceUpdate = 'false'
                     :placement = 'placement'
                     data-test ="be_ellipsis_test_placement"
                     content="自古逢秋悲寂寥" 
@@ -160,5 +165,5 @@ describe('test-be-ellipsis-props', () => {
     await asyncExpect(() => {
       expect(elm.innerHTML === '...日胜春朝').toBeTruthy()
     }, null)
-  })*/
+  })
 })

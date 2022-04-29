@@ -129,6 +129,13 @@
         type: String,
         default: '',
       },
+      /**
+       * 内部调用，更新布局，
+       */
+      forceUpdate: {
+          type: Boolean,
+          default: true,
+      },
     },
     emits: ['update'],
     setup(props, ctx) {
@@ -173,7 +180,7 @@
           // 设置 false 时通过 v-if 关闭卸载
           show.value = isShow
           // 关闭 observer
-          observer.disconnect()
+           observer.disconnect()
           nextTick(() => {
             if (show.value) {
               computePosition(props.placement)
@@ -251,10 +258,13 @@
           attributeFilter: ['style'],
         })
       }
+
       // 监听popover元素变化，强制更新，某些边界情况  @popperjs/core 位置定位是错误的
-      let observer = new MutationObserver(() => {
-        popperJS.value?.update()
-      })
+       let observer = new MutationObserver(() => {
+           if(props.forceUpdate){
+               popperJS.value?.update()
+           }
+       })
       /**
        * 用户传入指定坐标，创建vnode，用于popover.js定位
        * @param {number} x - 位置

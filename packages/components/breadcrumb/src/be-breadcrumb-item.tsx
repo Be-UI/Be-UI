@@ -36,6 +36,13 @@ export default defineComponent({
     clickOption: {
       type: Function,
     },
+    /**
+     * 内部调用，更新布局，
+     */
+    forceUpdate: {
+      type: Boolean,
+      default: true,
+    },
   },
   setup(props) {
     // 當前實例
@@ -128,6 +135,7 @@ export default defineComponent({
           aria-label="BeBreadcrumbItem">
           {optionList.value.length > 0 ? (
             <be-popover
+              forceUpdate={props.forceUpdate}
               ref="beBreadcrumbPopover"
               customClass="be-breadcrumb--popover"
               placement="bottom"
