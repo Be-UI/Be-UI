@@ -44,7 +44,7 @@ describe('test-be-dialog-props', () => {
         customClass: 'test-titles-class',
       },
     })
-    const titleElm = wrapper.find('.test-titles-class').find('.be-dialog-container-head').element
+    const titleElm = wrapper.find('.test-titles-class').find('.be-dialog--container__head').element
       .childNodes[0] as HTMLElement
     await asyncExpect(() => {
       expect(titleElm.innerHTML === 'test-titles').toBeTruthy()
@@ -56,7 +56,7 @@ describe('test-be-dialog-props', () => {
         isShow: true,
       },
     })
-    const modalElm = wrapper.find('.be-dialog-modal').exists()
+    const modalElm = wrapper.find('.be-dialog--modal').exists()
     await asyncExpect(() => {
       expect(modalElm).toBeTruthy()
     }, null)
@@ -68,7 +68,7 @@ describe('test-be-dialog-props', () => {
         layout: 'right',
       },
     })
-    const modalElm = wrapper.find('.be-dialog-footer__right').exists()
+    const modalElm = wrapper.find('.be-dialog--footer__right').exists()
     await asyncExpect(() => {
       expect(modalElm).toBeTruthy()
     }, null)
@@ -80,7 +80,7 @@ describe('test-be-dialog-props', () => {
         layout: 'center',
       },
     })
-    const modalElm = wrapper.find('.be-dialog-footer__center').exists()
+    const modalElm = wrapper.find('.be-dialog--footer__center').exists()
     await asyncExpect(() => {
       expect(modalElm).toBeTruthy()
     }, null)
@@ -124,7 +124,7 @@ describe('test-be-dialog-event', () => {
         }
       },
     })
-    wrapper.find('.be-dialog-close-btn').trigger('click')
+    wrapper.find('.be-dialog--icon__close-btn').trigger('click')
     await asyncExpect(() => {
       expect(handleClose).toBeCalled()
     }, null)
@@ -146,7 +146,7 @@ describe('test-be-dialog-event', () => {
         }
       },
     })
-    wrapper.find('.be-dialog-footer-btn').trigger('click')
+    wrapper.find('.be-dialog--footer__btn').trigger('click')
     await asyncExpect(() => {
       expect(handleConfirm).toBeCalled()
     }, null)

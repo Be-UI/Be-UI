@@ -1,7 +1,7 @@
-@use 'sass:map';
-@import 'var';
-@import 'mixin';
-
+@use "sass:map";
+@import "var";
+@import "mixin";
+$componentsClass:null;
 input:focus-visible {
   outline-offset: 0;
 }
@@ -355,13 +355,25 @@ $--breadcrumb: map.deep-merge(
 $--message-box: () !default;
 $--message-box: map.deep-merge(
   (
-    'w-full': var(--be-percentage-full),
-    'h-full': var(--be-percentage-full),
-    'bg-w': var(--be-base-color-bg-w),
+    'w-full':var(--be-percentage-full),
+    'h-full':var(--be-percentage-full),
+    'bg-w': var(--be-base-color-w),
     'success-color': var(--be-emo-success-color),
     'error-color': var(--be-emo-error-color),
     'warning-color': var(--be-emo-warning-color),
     'info-color': var(--be-emo-info-color),
   ),
   $--message-box
+);
+
+// 生成 be-dialog
+$--dialog: () !default;
+$--dialog: map.deep-merge(
+                (
+                        'w-full':var(--be-percentage-full),
+                        'h-full':var(--be-percentage-full),
+                        'bg-w': var(--be-base-color-w),
+                        'p': 1rem 1.25rem,
+                        'text-primary': var(--be-text-color-primary),
+                ),$--dialog
 );
