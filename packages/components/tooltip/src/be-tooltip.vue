@@ -17,8 +17,9 @@
   </be-popover>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import {defineComponent} from 'vue'
   import popover from '../../popover/src/be-popover.vue'
+
   export default defineComponent({
     name: 'BeTooltip',
     components: {
@@ -103,4 +104,3 @@
   })
 </script>
 
-<style scoped></style>

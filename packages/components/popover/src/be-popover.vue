@@ -419,6 +419,3 @@
   })
 </script>
 
-<style lang="scss">
-  @import '../../../style/be-popover';
-</style>

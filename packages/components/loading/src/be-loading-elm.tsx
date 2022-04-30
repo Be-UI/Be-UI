@@ -5,7 +5,7 @@
  * @update (czh 2021/06/06)
  */
 
-import { defineComponent, VNode } from 'vue'
+import {defineComponent, VNode} from 'vue'
 
 const renderCircle = function (color: string): VNode {
   return (
@@ -21,7 +21,7 @@ export default defineComponent({
   name: 'BeLoadingAnimate',
   inject: ['$$BeLoading'],
   render() {
-    const loadingAnim = []
+    const loadingAnim:Array<VNode> = []
     // 判断用户是否自定义渲染
     if (this.$$BeLoading.customRender()) {
       loadingAnim[0] = this.$$BeLoading.customRender()

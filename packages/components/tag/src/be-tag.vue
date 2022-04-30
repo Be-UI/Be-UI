@@ -21,10 +21,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive } from 'vue'
-  import BeIcon from '../../svg-icon/src/be-icon.vue'
+    import {defineComponent, reactive} from 'vue'
+    import BeIcon from '../../svg-icon/src/be-icon.vue'
 
-  export default defineComponent({
+    export default defineComponent({
     name: 'BeTag',
     components: { BeIcon },
     props: {
@@ -111,6 +111,3 @@
   })
 </script>
 
-<style lang="scss">
-  @import '../../../style/be-tag';
-</style>

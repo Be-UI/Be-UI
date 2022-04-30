@@ -48,20 +48,11 @@
 </template>
 
 <script lang="ts">
-  import {
-    defineComponent,
-    ref,
-    computed,
-    onMounted,
-    onUnmounted,
-    getCurrentInstance,
-    nextTick,
-    watch,
-  } from 'vue'
-  import { dragDirective } from '../../../utils/direactives/drag-directives'
+  import {computed, defineComponent, getCurrentInstance, nextTick, onMounted, onUnmounted, ref, watch,} from 'vue'
+  import {dragDirective} from '../../../utils/direactives/drag-directives'
   import BeButton from '../../button/src/be-button'
   import BeIcon from '../../svg-icon/src/be-icon.vue'
-  import { IContextMenu } from '../../contextmenu/src/be-contextmenu-type'
+  import {IContextMenu} from '../../contextmenu/src/be-contextmenu-type'
 
   /**
    * 可拖拽、放大、缩小弹窗
@@ -216,6 +207,3 @@
   })
 </script>
 
-<style lang="scss">
-  @import '../../../style/be-dialog';
-</style>

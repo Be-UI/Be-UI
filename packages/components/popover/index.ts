@@ -1,6 +1,7 @@
-import { App } from 'vue'
+import {App} from 'vue'
 import bePopover from './src/be-popover.vue'
-import type { SFCWithInstall } from '../../utils/types'
+import type {SFCWithInstall} from '../../utils/types'
+import '../../style/be-popover.scss';
 
 /**
  * 组件装载方法
