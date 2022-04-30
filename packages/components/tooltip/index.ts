@@ -1,6 +1,6 @@
 import { App } from 'vue'
 import beTooltip from './src/be-tooltip.vue'
-import type { SFCWithInstall } from '../../utils/types'
+import type { SFCWithInstall } from '../../utils/type/types.d'
 
 /**
  * 组件装载方法

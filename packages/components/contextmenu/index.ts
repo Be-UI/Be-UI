@@ -9,7 +9,7 @@ import beContextmenu from './src/be-contextmenu.vue'
 import beContextmenuItem from './src/be-contextmenu-item.vue'
 import beContextmenuSubMenu from './src/be-contextmenu-sub-menu.vue'
 import '../../style/be-contextmenu.scss'
-import { SFCWithInstall } from '../../utils/types'
+import { SFCWithInstall } from '../../utils/type/types'
 /**
  * 组件装载方法
  * @param app

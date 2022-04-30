@@ -17,7 +17,7 @@ import '../../style/be-footer.scss'
 import '../../style/be-header.scss'
 import '../../style/be-container.scss'
 
-import { SFCWithInstall } from '../../utils/types'
+import { SFCWithInstall } from '../../utils/type/types'
 /**
  * 组件装载方法
  * @param app

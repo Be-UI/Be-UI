@@ -2,7 +2,7 @@ import { App, defineComponent } from 'vue'
 import SvgIcon from "./src/be-icon.vue"
 import '../../style/be-icon.scss'
 import { createCustom } from './src/be-custom-icon'
-import { SFCWithInstall } from '../../utils/types'
+import { SFCWithInstall } from '../../utils/type/types'
 import { SvgDom } from '../../utils/create-svg'
 
 /**

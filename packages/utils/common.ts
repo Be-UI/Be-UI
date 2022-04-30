@@ -1,8 +1,8 @@
 import { isArray, isObject, toRawType } from '@vue/shared'
 
 import type { Ref } from 'vue'
-import { TimeoutHandle } from './types'
-import { IOption } from './types'
+import { TimeoutHandle } from './type/types'
+import { IOption } from './type/types'
 
 /**
  * id生成方法
