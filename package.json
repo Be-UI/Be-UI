@@ -11,7 +11,7 @@
     "docs"
   ],
   "scripts": {
-    "init": "pnpm install",
+    "init": "pnpm install --w",
     "dev": "vite --host",
     "build": "rollup -c rollup.config.js && pnpm run release",
     "test": "jest",

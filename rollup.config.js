@@ -14,9 +14,9 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import cleanup from 'rollup-plugin-cleanup';
 import {terser} from 'rollup-plugin-terser';
 import scss from "rollup-plugin-scss";
-import dts from 'rollup-plugin-dts'
+// import dts from 'rollup-plugin-dts'
 const config = [
-  /*  {
+    {
         external: ['@popperjs/core', id => /.test.js/.test(id), 'vue'],
         input: "./packages/components/index.ts", // 必须，入口文件
         output: [
@@ -64,14 +64,15 @@ const config = [
                 sourceMap: true,
             }),
             babel({
-                exclude: "**!/node_modules/!**",
+                exclude: "**/node_modules/**",
             }),
             commonjs(),
             terser(),
             cleanup({comments: 'none'}),
         ]
-    },*/
-    {
+    },
+
+    /*{
 
        // input: "./packages/utils/type/index.d.ts", // 必须，入口文件
         input: "./packages/components/index.d.ts",
@@ -89,7 +90,7 @@ const config = [
         plugins: [ // 引入的插件在这里配置
             dts()
         ]
-    },
+    },*/
 ]
 
 export default config
