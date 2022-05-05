@@ -260,6 +260,7 @@ $--popover: map.deep-merge(
                         'shadow-right': 1px -1px 3px -1px rgba(0, 0, 0, 0.37),
                         'shadow-bottom': -1px -1px 3px -1px rgba(0, 0, 0, 0.37),
                         'shadow-left': -1px 1px 3px -1px rgba(0, 0, 0, 0.37),
+                        'z-index':var(--be-zIndex-top2),
                 ),
                 $--popover
 );

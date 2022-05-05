@@ -9,7 +9,7 @@ $componentsClass: $name+ '-' + 'popover' !global;
   position: fixed;
   background-color: var(--be-popover-bg-w);
   @include be-radius;
-
+  z-index: var(--be-popover-z-index);;
   .#{ $componentsClass }#{$modifier-separator}body {
     box-sizing: border-box;
     padding: 8px 14px;
