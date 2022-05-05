@@ -6,7 +6,7 @@
  * @update (czh 2021/4/16)
  */
 import { DirectiveBinding, ObjectDirective } from 'vue'
-import { IEvent } from '../types'
+import { IEvent } from '../type/types'
 
 export const dragDirective: ObjectDirective = {
   beforeMount(el: HTMLElement, binding: DirectiveBinding): void {

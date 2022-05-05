@@ -5,11 +5,11 @@
  * @update (czh 2021/06/06)
  */
 
-import {defineComponent, VNode} from 'vue'
+import { defineComponent, VNode } from 'vue'
 
 const renderCircle = function (color: string): VNode {
   return (
-    <div class="circleBox">
+    <div class="circle--box">
       <span style={`background-color:${color}`}></span>
       <span style={`background-color:${color}`}></span>
       <span style={`background-color:${color}`}></span>
@@ -21,7 +21,7 @@ export default defineComponent({
   name: 'BeLoadingAnimate',
   inject: ['$$BeLoading'],
   render() {
-    const loadingAnim:Array<VNode> = []
+    const loadingAnim:Array<any> = []
     // 判断用户是否自定义渲染
     if (this.$$BeLoading.customRender()) {
       loadingAnim[0] = this.$$BeLoading.customRender()
@@ -33,7 +33,7 @@ export default defineComponent({
     return (
       <div
         style={`border-radius: ${this.$$BeLoading.round}px;`}
-        class={`be-loader be-loader__${this.$$BeLoading.sizeLoader} ${this.$$BeLoading.isBackgroundStyle}`}>
+        class={`be-load--container be-load__${this.$$BeLoading.sizeLoader} ${this.$$BeLoading.isBackgroundStyle}`}>
         {/*loading动画渲染*/}
         {loadingAnim}
       </div>

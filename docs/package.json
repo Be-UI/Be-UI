@@ -29,11 +29,14 @@
     "vite-plugin-inspect": "^0.4.3",
     "vite-plugin-pwa": "^0.11.13",
     "vite-plugin-windicss": "^1.8.4",
+    "@pnpm/types": "^8.0.0",
+    "@types/node": "*",
     "vitepress": "^0.22.3",
     "escape-html": "^1.0.3",
     "consola": "^2.15.3",
     "prismjs":"1.27.0",
     "markdown-it": "^12.3.2",
-    "markdown-it-container": "^3.0.0"
+    "markdown-it-container": "^3.0.0",
+    "windicss": "^3.4.3"
   }
 }

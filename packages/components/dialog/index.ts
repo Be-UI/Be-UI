@@ -1,7 +1,6 @@
 import beDialog from './src/be-dialog.vue'
-import {App} from 'vue'
-import type {SFCWithInstall} from '../../utils/types'
-import '../../style/be-dialog.scss';
+import { App } from 'vue'
+import type { SFCWithInstall } from '../../utils/type/types'
 
 beDialog.install = (app: App): void => {
   app.component(beDialog.name, beDialog)

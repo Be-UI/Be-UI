@@ -12,15 +12,15 @@ $componentsClass: $name+ '-' + 'message-box' !global;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2077;
+  z-index: var(--be-message-box-z-index);
   display: flex;
   justify-content: center;
   width: var(--be-message-box-h-full);
   height: var(--be-message-box-h-full);
 
   .#{ $componentsClass }#{$modifier-separator}container {
-    @apply shadow;
-    z-index: 998;
+    @include be-shadow;
+
     box-sizing: border-box;
     align-self: center;
     width: 306px;

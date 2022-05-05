@@ -3,6 +3,9 @@ $componentsClass:$name + '-' + 'dialog' !global;
 @include create-B(dialog){
   @include set-component-style-var('dialog', $--dialog);
 }
+@include create-B(dialog--modal){
+  @include set-component-style-var('dialog', $--dialog);
+}
 
 .#{$componentsClass}#{$modifier-separator}modal {
   width: 100%;
@@ -11,7 +14,7 @@ $componentsClass:$name + '-' + 'dialog' !global;
   left: 0;
   top: 0;
   @include flex-center;
-  z-index: 2076;
+  z-index: var(--be-dialog-z-index);
 }
 
 
@@ -22,13 +25,13 @@ $componentsClass:$name + '-' + 'dialog' !global;
   left: 0;
   top: 0;
   @include flex-center;
-  z-index: 2077;
+  z-index: var(--be-dialog-z-index) ;
   .#{$componentsClass}#{$modifier-separator}container {
     background-color: var(--be-dialog-bg-w);
     align-self: center;
     min-width: 24rem;
     border-radius: 0.5rem;
-    z-index: 998;
+
 
     .#{$componentsClass}#{$modifier-separator}title {
       background-color: var(--be-dialog-bg-w);

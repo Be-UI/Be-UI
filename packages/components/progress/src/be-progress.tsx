@@ -1,7 +1,7 @@
 import { computed, defineComponent, getCurrentInstance, PropType } from 'vue'
 import { IProgressColor, IProgressInst, IProgressSuccess } from './be-progress-type'
 import { isObject } from '@vue/shared'
-import { IOption } from '../../../utils/types'
+import { IOption } from '../../../utils/type/types'
 
 export default defineComponent({
   name: 'BeProgress',

@@ -6,7 +6,7 @@
     <transition name="be-fade-in-linear">
       <div
         v-if="isShowLoaderInner"
-        class="be-load-container flex-col"
+        class="be-load flex-col"
         :class="`${customClass} ${isFullScreenStyle}`"
         :style="`
                  background-color: ${mdColor};
@@ -18,9 +18,9 @@
         <BeLoadingAnimate></BeLoadingAnimate>
         <span
           v-if="text"
-          class="be-loader-text"
+          class="be-load--text"
           :style="`color:${colorText};`"
-          :class="`be-loader-text__${sizeLoader}`"
+          :class="`be-load--text__${sizeLoader}`"
           >{{ text }}</span
         >
       </div>
@@ -157,7 +157,7 @@
       const containerWidth = ref('')
       const containerLeft = ref('50%')
       const containerTop = ref('50%')
-      const isBackgroundStyle = computed(() => (props.isBackground ? 'be-loader__bg' : ''))
+      const isBackgroundStyle = computed(() => (props.isBackground ? 'be-load__bg' : ''))
       const isFullScreenStyle = ref<string | ComputedRef>('')
 
       /******************************************** loading位置、宽高设置 ************************************/
@@ -177,7 +177,7 @@
         if (props.text) {
           // 根据插槽元素数据，计算文字位置
           nextTick(() => {
-            let loaderElem: HTMLElement | null = document.querySelector('.be-loader')
+            let loaderElem: HTMLElement | null = document.querySelector('.be-load')
             if (!loaderElem) return
             let loaderElemHeight = Number(window.getComputedStyle(loaderElem).height.split('px')[0])
             leftTxt.value = left.value
@@ -227,7 +227,7 @@
        */
       const initComp = (): void => {
         isFullScreenStyle.value = computed(() =>
-          props.isFullScreen ? 'be-load-container__fullScreen' : ''
+          props.isFullScreen ? 'be-load__full' : ''
         ).value
         // 全屏显示时
         if (props.isFullScreen) {
