@@ -168,6 +168,19 @@
     @include set-css-var-type('shadow', $type, $--shadow);
   }
 
+    // zIndex
+    $--z-index: () !default;
+    $--z-index: map.merge(
+                    (
+                            'top1':9999,
+                            'top2':9998,
+                            'top3':9997,
+                    ),
+                    $--z-index
+    );
+    @each $type in (top1,top2,top3) {
+        @include set-css-var-type('zIndex', $type, $--z-index);
+    }
   // transform
   $--transform: () !default;
   $--transform: map.merge(
@@ -356,4 +369,17 @@ $--dialog: map.deep-merge(
                         'p': 1rem 1.25rem,
                         'text-primary': var(--be-text-color-primary),
                 ),$--dialog
+);
+
+// 生成 be-load
+$--load: () !default;
+$--load: map.deep-merge(
+                (
+                        'w-full':var(--be-percentage-full),
+                        'h-full':var(--be-percentage-full),
+                        'w-50':var(--be-percentage-50),
+                        'h-50':var(--be-percentage-50),
+                        'bg-w': var(--be-base-color-w),
+                        'z-index':var(--be-zIndex-top1),
+                ),$--load
 );

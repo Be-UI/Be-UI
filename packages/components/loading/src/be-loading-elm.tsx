@@ -9,7 +9,7 @@ import { defineComponent, VNode } from 'vue'
 
 const renderCircle = function (color: string): VNode {
   return (
-    <div class="circleBox">
+    <div class="circle--box">
       <span style={`background-color:${color}`}></span>
       <span style={`background-color:${color}`}></span>
       <span style={`background-color:${color}`}></span>
@@ -33,7 +33,7 @@ export default defineComponent({
     return (
       <div
         style={`border-radius: ${this.$$BeLoading.round}px;`}
-        class={`be-loader be-loader__${this.$$BeLoading.sizeLoader} ${this.$$BeLoading.isBackgroundStyle}`}>
+        class={`be-load--container be-load__${this.$$BeLoading.sizeLoader} ${this.$$BeLoading.isBackgroundStyle}`}>
         {/*loading动画渲染*/}
         {loadingAnim}
       </div>

@@ -71,7 +71,8 @@ describe('test-be-loading-props', () => {
     await asyncExpect(() => {
       const elm = wrapper
         .find('.test-beloading-round')
-        .element?.querySelector('.be-loader') as HTMLElement
+        .element?.querySelector('.be-load--container') as HTMLElement
+      debugger
       expect(elm.style.borderRadius === '5px').toBeTruthy()
     }, 300)
   })
@@ -86,7 +87,7 @@ describe('test-be-loading-props', () => {
     await asyncExpect(() => {
       const elm = wrapper
         .find('.test-beloading-color')
-        .element?.querySelector('.circleBox') as HTMLElement
+        .element?.querySelector('.circle--box') as HTMLElement
       expect(elm.querySelector('span')?.style.backgroundColor === 'red').toBeTruthy()
     }, 300)
   })
@@ -101,7 +102,7 @@ describe('test-be-loading-props', () => {
     await asyncExpect(() => {
       const elm = wrapper
         .find('.test-beloading-text')
-        .element?.querySelector('.be-loader-text') as HTMLElement
+        .element?.querySelector('.be-load--text') as HTMLElement
       expect(elm.textContent === 'testText').toBeTruthy()
     }, 300)
   })
@@ -116,7 +117,7 @@ describe('test-be-loading-props', () => {
     await asyncExpect(() => {
       const elm = wrapper
         .find('.test-beloading-colorText')
-        .element?.querySelector('.be-loader-text') as HTMLElement
+        .element?.querySelector('.be-load--text') as HTMLElement
       expect(elm.style.color === 'red').toBeTruthy()
     }, 300)
   })
@@ -138,14 +139,14 @@ describe('test-be-loading-props', () => {
     await asyncExpect(() => {
       const elm = wrapper
         .find('.test-beloading-isBackground')
-        .element?.querySelector('.be-loader__bg') as HTMLElement
+        .element?.querySelector('.be-load__bg') as HTMLElement
       expect(elm).not.toBeTruthy()
     }, 300)
     vm.show = true
     await asyncExpect(() => {
       const elm = wrapper
         .find('.test-beloading-isBackground')
-        .element?.querySelector('.be-loader__bg') as HTMLElement
+        .element?.querySelector('.be-load__bg') as HTMLElement
       expect(elm).toBeTruthy()
     }, 300)
   })
@@ -172,7 +173,7 @@ describe('test-be-loading-props', () => {
     })
     await asyncExpect(() => {
       const elm = wrapper.find('.test-beloading-isFullScreen').element as HTMLElement
-      expect(elm.className.indexOf('be-load-container__fullScreen') > 0).toBeTruthy()
+      expect(elm.className.indexOf('be-load__full') > 0).toBeTruthy()
     }, 1000)
   })
   test('props-customRender', async () => {
@@ -203,7 +204,7 @@ describe('test-be-loading-props', () => {
             `,
     })
     await asyncExpect(() => {
-      const elm = wrapper.find('.be-loader__large').element as HTMLElement
+      const elm = wrapper.find('.be-load__large').element as HTMLElement
       expect(elm).toBeTruthy()
     }, 1000)
   })
@@ -216,7 +217,7 @@ describe('test-be-loading-props', () => {
             `,
     })
     await asyncExpect(() => {
-      const elm = wrapper.find('.be-loader__small').element as HTMLElement
+      const elm = wrapper.find('.be-load__small').element as HTMLElement
       expect(elm).toBeTruthy()
     }, 1000)
   })

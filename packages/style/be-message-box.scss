@@ -19,7 +19,7 @@ $componentsClass: $name+ '-' + 'message-box' !global;
   height: var(--be-message-box-h-full);
 
   .#{ $componentsClass }#{$modifier-separator}container {
-    @apply shadow;
+    @include be-shadow;
     z-index: 998;
     box-sizing: border-box;
     align-self: center;
