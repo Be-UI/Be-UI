@@ -62,7 +62,7 @@ be-notification 单元测试
 | 2    | refactor style 右键菜单     | be-contextmenu  | <font color=#07c160 size=5>√</font> | <font color=#07c160 size=5>√</font> |
 | 3    | 对话框       | be-dialog       | <font color=#07c160 size=5>√</font> | <font color=#07c160 size=5>√</font> |
 | 4    | refactor style 输入框       | be-input        | <font color=#07c160 size=5>√</font> | <font color=red size=5>×</font>     |
-| 5    | refactor style 载入         | be-loading      | <font color=#07c160 size=5>√</font> | <font color=#07c160 size=5>√</font> |
+| 5    | 载入         | be-loading      | <font color=#07c160 size=5>√</font> | <font color=#07c160 size=5>√</font> |
 | 6    | 消息对话     | be-message-box  | <font color=#07c160 size=5>√</font> | <font color=#07c160 size=5>√</font> |
 | 7    | 分页         | be-pager        | <font color=#07c160 size=5>√</font> | <font color=red size=5>×</font>     |
 | 8    | 图标         | be-icon         | <font color=#07c160 size=5>√</font> | <font color=#07c160 size=5>√</font> |
