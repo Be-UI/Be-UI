@@ -21,7 +21,7 @@ export default defineComponent({
   name: 'BeLoadingAnimate',
   inject: ['$$BeLoading'],
   render() {
-    const loadingAnim = []
+    const loadingAnim:Array<any> = []
     // 判断用户是否自定义渲染
     if (this.$$BeLoading.customRender()) {
       loadingAnim[0] = this.$$BeLoading.customRender()

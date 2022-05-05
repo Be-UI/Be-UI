@@ -47,7 +47,7 @@ monorepo
 文档 迁移 vitepress
 1.样式重构
 be-select 支持绑定对象;禁用背景色
-be-loading 样式修改 修改层级：loading 2010 》 notification = message-box = message = popover = 2000 》 dialog 1998
+be-loading 样式修改 修改层级：  = popover = 2000 》
 be-notification 单元测试
 
 ## 长期排期

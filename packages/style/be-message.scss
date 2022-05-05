@@ -10,11 +10,10 @@ $componentsClass: $name+ '-' + 'message' !global;
   line-height: 25px;
 }
 @include create-B(message) {
-  z-index: 9999;
+  z-index: var(--be-message-z-index);
   max-height: 3rem;
   .#{ $componentsClass }#{$modifier-separator}container {
     position: absolute;
-    z-index: 998;
     box-sizing: border-box;
     width: max-content;
     padding: var(--be-notification-px);

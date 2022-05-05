@@ -312,6 +312,7 @@ $--message: map.deep-merge(
                         'text-error-color': var(--be-emo-error-color),
                         'text-warning-color': var(--be-emo-warning-color),
                         'text-info-color': var(--be-emo-info-color),
+                        'z-index':var(--be-zIndex-top2),
                 ),
                 $--message
 );
@@ -329,6 +330,8 @@ $--notification: map.deep-merge(
                         'text-error-color': var(--be-emo-error-color),
                         'text-warning-color': var(--be-emo-warning-color),
                         'text-info-color': var(--be-emo-info-color),
+                        'border-color': var(--be-emo-info-color--hover),
+                        'z-index':var(--be-zIndex-top2),
                 ),
                 $--notification
 );
@@ -355,6 +358,7 @@ $--message-box: map.deep-merge(
                         'error-color': var(--be-emo-error-color),
                         'warning-color': var(--be-emo-warning-color),
                         'info-color': var(--be-emo-info-color),
+                        'z-index':var(--be-zIndex-top2),
                 ),
                 $--message-box
 );
@@ -368,6 +372,7 @@ $--dialog: map.deep-merge(
                         'bg-w': var(--be-base-color-w),
                         'p': 1rem 1.25rem,
                         'text-primary': var(--be-text-color-primary),
+                        'z-index':var(--be-zIndex-top3),
                 ),$--dialog
 );
 
