@@ -4,9 +4,9 @@ $componentsClass: $name+ '-' + 'contextmenu' !global;
 }
 @include create-B(contextmenu) {
   @include be-pointer;
-  @include be-radius;
   @include be-shadow;
   @include font-mono;
+  border-radius: var(--be-contextmenu-rounded-base);
   background-color: var(--be-contextmenu-bg-w);
   position: absolute;
   margin: 0;

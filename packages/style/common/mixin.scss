@@ -40,9 +40,6 @@
   justify-content: center;
 }
 
-@mixin be-radius {
-  border-radius: 4px;
-}
 @mixin be-pointer {
   cursor: pointer;
 }
@@ -163,6 +160,8 @@
   $--rounded: map.merge(
                   (
                           'full': 9999px,
+                          'base': 4px,
+                          'lg': 50px,
                   ),
                   $--rounded
   );
@@ -250,6 +249,7 @@ $--progress: map.deep-merge(
                         'normal-color': var(--be-emo-link-color),
                         'success-color': var(--be-emo-success-color),
                         'error-color': var(--be-emo-error-color),
+                        'rounded-lg': var(--be-rounded-lg),
                 ),
                 $--progress
 );
@@ -279,6 +279,7 @@ $--popover: map.deep-merge(
                         'shadow-bottom': -1px -1px 3px -1px rgba(0, 0, 0, 0.37),
                         'shadow-left': -1px 1px 3px -1px rgba(0, 0, 0, 0.37),
                         'z-index':var(--be-zIndex-top2),
+                        'rounded-base': var(--be-rounded-base),
                 ),
                 $--popover
 );
@@ -290,6 +291,7 @@ $--pager: map.deep-merge(
                         'bg-b': var(--be-base-color-b),
                         'text-active': $link,
                         'border': 1px solid var(--be-base-color-grays),
+                        'rounded-base': var(--be-rounded-base),
                 ),
                 $--pager
 );
@@ -332,6 +334,7 @@ $--message: map.deep-merge(
                         'text-warning-color': var(--be-emo-warning-color),
                         'text-info-color': var(--be-emo-info-color),
                         'z-index':var(--be-zIndex-top2),
+                        'rounded-base': var(--be-rounded-base),
                 ),
                 $--message
 );
@@ -351,6 +354,7 @@ $--notification: map.deep-merge(
                         'text-info-color': var(--be-emo-info-color),
                         'border-color': var(--be-emo-info-color--hover),
                         'z-index':var(--be-zIndex-top2),
+                        'rounded-base': var(--be-rounded-base),
                 ),
                 $--notification
 );
@@ -378,6 +382,7 @@ $--message-box: map.deep-merge(
                         'warning-color': var(--be-emo-warning-color),
                         'info-color': var(--be-emo-info-color),
                         'z-index':var(--be-zIndex-top2),
+                        'rounded-base': var(--be-rounded-base),
                 ),
                 $--message-box
 );
@@ -392,6 +397,7 @@ $--dialog: map.deep-merge(
                         'p': 1rem 1.25rem,
                         'text-primary': var(--be-text-color-primary),
                         'z-index':var(--be-zIndex-top3),
+                        'rounded-base': var(--be-rounded-base),
                 ),$--dialog
 );
 
@@ -405,6 +411,7 @@ $--load: map.deep-merge(
                         'h-50':var(--be-percentage-50),
                         'bg-w': var(--be-base-color-w),
                         'z-index':var(--be-zIndex-top1),
+                        'rounded-base': var(--be-rounded-base),
                 ),$--load
 );
 
@@ -412,6 +419,7 @@ $--load: map.deep-merge(
 $--contextmenu: () !default;
 $--contextmenu: map.deep-merge(
                 (
+                        'rounded-base': var(--be-rounded-base),
                         'border-color': var(--be-base-color-grays),
                         'text-sm': var(--be-text-size-sm),
                         'text-hover': var(--be-base-color-w),

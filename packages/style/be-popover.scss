@@ -8,7 +8,7 @@ $componentsClass: $name+ '-' + 'popover' !global;
   @include be-shadow;
   position: fixed;
   background-color: var(--be-popover-bg-w);
-  @include be-radius;
+  border-radius: var(--be-popover-rounded-base);
   z-index: var(--be-popover-z-index);;
   .#{ $componentsClass }#{$modifier-separator}body {
     box-sizing: border-box;

@@ -18,7 +18,7 @@ $componentsClass: $name+ '-' + 'message' !global;
     width: max-content;
     padding: var(--be-notification-px);
     background-color: var(--be-message-bg-w);
-    @include be-radius;
+    border-radius: var(--be-message-rounded-base);
     @include be-shadow;
 
     .#{ $componentsClass }#{$modifier-separator}title {

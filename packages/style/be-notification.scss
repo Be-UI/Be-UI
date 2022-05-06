@@ -15,7 +15,7 @@ $componentsClass: $name+ '-' + 'notification' !global;
     padding: var(--be-notification-px);
     background-color: var(--be-notification-bg-w);
     border: 1px solid var(--be-notification-border-color);
-    @include be-radius;
+    border-radius: var(--be-notification-rounded-base);
     @include be-shadow;
 
     .#{ $componentsClass }#{$modifier-separator}title {

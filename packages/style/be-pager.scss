@@ -39,7 +39,7 @@ $componentsClass: $name+ '-' + 'pager' !global;
   li {
     @include flex-center;
     @include be-pointer;
-    @include be-radius;
+    border-radius: var(--be-pager-rounded-base);
     box-sizing: border-box;
     min-width: 25px;
     height: 25px;
@@ -98,6 +98,7 @@ $componentsClass: $name+ '-' + 'pager' !global;
     background-image: none;
     border: 1px solid var(--be-pager-border);
     transition: all 0.3s;
-    @include be-radius;
+    border-radius: var(--be-pager-rounded-base);
+
   }
 }

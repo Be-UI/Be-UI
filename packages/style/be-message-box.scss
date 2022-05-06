@@ -27,7 +27,7 @@ $componentsClass: $name+ '-' + 'message-box' !global;
     min-height: 158px;
     padding: 16px;
     background-color: var(--be-message-box-bg-w);
-    @include be-radius;
+    border-radius: var(--be-message-box-rounded-base);
     transition: opacity 0.5s;
 
     .#{ $componentsClass }#{$modifier-separator}title {
