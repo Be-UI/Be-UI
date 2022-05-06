@@ -148,7 +148,7 @@ $componentsClass: $name+ '-' + 'load' !global;
   .#{ $componentsClass }#{$element-separator}bg {
     @include be-shadow;
     background-color: var(--be-load-bg-w);
-    border-radius: 4px;
+    @include be-radius;
   }
 
   .#{ $componentsClass }#{$modifier-separator}text {

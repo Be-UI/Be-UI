@@ -1,14 +1,14 @@
-/* * @be-contextmenu-SubMenu.vue * @deprecated 右键菜单-菜单子菜单容器组件
+/* * @be-contextmenu--submenu.vue * @deprecated 右键菜单-菜单子菜单容器组件
 使用时配合Contextmenu.vue和ContextmenuItem.vue * @author czh * @update (czh 2021/4/10) */
 <template>
   <li :class="classname" @mouseenter="handleMouseenter" @mouseleave="handleMouseleave">
-    <span class="be-contextmenu-submenu__title">
+    <span class="be-contextmenu--submenu__title">
       <slot name="title">{{ title }}</slot>
-      <!-- <span class="be-contextmenu-iconfont be-contextmenu-submenu__icon" /> -->
+      <!-- <span class="be-contextmenu__iconfont be-contextmenu--submenu__icon" /> -->
     </span>
     <div v-show="hover" ref="submenu" :class="submenuCls">
       <ul>
-        <!-- @slot 插槽 嵌套使用组件 be-contextmenu-item、be-contextmenu-SubMenu-->
+        <!-- @slot 插槽 嵌套使用组件 be-contextmenu-item、be-contextmenu--submenu-->
         <slot />
       </ul>
     </div>
@@ -47,10 +47,10 @@
       const internalInstance = getCurrentInstance() as IContextMenu
       const classname = computed(() => {
         return {
-          'be-contextmenu-item': true,
-          'be-contextmenu-submenu': true,
-          'be-contextmenu-item__hover': hover.value,
-          'be-contextmenu-item__disabled': props.disabled,
+          'be-contextmenu--item': true,
+          'be-contextmenu--submenu': true,
+          'be-contextmenu--item__hover': hover.value,
+          'be-contextmenu--item__disabled': props.disabled,
         }
       })
       const submenuCls = computed(() => {

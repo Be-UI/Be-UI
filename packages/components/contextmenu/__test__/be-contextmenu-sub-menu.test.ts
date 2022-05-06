@@ -45,7 +45,7 @@ describe('test-be-contextmenu-sub-menu-props', () => {
     }, null)
     await asyncExpect(() => {
       expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
-      const titleElm = contextMenuElm?.querySelector('.be-contextmenu-submenu__title')
+      const titleElm = contextMenuElm?.querySelector('.be-contextmenu--submenu__title')
       expect(titleElm && titleElm.innerHTML.indexOf('宋词') > -1).toBeTruthy()
     }, null)
   })
@@ -86,19 +86,19 @@ describe('test-be-contextmenu-sub-menu-props', () => {
       expect(
         contextMenuElm &&
           contextMenuElm
-            ?.querySelectorAll('.be-contextmenu-submenu')[0]
-            .className.indexOf('be-contextmenu-item__disabled') > -1
+            ?.querySelectorAll('.be-contextmenu--submenu')[0]
+            .className.indexOf('be-contextmenu--item__disabled') > -1
       ).toBeTruthy()
     }, null)
     await asyncExpect(() => {
       contextMenuElm
-        ?.querySelectorAll('.be-contextmenu-submenu')[0]
+        ?.querySelectorAll('.be-contextmenu--submenu')[0]
         .dispatchEvent(new MouseEvent('mouseenter'))
       expect(handleEventEnter).not.toBeCalled()
     }, null)
     await asyncExpect(() => {
       contextMenuElm
-        ?.querySelectorAll('.be-contextmenu-submenu')[0]
+        ?.querySelectorAll('.be-contextmenu--submenu')[0]
         .dispatchEvent(new MouseEvent('mouseleave'))
       expect(handleEventLeave).not.toBeCalled()
     }, null)
@@ -138,13 +138,13 @@ describe('test-be-contextmenu-sub-menu-event', () => {
     }, null)
     await asyncExpect(() => {
       contextMenuElm
-        ?.querySelectorAll('.be-contextmenu-submenu')[0]
+        ?.querySelectorAll('.be-contextmenu--submenu')[0]
         .dispatchEvent(new MouseEvent('mouseenter'))
       expect(handleEventEnter).toBeCalled()
     }, null)
     await asyncExpect(() => {
       contextMenuElm
-        ?.querySelectorAll('.be-contextmenu-submenu')[0]
+        ?.querySelectorAll('.be-contextmenu--submenu')[0]
         .dispatchEvent(new MouseEvent('mouseleave'))
       expect(handleEventLeave).toBeCalled()
     }, null)
@@ -177,14 +177,14 @@ describe('test-be-contextmenu-sub-menu-slot', () => {
     }, null)
     await asyncExpect(() => {
       contextMenuElm
-        ?.querySelectorAll('.be-contextmenu-submenu')[0]
+        ?.querySelectorAll('.be-contextmenu--submenu')[0]
         .dispatchEvent(new MouseEvent('mouseenter'))
       expect(document.getElementById('laxycj')).toBeTruthy()
       const itemLi = contextMenuElm
-        ?.querySelectorAll('.be-contextmenu-submenu')[0]
-        .querySelectorAll('.be-contextmenu-item')[0].innerHTML
+        ?.querySelectorAll('.be-contextmenu--submenu')[0]
+        .querySelectorAll('.be-contextmenu--item')[0].innerHTML
       expect(itemLi && itemLi.indexOf('陆游') > -1).toBeTruthy()
-      const submenu = contextMenuElm?.querySelectorAll('.be-contextmenu-submenu')[1].innerHTML
+      const submenu = contextMenuElm?.querySelectorAll('.be-contextmenu--submenu')[1].innerHTML
       expect(submenu && submenu.indexOf('詞句') > -1).toBeTruthy()
     }, null)
   })

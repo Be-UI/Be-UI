@@ -58,6 +58,9 @@
   font-weight: bold;
   vertical-align: top;
 }
+@mixin be-text-align($align){
+    text-align: $align;
+}
 :root {
   $--emo-color: () !default;
   $--emo-color: map.deep-merge(
@@ -124,7 +127,22 @@
   @each $type in (primary, regular, secondary, placeholder, link) {
     @include set-css-var-type('text-color', $type, $--text-color);
   }
-
+    $--text-size: () !default;
+    $--text-size: map.merge(
+                    (
+                            'xs': 0.75rem,
+                            'sm': 0.875rem,
+                            'base': 1rem,
+                            'lg': 1.125rem,
+                            'xl': 1.25rem,
+                            '2xl': 1.5rem,
+                    ),
+                    $--text-size
+    );
+    // 文字大小
+    @each $type in (xs, sm, base, lg, xl,2xl) {
+        @include set-css-var-type('text-size', $type, $--text-size);
+    }
   $--color: () !default;
   $--color: map.deep-merge(
                   (
@@ -388,4 +406,20 @@ $--load: map.deep-merge(
                         'bg-w': var(--be-base-color-w),
                         'z-index':var(--be-zIndex-top1),
                 ),$--load
+);
+
+// 生成 be-contextmenu
+$--contextmenu: () !default;
+$--contextmenu: map.deep-merge(
+                (
+                        'border-color': var(--be-base-color-grays),
+                        'text-sm': var(--be-text-size-sm),
+                        'text-hover': var(--be-base-color-w),
+                        'text-primary': var(--be-text-color-primary),
+                        'bg-w': var(--be-base-color-w),
+                        'z-index':var(--be-zIndex-top2),
+                        'theme-dark': var(--be-base-color-b),
+                        'theme-red': var(--be-emo-error-color),
+                        'theme-default': var(--be-emo-link-color),
+                ),$--contextmenu
 );

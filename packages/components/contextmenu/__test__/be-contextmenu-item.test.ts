@@ -43,7 +43,7 @@ describe('test-be-contextmenu-item-props', () => {
     await asyncExpect(() => {
       expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
       expect(
-        contextMenuElm && contextMenuElm?.querySelectorAll('.be-contextmenu-divider').length > 0
+        contextMenuElm && contextMenuElm?.querySelectorAll('.be-contextmenu--divider').length > 0
       ).toBeTruthy()
     }, null)
   })
@@ -67,7 +67,7 @@ describe('test-be-contextmenu-item-props', () => {
       expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
     }, null)
     await asyncExpect(() => {
-      contextMenuElm?.querySelectorAll('.be-contextmenu-item')[0].dispatchEvent(new Event('click'))
+      contextMenuElm?.querySelectorAll('.be-contextmenu--item')[0].dispatchEvent(new Event('click'))
     }, null)
     await asyncExpect(() => {
       expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
@@ -103,10 +103,10 @@ describe('test-be-contextmenu-item-props', () => {
       expect(
         contextMenuElm &&
           contextMenuElm
-            ?.querySelectorAll('.be-contextmenu-item')[0]
-            .className.indexOf('be-contextmenu-item__disabled') > 0
+            ?.querySelectorAll('.be-contextmenu--item')[0]
+            .className.indexOf('be-contextmenu--item__disabled') > 0
       ).toBeTruthy()
-      contextMenuElm?.querySelectorAll('.be-contextmenu-item')[0].dispatchEvent(new Event('click'))
+      contextMenuElm?.querySelectorAll('.be-contextmenu--item')[0].dispatchEvent(new Event('click'))
       expect(handleEvent).not.toBeCalled()
     }, null)
   })
@@ -139,7 +139,7 @@ describe('test-be-contextmenu-item-event', () => {
       expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
     }, null)
     await asyncExpect(() => {
-      contextMenuElm?.querySelectorAll('.be-contextmenu-item')[0].dispatchEvent(new Event('click'))
+      contextMenuElm?.querySelectorAll('.be-contextmenu--item')[0].dispatchEvent(new Event('click'))
       expect(handleEvent).toBeCalled()
     }, null)
   })
@@ -171,14 +171,14 @@ describe('test-be-contextmenu-item-event', () => {
     }, null)
     await asyncExpect(() => {
       contextMenuElm
-        ?.querySelectorAll('.be-contextmenu-item')[0]
+        ?.querySelectorAll('.be-contextmenu--item')[0]
         .dispatchEvent(new MouseEvent('mouseenter'))
       expect(contextMenuElm && contextMenuElm.style.display === '').toBeTruthy()
       expect(handleEventEnter).toBeCalled()
     }, null)
     await asyncExpect(() => {
       contextMenuElm
-        ?.querySelectorAll('.be-contextmenu-item')[0]
+        ?.querySelectorAll('.be-contextmenu--item')[0]
         .dispatchEvent(new MouseEvent('mouseleave'))
       expect(handleEventLeave).toBeCalled()
     }, null)

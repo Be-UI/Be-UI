@@ -196,7 +196,7 @@ describe('test-be-contextmenu-slot', () => {
     }, null)
     await asyncExpect(() => {
       expect(
-        contextMenuElm && contextMenuElm?.querySelectorAll('.be-contextmenu-item').length > 0
+        contextMenuElm && contextMenuElm?.querySelectorAll('.be-contextmenu--item').length > 0
       ).toBeTruthy()
     }, 1000)
   })

@@ -2,7 +2,7 @@
 2021/4/10) */
 <template>
   <!--分隔符-->
-  <li v-if="divider" class="be-contextmenu-divider" />
+  <li v-if="divider" class="be-contextmenu--divider" />
   <!--菜单内容-->
   <li
     v-else
@@ -11,7 +11,7 @@
     @mouseenter="handleMouseenter"
     @mouseleave="handleMouseleave">
     <!-- @slot 插槽内容可以使用常规标签，
-    也可以嵌套使用组件 be-contextmenu-item、be-contextmenu-SubMenu
+    也可以嵌套使用组件 be-contextmenu-item、be-contextmenu--submenu
     -->
     <slot />
   </li>
@@ -56,9 +56,9 @@
       const $$contextmenu = inject('$$contextmenu') as IContextMenu
       const classname = computed(() => {
         return {
-          'be-contextmenu-item': !props.divider,
-          'be-contextmenu-item__hover': hover.value,
-          'be-contextmenu-item__disabled': props.disabled,
+          'be-contextmenu--item': !props.divider,
+          'be-contextmenu--item__hover': hover.value,
+          'be-contextmenu--item__disabled': props.disabled,
         }
       })
       /**

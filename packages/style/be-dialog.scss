@@ -30,12 +30,12 @@ $componentsClass:$name + '-' + 'dialog' !global;
     background-color: var(--be-dialog-bg-w);
     align-self: center;
     min-width: 24rem;
-    border-radius: 0.5rem;
+    @include be-radius;
 
 
     .#{$componentsClass}#{$modifier-separator}title {
       background-color: var(--be-dialog-bg-w);
-      border-radius: 0.5rem;
+      @include be-radius;
 
       .#{$componentsClass}#{$modifier-separator}container#{$element-separator}head {
         box-sizing: border-box;
