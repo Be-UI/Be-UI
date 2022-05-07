@@ -16,7 +16,7 @@ $componentsClass: $name+ '-' + 'message' !global;
     position: absolute;
     box-sizing: border-box;
     width: max-content;
-    padding: var(--be-notification-px);
+    padding: var(--be-message-px);
     background-color: var(--be-message-bg-w);
     border-radius: var(--be-message-rounded-base);
     @include be-shadow;

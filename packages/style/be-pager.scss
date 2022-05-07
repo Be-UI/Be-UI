@@ -101,4 +101,13 @@ $componentsClass: $name+ '-' + 'pager' !global;
     border-radius: var(--be-pager-rounded-base);
 
   }
+  .be-icon {
+    .be-icon--container{
+      width: 14px;
+      height: 14px;
+      use {
+        fill: #606266;
+      }
+    }
+  }
 }

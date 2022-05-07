@@ -22,7 +22,7 @@
 
     .be-button-prevIcon__primary,
     .be-button-nextIcon__primary {
-      .be-icon {
+      .be-icon--container {
         use {
           fill: $hoverIconColor;
         }
@@ -47,6 +47,7 @@
 
     .be-button-slot {
       @apply mx-1 my-0 font-mono;
+      font-size: 16px;
     }
 
     .be-button-prevIcon__error,
@@ -55,7 +56,7 @@
     .be-button-nextIcon__warning,
     .be-button-prevIcon__success,
     .be-button-nextIcon__success {
-      .be-icon {
+      .be-icon--container {
         use {
           @apply fill-default;
         }
@@ -66,7 +67,7 @@
     .be-button-nextIcon__info,
     .be-button-prevIcon__default,
     .be-button-nextIcon__default {
-      .be-icon {
+      .be-icon--container {
         use {
           @apply fill-info;
         }
@@ -75,7 +76,7 @@
 
     .be-button-prevIcon__primary,
     .be-button-nextIcon__primary {
-      .be-icon {
+      .be-icon--container {
         use {
           @apply fill-primaryh;
         }
@@ -155,7 +156,7 @@
   &:hover {
     .be-button-prevIcon__primary,
     .be-button-nextIcon__primary {
-      .be-icon {
+      .be-icon--container {
         use {
           @apply fill-default;
         }
@@ -174,7 +175,7 @@
 
     .be-button-prevIcon__default,
     .be-button-nextIcon__default {
-      .be-icon {
+      .be-icon--container {
         use {
           @apply fill-primaryh;
         }
@@ -263,7 +264,7 @@
 
     .be-button-prevIcon__default,
     .be-button-nextIcon__default {
-      .be-icon {
+      .be-icon--container {
         use {
           @apply fill-primaryh;
         }

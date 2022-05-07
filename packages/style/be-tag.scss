@@ -22,7 +22,9 @@ $componentsClass: $name+ '-' + 'tag' !global;
 }
 
 @include create-B(tag) {
-  @include flex-center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   @include be-pointer;
   @include font-mono;
   box-sizing: border-box;

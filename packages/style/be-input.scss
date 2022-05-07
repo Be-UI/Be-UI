@@ -80,7 +80,7 @@
       color: $infoHover;
       cursor: pointer;
 
-      .be-icon {
+      .be-icon--container {
         vertical-align: 1em;
         fill: $infoHover;
       }
@@ -97,7 +97,7 @@
         border: 1px solid $infoHover;
         border-radius: 50px;
 
-        .be-icon {
+        .be-icon--container {
           width: 16px;
           height: 16px;
         }

@@ -166,7 +166,7 @@
                   $--rounded
   );
 
-  @each $type in (full) {
+  @each $type in (full,base,lg) {
     @include set-css-var-type('rounded', $type, $--rounded);
   }
 

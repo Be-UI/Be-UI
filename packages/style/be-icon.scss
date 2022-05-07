@@ -7,7 +7,7 @@ $componentsClass: $name+ '-' + 'icon' !global;
 }
 
 @include create-B(icon) {
-  display: inline-block;
+  display: inline-flex;
 
   .#{ $componentsClass }#{$modifier-separator}container  {
     overflow: hidden;
