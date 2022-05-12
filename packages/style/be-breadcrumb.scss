@@ -28,7 +28,7 @@ $componentsClass: $name+ '-' + 'breadcrumb' !global;
       color: var(--be-breadcrumb-text-default);
 
       &:hover {
-        color: var(--be-breadcrumb-text-hover);
+        color: var(--be-breadcrumb-text--hover);
       }
     }
   }

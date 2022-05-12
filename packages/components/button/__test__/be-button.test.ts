@@ -157,16 +157,16 @@ describe('test-be-button-props', () => {
     const wrapper = _mount({
       template: `<BeButton prevIcon="warning"></BeButton>`,
     })
-    expect(wrapper.find('.be-button-prevIcon').exists()).toBeTruthy()
-    const iconUse = wrapper.find('.be-button-prevIcon').element.querySelector('use')
+    expect(wrapper.find('.be-button--prevIcon').exists()).toBeTruthy()
+    const iconUse = wrapper.find('.be-button--prevIcon').element.querySelector('use')
     expect(iconUse?.getAttribute('xlink:href') === '#warning').toBeTruthy()
   })
   test('props-nextIcon', () => {
     const wrapper = _mount({
       template: `<BeButton nextIcon="warning"></BeButton>`,
     })
-    expect(wrapper.find('.be-button-nextIcon').exists()).toBeTruthy()
-    const iconUse = wrapper.find('.be-button-nextIcon').element.querySelector('use')
+    expect(wrapper.find('.be-button--nextIcon').exists()).toBeTruthy()
+    const iconUse = wrapper.find('.be-button--nextIcon').element.querySelector('use')
     expect(iconUse?.getAttribute('xlink:href') === '#warning').toBeTruthy()
   })
   test('props-loading', () => {
@@ -180,8 +180,8 @@ describe('test-be-button-props', () => {
         }
       },
     })
-    expect(wrapper.find('.be-button-prevIcon').exists()).toBeTruthy()
-    const iconUse = wrapper.find('.be-button-prevIcon').element.querySelector('use')
+    expect(wrapper.find('.be-button--prevIcon').exists()).toBeTruthy()
+    const iconUse = wrapper.find('.be-button--prevIcon').element.querySelector('use')
     expect(iconUse?.getAttribute('xlink:href') === '#loading').toBeTruthy()
     wrapper.find('.be-button').trigger('click')
     expect(handleClick).not.toBeCalled()

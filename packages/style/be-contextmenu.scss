@@ -25,7 +25,7 @@ $componentsClass: $name+ '-' + 'contextmenu' !global;
     padding: 0.625rem 2.25rem;
     &.#{ $componentsClass }#{$modifier-separator}item#{$element-separator}hover {
       @include font-mono;
-      color: var(--be-contextmenu-text-hover);
+      color: var(--be-contextmenu-text--hover);
     }
 
     &.#{ $componentsClass }#{$modifier-separator}item#{$element-separator}disabled {

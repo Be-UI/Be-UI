@@ -150,7 +150,7 @@ export default defineComponent({
         <be-icon
           icon={prevIconStyle.value}
           spin={props.loading}
-          custom-class={`be-button-prevIcon be-button-prevIcon__${props.type}`}></be-icon>
+          custom-class={`be-button--prevIcon be-button--prevIcon__${props.type}`}></be-icon>
       ) : (
         ''
       )
@@ -161,7 +161,7 @@ export default defineComponent({
       ) : (
         <be-icon
           icon={nextIconStyle.value}
-          custom-class={`be-button-nextIcon be-button-nextIcon__${props.type}`}></be-icon>
+          custom-class={`be-button--nextIcon be-button--nextIcon__${props.type}`}></be-icon>
       )
     }
     return () => {
@@ -178,9 +178,9 @@ export default defineComponent({
                     be-button__${props.type}${borderStyle.value} 
                     ${props.customClass}`}
           disabled={props.disabled || props.loading}>
-          <div class="be-button-body" style="margin: 0 auto;display: flex">
+          <div class="be-button--body" style="margin: 0 auto;display: flex">
             {prevIconRender()}
-            <div class="be-button-slot">{ctx.slots.default && ctx.slots.default()}</div>
+            <div class="be-button--slot">{ctx.slots.default && ctx.slots.default()}</div>
             {nextIconRender()}
           </div>
         </button>
