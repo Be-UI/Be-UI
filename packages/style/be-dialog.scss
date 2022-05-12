@@ -46,6 +46,7 @@ $componentsClass:$name + '-' + 'dialog' !global;
           font-weight: bold;
           line-height: 2rem;
           float: right;
+          @include be-pointer;
          color: var(--be-dialog-text-primary);
         }
 
