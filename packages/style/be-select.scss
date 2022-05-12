@@ -57,7 +57,9 @@
       border-color: $pinkHoverBorder;
     }
   }
-
+  .be-select-input__disabled{
+    @apply bg-gray-100;
+  }
   .be-select-body__focus {
     border: 1px solid $pinkHoverBorder;
     outline: 0;

@@ -405,7 +405,7 @@ export default defineComponent({
               ),
               trigger: (
                 <div
-                  class={`be-select-body ${focusClass.value} ${props.customClass}`}
+                  class={`be-select-body ${focusClass.value} ${props.customClass} ${props.disabled ? 'be-select-input__disabled':''}`}
                   id={`be-select-body${uid}`}
                   style={{
                     cursor: cursor,
