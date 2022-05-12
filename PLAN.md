@@ -70,7 +70,7 @@ be-notification 单元测试
 | 10   | 文本省略     | be-ellipsis     | <font color=#07c160 size=5>√</font> | <font color=#07c160 size=5>√</font> |
 | 11   | 弹出显示     | be-popover      | <font color=#07c160 size=5>√</font> | <font color=red size=5>×</font>     |
 | 12   | 文本弹出显示 | be-toolTip      | <font color=#07c160 size=5>√</font> | <font color=red size=5>×</font>     |
-| 13   | refactor style 按钮         | be-button       | <font color=#07c160 size=5>√</font> | <font color=#07c160 size=5>√</font> |
+| 13   | 按钮         | be-button       | <font color=#07c160 size=5>√</font> | <font color=#07c160 size=5>√</font> |
 | 14   | 自动补全输入 | be-autocomplete | <font color=#07c160 size=5>√</font> | <font color=red size=5>×</font>     |
 | 15   | 标签         | be-tag          | <font color=#07c160 size=5>√</font> | <font color=#07c160 size=5>√</font> |
 | 16   | refactor style 选择框       | be-select       | <font color=#07c160 size=5>√</font> | <font color=red size=5>×</font>     |
