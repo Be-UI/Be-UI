@@ -4,20 +4,14 @@ import MarkdownIt from 'markdown-it'
 import mdContainer from 'markdown-it-container'
 import type Token from 'markdown-it/lib/token'
 import type Renderer from 'markdown-it/lib/renderer'
-import {highlight} from "../utils/highlight";
+import { highlight } from '../utils/highlight'
 
 const localMd = MarkdownIt()
 
 interface ContainerOpts {
   marker?: string | undefined
   validate?(params: string): boolean
-  render?(
-    tokens: Token[],
-    index: number,
-    options: any,
-    env: any,
-    self: Renderer
-  ): string
+  render?(tokens: Token[], index: number, options: any, env: any, self: Renderer): string
 }
 
 export const mdPlugin = (md: MarkdownIt) => {
