@@ -1,5 +1,4 @@
-
-$componentsClass: $name+ '-' + 'popover' !global;
+$componentsClass: $name + '-' + 'popover' !global;
 @include create-B(popover) {
   @include set-component-style-var('popover', $--popover);
 }
@@ -9,7 +8,7 @@ $componentsClass: $name+ '-' + 'popover' !global;
   position: fixed;
   background-color: var(--be-popover-bg-w);
   border-radius: var(--be-popover-rounded-base);
-  z-index: var(--be-popover-z-index);;
+  z-index: var(--be-popover-z-index);
   .#{ $componentsClass }#{$modifier-separator}body {
     box-sizing: border-box;
     padding: 8px 14px;

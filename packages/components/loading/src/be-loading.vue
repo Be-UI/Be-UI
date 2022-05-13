@@ -226,9 +226,7 @@
        * 初始化组件
        */
       const initComp = (): void => {
-        isFullScreenStyle.value = computed(() =>
-          props.isFullScreen ? 'be-load__full' : ''
-        ).value
+        isFullScreenStyle.value = computed(() => (props.isFullScreen ? 'be-load__full' : '')).value
         // 全屏显示时
         if (props.isFullScreen) {
           return

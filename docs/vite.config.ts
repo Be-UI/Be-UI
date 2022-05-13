@@ -1,15 +1,13 @@
 /*
-* @vite.config.ts
-* @deprecated 
-* @author czh
-* @update (czh 2022/4/18)
-*/
+ * @vite.config.ts
+ * @deprecated
+ * @author czh
+ * @update (czh 2022/4/18)
+ */
 import WindiCSS from 'vite-plugin-windicss'
 
 export default {
-  plugins: [
-    WindiCSS(),
-  ],
+  plugins: [WindiCSS()],
   css: {
     preprocessorOptions: {
       scss: {

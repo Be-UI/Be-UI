@@ -1,4 +1,4 @@
-$componentsClass: $name+ '-' + 'load' !global;
+$componentsClass: $name + '-' + 'load' !global;
 @include create-B(load) {
   @include set-component-style-var('load', $--load);
 }
@@ -6,7 +6,7 @@ $componentsClass: $name+ '-' + 'load' !global;
 .#{ $componentsClass } {
   z-index: var(--be-load-z-index);
   @include flex-center;
-  width:var(--be-load-w-full);
+  width: var(--be-load-w-full);
   height: var(--be-load-h-full);
   overflow: hidden;
   user-select: none;
@@ -19,7 +19,7 @@ $componentsClass: $name+ '-' + 'load' !global;
       right: 0;
       bottom: 0;
       left: 0;
-      width:var(--be-load-w-50);
+      width: var(--be-load-w-50);
       height: var(--be-load-h-50);
       margin: auto;
 
@@ -177,11 +177,10 @@ $componentsClass: $name+ '-' + 'load' !global;
   top: 0;
   left: 0;
   z-index: var(--be-load-z-index);
-  width:var(--be-load-w-full);
+  width: var(--be-load-w-full);
   height: var(--be-load-h-full);
 
   .#{ $componentsClass }#{$modifier-separator}container {
     margin-top: 5px;
   }
 }
-

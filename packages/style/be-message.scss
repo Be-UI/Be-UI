@@ -1,5 +1,4 @@
-
-$componentsClass: $name+ '-' + 'message' !global;
+$componentsClass: $name + '-' + 'message' !global;
 @include create-B(message) {
   @include set-component-style-var('message', $--message);
 }

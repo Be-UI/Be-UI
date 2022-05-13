@@ -1,5 +1,5 @@
-@use "sass:map";
-@import "var";
+@use 'sass:map';
+@import 'var';
 input:focus-visible {
   outline-offset: 0;
 }
@@ -26,5 +26,3 @@ input:focus-visible {
 .be-modal {
   background-color: $modal;
 }
-
-

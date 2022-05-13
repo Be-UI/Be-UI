@@ -5,9 +5,9 @@
  * @update (czh 2021/10/13)
  */
 import beInput from './src/be-input.vue'
-import {App} from 'vue'
-import type {SFCWithInstall} from '../../utils/type/types'
-import '../../style/be-input.scss';
+import { App } from 'vue'
+import type { SFCWithInstall } from '../../utils/type/types'
+import '../../style/be-input.scss'
 
 beInput.install = (app: App): void => {
   app.component(beInput.name, beInput)

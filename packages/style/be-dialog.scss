@@ -1,9 +1,8 @@
-
-$componentsClass:$name + '-' + 'dialog' !global;
-@include create-B(dialog){
+$componentsClass: $name + '-' + 'dialog' !global;
+@include create-B(dialog) {
   @include set-component-style-var('dialog', $--dialog);
 }
-@include create-B(dialog--modal){
+@include create-B(dialog--modal) {
   @include set-component-style-var('dialog', $--dialog);
 }
 
@@ -17,21 +16,19 @@ $componentsClass:$name + '-' + 'dialog' !global;
   z-index: var(--be-dialog-z-index);
 }
 
-
-@include create-B(dialog){
+@include create-B(dialog) {
   width: var(--be-dialog-w-full);
   height: var(--be-dialog-h-full);
   position: fixed;
   left: 0;
   top: 0;
   @include flex-center;
-  z-index: var(--be-dialog-z-index) ;
+  z-index: var(--be-dialog-z-index);
   .#{$componentsClass}#{$modifier-separator}container {
     background-color: var(--be-dialog-bg-w);
     align-self: center;
     min-width: 24rem;
     border-radius: var(--be-dialog-rounded-base);
-
 
     .#{$componentsClass}#{$modifier-separator}title {
       background-color: var(--be-dialog-bg-w);
@@ -47,7 +44,7 @@ $componentsClass:$name + '-' + 'dialog' !global;
           line-height: 2rem;
           float: right;
           @include be-pointer;
-         color: var(--be-dialog-text-primary);
+          color: var(--be-dialog-text-primary);
         }
 
         span {
@@ -88,9 +85,3 @@ $componentsClass:$name + '-' + 'dialog' !global;
     }
   }
 }
-
-
-
-
-
-

@@ -1,5 +1,4 @@
-
-$componentsClass: $name+ '-' + 'notification' !global;
+$componentsClass: $name + '-' + 'notification' !global;
 @include create-B(notification) {
   @include set-component-style-var('notification', $--notification);
 }

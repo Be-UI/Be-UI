@@ -1,11 +1,18 @@
-import {defineComponent, onMounted, ref, VNode, watch} from 'vue'
-import {IOption} from './be-select-type'
+import { defineComponent, onMounted, ref, VNode, watch } from 'vue'
+import { IOption } from './be-select-type'
 import BeInputSelect from '../../autocomplete/src/be-input-select.vue'
 import BePopover from '../../popover/src/be-popover.vue'
 import BeIcon from '../../svg-icon/src/be-icon.vue'
 import BeTag from '../../tag/src/be-tag.vue'
-import {IInputSelectFunc} from '../../autocomplete/src/be-autocomplete-type'
-import {arrDupRemov, debounce, getUuid, isFunction, jsonClone, mapToArr,} from '../../../utils/common'
+import { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
+import {
+  arrDupRemov,
+  debounce,
+  getUuid,
+  isFunction,
+  jsonClone,
+  mapToArr,
+} from '../../../utils/common'
 import composition from './be-select-composition'
 
 export default defineComponent({

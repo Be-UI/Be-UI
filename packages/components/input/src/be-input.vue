@@ -92,27 +92,27 @@
 </template>
 
 <script lang="ts">
-    import type {PropType} from 'vue'
-    /**
-     * 带输入建议远程搜索的输入框
-     */
-    import {
-        computed,
-        defineComponent,
-        getCurrentInstance,
-        nextTick,
-        onMounted,
-        reactive,
-        ref,
-        useAttrs,
-        watch,
-    } from 'vue'
-    import BeIcon from '../../svg-icon/src/be-icon.vue'
-    import {AutosizeProp, IInputInst} from './be-input-type'
-    import {isObject} from '@vue/shared'
-    import compTextareaHeight from './computeAreaHeight'
+  import type { PropType } from 'vue'
+  /**
+   * 带输入建议远程搜索的输入框
+   */
+  import {
+    computed,
+    defineComponent,
+    getCurrentInstance,
+    nextTick,
+    onMounted,
+    reactive,
+    ref,
+    useAttrs,
+    watch,
+  } from 'vue'
+  import BeIcon from '../../svg-icon/src/be-icon.vue'
+  import { AutosizeProp, IInputInst } from './be-input-type'
+  import { isObject } from '@vue/shared'
+  import compTextareaHeight from './computeAreaHeight'
 
-    export default defineComponent({
+  export default defineComponent({
     name: 'BeInput',
     components: { BeIcon },
     // 原生属性 readonly autocomplete name max min step autofocus form
@@ -446,4 +446,3 @@
     },
   })
 </script>
-

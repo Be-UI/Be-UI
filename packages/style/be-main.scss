@@ -1,5 +1,4 @@
-
-$componentsClass: $name+ '-' + 'main' !global;
+$componentsClass: $name + '-' + 'main' !global;
 
 @include create-B(main) {
   box-sizing: border-box;

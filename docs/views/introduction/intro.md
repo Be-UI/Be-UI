@@ -1,6 +1,3 @@
-
-
-
 # 指南
 
 ## 介绍
@@ -30,15 +27,17 @@ const app = createApp(App)
 app.use(BeUI)
 app.mount('#app')
 ```
+
 在也可以在组件中导入
 
 ```javascript
 import { defined } from 'vue'
-import {BeIcon} from '../public/be-ui/be-ui.es.js'
+import { BeIcon } from '../public/be-ui/be-ui.es.js'
 export default defineComponent({
-    conponents:{BeIcon}
+  conponents: { BeIcon },
 })
 ```
+
 ## 其他
 
 更新日志

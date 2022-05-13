@@ -1,6 +1,6 @@
 /* * @main.vue * @deprecated * @author czh * @update (czh 2022/4/15) */
 <template>
-    <div>main</div>
+  <div>main</div>
 </template>
 <script>
   export default {

@@ -5,7 +5,6 @@ import type { App } from 'vue'
 // const componentList: object = components
 // export type componentKeyType = keyof typeof componentList
 
-
 export type install = <T>() => T
-type BeUI = {version:string,install:install}
+type BeUI = { version: string; install: install }
 export default BeUI

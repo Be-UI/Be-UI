@@ -1,5 +1,4 @@
-
-$componentsClass: $name+ '-' + 'icon' !global;
+$componentsClass: $name + '-' + 'icon' !global;
 @keyframes be-animate-icon-spin {
   100% {
     transform: rotate(360deg);
@@ -9,7 +8,7 @@ $componentsClass: $name+ '-' + 'icon' !global;
 @include create-B(icon) {
   display: inline-flex;
 
-  .#{ $componentsClass }#{$modifier-separator}container  {
+  .#{ $componentsClass }#{$modifier-separator}container {
     overflow: hidden;
     vertical-align: 0;
   }

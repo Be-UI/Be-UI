@@ -1,4 +1,4 @@
-$componentsClass: $name+ '-' + 'breadcrumb' !global;
+$componentsClass: $name + '-' + 'breadcrumb' !global;
 @include create-B(breadcrumb) {
   @include set-component-style-var('breadcrumb', $--breadcrumb);
 }

@@ -13,10 +13,9 @@ import VPHome from './components/vp-home.vue'
 import type { Component } from 'vue'
 export default index
 // 全局组件
-export const globals: [string, Component][
-  ] = [
+export const globals: [string, Component][] = [
   ['Demo', VPDemo],
   ['vp-main', VPMain],
   ['vp-header', VPHeader],
-  ['vp-home', VPHome]
+  ['vp-home', VPHome],
 ]

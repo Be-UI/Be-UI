@@ -1,5 +1,5 @@
-@use './mixins' ;
-@use './vars' ;
+@use './mixins';
+@use './vars';
 @use './content/doc-content';
 @use './content/hero-content';
 
@@ -13,10 +13,7 @@
         padding-left: calc(var(--vp-sidebar-width-small) - var($scrollbar-size));
       }
       @include respond-to('xxl') {
-        padding-left: calc(
-          (100% - var(--vp-screen-max-width)) / 2 +
-            var(--vp-sidebar-width-small)
-        );
+        padding-left: calc((100% - var(--vp-screen-max-width)) / 2 + var(--vp-sidebar-width-small));
       }
     }
   }

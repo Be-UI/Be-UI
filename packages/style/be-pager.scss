@@ -1,5 +1,4 @@
-
-$componentsClass: $name+ '-' + 'pager' !global;
+$componentsClass: $name + '-' + 'pager' !global;
 @include create-B(pager) {
   @include set-component-style-var('pager', $--pager);
 }
@@ -99,10 +98,9 @@ $componentsClass: $name+ '-' + 'pager' !global;
     border: 1px solid var(--be-pager-border);
     transition: all 0.3s;
     border-radius: var(--be-pager-rounded-base);
-
   }
   .be-icon {
-    .be-icon--container{
+    .be-icon--container {
       width: 14px;
       height: 14px;
       use {

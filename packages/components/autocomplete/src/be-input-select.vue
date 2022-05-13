@@ -33,8 +33,8 @@
 </template>
 
 <script lang="ts">
-  import {computed, defineComponent, getCurrentInstance} from 'vue'
-  import {IInputInst} from '../../input/src/be-input-type'
+  import { computed, defineComponent, getCurrentInstance } from 'vue'
+  import { IInputInst } from '../../input/src/be-input-type'
 
   export default defineComponent({
     name: 'BeInputSelect',
@@ -108,5 +108,3 @@
     },
   })
 </script>
-
-

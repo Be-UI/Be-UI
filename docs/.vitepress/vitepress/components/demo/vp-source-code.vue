@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+  import { computed } from 'vue'
 
-const props = defineProps({
-  source: {
-    type: String,
-    required: true,
-  },
-})
+  const props = defineProps({
+    source: {
+      type: String,
+      required: true,
+    },
+  })
 
-const decoded = computed(() => {
-  return decodeURIComponent(props.source)
-})
+  const decoded = computed(() => {
+    return decodeURIComponent(props.source)
+  })
 </script>
 
 <template>
@@ -20,8 +20,8 @@ const decoded = computed(() => {
 </template>
 
 <style scoped lang="scss">
-.language-vue {
-  margin: 0;
-  border-radius: 0;
-}
+  .language-vue {
+    margin: 0;
+    border-radius: 0;
+  }
 </style>

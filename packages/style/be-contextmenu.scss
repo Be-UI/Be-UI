@@ -1,4 +1,4 @@
-$componentsClass: $name+ '-' + 'contextmenu' !global;
+$componentsClass: $name + '-' + 'contextmenu' !global;
 @include create-B(contextmenu) {
   @include set-component-style-var('contextmenu', $--contextmenu);
 }
@@ -53,14 +53,12 @@ $componentsClass: $name+ '-' + 'contextmenu' !global;
 
       &.left {
         left: 0;
-        transform: translateX(- 100%);
-
+        transform: translateX(-100%);
       }
 
       &.right {
         right: 0;
         transform: translateX(100%);
-
       }
 
       &.top {
@@ -103,7 +101,6 @@ $componentsClass: $name+ '-' + 'contextmenu' !global;
     background-color: var(--be-contextmenu-theme-dark);
   }
 }
-
 
 .#{ $componentsClass }#{$element-separator}iconfont {
   font-size: inherit;

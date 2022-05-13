@@ -1,4 +1,3 @@
-
 .be-select {
   .be-select-tag {
     padding: 0 7px 3px 0;
@@ -57,7 +56,7 @@
       border-color: $pinkHoverBorder;
     }
   }
-  .be-select-input__disabled{
+  .be-select-input__disabled {
     @apply bg-gray-100;
   }
   .be-select-body__focus {

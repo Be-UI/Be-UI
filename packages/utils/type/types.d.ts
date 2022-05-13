@@ -10,4 +10,3 @@ export type TimeoutHandle = ReturnType<typeof window.setTimeout>
 export interface IOption {
   [key: string]: any
 }
-

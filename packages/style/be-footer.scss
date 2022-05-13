@@ -1,5 +1,4 @@
-
-$componentsClass: $name+ '-' + 'footer' !global;
+$componentsClass: $name + '-' + 'footer' !global;
 
 @include create-B(footer) {
   box-sizing: border-box;

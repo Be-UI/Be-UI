@@ -1,14 +1,14 @@
 <script setup lang="ts">
-defineProps({
-  file: {
-    type: String,
-    required: true,
-  },
-  demo: {
-    type: Object,
-    required: true,
-  },
-})
+  defineProps({
+    file: {
+      type: String,
+      required: true,
+    },
+    demo: {
+      type: Object,
+      required: true,
+    },
+  })
 </script>
 
 <template>
@@ -20,9 +20,9 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
-.example-showcase {
-  padding: 0.8rem;
-  margin: 0.5px;
-  background-color: var(--bg-color);
-}
+  .example-showcase {
+    padding: 0.8rem;
+    margin: 0.5px;
+    background-color: var(--bg-color);
+  }
 </style>

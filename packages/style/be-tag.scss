@@ -1,5 +1,4 @@
-
-$componentsClass: $name+ '-' + 'tag' !global;
+$componentsClass: $name + '-' + 'tag' !global;
 @include create-B(tag) {
   @include set-component-style-var('tag', $--tag);
 }
