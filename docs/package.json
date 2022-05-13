@@ -17,26 +17,41 @@
     }
   },
   "dependencies": {
-    "@vueuse/core": "^8.2.5",
-    "@docsearch/js": "^3.0.0",
     "@docsearch/css": "^3.0.0",
+    "@docsearch/js": "^3.0.0",
     "@docsearch/react": "^3.0.0",
+    "@vueuse/core": "^8.2.5",
     "normalize.css": "^8.0.1",
     "prism-theme-vars": "^0.2.2"
   },
   "devDependencies": {
-    "@types/markdown-it": "^12.2.3",
-    "vite-plugin-inspect": "^0.4.3",
-    "vite-plugin-pwa": "^0.11.13",
-    "vite-plugin-windicss": "^1.8.4",
+    "@algolia/client-search": "4.9.1",
     "@pnpm/types": "^8.0.0",
+    "@types/markdown-it": "^12.2.3",
     "@types/node": "*",
-    "vitepress": "^0.22.3",
-    "escape-html": "^1.0.3",
+    "@types/react": "16.8.0",
+    "@vitejs/plugin-vue": "^2.3.1",
+    "@vitejs/plugin-vue-jsx": "^1.3.9",
     "consola": "^2.15.3",
-    "prismjs":"1.27.0",
+    "escape-html": "^1.0.3",
     "markdown-it": "^12.3.2",
     "markdown-it-container": "^3.0.0",
+    "prismjs": "1.27.0",
+    "react": "16.8.0",
+    "react-dom": "16.8.0",
+    "vite": "^2.9.5",
+    "vite-dts": "^1.0.4",
+    "vite-plugin-inspect": "^0.4.3",
+    "vite-plugin-pwa": "^0.11.13",
+    "vite-plugin-style-import": "^2.0.0",
+    "vite-plugin-windicss": "^1.8.4",
+    "vitepress": "^0.22.3",
     "windicss": "^3.4.3"
+  },
+  "peerDependencies": {
+    "@algolia/client-search": "4.9.1",
+    "@types/react": "16.8.0",
+    "react": "16.8.0",
+    "react-dom": "16.8.0"
   }
 }
