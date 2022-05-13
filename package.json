@@ -50,7 +50,9 @@
     "not op_mini all"
   ],
   "peerDependencies": {
-    "vue": "^3.2.31"
+    "vue": "^3.2.33",
+    "@vue/shared": "^3.2.33",
+    "@popperjs/core": "^2.11.5"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.5",
