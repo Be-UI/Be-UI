@@ -43,9 +43,7 @@
     "vite-plugin-style-import": "^2.0.0",
     "vite-plugin-windicss": "^1.8.4",
     "vitepress": "^0.22.3",
-    "windicss": "^3.4.3"
-  },
-  "peerDependencies": {
+    "windicss": "^3.4.3",
     "@algolia/client-search": "4.9.1",
     "@types/react": "16.8.0",
     "react": "16.8.0",
