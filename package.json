@@ -27,7 +27,7 @@
     "updateDep": "pnpm up"
   },
   "lint-staged": {
-    "./packages --ext .vue,.js,.ts,.jsx,.tsx": [
+    "./packages *.{vue,js,ts,jsx,tsx}": [
       "pretty-quick --staged",
       "eslint --fix",
       "git add"
