@@ -27,7 +27,7 @@
   },
   "lint-staged": {
     "*.{vue,js,ts,jsx,tsx,md,json}": [
-      "pretty-quick --staged",
+      "pretty-quick --staged --allow-empty",
       "eslint --fix",
       "git add"
     ]
