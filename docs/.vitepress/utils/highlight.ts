@@ -42,9 +42,7 @@ export const highlight = (str: string, lang: string) => {
     } catch {
       // eslint-disable-next-line no-console
       consola.warn(
-        chalk.yellow(
-          `[vitepress] Syntax highlight for language "${lang}" is not supported.`
-        )
+        chalk.yellow(`[vitepress] Syntax highlight for language "${lang}" is not supported.`)
       )
     }
   }
