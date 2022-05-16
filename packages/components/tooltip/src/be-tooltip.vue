@@ -9,9 +9,10 @@
     :x="x"
     :y="y"
     :width="width"
-    :trigger="trigger">
+    :trigger="trigger"
+  >
     <template #trigger>
-      <slot></slot>
+      <slot />
     </template>
     <span>{{ content }}</span>
   </be-popover>

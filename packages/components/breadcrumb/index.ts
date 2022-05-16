@@ -8,7 +8,7 @@ import { App } from 'vue'
 import beBreadcrumb from './src/be-breadcrumb'
 import beBreadcrumbItem from './src/be-breadcrumb-item'
 import { IBreadcrumb } from './src/be-breadcrumb-type'
-import '../../style/be-breadcrumb.scss'
+import '../../style/src/be-breadcrumb.scss'
 
 const breadcrumbComp = beBreadcrumb as IBreadcrumb
 /**

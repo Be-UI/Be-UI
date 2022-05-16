@@ -5,7 +5,8 @@
     :trigger="focusTrigger ? 'click' : 'none'"
     placement="bottom"
     :trigger-elm="`be_input_select_inner_${uid}`"
-    custom-class="be-input-select-popover">
+    custom-class="be-input-select-popover"
+  >
     <template #trigger>
       <be-input
         :id="`be_input_select_inner_${uid}`"
@@ -18,12 +19,13 @@
         @blur="handleBlur"
         @clear="handleClear"
         @prev-icon-click="handleIconClickPrev"
-        @next-icon-click="handleIconClickNext">
+        @next-icon-click="handleIconClickNext"
+      >
         <template #prev>
-          <slot name="prev"></slot>
+          <slot name="prev" />
         </template>
         <template #next>
-          <slot name="next"></slot>
+          <slot name="next" />
         </template>
       </be-input>
     </template>
@@ -34,9 +36,13 @@
         :label-value="labelValue"
         :select-style="selectStyle"
         :select-list="selectList"
-        @select="handleSelect">
+        @select="handleSelect"
+      >
         <template #cus-temp="slotProps">
-          <slot name="cus-temp" :item="slotProps.item"></slot>
+          <slot
+            name="cus-temp"
+            :item="slotProps.item"
+          />
         </template>
       </be-input-select>
     </transition>

@@ -1,6 +1,9 @@
 <template>
-  <aside class="be-aside" :style="style">
-    <slot></slot>
+  <aside
+    class="be-aside"
+    :style="style"
+  >
+    <slot />
   </aside>
 </template>
 <script lang="ts">

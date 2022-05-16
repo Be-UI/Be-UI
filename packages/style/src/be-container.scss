@@ -1,0 +1,19 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'container' !global;
+
+@include create-B(container) {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 0%;
+  flex-basis: auto;
+  flex-direction: row;
+  min-width: 0;
+}
+
+.#{ $componentsClass }#{$element-separator}vertical {
+  flex-direction: column;
+}

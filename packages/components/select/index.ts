@@ -9,7 +9,7 @@ import { App } from 'vue'
 import beSelect from './src/be-select'
 import beSelectMultiple from './src/be-select-multiple'
 import type { SFCWithInstall } from '../../utils/type/types'
-import '../../style/be-select.scss'
+import '../../style/src/be-select.scss'
 
 /**
  * 组件装载方法

@@ -1,7 +1,13 @@
 /* * @be-contextmenu.vue * @deprecated 右键菜单-菜单容器组件 * @author czh * @update (czh 2021/4/10)
 */
 <template>
-  <ul v-show="visible" ref="contextmenu" v-bind="attrs" :class="contextmenuCls" :style="style">
+  <ul
+    v-show="visible"
+    ref="contextmenu"
+    v-bind="attrs"
+    :class="contextmenuCls"
+    :style="style"
+  >
     <!-- @slot 插槽请使用组件 be-contextmenu-item.vue-->
     <slot />
   </ul>

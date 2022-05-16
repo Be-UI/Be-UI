@@ -1,0 +1,504 @@
+// set all css var for component by map
+@use 'sass:map';
+// 生成变量
+@mixin set-css-var-type($name, $type, $--variables) {
+  --be-#{$name}-#{$type}: #{map.get($--variables, $type)};
+}
+
+// 生成组件内变量
+@mixin set-component-style-var($name, $--variables) {
+  @each $attribute, $value in $--variables {
+    --be-#{$name}-#{$attribute}: #{$value};
+  }
+}
+
+// 生成组件类 BEM=>B
+//  air-table{} /* 块 */
+//  air-table__footer{} /* 元素 */
+//  air-table--full{} /* 修饰符 */
+// E 和 M 自己写算了
+@mixin create-B($block) {
+  // !global 語法使用全局變量覆蓋 即把$B: $name + '-' + $block 定義的變量提升到了全局
+  $B: $name + '-' + $block !global;
+  .#{$B} {
+    @content;
+  }
+}
+
+@mixin font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+}
+
+@mixin be-notification--icon {
+  margin-right: 10px;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+// 基于flex 的水平垂直居中
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin be-pointer {
+  cursor: pointer;
+}
+
+@mixin be-disabled {
+  cursor: not-allowed;
+}
+
+@mixin be-shadow {
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, var(--be-shadow-md);
+}
+
+@mixin be-message--title {
+  font-family: 'Microsoft YaHei', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+@mixin be-text-align($align) {
+  text-align: $align;
+}
+
+:root {
+  $--emo-color: () !default;
+  $--emo-color: map.deep-merge(
+    (
+      'warning-color': $warning,
+      'warning-color2': $warningHoverBorder,
+      'warning-color3': $warningBorder,
+      'success-color': $success,
+      'success-color2': #c2e7b0,
+      'success-color3': #f0f9eb,
+      'error-color': $error,
+      'error-color2': #fbc4c4,
+      'error-color3': #fef0f0,
+      'link-color': $link,
+      'info-color': $info,
+      'warning-color--hover': $warningHover,
+      'success-color--hover': $successHover,
+      'error-color--hover': $errorHover,
+      'link-color--hover': $linkHover,
+      'info-color--hover': $infoHover,
+    ),
+    $--emo-color
+  );
+  // 生成情感色变量
+  @each $type
+    in (
+      warning-color,
+      warning-color2,
+      warning-color3,
+      success-color,
+      success-color2,
+      success-color3,
+      error-color,
+      error-color2,
+      error-color3,
+      link-color,
+      warning-color--hover,
+      info-color--hover,
+      info-color,
+      success-color--hover,
+      error-color--hover,
+      link-color--hover
+    )
+  {
+    @include set-css-var-type('emo', $type, $--emo-color);
+  }
+
+  $--percentage: () !default;
+  $--percentage: map.deep-merge(
+    (
+      'zero': 0,
+      '25': 25%,
+      '50': 50%,
+      '75': 75%,
+      'full': 100%,
+    ),
+    $--percentage
+  );
+  // 百分比變量
+  @each $type in (zero, '25', '50', '75', full) {
+    @include set-css-var-type('percentage', $type, $--percentage);
+  }
+
+  $--text-color: () !default;
+  $--text-color: map.merge(
+    (
+      'primary': #303133,
+      'regular': #606266,
+      'secondary': #909399,
+      'placeholder': #c0c4cc,
+      'link': #409eff,
+    ),
+    $--text-color
+  );
+  // 文字顔色
+  @each $type in (primary, regular, secondary, placeholder, link) {
+    @include set-css-var-type('text-color', $type, $--text-color);
+  }
+  $--text-size: () !default;
+  $--text-size: map.merge(
+    (
+      'xs': 0.75rem,
+      'sm': 0.875rem,
+      'base': 1rem,
+      'lg': 1.125rem,
+      'xl': 1.25rem,
+      '2xl': 1.5rem,
+    ),
+    $--text-size
+  );
+  // 文字大小
+  @each $type in (xs, sm, base, lg, xl, 2xl) {
+    @include set-css-var-type('text-size', $type, $--text-size);
+  }
+  $--color: () !default;
+  $--color: map.deep-merge(
+    (
+      'w': $white,
+      'b': $black,
+      'grays': #c0c4cc,
+      'bg-hover': #f5f5f5,
+      'q-blues': #b3d8ff,
+    ),
+    $--color
+  );
+  // 其他基础色
+  @each $type in (w, b, grays, bg-hover, q-blues) {
+    @include set-css-var-type('base-color', $type, $--color);
+  }
+
+  // 圆角
+  $--rounded: () !default;
+  $--rounded: map.merge(
+    (
+      'full': 9999px,
+      'base': 4px,
+      'lg': 50px,
+    ),
+    $--rounded
+  );
+
+  @each $type in (full, base, lg) {
+    @include set-css-var-type('rounded', $type, $--rounded);
+  }
+
+  // 阴影
+  $--shadow: () !default;
+  $--shadow: map.merge(
+    (
+      'md': (
+        1px 3px 0 rgba(0, 0, 0, 0.1),
+        0 1px 2px 0 rgba(0, 0, 0, 0.06),
+      ),
+    ),
+    $--shadow
+  );
+  @each $type in (md) {
+    @include set-css-var-type('shadow', $type, $--shadow);
+  }
+
+  // zIndex
+  $--z-index: () !default;
+  $--z-index: map.merge(
+    (
+      'top1': 9999,
+      'top2': 9998,
+      'top3': 9997,
+    ),
+    $--z-index
+  );
+  @each $type in (top1, top2, top3) {
+    @include set-css-var-type('zIndex', $type, $--z-index);
+  }
+  // transform
+  $--transform: () !default;
+  $--transform: map.merge(
+    (
+      'translate-x-full-': -100%,
+      'translate-x': 0,
+      'translate-y': 0,
+      'rotate': 0,
+      'skew-x': 0,
+      'skew-y': 0,
+      'scale-x': 1,
+      'scale-y': 1,
+    ),
+    $--transform
+  );
+  @each $type
+    in (
+      'translate-x',
+      'translate-y',
+      'rotate',
+      'skew-x',
+      'skew-y',
+      'scale-x',
+      'scale-y',
+      'translate-x-full-'
+    )
+  {
+    @include set-css-var-type('transform', $type, $--transform);
+  }
+  // height
+  $--h: () !default;
+  $--h: map.merge(
+    (
+      'mini': 1.5rem,
+      'medium': 2rem,
+      'large': 2.5rem,
+    ),
+    $--h
+  );
+  @each $type in (mini, medium, large) {
+    @include set-css-var-type('h', $type, $--h);
+  }
+}
+
+// 生成 be-progress 类型颜色变量
+$--progress: () !default;
+$--progress: map.deep-merge(
+  (
+    'normal-color': var(--be-emo-link-color),
+    'success-color': var(--be-emo-success-color),
+    'error-color': var(--be-emo-error-color),
+    'rounded-lg': var(--be-rounded-lg),
+  ),
+  $--progress
+);
+// 生成 be-switch 颜色变量
+$--switch: () !default;
+$--switch: map.deep-merge(
+  (
+    'bg-w': var(--be-base-color-w),
+    'bg-b': var(--be-base-color-b),
+    'bg-checked': $link,
+    'bg-un-checked': var(--be-base-color-grays),
+    'trans-': translateX(var(--be-transform-translate-x-full-))
+      translateY(var(--be-transform-translate-y)) rotate(var(--be-transform-rotate))
+      skewX(var(--be-transform-skew-x)) skewY(var(--be-transform-skew-y))
+      scaleX(var(--be-transform-scale-x)) scaleY(var(--be-transform-scale-y)),
+  ),
+  $--switch
+);
+// 生成 be-popover 变量
+$--popover: () !default;
+$--popover: map.deep-merge(
+  (
+    'bg-w': var(--be-base-color-w),
+    'bg-b': var(--be-base-color-b),
+    'shadow-top': 1px 1px 3px -1px rgba(0, 0, 0, 0.37),
+    'shadow-right': 1px -1px 3px -1px rgba(0, 0, 0, 0.37),
+    'shadow-bottom': -1px -1px 3px -1px rgba(0, 0, 0, 0.37),
+    'shadow-left': -1px 1px 3px -1px rgba(0, 0, 0, 0.37),
+    'z-index': var(--be-zIndex-top2),
+    'rounded-base': var(--be-rounded-base),
+  ),
+  $--popover
+);
+// 生成 be-pager 变量
+$--pager: () !default;
+$--pager: map.deep-merge(
+  (
+    'bg-w': var(--be-base-color-w),
+    'bg-b': var(--be-base-color-b),
+    'text-active': $link,
+    'border': 1px solid var(--be-base-color-grays),
+    'rounded-base': var(--be-rounded-base),
+  ),
+  $--pager
+);
+
+// 生成 be-tag
+$--tag: () !default;
+$--tag: map.deep-merge(
+  (
+    'px': 0.625rem,
+    'h-mini': var(--be-h-mini),
+    'h-medium': var(--be-h-medium),
+    'h-large': var(--be-h-large),
+    'normal-color': var(--be-emo-link-color),
+    'success-color': var(--be-emo-success-color),
+    'error-color': var(--be-emo-error-color),
+    'warning-color': var(--be-emo-warning-color),
+    'primary-color': $primary,
+    'normal-color--hover': var(--be-emo-link-color--hover),
+    'success-color--hover': var(--be-emo-success-color--hover),
+    'error-color--hover': var(--be-emo-error-color--hover),
+    'warning-color--hover': var(--be-emo-warning-color--hover),
+    'primary-color--hover': var(--be-emo-link-color),
+    'border': 1px solid var(--be-base-color-grays),
+  ),
+  $--tag
+);
+
+// 生成 be-message
+$--message: () !default;
+$--message: map.deep-merge(
+  (
+    'px': 0.625rem,
+    'bg-w': var(--be-base-color-w),
+    'success-color': var(--be-emo-success-color),
+    'error-color': var(--be-emo-error-color),
+    'warning-color': var(--be-emo-warning-color),
+    'info-color': var(--be-emo-info-color),
+    'text-success-color': var(--be-emo-success-color),
+    'text-error-color': var(--be-emo-error-color),
+    'text-warning-color': var(--be-emo-warning-color),
+    'text-info-color': var(--be-emo-info-color),
+    'z-index': var(--be-zIndex-top2),
+    'rounded-base': var(--be-rounded-base),
+  ),
+  $--message
+);
+// 生成 be-notification
+$--notification: () !default;
+$--notification: map.deep-merge(
+  (
+    'px': 0.625rem,
+    'bg-w': var(--be-base-color-w),
+    'success-color': var(--be-emo-success-color),
+    'error-color': var(--be-emo-error-color),
+    'warning-color': var(--be-emo-warning-color),
+    'info-color': var(--be-emo-info-color),
+    'text-success-color': var(--be-emo-success-color),
+    'text-error-color': var(--be-emo-error-color),
+    'text-warning-color': var(--be-emo-warning-color),
+    'text-info-color': var(--be-emo-info-color),
+    'border-color': var(--be-emo-info-color--hover),
+    'z-index': var(--be-zIndex-top2),
+    'rounded-base': var(--be-rounded-base),
+  ),
+  $--notification
+);
+// 生成 be-breadcrumb
+$--breadcrumb: () !default;
+$--breadcrumb: map.deep-merge(
+  (
+    'w-full': var(--be-percentage-full),
+    'text--hover': var(--be-text-color-link),
+    'text-default': var(--be-text-color-regular),
+    'text-primary': var(--be-text-color-primary),
+    'bg-g': var(--be-base-color-bg-hover),
+  ),
+  $--breadcrumb
+);
+// 生成 be-message-box
+$--message-box: () !default;
+$--message-box: map.deep-merge(
+  (
+    'w-full': var(--be-percentage-full),
+    'h-full': var(--be-percentage-full),
+    'bg-w': var(--be-base-color-w),
+    'success-color': var(--be-emo-success-color),
+    'error-color': var(--be-emo-error-color),
+    'warning-color': var(--be-emo-warning-color),
+    'info-color': var(--be-emo-info-color),
+    'z-index': var(--be-zIndex-top2),
+    'rounded-base': var(--be-rounded-base),
+  ),
+  $--message-box
+);
+
+// 生成 be-dialog
+$--dialog: () !default;
+$--dialog: map.deep-merge(
+  (
+    'w-full': var(--be-percentage-full),
+    'h-full': var(--be-percentage-full),
+    'bg-w': var(--be-base-color-w),
+    'p': 1rem 1.25rem,
+    'text-primary': var(--be-text-color-primary),
+    'z-index': var(--be-zIndex-top3),
+    'rounded-base': var(--be-rounded-base),
+  ),
+  $--dialog
+);
+
+// 生成 be-load
+$--load: () !default;
+$--load: map.deep-merge(
+  (
+    'w-full': var(--be-percentage-full),
+    'h-full': var(--be-percentage-full),
+    'w-50': var(--be-percentage-50),
+    'h-50': var(--be-percentage-50),
+    'bg-w': var(--be-base-color-w),
+    'z-index': var(--be-zIndex-top1),
+    'rounded-base': var(--be-rounded-base),
+  ),
+  $--load
+);
+
+// 生成 be-contextmenu
+$--contextmenu: () !default;
+$--contextmenu: map.deep-merge(
+  (
+    'rounded-base': var(--be-rounded-base),
+    'border-color': var(--be-base-color-grays),
+    'text-sm': var(--be-text-size-sm),
+    'text--hover': var(--be-base-color-w),
+    'text-primary': var(--be-text-color-primary),
+    'bg-w': var(--be-base-color-w),
+    'z-index': var(--be-zIndex-top2),
+    'theme-dark': var(--be-base-color-b),
+    'theme-red': var(--be-emo-error-color),
+    'theme-default': var(--be-emo-link-color),
+  ),
+  $--contextmenu
+);
+
+// 生成 be-button
+$--button: () !default;
+$--button: map.deep-merge(
+  (
+    'db-ic--hover': var(--be-base-color-w),
+    'db-text--hover': var(--be-emo-link-color--hover),
+    'db-bg-color': var(--be-base-color-w),
+    'db-text': var(--be-text-color-regular),
+    'db-border': var(--be-base-color-grays),
+    'db-bg-color--hover': $primary,
+    'db-border--hover': var(--be-emo-link-color--hover),
+    'py-text--hover': var(--be-base-color-w),
+    'py-text': var(--be-emo-link-color),
+    'py-bg-color': $primary,
+    'py-bg-color--hover': var(--be-emo-link-color--hover),
+    'py-ic--hover': var(--be-base-color-w),
+    'py-border--hover': $primary,
+    'py-border': var(--be-base-color-q-blues),
+    'wr-bg-color': var(--be-emo-warning-color),
+    'wr-text': var(--be-base-color-w),
+    'wr-border': var(--be-emo-warning-color3),
+    'wr-bg-color--hover': var(--be-emo-warning-color--hover),
+    'wr-border--hover': var(--be-emo-warning-color2),
+    'wr-ic--hover': var(--be-base-color-w),
+    'sc-bg-color': var(--be-emo-success-color),
+    'sc-text': var(--be-base-color-w),
+    'sc-border': var(--be-emo-success-color3),
+    'sc-bg-color--hover': var(--be-emo-success-color--hover),
+    'sc-border--hover': var(--be-emo-success-color2),
+    'sc-ic--hover': var(--be-base-color-w),
+    'nf-bg-color': var(--be-base-color-w),
+    'nf-text': var(--be-text-color-regular),
+    'nf-border': var(--be-base-color-grays),
+    'nf-bg-color--hover': var(--be-emo-info-color--hover),
+    'nf-border--hover': var(--be-base-color-w),
+    'nf-ic--hover': var(--be-text-color-primary),
+    'er-bg-color': var(--be-emo-error-color),
+    'er-text': var(--be-base-color-w),
+    'er-border': var(--be-emo-error-color3),
+    'er-bg-color--hover': var(--be-emo-error-color--hover),
+    'er-border--hover': var(--be-emo-error-color2),
+    'er-ic--hover': var(--be-base-color-w),
+    'rounded-base': var(--be-rounded-base),
+  ),
+  $--button
+);

@@ -5,3 +5,4 @@ node_modules
 /packages/**/*.test.tsx
 package.json
 jest.config.js
+.eslintrc.js

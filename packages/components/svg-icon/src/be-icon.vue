@@ -1,7 +1,19 @@
 <template>
-  <div class="be-icon" :class="spinClass" v-on="$attrs">
-    <svg class="be-icon--container" :width="width" :height="height" aria-hidden="true">
-      <use :xlink:href="`#${iconName}`" :fill="color" />
+  <div
+    class="be-icon"
+    :class="spinClass"
+    v-on="$attrs"
+  >
+    <svg
+      class="be-icon--container"
+      :width="width"
+      :height="height"
+      aria-hidden="true"
+    >
+      <use
+        :xlink:href="`#${iconName}`"
+        :fill="color"
+      />
     </svg>
   </div>
 </template>

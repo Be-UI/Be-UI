@@ -11,11 +11,11 @@ import beMain from './src/be-main.vue'
 import beFooter from './src/be-footer.vue'
 import beHeader from './src/be-header.vue'
 
-import '../../style/be-main.scss'
-import '../../style/be-aside.scss'
-import '../../style/be-footer.scss'
-import '../../style/be-header.scss'
-import '../../style/be-container.scss'
+import '../../style/src/be-main.scss'
+import '../../style/src/be-aside.scss'
+import '../../style/src/be-footer.scss'
+import '../../style/src/be-header.scss'
+import '../../style/src/be-container.scss'
 
 import { SFCWithInstall } from '../../utils/type/types'
 /**

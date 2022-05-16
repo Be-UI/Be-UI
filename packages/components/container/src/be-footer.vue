@@ -1,6 +1,9 @@
 <template>
-  <footer class="be-footer" :style="style">
-    <slot></slot>
+  <footer
+    class="be-footer"
+    :style="style"
+  >
+    <slot />
   </footer>
 </template>
 <script lang="ts">

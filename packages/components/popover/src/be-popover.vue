@@ -4,15 +4,17 @@
     :id="`be_popover_trigger${uid}`"
     ref="bePopoverTrigger"
     aria-describedby="tooltip"
-    class="be-popover--trigger">
-    <slot name="trigger"></slot>
+    class="be-popover--trigger"
+  >
+    <slot name="trigger" />
   </div>
 
   <teleport to="body">
     <div
       :class="customClass"
       @mouseenter="handlePopoverDomEnter"
-      @mouseleave="handlePopoverDomLeave">
+      @mouseleave="handlePopoverDomLeave"
+    >
       <transition name="be-fade-in-linear">
         <div
           v-if="show"
@@ -21,11 +23,19 @@
           v-click-outside="{ handler: close, isDisabled: outsideDisabled }"
           class="be-popover"
           role="tooltip"
-          :style="stylePopover">
-          <div :id="`be_popover_body${uid}`" class="be-popover--body">
-            <slot></slot>
+          :style="stylePopover"
+        >
+          <div
+            :id="`be_popover_body${uid}`"
+            class="be-popover--body"
+          >
+            <slot />
           </div>
-          <div v-if="raw" :id="`be_popover_arrow${uid}`" :class="`be-popover--arrow`"></div>
+          <div
+            v-if="raw"
+            :id="`be_popover_arrow${uid}`"
+            :class="`be-popover--arrow`"
+          />
         </div>
       </transition>
     </div>

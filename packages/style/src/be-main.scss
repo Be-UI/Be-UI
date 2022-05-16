@@ -1,0 +1,14 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'main' !global;
+
+@include create-B(main) {
+  box-sizing: border-box;
+  display: block;
+  flex: 1 1 0%;
+  flex-basis: auto;
+  padding: 1.25rem;
+}

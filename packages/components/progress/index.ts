@@ -1,7 +1,7 @@
 import { App } from 'vue'
 import beProgress from './src/be-progress'
 import { IProgress } from './src/be-progress-type'
-import '../../style/be-progress.scss'
+import '../../style/src/be-progress.scss'
 
 const progressComp = beProgress as IProgress
 /**

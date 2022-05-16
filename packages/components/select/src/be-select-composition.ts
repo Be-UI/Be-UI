@@ -59,7 +59,7 @@ export default (props: any, ctx: any) => {
    * @param {Event} event - 事件对象
    */
   const handleFocus = (event: Event): void => {
-    ;(event.target as HTMLInputElement).querySelector('input')?.focus()
+    (event.target as HTMLInputElement).querySelector('input')?.focus()
     /** focus 事件
      * @event focus
      * @param {Event} event - 事件对象

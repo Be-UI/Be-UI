@@ -1,6 +1,9 @@
 <template>
-  <section class="be-container" :class="{ 'be-container__vertical': isVertical }">
-    <slot></slot>
+  <section
+    class="be-container"
+    :class="{ 'be-container__vertical': isVertical }"
+  >
+    <slot />
   </section>
 </template>
 <script lang="ts">

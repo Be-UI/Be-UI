@@ -11,11 +11,9 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
     '@vue/typescript/recommended',
-    'prettier',
+
   ],
-  plugins: ['prettier'], // ++
   rules: {
-    'prettier/prettier': 'error', // ++
     '@typescript-eslint/ban-types': [
       'error',
       {

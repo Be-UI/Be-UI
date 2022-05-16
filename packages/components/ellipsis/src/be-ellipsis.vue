@@ -1,19 +1,32 @@
 <template>
-  <be-tooltip :content="content" placement="top">
-    <span v-bind="attrs" :style="styleStr" @click="expandTriggerFunc" v-html="state.textInner">
-    </span>
-  </be-tooltip>
+  <!--  <be-tooltip
+    :content="content"
+    placement="top"
+  >
+    <span
+      v-bind="attrs"
+      :style="styleStr"
+      @click="expandTriggerFunc"
+      v-html="state.textInner"
+    />
+  </be-tooltip>-->
+  <span
+    v-bind="attrs"
+    :style="styleStr"
+    @click="expandTriggerFunc"
+    v-html="state.textInner"
+  />
 </template>
 
 <script lang="ts">
   import { defineComponent, reactive, watchEffect, ref, getCurrentInstance } from 'vue'
-  import tooltip from '../../tooltip/src/be-tooltip.vue'
+  //import tooltip from '../../tooltip/src/be-tooltip.vue'
   import { IEllipsis } from './be-ellipsis-type'
 
   export default defineComponent({
     name: 'BeEllipsis',
     components: {
-      'be-tooltip': tooltip,
+     // 'be-tooltip': tooltip,
     },
     props: {
       /**

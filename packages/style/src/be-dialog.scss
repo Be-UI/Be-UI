@@ -1,0 +1,92 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'dialog' !global;
+@include create-B(dialog) {
+  @include set-component-style-var('dialog', $--dialog);
+}
+@include create-B(dialog--modal) {
+  @include set-component-style-var('dialog', $--dialog);
+}
+
+.#{$componentsClass}#{$modifier-separator}modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  @include flex-center;
+  z-index: var(--be-dialog-z-index);
+}
+
+@include create-B(dialog) {
+  width: var(--be-dialog-w-full);
+  height: var(--be-dialog-h-full);
+  position: fixed;
+  left: 0;
+  top: 0;
+  @include flex-center;
+  z-index: var(--be-dialog-z-index);
+  .#{$componentsClass}#{$modifier-separator}container {
+    background-color: var(--be-dialog-bg-w);
+    align-self: center;
+    min-width: 24rem;
+    border-radius: var(--be-dialog-rounded-base);
+
+    .#{$componentsClass}#{$modifier-separator}title {
+      background-color: var(--be-dialog-bg-w);
+      border-radius: var(--be-dialog-rounded-base);
+
+      .#{$componentsClass}#{$modifier-separator}container#{$element-separator}head {
+        box-sizing: border-box;
+        padding: var(--be-dialog-p);
+
+        .#{$componentsClass}#{$modifier-separator}icon#{$element-separator}close {
+          @include font-mono;
+          font-weight: bold;
+          line-height: 2rem;
+          float: right;
+          @include be-pointer;
+          color: var(--be-dialog-text-primary);
+        }
+
+        span {
+          @include font-mono;
+          font-weight: 700;
+          font-size: 1.125rem;
+          line-height: 1.75rem;
+          color: var(--be-dialog-text-primary);
+        }
+      }
+    }
+
+    .#{$componentsClass}#{$modifier-separator}body {
+      box-sizing: border-box;
+      padding: var(--be-dialog-p);
+      .#{$componentsClass}#{$modifier-separator}body#{$element-separator}inner {
+        background-color: var(--be-dialog-bg-w);
+      }
+    }
+
+    .#{$componentsClass}#{$modifier-separator}footer {
+      padding: var(--be-dialog-p);
+      height: 4rem;
+
+      .#{$componentsClass}#{$modifier-separator}footer#{$element-separator}btn {
+        width: 5rem;
+      }
+    }
+
+    .#{$componentsClass}#{$modifier-separator}footer#{$element-separator}center {
+      display: flex;
+      justify-content: center;
+    }
+
+    .#{$componentsClass}#{$modifier-separator}footer#{$element-separator}right {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

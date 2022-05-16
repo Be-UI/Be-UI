@@ -1,6 +1,9 @@
 <template>
-  <header class="be-header" :style="style">
-    <slot></slot>
+  <header
+    class="be-header"
+    :style="style"
+  >
+    <slot />
   </header>
 </template>
 <script lang="ts">

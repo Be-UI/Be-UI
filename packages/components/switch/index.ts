@@ -1,7 +1,7 @@
 import { App } from 'vue'
 import beSwitch from './src/be-switch'
 import { ISwitch } from './src/be-switch-type'
-import '../../style/be-switch.scss'
+import '../../style/src/be-switch.scss'
 
 const switchComp = beSwitch as ISwitch
 /**

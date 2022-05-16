@@ -1,0 +1,10 @@
+{
+  "name": "@be-ui/buildss",
+  "version": "1.0.0",
+
+  "scripts": {
+    "build": "gulp"
+  },
+  "author": "bwsy",
+  "license": "ISC"
+}

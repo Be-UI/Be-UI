@@ -7,16 +7,21 @@
   be-tag__${type}
   be-tag__${size}
   ${customClass}
-  `">
-    <span :style="{ color: styleOption?.color }" :class="{ 'be—tag--close': isClose }">
-      <slot></slot>
+  `"
+  >
+    <span
+      :style="{ color: styleOption?.color }"
+      :class="{ 'be—tag--close': isClose }"
+    >
+      <slot />
     </span>
     <be-icon
       v-if="isClose"
       icon="deleteIc"
       class="be-tag_close"
       :style="{ fill: styleOption?.color }"
-      @click="$event => handleClose($event)"></be-icon>
+      @click="$event => handleClose($event)"
+    />
   </div>
 </template>
 

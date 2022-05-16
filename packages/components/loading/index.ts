@@ -1,7 +1,7 @@
 import loading from './src/be-loading-service'
 import { App } from 'vue'
 import { ILoading } from './src/be-loading-type'
-import '../../style/be-loading.scss'
+import '../../style/src/be-loading.scss'
 const load = loading as ILoading
 /**
  * 组件装载方法

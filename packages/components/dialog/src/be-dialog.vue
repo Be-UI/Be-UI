@@ -1,16 +1,26 @@
 /* * be-dialog.vue * @deprecated 可拖拽弹窗 * @author czh * @create (czh 2021/5/8) * @update (czh
 2021/5/8) */
 <template>
-  <div v-if="isShow" :class="dialogModels"></div>
+  <div
+    v-if="isShow"
+    :class="dialogModels"
+  />
   <transition name="dialog-fade">
-    <div v-if="isShow" class="be-dialog">
+    <div
+      v-if="isShow"
+      class="be-dialog"
+    >
       <div
         :id="`be_dialog_container${uid}`"
         v-drag="{ isDrag: isDrag }"
         class="be-dialog--container"
-        :class="customClassStyle">
+        :class="customClassStyle"
+      >
         <div class="be-dialog--title">
-          <div :id="`be_head${uid}`" class="be-dialog--container__head">
+          <div
+            :id="`be_head${uid}`"
+            class="be-dialog--container__head"
+          >
             <span>{{ titles }}</span>
             <!-- @slot 弹窗头部按钮 -->
             <div class="be-dialog--icon__close">
@@ -18,7 +28,8 @@
                 <be-icon
                   icon="deleteIc"
                   custom-class="be-dialog--icon__close-btn"
-                  @click="handleClose('btn')"></be-icon>
+                  @click="handleClose('btn')"
+                />
               </slot>
             </div>
           </div>
@@ -26,10 +37,13 @@
         <div class="be-dialog--body">
           <!-- @slot 弹窗主体-->
           <div class="be-dialog--body__inner">
-            <slot></slot>
+            <slot />
           </div>
         </div>
-        <div v-if="showFooter" :class="`be-dialog--footer be-dialog--footer__${layout}`">
+        <div
+          v-if="showFooter"
+          :class="`be-dialog--footer be-dialog--footer__${layout}`"
+        >
           <!-- @slot 弹窗底部-->
           <slot name="footer">
             <be-button
@@ -38,7 +52,8 @@
               round="3"
               custom-class="be-dialog--footer__btn"
               @click="handleConfirm"
-              >确定
+            >
+              确定
             </be-button>
           </slot>
         </div>

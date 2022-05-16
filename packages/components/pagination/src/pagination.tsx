@@ -146,7 +146,7 @@ export default defineComponent({
         if (/^\d+$/.test(value) && Number(value) <= total) {
           jumpTo(value)
         } else {
-          ;(e.target as HTMLInputElement).value = ''
+          (e.target as HTMLInputElement).value = ''
         }
       }
     }

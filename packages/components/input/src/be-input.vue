@@ -9,14 +9,16 @@
         ${isFocusClass}
         ${disabled ? 'be-input__disabled ' : ''}
         ${inputType === 'textarea' ? 'be-input__textarea' : ''}
-        ${customClass}`">
+        ${customClass}`"
+  >
     <!-- @slot 前置插槽-->
-    <slot name="prev"></slot>
+    <slot name="prev" />
     <div
       v-if="inputType !== 'textarea'"
       class="be-input-body"
       @mouseenter="handleEnter('noInputElm')"
-      @mouseleave="handleLeave('noInputElm')">
+      @mouseleave="handleLeave('noInputElm')"
+    >
       <!--  <div class="be-input" v-click-outside="closeDisplay" :class="customClass">
                 <div class="be-input-body" :class="expandStyle">-->
       <!--前置图标-->
@@ -24,7 +26,8 @@
         v-if="prevIcon"
         :icon="prevIcon"
         class="be-input-prevIcon"
-        @click="handleIcon('prev')"></be-icon>
+        @click="handleIcon('prev')"
+      />
       <input
         :id="id"
         ref="beInputInner"
@@ -44,7 +47,8 @@
         @keydown="handleKeydown"
         @mouseenter="handleEnter"
         @mouseleave="handleLeave"
-        @input="handleInput($event.target.value)" />
+        @input="handleInput($event.target.value)"
+      >
       <!--            @blur="handleBlur($event.target.value)"
                         @focus="handleFocus($event.target.value,$event)"-->
       <!--后置图标-->
@@ -52,25 +56,37 @@
         v-if="nextIcon"
         :icon="nextIcon"
         class="be-input-nextIcon"
-        @click="handleIcon('next')"></be-icon>
+        @click="handleIcon('next')"
+      />
       <!--清除按钮 v-show="showClearIcon-->
-      <div v-if="!isInner && showClearIcon" class="be-input-close-body">
+      <div
+        v-if="!isInner && showClearIcon"
+        class="be-input-close-body"
+      >
         <be-icon
           icon="deleteIc"
           class="be-input-icon be-input-close"
-          @click="handleClear"></be-icon>
+          @click="handleClear"
+        />
       </div>
       <!--密碼按鈕-->
-      <div v-show="showPassword" class="be-input-close-body">
+      <div
+        v-show="showPassword"
+        class="be-input-close-body"
+      >
         <be-icon
           :icon="`${isPassWord ? 'noEye' : 'eye'}`"
           class="be-input-icon be-input-password"
-          @click="handlePassword"></be-icon>
+          @click="handlePassword"
+        />
       </div>
     </div>
     <!-- @slot 后置插槽-->
-    <slot name="next"></slot>
-    <div v-if="inputType === 'textarea'" class="be-input-body">
+    <slot name="next" />
+    <div
+      v-if="inputType === 'textarea'"
+      class="be-input-body"
+    >
       <textarea
         ref="beInputAreaInner"
         class="be-input__textarea__inner"
@@ -85,8 +101,8 @@
         @blur="handleBlur($event.target.value, $event)"
         @change="handleChange"
         @keydown="handleKeydown"
-        @input="handleInput($event.target.value)">
-      </textarea>
+        @input="handleInput($event.target.value)"
+      />
     </div>
   </div>
 </template>

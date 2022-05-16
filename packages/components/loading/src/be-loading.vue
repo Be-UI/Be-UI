@@ -2,7 +2,8 @@
 <template>
   <div
     :id="`be_load_${uid}`"
-    :style="`position: absolute;height: ${containerHeight};width: ${containerWidth};left: ${containerLeft};top: ${containerTop};`">
+    :style="`position: absolute;height: ${containerHeight};width: ${containerWidth};left: ${containerLeft};top: ${containerTop};`"
+  >
     <transition name="be-fade-in-linear">
       <div
         v-if="isShowLoaderInner"
@@ -13,16 +14,16 @@
                  left: ${leftLoader};
                  top: ${topLoader};
                  width:${loaderWidth};
-                 height:${loaderHeight}`">
+                 height:${loaderHeight}`"
+      >
         <!--loading动画-->
-        <BeLoadingAnimate></BeLoadingAnimate>
+        <BeLoadingAnimate />
         <span
           v-if="text"
           class="be-load--text"
           :style="`color:${colorText};`"
           :class="`be-load--text__${sizeLoader}`"
-          >{{ text }}</span
-        >
+        >{{ text }}</span>
       </div>
     </transition>
   </div>

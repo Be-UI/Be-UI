@@ -1,12 +1,20 @@
 /* * @be-contextmenu--submenu.vue * @deprecated 右键菜单-菜单子菜单容器组件
 使用时配合Contextmenu.vue和ContextmenuItem.vue * @author czh * @update (czh 2021/4/10) */
 <template>
-  <li :class="classname" @mouseenter="handleMouseenter" @mouseleave="handleMouseleave">
+  <li
+    :class="classname"
+    @mouseenter="handleMouseenter"
+    @mouseleave="handleMouseleave"
+  >
     <span class="be-contextmenu--submenu__title">
       <slot name="title">{{ title }}</slot>
       <!-- <span class="be-contextmenu__iconfont be-contextmenu--submenu__icon" /> -->
     </span>
-    <div v-show="hover" ref="submenu" :class="submenuCls">
+    <div
+      v-show="hover"
+      ref="submenu"
+      :class="submenuCls"
+    >
       <ul>
         <!-- @slot 插槽 嵌套使用组件 be-contextmenu-item、be-contextmenu--submenu-->
         <slot />

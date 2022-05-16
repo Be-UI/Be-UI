@@ -1,0 +1,13 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'header' !global;
+
+@include create-B(header) {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  height: 3.5rem;
+  padding: 0 1.25rem 0 1.25rem;
+}

@@ -1,6 +1,6 @@
 <template>
   <main class="be-main">
-    <slot></slot>
+    <slot />
   </main>
 </template>
 <script lang="ts">
