@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "target": "es6",
+    "module": "ESNext",
     "strict": true,
     "jsx": "preserve",
     "noImplicitAny": false,
@@ -11,10 +10,20 @@
     "noImplicitThis": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "removeComments": true, // 删除注释
+    "noLib": false, // 不处理类库
     "allowSyntheticDefaultImports": true,
-    "lib": ["esnext", "dom"],
     // 类型文件声明位置
-    "types": ["vite/client", "jest", "packages/utils/types.ts"]
+    "types": ["vite/client", "jest", "packages/utils/types.ts"],
+    "declaration": false, // 默认不要声明文件
+    "lib": [
+      // 编译时用的库
+      "ESNext",
+      "DOM"
+    ],
+    "experimentalDecorators": true, // 装饰器语法
+    "forceConsistentCasingInFileNames": true, // 强制区分大小写
+    "skipLibCheck": true // 跳过类库检测
   },
   "include": [
     "packages/**/*.ts",

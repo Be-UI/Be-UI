@@ -2,6 +2,7 @@
   "name": "be-ui",
   "version": "3.0.2",
   "packageManager": "pnpm@6.32.4",
+  "main": "packages/components/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/baiwusanyu-c/Be-UI.git"
@@ -14,6 +15,7 @@
     "init": "pnpm install --w",
     "dev": "vite --host",
     "build": "rollup -c rollup.config.js && pnpm run release",
+    "build:gulp": "gulp -f ./build/gulpfile.ts",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint:ts": "eslint ./packages --ext .vue,.js,.ts,.jsx,.tsx",
@@ -50,9 +52,9 @@
     "not op_mini all"
   ],
   "peerDependencies": {
-    "vue": "^3.2.33",
+    "@popperjs/core": "^2.11.5",
     "@vue/shared": "^3.2.33",
-    "@popperjs/core": "^2.11.5"
+    "vue": "^3.2.33"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.5",
@@ -97,6 +99,12 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.7.1",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-sass": "^5.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "sucrase": "^3.20.3",
     "husky": "^8.0.1",
     "jest": "^27.5.1",
     "jest-environment-jsdom": "^27.5.1",
@@ -113,7 +121,6 @@
     "ts-jest": "^27.1.4",
     "tslib": "^2.4.0",
     "typescript": "^4.6.4",
-    "vue": "^3.2.31",
     "vue-tsc": "^0.34.13",
     "windicss": "^3.5.3"
   }
