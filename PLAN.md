@@ -42,10 +42,12 @@ internalInstance.ctx 禁止使用 proxy.$el.
 
 ## 排期
 
-打包：types
-monorepo
-文档 迁移 vitepress 1.样式重构
-be-select 支持绑定对象;禁用背景色
+打包：types  
+monorepo  
+glup
+文档 迁移 vitepress  
+1.样式重构  
+be-select 支持绑定对象;  
 be-notification 单元测试
 
 ## 长期排期
@@ -92,6 +94,83 @@ be-notification 单元测试
 - 在 package.json 的 script 里面配置"commit": "这里面添加 eslint、单测、stylelint 等"
 - 提交时执行命令例如 git commit -am "optimize: 项目添加 commitlint 本地校验配置" 或 git commit -m "optimize: 项目添加 commitlint 本地校验配置"
 
-### m
+### pnpm 常用指令
 
-pnpm install @be-ui/docs -w
+工作空间定义
+
+```
+pnpm-workspace.yaml
+
+packages:
+  - 'packages/**' # 组件库代码
+  - docs
+
+```
+
+```
+ package.json
+"devDependencies": {
+    "@be-ui/docs": "workspace:^1.0.0",
+    ....
+}
+```
+
+```
+docs/package.json
+{
+  "name": "@be-ui/docs"
+  ....
+  }
+```
+
+-w 在工作目录中启动
+
+pnpm install -D -w  
+pnpm add package
+
+pnpm update 根据指定的范围更新软件包的最新版本。
+在不带参数的情况下使用时，将更新所有依赖关系。 您可以使用一些模式来更新特定的依赖项。  
+pnpm up 遵循 package.json 指定的范围更新所有的依赖项  
+pnpm up --latest 更新所有依赖项，此操作会忽略 package.json 指定的范围  
+pnpm up foo@2 将 foo 更新到 v2 上的最新版本  
+pnpm up "@babel/\*" 更新 @babel 范围内的所有依赖项
+
+--prod, -P  
+仅更新在 dependencies 和 optionalDependencies 中的依赖项。
+
+--dev, -D  
+仅更新在 devDependencies 中的依赖项。
+
+pnpm env use --global 16  
+甚至能指定使用的 node 版本
+
+pnpm.overrides
+此字段允许您指示 pnpm 覆盖依赖关系图中的任何依赖项。 这对于您强制所有的 packages 使用单个版本的依赖项，或做后移植的修复，或用一个 fork 来替换依赖项时将十分有用。
+
+请注意，overrides 字段只能在项目的根目录下设置。
+
+```
+{
+    "pnpm": {
+        "overrides": {
+            "foo": "^1.0.0",
+            "quux": "npm:@myorg/quux@^1.0.0",
+            "bar@^2.1.0": "3.0.0",
+            "qar@1>zoo": "2"
+        }
+    }
+}
+```
+
+peerDependencies 通常用来声明核心依赖库
+假设插件 A 和插件 B 依赖于 Vue，如果放在 dependencies 中声明那么他们
+都会安装 Vue 依赖，若子项目将其 Vue 声明在 peerDependencies 中
+只要需要主项目 dependencies 中声明 Vue 即可，避免插件重复安装依赖
+
+```
+"peerDependencies": {
+    "vue": "^3.2.33",
+    "@vue/shared": "^3.2.33",
+    "@popperjs/core": "^2.11.5"
+  },
+```
