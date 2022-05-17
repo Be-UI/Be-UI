@@ -1,6 +1,7 @@
 export { default as BeEllipsis } from '../components/ellipsis' // 全局、按需
-/*export { default as BeIcon } from '../components/svg-icon' // 全局、按需
-export { default as BePopover } from '../components/popover' //全局、按需
+export { default as BeIcon } from '../components/svg-icon' // 全局、按需
+export { default as BeTag } from '../components/tag' //全局、按需
+/*export { default as BePopover } from '../components/popover' //全局、按需
 export { default as BeTooltip } from '../components/tooltip' //全局、按需
 export { default as BeButton } from '../components/button' //全局、按需
 export { default as BeDialog } from '../components/dialog' //全局、按需
@@ -8,7 +9,7 @@ export { default as BeLoading } from '../components/loading' //全局、按需
 export { default as BePagination } from '../components/pagination' //全局、按需
 export { default as BeInput } from '../components/input' //全局、按需
 export { default as BeAutocomplete } from '../components/autocomplete' //全局、按需
-export { default as BeTag } from '../components/tag' //全局、按需
+
 export { default as BeInputNumber } from '../components/input-number' //全局、按需
 export { BeSelect } from '../components/select' //全局、按需
 export { BeSelectMultiple } from '../components/select' //全局、按需

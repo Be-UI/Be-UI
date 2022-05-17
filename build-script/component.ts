@@ -1,9 +1,9 @@
 /**
  * 安装依赖 pnpm install fast-glob -w -D
  */
-import { nodeResolve } from '@rollup/plugin-node-resolve'
+import resolve, { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import vue from 'rollup-plugin-vue'
+import vue from '@vitejs/plugin-vue'
 import typescript from 'rollup-plugin-typescript2'
 import { series, parallel } from 'gulp'
 import { sync } from 'fast-glob' // 同步查找文件
@@ -16,6 +16,9 @@ import { Project, SourceFile } from 'ts-morph'
 import  glob from 'fast-glob'
 import * as VueCompiler from '@vue/compiler-sfc'
 import  fs from 'fs/promises'
+import {terser} from "rollup-plugin-terser";
+import cleanup from "rollup-plugin-cleanup";
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 const buildEachComponent = async () => {
   // 打包每个组件
@@ -31,8 +34,23 @@ const buildEachComponent = async () => {
     const input = path.resolve(compRoot, file, 'index.ts')
     const config = {
       input,
-      plugins: [nodeResolve(), typescript(), vue(), commonjs()],
-      external: id => /^vue/.test(id) || /^@be-ui/.test(id), // 排除掉vue和@be-ui的依赖
+      plugins: [
+        vue(
+          {
+            isProduction: true,
+          }
+        ),
+        vueJsx(),
+        resolve(),
+        typescript({
+          tsconfig:path.resolve(projectRoot, 'build-script/tsconfig.json')
+        }),
+        commonjs(),
+        // 压缩代码
+        terser(),
+        cleanup({ comments: 'none' }),
+      ],
+      external: (id: string) => /^vue/.test(id) || /^@be-ui/.test(id) || /^.test.js/.test(id)|| /^.md/.test(id),// 排除掉vue和@be-ui的依赖
     }
     const bundle = await rollup(config)
     const options = Object.values(buildConfig).map(config => ({
@@ -41,7 +59,6 @@ const buildEachComponent = async () => {
       paths: pathRewriter(config.output.name), // @be-ui => be-ui/es be-ui/lib  处理路径
       exports: 'named',
     }))
-
     await Promise.all(options.map(option => bundle.write(option as OutputOptions)))
   })
 
@@ -140,4 +157,4 @@ async function buildComponentEntry() {
   )
 }
 
-export const buildComponent = series(buildEachComponent, genTypes, copyTypes(), buildComponentEntry)
+export default series(buildEachComponent, genTypes, copyTypes(), buildComponentEntry)

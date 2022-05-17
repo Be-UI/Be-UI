@@ -27,7 +27,7 @@
 
 <script lang="ts">
   import { defineComponent, reactive } from 'vue'
-  import BeIcon from '../../svg-icon/src/be-icon.vue'
+  import {BeIcon} from '@be-ui/components'
 
   export default defineComponent({
     name: 'BeTag',
