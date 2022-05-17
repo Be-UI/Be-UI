@@ -9,7 +9,8 @@
   },
   "workspaces": [
     "packages/**",
-    "docs"
+    "docs",
+    "build-script"
   ],
   "scripts": {
     "init": "pnpm install --w",
@@ -125,7 +126,8 @@
     "windicss": "^3.5.3",
     "@be-ui/components": "workspace:^1.0.0",
     "@be-ui/style": "workspace:^1.0.0",
-    "@be-ui/buildss": "workspace:^1.0.0",
+    "@be-ui/utils": "workspace:^1.0.0",
+    "@be-ui/build": "workspace:^1.0.0",
     "@types/gulp-autoprefixer": "^0.0.33",
     "@types/gulp-clean-css": "^4.3.0",
     "@types/gulp-sass": "^5.0.0",

@@ -1,0 +1,12 @@
+{
+  "name": "@be-ui/build",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:utils": "gulp --require sucrase/register/ts -f build-utils.ts",
+    "build:style": "gulp --require sucrase/register/ts -f build-style.ts"
+  },
+  "author": "",
+  "license": "ISC"
+}

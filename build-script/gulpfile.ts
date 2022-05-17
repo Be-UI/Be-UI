@@ -2,12 +2,12 @@
 import { series, parallel } from "gulp";
 import { genTypes } from "./gen-types";
 import { withTaskName, run } from './utils';
-import { outDir, wpRoot } from "./utils/paths";
+import { outDir, beUIRoot } from "./utils/paths";
 
 // gulp 不叫打包，做代码转化 vite
 
 const copySourceCode = () => async () => {
-  await run(`cp ${wpRoot}/package.json ${outDir}/package.json`);
+  await run(`cp ${beUIRoot}/package.json ${outDir}/package.json`);
 };
 
 /**
@@ -21,11 +21,12 @@ const copySourceCode = () => async () => {
 export default series(
   // withTaskName("clean", async () => run("pnpm run clean")), // 删除dist目录
    parallel(
-     withTaskName("buildPackages", () =>{
-       run("pnpm run --filter ./packages --parallel build")
-     }
-
-     ), // 并行执行packages目录下的build脚本
+     withTaskName("buildUtils", () =>{
+       run("pnpm run --filter @be-ui/build --parallel build:utils")
+     }), // 并行执行packages目录下的build脚本
+      withTaskName("buildStyle", () =>{
+          run("pnpm run --filter @be-ui/build --parallel build:style")
+      })
      // withTaskName("buildFullComponent", () =>
      //   run("pnpm run build buildFullComponent")
      // ), // 执行build命令时会调用rollup，给rollup传参数buildFullComponent，那么就会执行导出任务叫buildFullComponent

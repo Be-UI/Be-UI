@@ -15,10 +15,11 @@ importers:
       '@babel/plugin-proposal-class-properties': ^7.16.7
       '@babel/preset-env': ^7.17.10
       '@babel/preset-typescript': ^7.16.7
-      '@be-ui/buildss': workspace:^1.0.0
+      '@be-ui/build': workspace:^1.0.0
       '@be-ui/components': workspace:^1.0.0
       '@be-ui/docs': workspace:^1.0.0
       '@be-ui/style': workspace:^1.0.0
+      '@be-ui/utils': workspace:^1.0.0
       '@commitlint/cli': ^16.3.0
       '@commitlint/config-conventional': ^16.2.4
       '@pnpm/find-workspace-packages': ^4.0.5
@@ -91,10 +92,11 @@ importers:
       '@babel/plugin-proposal-class-properties': registry.npmjs.org/@babel/plugin-proposal-class-properties/7.16.7_@babel+core@7.17.10
       '@babel/preset-env': registry.npmjs.org/@babel/preset-env/7.17.10_@babel+core@7.17.10
       '@babel/preset-typescript': registry.npmjs.org/@babel/preset-typescript/7.16.7_@babel+core@7.17.10
-      '@be-ui/buildss': link:packages/build
+      '@be-ui/build': link:build-script
       '@be-ui/components': link:packages/components
       '@be-ui/docs': link:docs
       '@be-ui/style': link:packages/style
+      '@be-ui/utils': link:packages/utils
       '@commitlint/cli': registry.npmjs.org/@commitlint/cli/16.3.0
       '@commitlint/config-conventional': registry.npmjs.org/@commitlint/config-conventional/16.2.4
       '@pnpm/find-workspace-packages': registry.npmjs.org/@pnpm/find-workspace-packages/4.0.5_@pnpm+logger@4.0.0
@@ -160,6 +162,9 @@ importers:
       vue-tsc: registry.npmjs.org/vue-tsc/0.34.15_typescript@4.6.4
       windicss: registry.npmjs.org/windicss/3.5.3
 
+  build-script:
+    specifiers: {}
+
   docs:
     specifiers:
       '@algolia/client-search': 4.9.1
@@ -224,13 +229,13 @@ importers:
   packages/be-ui:
     specifiers: {}
 
-  packages/build:
-    specifiers: {}
-
   packages/components:
     specifiers: {}
 
   packages/style:
+    specifiers: {}
+
+  packages/utils:
     specifiers: {}
 
 packages:

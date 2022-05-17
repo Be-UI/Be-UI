@@ -1,4 +1,4 @@
-import { outDir, projectRoot, wpRoot } from './utils/paths'
+import { outDir, projectRoot, beUIRoot } from './utils/paths'
 import  glob from 'fast-glob'
 import { Project, ModuleKind, ScriptTarget, SourceFile } from 'ts-morph'
 import  path from 'path'
@@ -9,7 +9,7 @@ import { buildConfig } from './utils/config'
 
 export const genEntryTypes = async () => {
   const files = await glob('*.ts', {
-    cwd: wpRoot,
+    cwd: beUIRoot,
     absolute: true,
     onlyFiles: true,
   })
@@ -22,7 +22,7 @@ export const genEntryTypes = async () => {
       noEmitOnError: false,
       outDir: path.resolve(outDir, 'entry/types'),
       target: ScriptTarget.ESNext,
-      rootDir: wpRoot,
+      rootDir: beUIRoot,
       strict: false,
     },
     skipFileDependencyResolution: true,

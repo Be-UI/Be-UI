@@ -2,12 +2,13 @@
 import { series, parallel, src, dest } from 'gulp'
 import { buildConfig } from './utils/config'
 import path from 'path'
-import { outDir, projectRoot } from './utils/paths'
+import { outDir, projectRoot,utilsRoot } from './utils/paths'
 import ts from 'gulp-typescript'
 import { withTaskName } from './utils'
 
 // 打包处理
 export const buildPackages = (dirname: string, name: string) => {
+  console.log(utilsRoot)
   const tasks = Object.entries(buildConfig).map(([module, config]) => {
     const output = path.resolve(dirname, config.output.name)
     // 安装依赖gulp-typescript
@@ -15,7 +16,8 @@ export const buildPackages = (dirname: string, name: string) => {
       // 处理ts文件
       withTaskName(`build${dirname}`, () => {
         const tsConfig = path.resolve(projectRoot, 'tsconfig.json') // ts配置文件路径
-        const inputs = ['**/*.ts', '!gulpfile.js', '!node_modules']
+       // const inputs = ['**/*.ts', '!gulpfile.js', '!node_modules']
+        const inputs = [`${utilsRoot}/*.ts`, '!gulpfile.js', '!gulpfile.ts','!node_modules']
         return src(inputs)
           .pipe(
             ts.createProject(tsConfig, {
@@ -36,3 +38,4 @@ export const buildPackages = (dirname: string, name: string) => {
 
   return parallel(...tasks)
 }
+export default buildPackages(utilsRoot,'utils')

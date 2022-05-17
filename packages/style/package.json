@@ -2,9 +2,6 @@
   "name": "@be-ui/style",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "build": "gulp"
-  },
   "author": "WQ",
   "license": "ISC"
 }

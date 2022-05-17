@@ -7,7 +7,7 @@ import vue from 'rollup-plugin-vue'
 import typescript from 'rollup-plugin-typescript2'
 import { parallel } from 'gulp'
 import  path from 'path'
-import { outDir, wpRoot } from './utils/paths'
+import { outDir, beUIRoot } from './utils/paths'
 import { rollup, OutputOptions } from 'rollup'
 import  fs from 'fs/promises'
 import { buildConfig } from './utils/config'
@@ -16,7 +16,7 @@ import { pathRewriter } from './utils'
 const buildFull = async () => {
   // rollup 打包的配置信息
   const config = {
-    input: path.resolve(wpRoot, 'index.ts'), // 打包入口
+    input: path.resolve(beUIRoot, 'index.ts'), // 打包入口
     plugins: [nodeResolve(), typescript(), vue(), commonjs()],
     external: id => /^vue/.test(id), // 打包的时候不打包vue代码
   }
@@ -53,13 +53,13 @@ const buildFull = async () => {
 
 async function buildEntry() {
   // 读取be-ui目录下的所有内容，包括目录和文件
-  const entryFiles = await fs.readdir(wpRoot, { withFileTypes: true })
+  const entryFiles = await fs.readdir(beUIRoot, { withFileTypes: true })
 
   // 过滤掉 不是文件的内容和package.json文件  index.ts 作为打包入口
   const entryPoints = entryFiles
     .filter(f => f.isFile())
     .filter(f => !['package.json'].includes(f.name))
-    .map(f => path.resolve(wpRoot, f.name))
+    .map(f => path.resolve(beUIRoot, f.name))
 
   const config = {
     input: entryPoints,
