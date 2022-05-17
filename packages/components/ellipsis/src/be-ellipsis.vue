@@ -86,13 +86,13 @@
       const handleText = (): void => {
         if (props.elpNum === 0) return
         if (props.placement === 'left') {
-          state.textInner = props.text.slice(0, props.text.length - props.elpNum) + '...'
+          state.textInner = props.text?.slice(0, props.text?.length - props.elpNum) + '...'
         }
         if (props.placement === 'center') {
           let elpNumCenter = props.elpNum / 2
-          let lenCenter = props.text.length / 2
-          let subStrHead = props.text.substr(0, lenCenter - elpNumCenter)
-          let subStrFoot = props.text.substr(lenCenter + elpNumCenter, props.text.length)
+          let lenCenter = props.text?.length / 2
+          let subStrHead = props.text?.substr(0, lenCenter - elpNumCenter)
+          let subStrFoot = props.text?.substr(lenCenter + elpNumCenter, props.text.length)
           state.textInner = subStrHead + '...' + subStrFoot
         }
         if (props.placement === 'right') {

@@ -42,9 +42,10 @@ internalInstance.ctx 禁止使用 proxy.$el.
 
 ## 排期
 
-打包：types  
-monorepo  
-glup
+打包：
+types：已完成style、已完成utils（差types）
+monorepo √
+glup √
 文档 迁移 vitepress  
 1.样式重构  
 be-select 支持绑定对象;  

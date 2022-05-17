@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build:utils": "gulp --require sucrase/register/ts -f build-utils.ts",
-    "build:style": "gulp --require sucrase/register/ts -f build-style.ts"
+    "build:style": "gulp --require sucrase/register/ts -f build-style.ts",
+    "build:fullComponent": "gulp --require sucrase/register/ts -f full-component.ts"
   },
   "author": "",
   "license": "ISC"

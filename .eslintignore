@@ -6,3 +6,4 @@ node_modules
 package.json
 jest.config.js
 .eslintrc.js
+/**/*.d.ts

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "ESNext",
     "target": "ESNext",
     "moduleResolution": "node",
     "strict": true,
@@ -10,6 +10,7 @@
     // 忽略 this 的类型检查, Raise error on this expressions with an implied any type.
     "noImplicitThis": false,
     "resolveJsonModule": true,
+    "isolatedModules": true,
     "esModuleInterop": true,
     "removeComments": true, // 删除注释
     "allowSyntheticDefaultImports": true,
@@ -22,17 +23,8 @@
     ],
     "experimentalDecorators": true, // 装饰器语法
     "forceConsistentCasingInFileNames": true, // 强制区分大小写
-
-
-
     "noLib": false, // 不处理类库
-
     "skipLibCheck": true // 跳过类库检测
-  },
-  "include": [
-    "packages",
-    "build-script"
-  ],
-  // ts 排除的文件
-  "exclude": ["node_modules", "**/__tests__/", "be-ui/**",   "build-script/**"]
+
+  }
 }
