@@ -7,3 +7,4 @@ package.json
 jest.config.js
 .eslintrc.js
 /**/*.d.ts
+build-script
