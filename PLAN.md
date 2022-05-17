@@ -43,7 +43,8 @@ internalInstance.ctx 禁止使用 proxy.$el.
 ## 排期
 
 打包：
-types：已完成style、已完成utils（差types）
+types：已完成style、已完成utils（差types文件夹）、已完成打总包，  
+打分包、类型生成、删除子包
 monorepo √
 glup √
 文档 迁移 vitepress  

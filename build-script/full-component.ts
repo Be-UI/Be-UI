@@ -119,4 +119,4 @@ async function buildEntry() {
 }
 
 // gulp适合流程控制和代码的转义  没有打包的功能
-export default series(parallel(buildEntry));
+export default series(parallel(buildFull,buildEntry));
