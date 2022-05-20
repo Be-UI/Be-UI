@@ -26,5 +26,6 @@
     "noLib": false, // 不处理类库
     "skipLibCheck": true // 跳过类库检测
 
+
   }
 }

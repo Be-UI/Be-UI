@@ -1,13 +1,9 @@
-import { App } from 'vue'
-import beTooltip from './src/be-tooltip.vue'
-import type { SFCWithInstall } from '../../utils/type/types.d'
 
-/**
- * 组件装载方法
- * @param app
- */
-beTooltip.install = (app: App): void => {
-  app.component(beTooltip.name, beTooltip)
+import beTooltip from './src/be-tooltip.vue'
+import { withInstall } from "@be-ui/utils/with-install"
+
+const BeTooltip = withInstall(beTooltip)
+export {
+  BeTooltip
 }
-const BeTooltip = beTooltip as SFCWithInstall<typeof beTooltip>
 export default BeTooltip

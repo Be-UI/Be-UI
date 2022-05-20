@@ -5,7 +5,7 @@
  * @update (czh 2021/11/12)
  */
 import { IMessage, IMsgInst } from './be-message-type'
-import { BeNotify, resetNotifyInstMap } from '../../notification/src/be-notification-service'
+import { BeNotify, resetNotifyInstMap } from '@be-ui/components/notification/src/be-notification-service'
 import { INotfiyInst } from '../../notification/src/be-notification-type'
 
 const createMessage = function (options: IMessage): IMsgInst {

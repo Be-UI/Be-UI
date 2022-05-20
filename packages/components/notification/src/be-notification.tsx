@@ -5,16 +5,17 @@
  * @update (czh 2021/6/7)
  */
 
-import { computed, defineComponent, reactive, ref, h, getCurrentInstance } from 'vue'
-import BeIcon from '../../svg-icon/src/be-icon.vue'
-import { INotfiy } from './be-notification-type'
+import { computed, defineComponent, reactive, ref, h, getCurrentInstance,PropType } from 'vue'
+import {BeIcon} from '@be-ui/components'
+import {INotfiy, INotifyOption} from './be-notification-type'
+import {getUuid} from "@be-ui/utils/common";
 
 export default defineComponent({
   name: 'BeNotification',
   components: { BeIcon },
   props: {
     option: {
-      type: Object,
+      type: Object as PropType<INotifyOption>,
       default: () => {
         return {
           isShow: false, // private
@@ -69,7 +70,7 @@ export default defineComponent({
       option.value.style = { bottom: offsetBottomStyle.value + 'px' }
     }
 
-    const placementStyle = computed(() => option.value.placement)
+   const placementStyle = computed(() => option.value.placement)
     option.value.placementSelf = placementStyle.value
     if (
       option.value.placementSelf === 'bottomLeft' ||
@@ -102,7 +103,7 @@ export default defineComponent({
      * 點擊關閉方法
      * @param event
      */
-    const handleClickClose = (event: Event | null): void => {
+   const handleClickClose = (event: Event | null): void => {
       clearTimer()
       close(event)
     }
@@ -117,7 +118,7 @@ export default defineComponent({
     /**
      * 關閉定時器清除方法
      */
-    const clearTimer = () => {
+      const clearTimer = () => {
       clearTimeout(timer)
       timer = 0
     }
@@ -126,7 +127,7 @@ export default defineComponent({
      */
     const startTimer = () => {
       if (option.value.duration > 0) {
-        timer = setTimeout(() => {
+        timer = window.setTimeout(() => {
           close(null)
         }, option.value.duration) //sad
       }
@@ -163,7 +164,7 @@ export default defineComponent({
     }
     setAnimate()
     /************************************** 組件主dom渲染方法 ******************************/
-    const uid = internalInstance.uid
+    const uid = internalInstance?.uid || getUuid()
     /**
      * 渲染組件主體dom方法
      * @param h

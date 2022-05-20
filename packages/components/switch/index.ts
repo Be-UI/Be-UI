@@ -1,15 +1,9 @@
-import { App } from 'vue'
-import beSwitch from './src/be-switch'
-import { ISwitch } from './src/be-switch-type'
-import '../../style/src/be-switch.scss'
 
-const switchComp = beSwitch as ISwitch
-/**
- * 组件装载方法
- * @param app
- */
-switchComp.install = (app: App): void => {
-  app.component(switchComp.name || '', switchComp)
+import beSwitch from './src/be-switch'
+import { withInstall } from "@be-ui/utils/with-install"
+
+const BeSwitch = withInstall(beSwitch)
+export {
+  BeSwitch
 }
-const BeSwitch: ISwitch = switchComp
 export default BeSwitch

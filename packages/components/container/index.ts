@@ -4,61 +4,20 @@
  * @author czh
  * @update (czh 2021/12/7)
  */
-import { App } from 'vue'
+
 import beContainer from './src/be-container.vue'
 import beAside from './src/be-aside.vue'
 import beMain from './src/be-main.vue'
 import beFooter from './src/be-footer.vue'
 import beHeader from './src/be-header.vue'
+import { withInstall } from "@be-ui/utils/with-install"
 
-import '../../style/src/be-main.scss'
-import '../../style/src/be-aside.scss'
-import '../../style/src/be-footer.scss'
-import '../../style/src/be-header.scss'
-import '../../style/src/be-container.scss'
+export const BeContainer = withInstall(beContainer)
 
-import { SFCWithInstall } from '../../utils/type/types'
-/**
- * 组件装载方法
- * @param app
- */
-beContainer.install = (app: App): void => {
-  app.component(beContainer.name || '', beContainer)
-}
-export const BeContainer = beContainer as SFCWithInstall<typeof beContainer>
+export const BeAside = withInstall(beAside)
 
-/**
- * 组件装载方法
- * @param app
- */
-beAside.install = (app: App): void => {
-  app.component(beAside.name || '', beAside)
-}
-export const BeAside = beAside as SFCWithInstall<typeof beAside>
+export const BeMain = withInstall(beMain)
 
-/**
- * 组件装载方法
- * @param app
- */
-beMain.install = (app: App): void => {
-  app.component(beMain.name || '', beMain)
-}
-export const BeMain = beMain as SFCWithInstall<typeof beMain>
+export const BeFooter = withInstall(beFooter)
 
-/**
- * 组件装载方法
- * @param app
- */
-beFooter.install = (app: App): void => {
-  app.component(beFooter.name || '', beFooter)
-}
-export const BeFooter = beFooter as SFCWithInstall<typeof beFooter>
-
-/**
- * 组件装载方法
- * @param app
- */
-beHeader.install = (app: App): void => {
-  app.component(beHeader.name || '', beHeader)
-}
-export const BeHeader = beHeader as SFCWithInstall<typeof beHeader>
+export const BeHeader = withInstall(beHeader)

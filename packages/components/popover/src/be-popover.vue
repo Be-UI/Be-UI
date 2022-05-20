@@ -54,11 +54,11 @@
     ref,
     watch,
   } from 'vue'
-  import { ClickOutside } from '../../../utils/direactives/click-outside'
+  import { ClickOutside } from '@be-ui/utils/direactives/click-outside'
   import type { Options, Placement, PositioningStrategy } from '@popperjs/core'
   import { createPopper, Instance } from '@popperjs/core'
   import { IPopover, TPopoverStyle, VirtualElement } from './be-popover-type'
-  import { isString } from '../../../utils/common'
+  import { isString } from '@be-ui/utils/common'
 
   export default defineComponent({
     name: 'BePopover',

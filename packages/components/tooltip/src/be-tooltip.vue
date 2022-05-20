@@ -19,12 +19,12 @@
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import popover from '../../popover/src/be-popover.vue'
+  import {BePopover} from '@be-ui/components'
 
   export default defineComponent({
     name: 'BeTooltip',
     components: {
-      'be-popover': popover,
+        BePopover
     },
     props: {
       /**
