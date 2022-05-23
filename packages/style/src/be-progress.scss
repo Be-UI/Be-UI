@@ -62,7 +62,7 @@ $componentsClass: $name + '-' + 'progress' !global;
     }
 
     .#{$componentsClass}-line-path#{$element-separator}round {
-      border-radius: var(--be-percentage-rounded-lg);
+      border-radius: var(--be-progress-rounded-lg);
     }
 
     .#{$componentsClass}-line-path#{$element-separator}success {
