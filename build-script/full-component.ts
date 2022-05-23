@@ -36,7 +36,7 @@ const buildFull = async () => {
       }),
       commonjs(),
       // 压缩代码
-      terser(),
+     // terser(),
       cleanup({ comments: 'none' }),
     ],
   }
@@ -101,7 +101,7 @@ async function buildEntry() {
       }),
       commonjs(),
       // 压缩代码
-      terser(),
+      //terser(),
       cleanup({ comments: 'none' }),
     ],
     external: (id: string) => /^vue/.test(id) || /^@be-ui/.test(id) || /^.test.js/.test(id),

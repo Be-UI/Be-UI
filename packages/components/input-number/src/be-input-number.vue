@@ -1,3 +1,4 @@
+<script lang="ts">
 import {
   computed,
   defineComponent,
@@ -6,7 +7,6 @@ import {
   onMounted,
   reactive,
   ref,
-  useAttrs,
   VNode,
   watch,
 } from 'vue'
@@ -52,7 +52,7 @@ export default defineComponent({
      */
     parser: {
       type: Function,
-      default: (val: string | number) => val,
+       default: (val: string | number) => val,
     },
     /**
      * 指定输入框展示值的格式
@@ -87,8 +87,8 @@ export default defineComponent({
   setup(props, ctx) {
     // 當前實例
     const internalInstance = getCurrentInstance() as IInputNumInstance
-    const uid = internalInstance.uid
-    const attrs = useAttrs()
+    const uid = internalInstance?.uid
+
     const tabindex = ref<number>(1)
     /**
      * focus 事件处理方法
@@ -113,7 +113,7 @@ export default defineComponent({
      * @param {String} value - 输入值
      */
     const handleInput = (value: string): void => {
-      let parserRes: string = props.parser(value)
+      let parserRes: string = props.parser ? props.parser(value) :value;
       let pointCheck = false
       const splitRes: Array<string> = parserRes.split('.')
       splitRes.forEach((val: string) => {
@@ -129,7 +129,7 @@ export default defineComponent({
         if (pointCheck) {
           inputInnerVal.value = props.formatter(parserRes)
         } else {
-          const val = (limitValue(parserRes) as IInputNumLimit).val
+          const val = !parserRes ? '' : (limitValue(parserRes) as IInputNumLimit).val
           inputInnerVal.value = props.formatter(val)
           updateInput(val)
         }
@@ -140,14 +140,13 @@ export default defineComponent({
      * @param {String | Number} value - 更新后值
      */
     const updateInput = (value: string | number): void => {
-      ctx.emit('update:modelValue', value)
+       ctx.emit('update:modelValue', value)
     }
     /**
      * 限制输入区间
      * @param value
      */
-    const limitValue = <T,>(value: T) => {
-      if (!value) return { val: value, type: '' }
+    function limitValue(value) {
       const val = Number(value)
       const max = props.max !== '' ? Number(props.max) : null
       const min = props.min !== '' ? Number(props.min) : null
@@ -216,8 +215,8 @@ export default defineComponent({
     const beInputInner = ref<any>(null)
     nextTick(() => {
       beInputInner.value =
-        internalInstance.refs[`beInputInner${uid}`] &&
-        reactive(internalInstance.refs[`beInputInner${uid}`] as IInputInst)
+        internalInstance?.refs[`beInputInner${uid}`] &&
+        reactive(internalInstance?.refs[`beInputInner${uid}`] as IInputInst)
     })
     const inputInnerInst = computed(() => {
       return beInputInner.value
@@ -248,27 +247,6 @@ export default defineComponent({
       inputInnerInst.value.select()
       ctx.emit('select')
     }
-    /**************************************** 前後插槽渲染 *******************************************/
-    /**
-     * 渲染前置插槽
-     */
-    const renderPreSlot = (): string | VNode => {
-      if (internalInstance.slots.pre) {
-        return <div class="be-input-number__pre">{internalInstance.slots.pre()}</div>
-      } else {
-        return ''
-      }
-    }
-    /**
-     * 渲染后置插槽
-     */
-    const renderNextSlot = (): string | VNode => {
-      if (internalInstance.slots.next) {
-        return <div class="be-input-number__next">{internalInstance.slots.next()}</div>
-      } else {
-        return ''
-      }
-    }
     /**************************************** 初始化方法 *******************************************/
     /**
      * 初始化方法
@@ -297,73 +275,75 @@ export default defineComponent({
     })
 
     return {
-      uid,
-      attrs,
-      inputInnerVal,
-      showLimit,
-      tabindex,
-      blur,
-      select,
-      focus,
-      handleFocus,
-      handleBlur,
-      handleChange,
-      renderPreSlot,
-      handleInput,
-      handleIncrease,
-      handleReduce,
-      renderNextSlot,
-      handleKeyDown,
+     uid,
+     inputInnerVal,
+     showLimit,
+     tabindex,
+     blur,
+     select,
+     focus,
+     handleFocus,
+     handleBlur,
+     handleChange,
+     handleInput,
+     handleIncrease,
+     handleReduce,
+     handleKeyDown,
     }
-  },
-  render() {
-    return (
-      <div
-        class={`
-                     be-input-number 
-                     ${this.disabled ? 'be-input-number__disabled ' : ''}`}
-        id={`be_input_number${this.uid}`}
-        onFocus={$event => this.handleFocus($event)}
-        onBlur={$event => this.handleBlur($event)}
-        onKeydown={$event => this.handleKeyDown($event)}
-        tabindex="0">
-        {this.renderPreSlot()}
-        <div class={`be-input-number__${this.size} be-input-number__default`}>
-          <be-input
-            tabindex={this.tabindex}
-            ref={`beInputInner${this.uid}`}
-            {...this.attrs}
-            size={this.size}
-            isInner={true}
-            onChange={this.handleChange}
-            disabled={this.disabled}
-            onFocus={(val: string, $event: InputEvent) => this.handleFocus($event)}
-            onBlur={(val: string) => this.handleBlur(val)}
-            custom-class={`be-input-number__inner be-input-number__${this.showLimit}`}
-            value={this.inputInnerVal}
-            onInput={this.handleInput}></be-input>
-          <div
-            class={`
-                         be-input-number__op 
-                         ${this.disabled ? 'be-input-number__op__disabled ' : ''}`}
-            onBlur={$event => this.handleBlur($event)}
-            onFocus={$event => this.handleFocus($event)}
-            tabindex="1">
-            <be-icon
-              icon="up"
-              class="be-input-number__up"
-              tabindex="2"
-              onClick={this.handleIncrease}
-              className="be-input-number__up"></be-icon>
-            <be-icon
-              icon="under"
-              class="be-input-number__down"
-              tabindex="2"
-              onClick={this.handleReduce}></be-icon>
-          </div>
-        </div>
-        {this.renderNextSlot()}
-      </div>
-    )
-  },
+  }
 })
+</script>
+<template>
+  <div
+    :id="`be_input_number${uid}`"
+    :class="`be-input-number ${disabled ? 'be-input-number__disabled ' : ''}`"
+    tabindex="0"
+    @focus="$event => handleFocus($event)"
+    @blur="$event => handleBlur($event)"
+    @keydown="$event => handleKeyDown($event)"
+  >
+    <div class="be-input-number__pre">
+      <slot name="pre" />
+    </div>
+    <div :class="`be-input-number__${size} be-input-number__default`">
+      <be-input
+        :ref="`beInputInner${uid}`"
+        :tabindex="tabindex"
+        :size="size"
+        :is-inner="true"
+        :on-change="handleChange"
+        :disabled="disabled"
+        :on-focus="(val: string, $event: InputEvent) =>handleFocus($event)"
+        :on-blur="(val: string) => handleBlur(val)"
+        :custom-class="`be-input-number__inner be-input-number__${showLimit}`"
+        :value="inputInnerVal"
+        :on-input="handleInput"
+      />
+      <div
+        :class="`
+            be-input-number__op
+            ${disabled ? 'be-input-number__op__disabled ' : ''}`"
+        tabindex="1"
+        @blur="handleBlur"
+        @focus="handleFocus"
+      >
+        <be-icon
+          icon="up"
+          class="be-input-number__up"
+          tabindex="2"
+          class-name="be-input-number__up"
+          @click="handleIncrease"
+        />
+        <be-icon
+          icon="under"
+          class="be-input-number__down"
+          tabindex="2"
+          @click="handleReduce"
+        />
+      </div>
+    </div>
+    <div class="be-input-number__next">
+      <slot name="next" />
+    </div>
+  </div>
+</template>
