@@ -23,7 +23,7 @@ export { BeBreadcrumbItem } from '../components/breadcrumb' //全局、按需
 // plugins
 export { default as BeNotification } from '../components/notification' //服务
 export { default as BeMessage } from '../components/message' //服务
-export { default as BeMsg } from '../components/message-box' //服务
+
 // 指令
 export { ClickOutside } from '@be-ui/utils/direactives/click-outside'
 export { contextmenu } from '@be-ui/utils/direactives/contextmenu-directives'
@@ -46,6 +46,8 @@ export { dragDirective } from '@be-ui/utils/direactives/drag-directives'
 //export { BeSelectMultiple } from '../components/select' //全局、按需
 // export { default as BeAutocomplete } from '../components/autocomplete' //全局、按需
 
+// 重写
+//export { default as BeMsg } from '../components/message-box' //服务
 
 
 
