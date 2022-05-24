@@ -43,11 +43,11 @@ const buildEachComponent = async () => {
         vueJsx(),
         resolve(),
         typescript({
-          tsconfig:path.resolve(projectRoot, 'build-script/tsconfig.json')
+          check:false
         }),
         commonjs(),
         // 压缩代码
-        terser(),
+        //terser(),
         cleanup({ comments: 'none' }),
       ],
       external: (id: string) => /^vue/.test(id) || /^@be-ui/.test(id) || /^.test.js/.test(id)|| /^.md/.test(id),// 排除掉vue和@be-ui的依赖
@@ -143,7 +143,7 @@ function copyTypes() {
 async function buildComponentEntry() {
   const config = {
     input: path.resolve(compRoot, 'index.ts'),
-    plugins: [typescript()],
+    plugins: [typescript({ check:false})],
     external: () => true,
   }
   const bundle = await rollup(config)

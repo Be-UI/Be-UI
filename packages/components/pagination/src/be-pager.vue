@@ -1,3 +1,4 @@
+
 <template>
   <div style="display: flex">
     <!--***************** 上页按钮 **********************-->
@@ -199,9 +200,9 @@
     computed,
     reactive,
   } from 'vue'
-  import { pagersDynamicList } from './pager-dynamic'
-  import { pagersList } from './pager-ordinary'
-  import { pagerFront } from './pager-front'
+  import { pagersDynamicList } from '@be-ui/components/pagination/src//pager-dynamic'
+  import { pagersList } from '@be-ui/components/pagination/src/pager-ordinary'
+  import { pagerFront } from '@be-ui/components/pagination/src//pager-front'
   import { IPageData, IPageProvide, IPagesFront } from './be-pagenation-type'
   import {BeIcon} from '@be-ui/components'
   export default defineComponent({
