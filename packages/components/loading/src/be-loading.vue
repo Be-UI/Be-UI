@@ -32,7 +32,7 @@
   /**
    * 公共的loading组件
    */
-  import BeLoadingAnimate from './be-loading-elm'
+  import BeLoadingAnimate from './be-loading-elm.vue'
   import {
     computed,
     defineComponent,
@@ -42,6 +42,7 @@
     watch,
     ComputedRef,
     watchEffect,
+      provide,
   } from 'vue'
   import { ILoadingInst, IPosStyle } from './be-loading-type'
 
@@ -160,8 +161,12 @@
       const containerTop = ref('50%')
       const isBackgroundStyle = computed(() => (props.isBackground ? 'be-load__bg' : ''))
       const isFullScreenStyle = ref<string | ComputedRef>('')
-
-      /******************************************** loading位置、宽高设置 ************************************/
+      provide('isBackgroundStyle',isBackgroundStyle)
+      provide('customRender',props.customRender)
+      provide('color',props.color)
+      provide('round',props.round)
+      provide('sizeLoader',sizeLoader)
+        /******************************************** loading位置、宽高设置 ************************************/
       // loading动画遮罩容器width
       const loaderWidth = ref('')
       // loading动画遮罩容器height

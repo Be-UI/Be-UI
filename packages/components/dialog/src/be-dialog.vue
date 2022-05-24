@@ -73,10 +73,9 @@
     ref,
     watch,
   } from 'vue'
-  import { dragDirective } from '../../../utils/direactives/drag-directives'
-  import BeButton from '../../button/src/be-button'
-  import BeIcon from '../../svg-icon/src/be-icon.vue'
-  import { IContextMenu } from '../../contextmenu/src/be-contextmenu-type'
+  import { dragDirective } from '@be-ui/utils/direactives/drag-directives'
+  import {BeButton,BeIcon} from '@be-ui/components'
+
 
   /**
    * 可拖拽、放大、缩小弹窗
@@ -151,7 +150,7 @@
     ],
     setup(props, ctx) {
       const customClassStyle = computed(() => props.customClass)
-      const internalInstance = getCurrentInstance() as IContextMenu
+      const internalInstance = getCurrentInstance()
       /**
        * 关闭组件
        */
@@ -225,7 +224,7 @@
         customClassStyle,
         handleClose,
         handleConfirm,
-        uid: internalInstance.uid,
+        uid: internalInstance?.uid,
       }
     },
   })

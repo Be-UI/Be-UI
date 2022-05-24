@@ -203,7 +203,7 @@
   import { pagersList } from './pager-ordinary'
   import { pagerFront } from './pager-front'
   import { IPageData, IPageProvide, IPagesFront } from './be-pagenation-type'
-  import BeIcon from '../../svg-icon'
+  import {BeIcon} from '@be-ui/components'
   export default defineComponent({
     name: 'BePager',
     components: { BeIcon },

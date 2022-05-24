@@ -10,7 +10,7 @@ import { IEvent } from '../type/types'
 
 export const dragDirective: ObjectDirective = {
   beforeMount(el: HTMLElement, binding: DirectiveBinding): void {
-    const op: HTMLElement = el
+   /* const op: HTMLElement = el
     op.style.transform = 'translate(0%, 0%)'
     op.style.position = 'absolute'
     // 设置不拖拽就直接返回
@@ -100,6 +100,6 @@ export const dragDirective: ObjectDirective = {
       document.onmouseup = () => {
         document.onmousemove = document.onmouseup = null
       }
-    }
+    }*/
   },
 }

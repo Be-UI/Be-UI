@@ -1,9 +1,9 @@
 import { defineComponent, onMounted, VNode, watch } from 'vue'
 import BeInputSelect from '../../autocomplete/src/be-input-select.vue'
-import BePopover from '../../popover/src/be-popover.vue'
-import BeIcon from '../../svg-icon/src/be-icon.vue'
+
+import {BeIcon,BePopover} from '@be-ui/components'
 import { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
-import { debounce, getUuid, isFunction, isString, jsonClone } from '../../../utils/common'
+import { debounce, getUuid, isFunction, isString, jsonClone } from '@be-ui/utils/common'
 import composition from './be-select-composition'
 
 export default defineComponent({

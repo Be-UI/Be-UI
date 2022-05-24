@@ -7,7 +7,7 @@
 import { ref, computed, getCurrentInstance, reactive, useAttrs, nextTick } from 'vue'
 import { IOption, ISelect } from './be-select-type'
 import { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
-import { getUuid, isFunction } from '../../../utils/common'
+import { getUuid, isFunction } from '@be-ui/utils/common'
 
 export default (props: any, ctx: any) => {
   // 當前實例

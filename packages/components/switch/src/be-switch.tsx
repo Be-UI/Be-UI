@@ -1,6 +1,6 @@
 import { defineComponent, getCurrentInstance, onMounted, ref, watch } from 'vue'
-import { isBool, isNumber, isString } from '../../../utils/common'
-import BeIcon from '../../svg-icon/src/be-icon.vue'
+import { isBool, isNumber, isString } from '@be-ui/utils/common'
+import {BeIcon} from '@be-ui/components'
 import { ISwitchInst } from './be-switch-type'
 
 export default defineComponent({
@@ -135,17 +135,17 @@ export default defineComponent({
       init()
     })
     return () => {
-      const unCheckedRender = internalInstance.slots.unCheckedRender ? (
+      const unCheckedRender = internalInstance?.slots.unCheckedRender ? (
         <div class={`be-switch__${props.size}_slot__unChecked`}>
           {' '}
-          {internalInstance.slots.unCheckedRender(innerState.value)}
+          {internalInstance?.slots.unCheckedRender(innerState.value)}
         </div>
       ) : (
         ''
       )
-      const checkedRender = internalInstance.slots.checkedRender ? (
+      const checkedRender = internalInstance?.slots.checkedRender ? (
         <div class={`be-switch__${props.size}_slot__checked`}>
-          {internalInstance.slots.checkedRender(innerState.value)}
+          {internalInstance?.slots.checkedRender(innerState.value)}
         </div>
       ) : (
         ''

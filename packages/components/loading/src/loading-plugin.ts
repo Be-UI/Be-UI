@@ -4,8 +4,8 @@
  * @author czh
  * @update (czh 2021/10/9)
  */
-import { beLoading } from './src/be-loading-service'
-import { ILoadingPlg } from './src/be-loading-type'
+import { beLoading } from './be-loading-service'
+import { ILoadingPlg } from './be-loading-type'
 
 const load: ILoadingPlg = {
   close: beLoading.close,

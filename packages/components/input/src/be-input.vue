@@ -123,10 +123,10 @@
     useAttrs,
     watch,
   } from 'vue'
-  import BeIcon from '../../svg-icon/src/be-icon.vue'
+  import {BeIcon} from '@be-ui/components'
   import { AutosizeProp, IInputInst } from './be-input-type'
   import { isObject } from '@vue/shared'
-  import compTextareaHeight from './computeAreaHeight'
+  import compTextareaHeight from '@be-ui/components/input/src/computeAreaHeight'
 
   export default defineComponent({
     name: 'BeInput',
@@ -395,11 +395,11 @@
 
       /**************************************** 暴露对外的公共方法 *******************************************/
       const beInputInner = ref<any>(null)
-      let curInstInputRefs = null
+      let curInstInputRefs: any = null
       let curInstAreaRefs: any = null
       nextTick(() => {
         curInstInputRefs =
-          internalInstance.refs.beInputInner &&
+          internalInstance?.refs.beInputInner &&
           reactive(internalInstance.refs.beInputInner as IInputInst)
         curInstAreaRefs =
           internalInstance.refs.beInputAreaInner &&
