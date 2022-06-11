@@ -5,11 +5,10 @@
 import commonjs from '@rollup/plugin-commonjs' // 将 CommonJS 模块转换为 ES6
 import vue from '@vitejs/plugin-vue'
 import typescript from 'rollup-plugin-typescript2'
-//import typescript from '@rollup/plugin-typescript'
  import resolve from '@rollup/plugin-node-resolve'
 import { parallel,series } from 'gulp'
 import  path from 'path'
-import {outDir, beUIRoot, projectRoot} from './utils/paths'
+import {outDir, beUIRoot} from './utils/paths'
 import { rollup, OutputOptions } from 'rollup'
 import  fs from 'fs/promises'
 import { buildConfig } from './utils/config'
@@ -96,10 +95,10 @@ async function buildEntry() {
       typescript({ check:false}),
       commonjs(),
       // 压缩代码
-      terser(),
+     terser(),
       cleanup({ comments: 'none' }),
     ],
-    external: (id: string) => /^vue/.test(id) || /^@be-ui/.test(id) || /^.test.js/.test(id),
+    external: (id: string) => /^vue/.test(id) || /^@be-ui/.test(id) || /^.test.js/.test(id)|| /^.md/.test(id),
   }
   const bundle = await rollup(config)
   return Promise.all(

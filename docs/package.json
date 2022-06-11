@@ -4,6 +4,7 @@
   "description": "be-ui文档",
   "packageManager": "pnpm@6.32.4",
   "scripts": {
+    "docs:init": "pnpm install",
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:serve": "vitepress serve",

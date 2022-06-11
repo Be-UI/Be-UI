@@ -44,7 +44,7 @@ internalInstance.ctx 禁止使用 proxy.$el.
 
 打包：
 还差
-保证引用路径、删除子包
+删除子包
 
 文档迁移编写 测试打包
 文档 迁移 vitepress  

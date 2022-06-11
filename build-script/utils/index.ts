@@ -32,7 +32,7 @@ export const run = async command => {
 // 重写打包后的@be-ui 路径
 export const pathRewriter = format => {
   return id => {
-    id = id.replaceAll('@be-ui', `be-ui/${format}`)
+    id = id.replaceAll('@be-ui', `dist/${format}`)
     return id
   }
 }
