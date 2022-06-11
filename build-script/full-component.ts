@@ -30,13 +30,10 @@ const buildFull = async () => {
       ),
       vueJsx(),
       resolve(),
-      typescript({
-        // 使用打包专用的 tsconfig
-        tsconfig:path.resolve(projectRoot, 'build-script/tsconfig.json')
-      }),
+      typescript({ check:false}),
       commonjs(),
       // 压缩代码
-     // terser(),
+      terser(),
       cleanup({ comments: 'none' }),
     ],
   }
@@ -96,12 +93,10 @@ async function buildEntry() {
       ),
       vueJsx(),
       resolve(),
-      typescript({
-        tsconfig:path.resolve(projectRoot, 'build-script/tsconfig.json')
-      }),
+      typescript({ check:false}),
       commonjs(),
       // 压缩代码
-      //terser(),
+      terser(),
       cleanup({ comments: 'none' }),
     ],
     external: (id: string) => /^vue/.test(id) || /^@be-ui/.test(id) || /^.test.js/.test(id),

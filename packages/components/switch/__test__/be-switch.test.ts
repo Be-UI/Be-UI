@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import BeSwitch from '../src/be-switch'
+import BeSwitch from '../src/be-switch.vue'
 import { ref } from 'vue'
 import {asyncExpect} from "../../../utils/utils";
 

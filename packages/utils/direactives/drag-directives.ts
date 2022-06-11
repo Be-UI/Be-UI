@@ -10,7 +10,7 @@ import { IEvent } from '../type/types'
 
 export const dragDirective: ObjectDirective = {
   beforeMount(el: HTMLElement, binding: DirectiveBinding): void {
-   /* const op: HTMLElement = el
+    const op: HTMLElement = el
     op.style.transform = 'translate(0%, 0%)'
     op.style.position = 'absolute'
     // 设置不拖拽就直接返回
@@ -20,7 +20,6 @@ export const dragDirective: ObjectDirective = {
     if (op.firstChild) {
       (op.firstChild as HTMLElement).style.cursor = 'move'
     }
-    // 调证分析- 交易所中的信息区也可拖动
     let otherEle: Element | null = null
     const childrenList: HTMLCollection = op.children
     for (let i = 0; i < childrenList.length; i++) {
@@ -100,6 +99,6 @@ export const dragDirective: ObjectDirective = {
       document.onmouseup = () => {
         document.onmousemove = document.onmouseup = null
       }
-    }*/
+    }
   },
 }

@@ -43,11 +43,10 @@ internalInstance.ctx 禁止使用 proxy.$el.
 ## 排期
 
 打包：
-types：已完成style(还需要删除、还需要去重)、已完成utils（差types文件夹）、已完成打总包，  
-打分包(需要修改每个组件，注意保持引用)、类型生成、保证引用路径、删除子包
-ssr
-monorepo √
-glup √
+还差
+保证引用路径、删除子包
+
+文档迁移编写 测试打包
 文档 迁移 vitepress  
 1.样式重构  
 be-select 支持绑定对象;  

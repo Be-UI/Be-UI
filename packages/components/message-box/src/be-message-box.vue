@@ -6,7 +6,7 @@
     <div
       :id="`be_message_box_container${_uid}`"
       v-drag="{ isDrag: isDrag }"
-      class="{containerstyle.value}"
+      :class="containerstyle.value"
     >
       <div class="be-message-box--title">
         <div
@@ -237,6 +237,7 @@ export default defineComponent({
       dialogModels,
       confirmFunc,
       close,
+      containerstyle,
     }
   }
 })

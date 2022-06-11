@@ -1,8 +1,8 @@
 
-import beSwitch from './src/be-switch'
+import switchComp from './src/be-switch.vue'
 import { withInstall } from "@be-ui/utils/with-install"
 
-const BeSwitch = withInstall(beSwitch)
+const BeSwitch = withInstall(switchComp)
 export {
   BeSwitch
 }

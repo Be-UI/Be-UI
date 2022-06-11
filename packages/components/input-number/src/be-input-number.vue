@@ -7,7 +7,6 @@ import {
   onMounted,
   reactive,
   ref,
-  VNode,
   watch,
 } from 'vue'
 import { IInputNumInstance, IInputNumLimit } from './be-input-number-type'

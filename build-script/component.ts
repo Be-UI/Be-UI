@@ -4,6 +4,7 @@
 import resolve, { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import typescript from 'rollup-plugin-typescript2'
 import { series, parallel } from 'gulp'
 import { sync } from 'fast-glob' // 同步查找文件
@@ -18,7 +19,6 @@ import * as VueCompiler from '@vue/compiler-sfc'
 import  fs from 'fs/promises'
 import {terser} from "rollup-plugin-terser";
 import cleanup from "rollup-plugin-cleanup";
-import vueJsx from '@vitejs/plugin-vue-jsx'
 
 const buildEachComponent = async () => {
   // 打包每个组件
@@ -47,7 +47,7 @@ const buildEachComponent = async () => {
         }),
         commonjs(),
         // 压缩代码
-        //terser(),
+        terser(),
         cleanup({ comments: 'none' }),
       ],
       external: (id: string) => /^vue/.test(id) || /^@be-ui/.test(id) || /^.test.js/.test(id)|| /^.md/.test(id),// 排除掉vue和@be-ui的依赖

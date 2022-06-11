@@ -166,7 +166,7 @@ export default defineComponent({
     let { listCache } = composition(props, ctx)
     watch(list, (nVal, oVal) => {
       if (nVal !== oVal) {
-        handleList(props.list)
+       handleList(props.list)
       }
     })
     /**
@@ -327,7 +327,7 @@ export default defineComponent({
             props.remoteFunc((query: Array<any>) => {
               loading.value = false
               // 处理数据并进行筛选
-              handleList(query)
+             handleList(query)
               matchSuggestions($eventDom.value, listCache)
             })
         }
