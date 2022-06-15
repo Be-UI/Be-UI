@@ -46,5 +46,6 @@
     "vite-plugin-windicss": "^1.8.4",
     "vitepress": "^0.22.4",
     "windicss": "^3.5.3"
+
   }
 }

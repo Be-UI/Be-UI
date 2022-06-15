@@ -18,3 +18,38 @@ lang: en-US
 icon/basic
 
 :::
+
+
+:::demo 通过 `width` 和 `height` 来直接设置宽高
+
+icon/size
+
+:::
+
+
+:::demo 通过 `color` 来设置颜色
+
+icon/color
+
+:::
+
+
+:::demo 通过 `spin` 来开启图标旋转
+
+icon/spin
+
+:::
+
+
+:::demo 通过 `customClass` 来传入样式类，覆盖原有样式
+
+icon/custom-class
+
+:::
+
+
+:::demo 使用 `BeIconComponets` 来实现自定义图标
+
+icon/custom-icon
+
+:::
