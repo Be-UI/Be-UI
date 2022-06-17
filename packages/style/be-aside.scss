@@ -1,8 +1,0 @@
-$componentsClass: $name + '-' + 'aside' !global;
-
-@include create-B(aside) {
-  box-sizing: border-box;
-  flex-shrink: 0;
-  width: 18rem;
-  overflow: auto;
-}

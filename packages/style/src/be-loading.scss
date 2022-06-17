@@ -1,0 +1,191 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'load' !global;
+@include create-B(load) {
+  @include set-component-style-var('load', $--load);
+}
+
+.#{ $componentsClass } {
+  z-index: var(--be-load-z-index);
+  @include flex-center;
+  width: var(--be-load-w-full);
+  height: var(--be-load-h-full);
+  overflow: hidden;
+  user-select: none;
+
+  .#{ $componentsClass }#{$modifier-separator}container {
+    position: relative;
+    .circle#{$modifier-separator}box {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: var(--be-load-w-50);
+      height: var(--be-load-h-50);
+      margin: auto;
+
+      span {
+        width: 6px;
+        height: 6px;
+        background-color: var(--be-emo-link-color);
+        border-radius: var(--be-rounded-full);
+        -webkit-animation: move 1.04s ease infinite;
+      }
+
+      span:nth-of-type(1) {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      span:nth-of-type(2) {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
+      span:nth-of-type(3) {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+
+      span:nth-of-type(4) {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+    }
+
+    .circle#{$modifier-separator}box:nth-of-type(2) {
+      transform: rotate(45deg);
+    }
+
+    @keyframes move {
+      0% {
+        transform: scale(0);
+      }
+
+      50% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(0);
+      }
+    }
+
+    /* 设置时间差 */
+
+    .circle#{$modifier-separator}box:nth-of-type(1) span:nth-of-type(1) {
+      animation-delay: -0.1s;
+    }
+
+    .circle#{$modifier-separator}box:nth-of-type(2) span:nth-of-type(4) {
+      animation-delay: -0.3s;
+    }
+
+    .circle#{$modifier-separator}box:nth-of-type(1) span:nth-of-type(4) {
+      animation-delay: -0.5s;
+    }
+
+    .circle#{$modifier-separator}box:nth-of-type(2) span:nth-of-type(3) {
+      animation-delay: -0.7s;
+    }
+
+    .circle#{$modifier-separator}box:nth-of-type(1) span:nth-of-type(3) {
+      animation-delay: -0.9s;
+    }
+
+    .circle#{$modifier-separator}box:nth-of-type(2) span:nth-of-type(2) {
+      animation-delay: -1.1s;
+    }
+
+    .circle#{$modifier-separator}box:nth-of-type(1) span:nth-of-type(2) {
+      animation-delay: -1.3s;
+    }
+
+    .circle#{$modifier-separator}box:nth-of-type(2) span:nth-of-type(1) {
+      animation-delay: -1.5s;
+    }
+  }
+
+  .#{ $componentsClass }#{$element-separator}default {
+    width: 46px;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+
+    .circle#{$modifier-separator}box span {
+      width: 6px;
+      height: 6px;
+    }
+  }
+
+  .#{ $componentsClass }#{$element-separator}small {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+
+    .circle#{$modifier-separator}box span {
+      width: 4px;
+      height: 4px;
+    }
+  }
+
+  .#{ $componentsClass }#{$element-separator}large {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+
+    .circle#{$modifier-separator}box span {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  .#{ $componentsClass }#{$element-separator}bg {
+    @include be-shadow;
+    background-color: var(--be-load-bg-w);
+    border-radius: var(--be-load-rounded-base);
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}text {
+    margin-top: 5px;
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}text#{$element-separator}default {
+    font-size: 14px;
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}text#{$element-separator}small {
+    font-size: 12px;
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}text#{$element-separator}large {
+    font-size: 16px;
+  }
+
+  .#{ $componentsClass }#{$element-separator}blur {
+    opacity: 0.3;
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}full {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--be-load-z-index);
+  width: var(--be-load-w-full);
+  height: var(--be-load-h-full);
+
+  .#{ $componentsClass }#{$modifier-separator}container {
+    margin-top: 5px;
+  }
+}

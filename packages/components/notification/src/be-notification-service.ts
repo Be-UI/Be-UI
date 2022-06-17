@@ -8,7 +8,7 @@ import { createVNode, render, DefineComponent } from 'vue'
 import beNotifyComponents from './be-notification'
 import type { INotifyOption, ItInstanceMap } from './be-notification-type'
 import { INotfiyInst } from './be-notification-type'
-import { jsonClone } from '../../../utils/common'
+import { jsonClone } from '@be-ui/utils/common'
 
 // 各個方向的實例緩存
 let instanceMap: ItInstanceMap = {
@@ -48,7 +48,7 @@ const closeNotify = function (instance: DefineComponent, isAll = false): void {
         throw new Error('EndIterative')
       }
     })
-  } catch (e) {
+  } catch (e:any) {
     if (e.message !== 'EndIterative') throw e
   }
 
@@ -83,7 +83,7 @@ const closeNotify = function (instance: DefineComponent, isAll = false): void {
 const close = (compInstance: HTMLElement, elm: HTMLElement): void => {
   if (compInstance && compInstance.parentNode) {
     setCloseAnimate(compInstance)
-    setTimeout(() => {
+    window.setTimeout(() => {
       render(null, elm)
     }, 300)
   }

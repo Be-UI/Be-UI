@@ -1,0 +1,352 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'button' !global;
+@include create-B(button) {
+  @include set-component-style-var('button', $--button);
+}
+
+@mixin be-button-border(
+  $bgColor,
+  $textColor,
+  $borderColor,
+  $hoverBgColor,
+  $HoverBorderColor,
+  $hoverIconColor
+) {
+  color: $textColor;
+  background-color: $bgColor;
+  border-color: $borderColor;
+  border-width: 1px;
+
+  button {
+    color: $textColor;
+  }
+
+  &:hover {
+    background-color: $hoverBgColor;
+    border-color: $HoverBorderColor;
+
+    .#{ $componentsClass }#{$modifier-separator}prevIcon#{$element-separator}primary,
+    .#{ $componentsClass }#{$modifier-separator}nextIcon#{$element-separator}primary {
+      .be-icon#{$modifier-separator}container {
+        use {
+          fill: $hoverIconColor;
+        }
+      }
+    }
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}inner {
+  border: 0;
+  @include be-pointer;
+  padding: 0;
+  background-color: transparent;
+  vertical-align: bottom;
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}inner#{$element-separator}disabled {
+  @include be-disabled;
+}
+
+@include create-B(button) {
+  @include font-mono;
+  border: 0;
+  border-radius: var(--be-button-rounded-base);
+  display: inline-block;
+  color: var(--be-button-nf-text);
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  .#{ $componentsClass }#{$modifier-separator}body {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+
+    .#{ $componentsClass }#{$modifier-separator}slot {
+      @include font-mono;
+      margin: 0 0.25rem;
+      font-size: var(--be-text-size-base);
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}prevIcon#{$element-separator}error,
+    .#{ $componentsClass }#{$modifier-separator}nextIcon#{$element-separator}error,
+    .#{ $componentsClass }#{$modifier-separator}prevIcon#{$element-separator}warning,
+    .#{ $componentsClass }#{$modifier-separator}nextIcon#{$element-separator}warning,
+    .#{ $componentsClass }#{$modifier-separator}prevIcon#{$element-separator}success,
+    .#{ $componentsClass }#{$modifier-separator}nextIcon#{$element-separator}success {
+      .be-icon#{$modifier-separator}container {
+        use {
+          fill: var(--be-button-db-bg-color);
+        }
+      }
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}prevIcon#{$element-separator}info,
+    .#{ $componentsClass }#{$modifier-separator}nextIcon#{$element-separator}info,
+    .#{ $componentsClass }#{$modifier-separator}prevIcon#{$element-separator}default,
+    .#{ $componentsClass }#{$modifier-separator}nextIcon#{$element-separator}default {
+      .be-icon#{$modifier-separator}container {
+        use {
+          fill: var(--be-button-nf-text);
+        }
+      }
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}prevIcon#{$element-separator}primary,
+    .#{ $componentsClass }#{$modifier-separator}nextIcon#{$element-separator}primary {
+      .be-icon#{$modifier-separator}container {
+        use {
+          fill: var(--be-button-py-text);
+        }
+      }
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}prevIcon,
+    .#{ $componentsClass }#{$modifier-separator}nextIcon {
+      align-items: center;
+      display: flex;
+    }
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}mini {
+  box-sizing: border-box;
+  padding: 0 0.625rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+
+  button {
+    line-height: 1.5rem;
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}medium {
+  box-sizing: border-box;
+  padding: 0 0.625rem;
+  height: 2rem;
+  line-height: 2rem;
+
+  button {
+    line-height: 2rem;
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}large {
+  box-sizing: border-box;
+  height: 2.25rem;
+  padding: 0 0.625rem;
+  line-height: 2.25rem;
+
+  button {
+    line-height: 2.25rem;
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}error {
+  @include font-mono;
+  border: 0;
+  background-color: var(--be-button-er-bg-color);
+  color: var(--be-button-er-text);
+  &:hover {
+    background-color: var(--be-button-er-bg-color--hover);
+  }
+  button {
+    @include font-mono;
+    color: var(--be-button-er-text);
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}info {
+  @include font-mono;
+  border: 0;
+  background-color: var(--be-button-nf-bg-color);
+  color: var(--be-button-nf-text);
+  &:hover {
+    background-color: var(--be-button-nf-bg-color--hover);
+  }
+  button {
+    color: var(--be-button-nf-text);
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}success {
+  @include font-mono;
+  border: 0;
+  color: var(--be-button-sc-text);
+  background-color: var(--be-button-sc-bg-color);
+  &:hover {
+    background-color: var(--be-button-sc-bg-color--hover);
+  }
+  button {
+    @include font-mono;
+    color: var(--be-button-sc-text);
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}warning {
+  @include font-mono;
+  border: 0;
+  color: var(--be-button-wr-text);
+  background-color: var(--be-button-wr-bg-color);
+  &:hover {
+    background-color: var(--be-button-wr-bg-color--hover);
+  }
+  button {
+    @include font-mono;
+    color: var(--be-button-wr-text);
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}primary {
+  @include font-mono;
+  border: 0;
+  background-color: var(--be-button-py-bg-color);
+  color: var(--be-button-py-text);
+  &:hover {
+    color: var(--be-button-py-text--hover);
+    border: 1px solid var(--be-button-py-border--hover);
+    background-color: var(--be-button-py-bg-color--hover);
+  }
+  button {
+    @include font-mono;
+    color: var(--be-button-py-text);
+    &:hover {
+      color: var(--be-button-py-text--hover);
+    }
+  }
+
+  &:hover {
+    .#{ $componentsClass }#{$modifier-separator}prevIcon#{$element-separator}primary,
+    .#{ $componentsClass }#{$modifier-separator}nextIcon#{$element-separator}primary {
+      .be-icon#{$modifier-separator}container {
+        use {
+          fill: var(--be-button-py-ic--hover);
+        }
+      }
+    }
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}default {
+  @include font-mono;
+  border: 0;
+  background-color: var(--be-button-db-bg-color);
+  color: var(--be-button-db-text);
+  &:hover {
+    color: var(--be-button-db-text--hover);
+    background-color: var(--be-button-db-bg-color--hove);
+  }
+  &:hover {
+    button {
+      @include font-mono;
+      color: var(--be-button-db-text);
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}prevIcon#{$element-separator}default,
+    .#{ $componentsClass }#{$modifier-separator}nextIcon#{$element-separator}default {
+      .be-icon#{$modifier-separator}container {
+        use {
+          color: var(--be-button-db-text--hover);
+        }
+      }
+    }
+  }
+}
+
+/* 带边框 */
+
+.#{ $componentsClass }#{$element-separator}error#{$element-separator}border {
+  @include be-button-border(
+    var(--be-button-er-bg-color),
+    var(--be-button-er-text),
+    var(--be-button-er-border),
+    var(--be-button-er-bg-color--hover),
+    var(--be-button-er-border--hover),
+    var(--be-button-er-ic--hover)
+  );
+}
+
+.#{ $componentsClass }#{$element-separator}info#{$element-separator}border {
+  @include be-button-border(
+    var(--be-button-nf-bg-color),
+    var(--be-button-nf-text),
+    var(--be-button-nf-border),
+    var(--be-button-nf-bg-color--hover),
+    var(--be-button-nf-border--hover),
+    var(--be-button-nf-ic--hover)
+  );
+}
+
+.#{ $componentsClass }#{$element-separator}success#{$element-separator}border {
+  @include be-button-border(
+    var(--be-button-sc-bg-color),
+    var(--be-button-sc-text),
+    var(--be-button-sc-border),
+    var(--be-button-sc-bg-color--hover),
+    var(--be-button-sc-border--hover),
+    var(--be-button-sc-ic--hover)
+  );
+}
+
+.#{ $componentsClass }#{$element-separator}warning#{$element-separator}border {
+  @include be-button-border(
+    var(--be-button-wr-bg-color),
+    var(--be-button-wr-text),
+    var(--be-button-wr-border),
+    var(--be-button-wr-bg-color--hover),
+    var(--be-button-wr-border--hover),
+    var(--be-button-wr-ic--hover)
+  );
+}
+
+.#{ $componentsClass }#{$element-separator}primary#{$element-separator}border {
+  @include be-button-border(
+    var(--be-button-py-bg-color),
+    var(--be-button-py-text),
+    var(--be-button-py-border),
+    var(--be-button-py-py-bg-color--hover),
+    var(--be-button-py-border--hover),
+    var(--be-button-py-ic--hover)
+  );
+
+  &:hover {
+    color: var(--be-button-py-text--hover);
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}default#{$element-separator}border {
+  @include be-button-border(
+    var(--be-button-db-bg-color),
+    var(--be-button-db-text),
+    var(--be-button-db-border),
+    var(--be-button-db-bg-color--hover),
+    var(--be-button-db-border--hover),
+    var(--be-button-db-ic--hover)
+  );
+
+  &:hover {
+    color: var(--be-button-db-text--hover);
+
+    button {
+      color: var(--be-button-db-text--hover);
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}prevIcon#{$element-separator}default,
+    .#{ $componentsClass }#{$modifier-separator}nextIcon#{$element-separator}default {
+      .be-icon#{$modifier-separator}container {
+        use {
+          fill: var(--be-button-db-text--hover);
+        }
+      }
+    }
+  }
+}

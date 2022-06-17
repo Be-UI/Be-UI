@@ -1,10 +1,8 @@
 import beDialog from './src/be-dialog.vue'
-import { App } from 'vue'
-import type { SFCWithInstall } from '../../utils/type/types'
-import '../../style/be-dialog.scss'
+import { withInstall } from "@be-ui/utils/with-install"
 
-beDialog.install = (app: App): void => {
-  app.component(beDialog.name, beDialog)
+const BeDialog = withInstall(beDialog)
+export {
+  BeDialog
 }
-const BeDialog = beDialog as SFCWithInstall<typeof beDialog>
 export default BeDialog

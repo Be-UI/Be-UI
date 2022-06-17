@@ -4,15 +4,17 @@
     :id="`be_popover_trigger${uid}`"
     ref="bePopoverTrigger"
     aria-describedby="tooltip"
-    class="be-popover--trigger">
-    <slot name="trigger"></slot>
+    class="be-popover--trigger"
+  >
+    <slot name="trigger" />
   </div>
 
   <teleport to="body">
     <div
       :class="customClass"
       @mouseenter="handlePopoverDomEnter"
-      @mouseleave="handlePopoverDomLeave">
+      @mouseleave="handlePopoverDomLeave"
+    >
       <transition name="be-fade-in-linear">
         <div
           v-if="show"
@@ -21,11 +23,19 @@
           v-click-outside="{ handler: close, isDisabled: outsideDisabled }"
           class="be-popover"
           role="tooltip"
-          :style="stylePopover">
-          <div :id="`be_popover_body${uid}`" class="be-popover--body">
-            <slot></slot>
+          :style="stylePopover"
+        >
+          <div
+            :id="`be_popover_body${uid}`"
+            class="be-popover--body"
+          >
+            <slot />
           </div>
-          <div v-if="raw" :id="`be_popover_arrow${uid}`" :class="`be-popover--arrow`"></div>
+          <div
+            v-if="raw"
+            :id="`be_popover_arrow${uid}`"
+            :class="`be-popover--arrow`"
+          />
         </div>
       </transition>
     </div>
@@ -44,11 +54,11 @@
     ref,
     watch,
   } from 'vue'
-  import { ClickOutside } from '../../../utils/direactives/click-outside'
+  import { ClickOutside } from '@be-ui/utils/direactives/click-outside'
   import type { Options, Placement, PositioningStrategy } from '@popperjs/core'
   import { createPopper, Instance } from '@popperjs/core'
   import { IPopover, TPopoverStyle, VirtualElement } from './be-popover-type'
-  import { isString } from '../../../utils/common'
+  import { isString } from '@be-ui/utils/common'
 
   export default defineComponent({
     name: 'BePopover',

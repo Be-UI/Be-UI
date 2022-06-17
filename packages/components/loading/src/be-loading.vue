@@ -2,7 +2,8 @@
 <template>
   <div
     :id="`be_load_${uid}`"
-    :style="`position: absolute;height: ${containerHeight};width: ${containerWidth};left: ${containerLeft};top: ${containerTop};`">
+    :style="`position: absolute;height: ${containerHeight};width: ${containerWidth};left: ${containerLeft};top: ${containerTop};`"
+  >
     <transition name="be-fade-in-linear">
       <div
         v-if="isShowLoaderInner"
@@ -13,16 +14,16 @@
                  left: ${leftLoader};
                  top: ${topLoader};
                  width:${loaderWidth};
-                 height:${loaderHeight}`">
+                 height:${loaderHeight}`"
+      >
         <!--loading动画-->
-        <BeLoadingAnimate></BeLoadingAnimate>
+        <BeLoadingAnimate />
         <span
           v-if="text"
           class="be-load--text"
           :style="`color:${colorText};`"
           :class="`be-load--text__${sizeLoader}`"
-          >{{ text }}</span
-        >
+        >{{ text }}</span>
       </div>
     </transition>
   </div>
@@ -31,7 +32,7 @@
   /**
    * 公共的loading组件
    */
-  import BeLoadingAnimate from './be-loading-elm'
+  import BeLoadingAnimate from './be-loading-elm.vue'
   import {
     computed,
     defineComponent,
@@ -41,6 +42,7 @@
     watch,
     ComputedRef,
     watchEffect,
+      provide,
   } from 'vue'
   import { ILoadingInst, IPosStyle } from './be-loading-type'
 
@@ -159,8 +161,12 @@
       const containerTop = ref('50%')
       const isBackgroundStyle = computed(() => (props.isBackground ? 'be-load__bg' : ''))
       const isFullScreenStyle = ref<string | ComputedRef>('')
-
-      /******************************************** loading位置、宽高设置 ************************************/
+      provide('isBackgroundStyle',isBackgroundStyle)
+      provide('customRender',props.customRender)
+      provide('color',props.color)
+      provide('round',props.round)
+      provide('sizeLoader',sizeLoader)
+        /******************************************** loading位置、宽高设置 ************************************/
       // loading动画遮罩容器width
       const loaderWidth = ref('')
       // loading动画遮罩容器height

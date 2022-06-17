@@ -1,9 +1,11 @@
 import { isArray, isObject, toRawType } from '@vue/shared'
 
 import type { Ref } from 'vue'
-import { TimeoutHandle } from './type/types'
-import { IOption } from './type/types'
+export type TimeoutHandle = ReturnType<typeof window.setTimeout>
 
+export interface IOption {
+  [key: string]: any
+}
 /**
  * id生成方法
  * @return {string}

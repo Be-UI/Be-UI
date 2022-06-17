@@ -1,9 +1,7 @@
 import paginationComponents from './src/pagination'
-import { App } from 'vue'
-import type { SFCWithInstall } from '../../utils/type/types'
-import '../../style/be-pager.scss'
-paginationComponents.install = (app: App): void => {
-  app.component(paginationComponents.name, paginationComponents)
+import { withInstall } from "@be-ui/utils/with-install"
+const BePagination = withInstall(paginationComponents)
+export {
+  BePagination
 }
-const BePagination = paginationComponents as SFCWithInstall<typeof paginationComponents>
 export default BePagination

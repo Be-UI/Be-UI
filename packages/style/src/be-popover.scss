@@ -1,0 +1,88 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'popover' !global;
+@include create-B(popover) {
+  @include set-component-style-var('popover', $--popover);
+}
+
+@include create-B(popover) {
+  @include be-shadow;
+  position: fixed;
+  background-color: var(--be-popover-bg-w);
+  border-radius: var(--be-popover-rounded-base);
+  z-index: var(--be-popover-z-index);
+  .#{ $componentsClass }#{$modifier-separator}body {
+    box-sizing: border-box;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--be-text-color-regular);
+    text-align: center;
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}arrow,
+  .#{ $componentsClass }#{$modifier-separator}arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: inherit;
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}arrow {
+    visibility: hidden;
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}arrow::before {
+    visibility: visible;
+    content: '';
+    transform: rotate(45deg);
+  }
+}
+
+.#{ $componentsClass }[data-popper-placement^='top'] {
+  .#{ $componentsClass }#{$modifier-separator}arrow {
+    bottom: -4px;
+
+    &::before {
+      box-shadow: var(--be-popover-shadow-top);
+    }
+  }
+}
+
+.#{ $componentsClass }[data-popper-placement^='bottom'] {
+  .#{ $componentsClass }#{$modifier-separator}arrow {
+    top: -4px;
+
+    &::before {
+      box-shadow: var(--be-popover-shadow-bottom);
+    }
+  }
+}
+
+.#{ $componentsClass }[data-popper-placement^='left'] {
+  .#{ $componentsClass }#{$modifier-separator}arrow {
+    right: -4px;
+
+    &::before {
+      box-shadow: var(--be-popover-shadow-left);
+    }
+  }
+}
+
+.#{ $componentsClass }[data-popper-placement^='right'] {
+  .#{ $componentsClass }#{$modifier-separator}arrow {
+    left: -4px;
+
+    &::before {
+      box-shadow: var(--be-popover-shadow-right);
+    }
+  }
+}
+
+.#{ $componentsClass }.be-input-select-popover {
+  .#{ $componentsClass }#{$modifier-separator}body {
+    padding: 0;
+  }
+}

@@ -18,9 +18,8 @@ export const dragDirective: ObjectDirective = {
       return
     }
     if (op.firstChild) {
-      ;(op.firstChild as HTMLElement).style.cursor = 'move'
+      (op.firstChild as HTMLElement).style.cursor = 'move'
     }
-    // 调证分析- 交易所中的信息区也可拖动
     let otherEle: Element | null = null
     const childrenList: HTMLCollection = op.children
     for (let i = 0; i < childrenList.length; i++) {

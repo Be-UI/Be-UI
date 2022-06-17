@@ -5,12 +5,10 @@
  * @update (czh 2021/10/13)
  */
 import beInput from './src/be-input.vue'
-import { App } from 'vue'
-import type { SFCWithInstall } from '../../utils/type/types'
-import '../../style/be-input.scss'
+import { withInstall } from "@be-ui/utils/with-install"
 
-beInput.install = (app: App): void => {
-  app.component(beInput.name, beInput)
+const BeInput = withInstall(beInput)
+export {
+  BeInput
 }
-const BeInput = beInput as SFCWithInstall<typeof beInput>
 export default BeInput

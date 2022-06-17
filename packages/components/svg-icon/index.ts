@@ -1,9 +1,8 @@
 import { App, defineComponent } from 'vue'
 import SvgIcon from './src/be-icon.vue'
-import '../../style/be-icon.scss'
 import { createCustom } from './src/be-custom-icon'
-import { SFCWithInstall } from '../../utils/type/types'
-import { SvgDom } from '../../utils/create-svg'
+import { withInstall } from "@be-ui/utils/with-install"
+import { SvgDom } from '@be-ui/utils/create-svg'
 
 /**
  * 初始化图标，生成svgDom
@@ -17,10 +16,7 @@ initIcon()
  * 组件装载方法
  * @param app
  */
-SvgIcon.install = (app: App): void => {
-  app.component(SvgIcon.name, SvgIcon)
-}
-const BeIcon = SvgIcon as SFCWithInstall<typeof SvgIcon>
+const BeIcon = withInstall(SvgIcon)
 
 interface template {
   template?: string
@@ -66,6 +62,9 @@ BeIcon.createFromIconfontCN = (url: string): void => {
     customCache.add(url)
     document.body.appendChild(script)
   }
+}
+export {
+  BeIcon
 }
 export default BeIcon
 export const BeIconComponets = BeIcon.BeIconComponets

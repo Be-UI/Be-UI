@@ -2,31 +2,53 @@
 @update (czh 2021/6/2) */
 <template>
   <transition name="be-zoom-in-top">
-    <div :id="`be_input_select${uid}`" class="be-input-select" :style="selectStyle">
+    <div
+      :id="`be_input_select${uid}`"
+      class="be-input-select"
+      :style="selectStyle"
+    >
       <ul
         v-show="!loading"
         v-if="list.length > 0"
         :id="`be_input_select_ul${uid}`"
         :key="`be_input_select_ul${uid}`"
-        :style="selectStyle">
+        :style="selectStyle"
+      >
         <li
           v-for="(item, index) in list"
           :key="item[keyValue]"
           class="be-input-select__inner"
-          @click="handleSelect(item, index)">
-          <slot name="cus-temp" :item="item">
+          @click="handleSelect(item, index)"
+        >
+          <slot
+            name="cus-temp"
+            :item="item"
+          >
             {{ item[labelValue] }}
           </slot>
         </li>
       </ul>
       <!--   载入中     -->
-      <ul v-show="loading" :key="`be-input-select${uid}-loading`">
-        <li class="be-input-select__line"></li>
-        <li class="be-input-select__inner" style="text-align: center">载入中...</li>
+      <ul
+        v-show="loading"
+        :key="`be-input-select${uid}-loading`"
+      >
+        <li class="be-input-select__line" />
+        <li
+          class="be-input-select__inner"
+          style="text-align: center"
+        >
+          载入中...
+        </li>
       </ul>
       <!--   无数据     -->
-      <ul v-show="loading && list.length === 0" :key="`be-input-select${uid}-loading`">
-        <li class="be-input-select__inner">暂无数据</li>
+      <ul
+        v-show="loading && list.length === 0"
+        :key="`be-input-select${uid}-loading`"
+      >
+        <li class="be-input-select__inner">
+          暂无数据
+        </li>
       </ul>
     </div>
   </transition>

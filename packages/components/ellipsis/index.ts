@@ -1,9 +1,9 @@
-import { App } from 'vue'
-import type { SFCWithInstall } from '../../utils/type/types'
-import beEllipsis from './src/be-ellipsis.vue'
+import { withInstall } from "@be-ui/utils/with-install"
 
-beEllipsis.install = (app: App): void => {
-  app.component(beEllipsis.name, beEllipsis)
+import beEllipsis from '../ellipsis/src/be-ellipsis.vue'
+const BeEllipsis = withInstall(beEllipsis)
+
+export{
+  BeEllipsis
 }
-const BeEllipsis = beEllipsis as SFCWithInstall<typeof beEllipsis>
-export default BeEllipsis
+export default BeEllipsis;

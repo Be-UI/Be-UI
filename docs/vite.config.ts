@@ -5,9 +5,9 @@
  * @update (czh 2022/4/18)
  */
 import WindiCSS from 'vite-plugin-windicss'
-
+import  vueJsx from '@vitejs/plugin-vue-jsx'
 export default {
-  plugins: [WindiCSS()],
+  plugins: [WindiCSS(),vueJsx()],
   css: {
     preprocessorOptions: {
       scss: {

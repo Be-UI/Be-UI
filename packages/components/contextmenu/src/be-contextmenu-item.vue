@@ -2,14 +2,18 @@
 2021/4/10) */
 <template>
   <!--分隔符-->
-  <li v-if="divider" class="be-contextmenu--divider" />
+  <li
+    v-if="divider"
+    class="be-contextmenu--divider"
+  />
   <!--菜单内容-->
   <li
     v-else
     :class="classname"
     @click="handleClick"
     @mouseenter="handleMouseenter"
-    @mouseleave="handleMouseleave">
+    @mouseleave="handleMouseleave"
+  >
     <!-- @slot 插槽内容可以使用常规标签，
     也可以嵌套使用组件 be-contextmenu-item、be-contextmenu--submenu
     -->

@@ -4,17 +4,11 @@
  * @author czh
  * @update (czh 2021/11/16)
  */
-import { App } from 'vue'
-import beInputNumber from './src/be-input-number'
-import type { SFCWithInstall } from '../../utils/type/types'
-import '../../style/be-input-number.scss'
 
-/**
- * 组件装载方法
- * @param app
- */
-beInputNumber.install = (app: App): void => {
-  app.component(beInputNumber.name, beInputNumber)
+import beInputNumber from './src/be-input-number.vue'
+import { withInstall } from "@be-ui/utils/with-install"
+const BeInputNumber = withInstall(beInputNumber)
+export {
+  BeInputNumber
 }
-const BeInputNumber = beInputNumber as SFCWithInstall<typeof beInputNumber>
 export default BeInputNumber

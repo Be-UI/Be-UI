@@ -1,9 +1,13 @@
+
 <template>
   <div style="display: flex">
     <!--***************** 上页按钮 **********************-->
-    <ul class="be-pager" :class="{ 'be-pager__disabled': pagerProps.disabled }">
+    <ul
+      class="be-pager"
+      :class="{ 'be-pager__disabled': pagerProps.disabled }"
+    >
       <li @click="prePage">
-        <be-icon icon="left"></be-icon>
+        <be-icon icon="left" />
       </li>
     </ul>
     <!--***************** 常规分页 **********************-->
@@ -11,12 +15,14 @@
       v-if="!pagerProps.isDynamic && !pagerProps.isFront"
       class="be-pager"
       :class="{ 'be-pager__disabled': pagerProps.disabled }"
-      @click="onPagerClick">
+      @click="onPagerClick"
+    >
       <!--第一页-->
       <li
         v-if="pagerProps.pageCount > 0"
         :class="{ active: pagerProps.currentPage === 1, disabled: pagerProps.disabled }"
-        class="number">
+        class="number"
+      >
         1
       </li>
       <!--更多上页缩略翻页-->
@@ -29,19 +35,22 @@
             hoverprevIconClass = '#303133'
             quickprevIconClass = 'more'
           }
-        ">
+        "
+      >
         <be-icon
           :icon="quickprevIconClass"
           class="more btn-quickprev"
           :color="hoverprevIconClass"
-          @click.stop="onPagerClick"></be-icon>
+          @click.stop="onPagerClick"
+        />
       </li>
       <!--分页主体-->
       <li
         v-for="pager in pagers"
         :key="pager"
         :class="{ active: pagerProps.currentPage === pager, disabled: pagerProps.disabled }"
-        class="number">
+        class="number"
+      >
         {{ pager }}
       </li>
       <!--更多下页缩略翻页-->
@@ -54,12 +63,14 @@
             hoverNextIconClass = '#303133'
             quicknextIconClass = 'more'
           }
-        ">
+        "
+      >
         <be-icon
           :icon="quicknextIconClass"
           class="more btn-quicknext"
           :color="hoverNextIconClass"
-          @click.stop="onPagerClick"></be-icon>
+          @click.stop="onPagerClick"
+        />
       </li>
       <!--最后一页-->
       <li
@@ -68,7 +79,8 @@
           active: pagerProps.currentPage < maxPageNum ? false : true,
           disabled: pagerProps.disabled,
         }"
-        class="number">
+        class="number"
+      >
         {{ maxPageNum }}
       </li>
     </ul>
@@ -77,12 +89,14 @@
       v-else-if="pagerProps.isDynamic && !pagerProps.isFront"
       class="be-pager"
       :class="{ 'be-pager__disabled': pagerProps.disabled }"
-      @click="onPagerClick">
+      @click="onPagerClick"
+    >
       <li
         v-for="pager in pagersDynamic"
         :key="pager"
         :class="{ active: pagerProps.currentPage === pager, disabled: pagerProps.disabled }"
-        class="number">
+        class="number"
+      >
         {{ pager }}
       </li>
     </ul>
@@ -91,12 +105,14 @@
       v-else-if="!pagerProps.isDynamic && pagerProps.isFront"
       class="be-pager"
       :class="{ 'be-pager__disabled': pagerProps.disabled }"
-      @click="onPagerClick">
+      @click="onPagerClick"
+    >
       <!--第一页-->
       <li
         v-if="pagerMix.pageParamsFront.maxPageNum > 0"
         :class="{ active: pagerProps.currentPage === 1, disabled: pagerProps.disabled }"
-        class="number">
+        class="number"
+      >
         1
       </li>
       <!--更多上页缩略翻页-->
@@ -109,18 +125,21 @@
             hoverprevIconClass = '#303133'
             quickprevIconClass = 'more'
           }
-        ">
+        "
+      >
         <be-icon
           :icon="quickprevIconClass"
           class="more btn-quickprev"
           :color="hoverprevIconClass"
-          @click.stop="onPagerClick"></be-icon>
+          @click.stop="onPagerClick"
+        />
       </li>
       <li
         v-for="pager in frontList"
         :key="pager"
         :class="{ active: pagerProps.currentPage === pager, disabled: pagerProps.disabled }"
-        class="number">
+        class="number"
+      >
         {{ pager }}
       </li>
       <!--更多下页缩略翻页-->
@@ -133,12 +152,14 @@
             hoverNextIconClass = '#303133'
             quicknextIconClass = 'more'
           }
-        ">
+        "
+      >
         <be-icon
           :icon="quicknextIconClass"
           class="more btn-quicknext"
           :color="hoverNextIconClass"
-          @click.stop="onPagerClick"></be-icon>
+          @click.stop="onPagerClick"
+        />
       </li>
       <!--最后一页-->
       <li
@@ -150,14 +171,18 @@
               : maxPageNum === pagerMix.pageParamsFront.maxPageNum,
           disabled: pagerProps.disabled,
         }"
-        class="number">
+        class="number"
+      >
         {{ pagerMix.pageParamsFront.maxPageNum }}
       </li>
     </ul>
     <!--***************** 下页按钮 **********************-->
-    <ul class="be-pager" :class="{ 'be-pager__disabled': pagerProps.disabled }">
+    <ul
+      class="be-pager"
+      :class="{ 'be-pager__disabled': pagerProps.disabled }"
+    >
       <li @click="nextPage">
-        <be-icon icon="right"></be-icon>
+        <be-icon icon="right" />
       </li>
     </ul>
   </div>
@@ -175,11 +200,11 @@
     computed,
     reactive,
   } from 'vue'
-  import { pagersDynamicList } from './pager-dynamic'
-  import { pagersList } from './pager-ordinary'
-  import { pagerFront } from './pager-front'
+  import { pagersDynamicList } from '@be-ui/components/pagination/src//pager-dynamic'
+  import { pagersList } from '@be-ui/components/pagination/src/pager-ordinary'
+  import { pagerFront } from '@be-ui/components/pagination/src//pager-front'
   import { IPageData, IPageProvide, IPagesFront } from './be-pagenation-type'
-  import BeIcon from '../../svg-icon'
+  import {BeIcon} from '@be-ui/components'
   export default defineComponent({
     name: 'BePager',
     components: { BeIcon },

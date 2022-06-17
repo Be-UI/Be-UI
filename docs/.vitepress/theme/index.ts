@@ -3,8 +3,8 @@ import 'normalize.css'
 import index, { globals } from '../vitepress'
 import type { Theme } from 'vitepress'
 import 'virtual:windi.css'
-import '../../../dist/css/style.css'
-import BeUI from '../../../dist/lib/be-ui.es.js'
+import '../../../dist/style/css/index.css'
+import BeUI from '../../../dist/index.esm.js'
 export const define = <T>(value: T): T => value
 export default define<Theme>({
   Layout: index,

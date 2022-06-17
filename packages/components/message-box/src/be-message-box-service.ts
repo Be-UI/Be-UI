@@ -6,7 +6,7 @@
  */
 
 import { createVNode, render, VNode } from 'vue'
-import beMsgComponents from './be-message-box'
+import beMsgComponents from './be-message-box.vue'
 import type { INMsgOption } from './be-message-box-type'
 
 /**

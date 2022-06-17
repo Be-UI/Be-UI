@@ -1,0 +1,279 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+.be-input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: $default;
+  border: 1px solid $infoHover;
+  border-radius: 3px;
+
+  &:hover {
+    border: 1px solid $pinkHoverBorder;
+    border-radius: 3px;
+  }
+
+  .be-input-body {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 5px;
+
+    .be-input__textarea__inner {
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      padding: 5px 15px;
+      font-size: inherit;
+      line-height: 1.5;
+      color: $defaultText;
+      resize: vertical;
+      background-color: $default;
+      background-image: none;
+      border: 0;
+      transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+      &:hover {
+        border: 0;
+      }
+    }
+
+    .be-input__inner {
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      border: 0;
+      border-radius: 3px;
+      outline: 0;
+    }
+
+    .be-input-nextIcon,
+    .be-input-prevIcon {
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+      line-height: 16px;
+      color: $infoHover;
+      cursor: pointer;
+
+      &:hover {
+        color: $infoHover;
+      }
+    }
+
+    .be-input-prevIcon {
+      margin-right: 5px;
+      margin-left: 5px;
+    }
+
+    .be-input-nextIcon {
+      margin: 0 5px;
+    }
+
+    .be-input-icon {
+      width: 100%;
+      height: 100%;
+
+      /* margin: 0 3px; */
+      font-size: 12px;
+      line-height: 1.5;
+      color: $infoHover;
+      cursor: pointer;
+
+      .be-icon--container {
+        vertical-align: 1em;
+        fill: $infoHover;
+      }
+    }
+
+    .be-input-close-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1em;
+      height: 100%;
+
+      .be-input-close {
+        border: 1px solid $infoHover;
+        border-radius: 50px;
+
+        .be-icon--container {
+          width: 16px;
+          height: 16px;
+        }
+
+        &:hover {
+          color: $infoHover;
+          border: 1px solid $infoHover;
+        }
+      }
+    }
+
+    .be-input-password-body {
+      width: 1em;
+      height: 1em;
+    }
+
+    .be-input-password {
+      height: 18px;
+      font-size: 18px;
+      line-height: 18px;
+    }
+
+    .be-input-select {
+      position: absolute;
+      max-height: 300px;
+      padding: 0;
+      margin: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background-color: $default;
+      border: 1px solid $infoHover;
+      border-top: 0;
+      border-radius: 0 0 3px 3px;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+        margin: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #c1c1c1;
+        border-radius: 5px;
+      }
+
+      .be-input-select__line {
+        width: 90%;
+        height: 1px;
+        margin: 0 auto;
+        list-style: none;
+        background-color: $infoHover;
+      }
+
+      .be-input-select__inner {
+        box-sizing: border-box;
+        height: 30px;
+        padding-left: 10px;
+        line-height: 30px;
+        list-style: none;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $infoHover;
+        }
+      }
+    }
+  }
+
+  .be-input-body__expand {
+    border: 1px solid $infoHover;
+    border-bottom: 0;
+    border-radius: 3px 3px 0 0;
+
+    &:hover {
+      border-bottom: 0;
+    }
+  }
+}
+
+.be-input__textarea {
+  border: 1px solid $infoHover;
+
+  &:hover {
+    border: 1px solid #b3d8ff;
+  }
+}
+
+.be-input__disabled {
+  cursor: not-allowed;
+  @apply bg-gray-100;
+}
+
+.be-input__focus {
+  border: 1px solid $pinkHoverBorder;
+  outline: 0;
+  box-shadow: 0 0 0 2px $pinkHoverBorder-02;
+}
+
+.be-input__mini {
+  .be-input-body {
+    .be-input__inner {
+      height: 25px;
+      font-size: 14px;
+      line-height: 25px;
+    }
+  }
+}
+
+.be-input__medium {
+  .be-input-body {
+    .be-input__inner {
+      height: 30px;
+      font-size: 14px;
+      line-height: 30px;
+    }
+  }
+}
+
+.be-input__large {
+  .be-input-body {
+    .be-input__inner {
+      height: 36px;
+      font-size: 14px;
+      line-height: 36px;
+    }
+  }
+}
+
+.be-input-select {
+  z-index: 2077;
+  max-height: 300px;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    margin: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 5px;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  .be-input-select__line {
+    width: 90%;
+    height: 1px;
+    margin: 0 auto;
+    list-style: none;
+    background-color: #dcdfe6;
+  }
+
+  .be-input-select__inner {
+    box-sizing: border-box;
+    height: 30px;
+    padding-left: 10px;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    list-style: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #dcdfe6;
+    }
+  }
+}

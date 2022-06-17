@@ -1,5 +1,5 @@
-import Pager from './be-pager.vue'
-import BeSelect from '../../select/src/be-select'
+import Pager from '@be-ui/components/pagination/src//be-pager.vue'
+import {BeSelect} from '@be-ui/components'
 import { defineComponent, getCurrentInstance, provide, ref, reactive } from 'vue'
 import {
   IPage,
@@ -10,7 +10,7 @@ import {
   IPagerMix,
   IPagerrenderList,
 } from './be-pagenation-type'
-import { arrayDeduplicationt } from '../../../utils/common'
+import { arrayDeduplicationt } from '@be-ui/utils/common'
 
 export default defineComponent({
   name: 'BePagination',
@@ -146,7 +146,7 @@ export default defineComponent({
         if (/^\d+$/.test(value) && Number(value) <= total) {
           jumpTo(value)
         } else {
-          ;(e.target as HTMLInputElement).value = ''
+          (e.target as HTMLInputElement).value = ''
         }
       }
     }

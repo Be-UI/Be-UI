@@ -1,14 +1,11 @@
 import loading from './src/be-loading-service'
-import { App } from 'vue'
-import { ILoading } from './src/be-loading-type'
-import '../../style/be-loading.scss'
-const load = loading as ILoading
-/**
- * 组件装载方法
- * @param app
- */
-load.install = (app: App): void => {
-  app.component(load.name || '', load)
+import { withInstall } from "@be-ui/utils/with-install"
+
+
+const BeLoading = withInstall(loading)
+export {
+  BeLoading
 }
-const BeLoading: ILoading = load
 export default BeLoading
+
+export * from './src/loading-plugin'

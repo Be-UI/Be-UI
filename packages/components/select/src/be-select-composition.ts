@@ -7,7 +7,7 @@
 import { ref, computed, getCurrentInstance, reactive, useAttrs, nextTick } from 'vue'
 import { IOption, ISelect } from './be-select-type'
 import { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
-import { getUuid, isFunction } from '../../../utils/common'
+import { getUuid, isFunction } from '@be-ui/utils/common'
 
 export default (props: any, ctx: any) => {
   // 當前實例
@@ -59,7 +59,7 @@ export default (props: any, ctx: any) => {
    * @param {Event} event - 事件对象
    */
   const handleFocus = (event: Event): void => {
-    ;(event.target as HTMLInputElement).querySelector('input')?.focus()
+    (event.target as HTMLInputElement).querySelector('input')?.focus()
     /** focus 事件
      * @event focus
      * @param {Event} event - 事件对象
