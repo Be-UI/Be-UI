@@ -71,14 +71,14 @@ icon/all-icon
 
 ### icon-props
 
-| 名称            | 类别                                                 | 默认值                                         |  默认值                                        |
+| 名称            | 类别                                                 | 默认值                                         |  说明                                        |
 | -------------- | --------------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| width          | `Number or String`                                   | `18`                                            | 自定义宽                                       |
-| height         | `Number or String`                                   | `18`                                            | 自定义宽                                       |
-| color          | `String`                                            | `-`                                            | 定义颜色                                        |
-| icon           | `String`                                            | `-`                                            | `icon` 名称                                      |
-| spin           | `Boolean`                                           | `false`                                        | 是否旋转                                        |
-| customClass    | `String`                                            | `-`                                            | 自定义主题样式类                                  |
+| width          | `Number or String`                                   | `18`                                         | 自定义宽                                       |
+| height         | `Number or String`                                   | `18`                                         | 自定义宽                                       |
+| color          | `String`                                            | `-`                                           | 定义颜色                                        |
+| icon           | `String`                                            | `-`                                           | `icon` 名称                                      |
+| spin           | `Boolean`                                           | `false`                                       | 是否旋转                                        |
+| customClass    | `String`                                            | `-`                                           | 自定义主题样式类                                  |
 
 
 ## Public Function
