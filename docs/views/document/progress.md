@@ -77,13 +77,32 @@ progress/linear-gradient
 
 :::
 
-## Cascader Events
+## Props
 
-| Event Name     | Description                                         | Parameters                                    |
-| -------------- | --------------------------------------------------- | --------------------------------------------- |
-| change         | triggers when the binding value changes             | value                                         |
-| expand-change  | triggers when expand option changes                 | an array of the expanding node's parent nodes |
-| blur           | triggers when Cascader blurs                        | (event: Event)                                |
-| focus          | triggers when Cascader focuses                      | (event: Event)                                |
-| visible-change | triggers when the dropdown appears/disappears       | true when it appears, and false otherwise     |
-| remove-tag     | triggers when remove tag in multiple selection mode | the value of the tag which is removed         |
+### icon-progress
+
+| 名称            | 类别                           | 默认值                                                      |  说明                                                                                                  |
+| -------------- | ----------------------------- | -----------------------------------------------------------| -------------------------------------------------------------------------------------------------------|
+| percent        | `Number`                      | `0`                                                        | 百分比                                                                                                 |
+| showInfo       | `Booleang`                    | `true`                                                     | 是否显示进度数值                                                                                         |
+| status         | `String`                      | `normal`                                                   | 状态 `success` \ `error` \ `normal`                                                                    |
+| success        | `Object`                      | `-`                                                        | 成功进度条配置 `{ percent: number, strokeColor: string }`,颜色和百分比独立于 `color`，`status` 和 `percent`  |
+| trailColor     | `String`                      | `-`                                                        | 未完成的分段的颜色                                                                                       |
+| strokeLinecap  | `String`                      | `round`                                                    | 进度条的圆角样式 `round` \ `square`                                                                     |
+| type           | `String`                      | `line`                                                     | 类型 `line` \ `circle` \ `dashboard`                                                                  |
+| color          | `String or Object`            | `line`                                                     | 进度条的色彩；传入`{ to: number, from: string }`可实现渐变，仅支持 `type = 'line'`；优先级高于 `status`       |
+| strokeWidth    | `Number`                      | `type = 'line' 时为10，type = 'circle'或 'dashboard' 时为10` | 进度条的宽度                                                                                           |
+| width          | `Number`                      | `132`                                                      | 进度条画布宽度,仅支持 `type = 'dashboard'` 和 `type = 'circle'`                                         |
+| gap            | `Number`                      | `75`                                                       | 仪表盘进度条缺口大小,可取值 `0 ~ 100`,仅支持 `type = 'dashboard'`                                         |
+| gapPosition    | `String`                      | `bottom`                                                   | 仪表盘进度条缺口位置 `top` \ `bottom` \ `left` \ `right`                                                |
+
+
+## Slots
+
+### progress-slots
+
+| 名称                            | 说明                                                                        |  
+| ----------------------------   | ---------------------------------------------------------------------------|
+| `default`                      | 默认插槽，自定义渲染百分比显示部分内容，仅 `type = 'line'` 时有效                   |
+| `center`                       | 自定义渲染百分比显示部分内容，仅 `type = 'circle'` 或 `type = 'dashboard'` 时有效 |
+

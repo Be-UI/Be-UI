@@ -1,5 +1,5 @@
 ---
-title: be-icon
+title: be-icon 
 lang: en-US
 ---
 
@@ -58,10 +58,33 @@ icon/custom-class
 icon/custom-icon
 
 :::
+
 ### 所有图标
 
-:::demo 
+:::demo
 
 icon/all-icon
 
 :::
+
+## Props
+
+### icon-props
+
+| 名称            | 类别                                                 | 默认值                                         |  说明                                        |
+| -------------- | --------------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+| width          | `Number or String`                                   | `18`                                         | 自定义宽                                       |
+| height         | `Number or String`                                   | `18`                                         | 自定义宽                                       |
+| color          | `String`                                            | `-`                                           | 定义颜色                                        |
+| icon           | `String`                                            | `-`                                           | `icon` 名称                                      |
+| spin           | `Boolean`                                           | `false`                                       | 是否旋转                                        |
+| customClass    | `String`                                            | `-`                                           | 自定义主题样式类                                  |
+
+
+## Public Function
+
+### icon-function
+
+| 名称                           | 参数                                                 | 说明                                         |  
+| ----------------------------  | --------------------------------------------------- | --------------------------------------------- |
+| `createFromIconfontCN`          | `url:String` `iconfont` 图标的地址                    | 加载 `iconfont` 图标                           |

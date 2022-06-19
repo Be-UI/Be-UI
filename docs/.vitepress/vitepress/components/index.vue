@@ -43,7 +43,7 @@
         <be-main class="be-ui-doc-main scroll-diy relative">
           <Content
             ref="content"
-            class="doc-content content-body"
+            class="doc-content content-body page-component"
             :class="{ 'content-body--home': !showSidebar }" />
           <!-- <vp-main></vp-main>-->
         </be-main>
@@ -81,5 +81,25 @@
   }
   .content-body--home {
     @apply w-full h-full absolute left-0 top-0;
+  }
+  .page-component table th {
+    text-align: left;
+    white-space: nowrap;
+    color: #909399;
+    font-weight: 400;
+  }
+  .page-component table td, .page-component table th {
+    border-bottom: 1px solid #dcdfe6;
+    padding: 15px;
+    max-width: 250px;
+  }
+
+  .page-component table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    font-size: 14px;
+    margin-bottom: 45px;
+    line-height: 1.5em;
   }
 </style>
