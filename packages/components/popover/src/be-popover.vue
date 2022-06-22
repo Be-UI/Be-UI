@@ -194,8 +194,8 @@
           nextTick(() => {
             if (show.value) {
               computePosition(props.placement)
+              ctx.emit('update', show.value)
             }
-            ctx.emit('update', show.value)
           })
         }, delay)
       }
@@ -413,7 +413,11 @@
           changeDisplay(false)
         }
       }
+      const update = (): void => {
+          popperJS.value?.update()
+      }
       return {
+        update,
         handlePopoverDomLeave,
         handlePopoverDomEnter,
         uid: internalInstance.uid,
