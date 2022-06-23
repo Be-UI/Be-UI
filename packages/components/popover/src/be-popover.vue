@@ -17,7 +17,7 @@
     >
       <transition name="be-fade-in-linear">
         <div
-          v-if="show"
+          v-if="showPopover"
           :id="`be_popover_${uid}`"
           :key="`be_popover_${uid}`"
           v-click-outside="{ handler: close, isDisabled: outsideDisabled }"
@@ -152,21 +152,21 @@
       const internalInstance = getCurrentInstance() as IPopover
       /******************************************** 显示控制相关 ************************************/
       // 是否显示
-      let show = ref(false)
+      let showPopover = ref(false)
       /**
        * click-outside 指令使用的关闭方法
        * @public
        */
       const close = (): void => {
         setTimeout(() => {
-          show.value = false
+            showPopover.value = false
           isEnterPopover.value = false
-          //show.value = false
+          //showPopover.value = false
           /** 提交触发 显示跟新 事件
            * @event update
            * @param {Boolean} 当前显示状态
            */
-          ctx.emit('update', show.value)
+          ctx.emit('update', showPopover.value)
         }, props.duration)
       }
       /**
@@ -176,7 +176,7 @@
        */
       const changeDisplay = (showParams: boolean | string): void => {
         let delay = 0
-        const isShow = showParams === 'manual' ? !show.value : (showParams as boolean)
+        const isShow = showParams === 'manual' ? !showPopover.value : (showParams as boolean)
         if (isShow) {
           delay = props.delay
         } else {
@@ -188,16 +188,22 @@
             return
           }
           // 设置 false 时通过 v-if 关闭卸载
-          show.value = isShow
+            showPopover.value = isShow
           // 关闭 observer
           observer.disconnect()
           nextTick(() => {
-            if (show.value) {
+            if (showPopover.value) {
               computePosition(props.placement)
-              ctx.emit('update', show.value)
+              ctx.emit('update', showPopover.value)
             }
           })
         }, delay)
+      }
+      const update = (): void => {
+          popperJS.value?.update()
+      }
+      const show = (): void => {
+          changeDisplay(true)
       }
       /************************************** 使用popover.js设置箭头、popover ******************************/
       // 位置样式
@@ -413,9 +419,6 @@
           changeDisplay(false)
         }
       }
-      const update = (): void => {
-          popperJS.value?.update()
-      }
       return {
         update,
         handlePopoverDomLeave,
@@ -424,7 +427,7 @@
         addEvent,
         stylePopover,
         outsideDisabled,
-        show,
+        showPopover,
         close,
         changeDisplay,
         computePosition,
