@@ -1,15 +1,61 @@
-# 指南
+---
+title: be-ellipsis
+lang: en-US
+---
+
+# be-ellipsis 文本缩略
 
 ## 介绍
 
-Be-UI3 是在业务累积后，通过整理与重构而来的前端桌面 UI 组件库。如果您在使用时有任何问题，请发邮件至 chenzhi740@foxmail.com
+它能够在一定程度上缩略的你文字。
 
-## 安装
 
-方式一：请将 npm 仓库源修改至内网，并通过一下命令安装使用
+## 演示
 
-```shell
-npm i -D be-ui3
-```
+### 基本使用
 
-方式二：您也可以直接到内网 GitLab 相关项目页面直接下载打包好的文件
+:::demo `content` 是你需要提示的内容，`text`则是你需要缩略的文本
+
+ellipsis/basic
+
+:::
+
+### 定义缩略的字数
+
+:::demo 这里通过 `elpNum` 可以指定你需要缩略的字数
+
+ellipsis/elpnum
+
+:::
+
+### 你需要縮略的位置
+
+:::demo `placement` 可以指定你需要縮略的位置 '`left' | 'center' | 'right'`
+
+ellipsis/placement
+
+:::
+
+### 多行省略
+
+:::demo `lineClamp` 可以指定你需要多行省略(换行时显示几行)，`expandTrigger` 则可以实现展开
+
+ellipsis/lineClamp
+
+:::
+
+## Props
+
+### ellipsis-props
+
+| 名称            | 类别              | 默认值    | 说明                           |
+| -------------- |-----------------|--------|-----------------------------------|
+| content        | `String`        | `-`    | 提示显示内容                        |
+| text       | `String`        | `-`    | 显示内容                              |
+| expandTrigger         | `Boolean`       | false  | 点击展开                    |
+| lineClamp        | `Number / null` | `null` | 多行省略                         |
+| elpNum     | `Number`        | `5`    | 缩略字符数                             |
+| placement  | `String`        | `left` | 缩略位置 `'left' / 'center'/ 'right'` |
+
+
+
