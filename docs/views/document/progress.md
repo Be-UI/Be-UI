@@ -90,7 +90,7 @@ progress/linear-gradient
 | trailColor     | `String`                     | `-`                                                        | 未完成的分段的颜色                                                                                       |
 | strokeLinecap  | `String`                     | `round`                                                    | 进度条的圆角样式 `round` \ `square`                                                                     |
 | type           | `String`                     | `line`                                                     | 类型 `line` \ `circle` \ `dashboard`                                                                  |
-| color          | `String or Object`           | `line`                                                     | 进度条的色彩；传入`{ to: number, from: string }`可实现渐变，仅支持 `type = 'line'`；优先级高于 `status`       |
+| color          | `String  / Object`           | `line`                                                     | 进度条的色彩；传入`{ to: number, from: string }`可实现渐变，仅支持 `type = 'line'`；优先级高于 `status`       |
 | strokeWidth    | `Number`                     | `type = 'line' 时为10，type = 'circle'或 'dashboard' 时为10` | 进度条的宽度                                                                                           |
 | width          | `Number`                     | `132`                                                      | 进度条画布宽度,仅支持 `type = 'dashboard'` 和 `type = 'circle'`                                         |
 | gap            | `Number`                     | `75`                                                       | 仪表盘进度条缺口大小,可取值 `0 ~ 100`,仅支持 `type = 'dashboard'`                                         |
