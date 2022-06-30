@@ -3,7 +3,6 @@ import { IBreadcrumbInst, IBreadcrumbItemVnode, IBreadcrumbPopover } from './be-
 import { useBrowserLocation } from '@be-ui/utils/use-browser-location'
 import {BePopover} from '@be-ui/components'
 import {getUuid} from "@be-ui/utils/common";
-
 export default defineComponent({
   name: 'BeBreadcrumbItem',
   components: {
@@ -34,11 +33,9 @@ export default defineComponent({
     },
     click: {
       type: Function,
-      default: () => {},
     },
     clickOption: {
       type: Function,
-      default: () => {},
     },
     /**
      * 内部调用，更新布局，
@@ -53,7 +50,7 @@ export default defineComponent({
     const internalInstance = getCurrentInstance() as IBreadcrumbInst
     const uid = internalInstance?.uid
     const browserLocationRef = useBrowserLocation()
-    const htmlTag = computed(() => (props.to && !props.click ? 'a' : 'span'))
+    const htmlTag = computed(() => (props.to && !props.click && !props.disabled && !props.clickOption ? 'a' : 'span'))
     const ariaCurrentRef = computed(() =>
       browserLocationRef.value.href === props.to ? 'location' : null
     )
@@ -147,17 +144,17 @@ export default defineComponent({
                      ${props.disabled ? 'be-breadcrumb--item__disabled' : ''} `}
           aria-label="BeBreadcrumbItem">
           {optionList.value.length > 0 ? (
-            <be-popover
-              forceUpdate={props.forceUpdate}
-              ref="beBreadcrumbPopover"
-              customClass="be-breadcrumb--popover"
-              placement="bottom"
-              trigger={props.disabled ? 'none' : 'click'}>
-              {{
-                default: () => <ul>{renderOption()}</ul>,
-                trigger: () => renderContent(),
-              }}
-            </be-popover>
+              <be-popover
+                  forceUpdate={props.forceUpdate}
+                  ref="beBreadcrumbPopover"
+                  customClass="be-breadcrumb--popover"
+                  placement="bottom"
+                  trigger={props.disabled ? 'none' : 'click'}>
+                  {{
+                      default: () => <ul>{renderOption()}</ul>,
+                      trigger: () => renderContent(),
+                  }}
+              </be-popover>
           ) : (
             renderContent()
           )}

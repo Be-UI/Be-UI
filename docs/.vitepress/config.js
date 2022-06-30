@@ -84,10 +84,6 @@ export default defineConfigWithTheme({
               link: '/views/document/button',
             },
             {
-              text: '面包屑',
-              link: '/views/document/breadcrumb',
-            },
-            {
               text: '布局容器',
               link: '/views/document/container',
             },
