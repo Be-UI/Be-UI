@@ -20,7 +20,6 @@ $componentsClass: $name + '-' + 'icon' !global;
 }
 
 .#{ $componentsClass }#{$element-separator}spin {
-  display: inline-block;
   -webkit-animation: be-animate-icon-spin 1s infinite linear;
   animation: be-animate-icon-spin 1s infinite linear;
 }

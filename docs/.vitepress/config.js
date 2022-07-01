@@ -68,7 +68,7 @@ export default defineConfigWithTheme({
           link: '/views/document/icon',
           children: [
             {
-              text: '图标',
+              text: '图标 be-icon',
               link: '/views/document/icon',
             },
             {
@@ -76,11 +76,11 @@ export default defineConfigWithTheme({
               link: '/views/document/autpcomplete',
             },
             {
-              text: '面包屑',
+              text: '面包屑 be-breadcrumb',
               link: '/views/document/breadcrumb',
             },
             {
-              text: '按钮',
+              text: '按钮 be-button',
               link: '/views/document/button',
             },
             {
@@ -96,7 +96,7 @@ export default defineConfigWithTheme({
               link: '/views/document/dialog',
             },
             {
-              text: '文本省略',
+              text: '文本省略 be-ellipsis',
               link: '/views/document/ellipsis',
             },
             {
@@ -128,7 +128,7 @@ export default defineConfigWithTheme({
               link: '/views/document/pager',
             },
             {
-              text: '进度条',
+              text: '进度条 be-progress',
               link: '/views/document/progress',
             },
             {
@@ -136,7 +136,7 @@ export default defineConfigWithTheme({
               link: '/views/document/select',
             },
             {
-              text: '开关',
+              text: '开关 be-switch',
               link: '/views/document/switch',
             },
             {

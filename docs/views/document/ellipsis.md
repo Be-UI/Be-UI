@@ -49,13 +49,13 @@ ellipsis/lineClamp
 ### ellipsis-props
 
 | 名称            | 类别              | 默认值    | 说明                           |
-| -------------- |-----------------|--------|-----------------------------------|
-| content        | `String`        | `-`    | 提示显示内容                        |
-| text       | `String`        | `-`    | 显示内容                              |
-| expandTrigger         | `Boolean`       | false  | 点击展开                    |
-| lineClamp        | `Number / null` | `null` | 多行省略                         |
-| elpNum     | `Number`        | `5`    | 缩略字符数                             |
-| placement  | `String`        | `left` | 缩略位置 `'left' / 'center'/ 'right'` |
+|---------------|-----------------|--------|-----------------------------------|
+| content       | `String`        | `-`    | 提示显示内容                        |
+| text          | `String`        | `-`    | 显示内容                              |
+| expandTrigger | `Boolean`       | false  | 点击展开                    |
+| lineClamp     | `Number / null` | `null` | 多行省略                         |
+| elpNum        | `Number`        | `5`    | 缩略字符数                             |
+| placement     | `String`        | `left` | 缩略位置 `'left' / 'center'/ 'right'` |
 
 
 

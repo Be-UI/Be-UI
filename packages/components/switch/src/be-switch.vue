@@ -10,9 +10,9 @@
     tabindex="0"
     @click="handleClick"
   >
-    <div :class="`be-switch__${size}_slot__unChecked`">
+    <div :class="`be-switch__${size}_slot__unChecked`" v-if="!innerState">
       <slot
-        name="unCheckedRender"
+          name="unCheckedRender"
         :state="innerState"
       />
     </div>
@@ -25,7 +25,7 @@
         custom-class="be-switch--circle--icon"
       />
     </div>
-    <div :class="`be-switch__${size}_slot__checked`">
+    <div :class="`be-switch__${size}_slot__checked`"  v-if="innerState">
       <slot
         name="checkedRender"
         :state="innerState"

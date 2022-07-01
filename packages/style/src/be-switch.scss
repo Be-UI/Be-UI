@@ -65,13 +65,13 @@ $componentsClass: $name + '-' + 'switch' !global;
   }
 
   .#{ $componentsClass }#{$element-separator}default_slot#{$element-separator}unChecked {
-    margin-right: 1.25rem;
-    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    margin-left: 1.25rem;
   }
 
   .#{ $componentsClass }#{$element-separator}default_slot#{$element-separator}checked {
-    margin-right: 0.25rem;
-    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    margin-left: 0.25rem;
   }
 }
 
