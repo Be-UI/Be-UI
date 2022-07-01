@@ -84,7 +84,7 @@ export default defineConfigWithTheme({
               link: '/views/document/button',
             },
             {
-              text: '布局容器',
+              text: '布局容器 be-container',
               link: '/views/document/container',
             },
             {

@@ -1,7 +1,8 @@
 <template>
   <be-container style="margin-bottom: 20px">
-    <be-header class="header-class pink-500">《header》一点剑意千川渺</be-header>
-    <be-main class="main-class pink-100">两袖白云万仞遥《main》</be-main>
+    <be-aside class="pink-500 left-class" width="200px">深巷明朝卖杏花《aside》
+    </be-aside>
+    <be-main class="main-class pink-100">《main》矮纸斜行闲作草</be-main>
   </be-container>
 </template>
 <style>
@@ -11,9 +12,9 @@
 .pink-100{
   background-color: rgb(251, 196, 196);
 }
-.header-class{
+.left-class{
   text-align: center;
-  line-height: 60px;
+  line-height: 200px;
 }
 .main-class{
   line-height: 160px;

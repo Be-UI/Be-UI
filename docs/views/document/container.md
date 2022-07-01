@@ -1,15 +1,125 @@
-# 指南
+---
+title: be-container
+lang: en-US
+---
+
+# be-container 容器布局
 
 ## 介绍
 
-Be-UI3 是在业务累积后，通过整理与重构而来的前端桌面 UI 组件库。如果您在使用时有任何问题，请发邮件至 chenzhi740@foxmail.com
+这是个布局使用的组件，包含 footer、header、aside、container、main.
 
-## 安装
 
-方式一：请将 npm 仓库源修改至内网，并通过一下命令安装使用
+## 演示
 
-```shell
-npm i -D be-ui3
-```
+### 基本使用
 
-方式二：您也可以直接到内网 GitLab 相关项目页面直接下载打包好的文件
+:::demo 这里列举了一些常用的布局，如果产品经理那厮不识好歹，搞得布局难跌一批，那就自己写。
+
+container/basic
+
+:::
+
+:::demo 
+
+container/header-main-footer
+
+:::
+
+:::demo 
+
+container/left-main
+
+:::
+
+:::demo 
+
+container/header-left-main
+
+:::
+
+:::demo 
+
+container/header-left-main-footer
+
+:::
+
+:::demo 
+
+container/left-header-main
+
+:::
+
+:::demo 
+
+container/left-header-main-footer
+
+:::
+
+
+
+## Props
+
+### footer-props
+
+| 名称              | 类别                            | 默认值       | 说明                  |
+|-----------------|-------------------------------|-----------|---------------------|
+| height          | `String`                      | `-` | `footer` 的高度 |
+### header-props
+
+| 名称             | 类别                            | 默认值 | 说明         |
+|----------------|-------------------------------|-----|------------|
+| height         | `String`                      | `-` | `header` 的高度 |
+### aside-props
+
+| 名称             | 类别                            | 默认值 | 说明        |
+|----------------|-------------------------------|-----|-----------|
+| width          | `String`                      | `-` | `aside` 的宽度 |
+### container-props
+
+| 名称                 | 类别                            | 默认值 | 说明                                       |
+|--------------------|-------------------------------|-----|------------------------------------------|
+| direction          | `String`                      | `-` | `container` 的方向，取值 `horizontal`、`vertical` |
+### main-props
+
+| 名称  | 类别                         | 默认值 | 说明  |
+|-----|----------------------------|-----|-----|
+| -   | `-`                        | `-` | `-` |
+
+
+
+## Slots
+
+### footer-slot
+
+| 名称              | 说明        |  
+|-----------------|-----------|
+| slot            | 就是普通插槽    |
+
+### header-slot
+
+| 名称              | 说明        |  
+|-----------------|-----------|
+| slot            | 就是普通插槽    |
+
+### aside-slot
+
+| 名称              | 说明        |  
+|-----------------|-----------|
+| slot            | 就是普通插槽    |
+
+### container-slot
+
+| 名称              | 说明        |  
+|-----------------|-----------|
+| slot            | 就是普通插槽，但是你只能传入`be-header`和`be-footer` |
+
+### main-slot
+
+| 名称              | 说明        |  
+|-----------------|-----------|
+| slot            | 就是普通插槽    |
+
+
+
+

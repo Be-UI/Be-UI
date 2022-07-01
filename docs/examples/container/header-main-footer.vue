@@ -1,7 +1,12 @@
 <template>
   <be-container style="margin-bottom: 20px">
-    <be-header class="header-class pink-500">《header》一点剑意千川渺</be-header>
-    <be-main class="main-class pink-100">两袖白云万仞遥《main》</be-main>
+
+    <be-header class="header-footer-class pink-500">世味年来薄似纱《header》</be-header>
+
+    <be-main class="main-class pink-100">《main》谁令骑马客京华</be-main>
+
+    <be-footer class="header-footer-class pink-500">小楼一夜听春雨《footer》</be-footer>
+
   </be-container>
 </template>
 <style>
@@ -11,7 +16,7 @@
 .pink-100{
   background-color: rgb(251, 196, 196);
 }
-.header-class{
+.header-footer-class{
   text-align: center;
   line-height: 60px;
 }
