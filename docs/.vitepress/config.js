@@ -73,7 +73,7 @@ export default defineConfigWithTheme({
             },
             {
               text: '自动补全',
-              link: '/views/document/autpcomplete',
+              link: '/views/document/autocomplete',
             },
             {
               text: '面包屑 be-breadcrumb',
@@ -140,7 +140,7 @@ export default defineConfigWithTheme({
               link: '/views/document/switch',
             },
             {
-              text: '标签',
+              text: '标签 be-tag',
               link: '/views/document/tag',
             },
             {

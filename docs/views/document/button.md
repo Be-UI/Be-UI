@@ -104,7 +104,7 @@ button/disabled
 
 ## Slots
 
-### button-slots
+### button-slot
 
 | 名称   | 说明                       |  
 |------| ----------------------------|

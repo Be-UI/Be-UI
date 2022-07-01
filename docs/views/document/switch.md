@@ -94,7 +94,7 @@ switch/render
 
 ## Slots
 
-### switch-slots
+### switch-slot
 
 | 名称                  | 说明                    |  
 |---------------------|-----------------------|

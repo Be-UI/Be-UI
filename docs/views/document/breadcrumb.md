@@ -73,11 +73,11 @@ breadcrumb/option
 
 ## Slots
 
-### be-breadcrumb-slots
+### be-breadcrumb-slot
 | 名称            | 说明                                         |
 | -------------- |--------------------------------------------|
 | slot        | 就是普通插槽,但是你必须传入组件 `be-breadcrumb-item`|
-### be-breadcrumb-item-slots
+### be-breadcrumb-item-slot
 | 名称          | 说明                                          |
 | ------------ |---------------------------------------------|
 | slot        | 就是普通插槽,但是你必须传入组件 `be-breadcrumb-item` |
