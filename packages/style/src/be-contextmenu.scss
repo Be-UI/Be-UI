@@ -15,18 +15,22 @@ $componentsClass: $name + '-' + 'contextmenu' !global;
   background-color: var(--be-contextmenu-bg-w);
   position: absolute;
   margin: 0;
+  padding: 0;
   font-size: var(--be-contextmenu-text-sm);
   border: 1px solid var(--be-contextmenu-border-color);
   list-style-type: none;
   white-space: nowrap;
   z-index: var(--be-contextmenu-z-index);
   -webkit-tap-highlight-color: transparent;
-
+  ul{
+    padding: 0;
+  }
   .#{ $componentsClass }#{$modifier-separator}item {
     @include font-mono;
     @include be-text-align('center');
     color: var(--be-contextmenu-text-primary);
     line-height: 1;
+
     padding: 0.625rem 2.25rem;
     &.#{ $componentsClass }#{$modifier-separator}item#{$element-separator}hover {
       @include font-mono;
