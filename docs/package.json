@@ -45,7 +45,7 @@
     "vite-plugin-style-import": "^2.0.0",
     "vite-plugin-windicss": "^1.8.4",
     "vitepress": "^0.22.4",
-    "windicss": "^3.5.3"
-
+    "windicss": "^3.5.3",
+    "@be-ui/utils": "workspace:^1.0.0"
   }
 }

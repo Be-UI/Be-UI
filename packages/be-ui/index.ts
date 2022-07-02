@@ -19,3 +19,4 @@ export default {
   install,
 }
 export * from '@be-ui/components'
+export * from '@be-ui/utils'
