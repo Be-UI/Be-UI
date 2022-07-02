@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import {contextmenu} from "be-ui"
+import {contextmenu} from "@be-ui/utils/index.ts"
 
 import {defineComponent} from "vue";
 export default defineComponent({

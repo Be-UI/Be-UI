@@ -30,54 +30,60 @@ contextmenu/basic
 
 :::
 
-### 不同情感类型
+### 定义触发类型
 
-:::demo 内置了六种类型，通过 `type` 设置 `default` | `primary` | `success` | `info` | `warning` | `error`
+:::demo `eventType` 定义触发类型
 
-tag/type
+contextmenu/event-type
 
 :::
 
-### 禁用
+### 直接禁用
 
 :::demo `disabled` 可以禁用你的 `contextmenu`
 
-tag/disabled
+contextmenu/disabled
 
 :::
 
-### 开启圆角
 
-:::demo 你可以通过 `round` 让它变得圆起来。
+### 定义分隔符
 
-tag/round
+:::demo `be-contextmenu-item` 可以通过 `divider` 让它变成分隔符
 
-:::
-
-### 可关闭的 `contextmenu`
-:::warning
-这里只实现了事件触发，真正的删除你还是通过数据维护
-:::
-
-:::demo `isClose` 可以开启关闭图标，并通过传入 `close` 事件来完成回调
-
-tag/close
+contextmenu/divider
 
 :::
 
-### 自定义样式类
+### disabled 禁用选项
 
-:::demo 通过 `customClass` 来传入样式类，覆盖原有样式
+:::demo `disabled` 可以禁用你的 `be-contextmenu-item`
 
-tag/class
+contextmenu/disabled-item
 
 :::
 
-### 开启样式配置
+### 点击后自动隐藏
 
-:::demo 通过 `option` 来传入可以直接修改边框、背景、圆角、字体
+:::demo `autoHide` 点击后自动隐藏
 
-tag/style
+contextmenu/auto-hide
+
+:::
+
+### 子菜单基本使用
+
+:::demo `be-contextmenu-item` 可以通过开启子菜单
+
+contextmenu/sub-contextmenu
+
+:::
+
+### disabled 禁用子菜单
+
+:::demo `disabled` 可以禁用你的 `contextmenu`
+
+contextmenu/sub-contextmenu-disabled
 
 :::
 
