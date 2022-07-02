@@ -1,5 +1,5 @@
 import Pager from '@be-ui/components/pagination/src//be-pager.vue'
-import {BeSelect} from '@be-ui/components'
+import {BeSelect} from '../../select'
 import { defineComponent, getCurrentInstance, provide, ref, reactive } from 'vue'
 import {
   IPage,
