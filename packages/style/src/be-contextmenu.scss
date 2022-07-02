@@ -15,6 +15,7 @@ $componentsClass: $name + '-' + 'contextmenu' !global;
   background-color: var(--be-contextmenu-bg-w);
   position: absolute;
   margin: 0;
+  padding: 0;
   font-size: var(--be-contextmenu-text-sm);
   border: 1px solid var(--be-contextmenu-border-color);
   list-style-type: none;

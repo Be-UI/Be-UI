@@ -6,7 +6,7 @@ import {
   ref,
   VNode,
 } from 'vue'
-import {BeIcon} from '@be-ui/components'
+import {BeIcon} from '../../svg-icon'
 import { IButtonInst } from './be-button-type'
 function useComponentId(Instance: ComponentInternalInstance) {
   return Instance.uid
