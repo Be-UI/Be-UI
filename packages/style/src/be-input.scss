@@ -3,36 +3,42 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-.be-input {
+$componentsClass: $name + '-' + 'input' !global;
+@include create-B(input) {
+  @include set-component-style-var('input', $--input);
+}
+@mixin flex-align-center {
   display: flex;
   align-items: center;
-  width: 100%;
-  background-color: $default;
-  border: 1px solid $infoHover;
-  border-radius: 3px;
+}
+@include create-B($name) {
+  @include flex-align-center;
+  width: var(--be-input-w-full);
+  background-color: var(--be-input-bg-w);
+  @include be-border(var(--be-input-border-color));
+  border-radius: var(--be-input-rounded-base);
 
   &:hover {
-    border: 1px solid $pinkHoverBorder;
-    border-radius: 3px;
+    @include be-border(var(--be-input-border-color-f));
+    border-radius: var(--be-input-rounded-base);
   }
 
-  .be-input-body {
+  .#{ $componentsClass }#{$modifier-separator}body {
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    width: 100%;
+    @include flex-align-center;
+    width: var(--be-input-w-full);
     padding: 0 5px;
 
-    .be-input__textarea__inner {
+    .#{ $componentsClass }#{$element-separator}textarea#{$element-separator}inner {
       box-sizing: border-box;
       display: block;
-      width: 100%;
+      width: var(--be-input-w-full);
       padding: 5px 15px;
       font-size: inherit;
       line-height: 1.5;
-      color: $defaultText;
+      color: var(--be-input-text-default);
       resize: vertical;
-      background-color: $default;
+      background-color: var(--be-input-bg-w);
       background-image: none;
       border: 0;
       transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -42,97 +48,95 @@
       }
     }
 
-    .be-input__inner {
-      width: 100%;
-      height: 30px;
-      line-height: 30px;
+    .#{ $componentsClass }#{$element-separator}inner {
+      width: var(--be-input-w-full);
+      height: var(--be-input-h-30);
+      line-height: var(--be-input-h-30);
       border: 0;
-      border-radius: 3px;
+      border-radius: var(--be-input-rounded-base);
       outline: 0;
     }
 
-    .be-input-nextIcon,
-    .be-input-prevIcon {
-      width: 16px;
-      height: 16px;
-      font-size: 16px;
-      line-height: 16px;
-      color: $infoHover;
-      cursor: pointer;
+    .#{ $componentsClass }#{$modifier-separator}next-icon,
+    .#{ $componentsClass }#{$modifier-separator}prev-icon {
+      width:  var(--be-input-icon-size);
+      height: var(--be-input-icon-size);
+      font-size: var(--be-input-icon-size);
+      line-height: var(--be-input-icon-size);
+      color: var(--be-input-icon-default);
+      @include be-pointer;
 
       &:hover {
-        color: $infoHover;
+        color: var(--be-input-icon-default);
       }
     }
 
-    .be-input-prevIcon {
+    .#{ $componentsClass }#{$modifier-separator}prev-icon {
       margin-right: 5px;
       margin-left: 5px;
     }
 
-    .be-input-nextIcon {
+    .#{ $componentsClass }#{$modifier-separator}next-icon {
       margin: 0 5px;
     }
 
-    .be-input-icon {
-      width: 100%;
-      height: 100%;
+    .#{ $componentsClass }#{$modifier-separator}icon {
+      width: var(--be-input-w-full);
+      height: var(--be-input-h-full);
 
       /* margin: 0 3px; */
       font-size: 12px;
       line-height: 1.5;
-      color: $infoHover;
-      cursor: pointer;
+      color: var(--be-input-icon-default);
+      @include be-pointer;
 
-      .be-icon--container {
-        vertical-align: 1em;
-        fill: $infoHover;
+      .be-icon#{$modifier-separator}container {
+        vertical-align: 1rem;
+        fill: var(--be-input-icon-default);
       }
     }
 
-    .be-input-close-body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 1em;
-      height: 100%;
+    .#{ $componentsClass }#{$modifier-separator}body#{$element-separator}close {
+      @include flex-center;
+      width: 1rem;
+      height: var(--be-input-h-full);
 
-      .be-input-close {
-        border: 1px solid $infoHover;
-        border-radius: 50px;
+      .#{ $componentsClass }#{$element-separator}close {
+        @include be-border(var(--be-input-border-color));
+        border-radius: var(--be-input-rounded-lg);
 
-        .be-icon--container {
-          width: 16px;
-          height: 16px;
+        .be-icon#{$modifier-separator}container {
+          width: var(--be-input-icon-size);
+          height: var(--be-input-icon-size);
         }
 
         &:hover {
-          color: $infoHover;
-          border: 1px solid $infoHover;
+          color: var(--be-input-icon-default);
+          @include be-border(var(--be-input-border-color));
         }
       }
     }
 
-    .be-input-password-body {
-      width: 1em;
-      height: 1em;
+    .#{ $componentsClass }-body#{$element-separator}password {
+      width: 1rem;
+      height: 1rem;
     }
 
-    .be-input-password {
-      height: 18px;
-      font-size: 18px;
-      line-height: 18px;
+    .#{ $componentsClass }#{$element-separator}password {
+      height: var(--be-input-text-base);
+      font-size: var(--be-input-text-base);
+      line-height: var(--be-input-text-base);
     }
 
-    .be-input-select {
+    .#{ $componentsClass }#{$modifier-separator}select {
       position: absolute;
       max-height: 300px;
       padding: 0;
       margin: 0;
       overflow-x: hidden;
       overflow-y: auto;
-      background-color: $default;
-      border: 1px solid $infoHover;
+      background-color: var(--be-input-bg-w);
+      @include be-border(var(--be-input-border-color));
       border-top: 0;
       border-radius: 0 0 3px 3px;
 
@@ -143,35 +147,35 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: #c1c1c1;
+        background-color: var(--be-input-border-color);
         border-radius: 5px;
       }
 
-      .be-input-select__line {
+      .#{ $componentsClass }#{$modifier-separator}select#{$element-separator}line {
         width: 90%;
         height: 1px;
         margin: 0 auto;
         list-style: none;
-        background-color: $infoHover;
+        background-color: var(--be-input-bg-g);;
       }
 
-      .be-input-select__inner {
+      .#{ $componentsClass }#{$modifier-separator}select#{$element-separator}inner {
         box-sizing: border-box;
-        height: 30px;
+        height: var(--be-input-h-30);
+        line-height: var(--be-input-h-30);
         padding-left: 10px;
-        line-height: 30px;
         list-style: none;
-        cursor: pointer;
+        @include be-pointer;
 
         &:hover {
-          background-color: $infoHover;
+          background-color: var(--be-input-border-color);
         }
       }
     }
   }
 
-  .be-input-body__expand {
-    border: 1px solid $infoHover;
+  .#{ $componentsClass }#{$modifier-separator}body#{$element-separator}expand {
+    @include be-border(var(--be-input-border-color));
     border-bottom: 0;
     border-radius: 3px 3px 0 0;
 
@@ -181,57 +185,59 @@
   }
 }
 
-.be-input__textarea {
-  border: 1px solid $infoHover;
+
+.#{ $componentsClass }#{$element-separator}textarea {
+  @include be-border(var(--be-input-border-color));
+
 
   &:hover {
-    border: 1px solid #b3d8ff;
+    @include be-border(var(--be-input-border-color-f));
   }
 }
 
-.be-input__disabled {
-  cursor: not-allowed;
-  @apply bg-gray-100;
+.#{ $componentsClass }#{$element-separator}disabled {
+  @include be-disabled;
+  background-color: var(--be-input-bg-g);
 }
 
-.be-input__focus {
-  border: 1px solid $pinkHoverBorder;
+.#{ $componentsClass }#{$element-separator}focus {
+  @include be-border(var(--be-input-border-color-f));
   outline: 0;
-  box-shadow: 0 0 0 2px $pinkHoverBorder-02;
+  box-shadow: 0 0 0 2px var(--be-input-border-shadow);
 }
 
-.be-input__mini {
-  .be-input-body {
-    .be-input__inner {
-      height: 25px;
-      font-size: 14px;
-      line-height: 25px;
+.#{ $componentsClass }#{$element-separator}mini {
+  .#{ $componentsClass }#{$modifier-separator}body {
+    .#{ $componentsClass }#{$element-separator}inner {
+      height: var(--be-input-size-mini);
+      font-size: var(--be-input-text-base);
+      line-height: var(--be-input-size-mini);
     }
   }
 }
 
-.be-input__medium {
-  .be-input-body {
-    .be-input__inner {
-      height: 30px;
-      font-size: 14px;
-      line-height: 30px;
+.#{ $componentsClass }#{$element-separator}medium {
+  .#{ $componentsClass }#{$modifier-separator}body {
+    .#{ $componentsClass }#{$element-separator}inner {
+      height: var(--be-input-size-medium);
+      font-size: var(--be-input-text-base);
+      line-height: var(--be-input-size-medium);
     }
   }
 }
 
-.be-input__large {
-  .be-input-body {
-    .be-input__inner {
-      height: 36px;
-      font-size: 14px;
-      line-height: 36px;
+.#{ $componentsClass }#{$element-separator}large {
+  .#{ $componentsClass }#{$modifier-separator}body {
+    .#{ $componentsClass }#{$element-separator}inner {
+      height: var(--be-input-size-large);
+      font-size: var(--be-input-text-base);
+      line-height: var(--be-input-size-large);
     }
   }
 }
 
-.be-input-select {
-  z-index: 2077;
+.#{ $componentsClass }#{$modifier-separator}select {
+  z-index: var(--be-input-z-index);
   max-height: 300px;
   margin: 0;
   overflow-x: hidden;
@@ -244,36 +250,34 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #c1c1c1;
-    border-radius: 5px;
+    background-color: var(--be-input-bg-g);
+    border-radius: var(--be-input-round-base);
   }
 
   ul {
     padding: 0;
   }
 
-  .be-input-select__line {
+  .#{ $componentsClass }#{$modifier-separator}select#{$element-separator}line {
     width: 90%;
     height: 1px;
     margin: 0 auto;
     list-style: none;
-    background-color: #dcdfe6;
+    background-color: var(--be-input-bg-g);
   }
 
-  .be-input-select__inner {
+  .#{ $componentsClass }#{$modifier-separator}select#{$element-separator}inner {
     box-sizing: border-box;
-    height: 30px;
+    height: var(--be-input-h-30);
     padding-left: 10px;
-    overflow: hidden;
-    font-size: 14px;
-    line-height: 30px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: var(--be-input-text-base);
+    line-height: var(--be-input-h-30);
+    @include be-ellipsis-class;
     list-style: none;
-    cursor: pointer;
+    @include be-pointer;
 
     &:hover {
-      background-color: #dcdfe6;
+      background-color: var(--be-input-bg-g);
     }
   }
 }

@@ -1,5 +1,5 @@
 import { defineComponent, onMounted, VNode, watch } from 'vue'
-import BeInputSelect from '../../autocomplete/src/be-input-select.vue'
+import BeInputSelect from '../../autocomplete/src/be-input--select.vue'
 
 import {BeIcon,BePopover} from '@be-ui/components'
 import { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'

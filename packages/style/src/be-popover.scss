@@ -81,7 +81,7 @@ $componentsClass: $name + '-' + 'popover' !global;
   }
 }
 
-.#{ $componentsClass }.be-input-select-popover {
+.#{ $componentsClass }.be-input--select-popover {
   .#{ $componentsClass }#{$modifier-separator}body {
     padding: 0;
   }
