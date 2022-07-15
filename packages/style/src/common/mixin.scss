@@ -65,7 +65,14 @@
 @mixin be-text-align($align) {
   text-align: $align;
 }
-
+@mixin be-border($color,$width:1px){
+  border: $width solid $color;
+}
+@mixin be-ellipsis-class {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 :root {
   $--emo-color: () !default;
   $--emo-color: map.deep-merge(
@@ -168,11 +175,13 @@
       'grays': #c0c4cc,
       'bg-hover': #f5f5f5,
       'q-blues': #b3d8ff,
+       'main':#ec4899,
+       'main-02':rgba(236, 72, 153, 0.2)
     ),
     $--color
   );
   // 其他基础色
-  @each $type in (w, b, grays, bg-hover, q-blues) {
+  @each $type in (w, b, grays, bg-hover, q-blues,main,main-02) {
     @include set-css-var-type('base-color', $type, $--color);
   }
 
@@ -501,4 +510,32 @@ $--button: map.deep-merge(
     'rounded-base': var(--be-rounded-base),
   ),
   $--button
+);
+
+// 生成 be-input
+$--input: () !default;
+$--input: map.deep-merge(
+                (
+                        'rounded-base': var(--be-rounded-base),
+                        'border-color-f':var(--be-base-color-main),
+                        'border-color':var(--be-emo-info-color--hover),
+                        'border-shadow':var(--be-base-color-main-02),
+                        'w-full': var(--be-percentage-full),
+                        'h-full': var(--be-percentage-full),
+                        'h-30': 30px,
+                        'bg-w': var(--be-base-color-w),
+                        'bg-g': var(--be-base-color-grays),
+                        'text-default': var(--be-text-color-regular),
+                        'icon-default': var(--be-text-color-placeholder),
+                        'icon-size': 16px,
+                        'rounded-lg': var(--be-rounded-lg),
+                        'rounded-base': var(--be-rounded-base),
+                        'text-base': var(--be-text-size-base),
+                        'z-index': var(--be-zIndex-top2),
+                        'size-mini': var(--be-h-mini),
+                        'size-medium': var(--be-h-medium),
+                        'size-large': var(--be-h-large),
+
+                ),
+                $--input
 );
