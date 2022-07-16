@@ -36,6 +36,10 @@ $componentsClass: $name + '-' + 'progress' !global;
         color: var(--be-text-color-primary);
       }
     }
+    svg {
+      position: absolute;
+      top: 0;
+    }
   }
 
   // 条形样式

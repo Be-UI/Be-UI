@@ -15,17 +15,17 @@
     <slot name="prev" />
     <div
       v-if="inputType !== 'textarea'"
-      class="be-input-body"
+      class="be-input--body"
       @mouseenter="handleEnter('noInputElm')"
       @mouseleave="handleLeave('noInputElm')"
     >
       <!--  <div class="be-input" v-click-outside="closeDisplay" :class="customClass">
-                <div class="be-input-body" :class="expandStyle">-->
+                <div class="be-input--body" :class="expandStyle">-->
       <!--前置图标-->
       <be-icon
         v-if="prevIcon"
         :icon="prevIcon"
-        class="be-input-prevIcon"
+        class="be-input--prev-icon"
         @click="handleIcon('prev')"
       />
       <input
@@ -55,28 +55,28 @@
       <be-icon
         v-if="nextIcon"
         :icon="nextIcon"
-        class="be-input-nextIcon"
+        class="be-input--next-icon"
         @click="handleIcon('next')"
       />
       <!--清除按钮 v-show="showClearIcon-->
       <div
         v-if="!isInner && showClearIcon"
-        class="be-input-close-body"
+        class="be-input--body__close"
       >
         <be-icon
           icon="deleteIc"
-          class="be-input-icon be-input-close"
+          class="be-input--icon be-input__close"
           @click="handleClear"
         />
       </div>
       <!--密碼按鈕-->
       <div
         v-show="showPassword"
-        class="be-input-close-body"
+        class="be-input--body__close"
       >
         <be-icon
           :icon="`${isPassWord ? 'noEye' : 'eye'}`"
-          class="be-input-icon be-input-password"
+          class="be-input--icon be-input__password"
           @click="handlePassword"
         />
       </div>
@@ -85,7 +85,7 @@
     <slot name="next" />
     <div
       v-if="inputType === 'textarea'"
-      class="be-input-body"
+      class="be-input--body"
     >
       <textarea
         ref="beInputAreaInner"

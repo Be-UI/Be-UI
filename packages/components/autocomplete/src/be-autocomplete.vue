@@ -5,7 +5,7 @@
     :trigger="focusTrigger ? 'click' : 'none'"
     placement="bottom"
     :trigger-elm="`be_input_select_inner_${uid}`"
-    custom-class="be-input-select-popover"
+    custom-class="be-input--select-popover"
   >
     <template #trigger>
       <be-input
@@ -30,7 +30,7 @@
       </be-input>
     </template>
     <transition name="dialog-fade">
-      <be-input-select
+      <be-input--select
         :loading="loading"
         :key-value="keyValue"
         :label-value="labelValue"
@@ -44,7 +44,7 @@
             :item="slotProps.item"
           />
         </template>
-      </be-input-select>
+      </be-input--select>
     </transition>
   </be-popover>
 </template>
@@ -62,7 +62,7 @@
     watch,
   } from 'vue'
   import {BePopover,BeInput} from '@be-ui/components'
-  import BeInputSelect from './be-input-select.vue'
+  import BeInputSelect from './be-input--select.vue'
   import { IInputSelectInst, IInputSelectFunc } from './be-autocomplete-type'
   import { isString, jsonClone } from '@be-ui/utils/common'
   import { isObject } from '@vue/shared'

@@ -1,10 +1,10 @@
-/* * be-input-select.vue * @deprecated 远程搜索的下拉框 * @author czh * @create (czh 2021/5/31) *
+/* * be-input--select.vue * @deprecated 远程搜索的下拉框 * @author czh * @create (czh 2021/5/31) *
 @update (czh 2021/6/2) */
 <template>
   <transition name="be-zoom-in-top">
     <div
       :id="`be_input_select${uid}`"
-      class="be-input-select"
+      class="be-input--select"
       :style="selectStyle"
     >
       <ul
@@ -17,7 +17,7 @@
         <li
           v-for="(item, index) in list"
           :key="item[keyValue]"
-          class="be-input-select__inner"
+          class="be-input--select__inner"
           @click="handleSelect(item, index)"
         >
           <slot
@@ -31,11 +31,11 @@
       <!--   载入中     -->
       <ul
         v-show="loading"
-        :key="`be-input-select${uid}-loading`"
+        :key="`be-input--select${uid}-loading`"
       >
-        <li class="be-input-select__line" />
+        <li class="be-input--select__line" />
         <li
-          class="be-input-select__inner"
+          class="be-input--select__inner"
           style="text-align: center"
         >
           载入中...
@@ -44,9 +44,9 @@
       <!--   无数据     -->
       <ul
         v-show="loading && list.length === 0"
-        :key="`be-input-select${uid}-loading`"
+        :key="`be-input--select${uid}-loading`"
       >
-        <li class="be-input-select__inner">
+        <li class="be-input--select__inner">
           暂无数据
         </li>
       </ul>
