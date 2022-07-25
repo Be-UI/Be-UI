@@ -12,8 +12,8 @@ import {
 import { IInputNumInstance, IInputNumLimit } from './be-input-number-type'
 import { IInputInst } from '../../input/src/be-input-type'
 import { accAdd, accSub, checkNumber } from '@be-ui/utils/common'
-import {BeIcon} from '../../svg-icon'
-import {BeInput} from '../../input'
+import BeIcon from '../../svg-icon/src/be-icon.vue'
+import BeInput from '../../input/src/be-input.vue'
 export default defineComponent({
   name: 'BeInputNumber',
   components: { BeInput, BeIcon },

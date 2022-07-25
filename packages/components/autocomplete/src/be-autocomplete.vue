@@ -62,7 +62,7 @@
     watch,
   } from 'vue'
   import {BePopover,BeInput} from '@be-ui/components'
-  import BeInputSelect from './be-input--select.vue'
+  import BeInputSelect from './be-input-select.vue'
   import { IInputSelectInst, IInputSelectFunc } from './be-autocomplete-type'
   import { isString, jsonClone } from '@be-ui/utils/common'
   import { isObject } from '@vue/shared'

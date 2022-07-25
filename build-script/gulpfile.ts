@@ -33,7 +33,7 @@ export default series(
            run("pnpm run --filter @be-ui/build --parallel build:fullComponent")
        ),
         // 执行build命令时会调用rollup，给rollup传参数buildFullComponent，那么就会执行导出任务叫buildFullComponent
-        // withTaskName("buildComponent", () => run("pnpm run --filter @be-ui/build --parallel build:component"))
+        withTaskName("buildComponent", () => run("pnpm run --filter @be-ui/build --parallel build:component"))
     ),
     parallel(genTypes, copySourceCode())
 );
