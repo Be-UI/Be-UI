@@ -1,0 +1,11 @@
+{
+  "name": "@be-ui/utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "clean": "rimraf es && rimraf lib"
+  },
+  "author": "",
+  "license": "MIT"
+}

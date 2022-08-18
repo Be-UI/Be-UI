@@ -1,0 +1,100 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'progress' !global;
+// BEM是一种前端命名方法论，主要是针对CSS，意思是块（Block）、元素（Element）、修饰符（Modifier）的简写。
+@include create-B(progress) {
+  // --be-progress-normal-color
+  // 生成 .--be-progress-normal-color 顔色
+  @include set-component-style-var('progress', $--progress);
+}
+
+// 生成 .be-progress
+@include create-B(progress) {
+  display: flex;
+  align-items: center;
+  width: var(--be-percentage-full);
+  line-height: 30px;
+
+  // 环形样式
+  .#{ $componentsClass }-circle {
+    position: relative;
+    top: var(--be-percentage-zero);
+    left: var(--be-percentage-zero);
+
+    .#{$componentsClass}-circle#{$modifier-separator}text {
+      position: absolute;
+      top: var(--be-percentage-50);
+      left: var(--be-percentage-50);
+      transform: translate(-50%, -50%);
+
+      .percent {
+        @apply font-mono;
+        font-size: 18px;
+        color: var(--be-text-color-primary);
+      }
+    }
+    svg {
+      position: absolute;
+      top: 0;
+    }
+  }
+
+  // 条形样式
+
+  .#{ $componentsClass }-line {
+    .#{$componentsClass}-line#{$modifier-separator}track {
+      position: relative;
+      top: var(--be-percentage-zero);
+      left: var(--be-percentage-zero);
+      width: var(--be-percentage-full);
+      margin-right: 10px;
+      background-color: $defaultGray;
+    }
+
+    .percent {
+      @apply font-mono;
+      font-size: 14px;
+      color: var(--be-text-color-primary);
+    }
+
+    .#{$componentsClass}-line-path {
+      height: var(--be-percentage-full);
+      transition: width 0.3s;
+    }
+
+    .#{$componentsClass}-line-path#{$element-separator}round {
+      border-radius: var(--be-progress-rounded-lg);
+    }
+
+    .#{$componentsClass}-line-path#{$element-separator}success {
+      position: absolute;
+      top: var(--be-percentage-zero);
+      left: var(--be-percentage-zero);
+    }
+  }
+
+  .#{$componentsClass}-body {
+    @include flex-center;
+    width: var(--be-percentage-full);
+    height: var(--be-percentage-full);
+
+    .#{$componentsClass}#{$element-separator}normal {
+      background-color: var(--be-progress-normal-color);
+    }
+
+    .#{$componentsClass}#{$element-separator}success {
+      background-color: var(--be-progress-success-color);
+    }
+
+    .#{$componentsClass}#{$element-separator}error {
+      background-color: var(--be-progress-error-color);
+    }
+  }
+}
+
+.#{$componentsClass}.#{$componentsClass}-circle-dashboard {
+  width: initial;
+}

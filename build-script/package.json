@@ -1,0 +1,14 @@
+{
+  "name": "@be-ui/build",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:utils": "gulp --require sucrase/register/ts -f build-utils.ts",
+    "build:style": "gulp --require sucrase/register/ts -f build-style.ts",
+    "build:fullComponent": "gulp --require sucrase/register/ts -f full-component.ts",
+    "build:component": "gulp --require sucrase/register/ts -f component.ts"
+  },
+  "author": "baiwusanyu",
+  "license": "MIT"
+}

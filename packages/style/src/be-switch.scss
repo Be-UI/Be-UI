@@ -1,0 +1,157 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'switch' !global;
+@include create-B(switch) {
+  @include set-component-style-var('switch', $--switch);
+}
+
+@include create-B(switch) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: var(--be-rounded-full);
+  .#{ $componentsClass }#{$modifier-separator}circle {
+    @include flex-center;
+    @include be-shadow;
+    background-color: var(--be-switch-bg-w);
+    border-radius: var(--be-rounded-full);
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}checked {
+  background-color: var(--be-switch-bg-checked);
+
+  .#{ $componentsClass }#{$modifier-separator}circle {
+    position: absolute;
+    left: calc(100% - 2px);
+    transform: var(--be-switch-trans-);
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}unChecked {
+  background-color: var(--be-switch-bg-un-checked);
+
+  .#{ $componentsClass }#{$modifier-separator}circle {
+    position: absolute;
+    left: 1px;
+    margin-left: 1px;
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}disabled {
+  cursor: not-allowed;
+}
+
+.#{ $componentsClass }#{$element-separator}default {
+  width: 35px;
+  min-width: min-content;
+  height: 1.25rem;
+  line-height: 1.25rem;
+
+  .#{ $componentsClass }#{$modifier-separator}circle {
+    width: 1rem;
+    height: 1rem;
+
+    .#{ $componentsClass }#{$modifier-separator}circle#{$modifier-separator}icon {
+      .be-icon--container {
+        width: 0.75rem;
+        height: 0.75rem;
+      }
+    }
+  }
+
+  .#{ $componentsClass }#{$element-separator}default_slot#{$element-separator}unChecked {
+    margin-right: 0.25rem;
+    margin-left: 1.25rem;
+  }
+
+  .#{ $componentsClass }#{$element-separator}default_slot#{$element-separator}checked {
+    margin-right: 1.25rem;
+    margin-left: 0.25rem;
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}small {
+  width: 30px;
+  min-width: min-content;
+  height: 1rem;
+  line-height: 1rem;
+
+  .#{ $componentsClass }#{$modifier-separator}circle {
+    width: 0.75rem;
+    height: 0.75rem;
+
+    .#{ $componentsClass }#{$modifier-separator}circle#{$modifier-separator}icon {
+      .be-icon--container {
+        width: 0.5rem;
+        height: 0.5rem;
+      }
+    }
+  }
+
+  .#{ $componentsClass }#{$element-separator}small_slot#{$element-separator}unChecked {
+    margin-right: 1rem;
+    margin-left: 0.25rem;
+  }
+
+  .#{ $componentsClass }#{$element-separator}small_slot#{$element-separator}checked {
+    margin-right: 0.25rem;
+    margin-left: 1rem;
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}large {
+  width: 40px;
+  min-width: min-content;
+  height: 1.5rem;
+  line-height: 1.5rem;
+
+  .#{ $componentsClass }#{$modifier-separator}circle {
+    width: 1.25rem;
+    height: 1.25rem;
+
+    .#{ $componentsClass }#{$modifier-separator}circle#{$modifier-separator}icon {
+      .be-icon--container {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
+
+  .#{ $componentsClass }#{$element-separator}large_slot#{$element-separator}unChecked {
+    margin-right: 1.5rem;
+    margin-left: 0.25rem;
+  }
+
+  .#{ $componentsClass }#{$element-separator}large_slot#{$element-separator}checked {
+    margin-right: 0.25rem;
+    margin-left: 1.5rem;
+  }
+}
+
+@keyframes switching {
+  0% {
+    box-shadow: 0 0 0 2px rgb(24 144 255 / 40%);
+  }
+
+  60% {
+    box-shadow: 0 0 0 4px rgb(24 144 255 / 20%);
+  }
+
+  80% {
+    box-shadow: 0 0 0 6px rgb(24 144 255 / 10%);
+  }
+
+  100% {
+    box-shadow: 0 0 0 8px rgb(24 144 255 / 5%);
+  }
+}
+
+.be-switching {
+  -webkit-animation: switching 0.3s linear;
+  -moz-animation: switching 0.3s linear;
+}

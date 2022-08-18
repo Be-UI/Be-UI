@@ -1,0 +1,24 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1,
+    "workspacePrefix": "D:\\project\\Be-UI3"
+  },
+  "1 info pnpm": {
+    "err": {
+      "name": "Error",
+      "message": "not found: lint-staged",
+      "code": "ENOENT",
+      "stack": "Error: not found: lint-staged\n    at getNotFoundError (D:\\nvm\\v16.4.2\\node_modules\\pnpm\\dist\\pnpm.cjs:41689:51)\n    at Function.whichSync [as sync] (D:\\nvm\\v16.4.2\\node_modules\\pnpm\\dist\\pnpm.cjs:41766:13)\n    at getCommandAbsolutePathSync (D:\\nvm\\v16.4.2\\node_modules\\pnpm\\dist\\pnpm.cjs:43331:44)\n    at default_1 (D:\\nvm\\v16.4.2\\node_modules\\pnpm\\dist\\pnpm.cjs:43340:32)\n    at D:\\nvm\\v16.4.2\\node_modules\\pnpm\\dist\\pnpm.cjs:178616:39"
+    }
+  },
+  "2 error pnpm": {
+    "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
+    "prefix": "D:\\project\\Be-UI3",
+    "err": {
+      "name": "pnpm",
+      "message": "not found: lint-staged",
+      "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
+      "stack": "Error: not found: lint-staged\n    at getNotFoundError (D:\\nvm\\v16.4.2\\node_modules\\pnpm\\dist\\pnpm.cjs:41689:51)\n    at Function.whichSync [as sync] (D:\\nvm\\v16.4.2\\node_modules\\pnpm\\dist\\pnpm.cjs:41766:13)\n    at getCommandAbsolutePathSync (D:\\nvm\\v16.4.2\\node_modules\\pnpm\\dist\\pnpm.cjs:43331:44)\n    at default_1 (D:\\nvm\\v16.4.2\\node_modules\\pnpm\\dist\\pnpm.cjs:43340:32)\n    at D:\\nvm\\v16.4.2\\node_modules\\pnpm\\dist\\pnpm.cjs:178616:39"
+    }
+  }
+}

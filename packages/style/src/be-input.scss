@@ -1,0 +1,283 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'input' !global;
+@include create-B(input) {
+  @include set-component-style-var('input', $--input);
+}
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+@include create-B($name) {
+  @include flex-align-center;
+  width: var(--be-input-w-full);
+  background-color: var(--be-input-bg-w);
+  @include be-border(var(--be-input-border-color));
+  border-radius: var(--be-input-rounded-base);
+
+  &:hover {
+    @include be-border(var(--be-input-border-color-f));
+    border-radius: var(--be-input-rounded-base);
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}body {
+    box-sizing: border-box;
+    @include flex-align-center;
+    width: var(--be-input-w-full);
+    padding: 0 5px;
+
+    .#{ $componentsClass }#{$element-separator}textarea#{$element-separator}inner {
+      box-sizing: border-box;
+      display: block;
+      width: var(--be-input-w-full);
+      padding: 5px 15px;
+      font-size: inherit;
+      line-height: 1.5;
+      color: var(--be-input-text-default);
+      resize: vertical;
+      background-color: var(--be-input-bg-w);
+      background-image: none;
+      border: 0;
+      transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+      &:hover {
+        border: 0;
+      }
+    }
+
+    .#{ $componentsClass }#{$element-separator}inner {
+      width: var(--be-input-w-full);
+      height: var(--be-input-h-30);
+      line-height: var(--be-input-h-30);
+      border: 0;
+      border-radius: var(--be-input-rounded-base);
+      outline: 0;
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}next-icon,
+    .#{ $componentsClass }#{$modifier-separator}prev-icon {
+      width:  var(--be-input-icon-size);
+      height: var(--be-input-icon-size);
+      font-size: var(--be-input-icon-size);
+      line-height: var(--be-input-icon-size);
+      color: var(--be-input-icon-default);
+      @include be-pointer;
+
+      &:hover {
+        color: var(--be-input-icon-default);
+      }
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}prev-icon {
+      margin-right: 5px;
+      margin-left: 5px;
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}next-icon {
+      margin: 0 5px;
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}icon {
+      width: var(--be-input-w-full);
+      height: var(--be-input-h-full);
+
+      /* margin: 0 3px; */
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--be-input-icon-default);
+      @include be-pointer;
+
+      .be-icon#{$modifier-separator}container {
+        vertical-align: 1rem;
+        fill: var(--be-input-icon-default);
+      }
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}body#{$element-separator}close {
+      @include flex-center;
+      width: 1rem;
+      height: var(--be-input-h-full);
+
+      .#{ $componentsClass }#{$element-separator}close {
+        @include be-border(var(--be-input-border-color));
+        border-radius: var(--be-input-rounded-lg);
+
+        .be-icon#{$modifier-separator}container {
+          width: var(--be-input-icon-size);
+          height: var(--be-input-icon-size);
+        }
+
+        &:hover {
+          color: var(--be-input-icon-default);
+          @include be-border(var(--be-input-border-color));
+        }
+      }
+    }
+
+    .#{ $componentsClass }-body#{$element-separator}password {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .#{ $componentsClass }#{$element-separator}password {
+      height: var(--be-input-text-base);
+      font-size: var(--be-input-text-base);
+      line-height: var(--be-input-text-base);
+    }
+
+    .#{ $componentsClass }#{$modifier-separator}select {
+      position: absolute;
+      max-height: 300px;
+      padding: 0;
+      margin: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background-color: var(--be-input-bg-w);
+      @include be-border(var(--be-input-border-color));
+      border-top: 0;
+      border-radius: 0 0 3px 3px;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+        margin: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--be-input-border-color);
+        border-radius: 5px;
+      }
+
+      .#{ $componentsClass }#{$modifier-separator}select#{$element-separator}line {
+        width: 90%;
+        height: 1px;
+        margin: 0 auto;
+        list-style: none;
+        background-color: var(--be-input-bg-g);;
+      }
+
+      .#{ $componentsClass }#{$modifier-separator}select#{$element-separator}inner {
+        box-sizing: border-box;
+        height: var(--be-input-h-30);
+        line-height: var(--be-input-h-30);
+        padding-left: 10px;
+        list-style: none;
+        @include be-pointer;
+
+        &:hover {
+          background-color: var(--be-input-border-color);
+        }
+      }
+    }
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}body#{$element-separator}expand {
+    @include be-border(var(--be-input-border-color));
+    border-bottom: 0;
+    border-radius: 3px 3px 0 0;
+
+    &:hover {
+      border-bottom: 0;
+    }
+  }
+}
+
+
+.#{ $componentsClass }#{$element-separator}textarea {
+  @include be-border(var(--be-input-border-color));
+
+
+  &:hover {
+    @include be-border(var(--be-input-border-color-f));
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}disabled {
+  @include be-disabled;
+  background-color: var(--be-input-bg-g);
+}
+
+.#{ $componentsClass }#{$element-separator}focus {
+  @include be-border(var(--be-input-border-color-f));
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--be-input-border-shadow);
+}
+
+.#{ $componentsClass }#{$element-separator}mini {
+  .#{ $componentsClass }#{$modifier-separator}body {
+    .#{ $componentsClass }#{$element-separator}inner {
+      height: var(--be-input-size-mini);
+      font-size: var(--be-input-text-base);
+      line-height: var(--be-input-size-mini);
+    }
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}medium {
+  .#{ $componentsClass }#{$modifier-separator}body {
+    .#{ $componentsClass }#{$element-separator}inner {
+      height: var(--be-input-size-medium);
+      font-size: var(--be-input-text-base);
+      line-height: var(--be-input-size-medium);
+    }
+  }
+}
+
+.#{ $componentsClass }#{$element-separator}large {
+  .#{ $componentsClass }#{$modifier-separator}body {
+    .#{ $componentsClass }#{$element-separator}inner {
+      height: var(--be-input-size-large);
+      font-size: var(--be-input-text-base);
+      line-height: var(--be-input-size-large);
+    }
+  }
+}
+
+.#{ $componentsClass }#{$modifier-separator}select {
+  z-index: var(--be-input-z-index);
+  max-height: 300px;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    margin: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--be-input-bg-g);
+    border-radius: var(--be-input-round-base);
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}select#{$element-separator}line {
+    width: 90%;
+    height: 1px;
+    margin: 0 auto;
+    list-style: none;
+    background-color: var(--be-input-bg-g);
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}select#{$element-separator}inner {
+    box-sizing: border-box;
+    height: var(--be-input-h-30);
+    padding-left: 10px;
+    font-size: var(--be-input-text-base);
+    line-height: var(--be-input-h-30);
+    @include be-ellipsis-class;
+    list-style: none;
+    @include be-pointer;
+
+    &:hover {
+      background-color: var(--be-input-bg-g);
+    }
+  }
+}

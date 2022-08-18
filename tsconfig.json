@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "module": "CommonJS",
+    "target": "ESNext",
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
@@ -11,19 +11,28 @@
     "noImplicitThis": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "removeComments": true, // 删除注释
     "allowSyntheticDefaultImports": true,
-    "lib": ["esnext", "dom"],
     // 类型文件声明位置
-    "types": ["vite/client", "jest"]
+    "declaration": false, // 默认不要声明文件
+    "lib": [
+      // 编译时用的库
+      "ESNext",
+      "DOM"
+    ],
+    "experimentalDecorators": true, // 装饰器语法
+    "forceConsistentCasingInFileNames": true, // 强制区分大小写
+
+
+
+    "noLib": false, // 不处理类库
+
+    "skipLibCheck": true // 跳过类库检测
   },
   "include": [
-    "/src/**/*.ts",
-    "/src/**/*.d.ts",
-    "/src/**/*.tsx",
-    "/src/**/*.vue",
-    "node_modules/@types/jest/index.d.ts"
+    "packages",
+    "build-script"
   ],
   // ts 排除的文件
-  "exclude": ["node_modules", "**/__tests__/"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["node_modules", "**/__tests__/", "be-ui/**",   "build-script/**"]
 }
