@@ -11,7 +11,7 @@
     "docs:install": "pnpm install"
   },
   "author": "baiwusanyu",
-  "license": "ISC",
+  "license": "MIT",
   "pnpm": {
     "overrides": {
       "jsdom": "16.4.0"

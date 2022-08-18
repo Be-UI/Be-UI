@@ -9,6 +9,6 @@
     "build:fullComponent": "gulp --require sucrase/register/ts -f full-component.ts",
     "build:component": "gulp --require sucrase/register/ts -f component.ts"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "baiwusanyu",
+  "license": "MIT"
 }

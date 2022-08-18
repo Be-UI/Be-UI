@@ -49,4 +49,4 @@ function copyfullstyle(){
     return src(path.resolve(styleRoot,'./dist/**')).pipe(dest(rootDistPath))
 }
 
-export default series(compile, copyfont,copyfullstyle);
+export default series(compile,copyfont,copyfullstyle);
