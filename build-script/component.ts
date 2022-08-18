@@ -10,7 +10,7 @@ import { series, parallel } from 'gulp'
 import { sync } from 'fast-glob' // 同步查找文件
 import { compRoot, outDir, projectRoot } from './utils/paths'
 import  path from 'path'
-import { rollup, OutputOptions } from 'rollup'
+import {rollup, OutputOptions, RollupOptions} from 'rollup'
 import { buildConfig } from './utils/config'
 import { pathRewriter, run } from './utils'
 import { Project, SourceFile } from 'ts-morph'
@@ -51,7 +51,7 @@ const buildEachComponent = async () => {
         cleanup({ comments: 'none' }),
       ],
       external: (id: string) => /^vue/.test(id) || /^@be-ui/.test(id) || /^.test.js/.test(id)|| /^.md/.test(id),// 排除掉vue和@be-ui的依赖
-    }
+    } as RollupOptions
     const bundle = await rollup(config)
     const options = Object.values(buildConfig).map(config => ({
       format: config.format,

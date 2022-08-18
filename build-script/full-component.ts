@@ -9,7 +9,7 @@ import typescript from 'rollup-plugin-typescript2'
 import { parallel,series } from 'gulp'
 import  path from 'path'
 import {outDir, beUIRoot} from './utils/paths'
-import { rollup, OutputOptions } from 'rollup'
+import {rollup, OutputOptions, RollupOptions} from 'rollup'
 import  fs from 'fs/promises'
 import { buildConfig } from './utils/config'
 import { pathRewriter } from './utils'
@@ -35,7 +35,7 @@ const buildFull = async () => {
       terser(),
       cleanup({ comments: 'none' }),
     ],
-  }
+  } as RollupOptions
   // 组件库两种使用方式 import 导入组件库 在浏览器中使用script
 
   // esm umd
@@ -99,7 +99,7 @@ async function buildEntry() {
       cleanup({ comments: 'none' }),
     ],
     external: (id: string) => /^vue/.test(id) || /^@be-ui/.test(id) || /^.test.js/.test(id)|| /^.md/.test(id),
-  }
+  } as RollupOptions
   const bundle = await rollup(config)
   return Promise.all(
     Object.values(buildConfig)

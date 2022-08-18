@@ -23,17 +23,17 @@ export default series(
     parallel(
         // 打包 utils
        withTaskName("buildUtils", () => {
-           run("pnpm run --filter @be-ui/build --parallel build:utils")
+           run("pnpm run --filter @be-ui/build --parallel build:utils && pnpm run --filter @be-ui/utils clean")
        }),
        // 打包 style
        withTaskName("buildStyle", () => {
-           run("pnpm run --filter @be-ui/build --parallel build:style")
+           run("pnpm run --filter @be-ui/build --parallel build:style && pnpm run --filter @be-ui/style clean")
        }),
-       withTaskName("buildFullComponent", () =>
+       /*withTaskName("buildFullComponent", () =>
            run("pnpm run --filter @be-ui/build --parallel build:fullComponent")
        ),
         // 执行build命令时会调用rollup，给rollup传参数buildFullComponent，那么就会执行导出任务叫buildFullComponent
-        withTaskName("buildComponent", () => run("pnpm run --filter @be-ui/build --parallel build:component"))
+        withTaskName("buildComponent", () => run("pnpm run --filter @be-ui/build --parallel build:component"))*/
     ),
     parallel(genTypes, copySourceCode())
 );
