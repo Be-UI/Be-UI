@@ -4,7 +4,7 @@
   <transition name="be-zoom-in-top">
     <div
       :id="`be_input_select${uid}`"
-      class="be-input--select"
+      class="be-input--select scroll-diy"
       :style="selectStyle"
     >
       <ul

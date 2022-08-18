@@ -73,6 +73,12 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+@mixin w-min($w) {
+  min-width: $w;
+}
+@mixin h-max($h) {
+  max-height: $h;
+}
 :root {
   $--emo-color: () !default;
   $--emo-color: map.deep-merge(
@@ -127,12 +133,13 @@
       '25': 25%,
       '50': 50%,
       '75': 75%,
+      '90': 90%,
       'full': 100%,
     ),
     $--percentage
   );
   // 百分比變量
-  @each $type in (zero, '25', '50', '75', full) {
+  @each $type in (zero, '25', '50', '75', '90',full) {
     @include set-css-var-type('percentage', $type, $--percentage);
   }
 
@@ -522,7 +529,8 @@ $--input: map.deep-merge(
                         'border-shadow':var(--be-base-color-main-02),
                         'w-full': var(--be-percentage-full),
                         'h-full': var(--be-percentage-full),
-                        'h-30': 30px,
+                        'h-30px': 30px,
+                        'w-90': var(--be-percentage-50),
                         'bg-w': var(--be-base-color-w),
                         'bg-g': var(--be-base-color-grays),
                         'text-default': var(--be-text-color-regular),
@@ -534,6 +542,7 @@ $--input: map.deep-merge(
                         'size-mini': var(--be-h-mini),
                         'size-medium': var(--be-h-medium),
                         'size-large': var(--be-h-large),
+                        'h-max':300px
 
                 ),
                 $--input
