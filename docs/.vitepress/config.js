@@ -88,7 +88,7 @@ export default defineConfigWithTheme({
               link: '/views/document/container',
             },
             {
-              text: '右键菜单',
+              text: '右键菜单 contextmenu',
               link: '/views/document/contextmenu',
             },
             {

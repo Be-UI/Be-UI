@@ -42,15 +42,11 @@ internalInstance.ctx 禁止使用 proxy.$el.
 
 ## 排期
 
-打包：
-还差
-删除子包
-
 文档迁移编写 测试打包
 文档 迁移 vitepress  
-1.样式重构  
-be-select 支持绑定对象;  
-be-notification 单元测试
+1.样式重构
+2.be-select 支持绑定对象;  
+3.be-notification 单元测试
 
 ## 长期排期
 
