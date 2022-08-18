@@ -50,8 +50,8 @@ $componentsClass: $name + '-' + 'input' !global;
 
     .#{ $componentsClass }#{$element-separator}inner {
       width: var(--be-input-w-full);
-      height: var(--be-input-h-30);
-      line-height: var(--be-input-h-30);
+      height: var(--be-input-h-30px);
+      line-height: var(--be-input-h-30px);
       border: 0;
       border-radius: var(--be-input-rounded-base);
       outline: 0;
@@ -130,7 +130,7 @@ $componentsClass: $name + '-' + 'input' !global;
 
     .#{ $componentsClass }#{$modifier-separator}select {
       position: absolute;
-      max-height: 300px;
+      @include h-max(var(--be-input-h-max));
       padding: 0;
       margin: 0;
       overflow-x: hidden;
@@ -140,19 +140,8 @@ $componentsClass: $name + '-' + 'input' !global;
       border-top: 0;
       border-radius: 0 0 3px 3px;
 
-      &::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-        margin: 5px;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: var(--be-input-border-color);
-        border-radius: 5px;
-      }
-
       .#{ $componentsClass }#{$modifier-separator}select#{$element-separator}line {
-        width: 90%;
+        width: var(--be-input-w-30);
         height: 1px;
         margin: 0 auto;
         list-style: none;
@@ -161,8 +150,8 @@ $componentsClass: $name + '-' + 'input' !global;
 
       .#{ $componentsClass }#{$modifier-separator}select#{$element-separator}inner {
         box-sizing: border-box;
-        height: var(--be-input-h-30);
-        line-height: var(--be-input-h-30);
+        height: var(--be-input-h-30px);
+        line-height: var(--be-input-h-30px);
         padding-left: 10px;
         list-style: none;
         @include be-pointer;
@@ -238,28 +227,17 @@ $componentsClass: $name + '-' + 'input' !global;
 
 .#{ $componentsClass }#{$modifier-separator}select {
   z-index: var(--be-input-z-index);
-  max-height: 300px;
+  @include h-max(var(--be-input-h-max));
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    margin: 5px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--be-input-bg-g);
-    border-radius: var(--be-input-round-base);
-  }
 
   ul {
     padding: 0;
   }
 
   .#{ $componentsClass }#{$modifier-separator}select#{$element-separator}line {
-    width: 90%;
+    width: var(--be-input-w-30);
     height: 1px;
     margin: 0 auto;
     list-style: none;
@@ -268,10 +246,10 @@ $componentsClass: $name + '-' + 'input' !global;
 
   .#{ $componentsClass }#{$modifier-separator}select#{$element-separator}inner {
     box-sizing: border-box;
-    height: var(--be-input-h-30);
+    height: var(--be-input-h-30px);
     padding-left: 10px;
     font-size: var(--be-input-text-base);
-    line-height: var(--be-input-h-30);
+    line-height: var(--be-input-h-30px);
     @include be-ellipsis-class;
     list-style: none;
     @include be-pointer;
