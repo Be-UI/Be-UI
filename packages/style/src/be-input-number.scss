@@ -3,88 +3,98 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-.be-input-number {
-  @apply flex border bg-default w-min;
+$componentsClass: $name + '-' + 'input-number' !global;
+@include create-B(input-number) {
+  @include set-component-style-var('input-number', $--input-number);
+}
 
-  .be-input-number__inner {
+.#{ $componentsClass } {
+  display: flex;
+  border-width: var(--be-input-number-border-w);
+  background-color: var(--be-input-number-bg-w);
+  width: var(--be-input-number-min-c);
+
+  .#{ $componentsClass }#{$element-separator}inner {
     user-select: none;
-    @apply border-0;
+    border-width: 0;
   }
 
-  .be-input-number__limit {
+  .#{ $componentsClass }#{$element-separator}limit {
     .be-input--body {
-      .be-input__inner {
-        @apply text-error font-mono;
+      .be-input#{$element-separator}inner {
+        color: var(--be-input-number-limit-color);
+        @include font-mono;
       }
     }
   }
 
-  .be-input-number__default {
-    @apply flex;
+  .#{ $componentsClass }#{$element-separator}default {
+    display: flex;
 
-    .be-input-number__op {
-      @apply flex justify-around flex-col border-l cursor-pointer;
+    .#{ $componentsClass }#{$element-separator}op {
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+      cursor: pointer;
+      border-left-width: var(--be-input-number-border-w);
 
-      .be-input-number__up {
-        @apply bg-default flex justify-center items-center flex-1 border-b;
-
-        .be-icon--container {
-          @apply w-3 h-3 fill-info;
-        }
+      .#{ $componentsClass }#{$element-separator}up {
+        @include flex-center;
+        flex: 1 1 0;
+        border-bottom-width: var(--be-input-number-border-w);
+        background-color: var(--be-input-number-bg-w);
       }
-
       .be-icon {
-        @apply bg-default flex justify-center items-center flex-1;
-
+        @include flex-center;
+        background-color: var(--be-input-number-bg-w);
+        flex: 1 1 0;
         .be-icon--container {
-          height: 0.7rem;
-          @apply w-3 fill-info;
+          height: var(--be-input-number-icon-size);
+          width: var(--be-input-number-icon-size);
+          fill: var(--be-input-number-color-icon);
         }
       }
     }
   }
 
-  .be-input-number__pre {
-    @apply border-r;
+  .#{ $componentsClass }#{$element-separator}pre {
+    border-right-width: var(--be-input-number-border-w);
   }
 
-  .be-input-number__next {
-    @apply border-l;
+  .#{ $componentsClass }#{$element-separator}next {
+    border-left-width: var(--be-input-number-border-w);
   }
 
-  .be-input-number__op__disabled {
-    @apply cursor-not-allowed;
+  .#{ $componentsClass }#{$element-separator}op#{$element-separator}disabled {
+    @include be-disabled
   }
 }
 
-.be-input-number__disabled {
-  @apply cursor-not-allowed bg-gray-100;
+.#{ $componentsClass }#{$element-separator}disabled {
+  @include be-disabled;
+  background-color: var(--be-input-number-color-disabled);
 }
 
-.be-input-number__mini {
-  @apply w-20 h-6;
+.#{ $componentsClass }#{$element-separator}small {
+  height: var(--be-input-number-h-small);
+  width: var(--be-input-number-w);
 
-  .be-input-number__inner {
+  .#{ $componentsClass }#{$element-separator}inner {
     .be-input--body {
-      .be-input__inner {
-        @apply h-5 leading-5;
-      }
-    }
-  }
-
-  .be-input-number__op {
-    .be-icon {
-      .be-icon--container {
-        @apply w-2.5 h-2.5;
+      .be-input#{$element-separator}inner {
+        height: var(--be-input-number-h-small-in);
+        line-height: var(--be-input-number-h-small-in);
       }
     }
   }
 }
 
-.be-input-number__medium {
-  @apply w-20 h-8;
+.#{ $componentsClass }#{$element-separator}medium {
+  height: var(--be-input-number-h-medium);
+  width: var(--be-input-number-w);
 }
 
-.be-input-number__large {
-  @apply w-20 h-10;
+.#{ $componentsClass }#{$element-separator}large {
+  height: var(--be-input-number-h-large);
+  width: var(--be-input-number-w);
 }
