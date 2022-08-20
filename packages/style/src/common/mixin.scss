@@ -42,6 +42,10 @@
   align-items: center;
   justify-content: center;
 }
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
 
 @mixin be-pointer {
   cursor: pointer;
@@ -179,6 +183,7 @@
     (
       'w': $white,
       'b': $black,
+      'disabled':#f3f4f6ff,
       'grays': #c0c4cc,
       'bg-hover': #f5f5f5,
       'q-blues': #b3d8ff,
@@ -188,7 +193,7 @@
     $--color
   );
   // 其他基础色
-  @each $type in (w, b, grays, bg-hover, q-blues,main,main-02) {
+  @each $type in (w, b, grays, bg-hover, q-blues,main,main-02,'disabled') {
     @include set-css-var-type('base-color', $type, $--color);
   }
 
@@ -546,4 +551,24 @@ $--input: map.deep-merge(
 
                 ),
                 $--input
+);
+
+// 生成 be-input
+$--input-number: () !default;
+$--input-number: map.deep-merge(
+                (
+                        'bg-w': var(--be-base-color-w),
+                        'w':5rem,
+                        'h-small':1.5rem,
+                        'h-small-in':1.25rem,
+                        'h-medium':2rem,
+                        'h-large':2.5rem,
+                        'border-w':1px,
+                        'min-c':min-content,
+                        'limit-color':var(--be-emo-error-color),
+                        'icon-size':0.75rem,
+                        'color-disabled':var(--be-base-color-disabled),
+                        'color-icon':var(--be-text-color-secondary),
+                ),
+                $--input-number
 );

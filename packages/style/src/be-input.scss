@@ -7,10 +7,7 @@ $componentsClass: $name + '-' + 'input' !global;
 @include create-B(input) {
   @include set-component-style-var('input', $--input);
 }
-@mixin flex-align-center {
-  display: flex;
-  align-items: center;
-}
+
 @include create-B($name) {
   @include flex-align-center;
   width: var(--be-input-w-full);

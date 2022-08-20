@@ -27,7 +27,7 @@ export default defineComponent({
     },
     /**
      * 大小
-     * @values 'mini' | 'medium' | 'large'
+     * @values 'small' | 'medium' | 'large'
      */
     size: {
       type: String,
@@ -331,7 +331,6 @@ export default defineComponent({
           icon="up"
           class="be-input-number__up"
           tabindex="2"
-          class-name="be-input-number__up"
           @click="handleIncrease"
         />
         <be-icon

@@ -5,7 +5,7 @@
  * @update (czh 2021/11/18)
  */
 import { mount } from '@vue/test-utils'
-import BeInputNumber from '../src/be-input-number'
+import BeInputNumber from '../src/be-input-number.vue'
 import { ComponentInternalInstance, getCurrentInstance, nextTick, onMounted, ref } from 'vue'
 import { asyncExpect } from '../../../utils/utils'
 const mousedown = new Event('mousedown')
@@ -28,15 +28,15 @@ const _mount = (options: any) =>
  * @param options
  */
 describe('test-be-input-number-props', () => {
-  test('props-size-mini', async () => {
+  test('props-size-small', async () => {
     const wrapper = await mount(BeInputNumber, {
       props: {
-        size: 'mini',
+        size: 'small',
         num: 0,
       },
     })
 
-    expect(wrapper.find('.be-input-number__mini').exists()).toBeTruthy()
+    expect(wrapper.find('.be-input-number__small').exists()).toBeTruthy()
   })
   test('props-size-medium', async () => {
     const wrapper = await mount(BeInputNumber, {
@@ -301,7 +301,7 @@ describe('test-be-input-number-event', () => {
     const handlePressEnterJest = jest.fn()
     const wrapper = await mount(BeInputNumber, {
       props: {
-        size: 'mini',
+        size: 'small',
         keyboard: true,
         onPressEnter: handlePressEnterJest,
       },
