@@ -158,6 +158,8 @@ export default defineComponent({
           props.modelValue === props.unCheckedValue
       ) {
         innerState.value = false
+        ctx.emit('update:modelValue', props.unCheckedValue)
+        return
       }
       if (
           props.checkedValue !== undefined &&
@@ -168,11 +170,12 @@ export default defineComponent({
           props.modelValue === props.checkedValue
       ) {
         innerState.value = true
+        ctx.emit('update:modelValue', props.checkedValue)
+        return
       }
+      ctx.emit('update:modelValue', setInnerState())
     }
-    onMounted(() => {
-      init()
-    })
+    init()
     return {
       innerState,
       handleClick,
