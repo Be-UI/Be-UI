@@ -46,6 +46,11 @@
   display: flex;
   align-items: center;
 }
+@mixin flex-align-center-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 @mixin be-pointer {
   cursor: pointer;
@@ -79,6 +84,12 @@
 }
 @mixin w-min($w) {
   min-width: $w;
+}
+@mixin w-max($w) {
+  max-width: $w;
+}
+@mixin h-min($h) {
+  min-height: $h;
 }
 @mixin h-max($h) {
   max-height: $h;
@@ -571,4 +582,30 @@ $--input-number: map.deep-merge(
                         'color-icon':var(--be-text-color-secondary),
                 ),
                 $--input-number
+);
+
+// 生成be-select
+$--select: () !default;
+$--select: map.deep-merge(
+                (
+                        'color-op-text':var(--be-text-color-secondary),
+                        'color-text':var(--be-text-color-regular),
+                        'bg-w': var(--be-base-color-w),
+                        'color-disabled':var(--be-base-color-disabled),
+                        'h-small':28px,
+                        'h-medium':30px,
+                        'h-large':40px,
+                        'h-option':30px,
+                        'h-icon':2rem,
+                        'color-icon':var(--be-emo-link-color),
+                        'border-color':var(--be-emo-info-color--hover),
+                        'border-color-f':var(--be-base-color-main),
+                        'border-shadow':var(--be-base-color-main-02),
+                        'w-full':var(--be-percentage-full),
+                        'rounded-base': var(--be-rounded-base),
+                        'color-info':var(--be-emo-info-color--hover),
+                        'bg-op-disabled':transparent,
+                        'bg-hover':var(--be-base-color-bg-hover),
+                ),
+                $--select
 );

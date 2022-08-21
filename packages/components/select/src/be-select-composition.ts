@@ -37,7 +37,7 @@ export default (props: any, ctx: any) => {
    * 计算输入建议下拉框位置
    */
   const computedPosition = (): void => {
-    const $eventDom: HTMLElement | null = document.getElementById(`be-select-body${uid}`)
+    const $eventDom: HTMLElement | null = document.getElementById(`be-select--body${uid}`)
     if (!$eventDom) return
     selectStyle.width = Number(window.getComputedStyle($eventDom).width.split('px')[0]) + 'px'
   }
@@ -83,7 +83,7 @@ export default (props: any, ctx: any) => {
    */
   const selectOpenChange = (showPopover: boolean): void => {
     if (showPopover) {
-      focusClass.value = 'be-select-body__focus'
+      focusClass.value = 'be-select--body__focus'
     } else {
       focusClass.value = ''
     }

@@ -19,7 +19,7 @@ export default defineComponent({
     },
     /**
      * 大小
-     * @values 'mini' | 'medium' | 'large'
+     * @values 'small' | 'medium' | 'large'
      */
     size: {
       type: String,
@@ -268,7 +268,7 @@ export default defineComponent({
         return (
           <div
             class={`
-                        be-select-option__extend`}>
+                        be-select--option__extend`}>
             <be-input value={addItem.value} onInput={handleInput}></be-input>
             <be-icon icon="add" onClick={addItemToList}></be-icon>
           </div>
@@ -355,10 +355,10 @@ export default defineComponent({
           <div
             class={`
                         ellipsis
-                        ${val.type === 'group' && index !== 0 ? 'be-select-option__line' : ''}
-                        ${val.isSelect ? 'be-select-option__choice' : ''}
-                        ${val.type === 'group' ? 'be-select-option__group' : 'be-select-option'}
-                        ${val.disabled ? 'be-select-option__disabled' : ''}`}
+                        ${val.type === 'group' && index !== 0 ? 'be-select--option__line' : ''}
+                        ${val.isSelect ? 'be-select--option__choice' : ''}
+                        ${val.type === 'group' ? 'be-select--option__group' : 'be-select--option'}
+                        ${val.disabled ? 'be-select--option__disabled' : ''}`}
             key={val[keyValue]}
             onClick={() => {
               if (val.disabled || val.type === 'group') return
@@ -382,15 +382,15 @@ export default defineComponent({
             placement="bottom"
             ref="beSelectPopover"
             trigger-elm={`be_select-${uid}`}
-            custom-class="be-select-popover">
+            custom-class="be-select--popover">
             {{
               default: (
-                <div style={selectStyle} class="be-select-option-body">
+                <div style={selectStyle} class="be-select--option--body">
                   <div
                     class={`
-                                    be-select-option-container 
+                                    be-select--option--container 
                                     scroll-diy 
-                                    ${loading.value ? 'be-select-loading ' : ''}`}
+                                    ${loading.value ? 'be-select--loading ' : ''}`}
                     id={`be_select_option_container_${uid}`}>
                     {/*渲染loading 或者列表 */}
                     {loading.value ? (
@@ -405,10 +405,10 @@ export default defineComponent({
               ),
               trigger: (
                 <div
-                  class={`be-select-body ${focusClass.value} ${props.customClass} ${
-                    props.disabled ? 'be-select-input__disabled' : ''
+                  class={`be-select--body ${focusClass.value} ${props.customClass} ${
+                    props.disabled ? 'be-select--input__disabled' : ''
                   }`}
-                  id={`be-select-body${uid}`}
+                  id={`be-select--body${uid}`}
                   style={{
                     cursor: cursor,
                   }}
@@ -428,7 +428,7 @@ export default defineComponent({
                     style={{
                       cursor: cursor,
                     }}
-                    class={`be-select-input be-select-input__${props.size}`}
+                    class={`be-select--input be-select--input__${props.size}`}
                   />
                   <be-icon
                     icon={iconType.value}
@@ -438,7 +438,7 @@ export default defineComponent({
                         $event.stopPropagation()
                       }
                     }}
-                    class={`be-select-icon`}></be-icon>
+                    class={`be-select--icon`}></be-icon>
                 </div>
               ),
             }}
