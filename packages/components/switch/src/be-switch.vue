@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, watch } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import { isBool, isNumber, isString } from '@be-ui/utils/common'
 import {BeIcon} from '@be-ui/components/svg-icon'
 export default defineComponent({
