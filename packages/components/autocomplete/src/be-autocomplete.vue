@@ -30,7 +30,7 @@
       </be-input>
     </template>
     <transition name="dialog-fade">
-      <be-input--select
+      <be-input-select
         :loading="loading"
         :key-value="keyValue"
         :label-value="labelValue"
@@ -44,7 +44,7 @@
             :item="slotProps.item"
           />
         </template>
-      </be-input--select>
+      </be-input-select>
     </transition>
   </be-popover>
 </template>
