@@ -3,161 +3,163 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-.be-select {
-  .be-select-tag {
-    padding: 0 7px 3px 0;
+$componentsClass: $name + '-' + 'select' !global;
+@include create-B(select) {
+  @include set-component-style-var('select ', $--select);
+}
+@include create-B(select) {
+  .#{$componentsClass}#{$modifier-separator}tag {
+    padding: 0 8px 3px 0;
   }
 
-  .be-select-input {
+  .#{$componentsClass}#{$modifier-separator}input {
     min-width: 1px;
-    max-width: 100%;
+    @include w-max(100%);
     overflow: hidden;
-    color: $defaultText;
+    color: var(--be-select-color-text);
     border: 0;
     outline: 0;
   }
 
-  .be-select-input__mini {
-    height: 28px;
-    line-height: 28px;
+  .#{$componentsClass}#{$modifier-separator}input__small {
+    height:  var(--be-select-h-small);
+    line-height:  var(--be-select-h-small);
   }
 
-  .be-select-input__medium {
-    height: 30px;
-    line-height: 30px;
+  .#{$componentsClass}#{$modifier-separator}input__medium {
+    height:  var(--be-select-h-medium);
+    line-height:  var(--be-select-h-medium);
   }
 
-  .be-select-input__large {
-    height: 40px;
-    line-height: 40px;
+  .#{$componentsClass}#{$modifier-separator}input__large {
+    height:  var(--be-select-h-large);
+    line-height:  var(--be-select-h-large);
   }
 
-  .be-input--select {
-    background-color: $default;
+  .be-input#{$modifier-separator}select {
+    background-color: var(--be-select-bg-w);
 
-    .be-input--select__inner {
+    .be-input#{$modifier-separator}select__inner {
       margin: 0;
     }
 
     ul {
-      margin-block-start: 0.5em;
-      margin-block-end: 0.5em;
+      margin-block-start: 0.5rem;
+      margin-block-end: 0.5rem;
     }
   }
 
-  .be-select-body {
+  .#{$componentsClass}#{$modifier-separator}body {
     position: relative;
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: var(--be-select-w-full);
     padding: 0 30px 0 8px;
-    background-color: $default;
-    border: 1px solid $infoBorder;
-    border-radius: 3px;
+    background-color: var(--be-select-bg-w);
+    border: 1px solid var(--be-select-borfer-color);
+    border-radius: var(--be-select-rounded-base);
     outline: 0;
 
     &:hover {
-      border-color: $pinkHoverBorder;
+      border-color: var(--be-select-border-color-f);
     }
   }
-  .be-select-input__disabled {
-    @apply bg-gray-100;
+  .#{$componentsClass}#{$modifier-separator}input__disabled {
+    background-color: var(--be-select-color-disabled);
   }
-  .be-select-body__focus {
-    border: 1px solid $pinkHoverBorder;
+  .#{$componentsClass}#{$modifier-separator}body__focus {
+    border: 1px solid var(--be-select-border-color-f);
     outline: 0;
-    box-shadow: 0 0 0 2px $pinkHoverBorder-02;
+    box-shadow: 0 0 0 2px var(--be-select-border-shadow)
   }
 
-  .be-select-icon {
+  .#{$componentsClass}--icon {
     position: absolute;
     top: 50%;
     right: 10px;
-    cursor: pointer;
-    fill: $defaultText;
+    @include be-pointer;
+    fill: var(--be-select-color-text);
     transform: translateY(-50%);
   }
 }
 
-.be-select-option-body {
+.#{$componentsClass}--option--body {
   box-sizing: border-box;
-  padding: 0.5em 0;
+  padding: 0.5rem 0;
 
-  .be-select-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 50px;
+  .#{$componentsClass}--loading {
+    @include flex-center;
+    @include h-min(50px)
   }
 
-  .be-select-option-container {
-    max-height: 300px;
+  .#{$componentsClass}--option--container {
+    @include h-max(300px);
     overflow-y: auto;
 
-    .be-select-option {
+    .#{$componentsClass}--option {
       box-sizing: border-box;
-      height: 30px;
+      height: var(--be-select-h-option);
+      line-height: var(--be-select-h-option);
       padding: 0 15px;
-      line-height: 30px;
-      color: $defaultText;
+      color: var(--be-select-color-text);
       text-align: left;
-      cursor: pointer;
+      @include be-pointer;
 
       &:hover {
-        background-color: $defaultGray;
+        background-color: var(--be-select-bg-hover);
       }
     }
 
-    .be-select-option__group {
+    .#{$componentsClass}--option__group {
       box-sizing: border-box;
-      height: 30px;
+      height: var(--be-select-h-option);
+      line-height: var(--be-select-h-option);
       padding-left: 6px;
-      line-height: 30px;
-      color: $info;
+      color: var(--be-select-color-op-text);
       text-align: left;
     }
 
-    .be-select-option__choice {
+    .#{$componentsClass}--option__choice {
       font-weight: bold;
-      color: $pinkHoverBorder;
-      background-color: $defaultGray;
+      color: var(--be-select-border-color-f);
+      background-color: var(--be-select-bg-hover);
 
-      .be-select-hook {
-        @apply float-right;
+      .#{$componentsClass}--hook {
+        float: right;
 
         .be-icon {
-          @apply h-8 leading-8 fill-blue;
+          fill: var(--be-select-color-icon);
+          line-height: var(--be-select-h-icon);
+          height: var(--be-select-h-icon);
         }
       }
 
       &:hover {
-        background-color: $defaultGray;
+        background-color: var(--be-select-bg-hover);
       }
     }
 
-    .be-select-option__line::before {
+    .#{$componentsClass}--option__line::before {
       position: absolute;
       width: 93%;
       height: 1px;
       content: ' ';
-      background-color: $infoHover;
+      background-color: var(--be-select-color-info);
     }
 
-    .be-select-option__disabled {
-      color: $infoHover;
-      cursor: not-allowed;
+    .#{$componentsClass}--option__disabled {
+      color: var(--be-select-color-info);
+      @include be-disabled;
 
       &:hover {
-        background-color: transparent;
+        background-color: var(--be-select-bg-op-disabled);
       }
     }
   }
 
-  .be-select-option__extend {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .#{$componentsClass}--option__extend {
+    @include flex-align-center-between;
     padding: 0 10px;
     margin-top: 5px;
 
@@ -166,20 +168,20 @@
       width: 70%;
     }
 
-    .be-icon--container {
+    .be-icon#{$modifier-separator}container {
       flex: 2;
 
       .be-icon {
         margin: 0 auto;
-        cursor: pointer;
+        @include be-pointer;
       }
     }
   }
 }
 
-.be-select-popover {
+.#{$componentsClass}#{$modifier-separator}popover {
   .be-popover {
-    .be-popover--body {
+    .be-popover#{$modifier-separator}body {
       padding: 0;
     }
   }

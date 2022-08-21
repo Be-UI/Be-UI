@@ -8,7 +8,7 @@ $componentsClass: $name + '-' + 'input' !global;
   @include set-component-style-var('input', $--input);
 }
 
-@include create-B($name) {
+@include create-B(input) {
   @include flex-align-center;
   width: var(--be-input-w-full);
   background-color: var(--be-input-bg-w);
