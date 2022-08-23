@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'switch' !global;
+$componentsClass: $name + '-' + 'switch' ;
 @include create-B(switch) {
   @include set-component-style-var('switch', $--switch);
 }

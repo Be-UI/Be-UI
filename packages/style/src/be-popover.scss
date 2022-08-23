@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'popover' !global;
+$componentsClass: $name + '-' + 'popover' ;
 @include create-B(popover) {
   @include set-component-style-var('popover', $--popover);
 }

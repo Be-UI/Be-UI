@@ -19,7 +19,7 @@
 // E 和 M 自己写算了
 @mixin create-B($block) {
   // !global 語法使用全局變量覆蓋 即把$B: $name + '-' + $block 定義的變量提升到了全局
-  $B: $name + '-' + $block !global;
+  $B: $name + '-' + $block ;
   .#{$B} {
     @content;
   }

@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'contextmenu' !global;
+$componentsClass: $name + '-' + 'contextmenu' ;
 @include create-B(contextmenu) {
   @include set-component-style-var('contextmenu', $--contextmenu);
 }
