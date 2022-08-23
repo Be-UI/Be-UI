@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'button' !global;
+$componentsClass: $name + '-' + 'button' ;
 @include create-B(button) {
   @include set-component-style-var('button', $--button);
 }

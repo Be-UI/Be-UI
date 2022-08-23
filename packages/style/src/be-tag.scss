@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'tag' !global;
+$componentsClass: $name + '-' + 'tag' ;
 @include create-B(tag) {
   @include set-component-style-var('tag', $--tag);
 }

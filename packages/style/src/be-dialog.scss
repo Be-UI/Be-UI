@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'dialog' !global;
+$componentsClass: $name + '-' + 'dialog' ;
 @include create-B(dialog) {
   @include set-component-style-var('dialog', $--dialog);
 }

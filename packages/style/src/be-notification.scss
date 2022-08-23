@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'notification' !global;
+$componentsClass: $name + '-' + 'notification' ;
 @include create-B(notification) {
   @include set-component-style-var('notification', $--notification);
 }

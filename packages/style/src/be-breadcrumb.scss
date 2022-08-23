@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'breadcrumb' !global;
+$componentsClass: $name + '-' + 'breadcrumb' ;
 @include create-B(breadcrumb) {
   @include set-component-style-var('breadcrumb', $--breadcrumb);
 }

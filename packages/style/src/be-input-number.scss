@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'input-number' !global;
+$componentsClass: $name + '-' + 'input-number' ;
 @include create-B(input-number) {
   @include set-component-style-var('input-number', $--input-number);
 }

@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'main' !global;
+$componentsClass: $name + '-' + 'main' ;
 
 @include create-B(main) {
   box-sizing: border-box;

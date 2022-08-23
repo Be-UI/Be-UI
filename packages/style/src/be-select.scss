@@ -3,9 +3,9 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'select' !global;
+$componentsClass: $name + '-' + 'select' ;
 @include create-B(select) {
-  @include set-component-style-var('select ', $--select);
+  @include set-component-style-var('select', $--select);
 }
 @include create-B(select) {
   .#{$componentsClass}#{$modifier-separator}tag {
