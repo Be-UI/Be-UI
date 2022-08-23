@@ -1,5 +1,5 @@
 <template>
-  <be-popover customClass="header-popover" x="500" y="500" trigger="click">
+  <be-popover customClass="header-popover" :x="400" :y="400" trigger="click">
     <template #trigger>
       <be-button style="margin-right: 5px" customClass="sm:mb-4" type="info" bordered>可以了</be-button>
     </template>
