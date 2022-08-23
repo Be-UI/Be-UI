@@ -148,7 +148,7 @@ export default defineConfigWithTheme({
               link: '/views/document/tooltip',
             },
             {
-              text: '弹出框',
+              text: '弹出框 popover',
               link: '/views/document/popover',
             },
           ],
