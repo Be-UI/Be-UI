@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'load' !global;
+$componentsClass: $name + '-' + 'load' ;
 @include create-B(load) {
   @include set-component-style-var('load', $--load);
 }

@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'pager' !global;
+$componentsClass: $name + '-' + 'pager' ;
 @include create-B(pager) {
   @include set-component-style-var('pager', $--pager);
 }

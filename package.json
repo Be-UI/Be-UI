@@ -15,8 +15,7 @@
   "scripts": {
     "init": "pnpm install --w",
     "dev": "vite --host",
-    "build": "rollup -c rollup.config.js && pnpm run release",
-    "build:gulp": "gulp -f ./build-script/gulpfile.ts",
+    "build": "gulp -f ./build-script/gulpfile.ts",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint:ts": "eslint ./packages --ext .vue,.js,.ts,.jsx,.tsx",

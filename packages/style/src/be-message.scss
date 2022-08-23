@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'message' !global;
+$componentsClass: $name + '-' + 'message' ;
 @include create-B(message) {
   @include set-component-style-var('message', $--message);
 }

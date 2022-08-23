@@ -3,7 +3,7 @@
 @import 'common/mixin';
 @import 'common/var';
 @import 'common/config';
-$componentsClass: $name + '-' + 'icon' !global;
+$componentsClass: $name + '-' + 'icon' ;
 @keyframes be-animate-icon-spin {
   100% {
     transform: rotate(360deg);
