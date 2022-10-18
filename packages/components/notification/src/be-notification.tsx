@@ -8,7 +8,7 @@
 import { computed, defineComponent, reactive, ref, h, getCurrentInstance,PropType } from 'vue'
 import {BeIcon} from '@be-ui/components'
 import {INotfiy, INotifyOption} from './be-notification-type'
-import {getUuid} from "@be-ui/utils/common";
+import {getUuid} from "packages/utils/utils";
 
 export default defineComponent({
   name: 'BeNotification',

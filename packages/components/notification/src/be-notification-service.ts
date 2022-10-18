@@ -8,7 +8,7 @@ import { createVNode, render, DefineComponent } from 'vue'
 import beNotifyComponents from './be-notification'
 import type { INotifyOption, ItInstanceMap } from './be-notification-type'
 import { INotfiyInst } from './be-notification-type'
-import { jsonClone } from '@be-ui/utils/common'
+import { jsonClone } from 'packages/utils/utils'
 
 // 各個方向的實例緩存
 let instanceMap: ItInstanceMap = {

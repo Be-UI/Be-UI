@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import {defineComponent,inject,ref} from 'vue'
-import {getUuid} from "@be-ui/utils/common";
+import {getUuid} from "packages/utils/utils";
 
 export default defineComponent({
     name: "BeLoadingElm",

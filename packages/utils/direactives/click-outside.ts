@@ -1,10 +1,4 @@
-/*
- * click-outside.ts
- * @deprecated dom元素外部点击指令
- * @author czh
- * @create (czh 2021/4/26)
- * @update (czh 2021/4/26)
- */
+
 import { DirectiveBinding, ObjectDirective } from 'vue'
 
 function defaultConditional(): boolean {

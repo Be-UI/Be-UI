@@ -58,7 +58,7 @@
   import type { Options, Placement, PositioningStrategy } from '@popperjs/core'
   import { createPopper, Instance } from '@popperjs/core'
   import { IPopover, TPopoverStyle, VirtualElement } from './be-popover-type'
-  import { isString } from '@be-ui/utils/common'
+  import { isString } from 'packages/utils/utils'
 
   export default defineComponent({
     name: 'BePopover',

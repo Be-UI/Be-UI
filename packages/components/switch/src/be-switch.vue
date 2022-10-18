@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import { isBool, isNumber, isString } from '@be-ui/utils/common'
+import { isBool, isNumber, isString } from 'packages/utils/utils'
 import {BeIcon} from '@be-ui/components/svg-icon'
 export default defineComponent({
   name: "BeSwitch",

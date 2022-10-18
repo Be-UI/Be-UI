@@ -2,7 +2,7 @@ import { computed, defineComponent, getCurrentInstance, h, nextTick, onMounted, 
 import { IBreadcrumbInst, IBreadcrumbItemVnode, IBreadcrumbPopover } from './be-breadcrumb-type'
 import { useBrowserLocation } from '@be-ui/utils/use-browser-location'
 import {BePopover} from '@be-ui/components'
-import {getUuid} from "@be-ui/utils/common";
+import {getUuid} from "packages/utils/utils";
 export default defineComponent({
   name: 'BeBreadcrumbItem',
   components: {

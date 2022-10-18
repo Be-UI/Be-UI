@@ -11,7 +11,7 @@ import {
 } from 'vue'
 import { IInputNumInstance, IInputNumLimit } from './be-input-number-type'
 import { IInputInst } from '../../input/src/be-input-type'
-import { accAdd, accSub, checkNumber } from '@be-ui/utils/common'
+import { accAdd, accSub, checkNumber } from 'packages/utils/utils'
 import BeIcon from '../../svg-icon/src/be-icon.vue'
 import BeInput from '../../input/src/be-input.vue'
 export default defineComponent({

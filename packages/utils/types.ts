@@ -10,3 +10,15 @@ export type TimeoutHandle = ReturnType<typeof window.setTimeout>
 export interface IOption {
   [key: string]: any
 }
+
+export interface IWindowLocation {
+  hash?: string
+  host?: string
+  hostname?: string
+  href?: string
+  origin?: string
+  pathname?: string
+  port?: string
+  protocol?: string
+  search?: string
+}

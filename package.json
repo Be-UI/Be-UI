@@ -15,7 +15,7 @@
   "scripts": {
     "init": "pnpm install --w",
     "dev": "vite --host",
-    "build": "gulp -f ./build-script/gulpfile.ts",
+    "build": "pnpm run clean && pnpm run --filter @be-ui/build build:utils",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint:ts": "eslint ./packages --ext .vue,.js,.ts,.jsx,.tsx",
@@ -26,8 +26,7 @@
     "release": "cp package.json README.md dist",
     "prepare": "husky install",
     "update:dep": "pnpm up",
-    "clean": "pnpm run clean:dist",
-    "clean:dist": "rimraf dist"
+    "clean": "rimraf dist"
   },
   "lint-staged": {
     "*.{vue,js,ts,jsx,tsx,json}": [

@@ -64,7 +64,7 @@
   import {BePopover,BeInput} from '@be-ui/components'
   import BeInputSelect from './be-input-select.vue'
   import { IInputSelectInst, IInputSelectFunc } from './be-autocomplete-type'
-  import { isString, jsonClone } from '@be-ui/utils/common'
+  import { isString, jsonClone } from 'packages/utils/utils'
   import { isObject } from '@vue/shared'
   export default defineComponent({
     name: 'BeAutocomplete',

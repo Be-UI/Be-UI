@@ -1,18 +1,8 @@
 import { onMounted, onUnmounted, Ref, ref } from 'vue'
+import {IWindowLocation} from "./types";
+
 export const hasWindow = typeof window !== 'undefined'
 const defaultWindow = hasWindow ? window : null
-export interface IWindowLocation {
-  hash?: string
-  host?: string
-  hostname?: string
-  href?: string
-  origin?: string
-  pathname?: string
-  port?: string
-  protocol?: string
-  search?: string
-}
-
 export const useBrowserLocation = (customWindow = defaultWindow): Ref<IWindowLocation> => {
   const getWindowLocation = (): IWindowLocation => {
     const { hash, host, hostname, href, origin, pathname, port, protocol, search } =

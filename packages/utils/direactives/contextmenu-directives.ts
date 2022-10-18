@@ -1,11 +1,4 @@
-/*
- * contextmenu-directives.ts
- * @deprecated 右键菜单指令，这个指令只适用于右键菜单
- * 通过 inserted 的钩子 给渲染后的目标元素绑定右键事件和id
- * @author czh
- * @create (czh 2021/4/14)
- * @update (czh 2021/4/16)
- */
+
 import { DirectiveBinding, ObjectDirective, VNode } from 'vue'
 export const contextmenu: ObjectDirective = {
   mounted(el, binding: DirectiveBinding, vnode: VNode) {

@@ -10,7 +10,7 @@ import {
   isFunction,
   jsonClone,
   mapToArr,
-} from '../../../utils/common'
+} from '../../../utils/utils'
 import composition from './be-select-composition'
 
 export default defineComponent({

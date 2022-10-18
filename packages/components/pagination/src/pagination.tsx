@@ -10,7 +10,7 @@ import {
   IPagerMix,
   IPagerrenderList,
 } from './be-pagenation-type'
-import { arrayDeduplicationt } from '@be-ui/utils/common'
+import { arrayDeduplicationt } from 'packages/utils/utils'
 
 export default defineComponent({
   name: 'BePagination',

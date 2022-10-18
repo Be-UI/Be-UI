@@ -1,12 +1,6 @@
-/*
- * drag-directives.ts
- * @deprecated 拖拽指令
- * @author xuqianqian
- * @create (xuqianqian 2021/4/16)
- * @update (czh 2021/4/16)
- */
+
 import { DirectiveBinding, ObjectDirective } from 'vue'
-import { IEvent } from '../type/types'
+import { IEvent } from '../types'
 
 export const dragDirective: ObjectDirective = {
   beforeMount(el: HTMLElement, binding: DirectiveBinding): void {
