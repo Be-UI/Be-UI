@@ -1,6 +1,7 @@
 {
   "name": "@be-ui/utils",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.ts",
   "scripts": {
