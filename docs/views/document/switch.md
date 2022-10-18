@@ -76,7 +76,7 @@ switch/render
 | modelValue     | `Boolean / String / Number`    | `-`       | 绑定值                               |
 | size           | `String`                       | `default` | 尺寸 `'small' / 'default'/ 'large'` |
 | disabled       | `Boolean`                      | `false`   | 禁用                                |
-| isLoading       | `Boolean`                     | `false`   | 载入                                |
+| isLoading      | `Boolean`                     | `false`   | 载入                                |
 | customClass    | `String`                       | `-`       | 自定义主题样式类                          |
 | checkedValue   | `Boolean / String / Number`    | `-`       | 指定开启时的值                           |
 | unCheckedValue | `Boolean / String / Number`    | `-`       | 指定关闭时的值                           |
