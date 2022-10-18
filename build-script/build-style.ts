@@ -1,63 +1,37 @@
-import { series ,parallel} from 'gulp'
-import resolve from '@rollup/plugin-node-resolve'
-import babel from '@rollup/plugin-babel'
-import commonjs from '@rollup/plugin-commonjs'
-import typescript from 'rollup-plugin-typescript2'
-import cleanup from 'rollup-plugin-cleanup'
-import { terser } from 'rollup-plugin-terser'
-import dts from 'rollup-plugin-dts'
-import { build } from "./utils/utils";
+import gulpSass from "gulp-sass";
+import dartSass from "sass";
+import autoprefixer from "gulp-autoprefixer";
+import cleanCss from "gulp-clean-css";
+import path from "path";
+import { series, src, dest } from "gulp";
 
-const config = {
-  input: '../packages/utils/index.ts', // 必须，入口文件
-  external: ['vue'],
-  plugins: [
-    // 引入的插件在这里配置
-    resolve(),
-    typescript(),
-    babel({
-      presets: ['@babel/preset-env'],
-      exclude: '**/node_modules/**',
-      babelHelpers: 'runtime',
-    }),
-    commonjs(),
-    cleanup({ comments: 'none' }),
-    // terser(),
-  ],
+function compile() {
+  const sass = gulpSass(dartSass);
+  return src(path.resolve(__dirname, `../packages/style/src/*.scss`))
+    .pipe(sass.sync())
+    .pipe(autoprefixer())
+    .on('data',(data) => {
+      let content = data.contents.toString()
+      // content = content.replaceAll('./fonts','be-ui/style/fonts')
+      data.contents = Buffer.from(content)
+    })
+    .pipe(cleanCss())
+    .pipe(dest(`../dist/style`));
 }
 
-const buildConfig = [
-  {
-    file: '../dist/utils/index.js',
-    format: 'es',
-    inlineDynamicImports: true,
-    name: 'index',
-  },
-  {
-    file: '../dist/utils/index.cjs',
-    format: 'cjs',
-    inlineDynamicImports: true,
-    name: 'index',
-  },
-]
+/**
+ * handle font file
+ */
+/*function copyfont() {
+  return src(path.resolve(__dirname,`../packages/style/src/fonts/!**`)).pipe(dest(`../packages/style/dist/fonts`))
+}
 
-const typeConfig = {
-  input: '../packages/utils/index.ts', // 必须，入口文件
-  plugins: [
-    resolve(),
-    typescript(),
-    dts(),
-  ],
-}
-const buildTypeConfig = [
-  {
-    file: '../dist/utils/index.d.ts',
-    format: 'es',
-  },
-]
-// 打包处理
-const buildPackages = () => {
-  return parallel(() => build(config, buildConfig), () => build(typeConfig, buildTypeConfig) )
-}
-let taskList = [buildPackages()]
-export default series(...taskList)
+/!**
+ * css build files save to dist
+ *!/
+function copyfullstyle(){
+  const rootDistPath = path.resolve(projectRoot,'./dist/style')
+  return src(path.resolve(styleRoot,'./dist/!**')).pipe(dest(rootDistPath))
+}*/
+
+export default series(compile);

@@ -15,7 +15,7 @@
   "scripts": {
     "init": "pnpm install --w",
     "dev": "vite --host",
-    "build": "pnpm run clean && pnpm run --filter @be-ui/build build:utils",
+    "build": "pnpm run --filter @be-ui/build build",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint:ts": "eslint ./packages --ext .vue,.js,.ts,.jsx,.tsx",

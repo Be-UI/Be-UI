@@ -4,9 +4,12 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "build:utils": "gulp --require sucrase/register/ts -f build-utils.ts"
+    "build": "gulp --require sucrase/register/ts -f index.ts",
+    "build:utils": "gulp --require sucrase/register/ts -f build-utils.ts",
+    "build:style": "gulp --require sucrase/register/ts -f build-style.ts"
   },
   "devDependencies": {
+    "chalk": "4.1.2",
     "@babel/core": "^7.19.0",
     "@babel/preset-env": "^7.19.0",
     "@babel/preset-typescript": "^7.16.0",

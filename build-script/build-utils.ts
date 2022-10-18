@@ -22,7 +22,7 @@ const config = {
     }),
     commonjs(),
     cleanup({ comments: 'none' }),
-    // terser(),
+    terser(),
   ],
 }
 
