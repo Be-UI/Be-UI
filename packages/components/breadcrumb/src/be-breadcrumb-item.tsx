@@ -1,13 +1,13 @@
-import { computed, defineComponent, getCurrentInstance, h, nextTick, onMounted, VNode } from 'vue'
-import { IBreadcrumbInst, IBreadcrumbItemVnode, IBreadcrumbPopover } from './be-breadcrumb-type'
-import { useBrowserLocation } from '@be-ui/utils/use-browser-location'
-import {BePopover} from '@be-ui/components'
-import {getUuid} from "@be-ui/utils/common";
+import type { VNode } from 'vue'
+import { computed, defineComponent, getCurrentInstance, h, nextTick, onMounted } from 'vue'
+import { useBrowserLocation } from '@be-ui/utils'
+import { BePopover } from '@be-ui/components'
+import { getUuid } from '@be-ui/utils'
+import type { IBreadcrumbInst, IBreadcrumbItemVnode, IBreadcrumbPopover } from './be-breadcrumb-type'
 export default defineComponent({
   name: 'BeBreadcrumbItem',
   components: {
-    // 'be-popover': defineAsyncComponent(() => import("../../popover")),
-    'be-popover': BePopover,
+    BePopover,
   },
 
   props: {
@@ -24,7 +24,7 @@ export default defineComponent({
     // 跳转目标
     to: {
       type: String,
-      default:''
+      default: '',
     },
     // 禁用
     disabled: {
@@ -52,7 +52,7 @@ export default defineComponent({
     const browserLocationRef = useBrowserLocation()
     const htmlTag = computed(() => (props.to && !props.click && !props.disabled && !props.clickOption ? 'a' : 'span'))
     const ariaCurrentRef = computed(() =>
-      browserLocationRef.value.href === props.to ? 'location' : null
+      browserLocationRef.value.href === props.to ? 'location' : null,
     )
     const optionList = computed(() => props.option)
     /**
@@ -62,9 +62,9 @@ export default defineComponent({
     const handleClick = (event: Event): void => {
       // @ts-ignore
       if (
-        (internalInstance?.vnode as IBreadcrumbItemVnode)?.beBreadcrumbIndex === 'last' ||
-        optionList.value.length > 0 ||
-        props.disabled
+        (internalInstance?.vnode as IBreadcrumbItemVnode)?.beBreadcrumbIndex === 'last'
+        || optionList.value.length > 0
+        || props.disabled
       ) {
         event.preventDefault()
         return
@@ -74,33 +74,32 @@ export default defineComponent({
         props.click(event)
       }
     }
-   /**
+    /**
      * 下拉点击方法
      * @param  val - 事件对象
      */
-     const handleClickItem = (val: any) => {
-      if (props?.clickOption) {
+    const handleClickItem = (val: any) => {
+      if (props?.clickOption)
         props?.clickOption(val)
-      }
-      const curInstPopover = (internalInstance?.refs.beBreadcrumbPopover) as IBreadcrumbPopover
-     // @ts-ignore
-     curInstPopover.close()
 
+      const curInstPopover = (internalInstance?.refs.beBreadcrumbPopover) as IBreadcrumbPopover
+      // @ts-ignore
+      curInstPopover.close()
     }
 
-   /**
+    /**
      * 渲染下拉列表
      */
     const renderOption = () => {
       const renderList: Array<VNode> = []
       optionList.value.forEach((val: any) => {
-        // @ts-ignore
-         const id = val.id ? val.id as string : getUuid()
-        // @ts-ignore
-         const label  = val.label
+       // @ts-ignore
+        const id = val.id ? val.id as string : getUuid()
+       // @ts-ignore
+        const label = val.label
         renderList.push(
-          // @ts-ignore
-          <li  key={id} class="be-breadcrumb--li" onClick={() => handleClickItem(val)}>{label}</li>
+         // @ts-ignore
+          <li key={id} class="be-breadcrumb--li" onClick={() => handleClickItem(val)}>{label}</li>,
         )
       })
 
@@ -120,30 +119,31 @@ export default defineComponent({
             htmlTag.value,
             {
               'aria-current': ariaCurrentRef.value,
-              href: props.to,
+              'href': props.to,
             },
-            internalInstance?.slots.default ? internalInstance?.slots.default() : ''
+            internalInstance?.slots.default ? internalInstance?.slots.default() : '',
           )}
         </div>
       )
     }
-     onMounted(() => {
+    onMounted(() => {
       nextTick(() => {
         const curInstPopover = internalInstance?.refs.beBreadcrumbPopover as IBreadcrumbPopover
-        optionList.value.length > 0 &&
-        // @ts-ignore
-          curInstPopover.addEvent(internalInstance?.refs.BeBreadcrumbItem)
+        optionList.value.length > 0
+       // @ts-ignore
+          && curInstPopover.addEvent(internalInstance?.refs.BeBreadcrumbItem)
       })
     })
     return () => {
-      // @ts-ignore
+     // @ts-ignore
       return (
         <div
           class={`
                      be-breadcrumb--item
                      ${props.disabled ? 'be-breadcrumb--item__disabled' : ''} `}
           aria-label="BeBreadcrumbItem">
-          {optionList.value.length > 0 ? (
+          {optionList.value.length > 0
+            ? (
               <be-popover
                   forceUpdate={props.forceUpdate}
                   ref="beBreadcrumbPopover"
@@ -151,13 +151,14 @@ export default defineComponent({
                   placement="bottom"
                   trigger={props.disabled ? 'none' : 'click'}>
                   {{
-                      default: () => <ul>{renderOption()}</ul>,
-                      trigger: () => renderContent(),
+                    default: () => <ul>{renderOption()}</ul>,
+                    trigger: () => renderContent(),
                   }}
               </be-popover>
-          ) : (
-            renderContent()
-          )}
+              )
+            : (
+                renderContent()
+              )}
           <div class="be-breadcrumb--item__separator">
             {internalInstance?.slots?.separator
               ? internalInstance?.slots?.separator()

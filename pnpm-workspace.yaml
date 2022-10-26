@@ -1,4 +1,5 @@
 packages:
-  - 'packages/**' # 组件库代码
+  - 'packages/**'
+  - build
+  - play
   - docs
-  - build-script

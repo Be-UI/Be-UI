@@ -1,6 +1,7 @@
-import { computed, defineComponent, getCurrentInstance, PropType } from 'vue'
-import { IProgressColor, IProgressInst, IProgressSuccess } from './be-progress-type'
+import type { PropType } from 'vue'
+import { computed, defineComponent, getCurrentInstance } from 'vue'
 import { isObject } from '@vue/shared'
+import type { IProgressColor, IProgressInst, IProgressSuccess } from './be-progress-type'
 
 declare interface IOption {
   [key: string]: any
@@ -38,7 +39,7 @@ export default defineComponent({
     },
     strokeWidth: {
       type: Number,
-      default:6
+      default: 6,
     },
     success: {
       type: Object as PropType<IProgressSuccess>,
@@ -62,37 +63,37 @@ export default defineComponent({
     const internalInstance = getCurrentInstance() as IProgressInst
     const innerStrokeWidth = computed(() => {
       // type="line"
-      if (props.type === 'line' && !props.strokeWidth && props.strokeWidth !== 0) {
+      if (props.type === 'line' && !props.strokeWidth && props.strokeWidth !== 0)
         return 10
-      }
+
       // type="circle"
       if (
-        (props.type === 'circle' || props.type === 'dashboard') &&
-        !props.strokeWidth &&
-        props.strokeWidth !== 0
-      ) {
+        (props.type === 'circle' || props.type === 'dashboard')
+        && !props.strokeWidth
+        && props.strokeWidth !== 0
+      )
         return 6
-      }
+
       return props.strokeWidth
     })
 
-    /******************************* type="line" *************************/
+    /** ***************************** type="line" *************************/
     // 根据props 设置相关样式
     const innerStyleTypeLine = computed(() => {
       return setStyleTypeLine()
     })
     const setStyleTypeLine = (): IOption => {
       const styleIns: IOption = {
-        backgroundImage:'',
-        backgroundColor:'',
-        width:'',
-        height:''
+        backgroundImage: '',
+        backgroundColor: '',
+        width: '',
+        height: '',
       }
-      if (isObject(props.color)) {
+      if (isObject(props.color))
         styleIns.backgroundImage = `linear-gradient(to right, ${props.color.from} 0%, ${props.color.to} 100%)`
-      } else {
+      else
         styleIns.backgroundColor = props.color
-      }
+
       styleIns.width = `${props.percent >= 100 ? 100 : props.percent}%`
       styleIns.height = `${innerStrokeWidth.value}px`
       return styleIns
@@ -101,18 +102,17 @@ export default defineComponent({
      * 超过一百显示为 success 的status
      */
     const innerStyleStatus = computed(() => {
-      if (props.percent >= 100) {
+      if (props.percent >= 100)
         return 'success'
-      } else {
+      else
         return props.status
-      }
     })
 
-    /******************************* type="circle"  | type="dashboard" *************************/
+    /** ***************************** type="circle"  | type="dashboard" *************************/
     /**
      * 設置畫布大小
      */
-   const setCircleContainerStyle = computed(() => {
+    const setCircleContainerStyle = computed(() => {
       if (props.type === 'circle' || props.type === 'dashboard') {
         return {
           width: `${props.width}px`,
@@ -121,100 +121,98 @@ export default defineComponent({
       }
       return {}
     })
-     const relativeStrokeWidth = computed(() => {
-       //
-       return ((innerStrokeWidth.value! / props.width) * 100).toFixed(1)
-     })
-     const radius = computed(() => {
-       if (props.type === 'circle' || props.type === 'dashboard') {
-         return parseInt(`${50 - parseFloat(relativeStrokeWidth.value) / 2}`, 10)
-       } else {
-         return 0
-       }
-     })
+    const relativeStrokeWidth = computed(() => {
+      //
+      return ((innerStrokeWidth.value! / props.width) * 100).toFixed(1)
+    })
+    const radius = computed(() => {
+      if (props.type === 'circle' || props.type === 'dashboard')
+        return parseInt(`${50 - parseFloat(relativeStrokeWidth.value) / 2}`, 10)
+      else
+        return 0
+    })
 
-     const trackPath = computed(() => {
-       const r = radius.value
-       const isDashboard = props.type === 'dashboard' ? true : false
-       const pathM = `M 50 50`
-       const pathA = `a ${r} ${r} 0 1 1`
-       if (isDashboard) {
-         if (props.gapPosition === 'bottom') {
-           return `${pathM} m 0 ${r} ${pathA} 0 -${r * 2} ${pathA} 0 ${r * 2}`
-         }
-         if (props.gapPosition === 'left') {
-           return `${pathM} m -${r} 0 ${pathA} ${r * 2} 0 ${pathA} -${r * 2} 0`
-         }
-         if (props.gapPosition === 'right') {
-           return `${pathM} m ${r} 0 ${pathA} -${r * 2} 0 ${pathA} ${r * 2} 0`
-         }
-       }
-       return `${pathM} m 0 -${r} ${pathA} 0 ${r * 2} ${pathA} 0 -${r * 2}`
-     })
-     // 计算周长
+    const trackPath = computed(() => {
+      const r = radius.value
+      const isDashboard = props.type === 'dashboard'
+      const pathM = 'M 50 50'
+      const pathA = `a ${r} ${r} 0 1 1`
+      if (isDashboard) {
+        if (props.gapPosition === 'bottom')
+          return `${pathM} m 0 ${r} ${pathA} 0 -${r * 2} ${pathA} 0 ${r * 2}`
+
+        if (props.gapPosition === 'left')
+          return `${pathM} m -${r} 0 ${pathA} ${r * 2} 0 ${pathA} -${r * 2} 0`
+
+        if (props.gapPosition === 'right')
+          return `${pathM} m ${r} 0 ${pathA} -${r * 2} 0 ${pathA} ${r * 2} 0`
+      }
+      return `${pathM} m 0 -${r} ${pathA} 0 ${r * 2} ${pathA} 0 -${r * 2}`
+    })
+    // 计算周长
     const perimeter = computed(() => {
-       return 2 * Math.PI * radius.value
-     })
+      return 2 * Math.PI * radius.value
+    })
 
-     const rate = computed(() => {
-       return props.type === 'dashboard' ? props.gap / 100 : 1
-     })
+    const rate = computed(() => {
+      return props.type === 'dashboard' ? props.gap / 100 : 1
+    })
 
-     const strokeDashoffset = computed(() => {
-       const offset = (-1 * perimeter.value * (1 - rate.value)) / 2
-       return `${offset}px`
-     })
-     /**
+    const strokeDashoffset = computed(() => {
+      const offset = (-1 * perimeter.value * (1 - rate.value)) / 2
+      return `${offset}px`
+    })
+    /**
       * 設置軌道樣式
       */
-      const trailPathStyle = computed(() => {
-       return {
-         strokeDasharray: `${perimeter.value * rate.value}px, ${perimeter.value}px`,
-         strokeDashoffset: strokeDashoffset.value,
-       }
-     })
-     /**
+    const trailPathStyle = computed(() => {
+      return {
+        strokeDasharray: `${perimeter.value * rate.value}px, ${perimeter.value}px`,
+        strokeDashoffset: strokeDashoffset.value,
+      }
+    })
+    /**
       * 設置環形樣式
       */
-     const circlePathStyle = computed(() => {
-       return createCirclePathStyle(props.percent)
-     })
-     /**
+    const circlePathStyle = computed(() => {
+      return createCirclePathStyle(props.percent)
+    })
+    /**
       * 生成環形樣式
       */
-     const createCirclePathStyle = (percent: number): IOption => {
-       return {
-         strokeDasharray: `${perimeter.value * rate.value * (percent / 100)}px, ${
+    const createCirclePathStyle = (percent: number): IOption => {
+      return {
+        strokeDasharray: `${perimeter.value * rate.value * (percent / 100)}px, ${
            perimeter.value
          }px`,
-         strokeDashoffset: strokeDashoffset.value,
-         transition: 'stroke-dasharray 0.6s ease 0s, stroke 0.6s ease',
-       }
-     }
-     const circlePathColor = computed(() => {
-       if ((props.status === 'normal' && !props.color) || isObject(props.color)) {
-         return 'rgba(64, 158, 255, .94)'
-       }
-       if (props.status === 'error' && !props.color) {
-         return '#F14E53FF'
-       }
-       if (props.status === 'success' && !props.color) {
-         return '#22C416FF'
-       }
-       return props?.color || 'rgba(64, 158, 255, .94)'
-     })
-     /******************************* success配置进度条部分 *************************/
-     /**
+        strokeDashoffset: strokeDashoffset.value,
+        transition: 'stroke-dasharray 0.6s ease 0s, stroke 0.6s ease',
+      }
+    }
+    const circlePathColor = computed(() => {
+      if ((props.status === 'normal' && !props.color) || isObject(props.color))
+        return 'rgba(64, 158, 255, .94)'
+
+      if (props.status === 'error' && !props.color)
+        return '#F14E53FF'
+
+      if (props.status === 'success' && !props.color)
+        return '#22C416FF'
+
+      return props?.color || 'rgba(64, 158, 255, .94)'
+    })
+    /** ***************************** success配置进度条部分 *************************/
+    /**
       * 渲染success配置进度条部分
       */
-     const renderSuccess = (): JSX.Element | undefined => {
-       if (
-         isObject(props.success) &&
-         props.success.color &&
-         props.success.percent &&
-         props.type === 'line'
-       ) {
-         return (
+    const renderSuccess = (): JSX.Element | undefined => {
+      if (
+        isObject(props.success)
+         && props.success.color
+         && props.success.percent
+         && props.type === 'line'
+      ) {
+        return (
            <div
              class={`
                                              be-progress-line-path
@@ -226,15 +224,15 @@ export default defineComponent({
                                              }
                                              `}
              style={innerStyleTypeLineSuccess.value}></div>
-         )
-       }
-       if (
-         isObject(props.success) &&
-         props.success.color &&
-         props.success.percent &&
-         (props.type === 'circle' || props.type === 'dashboard')
-       ) {
-         return (
+        )
+      }
+      if (
+        isObject(props.success)
+         && props.success.color
+         && props.success.percent
+         && (props.type === 'circle' || props.type === 'dashboard')
+      ) {
+        return (
            <path
              class="be-progress-circle__success"
              d={trackPath.value}
@@ -243,48 +241,51 @@ export default defineComponent({
              stroke-linecap={props.strokeLinecap as 'round' | 'square'}
              stroke-width={relativeStrokeWidth.value}
              style={circleSuccessPathStyle.value}></path>
-         )
-       }
-       return
-     }
-     /**
+        )
+      }
+    }
+    /**
       * 设置环形 Success 样式
       */
-     const circleSuccessPathStyle = computed(() => {
-       return createCirclePathStyle(props.success?.percent!)
-     })
-     /**
+    const circleSuccessPathStyle = computed(() => {
+      return createCirclePathStyle(props.success?.percent!)
+    })
+    /**
       * 设置success配置进度条部分样式
       */
-     const innerStyleTypeLineSuccess = computed(() => {
-       const styleIns: IOption = {
-         color:'',
-         backgroundColor:'',
-         width:'',
-         height:''
-       }
-       // type="line"
-       if (props.type === 'line') {
-         styleIns.backgroundColor = props.success?.color
-         styleIns.width = `${props.success?.percent! >= 100 ? 100 : props.success?.percent}%`
-         styleIns.height = `${innerStrokeWidth.value}px`
-         return styleIns
-       }
-       // type="circle" | type="dashboard"
-       styleIns.color = props.success?.color
-       return styleIns
-     })
+    const innerStyleTypeLineSuccess = computed(() => {
+      const styleIns: IOption = {
+        color: '',
+        backgroundColor: '',
+        width: '',
+        height: '',
+      }
+      // type="line"
+      if (props.type === 'line') {
+        styleIns.backgroundColor = props.success?.color
+        styleIns.width = `${props.success?.percent! >= 100 ? 100 : props.success?.percent}%`
+        styleIns.height = `${innerStrokeWidth.value}px`
+        return styleIns
+      }
+      // type="circle" | type="dashboard"
+      styleIns.color = props.success?.color
+      return styleIns
+    })
     return () => {
-      const rightRender = internalInstance?.slots.default ? (
-        internalInstance?.slots.default()
-      ) : (
+      const rightRender = internalInstance?.slots.default
+        ? (
+            internalInstance?.slots.default()
+          )
+        : (
         <span class="percent">{`${props.percent}%`}</span>
-      )
-      const centerRender = internalInstance?.slots.center ? (
-        internalInstance?.slots.center()
-      ) : (
+          )
+      const centerRender = internalInstance?.slots.center
+        ? (
+            internalInstance?.slots.center()
+          )
+        : (
         <span class="percent">{`${props.percent}%`}</span>
-      )
+          )
       return (
         <div
           class={`${
@@ -317,7 +318,7 @@ export default defineComponent({
                                     */}
                 {renderSuccess()}
               </div>
-              {/*slot - right*/}
+              {/* slot - right */}
               {props.showInfo ? rightRender : ''}
             </div>
           ) : (
@@ -349,7 +350,7 @@ export default defineComponent({
                 {renderSuccess()}
               </svg>
               <div class="be-progress-circle--text">
-                {/*slot - center*/}
+                {/* slot - center */}
                 {props.showInfo ? centerRender : ''}
               </div>
             </div>

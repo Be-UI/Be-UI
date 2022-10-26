@@ -1,17 +1,16 @@
 <template>
   <be-ellipsis
 
-      :elpNum="10"
+    :elp-num="10"
 
-      placement="left"
+    placement="left"
 
-      :lineClamp="2"
+    :line-clamp="2"
 
-      expandTrigger
+    expand-trigger
 
-      text="菩萨蛮 归鸿声断残云碧，背窗雪落炉烟直。烛底凤钗明，钗头人胜轻。角声催晓漏，曙色回牛斗。春意看花难，西风留旧寒。"
+    text="菩萨蛮 归鸿声断残云碧，背窗雪落炉烟直。烛底凤钗明，钗头人胜轻。角声催晓漏，曙色回牛斗。春意看花难，西风留旧寒。"
 
-      content="菩萨蛮 归鸿声断残云碧，背窗雪落炉烟直。烛底凤钗明，钗头人胜轻。角声催晓漏，曙色回牛斗。春意看花难，西风留旧寒。">
-
-  </be-ellipsis>
+    content="菩萨蛮 归鸿声断残云碧，背窗雪落炉烟直。烛底凤钗明，钗头人胜轻。角声催晓漏，曙色回牛斗。春意看花难，西风留旧寒。"
+  />
 </template>

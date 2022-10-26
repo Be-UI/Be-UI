@@ -140,11 +140,11 @@ export default defineConfigWithTheme({
               link: '/views/document/switch',
             },
             {
-              text: '标签 tag',
+              text: '标签 tag?',
               link: '/views/document/tag',
             },
             {
-              text: '提示框',
+              text: '提示框 tooltip',
               link: '/views/document/tooltip',
             },
             {

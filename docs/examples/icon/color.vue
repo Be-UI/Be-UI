@@ -1,3 +1,3 @@
 <template>
-  <be-icon icon="search" color="red" ></be-icon>
+  <be-icon icon="search" color="red" />
 </template>

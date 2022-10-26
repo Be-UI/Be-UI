@@ -1,51 +1,9 @@
-<template>
-  <div
-    :class="`
-      be-switch
-      be-switch__${size}
-      ${disabled || isLoading ? 'be-switch__disabled' : ''}
-      ${innerState ? 'be-switch__checked' : 'be-switch__unChecked'}
-      ${switching}
-      ${customClass} `"
-    tabindex="0"
-    @click="handleClick"
-  >
-    <div
-      v-if="!innerState"
-      :class="`be-switch__${size}_slot__unChecked`"
-    >
-      <slot
-        name="unCheckedRender"
-        :state="innerState"
-      />
-    </div>
-
-    <div class="be-switch--circle">
-      <be-icon
-        v-if="isLoading"
-        spin
-        icon="loading"
-        custom-class="be-switch--circle--icon"
-      />
-    </div>
-    <div
-      v-if="innerState"
-      :class="`be-switch__${size}_slot__checked`"
-    >
-      <slot
-        name="checkedRender"
-        :state="innerState"
-      />
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import { isBool, isNumber, isString } from '@be-ui/utils/common'
-import {BeIcon} from '@be-ui/components/svg-icon'
+import { isBool, isNumber, isString } from '@be-ui/utils'
+import { BeIcon } from '@be-ui/components/icon'
 export default defineComponent({
-  name: "BeSwitch",
+  name: 'BeSwitch',
   components: { BeIcon },
   props: {
     /**
@@ -81,21 +39,24 @@ export default defineComponent({
     },
   },
   emits: ['update:modelValue', 'change', 'click'],
-    setup(props, ctx) {
+  setup(props, ctx) {
     const innerState = ref<boolean>(false)
     const switching = ref<string>('')
     /**
      * 切换状态方法
      */
     let changeData = {}
-    let isUpdateModel = false
-    const switchState = (): void => {
-      changeClass()
-      // 切换状态
-      const modelValue = setInnerState()
-      emitChangeEvt()
-      ctx.emit('update:modelValue', modelValue)
-      isUpdateModel = true
+    const emitChangeEvt = (): void => {
+      ctx.emit('change', changeData)
+    }
+    /**
+     * 设置动画样式类
+     */
+    const changeClass = (): void => {
+      switching.value = 'be-switching'
+      setTimeout(() => {
+        switching.value = ''
+      }, 500)
     }
     const setInnerState = (): string | number | boolean => {
       if (innerState.value) {
@@ -113,35 +74,34 @@ export default defineComponent({
       }
       return props.checkedValue ? props.checkedValue : true
     }
+    let isUpdateModel = false
+    const switchState = (): void => {
+      changeClass()
+      // 切换状态
+      const modelValue = setInnerState()
+      emitChangeEvt()
+      ctx.emit('update:modelValue', modelValue)
+      isUpdateModel = true
+    }
+
     watch(
-        () => props.modelValue,
-        () => {
-          if (isUpdateModel) {
-            isUpdateModel = false
-            return
-          }
-          setInnerState()
-          emitChangeEvt()
+      () => props.modelValue,
+      () => {
+        if (isUpdateModel) {
+          isUpdateModel = false
+          return
         }
+        setInnerState()
+        emitChangeEvt()
+      },
     )
-    const emitChangeEvt = (): void => {
-      ctx.emit('change', changeData)
-    }
-    /**
-     * 设置动画样式类
-     */
-    const changeClass = (): void => {
-      switching.value = 'be-switching'
-      setTimeout(() => {
-        switching.value = ''
-      }, 500)
-    }
     /**
      * 点击方法
      * @param {Event} $event - 事件对象
      */
     const handleClick = async ($event?: Event) => {
-      if (props.disabled || props.isLoading) return
+      if (props.disabled || props.isLoading)
+        return
       await switchState()
       ctx.emit('click', $event)
     }
@@ -150,24 +110,24 @@ export default defineComponent({
      */
     const init = (): void => {
       if (
-          props.unCheckedValue !== undefined &&
-          props.unCheckedValue !== '' &&
-          (isBool(props.unCheckedValue) ||
-              isString(props.unCheckedValue) ||
-              isNumber(props.unCheckedValue)) &&
-          props.modelValue === props.unCheckedValue
+        props.unCheckedValue !== undefined
+          && props.unCheckedValue !== ''
+          && (isBool(props.unCheckedValue)
+              || isString(props.unCheckedValue)
+              || isNumber(props.unCheckedValue))
+          && props.modelValue === props.unCheckedValue
       ) {
         innerState.value = false
         ctx.emit('update:modelValue', props.unCheckedValue)
         return
       }
       if (
-          props.checkedValue !== undefined &&
-          props.checkedValue !== '' &&
-          (isBool(props.checkedValue) ||
-              isString(props.checkedValue) ||
-              isNumber(props.checkedValue)) &&
-          props.modelValue === props.checkedValue
+        props.checkedValue !== undefined
+          && props.checkedValue !== ''
+          && (isBool(props.checkedValue)
+              || isString(props.checkedValue)
+              || isNumber(props.checkedValue))
+          && props.modelValue === props.checkedValue
       ) {
         innerState.value = true
         ctx.emit('update:modelValue', props.checkedValue)
@@ -184,6 +144,48 @@ export default defineComponent({
   },
 })
 </script>
+
+<template>
+  <div
+    :class="`
+      be-switch
+      be-switch__${size}
+      ${disabled || isLoading ? 'be-switch__disabled' : ''}
+      ${innerState ? 'be-switch__checked' : 'be-switch__unChecked'}
+      ${switching}
+      ${customClass} `"
+    tab-index="0"
+    @click="handleClick"
+  >
+    <div
+      v-if="!innerState"
+      :class="`be-switch__${size}_slot__unChecked`"
+    >
+      <slot
+        name="unCheckedRender"
+        :state="innerState"
+      />
+    </div>
+
+    <div class="be-switch--circle">
+      <BeIcon
+        v-if="isLoading"
+        spin
+        icon="loading"
+        custom-class="be-switch--circle--icon"
+      />
+    </div>
+    <div
+      v-if="innerState"
+      :class="`be-switch__${size}_slot__checked`"
+    >
+      <slot
+        name="checkedRender"
+        :state="innerState"
+      />
+    </div>
+  </div>
+</template>
 
 <style scoped>
 

@@ -1,7 +1,5 @@
+import { withInstall } from '@be-ui/utils'
 import Tag from './src/be-tag.vue'
-import { withInstall } from "@be-ui/utils/with-install"
-const BeTag = withInstall(Tag)
-export {
-  BeTag
-}
+
+export const BeTag = withInstall(Tag)
 export default BeTag

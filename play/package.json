@@ -1,0 +1,39 @@
+{
+  "name": "@be-ui/play",
+  "type": "module",
+  "version": "1.0.0",
+  "private": false,
+  "packageManager": "^pnpm@7.0.0",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "homepage": "",
+  "repository": "",
+  "bugs": "",
+  "keywords": [],
+  "main": "index.ts",
+  "engines": {
+    "node": ">= 16"
+  },
+  "scripts": {
+    "dev": "vite --host --mode development"
+  },
+  "dependencies": {
+    "postcss-px-to-viewport-8-plugin": "^1.1.5",
+    "vue": "^3.2.37",
+    "be-ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.3",
+    "@vitejs/plugin-vue-jsx": "^1.0.2",
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "postcss-px2rem": "^0.3.0",
+    "postcss-pxtorem": "^6.0.0",
+    "vite": "^3.1.8",
+    "vite-plugin-chunk-split": "^0.2.7",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-progress": "^0.0.3",
+    "vue-tsc": "^0.39.5"
+  }
+}

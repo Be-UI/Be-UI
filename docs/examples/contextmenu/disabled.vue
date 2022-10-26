@@ -1,6 +1,17 @@
+<script>
+import { contextmenu } from '@be-ui/utils/index.ts'
+
+import { defineComponent } from 'vue'
+export default defineComponent({
+  directives: { contextmenu },
+})
+</script>
+
 <template>
-  <div class="bg-pink-50 relative flex justify-center items-center" style="width: 300px;height: 300px"
-       v-contextmenu:disabledContextmenu>
+  <div
+    v-contextmenu:disabledContextmenu class="bg-pink-50 relative flex justify-center items-center"
+    style="width: 300px;height: 300px"
+  >
     点我无效哦~
     <be-contextmenu ref="disabledContextmenu" disabled>
       <be-contextmenu-item>金粟如来出世，蕊宫仙子乘风。</be-contextmenu-item>
@@ -10,13 +21,3 @@
     </be-contextmenu>
   </div>
 </template>
-<script>
-import {contextmenu} from "@be-ui/utils/index.ts"
-
-import {defineComponent} from "vue";
-export default defineComponent({
-  directives: {contextmenu},
-})
-
-
-</script>

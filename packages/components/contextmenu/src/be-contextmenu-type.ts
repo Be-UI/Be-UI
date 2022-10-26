@@ -1,10 +1,4 @@
-/*
- * @be-contextmenu-type.ts
- * @deprecated
- * @author czh
- * @update (czh 2021/12/3)
- */
-import { ComponentInternalInstance, VNode } from 'vue'
+import type { ComponentInternalInstance, VNode } from 'vue'
 
 export interface IContextMenu extends ComponentInternalInstance {
   uid: number

@@ -13,7 +13,7 @@
 
 <script setup>
 import {ref } from 'vue'
-import {BeMessage} from '../../../dist/index.esm.js'
+import {BeMessage} from 'be-ui'
 import svgDict from '../../utils/svg-dict'
 const iconNameList = ref(Object.keys(svgDict).sort())
 const message = BeMessage.service

@@ -3,7 +3,7 @@
 </template>
 
 <script lang="tsx">
-import {BeIcon} from '../../../dist/index.esm'
+import {BeIconComponents} from 'be-ui'
 import {defineComponent} from "vue";
 
 const badashouIcon = {
@@ -84,7 +84,7 @@ const badashouIcon = {
 
 };
 
-const badashou = BeIcon.BeIconComponets('badashou', badashouIcon)
+const badashou = BeIconComponents('badashou', badashouIcon)
 
 export default defineComponent({
 

@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import BeTag from '../src/be-tag.vue'
-
+import {describe, test, expect, vi } from "vitest";
 /**
  * 测试props生效
  * @param options
@@ -133,7 +133,7 @@ const _mount = (options: any) =>
     ...options,
   })
 describe('test-be-tag-close-event', () => {
-  const handleClick = jest.fn()
+  const handleClick = vi.fn()
   test('event:close', async () => {
     const wrapper = _mount({
       template: `

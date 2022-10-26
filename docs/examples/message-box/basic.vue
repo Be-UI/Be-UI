@@ -1,4 +1,4 @@
 <template>
-  <be-icon icon="search"></be-icon>
+  <be-icon icon="search" />
   123456
 </template>
