@@ -1,11 +1,24 @@
 {
   "name": "@be-ui/components",
+  "type": "module",
   "version": "1.0.0",
+  "private": false,
+  "packageManager": "^pnpm@7.0.0",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "homepage": "",
+  "repository": "",
+  "bugs": "",
+  "keywords": [],
   "main": "index.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "engines": {
+    "node": ">= 16"
   },
-  "packageManager": "pnpm@6.32.4",
-  "author": "baiwusanyu",
-  "license": "MIT"
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@be-ui/utils": "*"
+  }
 }

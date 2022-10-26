@@ -1,15 +1,11 @@
-/*
- * @be-select-type.d.ts.ts
- * @deprecated
- * @author czh
- * @update (czh 2021/10/28)
- */
+
 import { ComponentInternalInstance } from 'vue'
+import {IInputSelectFunc} from "../../autocomplete/src/be-autocomplete-type";
 
 export interface ISelect extends ComponentInternalInstance {
   uid: number
+  refs:{
+    beSelectPopover: IInputSelectFunc
+  }
 }
 
-export interface IOption {
-  [key: string]: any
-}

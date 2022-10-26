@@ -1,9 +1,5 @@
 <template>
-  <be-progress percent="30" strokeLinecap="round" >
+  <be-progress percent="30" stroke-linecap="round" />
 
-  </be-progress>
-
-  <be-progress percent="60" strokeLinecap="square" >
-
-  </be-progress>
+  <be-progress percent="60" stroke-linecap="square" />
 </template>

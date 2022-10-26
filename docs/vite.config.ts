@@ -6,7 +6,8 @@
  */
 import WindiCSS from 'vite-plugin-windicss'
 import  vueJsx from '@vitejs/plugin-vue-jsx'
-export default {
+import {defineConfig} from "vite";
+export default defineConfig({
   plugins: [WindiCSS(),vueJsx()],
   css: {
     preprocessorOptions: {
@@ -22,4 +23,4 @@ export default {
       },
     },
   },
-}
+})

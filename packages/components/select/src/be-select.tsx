@@ -1,9 +1,12 @@
-import { defineComponent, onMounted, VNode, watch } from 'vue'
-import BeInputSelect from '../../autocomplete/src/be-input-select.vue'
+import type { VNode } from 'vue'
+import { defineComponent, onMounted, watch } from 'vue'
+import BeInputSelect from '@be-ui/components/autocomplete'
 
-import {BeIcon,BePopover} from '@be-ui/components'
-import { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
-import { debounce, getUuid, isFunction, isString, jsonClone } from '@be-ui/utils/common'
+import { BeIcon } from '@be-ui/components/icon'
+import { BePopover } from '@be-ui/components/popover'
+import { debounce, getUuid, isFunction, isString, jsonClone } from '@be-ui/utils'
+import { an } from 'vitest/dist/global-732f9b14'
+import type { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
 import composition from './be-select-composition'
 
 export default defineComponent({
@@ -163,12 +166,13 @@ export default defineComponent({
       focusClass,
       changeIcon,
     } = composition(props, ctx)
+
     let { listCache } = composition(props, ctx)
     watch(list, (nVal, oVal) => {
-      if (nVal !== oVal) {
-       handleList(props.list)
-      }
+      if (nVal !== oVal)
+        handleList(props.list)
     })
+
     /**
      * 處理列表數據
      * @param {Array} list - 数据列表
@@ -177,22 +181,24 @@ export default defineComponent({
       // 分组数据处理逻辑
       if (props.group) {
         const arr: Array<any> = []
-        list.forEach((res: any) => {
+        list.forEach((res: { children?: Array<any>; isSelect: boolean }) => {
           res.isSelect = false
           const group = { ...res }
           delete group.children
           arr.push(group)
-          if (res.children?.length > 0) {
+
+          if (res.children && res.children?.length > 0) {
             res.children.forEach((childRes: any) => {
               arr.push(childRes)
             })
           }
         })
         dataList.value = arr
-      } else {
+      }
+      else {
         // 沒有指定key，則生成
         if (!props.keyValue) {
-          list.forEach(val => {
+          list.forEach((val) => {
             val.isSelect = false
             val.id = getUuid()
           })
@@ -200,9 +206,8 @@ export default defineComponent({
         if (props.keyValue) {
           list.forEach((val: any) => {
             val.isSelect = false
-            if (!val[props.keyValue || 'id']) {
+            if (!val[props.keyValue || 'id'])
               val[props.keyValue || 'id'] = getUuid()
-            }
           })
         }
         dataList.value = list
@@ -217,11 +222,6 @@ export default defineComponent({
     const handleSelect = (value: any, index: number): void => {
       resetSelect()
       updateValue(value)
-      /** 选中 select 事件
-       * @event select
-       * @param {Object} value - 点击对象数据
-       * @param {Number} index - 点击的对应列表索引
-       */
       ctx.emit('select', value, index)
       // 关闭下拉，清除缓存
       const curInstPopover = internalInstance.refs.beSelectPopover as IInputSelectFunc
@@ -232,13 +232,12 @@ export default defineComponent({
      * @param value
      */
     const updateValue = (value: any): void => {
-      if (isString(value)) {
+      if (isString(value))
         ctx.emit('update:modelValue', value)
-      } else {
+      else
         ctx.emit('update:modelValue', value[props.labelValue])
-      }
     }
-    /**************************************** 各種事件方法 ************************************/
+    /** ************************************** 各種事件方法 ************************************/
     /**
      * 重置选中状态
      */
@@ -250,15 +249,12 @@ export default defineComponent({
      */
     const handleClear = (): void => {
       updateValue('')
-      /** 输入 clear 事件
-       * @event clear
-       */
       ctx.emit('clear')
       changeIcon(props.selectIcon)
       dataList.value = listCache
       resetSelect()
     }
-    /**************************************** 擴展渲染選項方法 ************************************/
+    /** ************************************** 擴展渲染選項方法 ************************************/
     /**
      * 擴展渲染
      * 不支持分組
@@ -267,15 +263,14 @@ export default defineComponent({
       if (props.extend && !props.group) {
         return (
           <div
-            class={`
-                        be-select--option__extend`}>
+            class={' be-select--option__extend'}>
             <be-input value={addItem.value} onInput={handleInput}></be-input>
             <be-icon icon="add" onClick={addItemToList}></be-icon>
           </div>
         )
       }
     }
-    /**************************************** 輸入匹配建議相關方法 ************************************/
+    /** ************************************** 輸入匹配建議相關方法 ************************************/
     /**
      * 匹配输入建议
      * @param {string} value - 輸入值
@@ -285,8 +280,8 @@ export default defineComponent({
       const filter = (value: string, ordData: Array<any>, labelValue: string) => {
         const arr = value
           ? ordData.filter((val: any) => {
-              return val[labelValue].toString().toLowerCase().indexOf(value.toLowerCase()) >= 0
-            })
+            return val[labelValue].toString().toLowerCase().includes(value.toLowerCase())
+          })
           : ordData
         return arr.length > 0 ? arr : ordData
       }
@@ -296,9 +291,9 @@ export default defineComponent({
         ? props.searchFunc(value, ordData, props.labelValue)
         : filter(value, ordData, props.labelValue)
       // 排序調用排序
-      if (props.sortFunc) {
+      if (props.sortFunc)
         filterRes.sort(props.sortFunc)
-      }
+
       ctx.emit('search', filterRes)
       dataList.value = filterRes
     }
@@ -323,11 +318,11 @@ export default defineComponent({
           curInstPopover.changeDisplay(true)
           loading.value = true
           // 执行回调拿数据
-          props.remoteFunc &&
-            props.remoteFunc((query: Array<any>) => {
+          props.remoteFunc
+            && props.remoteFunc((query: Array<any>) => {
               loading.value = false
               // 处理数据并进行筛选
-             handleList(query)
+              handleList(query)
               matchSuggestions($eventDom.value, listCache)
             })
         }
@@ -340,35 +335,34 @@ export default defineComponent({
       handleList(props.list)
       addScrollEvt()
     })
-    /**
-     * 選項列表渲染
-     */
-    const renderOption = (): Array<VNode> => {
+    const renderOption = (): Array<JSX.Element> => {
       const keyValue = props?.keyValue || 'id'
-      const optionList: Array<VNode> = []
+      const optionList: Array<JSX.Element> = [<></>]
+
+      const handleClick = (val, index) => {
+        if (val.disabled || val.type === 'group')
+          return
+        handleSelect(val, index)
+      }
       dataList.value.forEach((val, index) => {
-        if (props.modelValue === val[props.labelValue]) {
+        if (props.modelValue === val[props.labelValue])
           val.isSelect = true
-        }
+
         // 選項列表
         optionList.push(
-          <div
-            class={`
-                        ellipsis
-                        ${val.type === 'group' && index !== 0 ? 'be-select--option__line' : ''}
-                        ${val.isSelect ? 'be-select--option__choice' : ''}
-                        ${val.type === 'group' ? 'be-select--option__group' : 'be-select--option'}
-                        ${val.disabled ? 'be-select--option__disabled' : ''}`}
-            key={val[keyValue]}
-            onClick={() => {
-              if (val.disabled || val.type === 'group') return
-              handleSelect(val, index)
-            }}>
-            {/*有插槽就渲染插槽*/}
-            {internalInstance.slots.default
-              ? internalInstance.slots.default(val, index)
-              : val[props.labelValue]}
-          </div>
+            <div
+              class={` ellipsis
+                     ${val.type === 'group' && index !== 0 ? 'be-select--option__line' : ''}
+                     ${val.isSelect ? 'be-select--option__choice' : ''}
+                     ${val.type === 'group' ? 'be-select--option__group' : 'be-select--option'}
+                     ${val.disabled ? 'be-select--option__disabled' : ''}`}
+              key={val[keyValue]}
+              onClick={() => handleClick(val, index)}>
+              {/* 有插槽就渲染插槽 */}
+              {internalInstance.slots.default
+                ? internalInstance.slots.default(val, index)
+                : val[props.labelValue]}
+            </div>,
         )
       })
       return optionList
@@ -388,18 +382,20 @@ export default defineComponent({
                 <div style={selectStyle} class="be-select--option--body">
                   <div
                     class={`
-                                    be-select--option--container 
-                                    scroll-diy 
-                                    ${loading.value ? 'be-select--loading ' : ''}`}
+                            be-select--option--container 
+                            scroll-diy 
+                            ${loading.value ? 'be-select--loading ' : ''}`}
                     id={`be_select_option_container_${uid}`}>
-                    {/*渲染loading 或者列表 */}
-                    {loading.value ? (
+                    {/* 渲染loading 或者列表 */}
+                    {loading.value
+                      ? (
                       <be-icon icon="loading" spin width="25" height="25" fill="#606266"></be-icon>
-                    ) : (
-                      renderOption()
-                    )}
+                        )
+                      : (
+                          renderOption()
+                        )}
                   </div>
-                  {/*动态扩展*/}
+                  {/* 动态扩展 */}
                   {renderExtendElm()}
                 </div>
               ),
@@ -410,23 +406,23 @@ export default defineComponent({
                   }`}
                   id={`be-select--body${uid}`}
                   style={{
-                    cursor: cursor,
+                    cursor,
                   }}
-                  tabindex={`0`}
+                  tab-index={'0'}
                   onMouseenter={$event => handleMouseEnter($event)}
                   onMouseleave={$event => handleMouseLeave($event)}
                   onFocus={$event => handleFocus($event)}
                   onBlur={$event => handleBlur($event)}>
                   <input
                     readonly={readonlyInput.value}
-                    tabindex={`-1`}
+                    tab-index={'-1'}
                     onFocus={computedPosition}
                     value={props.modelValue}
                     placeholder={props.placeholder}
                     disabled={props.disabled}
                     onInput={$event => inputChange($event)}
                     style={{
-                      cursor: cursor,
+                      cursor,
                     }}
                     class={`be-select--input be-select--input__${props.size}`}
                   />
@@ -438,7 +434,7 @@ export default defineComponent({
                         $event.stopPropagation()
                       }
                     }}
-                    class={`be-select--icon`}></be-icon>
+                    class={'be-select--icon'}></be-icon>
                 </div>
               ),
             }}

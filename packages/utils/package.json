@@ -1,11 +1,21 @@
 {
   "name": "@be-ui/utils",
+  "type": "module",
   "version": "1.0.0",
+  "private": false,
+  "packageManager": "^pnpm@7.0.0",
   "description": "",
-  "main": "index.ts",
-  "scripts": {
-    "clean": "rimraf es && rimraf lib"
-  },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "",
+  "repository": "",
+  "bugs": "",
+  "keywords": [],
+  "main": "index.ts",
+  "engines": {
+    "node": ">= 16"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  }
 }

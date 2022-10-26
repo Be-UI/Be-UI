@@ -1,10 +1,4 @@
-/*
- * @be-breadcrumb-type.ts.ts
- * @deprecated
- * @author czh
- * @update (czh 2021/11/22)
- */
-import { ComponentInternalInstance, VNode } from 'vue'
+import type { ComponentInternalInstance, VNode } from 'vue'
 
 export interface IBreadcrumb {
   install?: Function

@@ -1,9 +1,5 @@
-
+import { withInstall } from '@be-ui/utils'
 import beProgress from './src/be-progress'
-import { withInstall } from "@be-ui/utils/with-install"
 
-const BeProgress = withInstall(beProgress)
-export {
-  BeProgress
-}
+export const BeProgress = withInstall(beProgress)
 export default BeProgress

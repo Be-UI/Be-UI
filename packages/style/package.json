@@ -1,10 +1,18 @@
 {
   "name": "@be-ui/style",
+  "type": "module",
   "version": "1.0.0",
-  "main": "index.js",
-  "author": "baiwusanyu",
+  "private": false,
+  "packageManager": "^pnpm@7.0.0",
+  "description": "",
+  "author": "",
   "license": "MIT",
-  "scripts": {
-    "clean": "rimraf dist"
+  "homepage": "",
+  "repository": "",
+  "bugs": "",
+  "keywords": [],
+  "main": "index.ts",
+  "engines": {
+    "node": ">= 16"
   }
 }

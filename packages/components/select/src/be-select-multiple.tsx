@@ -1,8 +1,10 @@
-import { defineComponent, onMounted, ref, VNode, watch } from 'vue'
-import { IOption } from './be-select-type'
-import BeInputSelect from '../../autocomplete/src/be-input-select.vue'
-import {BePopover,BeIcon,BeTag} from '@be-ui/components'
-import { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
+import type { VNode } from 'vue'
+import { defineComponent, onMounted, ref, watch } from 'vue'
+import type { IOption } from '@be-ui/utils'
+
+import { BeIcon } from '@be-ui/components/icon'
+import { BePopover } from '@be-ui/components/popover'
+import { BeTag } from '@be-ui/components/tag'
 import {
   arrDupRemov,
   debounce,
@@ -10,7 +12,9 @@ import {
   isFunction,
   jsonClone,
   mapToArr,
-} from '../../../utils/common'
+} from '@be-ui/utils'
+import type { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
+import BeInputSelect from '../../autocomplete/src/be-input-select.vue'
 import composition from './be-select-composition'
 
 export default defineComponent({
@@ -190,9 +194,8 @@ export default defineComponent({
     } = composition(props, ctx)
     let { listCache } = composition(props, ctx)
     watch(list, (nVal, oVal) => {
-      if (nVal !== oVal) {
+      if (nVal !== oVal)
         handleList(props.list)
-      }
     })
     /**
      * 處理列表數據
@@ -203,39 +206,39 @@ export default defineComponent({
       // 分组数据处理逻辑
       if (props.group) {
         const arr: Array<any> = []
-        list.forEach((res: any) => {
+        list.forEach((res: { children?: Array<any>; isSelect: boolean }) => {
           res.isSelect = false
           const group = { ...res }
           delete group.children
           arr.push(group)
-          if (res.children?.length > 0) {
-            res.children.forEach((childRes: any) => {
+          if (res.children && res.children?.length > 0) {
+            res.children.forEach((childRes) => {
               arr.push(childRes)
             })
           }
         })
         dataList.value = arr
-      } else {
+      }
+      else {
         // 沒有指定key，則生成
         if (!props.keyValue) {
-          list.forEach((val: any) => {
+          list.forEach((val) => {
             val.isSelect = false
             val.id = getUuid()
           })
         }
         if (props.keyValue) {
-          list.forEach((val: any) => {
+          list.forEach((val) => {
             val.isSelect = false
-            if (!val[props.keyValue || 'id']) {
+            if (!val[props.keyValue || 'id'])
               val[props.keyValue || 'id'] = getUuid()
-            }
           })
         }
         dataList.value = list
       }
       listCache = jsonClone(dataList.value)
     }
-    /**************************************** 擴展渲染選項方法 ************************************/
+    /** ************************************** 擴展渲染選項方法 ************************************/
     /**
      * 擴展渲染
      * 不支持分組
@@ -252,7 +255,7 @@ export default defineComponent({
         )
       }
     }
-    /**************************************** 輸入匹配建議相關方法 ************************************/
+    /** ************************************** 輸入匹配建議相關方法 ************************************/
     /**
      * 匹配输入建议
      * @param {string} inputValue - 輸入值
@@ -260,16 +263,16 @@ export default defineComponent({
      */
     const matchSuggestions = (inputValue: string, ordData: Array<any>): void => {
       // 大于最大数量直接返回
-      if (tagList.value.length >= Number(props.max) && props.max) {
+      if (tagList.value.length >= Number(props.max) && props.max)
         return
-      }
+
       const value = jsonClone(inputValue)
       // 模糊匹配方法
       const filter = (value: string, ordData: Array<any>, labelValue: string) => {
         const arr = value
           ? ordData.filter((val: any) => {
-              return val[labelValue].toString().toLowerCase().indexOf(value.toLowerCase()) >= 0
-            })
+            return val[labelValue].toString().toLowerCase().includes(value.toLowerCase())
+          })
           : ordData
         return {
           data: arr.length > 0 ? jsonClone(arr) : jsonClone(ordData),
@@ -282,14 +285,16 @@ export default defineComponent({
       let filterRes: Array<any> = []
       if (value) {
         // 字符串包含 ‘，’，进行分割
-        const isHasComma = value.indexOf(',') >= 0
-        if (isHasComma) inputMultiple.value = ''
+        const isHasComma = value.includes(',')
+        if (isHasComma)
+          inputMultiple.value = ''
         let inputVal = value.split(',').filter((res: any) => res)
         // 輸入去重
         inputVal = Array.from(new Set(inputVal))
         // 和 tagList 取并集
         const tagListLabel = tagList.value.map(res => res.label)
-        inputVal = [...new Set([...tagListLabel, ...inputVal])]
+        const mergeList = new Set([...tagListLabel, ...inputVal])
+        inputVal = [...Array.from(mergeList)]
         // 匹配到的
         let hasList: Array<any> = []
         // 沒匹配到的
@@ -311,15 +316,15 @@ export default defineComponent({
             item.isAutoAdd = true
             addList.push(item)
             dataL.push(item)
-          } else {
+          }
+          else {
             if (isHasComma) {
               let isHas = false
               dataList.value.forEach((dataRes: any) => {
                 if (res === dataRes[label]) {
                   isHas = true
-                  if (!selectMap.has(dataRes[keyId])) {
+                  if (!selectMap.has(dataRes[keyId]))
                     selectMap.set(dataRes[keyId], dataRes)
-                  }
                 }
               })
               // 匹配函数匹配到，但是列表中没有
@@ -339,9 +344,9 @@ export default defineComponent({
         })
         filterRes = hasList.concat(addList)
         // 排序調用排序
-        if (props.sortFunc) {
+        if (props.sortFunc)
           filterRes.sort(props.sortFunc as (a: any, b: any) => number)
-        }
+
         /** search 事件
          * @event search
          * @param {Array} filterRes - 过滤结果
@@ -349,7 +354,8 @@ export default defineComponent({
         ctx.emit('search', filterRes)
         // 更新下拉列表 - 選中狀態匹配
         dataList.value = isHasComma ? dataL : filterRes
-      } else {
+      }
+      else {
         // 爲空則使用原始數據 - 選中狀態匹配
         dataList.value = jsonClone(ordData)
       }
@@ -387,20 +393,20 @@ export default defineComponent({
           curInstPopover.changeDisplay(true)
           loading.value = true
           // 执行回调拿数据
-          props.remoteFunc &&
-            props.remoteFunc((query: Array<any>) => {
-              loading.value = false
-              // 处理数据并进行筛选
-              handleList(query)
-              matchSuggestions($eventDom.value, listCache)
-            })
+          props.remoteFunc
+          && props.remoteFunc((query: Array<any>) => {
+            loading.value = false
+            // 处理数据并进行筛选
+            handleList(query)
+            matchSuggestions($eventDom.value, listCache)
+          })
         }
         return debounce(handleRemote, 300).call(this)
       }
       // 匹配輸入建議
       matchSuggestions($eventDom.value, listCache.concat(addItemList.value))
     }
-    /**************************************** 多選相關方法 ************************************/
+    /** ************************************** 多選相關方法 ************************************/
     // tag 列表
     const tagList = ref<Array<any>>([])
     // 多選時，維護的内部輸入
@@ -419,14 +425,14 @@ export default defineComponent({
      */
     const handleSelect = (value: any, index: number): void => {
       // 大于最大数量直接返回
-      if (tagList.value.length >= Number(props.max) && props.max) {
+      if (tagList.value.length >= Number(props.max) && props.max)
         return
-      }
+
       const itemLabel = value[keyId]
       if (selectMap.has(itemLabel)) {
-        if (value.isAutoAdd) {
+        if (value.isAutoAdd)
           addItemList.value = addItemList.value.filter(val => val[keyId] !== value[keyId])
-        }
+
         selectMap.delete(itemLabel)
         value.isSelect = false
         /** 取消选中 Deselect 事件
@@ -435,10 +441,11 @@ export default defineComponent({
          * @param {Number} index - 点击的对应列表索引
          */
         ctx.emit('Deselect', value, index)
-      } else {
-        if (value.isAutoAdd) {
+      }
+      else {
+        if (value.isAutoAdd)
           addItemList.value.push(value)
-        }
+
         selectMap.set(itemLabel, value)
         value.isSelect = true
         /** 选中 select 事件
@@ -454,7 +461,7 @@ export default defineComponent({
        */
       ctx.emit('change', value)
       inputMultiple.value = ''
-      //if(value.isAutoAdd){
+      // if(value.isAutoAdd){
       dataList.value = listCache.concat(addItemList.value)
       // }
       updateValue()
@@ -509,9 +516,8 @@ export default defineComponent({
      */
     const setSelectState = (state: boolean, match: any): void => {
       dataList.value.forEach((select: any) => {
-        if (select[keyId] === match) {
+        if (select[keyId] === match)
           select.isSelect = state
-        }
       })
     }
     /**
@@ -557,9 +563,9 @@ export default defineComponent({
      * 渲染tag
      */
     const renderTags = (): Array<VNode> | void => {
-      if (!tagList.value || tagList.value?.length === 0) {
+      if (!tagList.value || tagList.value?.length === 0)
         return
-      }
+
       let renderTag = jsonClone(tagList.value)
       // maxTag 实现
       if (props.maxTag && tagList.value.length > Number(props.maxTag)) {
@@ -575,12 +581,14 @@ export default defineComponent({
         // 選項列表
         list.push(
           <div class="be-select--tag">
-            {/*tag 自定义插槽*/}
-            {internalInstance.slots.tag ? (
-              internalInstance.slots.tag({ data: val, index })
-            ) : (
+            {/* tag 自定义插槽 */}
+            {internalInstance.slots.tag
+              ? (
+                  internalInstance.slots.tag({ data: val, index })
+                )
+              : (
               <be-tag
-                key={val.label + 'tag'}
+                key={`${val.label}tag`}
                 isClose={true}
                 type="info"
                 size="mini"
@@ -588,8 +596,8 @@ export default defineComponent({
                 onClose={() => closeTag(val)}>
                 {val[label]}
               </be-tag>
-            )}
-          </div>
+                )}
+          </div>,
         )
       })
       return list
@@ -613,18 +621,19 @@ export default defineComponent({
                         ${val.disabled ? 'be-select--option__disabled' : ''}`}
             key={val[keyValue]}
             onClick={() => {
-              if (val.disabled || val.type === 'group') return
+              if (val.disabled || val.type === 'group')
+                return
               handleSelect(val, index)
             }}>
-            {/*有插槽就渲染插槽*/}
+            {/* 有插槽就渲染插槽 */}
             {internalInstance.slots.default
               ? internalInstance.slots.default({
-                  data: val,
-                  index,
-                })
+                data: val,
+                index,
+              })
               : val[props.labelValue]}
-            {val.isSelect ? <be-icon icon="select" custom-class={`be-select--hook`}></be-icon> : ''}
-          </div>
+            {val.isSelect ? <be-icon icon="select" custom-class={'be-select--hook'}></be-icon> : ''}
+          </div>,
         )
       })
       return optionList
@@ -648,14 +657,16 @@ export default defineComponent({
                                     scroll-diy 
                                     ${loading.value ? 'be-select--loading ' : ''}`}
                     id={`be_select_option_container_${uid}`}>
-                    {/*渲染loading 或者列表 */}
-                    {loading.value ? (
+                    {/* 渲染loading 或者列表 */}
+                    {loading.value
+                      ? (
                       <be-icon icon="loading" spin width="25" height="25" fill="#606266"></be-icon>
-                    ) : (
-                      renderOption()
-                    )}
+                        )
+                      : (
+                          renderOption()
+                        )}
                   </div>
-                  {/*动态扩展*/}
+                  {/* 动态扩展 */}
                   {renderExtendElm()}
                 </div>
               ),
@@ -664,9 +675,9 @@ export default defineComponent({
                   class={`be-select--body ${focusClass.value} ${props.customClass}`}
                   id={`be-select--body${uid}`}
                   style={{
-                    cursor: cursor,
+                    cursor,
                   }}
-                  tabindex={`0`}
+                  tab-index={'0'}
                   onMouseenter={$event => handleMouseEnter($event)}
                   onMouseleave={$event => handleMouseLeave($event)}
                   onFocus={$event => handleFocus($event)}
@@ -674,14 +685,14 @@ export default defineComponent({
                   {renderTags()}
                   <input
                     readonly={readonlyInput.value}
-                    tabindex={`-1`}
+                    tab-index={'-1'}
                     onFocus={computedPosition}
                     value={inputMultiple.value}
                     disabled={props.disabled}
                     onInput={$event => inputChange($event)}
                     style={{
-                      cursor: cursor,
-                      width: txtWidth.value + 'px',
+                      cursor,
+                      width: `${txtWidth.value}px`,
                     }}
                     class={`be-select--input be-select--input__${props.size}`}
                   />
@@ -693,7 +704,7 @@ export default defineComponent({
                         $event.stopPropagation()
                       }
                     }}
-                    class={`be-select--icon`}></be-icon>
+                    class={'be-select--icon'}></be-icon>
                 </div>
               ),
             }}

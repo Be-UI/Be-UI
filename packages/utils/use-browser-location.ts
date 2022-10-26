@@ -1,22 +1,13 @@
-import { onMounted, onUnmounted, Ref, ref } from 'vue'
+import type { Ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
+import type { IWindowLocation } from './types'
+
 export const hasWindow = typeof window !== 'undefined'
 const defaultWindow = hasWindow ? window : null
-export interface IWindowLocation {
-  hash?: string
-  host?: string
-  hostname?: string
-  href?: string
-  origin?: string
-  pathname?: string
-  port?: string
-  protocol?: string
-  search?: string
-}
-
 export const useBrowserLocation = (customWindow = defaultWindow): Ref<IWindowLocation> => {
   const getWindowLocation = (): IWindowLocation => {
-    const { hash, host, hostname, href, origin, pathname, port, protocol, search } =
-      customWindow?.location || {}
+    const { hash, host, hostname, href, origin, pathname, port, protocol, search }
+      = customWindow?.location || {}
 
     return {
       hash,
@@ -30,11 +21,11 @@ export const useBrowserLocation = (customWindow = defaultWindow): Ref<IWindowLoc
       search,
     }
   }
+  const locationState = ref(getWindowLocation())
+
   const updateLocation = (): void => {
     locationState.value = getWindowLocation()
   }
-
-  const locationState = ref(getWindowLocation())
 
   onMounted(() => {
     if (customWindow) {

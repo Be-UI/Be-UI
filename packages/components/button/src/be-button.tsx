@@ -1,13 +1,15 @@
-import {
+import type {
   ComponentInternalInstance,
+  VNode,
+} from 'vue'
+import {
   computed,
   defineComponent,
   getCurrentInstance,
   ref,
-  VNode,
 } from 'vue'
-import {BeIcon} from '../../svg-icon'
-import { IButtonInst } from './be-button-type'
+import { BeIcon } from '@be-ui/components/icon'
+import type { IButtonInst } from './be-button-type'
 function useComponentId(Instance: ComponentInternalInstance) {
   return Instance.uid
 }
@@ -111,11 +113,11 @@ export default defineComponent({
     const uid = ref<number>(useComponentId(internalInstance))
     const btnStyle = computed(() => {
       return {
-        background: props.ghost ? 'transparent !important' : '',
-        cursor: props.disabled ? 'not-allowed' : 'pointer',
+        'background': props.ghost ? 'transparent !important' : '',
+        'cursor': props.disabled ? 'not-allowed' : 'pointer',
         'border-style': props.dashed ? 'dashed' : 'solid',
         'border-radius': `${props.round}px`,
-        display: props.flex ? 'flex' : '',
+        'display': props.flex ? 'flex' : '',
       }
     })
     const borderStyle = computed(() => {
@@ -125,44 +127,47 @@ export default defineComponent({
       return props.disabled || props.loading ? 'be-button__inner__disabled' : ''
     })
     const prevIconStyle = computed(() => {
-      if (props.loading) {
+      if (props.loading)
         return 'loading'
-      }
-      if (props.prevIcon) {
+
+      if (props.prevIcon)
         return props.prevIcon
-      } else {
+      else
         return ''
-      }
     })
     const nextIconStyle = computed(() => {
       if (props.nextIcon) {
-        if (props.loading) {
+        if (props.loading)
           return ''
-        } else {
+        else
           return props.nextIcon
-        }
-      } else {
+      }
+      else {
         return ''
       }
     })
     const prevIconRender = (): VNode | '' => {
-      return props.prevIcon || props.loading ? (
+      return props.prevIcon || props.loading
+        ? (
         <be-icon
           icon={prevIconStyle.value}
           spin={props.loading}
           custom-class={`be-button--prevIcon be-button--prevIcon__${props.type}`}></be-icon>
-      ) : (
-        ''
-      )
+          )
+        : (
+            ''
+          )
     }
     const nextIconRender = (): VNode | '' => {
-      return !props.nextIcon ? (
-        ''
-      ) : (
+      return !props.nextIcon
+        ? (
+            ''
+          )
+        : (
         <be-icon
           icon={nextIconStyle.value}
           custom-class={`be-button--nextIcon be-button--nextIcon__${props.type}`}></be-icon>
-      )
+          )
     }
     return () => {
       return (

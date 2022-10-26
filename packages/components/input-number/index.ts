@@ -5,10 +5,10 @@
  * @update (czh 2021/11/16)
  */
 
+import { withInstall } from '@be-ui/utils'
 import beInputNumber from './src/be-input-number.vue'
-import { withInstall } from "@be-ui/utils/with-install"
 const BeInputNumber = withInstall(beInputNumber)
 export {
-  BeInputNumber
+  BeInputNumber,
 }
 export default BeInputNumber

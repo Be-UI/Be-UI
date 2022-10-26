@@ -1,38 +1,31 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
     "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
-    "noImplicitAny": false,
     "sourceMap": true,
-    // 忽略 this 的类型检查, Raise error on this expressions with an implied any type.
     "noImplicitThis": false,
+    "noImplicitAny": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "removeComments": true, // 删除注释
     "allowSyntheticDefaultImports": true,
-    // 类型文件声明位置
-    "declaration": false, // 默认不要声明文件
-    "lib": [
-      // 编译时用的库
-      "ESNext",
-      "DOM"
-    ],
-    "experimentalDecorators": true, // 装饰器语法
-    "forceConsistentCasingInFileNames": true, // 强制区分大小写
-
-
-
     "noLib": false, // 不处理类库
-
-    "skipLibCheck": true // 跳过类库检测
+    "skipLibCheck": true, // 跳过类库检测
+    "preserveSymlinks": true,
+    "lib": ["ESNext", "DOM"],
+    "types": [
+      "node"
+    ]
   },
   "include": [
-    "packages",
-    "build-script"
+    "/packages/**/*.ts",
+    "/build/**/*.ts",
+    "/packages/**/*.vue",
+    "packages/components/shims-vue.d.ts"
   ],
   // ts 排除的文件
-  "exclude": ["node_modules", "**/__tests__/", "be-ui/**",   "build-script/**"]
+  "exclude": ["node_modules", "**/__tests__/"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

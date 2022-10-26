@@ -1,5 +1,5 @@
 import { defineComponent, getCurrentInstance } from 'vue'
-import { IBreadcrumb, IBreadcrumbInst, IBreadcrumbItemVnode } from './be-breadcrumb-type'
+import type { IBreadcrumb, IBreadcrumbInst, IBreadcrumbItemVnode } from './be-breadcrumb-type'
 export default defineComponent({
   name: 'BeBreadcrumb',
   setup() {
@@ -9,12 +9,12 @@ export default defineComponent({
       ? internalInstance?.slots.default()
       : []
     // 给插槽最后一个虚拟dom打上标记，在点击跳转时能够识别阻止
-    // @ts-ignore
+   // @ts-ignore
     if (
-      slots.length > 0 &&
-      (slots[slots.length - 1].type as IBreadcrumb).name === 'BeBreadcrumbItem'
+      slots.length > 0
+      && (slots[slots.length - 1].type as IBreadcrumb).name === 'BeBreadcrumbItem'
     ) {
-      // @ts-ignore
+     // @ts-ignore
       slots[slots.length - 1].beBreadcrumbIndex = 'last'
     }
     return () => {

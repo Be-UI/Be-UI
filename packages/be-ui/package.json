@@ -1,15 +1,44 @@
 {
   "name": "be-ui",
   "version": "1.0.0",
+  "type": "module",
   "private": false,
-  "description": "",
-  "main": "index.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "packageManager": "^pnpm@7.0.0",
   "author": "",
+  "homepage": "",
+  "repository": "",
+  "description": "A Component Library for Vue 3",
+  "keywords": [
+    "component library",
+    "ui framework",
+    "ui",
+    "vue"
+  ],
   "license": "MIT",
-  "dependencies": {
-
+  "main": "index.ts",
+  "module": "../../dist/es/index.js",
+  "types": "../../dist/es/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "style": "dist/style/index.css",
+  "sideEffects": [
+    "dist/*",
+    "packages/**/*.css",
+    "packages/style/src/**/*.scss",
+    "es/components/*/style/*",
+    "lib/components/*/style/*"
+  ],
+  "engines": {
+    "node": ">= 16"
+  },
+  "browserslist": [
+    "> 1%",
+    "not ie 11",
+    "not op_mini all"
+  ],
+  "peerDependencies": {
+    "vue": "^3.2.0",
+    "@popperjs/core": "^2.11.5"
   }
 }

@@ -6,7 +6,7 @@
  */
 import type { ComponentInternalInstance } from 'vue'
 
-export type IInputNum = {
+export interface IInputNum {
   titles?: string
   customClass?: string
   msgType?: string
@@ -22,7 +22,7 @@ export type IInputNum = {
   loading?: boolean
 }
 
-export type ItInstanceMap = {
+export interface ItInstanceMap {
   topLeft?: Array<any>
   topRight?: Array<any>
   bottomLeft?: Array<any>

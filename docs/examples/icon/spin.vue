@@ -1,3 +1,3 @@
 <template>
-  <be-icon icon="loading" spin ></be-icon>
+  <be-icon icon="loading" spin />
 </template>

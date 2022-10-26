@@ -4,7 +4,7 @@
  * @author czh
  * @update (czh 2021/10/18)
  */
-import { NodeStyle, TextAreaHeight } from './be-input-type'
+import type { NodeStyle, TextAreaHeight } from './be-input-type'
 
 let hiddenTextarea: HTMLTextAreaElement | null
 const HIDDEN_STYLE = `
@@ -42,16 +42,16 @@ function computeNodeStyling(targetElement: Element): NodeStyle {
   const style = window.getComputedStyle(targetElement)
   const boxSizing = style.getPropertyValue('box-sizing')
 
-  const paddingSize =
-    parseFloat(style.getPropertyValue('padding-bottom')) +
-    parseFloat(style.getPropertyValue('padding-top'))
+  const paddingSize
+    = parseFloat(style.getPropertyValue('padding-bottom'))
+    + parseFloat(style.getPropertyValue('padding-top'))
 
-  const borderSize =
-    parseFloat(style.getPropertyValue('border-bottom-width')) +
-    parseFloat(style.getPropertyValue('border-top-width'))
+  const borderSize
+    = parseFloat(style.getPropertyValue('border-bottom-width'))
+    + parseFloat(style.getPropertyValue('border-top-width'))
 
   const contextStyle = CONTEXT_STYLE.map(name => `${name}:${style.getPropertyValue(name)}`).join(
-    ';'
+    ';',
   )
   return { contextStyle, paddingSize, borderSize, boxSizing }
 }
@@ -69,12 +69,12 @@ function computeMinRowH(
   minRows: number,
   boxSizing: string,
   paddingSize: number,
-  borderSize: number
+  borderSize: number,
 ): number {
   let minHeight = singleRowHeight * minRows
-  if (boxSizing === 'border-box') {
+  if (boxSizing === 'border-box')
     minHeight = minHeight + paddingSize + borderSize
-  }
+
   height = Math.max(minHeight, height)
   return minHeight
 }
@@ -85,20 +85,21 @@ function computeMaxRowH(
   maxRows: number | null,
   boxSizing: string,
   paddingSize: number,
-  borderSize: number
+  borderSize: number,
 ): number | undefined {
-  if (!maxRows) return
+  if (!maxRows)
+    return
   let maxHeight = singleRowHeight * maxRows
-  if (boxSizing === 'border-box') {
+  if (boxSizing === 'border-box')
     maxHeight = maxHeight + paddingSize + borderSize
-  }
+
   return Math.min(maxHeight, height)
 }
 
 export default function compTextareaHeight(
   targetElement: HTMLInputElement,
   minRows = 1,
-  maxRows: number | null = null
+  maxRows: number | null = null,
 ): TextAreaHeight {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea')
@@ -113,11 +114,11 @@ export default function compTextareaHeight(
   let height = hiddenTextarea.scrollHeight
   const result = {} as TextAreaHeight
 
-  if (boxSizing === 'border-box') {
+  if (boxSizing === 'border-box')
     height = height + borderSize
-  } else if (boxSizing === 'content-box') {
+  else if (boxSizing === 'content-box')
     height = height - paddingSize
-  }
+
   hiddenTextarea.value = ''
   const singleRowHeight = computeSingleRowH(hiddenTextarea.scrollHeight, paddingSize)
 
@@ -128,13 +129,13 @@ export default function compTextareaHeight(
       minRows,
       boxSizing,
       paddingSize,
-      borderSize
+      borderSize,
     )
     result.minHeight = `${minHeight}px`
   }
   if (maxRows !== null) {
-    height =
-      computeMaxRowH(height, singleRowHeight, maxRows, boxSizing, paddingSize, borderSize) || height
+    height
+      = computeMaxRowH(height, singleRowHeight, maxRows, boxSizing, paddingSize, borderSize) || height
   }
   result.height = `${height}px`
   hiddenTextarea.parentNode?.removeChild(hiddenTextarea)
