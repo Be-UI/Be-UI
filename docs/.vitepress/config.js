@@ -108,7 +108,7 @@ export default defineConfigWithTheme({
               link: '/views/document/input-number',
             },
             {
-              text: '载入',
+              text: '载入 loading',
               link: '/views/document/loading',
             },
             {
@@ -140,7 +140,7 @@ export default defineConfigWithTheme({
               link: '/views/document/switch',
             },
             {
-              text: '标签 tag?',
+              text: '标签 tag',
               link: '/views/document/tag',
             },
             {
