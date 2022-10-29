@@ -25,7 +25,7 @@ export { BeContainer } from './container'
 export { BeSelect } from './select'
 export { BeSelectMultiple } from './select'
 // plugins
-export { default as BeLoadingSer } from './loading-plugin' // 服务
+export { loadingPlugin as BeLoadingSer } from './loading-plugin' // 服务
 export { default as BeNotification } from './notification-plugin' // 服务
 export { default as BeMessage } from './message-plugin'
 export { default as BeMsg } from './message-box-plugin' // 服务
