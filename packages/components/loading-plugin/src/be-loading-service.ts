@@ -20,7 +20,7 @@ const initLoading = (options = {}) => {
   const defaultOption = {
     isBackground: true,
     bgColor: 'rgba(255,255,255,.5)',
-    customRender: () => null,
+    customRender: undefined,
     text: '',
     size: 'default',
     customClass: '',
