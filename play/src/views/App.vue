@@ -1,10 +1,19 @@
-<script setup lang="ts" name="app">
+<script setup lang="tsx" name="app">
+import BeLoading from '@be-ui/components/loading-plugin'
+import {defineComponent, h} from "vue";
+const customRenderComp = {
+  render(){
+    return <div>雪中</div>
+  }
+}
+const customRenderContent = ()=>defineComponent(customRenderComp)
 </script>
 
 <template>
   <div id="app_index">
-    APP
-    <be-icon icon="loop" />
+    <div class="bg-pink-50 relative" style="width: 300px; height: 300px">
+      <be-loading show :customRender = 'customRenderContent'></be-loading>
+    </div>
   </div>
 </template>
 
