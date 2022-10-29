@@ -108,7 +108,6 @@ export default defineComponent({
        */
     customRender: {
       type: Function,
-      default: () => null,
     },
   },
   setup(props) {
@@ -183,7 +182,7 @@ export default defineComponent({
       const w: number = slotElem.offsetWidth
       const h: number = slotElem.offsetHeight
       if (h === 0 || w === 0) {
-        // console.warn('You need to set the width and height attribute for the body element')
+        console.warn('You need to set the width and height attribute for the body element')
       }
       // 从目标元素开始向外遍历，累加top和left值
       let t: number, l: number
