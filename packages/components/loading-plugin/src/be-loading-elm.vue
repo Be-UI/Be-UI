@@ -38,7 +38,7 @@ export default defineComponent({
     :class="`be-load--container be-load__${sizeLoader} ${isBackgroundStyle}`"
   >
     <div v-if="customRender">
-      {{ customRender() }}
+      <component :is="customRender()"/>
     </div>
     <div v-if="!customRender">
       <div
