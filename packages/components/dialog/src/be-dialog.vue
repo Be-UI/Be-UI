@@ -1,5 +1,4 @@
-/* * be-dialog.vue * @deprecated 可拖拽弹窗 * @author czh * @create (czh 2021/5/8) * @update (czh
-2021/5/8) */
+
 <script lang="ts">
 import {
   computed,
@@ -216,7 +215,6 @@ export default defineComponent({
           <slot name="footer">
             <BeButton
               type="primary"
-              bordered
               round="3"
               custom-class="be-dialog--footer__btn"
               @click="handleConfirm"
