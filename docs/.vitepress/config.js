@@ -92,7 +92,7 @@ export default defineConfigWithTheme({
               link: '/views/document/contextmenu',
             },
             {
-              text: '弹窗',
+              text: '弹窗 dialog',
               link: '/views/document/dialog',
             },
             {
