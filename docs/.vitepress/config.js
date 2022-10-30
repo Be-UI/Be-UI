@@ -116,7 +116,7 @@ export default defineConfigWithTheme({
               link: '/views/document/message-box',
             },
             {
-              text: '消息信息',
+              text: '消息信息 message',
               link: '/views/document/message',
             },
             {
