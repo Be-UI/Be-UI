@@ -249,7 +249,7 @@ export default defineComponent({
         </div>
         <div v-if="!footerRender">
           <button
-            :class="`be-button be-button__mini be-button__${msgType} ${msgType === 'info' ? 'border' : ''}`"
+            :class="`be-button be-button__mini be-button__${msgType} ${msgType === 'info' ? 'be-button__border' : ''}`"
             @click="confirmFunc()"
           >
             知道了
