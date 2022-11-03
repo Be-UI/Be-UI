@@ -1,6 +1,8 @@
-<script setup lang="tsx" name="app">
-import BeMsg from '@be-ui/components/message-box-plugin'
-import {defineComponent, h} from "vue";
+<template>
+  <be-button customClass='mr-4' @click="openMsg('info')" bordered type="info">秋词</be-button>
+</template>
+<script lang="tsx" setup>
+import { BeMsg } from 'be-ui'
 const msgBox = BeMsg.service
 const openMsg = (type: string): void => {
   msgBox({
@@ -18,16 +20,3 @@ const openMsg = (type: string): void => {
   })
 }
 </script>
-
-<template>
-  <div id="app_index">
-    <div class="bg-pink-50 relative" style="width: 300px; height: 300px">
-      <button @click="openMsg('info')">test</button>
-    </div>
-  </div>
-</template>
-
-<style lang="scss">
-@import "src/assets/style/app.scss";
-</style>
-
