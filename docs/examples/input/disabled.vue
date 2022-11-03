@@ -1,10 +1,7 @@
 <template>
   <div class="exp-input">
-    <be-input size="mini" v-model="value" ></be-input>
-    <be-input size="medium" v-model="value" ></be-input>
-    <be-input size="large" v-model="value" ></be-input>
+    <be-input size="medium" disabled v-model="value" ></be-input>
   </div>
-
 </template>
 <script setup lang="ts">
 import {ref} from 'vue'

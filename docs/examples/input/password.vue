@@ -1,14 +1,11 @@
 <template>
   <div class="exp-input">
-    <be-input size="mini" v-model="value" ></be-input>
-    <be-input size="medium" v-model="value" ></be-input>
-    <be-input size="large" v-model="value" ></be-input>
+    <be-input size="medium" showPassword type="password" v-model="value" ></be-input>
   </div>
-
 </template>
 <script setup lang="ts">
 import {ref} from 'vue'
-const value = ref<string>('')
+const value = ref<string>('唱着人们心头的曲折')
 </script>
 <style lang="scss">
 .exp-input{

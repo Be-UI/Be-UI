@@ -11,6 +11,7 @@ $componentsClass: $name + '-' + 'input' ;
 @include create-B(input) {
   @include flex-align-center;
   width: var(--be-input-w-full);
+  height: min-content;
   background-color: var(--be-input-bg-w);
   @include be-border(var(--be-input-border-color));
   border-radius: var(--be-input-rounded-base);
