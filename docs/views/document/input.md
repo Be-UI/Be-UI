@@ -156,5 +156,5 @@ input/autosize
 | focus        | `-` | 通过 `refs` 可以手动聚焦，不会触发 `emit('focus')` |
 | blur         | `-` | 通过 `refs` 可以手动聚焦，不会触发 `emit('blur') ` |
 | select       | `-` | 通过 `refs` 可以手动聚焦，不会触发 `emit('select')` |
-| handleClear  | `-` | 通过 `refs` 可以手动聚焦，会触发 `emit('clear')`  |
+| handleClear  | `-` | 通过 `refs` 可以手动聚焦，⚠️会触发 `emit('clear')`  |
 
