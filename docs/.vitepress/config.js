@@ -112,7 +112,7 @@ export default defineConfigWithTheme({
               link: '/views/document/loading',
             },
             {
-              text: '信息盒子',
+              text: '信息盒子 message-box',
               link: '/views/document/message-box',
             },
             {
