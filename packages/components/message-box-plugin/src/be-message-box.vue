@@ -144,7 +144,7 @@ export default defineComponent({
     })
     /** ************************************ 样式设置相关 ******************************/
     const containerClass = ref('')
-    const containerstyle = computed(() => containerClass.value)
+    const containerStyle = computed(() => containerClass.value)
     /**
      * 设置动画、样式类
      */
@@ -163,13 +163,31 @@ export default defineComponent({
 
       setAnimate()
     })
+
+    const bodyRenderer = defineComponent(()=>{
+      return props.bodyRender
+    })
+    const footerRenderer = defineComponent(()=>{
+      return props.footerRender
+    })
+    const iconNextRenderer = defineComponent(()=>{
+      return props.iconNextRender
+    })
+    const iconPreRenderer = defineComponent(()=>{
+      return props.iconPreRender
+    })
+
     return {
       show,
       _uid,
       dialogModels,
       confirmFunc,
       close,
-      containerstyle,
+      containerStyle,
+      bodyRenderer,
+      footerRenderer,
+      iconPreRenderer,
+      iconNextRenderer
     }
   },
 })
@@ -183,7 +201,7 @@ export default defineComponent({
     <div
       :id="`be_message_box_container${_uid}`"
       v-drag="{ isDrag }"
-      :class="containerstyle.value"
+      :class="containerStyle"
     >
       <div class="be-message-box--title">
         <div
@@ -191,7 +209,7 @@ export default defineComponent({
           class="be-message-box--head"
         >
           <div v-if="iconPreRender">
-            {{ iconPreRender() }}
+            <component :is='iconPreRenderer' />
             <span :class="`text-${msgType}`">{{ titles }}</span>
           </div>
           <div v-if="!iconPreRender">
@@ -207,7 +225,7 @@ export default defineComponent({
               v-if="iconNextRender"
               @click="close"
             >
-              {{ iconNextRender() }}
+              <component :is='iconNextRenderer' />
             </div>
             <BeIcon
               v-if="!iconNextRender"
@@ -219,7 +237,7 @@ export default defineComponent({
       </div>
 
       <div class="be-message-box--body">
-        {{ bodyRender ? bodyRender() : '' }}
+        <component :is='bodyRenderer' />
       </div>
 
       <div :class="`be-message-box--footer be-message-box--footer__${footerType}`">
@@ -227,7 +245,7 @@ export default defineComponent({
           v-if="footerRender"
           @click="confirmFunc()"
         >
-          {{ footerRender() }}
+          <component :is='footerRenderer' />
         </div>
         <div v-if="!footerRender">
           <button
