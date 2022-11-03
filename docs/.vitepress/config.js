@@ -120,7 +120,7 @@ export default defineConfigWithTheme({
               link: '/views/document/message',
             },
             {
-              text: '通知',
+              text: '通知 notification',
               link: '/views/document/notification',
             },
             {
