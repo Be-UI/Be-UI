@@ -5,7 +5,6 @@ import BeInputSelect from '@be-ui/components/autocomplete'
 import { BeIcon } from '@be-ui/components/icon'
 import { BePopover } from '@be-ui/components/popover'
 import { debounce, getUuid, isFunction, isString, jsonClone } from '@be-ui/utils'
-import { an } from 'vitest/dist/global-732f9b14'
 import type { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
 import composition from './be-select-composition'
 
