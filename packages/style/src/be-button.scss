@@ -350,3 +350,7 @@ $componentsClass: $name + '-' + 'button' ;
     }
   }
 }
+
+.be-button__border{
+  border: 1px solid var(--be-button-db-border);
+}
