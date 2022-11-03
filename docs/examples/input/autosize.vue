@@ -1,14 +1,11 @@
 <template>
   <div class="exp-input">
-    <be-input size="mini" v-model="value" ></be-input>
-    <be-input size="medium" v-model="value" ></be-input>
-    <be-input size="large" v-model="value" ></be-input>
+    <be-input type="textarea" :autosize = "{minRows:2,maxRows:3}" v-model="value" ></be-input>
   </div>
-
 </template>
 <script setup lang="ts">
 import {ref} from 'vue'
-const value = ref<string>('')
+const value = ref<string>('湖心亭看雪')
 </script>
 <style lang="scss">
 .exp-input{
@@ -16,7 +13,7 @@ const value = ref<string>('')
   flex-wrap: wrap;
   width: 100%;
   .be-input{
-    width: 200px;
+    width: 230px;
     margin: 0 6px;
   }
 }

@@ -100,7 +100,7 @@ export default defineConfigWithTheme({
               link: '/views/document/ellipsis',
             },
             {
-              text: '输入框',
+              text: '输入框 input',
               link: '/views/document/input',
             },
             {
