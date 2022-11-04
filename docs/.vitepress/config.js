@@ -104,7 +104,7 @@ export default defineConfigWithTheme({
               link: '/views/document/input',
             },
             {
-              text: '数字输入',
+              text: '数字输入 input-number',
               link: '/views/document/input-number',
             },
             {
