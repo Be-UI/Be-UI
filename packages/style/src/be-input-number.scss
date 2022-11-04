@@ -57,14 +57,6 @@ $componentsClass: $name + '-' + 'input-number' ;
     }
   }
 
-  .#{ $componentsClass }#{$element-separator}pre {
-    border-right-width: var(--be-input-number-border-w);
-  }
-
-  .#{ $componentsClass }#{$element-separator}next {
-    border-left-width: var(--be-input-number-border-w);
-  }
-
   .#{ $componentsClass }#{$element-separator}op#{$element-separator}disabled {
     @include be-disabled
   }
@@ -75,7 +67,7 @@ $componentsClass: $name + '-' + 'input-number' ;
   background-color: var(--be-input-number-color-disabled);
 }
 
-.#{ $componentsClass }#{$element-separator}small {
+.#{ $componentsClass }#{$element-separator}mini {
   height: var(--be-input-number-h-small);
   width: var(--be-input-number-w);
 

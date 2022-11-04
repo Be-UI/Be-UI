@@ -304,9 +304,7 @@ export default defineComponent({
     @blur="$event => handleBlur($event)"
     @keydown="$event => handleKeyDown($event)"
   >
-    <div class="be-input-number__pre">
-      <slot name="pre" />
-    </div>
+  
     <div :class="`be-input-number__${size} be-input-number__default`">
       <BeInput
         :ref="`beInputInner${uid}`"
@@ -343,8 +341,6 @@ export default defineComponent({
         />
       </div>
     </div>
-    <div class="be-input-number__next">
-      <slot name="next" />
-    </div>
+  
   </div>
 </template>
