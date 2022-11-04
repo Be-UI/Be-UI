@@ -104,7 +104,7 @@ export default defineConfigWithTheme({
               link: '/views/document/input',
             },
             {
-              text: '数字输入框',
+              text: '数字输入',
               link: '/views/document/input-number',
             },
             {
@@ -132,7 +132,7 @@ export default defineConfigWithTheme({
               link: '/views/document/progress',
             },
             {
-              text: '选择框',
+              text: '选择框 select',
               link: '/views/document/select',
             },
             {

@@ -336,7 +336,7 @@ export default defineComponent({
     })
     const renderOption = (): Array<JSX.Element> => {
       const keyValue = props?.keyValue || 'id'
-      const optionList: Array<JSX.Element> = [<></>]
+      const optionList: Array<JSX.Element> = []
 
       const handleClick = (val, index) => {
         if (val.disabled || val.type === 'group')
@@ -379,23 +379,22 @@ export default defineComponent({
             {{
               default: (
                 <div style={selectStyle} class="be-select--option--body">
-                  <div
-                    class={`
+                  <div class={`
                             be-select--option--container 
                             scroll-diy 
                             ${loading.value ? 'be-select--loading ' : ''}`}
                     id={`be_select_option_container_${uid}`}>
-                    {/* 渲染loading 或者列表 */}
+                    {/* 渲染loading 或者列表*/}
                     {loading.value
                       ? (
                       <be-icon icon="loading" spin width="25" height="25" fill="#606266"></be-icon>
                         )
                       : (
-                          renderOption()
+                        renderOption()
                         )}
                   </div>
                   {/* 动态扩展 */}
-                  {renderExtendElm()}
+                  {/*{renderExtendElm()}*/}
                 </div>
               ),
               trigger: (
