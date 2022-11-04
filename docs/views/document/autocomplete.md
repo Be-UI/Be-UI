@@ -68,13 +68,6 @@ autocomplete/custom
 | fetchSuggestions  | `Function`        | `-`     | 远程加载下拉列表数据，会传入一个回调方法，你可以把数据传递给它      |
 | 其他               | `-`               | `-`     | 支持 `be-input` 的 `text` 模式下其他 `props` |
 
-modelValue	String | Number	''	绑定值
-focusTrigger	Boolean	true	是否focus触发
-suggestionList	Array<any>	[]	輸入建议列表
-labelValue	String	'label'	suggestionList 的显示字段
-keyValue	String	'id'	suggestionList 的键名
-fetchSuggestions	Function	undefined	远程加载下拉列表数据，会传入一个回调方法，你可以把数据传递给它
-其他	-	-	支持 be-input 的 text模式下其他 props
 
 ## Emits
 
