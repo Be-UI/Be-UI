@@ -394,7 +394,7 @@ export default defineComponent({
                         )}
                   </div>
                   {/* 动态扩展 */}
-                  {/*{renderExtendElm()}*/}
+                  {renderExtendElm()}
                 </div>
               ),
               trigger: (
