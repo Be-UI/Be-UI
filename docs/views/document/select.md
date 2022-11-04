@@ -20,42 +20,19 @@ select/basic
 
 :::
 
-
-
-
-
-### 不同情感类型
-
-:::demo 内置了六种类型，通过 `type` 设置 `default` | `primary` | `success` | `info` | `warning` | `error`
-
-tag/type
-
-:::
-
 ### 禁用
 
-:::demo `disabled` 可以禁用你的 `tag`
+:::demo `disabled` 可以禁用你的 `select`
 
-tag/disabled
-
-:::
-
-### 开启圆角
-
-:::demo 你可以通过 `round` 让它变得圆起来。
-
-tag/round
+select/disabled
 
 :::
 
-### 可关闭的 `tag`
-:::warning
-这里只实现了事件触发，真正的删除你还是通过数据维护
-:::
+### 可清除的
 
-:::demo `isClose` 可以开启关闭图标，并通过传入 `close` 事件来完成回调
+:::demo 通过 `clear` 设置可清除的 `select`
 
-tag/close
+select/clear
 
 :::
 
@@ -63,15 +40,71 @@ tag/close
 
 :::demo 通过 `customClass` 来传入样式类，覆盖原有样式
 
-tag/class
+select/class
 
 :::
 
-### 开启样式配置
+### 自定义下拉图标
 
-:::demo 通过 `option` 来传入可以直接修改边框、背景、圆角、字体
+:::demo 定义下拉图标 `selectIcon`
 
-tag/style
+select/icon
+
+:::
+
+
+### 搜索匹配
+
+:::demo `search` 开启搜索匹配
+
+select/search
+
+:::
+
+### 自定义搜索与排序
+:::warning
+注意：开启自定义搜索与排序 需要传入 `search` 开启搜索匹配
+:::
+:::demo `searchFunc` 指定搜索方法 与 `sortFunc` 指定搜索排序
+
+select/sort
+
+:::
+
+### 远程搜索
+
+:::warning
+注意：开启远程搜索 需要传入 `search` 开启搜索匹配，你只能通过输入来进行匹配选择
+:::
+
+:::demo `remoteFunc` 与 `remote` 在输入搜索时开启远程搜索
+
+select/remote
+
+:::
+
+
+### 动态扩展 TODO
+
+:::demo `extend` 开启动态扩展
+
+select/extend
+
+:::
+
+### 分组下拉
+
+:::demo `group` 开启动选项分组
+
+select/group
+
+:::
+
+### 自定义下拉内容渲染
+
+:::demo 通过插槽来自定义下拉渲染
+
+select/custom
 
 :::
 
