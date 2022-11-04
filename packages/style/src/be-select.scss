@@ -57,7 +57,7 @@ $componentsClass: $name + '-' + 'select' ;
     width: var(--be-select-w-full);
     padding: 0 30px 0 8px;
     background-color: var(--be-select-bg-w);
-    border: 1px solid var(--be-select-borfer-color);
+    border: 1px solid var(--be-select-border-color);
     border-radius: var(--be-select-rounded-base);
     outline: 0;
 
