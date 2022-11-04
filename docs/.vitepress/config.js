@@ -72,7 +72,7 @@ export default defineConfigWithTheme({
               link: '/views/document/icon',
             },
             {
-              text: '自动补全',
+              text: '自动补全 autocomplete',
               link: '/views/document/autocomplete',
             },
             {
