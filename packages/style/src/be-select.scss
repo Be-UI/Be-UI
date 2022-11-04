@@ -49,6 +49,8 @@ $componentsClass: $name + '-' + 'select' ;
     }
   }
 
+
+
   .#{$componentsClass}#{$modifier-separator}body {
     position: relative;
     box-sizing: border-box;
@@ -82,6 +84,10 @@ $componentsClass: $name + '-' + 'select' ;
     fill: var(--be-select-color-text);
     transform: translateY(-50%);
   }
+}
+
+@include create-B(select--option--body) {
+  @include set-component-style-var('select', $--select);
 }
 
 .#{$componentsClass}--option--body {
