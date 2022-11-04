@@ -372,6 +372,7 @@ export default defineComponent({
           <be-popover
             onUpdate={selectOpenChange}
             trigger={trigger.value}
+            disabled={props.disabled}
             placement="bottom"
             ref="beSelectPopover"
             trigger-elm={`be_select-${uid}`}

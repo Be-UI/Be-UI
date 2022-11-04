@@ -4,6 +4,7 @@
 
     <be-select size="medium" :list="baseList"
                keyValue="id"
+               disabled
                v-model="mediumVal"
                labelValue="label">
 
