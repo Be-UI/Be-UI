@@ -549,6 +549,7 @@ $--input: map.deep-merge(
                         'w-90': var(--be-percentage-50),
                         'bg-w': var(--be-base-color-w),
                         'bg-g': var(--be-base-color-grays),
+                        'bg-hover': var(--be-emo-info-color--hover),
                         'text-default': var(--be-text-color-regular),
                         'icon-default': var(--be-text-color-placeholder),
                         'icon-size': 16px,

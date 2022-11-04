@@ -223,6 +223,11 @@ $componentsClass: $name + '-' + 'input' ;
   }
 }
 
+
+@include create-B(input--select) {
+  @include set-component-style-var('input', $--input);
+}
+
 .#{ $componentsClass }#{$modifier-separator}select {
   z-index: var(--be-input-z-index);
   @include h-max(var(--be-input-h-max));
@@ -253,7 +258,7 @@ $componentsClass: $name + '-' + 'input' ;
     @include be-pointer;
 
     &:hover {
-      background-color: var(--be-input-bg-g);
+      background-color: var(--be-input-bg-hover);
     }
   }
 }
