@@ -1,20 +1,19 @@
 <template>
   <div class="exp-pager">
     <be-pagination
-        isOrdianry
+        isFront
+        :pageSize="pageParamsFront.pageSize"
+        :currentPage="pageParamsFront.currentPage"
+        :pageData="pageDataFront"
         :pagerShowCount="5"
-        :pageSize="pageParams.pageSize"
-        :pageCount="pageParams.total"
-        :currentPage="pageParams.currentPage"
-        @updateNum = 'updateNum'
-        @changePage="pageChange">
-      <template #prev>🐕</template>
-      <template #next>🥑</template>
+        @updateNum='updateNumFront'
+        @updatePage="updatePageFront"
+        @changePage="pageChangeFront">
     </be-pagination>
   </div>
 </template>
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { BePagination } from "@be-ui/components";
 
 type IPageData = {
@@ -24,19 +23,29 @@ type IPageData = {
   total?:number
 }
 
-let pageParams = reactive({
-  currentPage: 1,
-  pageNum: 1,
-  pageSize: 200,
-  total: 3000
-})
+let pageDataFront = ref<Array<{ num: number }>>([])
 
-const updateNum = (data:IPageData):void =>{
-  pageParams.pageSize = data.pageSize
+for (let i = 0; i < 3000; i++) {
+  pageDataFront.value.push({num: i})
 }
 
-const pageChange = (data:IPageData):void =>{
-  pageParams.currentPage = data.currentPage
+let pageParamsFront = reactive({
+  currentPage: 1,
+  pageNum: 1,
+  pageSize: 20,
+  total: pageDataFront.value.length,
+})
+
+const updatePageFront = (data: { num: number }): void => {
+  console.log(data)
+}
+
+const updateNumFront = (data: IPageData): void => {
+  pageParamsFront.pageSize = data.pageSize
+}
+
+const pageChangeFront = (data: IPageData): void => {
+  pageParamsFront.currentPage = data.currentPage
 }
 </script>
 <style>
