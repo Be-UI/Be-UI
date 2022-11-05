@@ -2,6 +2,7 @@
   <div class="exp-pager">
     <be-pagination
       isOrdianry
+      disabled
       :pageSize="pageParams.pageSize"
       :pageCount="pageParams.total"
       :currentPage="pageParams.currentPage"

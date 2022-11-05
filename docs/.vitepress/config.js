@@ -124,7 +124,7 @@ export default defineConfigWithTheme({
               link: '/views/document/notification',
             },
             {
-              text: '分页',
+              text: '分页 pager',
               link: '/views/document/pager',
             },
             {

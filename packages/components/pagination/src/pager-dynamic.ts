@@ -1,4 +1,4 @@
-import { IPageProvide } from './be-pagenation-type'
+import { IPageProvide } from './be-pagination-type'
 
 /**
  * 计算 动态 分页列表数据

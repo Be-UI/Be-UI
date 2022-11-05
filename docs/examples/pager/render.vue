@@ -2,12 +2,15 @@
   <div class="exp-pager">
     <be-pagination
       isOrdianry
+      :pagerShowCount="5"
       :pageSize="pageParams.pageSize"
       :pageCount="pageParams.total"
+      :layout="['jump', 'page', 'pNum', 'info']"
       :currentPage="pageParams.currentPage"
-      :pagerShowCount="5"
       @updateNum = 'updateNum'
       @changePage="pageChange">
+      <template #prev>🐕</template>
+      <template #next>🥑</template>
   </be-pagination>
   </div>
 </template>

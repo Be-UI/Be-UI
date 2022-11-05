@@ -9,11 +9,11 @@ import {
   IPagerInst,
   IPagerMix,
   IPagerrenderList,
-} from './be-pagenation-type'
+} from './be-pagination-type'
 import { arrayDeduplicationt } from '@be-ui/utils'
 
 export default defineComponent({
-  name: 'BePagenation',
+  name: 'BePagination',
   components: {
     PagerComp: Pager,
     BeSelect,
