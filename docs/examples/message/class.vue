@@ -11,7 +11,6 @@ const msgByCustomClass = (): void => {
     titles: `月下小景`,
     msgType: 'info',
     customClass: 'test-msg',
-    offsetTop: 60,
   })
 }
 </script>

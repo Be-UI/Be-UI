@@ -1,5 +1,5 @@
 
-@-webkit-keyframes bounce-in-right {
+@keyframes bounce-in-right {
   0% {
     opacity: 0;
     -webkit-transform: translateX(2000px);
@@ -19,7 +19,7 @@
   }
 }
 
-@-moz-keyframes bounce-in-right {
+@keyframes bounce-in-right {
   0% {
     opacity: 0;
     -moz-transform: translateX(2000px);
@@ -39,7 +39,7 @@
   }
 }
 
-@-webkit-keyframes fade-in-left-big {
+@keyframes fade-in-left-big {
   0% {
     opacity: 0;
     -webkit-transform: translateX(-2000px);
@@ -51,7 +51,7 @@
   }
 }
 
-@-moz-keyframes fade-in-left-big {
+@keyframes fade-in-left-big {
   0% {
     opacity: 0;
     -moz-transform: translateX(-2000px);
@@ -63,7 +63,7 @@
   }
 }
 
-@-webkit-keyframes bounce-in-top-center {
+@keyframes bounce-in-top-center {
   0% {
     opacity: 0;
     -webkit-transform: translateY(-1000px);
@@ -83,7 +83,7 @@
   }
 }
 
-@-moz-keyframes bounce-in-top-center {
+@keyframes bounce-in-top-center {
   0% {
     opacity: 0;
     -moz-transform: translateY(-1000px);
@@ -103,7 +103,7 @@
   }
 }
 
-@-webkit-keyframes out-top-center {
+@keyframes out-top-center {
   0% {
     opacity: 1;
     -webkit-transform: translateY(0);
@@ -125,7 +125,7 @@
   }
 }
 
-@-moz-keyframes out-top-center {
+@keyframes out-top-center {
   0% {
     opacity: 1;
     -moz-transform: translateY(0);
@@ -272,7 +272,7 @@
   animation: dialog-fade-out 0.3s;
 }
 
-@-webkit-keyframes dialog-fade-in {
+@keyframes dialog-fade-in {
   0% {
     opacity: 0;
     -webkit-transform: translate3d(0, -20px, 0);
@@ -300,7 +300,7 @@
   }
 }
 
-@-webkit-keyframes dialog-fade-out {
+@keyframes dialog-fade-out {
   0% {
     opacity: 1;
     -webkit-transform: translate3d(0, 0, 0);

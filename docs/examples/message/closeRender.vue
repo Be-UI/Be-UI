@@ -10,7 +10,6 @@ const msgByClosePreRender = (): void => {
   message({
     titles: `蜜柑`,
     msgType: 'warning',
-    offsetTop: 60,
     closeRender: <span style="color:red">🪷</span>
   })
 }

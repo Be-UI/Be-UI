@@ -10,7 +10,6 @@ const msgByIconPreRender = (): void => {
   message({
     titles: `烛虚`,
     msgType: 'warning',
-    offsetTop: 60,
     iconPreRender: <span style="color:red">🍃</span>
   })
 }

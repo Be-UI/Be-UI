@@ -14,7 +14,6 @@ const msgByUpdate = (): void => {
     titles: `雪晴(点击更新按钮)`,
     msgType: 'info',
     key: 'msgByUpdate',
-    offsetTop: 60,
   })
 }
 const updateMsg = (): void => {
@@ -22,7 +21,6 @@ const updateMsg = (): void => {
     titles: `长河`,
     msgType: 'warning',
     key: 'msgByUpdate',
-    offsetTop: 60,
   })
 }
 </script>

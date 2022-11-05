@@ -12,7 +12,6 @@ const msgByLoading = (): void => {
     msgType: 'error',
     key: 'msgByLoading',
     loading: true,
-    offsetTop: 60,
   })
 }
 </script>

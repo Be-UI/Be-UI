@@ -19,7 +19,6 @@ const msgByType = (type: string): void => {
   message({
     titles: `准风月谈(${type})`,
     msgType: type,
-    offsetTop: 60,
   })
 }
 </script>

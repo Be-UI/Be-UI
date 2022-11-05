@@ -10,9 +10,9 @@ export interface IMessage extends INotifyOption{
   duration?: number
   key?: string
   onClose?: () => void
-  iconPreRender: any
-  closeRender: any
-  compType: string
+  iconPreRender?: any
+  closeRender?: any
+  compType?: string
   close?: boolean
   loading?: boolean
 }
