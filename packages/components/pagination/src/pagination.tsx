@@ -252,7 +252,7 @@ export default defineComponent({
     const pagerMix = reactive<IPagerMix>({
       jumpPage: jumpPage.value,
       pageParamsFront: pageParamsFront,
-      pageNumVal: pageNumVal.value,
+      pageNumVal
     })
     provide('$$BePaginMix', pagerMix)
 
@@ -265,6 +265,7 @@ export default defineComponent({
       }
       const nextSlot: Function = curInst.slots.next ? curInst.slots.next : () => {}
       const prevSlot: Function = curInst.slots.prev ? curInst.slots.prev : () => {}
+
       // 定义布局渲染列表
       const renderList: IPagerrenderList = {
         // @ts-ignore

@@ -1,5 +1,5 @@
 
-import { ComponentInternalInstance, VNode } from 'vue'
+import { ComponentInternalInstance, VNode, Ref } from 'vue'
 
 export interface IPageProvide {
   pageSize: number
@@ -55,7 +55,7 @@ export interface IPageParamsFront {
 export interface IPagerMix {
   jumpPage: string
   pageParamsFront: IPageParamsFront
-  pageNumVal: string
+  pageNumVal: Ref<string>
 }
 
 export interface IPagesFront {
