@@ -72,7 +72,11 @@ pager/layout
 :::
 
 ### 自定义插槽渲染
+:::warning
 
+注意：它受到布局配置 `layout` 影响
+
+:::
 :::demo 你也可以通过插槽 `next` 与 插槽 `prev` 自己来渲染分页前后内容
 
 pager/render 

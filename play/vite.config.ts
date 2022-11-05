@@ -18,6 +18,9 @@ export default defineConfig({
     }),
     viteCompression(),
   ],
+  server:{
+    port: 3000
+  },
   envDir: './env',
   css: {
     postcss: 'postcss.config.cjs',

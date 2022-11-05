@@ -28,8 +28,8 @@ let pageParams = reactive({
   total: 3000
 })
 
-const updateNum = (data:number):void =>{
-pageParams.pageSize = data
+const updateNum = (data:IPageData):void =>{
+pageParams.pageSize = data.pageSize
 }
 
 const pageChange = (data:IPageData):void =>{

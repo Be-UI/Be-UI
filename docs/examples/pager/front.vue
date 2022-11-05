@@ -38,8 +38,8 @@ const updatePageFront = (data: { num: number }): void => {
   console.log(data)
 }
 
-const updateNumFront = (data: number): void => {
-  pageParamsFront.pageSize = data
+const updateNumFront = (data: IPageData): void => {
+  pageParamsFront.pageSize = data.pageSize
 }
 
 const pageChangeFront = (data: IPageData): void => {
