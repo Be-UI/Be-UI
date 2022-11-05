@@ -2,10 +2,11 @@
   <div class="exp-pager">
     <be-pagination
       isOrdianry
+      :pagerShowCount="8"
       :pageSize="pageParams.pageSize"
       :pageCount="pageParams.total"
+      :pageNum="[{label: 10}, {label: 20}, {label: 30}, {label: 100}]"
       :currentPage="pageParams.currentPage"
-      :pagerShowCount="5"
       @updateNum = 'updateNum'
       @changePage="pageChange">
   </be-pagination>

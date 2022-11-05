@@ -1,14 +1,14 @@
 <template>
   <div class="exp-pager">
     <be-pagination
-      isOrdianry
+      isDynamic
       :pageSize="pageParams.pageSize"
-      :pageCount="pageParams.total"
       :currentPage="pageParams.currentPage"
       :pagerShowCount="5"
+      :layout="['jump', 'page', 'pNum', 'info']"
       @updateNum = 'updateNum'
       @changePage="pageChange">
-  </be-pagination>
+</be-pagination>
   </div>
 </template>
 <script lang="ts" setup>

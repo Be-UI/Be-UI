@@ -203,7 +203,7 @@
   import { pagersDynamicList } from '../src/pager-dynamic'
   import { pagersList } from '../src/pager-ordinary'
   import { pagerFront } from '../src/pager-front'
-  import { IPageData, IPageProvide, IPagesFront } from './be-pagenation-type'
+  import { IPageData, IPageProvide, IPagesFront } from './be-pagination-type'
   import {BeIcon} from '@be-ui/components'
   export default defineComponent({
     name: 'BePager',

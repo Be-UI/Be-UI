@@ -50,6 +50,7 @@ input-number/step
 注意：`parser` 会在 `change` 和 `input` 事件中调用，而且你必须针对 `formatter` 在 `parser` 中将其还原为纯数字字符，否则 `parser` 将无效。
 
 :::
+
 :::demo `formatter` 是输入框显示格式，而 `parser` 是输入框实际绑定的格式，二者需要配合使用
 
 input-number/step

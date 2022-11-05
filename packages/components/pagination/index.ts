@@ -1,7 +1,7 @@
 import paginationComponents from './src/pagination'
 import { withInstall } from "@be-ui/utils"
-const BePagenation = withInstall(paginationComponents)
+const BePagination = withInstall(paginationComponents)
 export {
-  BePagenation
+  BePagination
 }
-export default BePagenation
+export default BePagination

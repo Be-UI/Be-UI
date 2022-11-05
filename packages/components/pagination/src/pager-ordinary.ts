@@ -1,5 +1,5 @@
 import { Ref } from 'vue'
-import { IPageProvide } from './be-pagenation-type'
+import { IPageProvide } from './be-pagination-type'
 
 /**
  * 计算常规分页列表数据

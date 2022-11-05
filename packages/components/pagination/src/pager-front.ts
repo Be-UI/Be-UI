@@ -1,5 +1,5 @@
 import { computed, Ref } from 'vue'
-import { IPageProvide, IPagerMix, IPagesFront } from './be-pagenation-type'
+import { IPageProvide, IPagerMix, IPagesFront } from './be-pagination-type'
 
 /**
  * 前端分页处理计算
