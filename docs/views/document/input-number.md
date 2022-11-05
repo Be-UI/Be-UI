@@ -20,61 +20,46 @@ input-number/basic
 
 :::
 
-### 不同情感类型
-
-:::demo 内置了六种类型，通过 `type` 设置 `default` | `primary` | `success` | `info` | `warning` | `error`
-
-tag/type
-
-:::
-
 ### 禁用
 
-:::demo `disabled` 可以禁用你的 `tag`
+:::demo `disabled` 可以禁用你的 `input-number`
 
-tag/disabled
-
-:::
-
-### 开启圆角
-
-:::demo 你可以通过 `round` 让它变得圆起来。
-
-tag/round
+input-number/disabled
 
 :::
 
-### 可关闭的 `tag`
+### 键盘控制
+
+:::demo `keyboard` 可以开启键盘行为
+
+input-number/keyboard
+
+:::
+
+### 控制步长
+
+:::demo `step` 可以定义步长
+
+input-number/step
+
+:::
+
+### 显示格式化与自定义解析
 :::warning
-这里只实现了事件触发，真正的删除你还是通过数据维护
-:::
 
-:::demo `isClose` 可以开启关闭图标，并通过传入 `close` 事件来完成回调
-
-tag/close
+注意：`parser` 会在 `change` 和 `input` 事件中调用，而且你必须针对 `formatter` 在 `parser` 中将其还原为纯数字字符，否则 `parser` 将无效。
 
 :::
+:::demo `formatter` 是输入框显示格式，而 `parser` 是输入框实际绑定的格式，二者需要配合使用
 
-### 自定义样式类
-
-:::demo 通过 `customClass` 来传入样式类，覆盖原有样式
-
-tag/class
-
-:::
-
-### 开启样式配置
-
-:::demo 通过 `option` 来传入可以直接修改边框、背景、圆角、字体
-
-tag/style
+input-number/step
 
 :::
 
 
 ## Props
 
-### tag-props
+### input-number-props
 
 | 名称          | 类别                            | 默认值       | 说明                                                                                     |
 |-------------|-------------------------------|-----------|-------------------------------------------------------------------------------------------------|
@@ -89,7 +74,7 @@ tag/style
 
 ## Emits
 
-### tag-emit
+### input-number-emit
 
 | 名称             | 参数              | 说明               |
 |----------------|-----------------|------------------|
@@ -98,7 +83,7 @@ tag/style
 
 ## Slots
 
-### tag-slot
+### input-number-slot
 
 | 名称              | 说明        |  
 |-----------------|-----------|

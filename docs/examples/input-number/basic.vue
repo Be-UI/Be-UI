@@ -2,7 +2,7 @@
    <div class="exp-input-num">
      <div>
       <be-input-number size="mini" v-model="value" >
-        <template #pre>$</template>
+    
       </be-input-number>
      </div>
      <div>
