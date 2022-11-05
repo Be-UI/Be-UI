@@ -14,9 +14,8 @@ $componentsClass: $name + '-' + 'pager' ;
 
   .be-select {
     .be-select--body.be-pager-select {
-      width: 5rem;
-      min-width: 64px;
-      height: 25px;
+      padding: 0 6px 0 6px;
+      width: 80px;
       margin: 0 5px;
       font-size: 12px;
 
@@ -87,23 +86,6 @@ $componentsClass: $name + '-' + 'pager' ;
   .more::before {
     line-height: 30px;
   }
-  .#{ $componentsClass }#{$modifier-separator}info {
-    font-size: 12px;
-  }
-  .#{ $componentsClass }#{$modifier-separator}jump {
-    margin: 0 5px;
-    font-size: 12px;
-  }
-  .#{ $componentsClass }#{$modifier-separator}jump#{$element-separator}input {
-    width: 35px;
-    margin: 0 2px;
-    color: var(--be-text-color-regular);
-    background-color: var(--be-pager-bg-w);
-    background-image: none;
-    border: 1px solid var(--be-pager-border);
-    transition: all 0.3s;
-    border-radius: var(--be-pager-rounded-base);
-  }
   .be-icon {
     .be-icon--container {
       width: 14px;
@@ -113,4 +95,27 @@ $componentsClass: $name + '-' + 'pager' ;
       }
     }
   }
+}
+
+
+
+@include create-B(pager-container) {
+  @include set-component-style-var('pager', $--pager);
+}
+.#{ $componentsClass }#{$modifier-separator}info {
+  font-size: 12px;
+}
+.#{ $componentsClass }#{$modifier-separator}jump {
+  margin: 0 5px;
+  font-size: 12px ;
+}
+.#{ $componentsClass }#{$modifier-separator}jump#{$element-separator}input {
+  width: 35px;
+  margin: 0 2px;
+  color: var(--be-text-color-regular);
+  background-color: var(--be-pager-bg-w);
+  background-image: none;
+  border: var(--be-pager-border);
+  transition: all 0.3s;
+  border-radius: var(--be-pager-rounded-base);
 }

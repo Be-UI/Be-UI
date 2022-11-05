@@ -1,4 +1,4 @@
-import { computed, Ref } from 'vue'
+import {computed, Ref, unref} from 'vue'
 import { IPageProvide, IPagerMix, IPagesFront } from './be-pagination-type'
 
 /**
@@ -25,7 +25,7 @@ export const pagerFront = (
     const pageFrontData = computed((): Array<number> => {
       // 如果设置了每页显示 则使用 pageNumVal，否则使用初始用户设置的 pageSize
       const pageSize = $$BePaginMix.pageNumVal
-        ? Number($$BePaginMix.pageNumVal.split('/')[0])
+        ? Number((unref($$BePaginMix.pageNumVal) as string).split('/')[0])
         : $$BePaginProps.pageSize
       // 最大頁數 = 數據縂條數/每頁顯示數量
       maxPageNum.value = Math.ceil($$BePaginProps.pageData.length / pageSize)

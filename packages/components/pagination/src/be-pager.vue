@@ -197,6 +197,7 @@
     watchEffect,
     watch,
     Ref,
+    unref,
     computed,
     reactive,
   } from 'vue'
@@ -306,7 +307,7 @@
               ? $$BePaginMix.pageParamsFront.maxPageNum
               : $$BePaginProps.pageCount,
             pageSize: $$BePaginMix.pageNumVal
-              ? Number($$BePaginMix.pageNumVal.split('/')[0])
+              ? Number((unref($$BePaginMix.pageNumVal) as string).split('/')[0])
               : $$BePaginProps.pageSize,
           }
           ctx.emit('changePage', resData)
@@ -397,7 +398,7 @@
               ? $$BePaginMix.pageParamsFront.maxPageNum
               : $$BePaginProps.pageCount,
             pageSize: $$BePaginMix.pageNumVal
-              ? Number($$BePaginMix.pageNumVal.split('/')[0])
+              ? Number((unref($$BePaginMix.pageNumVal) as string).split('/')[0])
               : $$BePaginProps.pageSize,
           }
           ctx.emit('changePage', resData)
@@ -458,7 +459,7 @@
       onMounted(() => {
         if ($$BePaginProps.isFront) {
           const pageSize = $$BePaginMix.pageNumVal
-            ? Number($$BePaginMix.pageNumVal.split('/')[0])
+            ? Number((unref($$BePaginMix.pageNumVal) as string).split('/')[0])
             : $$BePaginProps.pageSize
           maxPageNum.value = Math.ceil($$BePaginProps.pageData.length / pageSize)
         } else {

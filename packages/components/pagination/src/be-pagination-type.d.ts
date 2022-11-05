@@ -15,7 +15,7 @@ export interface IPageProvide {
   pageCount: number
   jumpPage: string
   pageParamsFront: any
-  pageNumVal: string
+  pageNumVal: Ref<string>
 }
 
 export interface IPagerInst {
