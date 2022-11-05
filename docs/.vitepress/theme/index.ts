@@ -1,4 +1,4 @@
-// import ElementPlus from 'element-plus'
+
 import 'normalize.css'
 import index, { globals } from '../vitepress'
 import type { Theme } from 'vitepress'

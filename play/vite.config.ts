@@ -22,9 +22,7 @@ export default defineConfig({
     port: 3000
   },
   envDir: './env',
-  css: {
-    postcss: 'postcss.config.cjs',
-  },
+
   build: {
     minify: true,
     cssCodeSplit: true,
