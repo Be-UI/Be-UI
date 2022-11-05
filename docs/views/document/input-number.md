@@ -67,7 +67,7 @@ input-number/step
 | type        | `String`                      | `default` | 尺寸 `'default' / 'primary'/ 'success'/ 'info' / 'warning'/ 'error'`                              |
 | disabled    | `Boolean`                     | `false`   | 禁用                                                                                              |
 | round       | `Number`                      | `0`       | 载入                                                                                              |
-| isClose     | `Boolean`                     | `false`   |自定义主题样式类                                                                                    |
+| isClose     | `Boolean`                     | `false`   | 自定义主题样式类                                                                                    |
 | customClass | `String`                      | `-`       | 指定开启时的值                                                                                     |
 | option      | `Object`                      | `-`       | 配置，背景色，边框色，文字色 `{ borderRadius: String,backgroundColor: String,border: String,color: String,}`  |
 
