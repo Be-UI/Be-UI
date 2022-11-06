@@ -9,7 +9,7 @@ import { mdPlugin } from './plugin/plugins'
 export default defineConfigWithTheme({
   repo: 'xinlei3166/vitepress-theme-demoblock',
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }], // 浏览器tab的title 图标
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.ico' }], // 浏览器tab的title 图标
   ],
   // ...
   base: '/',
