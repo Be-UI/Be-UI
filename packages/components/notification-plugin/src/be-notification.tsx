@@ -137,21 +137,10 @@ export default defineComponent({
         props.compType
       }__${option.value.placement} 
       ${option.value.customClass ? option.value.customClass : ''}`
-      containerClass.value = classStr
-      if (
-        option.value.placement === 'bottomRight'
-        || (option.value.placement === 'topRight' && !option.value.isUpdate)
-      ) {
-        containerClass.value
-          = `${classStr} be-${props.compType}-animation-right-in be-${props.compType}__bottom`
-      }
-      if (
-        option.value.placement === 'bottomLeft'
-        || (option.value.placement === 'topLeft' && !option.value.isUpdate)
-      ) {
-        containerClass.value
-          = `${classStr} be-${props.compType}-animation-left-in be-${props.compType}__top`
-      }
+      const placements = option.value.placement
+      const inAnimate = /Left/.test(placements) ? `be-${props.compType}-animation-left-in` : `be-${props.compType}-animation-right-in`
+      const offsetAnimate = /bottom/.test(placements) ? `be-${props.compType}__bottom` : `be-${props.compType}__top`
+      containerClass.value = `${classStr} ${inAnimate} ${offsetAnimate}`
       if (option.value.placement === 'topCenter' && !option.value.isUpdate) {
         containerClass.value
           = `${classStr} be-${props.compType}-animation-top-center-in be-${props.compType}__top`

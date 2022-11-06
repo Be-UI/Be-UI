@@ -30,6 +30,7 @@
     "vite-plugin-chunk-split": "^0.2.7",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-progress": "^0.0.3",
-    "vue-tsc": "^0.39.5"
+    "vue-tsc": "^0.39.5",
+    "sass": "^1.56.0"
   }
 }
