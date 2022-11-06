@@ -9,11 +9,12 @@
 
     <div class="h-10 flex items-center justify-between ml-10">
       <div
-        class="w-12 cursor-pointer font-mono md:flex sm:hidden"
-        v-for="item in navs"
+        class="w-16 cursor-pointer font-mono text-center text-lg h-60px leading-60px md:flex sm:hidden hover:text-pink-500"
+        v-for="(item, index) in navs"
         :key="item.link + item.text"
-        @click="routerPush(item.link)">
-        {{ item.text }}
+        :class="{active: index === curIndex}"
+        @click="routerPush(item.link, index)">
+        <p style="margin: 0 auto">{{ item.text }}</p>
       </div>
       <vp-search class="search" :options="theme.algolia" multilang></vp-search>
     </div>
@@ -26,7 +27,7 @@
 </template>
 
 <script lang="tsx">
-  import { defineComponent } from 'vue'
+  import { defineComponent , ref} from 'vue'
   import { useNav } from '../composables/nav'
   import { useRouter, Router } from 'vitepress'
   import VpSearch from './vp-search.vue'
@@ -41,18 +42,21 @@
     setup() {
       const navs = useNav()
       const { theme } = useData()
+      const curIndex = ref(0)
       /**
        * 跳转方法
        * @param path 路由地址
        */
       const router: Router = useRouter()
-      const routerPush = (path: string): void => {
+      const routerPush = (path: string, index: number): void => {
+        curIndex.value = index
         router.go(path)
       }
       return {
         theme,
         routerPush,
         navs,
+        curIndex
       }
     },
   })
@@ -61,5 +65,9 @@
 <style>
   .menu-icon .be-icon {
     @apply w-6 h-6;
+  }
+  .active{
+    @apply text-pink-500;
+    border-bottom: 2px solid rgba(236, 72, 153, 1);
   }
 </style>
