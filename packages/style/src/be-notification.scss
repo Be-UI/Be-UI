@@ -127,7 +127,8 @@ $componentsClass: $name + '-' + 'notification' ;
 }
 
 .#{ $componentsClass }#{$element-separator}top {
-  transition: bottom 0.3s;
+  transition: top 0.3s
+
 }
 
 .#{ $componentsClass }-animation-right-in {

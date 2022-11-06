@@ -3,7 +3,7 @@
     <section
       v-for="item in list"
       style="height: 45px"
-      class="sidebar-groups font-mono bg-default w-full mb-2 flex flex-col px-8"
+      class="sidebar-groups font-mono bg-default w-full mb-2 flex flex-col px-6"
       :key="item.link">
       <p class="sidebar-group__title">{{ item.text }}</p>
       <a
