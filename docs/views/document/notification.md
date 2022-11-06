@@ -29,7 +29,11 @@ notification/placement
 :::
 
 ### 纵向偏移
+:::warning
 
+注意：意在同一时刻，每一个的 `notification` 实例应当具有一个相同的偏移量。
+
+:::
 :::demo `offsetTop` 或 `offsetBottom` 可以自定义你需要的偏移量。
 
 notification/offset

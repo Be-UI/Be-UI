@@ -137,7 +137,7 @@ export default defineComponent({
         props.compType
       }__${option.value.placement} 
       ${option.value.customClass ? option.value.customClass : ''}`
-      const placements = option.value.placement
+      const placements = option.value.placement || 'topRight'
       const inAnimate = /Left/.test(placements) ? `be-${props.compType}-animation-left-in` : `be-${props.compType}-animation-right-in`
       const offsetAnimate = /bottom/.test(placements) ? `be-${props.compType}__bottom` : `be-${props.compType}__top`
       containerClass.value = `${classStr} ${inAnimate} ${offsetAnimate}`
