@@ -21,6 +21,11 @@ export default defineComponent({
     target:{
       type: String,
       default: ''
+    },
+    // TODO
+    duration:{
+      type: Number,
+      default: 450
     }
   },
   emits: ['click'],
