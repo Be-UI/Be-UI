@@ -1,7 +1,9 @@
 <script lang="ts">
+// 文档
+// 单测
 import {defineComponent, ref, computed, shallowRef, onMounted, onBeforeUnmount} from 'vue'
 import { BeIcon } from '@be-ui/components/icon'
-import {easeInOutCubic, throttle} from '@be-ui/utils'
+import BTween from 'b-tween';
 export default defineComponent({
   name: 'BeBackTop',
   components: { BeIcon },
@@ -18,14 +20,17 @@ export default defineComponent({
       type: Number,
       default: 200
     },
-    target:{
+    target:{ // 触发滚动的对象
       type: String,
       default: ''
     },
-    // TODO
+    easing: {
+      type: String,
+      default: 'quartOut',
+    },
     duration:{
       type: Number,
-      default: 450
+      default: 500
     }
   },
   emits: ['click'],
@@ -40,28 +45,31 @@ export default defineComponent({
 
     const scrollToTop = () =>{
       if (!targetEl.value) return
-      const beginTime = Date.now()
-      const beginValue = targetEl.value.scrollTop
-      const frameFunc = () => {
-        if (!targetEl.value) return
-        const progress = (Date.now() - beginTime) / 500
-        if (progress < 1) {
-          targetEl.value.scrollTop = beginValue * (1 - easeInOutCubic(progress))
-          requestAnimationFrame(frameFunc)
-        } else {
-          targetEl.value.scrollTop = 0
-        }
-      }
-      requestAnimationFrame(frameFunc)
+      const { scrollTop } = targetEl.value;
+      const tween = new BTween({
+        from: { scrollTop },
+        to: { scrollTop: 0 },
+        easing: props.easing,
+        duration: props.duration,
+        onUpdate: (keys: any) => {
+          if (targetEl.value) {
+            targetEl.value.scrollTop = keys.scrollTop;
+          }
+        },
+      });
+      tween.start();
     }
 
     const handleClick = (event: MouseEvent) =>{
+      // 返回顶部
       scrollToTop()
       ctx.emit('click', event)
     }
 
     const setContainer = () =>{
+      // 容器
       container.value = document
+      // 目标对象
       targetEl.value = document.documentElement
 
       if (props.target) {
@@ -73,18 +81,23 @@ export default defineComponent({
       }
     }
 
+    // 滚动事件，超过滚动距离就显示组件
     const handleScroll = () => {
-      if (targetEl.value) show.value = targetEl.value.scrollTop >= props.showHeight
+      if (targetEl.value) {
+        const { showHeight } = props;
+        const { scrollTop } = targetEl.value;
+        show.value = scrollTop >= showHeight;
+      }
     }
-    const handleScrollThrottled = throttle(handleScroll, 300)
+    handleScroll();
 
     onMounted(() => {
       setContainer()
-      container.value.addEventListener('scroll', handleScrollThrottled)
+      container.value.addEventListener('scroll', handleScroll)
     })
 
     onBeforeUnmount(()=>{
-      container.value.removeEventListener('scroll', handleScrollThrottled)
+      container.value.removeEventListener('scroll', handleScroll)
     })
     return {
       show,
@@ -96,32 +109,41 @@ export default defineComponent({
 </script>
 
 <template>
-  <transition :name="`be-fade-in`">
+  <transition name="be-fade-in-linear">
     <div
         v-if="show"
         :style="backTopStyle"
         class="be-back-top"
         @click.stop="handleClick">
       <slot>
-        <be-icon icon="add"></be-icon>
+        <be-icon icon="up"></be-icon>
       </slot>
     </div>
   </transition>
 </template>
 <style lang="scss">
-.be-back-top{
+
+/*.be-back-top{
   background-color: white;
   position: fixed;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  color: #79bbff;
+  color: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  box-shadow: 0 0 0 4px rgb(24 144 255 / 20%);
+  box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
   cursor: pointer;
   z-index: 5;
 }
+.be-back-top:hover{
+  color: #000000;
+  .be-icon--container{
+    use{
+      fill: #ec4899;
+    }
+  }
+}*/
 </style>

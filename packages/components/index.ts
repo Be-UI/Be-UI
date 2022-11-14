@@ -24,7 +24,7 @@ export { BeHeader } from './container'
 export { BeContainer } from './container'
 export { BeSelect } from './select'
 export { BeSelectMultiple } from './select'
-export { BeBackTop } from './backup'
+export { BeBackTop } from './backtop'
 // plugins
 export { loadingPlugin as BeLoadingSer } from './loading-plugin' // 服务
 export { default as BeNotification } from './notification-plugin' // 服务

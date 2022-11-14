@@ -1,4 +1,4 @@
-export * from './ainimation';
+
 export * from './direactives/click-outside'
 export * from './direactives/contextmenu-directives'
 export * from './direactives/drag-directives'
