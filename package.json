@@ -30,17 +30,18 @@
     "test:coverage": "vitest run --coverage"
   },
   "peerDependencies": {
-    "vue": "^3.2.0",
-    "@popperjs/core": "^2.11.5"
+    "@popperjs/core": "^2.11.5",
+    "vue": "^3.2.0"
   },
   "dependencies": {
     "@be-ui/build": "workspace:*",
     "@be-ui/components": "workspace:*",
-    "be-ui": "workspace:*",
     "@be-ui/play": "workspace:*",
     "@be-ui/style": "workspace:*",
     "@be-ui/utils": "workspace:*",
-    "@popperjs/core": "^2.11.5"
+    "@popperjs/core": "^2.11.5",
+    "b-tween": "^0.3.3",
+    "be-ui": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",
@@ -66,14 +67,14 @@
     "cross-env": "^7.0.3",
     "eslint": "^8.18.0",
     "husky": "^7.0.4",
+    "jsdom": "latest",
     "pnpm": "^6.3.0",
     "rimraf": "^3.0.2",
     "sass": "^1.51.0",
     "typescript": "4.8.4",
     "vitest": "^0.24.3",
     "vue": "^3.2.41",
-    "vue-tsc": "^1.0.8",
-    "jsdom": "latest"
+    "vue-tsc": "^1.0.8"
   },
   "lint-staged": {
     "*.{vue,js,ts,jsx,tsx,md,json}": [

@@ -61,7 +61,7 @@
 }
 
 @mixin be-shadow {
-  box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, var(--be-shadow-md);
+  box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
 }
 
 @mixin be-message--title {
@@ -609,4 +609,19 @@ $--select: map.deep-merge(
                         'bg-hover':var(--be-base-color-bg-hover),
                 ),
                 $--select
+);
+
+// 生成be-back-top
+$--back-top: () !default;
+$--back-top: map.deep-merge(
+                (
+                   'bg-w': var(--be-base-color-w),
+                   'color-icon':var(--be-text-color-regular),
+                   'rounded-full': var(--be-rounded-full),
+                    'color-icon-hover':var(--be-base-color-main),
+                    'w':2.5rem,
+                    'h':2.5rem,
+                     'z-index': var(--be-zIndex-top2),
+                ),
+                $--back-top
 );

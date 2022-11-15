@@ -1,0 +1,32 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'back-top' ;
+@include create-B(back-top) {
+  @include set-component-style-var('back-top', $--back-top);
+}
+
+@include create-B(back-top) {
+  @include flex-center;
+  @include be-pointer;
+  @include be-shadow;
+  background-color: var(--be-back-top-bg-w);
+  position: fixed;
+  width: var(--be-back-top-w);
+  height: var(--be-back-top-h);
+  border-radius: var(--be-back-top-rounded-full);
+  z-index: var(--be-back-z-index);
+
+  &:hover{
+    .be-icon--container{
+      use{
+        fill: var(--be-back-top-color-icon-hover);
+      }
+    }
+  }
+
+}
+
+
