@@ -20,10 +20,10 @@
     ]
   },
   "include": [
-    "/packages/**/*.ts",
-    "/**/*.tsx",
-    "/build/**/*.ts",
-    "/packages/**/*.vue",
+    "packages/**/*.ts",
+    "packages/*.tsx",
+    "build/**/*.ts",
+    "packages/**/*.vue",
     "packages/components/shims-vue.d.ts"
   ],
   // ts 排除的文件

@@ -170,7 +170,7 @@ export default defineComponent({
           />
           )
     }
-    return () => {
+    return function() {
       return (
         <button
           type="button"
@@ -178,14 +178,14 @@ export default defineComponent({
           style={btnStyle.value}
           id={`be_button_${uid.value}`}
           class={`
-                    be-button 
-                    be-button__inner ${disabledStyle.value} 
-                    be-button__${props.size} 
-                    be-button__${props.type}${borderStyle.value} 
-                    ${props.customClass}`}
+                be-button 
+                be-button__inner ${disabledStyle.value} 
+                be-button__${props.size} 
+                be-button__${props.type}${borderStyle.value} 
+                ${props.customClass}`}
           disabled={props.disabled || props.loading}
         >
-          <div class="be-button--body" style={{ margin: ' 0 auto', display: 'flex' }}>
+          <div class={'be-button--body'} style={{ margin: ' 0 auto', display: 'flex' }}>
             {prevIconRender()}
             <div class="be-button--slot">{ctx.slots.default && ctx.slots.default()}</div>
             {nextIconRender()}
