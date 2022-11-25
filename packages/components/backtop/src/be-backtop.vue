@@ -1,6 +1,4 @@
 <script lang="ts">
-// 文档
-// 单测
 import {defineComponent, ref, computed, shallowRef, onMounted, onBeforeUnmount} from 'vue'
 import { BeIcon } from '@be-ui/components/icon'
 import BTween from 'b-tween';
@@ -93,11 +91,11 @@ export default defineComponent({
 
     onMounted(() => {
       setContainer()
-      container.value.addEventListener('scroll', handleScroll)
+      container.value && container.value.addEventListener('scroll', handleScroll)
     })
 
     onBeforeUnmount(()=>{
-      container.value.removeEventListener('scroll', handleScroll)
+      container.value && container.value.removeEventListener('scroll', handleScroll)
     })
     return {
       show,

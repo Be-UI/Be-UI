@@ -151,6 +151,10 @@ export default defineConfigWithTheme({
               text: '弹出框 popover',
               link: '/views/document/popover',
             },
+            {
+              text: '回到顶部 backtop',
+              link: '/views/document/backtop',
+            },
           ],
         },
       ],
