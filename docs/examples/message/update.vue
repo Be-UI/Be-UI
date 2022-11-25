@@ -1,29 +1,39 @@
 <template>
-  <be-button @click="msgByUpdate()" style="margin-right: 5px"
-             bordered>边城
+  <be-button
+    style="margin-right: 5px"
+    bordered
+    @click="msgByUpdate()"
+  >
+    边城
   </be-button>
-  <be-button @click="updateMsg()" style="margin-right: 5px"
-             bordered>update
+  <be-button
+    style="margin-right: 5px"
+    bordered
+    @click="updateMsg()"
+  >
+    update
   </be-button>
 </template>
+
 <script lang="ts" setup>
 import { BeMessage } from 'be-ui'
 const message = BeMessage.service
 const msgByUpdate = (): void => {
   message({
-    titles: `雪晴(点击更新按钮)`,
+    titles: '雪晴(点击更新按钮)',
     msgType: 'info',
     key: 'msgByUpdate',
   })
 }
 const updateMsg = (): void => {
   message({
-    titles: `长河`,
+    titles: '长河',
     msgType: 'warning',
     key: 'msgByUpdate',
   })
 }
 </script>
+
 <style>
 .be-message.test-msg
 .be-message--container

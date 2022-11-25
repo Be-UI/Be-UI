@@ -68,8 +68,7 @@ export default defineComponent({
         document.body.addEventListener('click', handleBodyClick)
         document.body.addEventListener('mousedown', handleBodyClick)
         document.body.addEventListener('mousewheel', handleBodyClick)
-      }
-      else {
+      } else {
         /** 隐藏时提交触发 hide 事件
            * @event hide
            * @param {Object} 当前be-contextmenu组件上下文
@@ -122,7 +121,7 @@ export default defineComponent({
        * 处理右键点击方法
        * @param {Event} evt - 事件对象
        */
-    const handleReferenceContextmenu = (evt: Event): void => {
+    function handleReferenceContextmenu(evt: Event) {
       const event = evt as MouseEvent
       event.preventDefault()
       if (props.disabled)
@@ -171,7 +170,7 @@ export default defineComponent({
        * @param {Object} position - 位置对象
        * @public
        */
-    const show = (position?: IPosition): void => {
+    function show(position?: IPosition) {
       // 根据window.$BeContextmenu 获取 $beContextmenuId缓存
       // 不等于当前触发的菜单时，隐藏其他菜单
       Object.keys(window.$BeContextmenu).forEach((key) => {
@@ -194,7 +193,7 @@ export default defineComponent({
        * @param {Event} event - 事件对象
        * @public
        */
-    const handleBodyClick = (event: Event): void => {
+    function handleBodyClick(event: Event) {
       // 判断菜单组件下dom树是否包含点击事件触发dom元素
       const target = event.target as HTMLElement
       const notOutside: boolean

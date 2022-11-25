@@ -10,7 +10,7 @@ export interface INotifyOption {
   duration?: number
   key?: string
   onClose?: () => void
-  onClick?: (e?:Event) => void
+  onClick?: (e?: Event) => void
   compType?: string
   close?: boolean
   isUpdate?: boolean

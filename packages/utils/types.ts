@@ -7,9 +7,7 @@ export interface IEvent extends MouseEvent {
 }
 export type TimeoutHandle = ReturnType<typeof window.setTimeout>
 
-export interface IOption {
-  [key: string]: any
-}
+export type IOption = Record<string, any>
 
 export interface IWindowLocation {
   hash?: string

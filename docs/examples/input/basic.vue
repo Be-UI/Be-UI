@@ -1,15 +1,16 @@
 <template>
   <div class="exp-input">
-    <be-input size="mini" v-model="value" ></be-input>
-    <be-input size="medium" v-model="value" ></be-input>
-    <be-input size="large" v-model="value" ></be-input>
+    <be-input v-model="value" size="mini" />
+    <be-input v-model="value" size="medium" />
+    <be-input v-model="value" size="large" />
   </div>
-
 </template>
+
 <script setup lang="ts">
-import {ref} from 'vue'
+import { ref } from 'vue'
 const value = ref<string>('')
 </script>
+
 <style lang="scss">
 .exp-input{
   display: flex;

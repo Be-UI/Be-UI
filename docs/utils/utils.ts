@@ -3,9 +3,9 @@ export const extRE = /(index)?\.(md|html)$/
 export const endingSlashRE = /\/$/
 export const outboundRE = /^[a-z]+:/i
 export function isActive(route, path) {
-  if (path === undefined) {
+  if (path === undefined)
     return false
-  }
+
   const routePath = normalize(`/${route.data.relativePath}`)
   const pagePath = normalize(path)
   return routePath === pagePath

@@ -1,6 +1,7 @@
 <template>
-  <be-icon icon="loading" customClass="loading-test" ></be-icon>
+  <be-icon icon="loading" custom-class="loading-test" />
 </template>
+
 <style>
 .loading-test{
   fill: #22c416;

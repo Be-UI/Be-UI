@@ -1,6 +1,4 @@
-import type { VNode } from 'vue'
 import { defineComponent, onMounted, ref, watch } from 'vue'
-import type { IOption } from '@be-ui/utils'
 
 import { BeIcon } from '@be-ui/components/icon'
 import { BePopover } from '@be-ui/components/popover'
@@ -13,9 +11,11 @@ import {
   jsonClone,
   mapToArr,
 } from '@be-ui/utils'
-import type { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
 import BeInputSelect from '../../autocomplete/src/be-input-select.vue'
 import composition from './be-select-composition'
+import type { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
+import type { IOption } from '@be-ui/utils'
+import type { VNode } from 'vue'
 
 export default defineComponent({
   name: 'BeSelectMultiple',
@@ -201,12 +201,12 @@ export default defineComponent({
      * 處理列表數據
      * @param {Array} propList - 数据列表
      */
-    const handleList = (propList: Array<any>): void => {
+    function handleList(propList: Array<any>) {
       const list = jsonClone(propList)
       // 分组数据处理逻辑
       if (props.group) {
         const arr: Array<any> = []
-        list.forEach((res: { children?: Array<any>; isSelect: boolean }) => {
+        list.forEach((res: { children?: Array<any>, isSelect: boolean }) => {
           res.isSelect = false
           const group = { ...res }
           delete group.children
@@ -218,8 +218,7 @@ export default defineComponent({
           }
         })
         dataList.value = arr
-      }
-      else {
+      } else {
         // 沒有指定key，則生成
         if (!props.keyValue) {
           list.forEach((val) => {
@@ -248,14 +247,24 @@ export default defineComponent({
         return (
           <div
             class={`
-                        be-select--option__extend`}>
-            <be-input value={addItem.value} onInput={handleInput}></be-input>
-            <be-icon icon="add" onClick={addItemToList}></be-icon>
+                        be-select--option__extend`}
+          >
+            <be-input value={addItem.value} onInput={handleInput} />
+            <be-icon icon="add" onClick={addItemToList} />
           </div>
         )
       }
     }
     /** ************************************** 輸入匹配建議相關方法 ************************************/
+    // tag 列表
+    const tagList = ref<Array<any>>([])
+    // 多選時，維護的内部輸入
+    const inputMultiple = ref<string>('')
+    // 列表显示label
+    const label = props.labelValue || 'label'
+    // 列表显示keyid
+    const keyId = props.keyValue || 'id'
+    let selectMap = new Map()
     /**
      * 匹配输入建议
      * @param {string} inputValue - 輸入值
@@ -316,8 +325,7 @@ export default defineComponent({
             item.isAutoAdd = true
             addList.push(item)
             dataL.push(item)
-          }
-          else {
+          } else {
             if (isHasComma) {
               let isHas = false
               dataList.value.forEach((dataRes: any) => {
@@ -354,8 +362,7 @@ export default defineComponent({
         ctx.emit('search', filterRes)
         // 更新下拉列表 - 選中狀態匹配
         dataList.value = isHasComma ? dataL : filterRes
-      }
-      else {
+      } else {
         // 爲空則使用原始數據 - 選中狀態匹配
         dataList.value = jsonClone(ordData)
       }
@@ -364,6 +371,8 @@ export default defineComponent({
         setSelectState(true, tag[keyId])
       })
     }
+    // 输入框宽度
+    const txtWidth = ref<number>(0)
     /**
      * 输入事件
      * @param {Event} event - 事件对象
@@ -383,7 +392,7 @@ export default defineComponent({
       const curInstPopover = internalInstance.refs.beSelectPopover as IInputSelectFunc
       // 开启远程搜索时
       if (props.remote && isFunction(props.remoteFunc) && props.remoteFunc) {
-        const handleRemote = function () {
+        const handleRemote = function() {
           // 为空，关闭下拉 直接返回
           if (!$eventDom.value) {
             curInstPopover.close()
@@ -407,17 +416,7 @@ export default defineComponent({
       matchSuggestions($eventDom.value, listCache.concat(addItemList.value))
     }
     /** ************************************** 多選相關方法 ************************************/
-    // tag 列表
-    const tagList = ref<Array<any>>([])
-    // 多選時，維護的内部輸入
-    const inputMultiple = ref<string>('')
-    // 输入框宽度
-    const txtWidth = ref<number>(0)
-    // 列表显示label
-    const label = props.labelValue || 'label'
-    // 列表显示keyid
-    const keyId = props.keyValue || 'id'
-    let selectMap = new Map()
+
     /**
      * 下拉搜索选择事件方法
      * @param {Object } value - 选中后值
@@ -441,8 +440,7 @@ export default defineComponent({
          * @param {Number} index - 点击的对应列表索引
          */
         ctx.emit('Deselect', value, index)
-      }
-      else {
+      } else {
         if (value.isAutoAdd)
           addItemList.value.push(value)
 
@@ -473,7 +471,7 @@ export default defineComponent({
     /**
      * 更新數據方法
      */
-    const updateValue = (): void => {
+    function updateValue() {
       const res = jsonClone(mapToArr(selectMap))
       tagList.value = res
       ctx.emit('update:modelValue', res)
@@ -514,7 +512,7 @@ export default defineComponent({
      * @param {boolean} state - 状态值
      * @param {Object} match - 匹配对象
      */
-    const setSelectState = (state: boolean, match: any): void => {
+    function setSelectState(state: boolean, match: any) {
       dataList.value.forEach((select: any) => {
         if (select[keyId] === match)
           select.isSelect = state
@@ -524,7 +522,7 @@ export default defineComponent({
      * 根据输入文字计算宽度
      * @param text
      */
-    const textWidth = (text: string) => {
+    function textWidth(text: string) {
       const sensor = document.createElement('a')
       sensor.innerHTML = text
       const body = document.getElementsByTagName('body')[0]
@@ -587,15 +585,16 @@ export default defineComponent({
                   internalInstance.slots.tag({ data: val, index })
                 )
               : (
-              <be-tag
-                key={`${val.label}tag`}
-                isClose={true}
-                type="info"
-                size="mini"
-                customClass="ellipsis"
-                onClose={() => closeTag(val)}>
-                {val[label]}
-              </be-tag>
+                <be-tag
+                  key={`${val.label}tag`}
+                  isClose
+                  type="info"
+                  size="mini"
+                  customClass="ellipsis"
+                  onClose={() => closeTag(val)}
+                >
+                  {val[label]}
+                </be-tag>
                 )}
           </div>,
         )
@@ -624,7 +623,8 @@ export default defineComponent({
               if (val.disabled || val.type === 'group')
                 return
               handleSelect(val, index)
-            }}>
+            }}
+          >
             {/* 有插槽就渲染插槽 */}
             {internalInstance.slots.default
               ? internalInstance.slots.default({
@@ -632,7 +632,7 @@ export default defineComponent({
                 index,
               })
               : val[props.labelValue]}
-            {val.isSelect ? <be-icon icon="select" custom-class={'be-select--hook'}></be-icon> : ''}
+            {val.isSelect ? <be-icon icon="select" custom-class="be-select--hook" /> : ''}
           </div>,
         )
       })
@@ -647,7 +647,8 @@ export default defineComponent({
             placement="bottom"
             ref="beSelectPopover"
             trigger-elm={`be_select-${uid}`}
-            custom-class="be-select--popover">
+            custom-class="be-select--popover"
+          >
             {{
               default: (
                 <div style={selectStyle} class="be-select--option--body">
@@ -656,11 +657,12 @@ export default defineComponent({
                                     be-select--option--container 
                                     scroll-diy 
                                     ${loading.value ? 'be-select--loading ' : ''}`}
-                    id={`be_select_option_container_${uid}`}>
+                    id={`be_select_option_container_${uid}`}
+                  >
                     {/* 渲染loading 或者列表 */}
                     {loading.value
                       ? (
-                      <be-icon icon="loading" spin width="25" height="25" fill="#606266"></be-icon>
+                        <be-icon icon="loading" spin width="25" height="25" fill="#606266" />
                         )
                       : (
                           renderOption()
@@ -677,15 +679,16 @@ export default defineComponent({
                   style={{
                     cursor,
                   }}
-                  tab-index={'0'}
+                  tab-index="0"
                   onMouseenter={$event => handleMouseEnter($event)}
                   onMouseleave={$event => handleMouseLeave($event)}
                   onFocus={$event => handleFocus($event)}
-                  onBlur={$event => handleBlur($event)}>
+                  onBlur={$event => handleBlur($event)}
+                >
                   {renderTags()}
                   <input
                     readonly={readonlyInput.value}
-                    tab-index={'-1'}
+                    tab-index="-1"
                     onFocus={computedPosition}
                     value={inputMultiple.value}
                     disabled={props.disabled}
@@ -704,7 +707,8 @@ export default defineComponent({
                         $event.stopPropagation()
                       }
                     }}
-                    class={'be-select--icon'}></be-icon>
+                    class="be-select--icon"
+                  />
                 </div>
               ),
             }}

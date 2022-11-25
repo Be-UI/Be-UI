@@ -102,7 +102,7 @@ export default defineComponent({
        * 关闭组件
        * @param {string} type 类型
        */
-    const handleClose = (type?: string): void => {
+    function handleClose(type?: string) {
       if (type === 'btn' || type === 'keyboard') {
         /** 弹窗关闭事件
            * @event close
@@ -111,21 +111,26 @@ export default defineComponent({
       }
       ctx.emit('update:isShow', false)
     }
+    /**
+     * 键盘esc退出的监听取消
+     */
+    const removeEscExitFunc = (): void => {
+      document.body.onkeydown = null
+    }
     const show = computed(() => props.isShow)
     watch(show, (nVal) => {
       if (nVal) {
         nextTick(() => {
           listenerEscExitFunc()
         })
-      }
-      else {
+      } else {
         removeEscExitFunc()
       }
     })
     /**
        * 键盘esc 退出的监听
        */
-    const listenerEscExitFunc = (): void => {
+    function listenerEscExitFunc() {
       if (props.escExit) {
         document.body.onkeydown = (e) => {
           if (e && e.key === 'Escape') {
@@ -138,12 +143,7 @@ export default defineComponent({
         }
       }
     }
-    /**
-       * 键盘esc退出的监听取消
-       */
-    const removeEscExitFunc = (): void => {
-      document.body.onkeydown = null
-    }
+
     const dialogModels = ref('')
     // 开启遮罩与键盘监听
     onMounted(() => {

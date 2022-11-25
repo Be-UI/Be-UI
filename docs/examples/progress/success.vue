@@ -5,4 +5,3 @@
     <be-progress type="dashboard" percent="80" status="normal" :success="{ percent: 50, color: '#00ffff' }" />
   </div>
 </template>
-

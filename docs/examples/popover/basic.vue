@@ -1,7 +1,9 @@
 <template>
-  <be-popover customClass="header-popover">
+  <be-popover custom-class="header-popover">
     <template #trigger>
-      <be-button style="margin-right: 5px" customClass="sm:mb-4" type="info" bordered>苦瓜</be-button>
+      <be-button style="margin-right: 5px" custom-class="sm:mb-4" type="info" bordered>
+        苦瓜
+      </be-button>
     </template>
     <p>今天先记得听过人说这叫半生瓜</p>
     <p>那意味着它的美年轻不会洞察吗</p>

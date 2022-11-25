@@ -11,8 +11,8 @@ import {
   watch,
 } from 'vue'
 import { ClickOutside, isString } from '@be-ui/utils'
-import type { Instance, Options, Placement, PositioningStrategy } from '@popperjs/core'
 import { createPopper } from '@popperjs/core'
+import type { Instance, Options, Placement, PositioningStrategy } from '@popperjs/core'
 import type { IPopover, TPopoverStyle, VirtualElement } from './be-popover-type'
 
 export default defineComponent({
@@ -108,6 +108,7 @@ export default defineComponent({
     /** ****************************************** 显示控制相关 ************************************/
     // 是否显示
     const showPopover = ref(false)
+    const isEnterPopover = ref<boolean>(false)
     /**
        * click-outside 指令使用的关闭方法
        * @public
@@ -124,6 +125,13 @@ export default defineComponent({
         ctx.emit('update', showPopover.value)
       }, props.duration)
     }
+    // popover.js 实例缓存
+    const popperJS = ref<Instance>()
+    // 监听popover元素变化，强制更新，某些边界情况  @popperjs/core 位置定位是错误的
+    const observer = new MutationObserver(() => {
+      if (props.forceUpdate)
+        popperJS.value?.update()
+    })
     /**
        * 显示控制方法
        * @param {Boolean} showParams - 显示变量
@@ -167,13 +175,12 @@ export default defineComponent({
       top: '0px',
       zIndex: '2000',
     })
-    // popover.js 实例缓存
-    let popperJS = ref<Instance>()
+    let computeDom: Element | any = null
     /**
        * 计算显示位置
        * @param {String} placement - 位置
        */
-    const computePosition = (placement: string, type = ''): void => {
+    function computePosition(placement: string, type = '') {
       if (type === 'update') {
         popperJS.value?.update()
         return
@@ -221,8 +228,7 @@ export default defineComponent({
         popperJS.value = createPopper(VNodeTrigger, popover, popoverOption)
         VNodeTrigger.getBoundingClientRect = generateGetBoundingClientRect(props.x, props.y)
         popperJS.value.update()
-      }
-      else {
+      } else {
         popperJS.value = createPopper(computeDom, popover, popoverOption)
       }
       observer.observe(popover, {
@@ -231,17 +237,12 @@ export default defineComponent({
       })
     }
 
-    // 监听popover元素变化，强制更新，某些边界情况  @popperjs/core 位置定位是错误的
-    let observer = new MutationObserver(() => {
-      if (props.forceUpdate)
-        popperJS.value?.update()
-    })
     /**
        * 用户传入指定坐标，创建vnode，用于popover.js定位
        * @param {number} x - 位置
        * @param {number} y - 位置
        */
-    const generateGetBoundingClientRect = (x = 0, y = 0) => {
+    function generateGetBoundingClientRect(x = 0, y = 0) {
       const rect = {
         width: 0,
         height: 0,
@@ -255,7 +256,7 @@ export default defineComponent({
     /** ****************************************** dom操作相关 ************************************/
     // 触发元素dom
     let triggerDom: Element | any = null
-    let computeDom: Element | any = null
+
     /**
        * 遍历dom树，找到合适的trigger元素
        * @param root
@@ -292,8 +293,7 @@ export default defineComponent({
               = matchDom(internalInstance.refs.bePopoverTrigger)
               || triggerDom
               || internalInstance.refs.bePopoverTrigger
-        }
-        else {
+        } else {
           triggerDom
               = matchDom(internalInstance.refs.bePopoverTrigger)
               || internalInstance.refs.bePopoverTrigger
@@ -309,8 +309,7 @@ export default defineComponent({
         }
         if (triggerDom && props.trigger === 'manual')
           triggerDom.addEventListener('click', evtList.manual, false)
-      }
-      else {
+      } else {
         console.error('Please set the trigger element')
       }
     }
@@ -326,7 +325,7 @@ export default defineComponent({
     /**
        * 触发元素触发事件方法移除
        */
-    const removeEvt = (): void => {
+    function removeEvt() {
       if (triggerDom) {
         triggerDom.removeEventListener('click', evtList.click, false)
         triggerDom.removeEventListener('mouseenter', evtList.mouseenter, false)
@@ -361,7 +360,6 @@ export default defineComponent({
       observer.disconnect()
     })
     /** ****************************************** popover元素 dom 操作相关 ************************************/
-    const isEnterPopover = ref<boolean>(false)
     const handlePopoverDomEnter = (): void => {
       if (props.trigger === 'hover')
         isEnterPopover.value = true

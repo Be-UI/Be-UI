@@ -4,12 +4,13 @@ const show = ref(false)
 </script>
 
 <template>
-  <be-button @click="show = true" style="margin-right: 5px" customClass="sm:mb-4" bordered>
+  <be-button style="margin-right: 5px" custom-class="sm:mb-4" bordered @click="show = true">
     桃李春风
   </be-button>
   <be-dialog
-      titles="方珍珠"
-      v-model:is-show="show">
+    v-model:is-show="show"
+    titles="方珍珠"
+  >
     <p>破风筝唱有一位姑娘本姓方，帮助她爸爸糊后窗。有朝一日她出了嫁，谁肯来帮爸爸的忙笑哈哈哈。</p>
     <p>方大凤也唱有一位姑娘本姓方，爱她的爸爸也爱她娘。她妈妈一点一点的有了进步，她爸爸精明又要强。</p>
   </be-dialog>

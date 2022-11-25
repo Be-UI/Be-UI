@@ -1,9 +1,18 @@
 <template>
-  <be-button customClass='mr-4' @click="openMsg('warning')" type="warning">云台三落（warning）</be-button>
-  <be-button customClass='mr-4' @click="openMsg('info')" bordered type="info">（info）飞燕啄月</be-button>
-  <be-button customClass='mr-4' @click="openMsg('success')" type="success">苍龙出水（success）</be-button>
-  <be-button customClass='mr-4' @click="openMsg('error')" type="error">（error）风雷一剑</be-button>
+  <be-button custom-class="mr-4" type="warning" @click="openMsg('warning')">
+    云台三落（warning）
+  </be-button>
+  <be-button custom-class="mr-4" bordered type="info" @click="openMsg('info')">
+    （info）飞燕啄月
+  </be-button>
+  <be-button custom-class="mr-4" type="success" @click="openMsg('success')">
+    苍龙出水（success）
+  </be-button>
+  <be-button custom-class="mr-4" type="error" @click="openMsg('error')">
+    （error）风雷一剑
+  </be-button>
 </template>
+
 <script lang="tsx" setup>
 import { BeMsg } from 'be-ui'
 const msgBox = BeMsg.service

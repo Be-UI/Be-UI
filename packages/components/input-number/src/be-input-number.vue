@@ -127,8 +127,7 @@ export default defineComponent({
       nextTick(() => {
         if (pointCheck) {
           inputInnerVal.value = props.formatter(parserRes)
-        }
-        else {
+        } else {
           const val = !parserRes ? '' : (limitValue(parserRes) as IInputNumLimit).val
           inputInnerVal.value = props.formatter(val)
           updateInput(val)
@@ -139,7 +138,7 @@ export default defineComponent({
      * input 事件处理方法，实现双向绑定
      * @param {String | Number} value - 更新后值
      */
-    const updateInput = (value: string | number): void => {
+    function updateInput(value: string | number) {
       ctx.emit('update:modelValue', value)
     }
     /**
@@ -258,8 +257,7 @@ export default defineComponent({
         || props.modelValue === 0
       ) {
         inputInnerVal.value = props.formatter(props.modelValue)
-      }
-      else {
+      } else {
         // console.error('You should pass in numeric or pure numeric string variables, such as 1 or \'12\'')
       }
     }
@@ -304,7 +302,6 @@ export default defineComponent({
     @blur="$event => handleBlur($event)"
     @keydown="$event => handleKeyDown($event)"
   >
-  
     <div :class="`be-input-number__${size} be-input-number__default`">
       <BeInput
         :ref="`beInputInner${uid}`"
@@ -341,6 +338,5 @@ export default defineComponent({
         />
       </div>
     </div>
-  
   </div>
 </template>

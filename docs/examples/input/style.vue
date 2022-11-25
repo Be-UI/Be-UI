@@ -1,12 +1,14 @@
 <template>
   <div class="exp-input">
-    <be-input :inputStyle="{background:'#ecffec'}" v-model="value" ></be-input>
+    <be-input v-model="value" :input-style="{ background: '#ecffec' }" />
   </div>
 </template>
+
 <script setup lang="ts">
-import {ref} from 'vue'
+import { ref } from 'vue'
 const value = ref<string>('明月照 我寂寥')
 </script>
+
 <style lang="scss">
 .exp-input{
   display: flex;

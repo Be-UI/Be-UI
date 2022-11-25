@@ -1,12 +1,12 @@
-import type { VNode } from 'vue'
 import { defineComponent, onMounted, watch } from 'vue'
 import BeInputSelect from '@be-ui/components/autocomplete'
 
 import { BeIcon } from '@be-ui/components/icon'
 import { BePopover } from '@be-ui/components/popover'
 import { debounce, getUuid, isFunction, isString, jsonClone } from '@be-ui/utils'
-import type { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
 import composition from './be-select-composition'
+import type { IInputSelectFunc } from '../../autocomplete/src/be-autocomplete-type'
+import type { VNode } from 'vue'
 
 export default defineComponent({
   name: 'BeSelect',
@@ -176,11 +176,11 @@ export default defineComponent({
      * 處理列表數據
      * @param {Array} list - 数据列表
      */
-    const handleList = (list: Array<any>): void => {
+    function handleList(list: Array<any>) {
       // 分组数据处理逻辑
       if (props.group) {
         const arr: Array<any> = []
-        list.forEach((res: { children?: Array<any>; isSelect: boolean }) => {
+        list.forEach((res: { children?: Array<any>, isSelect: boolean }) => {
           res.isSelect = false
           const group = { ...res }
           delete group.children
@@ -193,8 +193,7 @@ export default defineComponent({
           }
         })
         dataList.value = arr
-      }
-      else {
+      } else {
         // 沒有指定key，則生成
         if (!props.keyValue) {
           list.forEach((val) => {
@@ -218,7 +217,7 @@ export default defineComponent({
      * @param {Object } value - 选中后值
      * @param {Number} index - 点击索引
      */
-    const handleSelect = (value: any, index: number): void => {
+    function handleSelect(value: any, index: number) {
       resetSelect()
       updateValue(value)
       ctx.emit('select', value, index)
@@ -230,7 +229,7 @@ export default defineComponent({
      * 更新數據方法
      * @param value
      */
-    const updateValue = (value: any): void => {
+    function updateValue(value: any) {
       if (isString(value))
         ctx.emit('update:modelValue', value)
       else
@@ -240,7 +239,7 @@ export default defineComponent({
     /**
      * 重置选中状态
      */
-    const resetSelect = (): void => {
+    function resetSelect() {
       dataList.value.map(val => (val.isSelect = false))
     }
     /**
@@ -262,9 +261,10 @@ export default defineComponent({
       if (props.extend && !props.group) {
         return (
           <div
-            class={' be-select--option__extend'}>
-            <be-input value={addItem.value} onInput={handleInput}></be-input>
-            <be-icon icon="add" onClick={addItemToList}></be-icon>
+            class=" be-select--option__extend"
+          >
+            <be-input value={addItem.value} onInput={handleInput} />
+            <be-icon icon="add" onClick={addItemToList} />
           </div>
         )
       }
@@ -307,7 +307,7 @@ export default defineComponent({
       const curInstPopover = internalInstance.refs.beSelectPopover as IInputSelectFunc
       // 开启远程搜索时
       if (props.remote && isFunction(props.remoteFunc) && props.remoteFunc) {
-        const handleRemote = function () {
+        const handleRemote = function() {
           // 为空，关闭下拉 直接返回
           if (!$eventDom.value) {
             curInstPopover.close()
@@ -349,19 +349,20 @@ export default defineComponent({
 
         // 選項列表
         optionList.push(
-            <div
-              class={` ellipsis
+          <div
+            class={` ellipsis
                      ${val.type === 'group' && index !== 0 ? 'be-select--option__line' : ''}
                      ${val.isSelect ? 'be-select--option__choice' : ''}
                      ${val.type === 'group' ? 'be-select--option__group' : 'be-select--option'}
                      ${val.disabled ? 'be-select--option__disabled' : ''}`}
-              key={val[keyValue]}
-              onClick={() => handleClick(val, index)}>
-              {/* 有插槽就渲染插槽 */}
-              {internalInstance.slots.default
-                ? internalInstance.slots.default(val, index)
-                : val[props.labelValue]}
-            </div>,
+            key={val[keyValue]}
+            onClick={() => handleClick(val, index)}
+          >
+            {/* 有插槽就渲染插槽 */}
+            {internalInstance.slots.default
+              ? internalInstance.slots.default(val, index)
+              : val[props.labelValue]}
+          </div>,
         )
       })
       return optionList
@@ -376,22 +377,25 @@ export default defineComponent({
             placement="bottom"
             ref="beSelectPopover"
             trigger-elm={`be_select-${uid}`}
-            custom-class="be-select--popover">
+            custom-class="be-select--popover"
+          >
             {{
               default: (
                 <div style={selectStyle} class="be-select--option--body">
-                  <div class={`
+                  <div
+                    class={`
                             be-select--option--container 
                             scroll-diy 
                             ${loading.value ? 'be-select--loading ' : ''}`}
-                    id={`be_select_option_container_${uid}`}>
-                    {/* 渲染loading 或者列表*/}
+                    id={`be_select_option_container_${uid}`}
+                  >
+                    {/* 渲染loading 或者列表 */}
                     {loading.value
                       ? (
-                      <be-icon icon="loading" spin width="25" height="25" fill="#606266"></be-icon>
+                        <be-icon icon="loading" spin width="25" height="25" fill="#606266" />
                         )
                       : (
-                        renderOption()
+                          renderOption()
                         )}
                   </div>
                   {/* 动态扩展 */}
@@ -407,14 +411,15 @@ export default defineComponent({
                   style={{
                     cursor,
                   }}
-                  tab-index={'0'}
+                  tab-index="0"
                   onMouseenter={$event => handleMouseEnter($event)}
                   onMouseleave={$event => handleMouseLeave($event)}
                   onFocus={$event => handleFocus($event)}
-                  onBlur={$event => handleBlur($event)}>
+                  onBlur={$event => handleBlur($event)}
+                >
                   <input
                     readonly={readonlyInput.value}
-                    tab-index={'-1'}
+                    tab-index="-1"
                     onFocus={computedPosition}
                     value={props.modelValue}
                     placeholder={props.placeholder}
@@ -433,7 +438,8 @@ export default defineComponent({
                         $event.stopPropagation()
                       }
                     }}
-                    class={'be-select--icon'}></be-icon>
+                    class="be-select--icon"
+                  />
                 </div>
               ),
             }}

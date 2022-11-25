@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { PropType } from 'vue'
 /**
    * 带输入建议远程搜索的输入框
    */
@@ -17,6 +16,7 @@ import {
 import { BeIcon } from '@be-ui/components/icon'
 import { isObject } from '@vue/shared'
 import compTextareaHeight from '../src/computeAreaHeight'
+import type { PropType } from 'vue'
 import type { AutosizeProp, IInputInst } from './be-input-type'
 
 export default defineComponent({
@@ -248,6 +248,7 @@ export default defineComponent({
         showClearIcon.value = false
     }
     /** ************************************** 文本域相关方法 *******************************************/
+    let curInstAreaRefs: any = null
     const areaStyle = ref({})
     const resizeTextarea = () => {
       const { autosize } = props
@@ -260,8 +261,7 @@ export default defineComponent({
         areaStyle.value = {
           ...compTextareaHeight(curInstAreaRefs, minRows, maxRows),
         }
-      }
-      else {
+      } else {
         areaStyle.value = {
           minHeight: compTextareaHeight(curInstAreaRefs, props.rows).minHeight,
         }
@@ -285,7 +285,6 @@ export default defineComponent({
     /** ************************************** 暴露对外的公共方法 *******************************************/
     const beInputInner = ref<any>(null)
     let curInstInputRefs: any = null
-    let curInstAreaRefs: any = null
     nextTick(() => {
       curInstInputRefs
           = internalInstance?.refs.beInputInner

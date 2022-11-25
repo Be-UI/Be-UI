@@ -4,12 +4,16 @@
       残雪凝辉冷画屏《aside》
     </be-aside>
     <be-container>
-      <be-header class="header-class pink-500">《header》落梅横笛已三更
+      <be-header class="header-class pink-500">
+        《header》落梅横笛已三更
       </be-header>
-      <be-main class="main-class pink-100">更无人处月胧明《main》</be-main>
+      <be-main class="main-class pink-100">
+        更无人处月胧明《main》
+      </be-main>
     </be-container>
   </be-container>
 </template>
+
 <style>
 .pink-500{
   background-color: rgba(253,242,248,1);

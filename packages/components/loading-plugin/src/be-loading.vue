@@ -2,7 +2,6 @@
 /**
    * 公共的loading组件
    */
-import type { ComputedRef } from 'vue'
 import {
   computed,
   defineComponent,
@@ -14,6 +13,7 @@ import {
   watchEffect,
 } from 'vue'
 import BeLoadingAnimate from './be-loading-elm.vue'
+import type { ComputedRef } from 'vue'
 import type { ILoadingInst, IPosStyle } from './be-loading-type'
 
 export default defineComponent({
@@ -161,8 +161,7 @@ export default defineComponent({
           if (top.value.split('px').length > 1) {
             topVal = top.value.split('px')
             topTxt.value = `${Number(topVal[0]) + loaderElemHeight / 2 + 20}px`
-          }
-          else {
+          } else {
             topVal = top.value.split('%')
             topTxt.value = `calc(${Number(topVal[0])}% + ${loaderElemHeight / 2 + 20}px)`
           }
@@ -181,9 +180,9 @@ export default defineComponent({
         return null
       const w: number = slotElem.offsetWidth
       const h: number = slotElem.offsetHeight
-      if (h === 0 || w === 0) {
+      if (h === 0 || w === 0)
         console.warn('You need to set the width and height attribute for the body element')
-      }
+
       // 从目标元素开始向外遍历，累加top和left值
       let t: number, l: number
       for (
@@ -216,7 +215,7 @@ export default defineComponent({
        * 获取父节点信息，进行宽高定位
        * @param parentDom
        */
-    const getParentDomAttr = (parentDom: HTMLElement): void => {
+    function getParentDomAttr(parentDom: HTMLElement) {
       if (!parentDom)
         return
       const parentStylr: IPosStyle | null = getAbsolutePosition(parentDom)
@@ -241,8 +240,7 @@ export default defineComponent({
             initComp()
           })
         }, props.delay)
-      }
-      else {
+      } else {
         isShowLoaderInner.value = show
         clearTimeout(timer)
         timer.value = null

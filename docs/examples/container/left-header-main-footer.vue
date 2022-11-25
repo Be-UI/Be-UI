@@ -4,13 +4,19 @@
       我是人间惆怅客《aside》
     </be-aside>
     <be-container>
-      <be-header class="header-footer-class pink-500">《header》知君何事泪纵横
+      <be-header class="header-footer-class pink-500">
+        《header》知君何事泪纵横
       </be-header>
-      <be-main class="main-class pink-100">断肠声里忆平生《main》</be-main>
-      <be-footer class="header-footer-class pink-500">《footer》下班！</be-footer>
+      <be-main class="main-class pink-100">
+        断肠声里忆平生《main》
+      </be-main>
+      <be-footer class="header-footer-class pink-500">
+        《footer》下班！
+      </be-footer>
     </be-container>
   </be-container>
 </template>
+
 <style>
 .pink-500{
   background-color: rgba(253,242,248,1);

@@ -4,9 +4,9 @@
  * @author czh
  * @update (czh 2021/06/06)
  */
-import type { RendererNode, VNode } from 'vue'
 import { createVNode, render } from 'vue'
 import beLoadingComponents from './be-loading.vue'
+import type { RendererNode, VNode } from 'vue'
 import type { ILoadingPlg } from './be-loading-type'
 
 const closeLoading = (instance: RendererNode) => {

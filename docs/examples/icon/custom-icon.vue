@@ -1,10 +1,10 @@
 <template>
-<badaShou></badaShou>
+  <BadaShou />
 </template>
 
 <script lang="tsx">
-import {BeIconComponents} from 'be-ui'
-import {defineComponent} from "vue";
+import { BeIconComponents } from 'be-ui'
+import { defineComponent } from 'vue'
 
 const badashouIcon = {
 
@@ -82,15 +82,15 @@ const badashouIcon = {
 
   ,
 
-};
+}
 
 const badashou = BeIconComponents('badashou', badashouIcon)
 
 export default defineComponent({
 
-  name: "doc-icon",
+  name: 'DocIcon',
 
-  components: {badaShou:badashou},
+  components: { BadaShou: badashou },
 
 })
 </script>

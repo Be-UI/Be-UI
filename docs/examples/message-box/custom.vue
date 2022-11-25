@@ -1,6 +1,9 @@
 <template>
-  <be-button customClass='mr-4' @click="openMsg('info')" bordered type="info">秋词</be-button>
+  <be-button custom-class="mr-4" bordered type="info" @click="openMsg('info')">
+    秋词
+  </be-button>
 </template>
+
 <script lang="tsx" setup>
 import { BeMsg } from 'be-ui'
 const msgBox = BeMsg.service

@@ -1,17 +1,24 @@
 <template>
-  <be-button @click="msgByType('success')" style="margin-right: 5px" customClass="sm:mb-4" type="success">
+  <be-button style="margin-right: 5px" custom-class="sm:mb-4" type="success" @click="msgByType('success')">
     朝花夕拾(success)
   </be-button>
-  <be-button @click="msgByType('info')" style="margin-right: 5px" customClass="sm:mb-4" type="info"
-             bordered>花边文学(info)
+  <be-button
+    style="margin-right: 5px"
+    custom-class="sm:mb-4"
+    type="info"
+    bordered
+    @click="msgByType('info')"
+  >
+    花边文学(info)
   </be-button>
-  <be-button @click="msgByType('warning')" style="margin-right: 5px" customClass="sm:mb-4" type="warning">
+  <be-button style="margin-right: 5px" custom-class="sm:mb-4" type="warning" @click="msgByType('warning')">
     热风(warning)
   </be-button>
-  <be-button @click="msgByType('error')" style="margin-right: 5px" customClass="sm:mb-4" type="error">
+  <be-button style="margin-right: 5px" custom-class="sm:mb-4" type="error" @click="msgByType('error')">
     三闲集(error)
   </be-button>
 </template>
+
 <script lang="ts" setup>
 import { BeMessage } from 'be-ui'
 const message = BeMessage.service

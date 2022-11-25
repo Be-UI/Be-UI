@@ -7,7 +7,7 @@ import commonjs from '@rollup/plugin-commonjs'
 const config = [
   {
     external: ['@popperjs/core', id => /.test.js/.test(id), 'vue'],
-    input: '../packages/components/backtop/index.ts', // 必须，入口文件
+    input: '../packages/components/pagination/index.ts', // 必须，入口文件
     output: [
       {
         file: '../dist/index.js',

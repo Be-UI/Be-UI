@@ -5,10 +5,10 @@
  * @update (czh 2022/4/18)
  */
 import WindiCSS from 'vite-plugin-windicss'
-import  vueJsx from '@vitejs/plugin-vue-jsx'
-import {defineConfig} from "vite";
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import { defineConfig } from 'vite'
 export default defineConfig({
-  plugins: [WindiCSS(),vueJsx()],
+  plugins: [WindiCSS(), vueJsx()],
   css: {
     preprocessorOptions: {
       scss: {

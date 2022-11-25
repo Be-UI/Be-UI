@@ -1,5 +1,5 @@
-import type { Ref } from 'vue'
 import { onMounted, onUnmounted, ref } from 'vue'
+import type { Ref } from 'vue'
 import type { IWindowLocation } from './types'
 
 export const hasWindow = typeof window !== 'undefined'

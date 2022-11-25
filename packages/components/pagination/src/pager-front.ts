@@ -1,5 +1,6 @@
-import {computed, Ref, unref} from 'vue'
-import { IPageProvide, IPagerMix, IPagesFront } from './be-pagination-type'
+import { computed, unref } from 'vue'
+import type { Ref } from 'vue'
+import type { IPageProvide, IPagerMix, IPagesFront } from './be-pagination-type'
 
 /**
  * 前端分页处理计算
@@ -16,7 +17,7 @@ export const pagerFront = (
   maxPageNum: Ref,
   showPrev: Ref,
   showNext: Ref,
-  inst: any
+  inst: any,
 ): IPagesFront => {
   if ($$BePaginProps.isFront) {
     // 分页切片
@@ -48,24 +49,23 @@ export const pagerFront = (
       // 当小于用户定义的显示页数 大于 用户总页数和显示数计算出来的总页数时，使用计算的总页数
       pagerShowCount = maxPageNum.value <= pagerShowCount ? maxPageNum.value : pagerShowCount
       // 计算当前页，大于最大页时，使用最大页
-      const currentPage: number =
-        Number($$BePaginProps.currentPage) > maxPageNum.value
+      const currentPage: number
+        = Number($$BePaginProps.currentPage) > maxPageNum.value
           ? maxPageNum.value
           : Number($$BePaginProps.currentPage)
       // 初始时，返回切片数据
-      if (currentPage === 1) {
+      if (currentPage === 1)
         inst.emit('updatePage', { data: sliceList.get(1) })
-      }
+
       let showPrevMore = false
       let showNextMore = false
       // 根据页数和显示页数，判断是否显示翻页缩略
       if (maxPageNum.value > pagerShowCount) {
-        if (currentPage > pagerShowCount - halfPagerCount) {
+        if (currentPage > pagerShowCount - halfPagerCount)
           showPrevMore = true
-        }
-        if (currentPage < maxPageNum.value - (pagerShowCount - 2)) {
+
+        if (currentPage < maxPageNum.value - (pagerShowCount - 2))
           showNextMore = true
-        }
       }
       // 根据 showNextMore 和 showPrevMore 也就是上下页缩略翻页的现实情况
       // 设置生成页码列表，循环渲染，值得注意的是第一页和最后一页永远都是显示的
@@ -73,21 +73,18 @@ export const pagerFront = (
       if (showPrevMore && !showNextMore) {
         // 只显示上页缩略翻页
         const startPage: number = maxPageNum.value - (pagerShowCount - 2)
-        for (let i: number = startPage; i < maxPageNum.value; i++) {
+        for (let i: number = startPage; i < maxPageNum.value; i++)
           array.push(i)
-        }
       } else if ((!showPrevMore && showNextMore) || (!showPrevMore && !showNextMore)) {
         // 只显示下页缩略翻页或都不显示时，pagerShowCount 的有效参数必须大于2
         // i 从2开始，刚好排除了第一页和最后一页永远都是显示的次数
-        for (let i = 2; i < pagerShowCount; i++) {
+        for (let i = 2; i < pagerShowCount; i++)
           array.push(i)
-        }
       } else if (showPrevMore && showNextMore) {
         // 上下页缩略翻页都显示时，渲染范围根据当前页，前后各偏移
         const offset: number = Math.floor(pagerShowCount / 2) - 1
-        for (let i: number = currentPage - offset; i < currentPage + offset + 1; i++) {
+        for (let i: number = currentPage - offset; i < currentPage + offset + 1; i++)
           array.push(i)
-        }
       }
       showPrev.value = showPrevMore
       showNext.value = showNextMore
@@ -98,8 +95,8 @@ export const pagerFront = (
      *上一页
      */
     const prePageFront = (): void => {
-      let currentPage: number =
-        Number($$BePaginProps.currentPage) > maxPageNum.value
+      let currentPage: number
+        = Number($$BePaginProps.currentPage) > maxPageNum.value
           ? maxPageNum.value
           : Number($$BePaginProps.currentPage)
       if (currentPage !== 1 && currentPage > 0 && $$BePaginProps.isFront) {
@@ -111,8 +108,8 @@ export const pagerFront = (
      *下一页
      */
     const nextPageFront = (): void => {
-      let currentPage: number =
-        Number($$BePaginProps.currentPage) > maxPageNum.value
+      let currentPage: number
+        = Number($$BePaginProps.currentPage) > maxPageNum.value
           ? maxPageNum.value
           : Number($$BePaginProps.currentPage)
       if (currentPage !== $$BePaginMix.pageParamsFront.maxPageNum && $$BePaginProps.isFront) {

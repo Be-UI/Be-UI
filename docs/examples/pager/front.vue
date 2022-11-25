@@ -1,17 +1,18 @@
 <template>
   <div class="exp-pager">
     <be-pagination
-    isFront
-    :pageSize="pageParamsFront.pageSize"
-    :currentPage="pageParamsFront.currentPage"
-    :pageData="pageDataFront"
-    :pagerShowCount="5"
-    @updateNum='updateNumFront'
-    @updatePage="updatePageFront"
-    @changePage="pageChangeFront">
-</be-pagination>
+      is-front
+      :page-size="pageParamsFront.pageSize"
+      :current-page="pageParamsFront.currentPage"
+      :page-data="pageDataFront"
+      :pager-show-count="5"
+      @update-num="updateNumFront"
+      @update-page="updatePageFront"
+      @change-page="pageChangeFront"
+    />
   </div>
 </template>
+
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 type IPageData = {
@@ -21,13 +22,12 @@ type IPageData = {
   total?:number
 }
 
-let pageDataFront = ref<Array<{ num: number }>>([])
+const pageDataFront = ref<Array<{ num: number }>>([])
 
-for (let i = 0; i < 3000; i++) {
-  pageDataFront.value.push({num: i})
-}
+for (let i = 0; i < 3000; i++)
+  pageDataFront.value.push({ num: i })
 
-let pageParamsFront = reactive({
+const pageParamsFront = reactive({
   currentPage: 1,
   pageNum: 1,
   pageSize: 20,
@@ -46,9 +46,9 @@ const pageChangeFront = (data: IPageData): void => {
   pageParamsFront.currentPage = data.currentPage
 }
 </script>
+
 <style>
   .exp-pager{
     @apply bg-pink-50 px-4;
   }
 </style>
-

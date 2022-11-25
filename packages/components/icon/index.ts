@@ -1,8 +1,8 @@
-import type { App } from 'vue'
 import { defineComponent } from 'vue'
 import { initIconSvg, withInstall } from '@be-ui/utils'
 import SvgIcon from './src/be-icon.vue'
 import { createCustom } from './src/be-custom-icon'
+import type { App } from 'vue'
 
 initIconSvg()
 

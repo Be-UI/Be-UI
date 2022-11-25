@@ -99,7 +99,7 @@ export default defineComponent({
      * 点击方法
      * @param {Event} $event - 事件对象
      */
-    const handleClick = async ($event?: Event) => {
+    const handleClick = async($event?: Event) => {
       if (props.disabled || props.isLoading)
         return
       await switchState()

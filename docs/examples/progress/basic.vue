@@ -5,4 +5,3 @@
 
   <be-progress percent="80" status="error" />
 </template>
-

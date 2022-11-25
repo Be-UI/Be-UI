@@ -11,4 +11,3 @@
     </be-breadcrumb-item>
   </be-breadcrumb>
 </template>
-
