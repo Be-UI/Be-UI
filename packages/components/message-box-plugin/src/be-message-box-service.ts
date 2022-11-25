@@ -5,9 +5,9 @@
  * @update (czh 2021/06/07)
  */
 
-import type { VNode } from 'vue'
 import { createVNode, render } from 'vue'
 import beMsgComponents from './be-message-box.vue'
+import type { VNode } from 'vue'
 import type { INMsgOption } from './be-message-box-type'
 
 /**

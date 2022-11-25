@@ -1,36 +1,40 @@
 <template>
-    <div class="w-full grid grid-cols-4 gap-2">
-      <div v-for="item in iconNameList"
-           title="点击复制"
-           @click="copy(item)"
-           class="flex items-center justify-center font-mono flex-col cursor-pointer border-1 rounded shadows icon-items"
-           :key="item + 'keys'">
-        <be-icon :icon="item" width="25" height="25"></be-icon>
-        <p class="mt-4">{{item}}</p>
-      </div>
+  <div class="w-full grid grid-cols-4 gap-2">
+    <div
+      v-for="item in iconNameList"
+      :key="item + 'keys'"
+      title="点击复制"
+      class="flex items-center justify-center font-mono flex-col cursor-pointer border-1 rounded shadows icon-items"
+      @click="copy(item)"
+    >
+      <be-icon :icon="item" width="25" height="25" />
+      <p class="mt-4">
+        {{ item }}
+      </p>
     </div>
+  </div>
 </template>
 
 <script setup>
-import {ref } from 'vue'
-import {BeMessage} from 'be-ui'
+import { ref } from 'vue'
+import { BeMessage } from 'be-ui'
 import svgDict from '../../utils/svg-dict'
 const iconNameList = ref(Object.keys(svgDict).sort())
 const message = BeMessage.service
-const copy = (name) =>{
-  let oInput = document.createElement('input')
-  oInput.value = name;
+const copy = (name) => {
+  const oInput = document.createElement('input')
+  oInput.value = name
   document.body.appendChild(oInput)
   oInput.select()
-  document.execCommand("Copy")
+  document.execCommand('Copy')
   oInput.style.display = 'none'
   document.body.removeChild(oInput)
   message({
     closeRender: undefined,
-    compType: "",
+    compType: '',
     iconPreRender: undefined,
-    titles: `复制成功`,
-    msgType: 'success'
+    titles: '复制成功',
+    msgType: 'success',
   })
 }
 </script>

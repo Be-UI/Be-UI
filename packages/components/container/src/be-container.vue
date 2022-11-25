@@ -22,8 +22,7 @@ export default defineComponent({
           const tag = (vNode.type as Component).name
           return tag === 'BeHeader' || tag === 'BeFooter'
         })
-      }
-      else {
+      } else {
         return false
       }
     })

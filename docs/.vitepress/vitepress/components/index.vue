@@ -1,26 +1,25 @@
 <script lang="ts">
-  import { computed, defineComponent, ref } from 'vue'
-  import { useData } from 'vitepress'
-  import VpHeader from './vp-header.vue'
-  import VpSidebar from './vp-sidebar.vue'
-  import VpMain from './vp-main.vue'
-  export default defineComponent({
-    name: 'VPAPP',
-    components: { VpMain, VpSidebar, VpHeader },
-    setup() {
-      // 通过api能够拿到一些配置、数据、md内容，根据内容渲染
-      const { page } = useData()
-      const showSidebar = computed(() => {
-        return !(page.value.relativePath === 'index.md')
-      })
-      const content = ref<{ $el: HTMLElement }>()
+import { computed, defineComponent, ref } from 'vue'
+import { useData } from 'vitepress'
+import VpHeader from './vp-header.vue'
+import VpSidebar from './vp-sidebar.vue'
+export default defineComponent({
+  name: 'VPAPP',
+  components: { VpSidebar, VpHeader },
+  setup() {
+    // 通过api能够拿到一些配置、数据、md内容，根据内容渲染
+    const { page } = useData()
+    const showSidebar = computed(() => {
+      return !(page.value.relativePath === 'index.md')
+    })
+    const content = ref<{ $el: HTMLElement }>()
 
-      return {
-        showSidebar,
-        content,
-      }
-    },
-  })
+    return {
+      showSidebar,
+      content,
+    }
+  },
+})
 </script>
 
 <template>
@@ -28,29 +27,32 @@
     <be-container class="be-ui-doc-container h-full">
       <be-header
         class="flex items-center justify-between fixed w-full bg-default shadow"
-        style="z-index: 2077">
-        <vp-header></vp-header>
+        style="z-index: 2077"
+      >
+        <VpHeader />
       </be-header>
       <!--  渲染mkd内容    -->
       <be-container class="mt-14">
         <!--  侧边导航    -->
         <be-aside
-          class="scroll-diy bg-default shadow md:block sm:hidden"
           v-if="showSidebar"
-          style="overflow-y: auto; min-height: 100vh">
-          <vp-sidebar></vp-sidebar>
+          class="scroll-diy bg-default shadow md:block sm:hidden"
+          style="overflow-y: auto; min-height: 100vh"
+        >
+          <VpSidebar />
         </be-aside>
         <be-main class="be-ui-doc-main scroll-diy relative">
           <Content
             ref="content"
             class="doc-content content-body page-component"
-            :class="{ 'content-body--home': !showSidebar }" />
-          <!-- <vp-main></vp-main>-->
+            :class="{ 'content-body--home': !showSidebar }"
+          />
         </be-main>
       </be-container>
     </be-container>
   </div>
 </template>
+
 <style lang="scss">
   .App .be-header {
     @apply px-8;

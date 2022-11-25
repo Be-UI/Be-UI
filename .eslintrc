@@ -1,6 +1,18 @@
 {
-  "extends": "@baiwusanyu",
+  "extends": [
+    "plugin:@baiwusanyu/typescript",
+    "plugin:@baiwusanyu/vue",
+    "plugin:@baiwusanyu/json",
+    "plugin:@baiwusanyu/yml",
+    "plugin:@baiwusanyu/markdown"
+  ],
   "rules": {
-    "no-console": ["warn", { "allow": ["log","error"] }]
+    "vue/no-irregular-whitespace": "off",
+    "no-irregular-whitespace": "off", // js
+    "multiline-ternary": "off", // js
+    "no-cond-assign":"off",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "n/no-callback-literal": "off",
+    "no-unmodified-loop-condition": "off"
   }
 }

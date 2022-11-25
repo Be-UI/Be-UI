@@ -6,4 +6,3 @@ import '@be-ui/style/src/index.scss'
 const app = createApp(App)
 // app.use(BeUI)
 app.mount('#app')
-

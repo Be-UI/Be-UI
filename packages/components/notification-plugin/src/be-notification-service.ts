@@ -1,7 +1,7 @@
-import type { DefineComponent } from 'vue'
 import { createVNode, render } from 'vue'
 import { jsonClone } from '@be-ui/utils'
 import beNotifyComponents from './be-notification'
+import type { DefineComponent } from 'vue'
 import type { INotifyInst, INotifyOption, ItInstanceMap } from './be-notification-type'
 
 // 各個方向的實例緩存
@@ -19,7 +19,7 @@ let isCache = false
  * @param {Object} instance - 组件实例上下文
  * @param {Boolean} isAll - 是否关闭全部
  */
-const closeNotify = function (instance: DefineComponent, isAll = false): void {
+const closeNotify = function(instance: DefineComponent, isAll = false): void {
   if (!instance)
     return
   let index = -1
@@ -43,8 +43,7 @@ const closeNotify = function (instance: DefineComponent, isAll = false): void {
         throw new Error('EndIterative')
       }
     })
-  }
-  catch (e: any) {
+  } catch (e: any) {
     if (e.message !== 'EndIterative')
       throw e
   }
@@ -79,7 +78,7 @@ const closeNotify = function (instance: DefineComponent, isAll = false): void {
  * @param compInstance 組件實例 dom
  * @param elm 挂載元素dom
  */
-const close = (compInstance: HTMLElement, elm: HTMLElement): void => {
+function close(compInstance: HTMLElement, elm: HTMLElement) {
   if (compInstance && compInstance.parentNode) {
     setCloseAnimate(compInstance)
     window.setTimeout(() => {
@@ -91,7 +90,7 @@ const close = (compInstance: HTMLElement, elm: HTMLElement): void => {
  * 設置關閉動畫
  * @param compInstance 組件實例 dom
  */
-const setCloseAnimate = (compInstance: HTMLElement): void => {
+function setCloseAnimate(compInstance: HTMLElement) {
   let className = compInstance.className
   if (!className.includes('be-message'))
     return
@@ -106,7 +105,7 @@ const setCloseAnimate = (compInstance: HTMLElement): void => {
 /**
  * 關閉全部方法
  */
-export const closeAll = (): void => {
+export function closeAll() {
   Object.keys(instanceMap).forEach((placement: string) => {
     Object(instanceMap)[placement].forEach((val: any) => {
       close(val.instance.el, val.elm)
@@ -114,7 +113,7 @@ export const closeAll = (): void => {
   })
   resetNotifyInstMap()
 }
-export const resetNotifyInstMap = (): void => {
+export function resetNotifyInstMap() {
   instanceMap = {
     topLeft: [],
     topRight: [],
@@ -195,8 +194,7 @@ const componentRender = (
       bodyElement.append(instanceInner.el)
     else
       bodyElement && bodyElement.appendChild(instanceInner.el)
-  }
-  else {
+  } else {
     // 找到原先的实例，删除，再更新option 重新渲染
     const placement = option.placement || 'topRight'
     const instancesList = Object(instanceMap)[placement]
@@ -226,7 +224,7 @@ const componentRender = (
  * 創建组件实例
  * @param {Object} options - 配置對象
  */
-const createNotify = function (options: INotifyOption): INotifyInst {
+const createNotify = function(options: INotifyOption): INotifyInst {
   isCache = false
   // 初始默认配置
   const defaultOption = {

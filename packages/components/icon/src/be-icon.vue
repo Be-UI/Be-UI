@@ -71,4 +71,3 @@ export default defineComponent({
     </svg>
   </div>
 </template>
-

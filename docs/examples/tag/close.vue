@@ -1,13 +1,13 @@
 <template>
   <div class="flex">
-    <be-tag @close="handleClose" isClose customClass="mr-4">
+    <be-tag is-close custom-class="mr-4" @close="handleClose">
       和人
     </be-tag>
   </div>
-
 </template>
+
 <script setup>
-const handleClose = () =>{
+const handleClose = () => {
   console.log('close')
 }
 </script>

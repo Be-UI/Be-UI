@@ -2,21 +2,24 @@
   <div class="flex flex-col items-start w-full py-4 sidebar scroll-diy">
     <section
       v-for="item in list"
+      :key="item.link"
       style="height: 45px"
       class="sidebar-groups font-mono bg-default w-full mb-2 flex flex-col px-6"
-      :key="item.link">
-      <p class="sidebar-group__title">{{ item.text }}</p>
+    >
+      <p class="sidebar-group__title">
+        {{ item.text }}
+      </p>
       <a
         v-for="(child, childKey) in item.children"
         :key="childKey"
-        @click="handleClick"
         :class="{
-          link: true,
           'aside-active': handleActive(child),
           'flex items-center': item.promotion,
         }"
-        class="hover:shadow hover:text-pink-500 hover:font-bold"
-        :href="`${pageFlag === 'introduction' ? `#${child.text}` : child.link}`">
+        class="hover:shadow hover:text-pink-500 hover:font-bold link"
+        :href="`${pageFlag === 'introduction' ? `#${child.text}` : child.link}`"
+        @click="handleClick"
+      >
         <p class="link-text">{{ child.text }}</p>
       </a>
     </section>
@@ -24,62 +27,59 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref, watch } from 'vue'
-  //import {config} from '../../src/aside-config/index'
-  import { useRouter, Router, useRoute, Route } from 'vitepress'
-  import { useData } from 'vitepress'
-  import { isActive, isActiveIntro } from '../../../utils/utils'
-  export default defineComponent({
-    name: 'vp-sidebar',
-    setup() {
-      const router: Router = useRouter()
-      const routerPush = (url: string): void => {
-        router.go(url)
-      }
-      const { theme, page } = useData()
-      // 监听设置 sidebar 列表
-      const relativePath = computed(() => {
-        return page.value.relativePath
-      })
-      watch(relativePath, () => {
-        list.value = []
-        getList()
-      })
-      const list = ref<any>([])
-      const pageFlag = ref<string>('')
-      const getList = (): void => {
-        pageFlag.value = page.value.relativePath.split('/')[1]
-        if (pageFlag.value) {
-          list.value = theme.value.sidebar[`/${pageFlag.value}/`]
-        }
-      }
+import { computed, defineComponent, ref, watch } from 'vue'
+// import {config} from '../../src/aside-config/index'
+import { Route, Router, useData, useRoute, useRouter } from 'vitepress'
+import { isActive, isActiveIntro } from '../../../utils/utils'
+export default defineComponent({
+  name: 'VpSidebar',
+  setup() {
+    const router: Router = useRouter()
+    const routerPush = (url: string): void => {
+      router.go(url)
+    }
+    const { theme, page } = useData()
+    // 监听设置 sidebar 列表
+    const relativePath = computed(() => {
+      return page.value.relativePath
+    })
+    const list = ref<any>([])
+    watch(relativePath, () => {
+      list.value = []
       getList()
-      const route: Route = useRoute()
-      const href = ref('.html#介绍')
-      const handleActive = computed(() => {
-        return function (item): boolean {
-          if (pageFlag.value === 'introduction') {
-            return isActiveIntro(href.value, item.text)
-          } else {
-            return isActive(route, item.link)
-          }
-        }
-      })
-      const handleClick = (): void => {
-        href.value = location.href
+    })
+    const pageFlag = ref<string>('')
+    function getList() {
+      pageFlag.value = page.value.relativePath.split('/')[1]
+      if (pageFlag.value)
+        list.value = theme.value.sidebar[`/${pageFlag.value}/`]
+    }
+    getList()
+    const route: Route = useRoute()
+    const href = ref('.html#介绍')
+    const handleActive = computed(() => {
+      return function(item): boolean {
+        if (pageFlag.value === 'introduction')
+          return isActiveIntro(href.value, item.text)
+        else
+          return isActive(route, item.link)
       }
-      return {
-        handleClick,
-        href,
-        handleActive,
-        //config,
-        pageFlag,
-        list,
-        routerPush,
-        route,
-      }
-    },
-  })
+    })
+    const handleClick = (): void => {
+      href.value = location.href
+    }
+    return {
+      handleClick,
+      href,
+      handleActive,
+      // config,
+      pageFlag,
+      list,
+      routerPush,
+      route,
+    }
+  },
+})
 </script>
 
 <style scoped>

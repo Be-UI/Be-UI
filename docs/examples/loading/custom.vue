@@ -1,14 +1,15 @@
 <template>
   <div class="bg-pink-50 relative" style="width: 300px; height: 300px">
-    <be-loading show :customRender = 'customRenderContent'></be-loading>
+    <be-loading show :custom-render="customRenderContent" />
   </div>
 </template>
+
 <script lang="tsx" setup>
-import {defineComponent, h} from "vue";
+import { defineComponent, h } from 'vue'
 const customRenderComp = {
-  render(){
+  render() {
     return <div>雪中</div>
-  }
+  },
 }
-const customRenderContent = ()=>defineComponent(customRenderComp)
+const customRenderContent = () => defineComponent(customRenderComp)
 </script>

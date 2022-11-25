@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import BePopover from '@be-ui/components/popover'
+import { BePopover } from '@be-ui/components/popover'
 
 export default defineComponent({
   name: 'BeTooltip',

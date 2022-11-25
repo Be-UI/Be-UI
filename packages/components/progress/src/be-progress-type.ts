@@ -8,7 +8,7 @@ export interface IProgress {
 export interface IProgressInst extends ComponentInternalInstance {
   uid: number
 }
-export type IProgressColor = { to: string; from: string } | string
+export type IProgressColor = { to: string, from: string } | string
 
 export interface IProgressSuccess {
   percent: number

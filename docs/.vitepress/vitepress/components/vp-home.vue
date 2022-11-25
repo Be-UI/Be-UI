@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { Route, Router } from 'vitepress'
 import { useRoute, useRouter } from 'vitepress'
+import type { Route, Router } from 'vitepress'
 
 export default defineComponent({
   setup() {
@@ -28,7 +28,7 @@ export default defineComponent({
         </h1>
       </div>
       <div class="flex items-center justify-center  animate__animated animate__fadeIn">
-        <p class="font-bold font-mono text-5xl main-title" >
+        <p class="font-bold font-mono text-5xl main-title">
           一个基于Vue3的简单 UI 组件库
         </p>
       </div>
@@ -44,10 +44,10 @@ export default defineComponent({
           文档
         </be-button>
       </div>
-        <img style="z-index: -1" src="../assets/img/hua-center.png" class="fixed bottom-0 animate__animated animate__fadeInUpBig" alt=""/>
-        <img style="z-index: -1" src="../assets/img/hua-left.png" class="fixed bottom-0 left-0 animate__animated animate__fadeInUpBig" alt=""/>
-        <img style="z-index: -1" src="../assets/img/hua-right.png" class="fixed bottom-0 right-0 animate__animated animate__fadeInUpBig" alt=""/>
-      </div>
+      <img style="z-index: -1" src="../assets/img/hua-center.png" class="fixed bottom-0 animate__animated animate__fadeInUpBig" alt="">
+      <img style="z-index: -1" src="../assets/img/hua-left.png" class="fixed bottom-0 left-0 animate__animated animate__fadeInUpBig" alt="">
+      <img style="z-index: -1" src="../assets/img/hua-right.png" class="fixed bottom-0 right-0 animate__animated animate__fadeInUpBig" alt="">
+    </div>
     <div
       class="w-1/3 h-1/3 fixed left-0 animate__animated animate__fadeInLeft"
       style="top: 30%; transform: translateY(-50%)"

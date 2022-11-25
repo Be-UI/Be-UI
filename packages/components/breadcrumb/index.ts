@@ -5,4 +5,3 @@ import beBreadcrumbItem from './src/be-breadcrumb-item'
 export const BeBreadcrumb = withInstall(beBreadcrumb)
 
 export const BeBreadcrumbItem = withInstall(beBreadcrumbItem)
-

@@ -16,7 +16,7 @@ export default defineConfigWithTheme({
   title: 'Be-UI3', // 浏览器tab的title和head的title
   description: 'be-ui3 Vue3组件库',
   markdown: {
-    config: md => {
+    config: (md) => {
       return mdPlugin(md)
     },
   },

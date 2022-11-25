@@ -1,11 +1,9 @@
-import type { PropType } from 'vue'
 import { computed, defineComponent, getCurrentInstance } from 'vue'
 import { isObject } from '@vue/shared'
+import type { PropType } from 'vue'
 import type { IProgressColor, IProgressInst, IProgressSuccess } from './be-progress-type'
 
-declare interface IOption {
-  [key: string]: any
-}
+type IOption = Record<string, any>
 export default defineComponent({
   name: 'BeProgress',
   props: {
@@ -82,7 +80,7 @@ export default defineComponent({
     const innerStyleTypeLine = computed(() => {
       return setStyleTypeLine()
     })
-    const setStyleTypeLine = (): IOption => {
+    function setStyleTypeLine() {
       const styleIns: IOption = {
         backgroundImage: '',
         backgroundColor: '',
@@ -180,7 +178,7 @@ export default defineComponent({
     /**
       * 生成環形樣式
       */
-    const createCirclePathStyle = (percent: number): IOption => {
+    function createCirclePathStyle(percent: number) {
       return {
         strokeDasharray: `${perimeter.value * rate.value * (percent / 100)}px, ${
            perimeter.value
@@ -203,56 +201,8 @@ export default defineComponent({
     })
     /** ***************************** success配置进度条部分 *************************/
     /**
-      * 渲染success配置进度条部分
-      */
-    const renderSuccess = (): JSX.Element | undefined => {
-      if (
-        isObject(props.success)
-         && props.success.color
-         && props.success.percent
-         && props.type === 'line'
-      ) {
-        return (
-           <div
-             class={`
-                                             be-progress-line-path
-                                             be-progress-line-path__success
-                                             ${
-                                               props.strokeLinecap === 'round'
-                                                 ? 'be-progress-line-path__round'
-                                                 : ''
-                                             }
-                                             `}
-             style={innerStyleTypeLineSuccess.value}></div>
-        )
-      }
-      if (
-        isObject(props.success)
-         && props.success.color
-         && props.success.percent
-         && (props.type === 'circle' || props.type === 'dashboard')
-      ) {
-        return (
-           <path
-             class="be-progress-circle__success"
-             d={trackPath.value}
-             stroke={innerStyleTypeLineSuccess.value.color}
-             fill="none"
-             stroke-linecap={props.strokeLinecap as 'round' | 'square'}
-             stroke-width={relativeStrokeWidth.value}
-             style={circleSuccessPathStyle.value}></path>
-        )
-      }
-    }
-    /**
-      * 设置环形 Success 样式
-      */
-    const circleSuccessPathStyle = computed(() => {
-      return createCirclePathStyle(props.success?.percent!)
-    })
-    /**
-      * 设置success配置进度条部分样式
-      */
+     * 设置success配置进度条部分样式
+     */
     const innerStyleTypeLineSuccess = computed(() => {
       const styleIns: IOption = {
         color: '',
@@ -271,47 +221,102 @@ export default defineComponent({
       styleIns.color = props.success?.color
       return styleIns
     })
+    /**
+      * 渲染success配置进度条部分
+      */
+    const renderSuccess = (): JSX.Element | undefined => {
+      if (
+        isObject(props.success)
+         && props.success.color
+         && props.success.percent
+         && props.type === 'line'
+      ) {
+        return (
+          <div
+            class={`
+                                             be-progress-line-path
+                                             be-progress-line-path__success
+                                             ${
+                                               props.strokeLinecap === 'round'
+                                                 ? 'be-progress-line-path__round'
+                                                 : ''
+                                             }
+                                             `}
+            style={innerStyleTypeLineSuccess.value}
+          />
+        )
+      }
+      /**
+       * 设置环形 Success 样式
+       */
+      const circleSuccessPathStyle = computed(() => {
+        return createCirclePathStyle(props.success?.percent!)
+      })
+
+      if (
+        isObject(props.success)
+         && props.success.color
+         && props.success.percent
+         && (props.type === 'circle' || props.type === 'dashboard')
+      ) {
+        return (
+          <path
+            class="be-progress-circle__success"
+            d={trackPath.value}
+            stroke={innerStyleTypeLineSuccess.value.color}
+            fill="none"
+            stroke-linecap={props.strokeLinecap as 'round' | 'square'}
+            stroke-width={relativeStrokeWidth.value}
+            style={circleSuccessPathStyle.value}
+          />
+        )
+      }
+    }
+
     return () => {
       const rightRender = internalInstance?.slots.default
         ? (
             internalInstance?.slots.default()
           )
         : (
-        <span class="percent">{`${props.percent}%`}</span>
+          <span class="percent">{`${props.percent}%`}</span>
           )
       const centerRender = internalInstance?.slots.center
         ? (
             internalInstance?.slots.center()
           )
         : (
-        <span class="percent">{`${props.percent}%`}</span>
+          <span class="percent">{`${props.percent}%`}</span>
           )
       return (
         <div
           class={`${
             props.type === 'line' ? 'be-progress' : 'be-progress be-progress-circle-dashboard'
-          }`}>
+          }`}
+        >
           {props.type === 'line' ? (
             <div class="be-progress-body be-progress-line">
               <div
                 class={`
-                                        be-progress-line--track
-                                        ${
-                                          props.strokeLinecap === 'round'
-                                            ? 'be-progress-line-path__round'
-                                            : ''
-                                        }`}
-                style={`background-color:${props.trailColor}`}>
+                          be-progress-line--track
+                          ${
+                            props.strokeLinecap === 'round'
+                              ? 'be-progress-line-path__round'
+                              : ''
+                          }`}
+                style={`background-color: ${props.trailColor}`}
+              >
                 <div
                   class={`
-                                            be-progress-line-path  
-                                            ${
-                                              props.strokeLinecap === 'round'
-                                                ? 'be-progress-line-path__round'
-                                                : ''
-                                            }  
-                                            be-progress__${innerStyleStatus.value}`}
-                  style={innerStyleTypeLine.value}></div>
+                           be-progress-line-path  
+                           ${
+                             props.strokeLinecap === 'round'
+                               ? 'be-progress-line-path__round'
+                               : ''
+                           }  
+                           be-progress__${innerStyleStatus.value}`}
+                  style={innerStyleTypeLine.value}
+                />
                 {/*
                                     传入了success配置时渲染
                                     分段success部分颜色不受color、status控制，根据percent的显示独立。100时也不用变色
@@ -334,7 +339,8 @@ export default defineComponent({
                   stroke={props.trailColor ? props.trailColor : '#f5f5f5'}
                   stroke-width={relativeStrokeWidth.value}
                   fill="none"
-                  style={trailPathStyle.value}></path>
+                  style={trailPathStyle.value}
+                />
                 <path
                   class="be-progress-circle__path"
                   d={trackPath.value}
@@ -342,7 +348,8 @@ export default defineComponent({
                   fill="none"
                   stroke-linecap={props.strokeLinecap as 'round' | 'square'}
                   stroke-width={relativeStrokeWidth.value}
-                  style={circlePathStyle.value}></path>
+                  style={circlePathStyle.value}
+                />
                 {/*
                                     传入了success配置时渲染
                                     分段success部分颜色不受color、status控制、根据percent的显示独立。100时也不用变色

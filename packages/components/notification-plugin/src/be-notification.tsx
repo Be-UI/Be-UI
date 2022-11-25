@@ -1,7 +1,7 @@
-import type { PropType } from 'vue'
 import { computed, defineComponent, getCurrentInstance, h, reactive, ref } from 'vue'
 import { BeIcon } from '@be-ui/components/icon'
 import { getUuid } from '@be-ui/utils'
+import type { PropType } from 'vue'
 import type { INotify, INotifyOption } from './be-notification-type'
 
 export default defineComponent({
@@ -33,7 +33,7 @@ export default defineComponent({
           onClose: null, // √
           // 点击回调方法
           onClick: null, // √
-          closeNotify:(inst:INotify,isAll:boolean )=>{}
+          closeNotify: undefined,
         }
       },
     },
@@ -91,7 +91,6 @@ export default defineComponent({
       event && event.stopPropagation()
       // 刪除緩存的組件實例，調整位置.关闭销毁
       props.option.closeNotify && props.option.closeNotify(internalInstance, false)
-
     }
     /**
      * 點擊關閉方法
@@ -106,14 +105,13 @@ export default defineComponent({
      * @param event
      */
     const onClick = (event: Event): void => {
-
       selfEvent.onClick && selfEvent.onClick(event)
     }
     /** ************************************ 自動關閉定時器 方法******************************/
     /**
      * 關閉定時器清除方法
      */
-    const clearTimer = () => {
+    function clearTimer() {
       clearTimeout(timer)
       timer = 0
     }
@@ -153,31 +151,34 @@ export default defineComponent({
      * 渲染組件主體dom方法
      * @param h
      */
-    const renderBody = function (h: any) {
+    const renderBody = function(h: any) {
       const evt = {
         onClick: (event: Event) => handleClickClose(event),
       }
       return h(
         <div
-          class={`be-${props.compType}--container be-${props.compType}--container__${option.value.placement}`}>
+          class={`be-${props.compType}--container be-${props.compType}--container__${option.value.placement}`}
+        >
           <div class={`be-${props.compType}--title`}>
             <div class={`be-${props.compType}--head`} id={`be_${props.compType}_head${uid}`}>
               <div>
                 {isLoading.value
                   ? (
-                  <BeIcon
-                    icon="loading"
-                    spin
-                    customClass={`icon__${option.value.msgType}`}></BeIcon>
+                    <BeIcon
+                      icon="loading"
+                      spin
+                      customClass={`icon__${option.value.msgType}`}
+                    />
                     )
                   : option.value.iconPreRender
                     ? (
                         option.value.iconPreRender
                       )
                     : (
-                  <BeIcon
-                    icon={`${option.value.msgType}`}
-                    customClass={`icon__${option.value.msgType}`}></BeIcon>
+                      <BeIcon
+                        icon={`${option.value.msgType}`}
+                        customClass={`icon__${option.value.msgType}`}
+                      />
                       )}
                 <span class={`txt__${option.value.msgType}`}>{option.value.titles}</span>
               </div>
@@ -189,7 +190,7 @@ export default defineComponent({
                     )
                   : option.value.close
                     ? (
-                  <BeIcon icon="deleteIc" {...evt}></BeIcon>
+                      <BeIcon icon="deleteIc" {...evt} />
                       )
                     : (
                         ''
@@ -200,15 +201,15 @@ export default defineComponent({
           {/** @slot 弹窗主体**/}
           {props.compType === 'notification'
             ? (
-            <div class={`be-${props.compType}--body`}>
-              {option.value.bodyRender
-                ? (
-                    option.value.bodyRender()
-                  )
-                : (
-                <p class={`be-${props.compType}--description`}>{option.value.description}</p>
-                  )}
-            </div>
+              <div class={`be-${props.compType}--body`}>
+                {option.value.bodyRender
+                  ? (
+                      option.value.bodyRender()
+                    )
+                  : (
+                    <p class={`be-${props.compType}--description`}>{option.value.description}</p>
+                    )}
+              </div>
               )
             : (
                 ''
@@ -229,7 +230,8 @@ export default defineComponent({
             onClick(event)
           }}
           class={containerClass.value}
-          id={`be_${props.compType}${uid}`}>
+          id={`be_${props.compType}${uid}`}
+        >
           {option.value.isShow ? renderBody.call(this, h) : ''}
         </div>
       )

@@ -1,19 +1,25 @@
 <template>
   <div class="exp-pager">
     <be-pagination
-      isOrdianry
-      :pagerShowCount="5"
-      :pageSize="pageParams.pageSize"
-      :pageCount="pageParams.total"
+      is-ordianry
+      :pager-show-count="5"
+      :page-size="pageParams.pageSize"
+      :page-count="pageParams.total"
       :layout="['jump', 'page', 'pNum', 'info']"
-      :currentPage="pageParams.currentPage"
-      @updateNum = 'updateNum'
-      @changePage="pageChange">
-      <template #prev>🐕</template>
-      <template #next>🥑</template>
-  </be-pagination>
+      :current-page="pageParams.currentPage"
+      @update-num="updateNum"
+      @change-page="pageChange"
+    >
+      <template #prev>
+        🐕
+      </template>
+      <template #next>
+        🥑
+      </template>
+    </be-pagination>
   </div>
 </template>
+
 <script lang="ts" setup>
 import { reactive } from 'vue'
 type IPageData = {
@@ -23,24 +29,24 @@ type IPageData = {
   total?:number
 }
 
-let pageParams = reactive({
+const pageParams = reactive({
   currentPage: 1,
   pageNum: 1,
   pageSize: 200,
-  total: 3000
+  total: 3000,
 })
 
-const updateNum = (data:IPageData):void =>{
-pageParams.pageSize = data.pageSize
+const updateNum = (data:IPageData):void => {
+  pageParams.pageSize = data.pageSize
 }
 
-const pageChange = (data:IPageData):void =>{
-    pageParams.currentPage = data.currentPage
+const pageChange = (data:IPageData):void => {
+  pageParams.currentPage = data.currentPage
 }
 </script>
+
 <style>
 .exp-pager{
   @apply bg-pink-50 px-4;
 }
 </style>
-

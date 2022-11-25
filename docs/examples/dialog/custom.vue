@@ -1,21 +1,22 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 const show = ref(false)
-const handleClose = () =>{
+const handleClose = () => {
   show.value = false
 }
-const handleConfirm = () =>{
+const handleConfirm = () => {
   show.value = false
 }
 </script>
 
 <template>
-  <be-button @click="show = true" style="margin-right: 5px" customClass="sm:mb-4" bordered>
+  <be-button style="margin-right: 5px" custom-class="sm:mb-4" bordered @click="show = true">
     惶惑
   </be-button>
   <be-dialog
-      titles="剑北篇"
-      v-model:is-show="show">
+    v-model:is-show="show"
+    titles="剑北篇"
+  >
     <template #headerIcon>
       <i @click="handleClose">🌸</i>
     </template>

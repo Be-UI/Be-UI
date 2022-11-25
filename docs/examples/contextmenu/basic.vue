@@ -9,7 +9,8 @@ export default defineComponent({
 
 <template>
   <div
-    v-contextmenu:baseContextmenu class="bg-pink-50 relative flex justify-center items-center"
+    v-contextmenu:baseContextmenu
+    class="bg-pink-50 relative flex justify-center items-center"
     style="width: 300px;height: 300px"
   >
     右键点我~

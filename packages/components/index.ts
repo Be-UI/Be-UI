@@ -31,4 +31,5 @@ export { default as BeNotification } from './notification-plugin' // 服务
 export { default as BeMessage } from './message-plugin'
 export { default as BeMsg } from './message-box-plugin' // 服务
 // function
-export * from './icon'
+export { BeIconComponents } from './icon'
+export { createFromIconfontCN } from './icon'

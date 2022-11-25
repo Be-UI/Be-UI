@@ -1,9 +1,9 @@
 
-import {  service as BeNotify, reset as resetNotifyInstMap } from '@be-ui/components/notification-plugin'
+import { service as BeNotify, reset as resetNotifyInstMap } from '@be-ui/components/notification-plugin'
 // import type { INotifyInst, INotifyOption } from '@be-ui/components/notification-plugin'
 import type { IMessage, IMsgInst } from './be-message-type'
 
-const createMessage = function (options: IMessage): IMsgInst {
+const createMessage = function(options: IMessage): IMsgInst {
   const option: IMessage = {
     titles: options.titles || 'message',
     msgType: options.msgType || 'info',

@@ -1,5 +1,5 @@
+import type { INotifyOption } from '../../notification-plugin'
 import type { ComponentInternalInstance } from 'vue'
-import {INotifyOption} from "../../notification-plugin";
 
 export interface IMessage extends INotifyOption{
   titles?: string

@@ -4,13 +4,14 @@ const show = ref(false)
 </script>
 
 <template>
-  <be-button @click="show = true" style="margin-right: 5px" customClass="sm:mb-4" bordered>
+  <be-button style="margin-right: 5px" custom-class="sm:mb-4" bordered @click="show = true">
     微神
   </be-button>
   <be-dialog
-      titles="月牙集"
-      :isOpenModal="false"
-      v-model:is-show="show">
+    v-model:is-show="show"
+    titles="月牙集"
+    :is-open-modal="false"
+  >
     <p>它养着一群混饭吃的人，作些个混饭吃的事。</p>
   </be-dialog>
 </template>

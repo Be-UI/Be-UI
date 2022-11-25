@@ -18,8 +18,8 @@ export default defineConfig({
     }),
     viteCompression(),
   ],
-  server:{
-    port: 3000
+  server: {
+    port: 3000,
   },
   envDir: './env',
 

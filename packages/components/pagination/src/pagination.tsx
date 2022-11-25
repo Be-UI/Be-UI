@@ -1,7 +1,8 @@
+import { BeSelect } from '@be-ui/components/select'
+import { defineComponent, getCurrentInstance, provide, reactive, ref } from 'vue'
+import { arrayDeduplicationt } from '@be-ui/utils'
 import Pager from '../src/be-pager.vue'
-import {BeSelect} from '@be-ui/components/select'
-import { defineComponent, getCurrentInstance, provide, ref, reactive } from 'vue'
-import {
+import type {
   IPage,
   IPageData,
   IPageParamsFront,
@@ -10,7 +11,6 @@ import {
   IPagerMix,
   IPagerrenderList,
 } from './be-pagination-type'
-import { arrayDeduplicationt } from '@be-ui/utils'
 
 export default defineComponent({
   name: 'BePagination',
@@ -26,7 +26,7 @@ export default defineComponent({
       type: Number,
       default: 5,
       validator: (value: number): boolean => {
-        return value <= 0 ? false : true
+        return !(value <= 0)
       },
     },
     /**
@@ -36,7 +36,7 @@ export default defineComponent({
       type: Number,
       default: 1,
       validator: (value: number): boolean => {
-        return value <= 0 ? false : true
+        return !(value <= 0)
       },
     },
     /**
@@ -62,7 +62,7 @@ export default defineComponent({
     pagerShowCount: {
       type: Number,
       validator: (value: number): boolean => {
-        return value > 2 ? true : false
+        return value > 2
       },
     },
     /**
@@ -121,7 +121,7 @@ export default defineComponent({
   setup(props, ctx) {
     const curInst = getCurrentInstance() as IPage
     let pageParamsFront = reactive<IPageParamsFront>({ maxPageNum: 0 })
-    /********************************* 输入指定页码跳转 *****************************************/
+    /** ******************************* 输入指定页码跳转 *****************************************/
     const jumpPage = ref<string>('')
     /**
      * 分页跳转方法
@@ -143,14 +143,13 @@ export default defineComponent({
         const total: number = props.isFront ? pageParamsFront.maxPageNum : maxPageNum
         const value: string = (e.target as HTMLInputElement).value
         // 只处理小于最大页码的正整数
-        if (/^\d+$/.test(value) && Number(value) <= total) {
+        if (/^\d+$/.test(value) && Number(value) <= total)
           jumpTo(value)
-        } else {
+        else
           (e.target as HTMLInputElement).value = ''
-        }
       }
     }
-    /********************************* 每页显示数量设置 *****************************************/
+    /** ******************************* 每页显示数量设置 *****************************************/
     // 每页显示数量
     const pageNumVal = ref<string>('')
     /**
@@ -173,20 +172,20 @@ export default defineComponent({
      */
     const pageNumInner = ref<Array<any>>([])
     const initPageSelect = (): void => {
-      pageNumVal.value = props.pageSize + ' / ' + props.pageUnit //disabled
+      pageNumVal.value = `${props.pageSize} / ${props.pageUnit}` // disabled
       // 把pagesize加到下拉选择pageNum中
       pageNumInner.value = props.pageNum
       pageNumInner.value.unshift({ label: props.pageSize })
       pageNumInner.value = arrayDeduplicationt(pageNumInner.value, 'label')
       pageNumInner.value.sort((a, b) => a.label - b.label)
-      pageNumInner.value.map((val: any) => {
-        val.label = val.label + ' / ' + props.pageUnit
+      pageNumInner.value.forEach((val: any) => {
+        val.label = `${val.label} / ${props.pageUnit}`
       })
     }
-    if (props.layout?.includes('pNum')) {
+    if (props.layout?.includes('pNum'))
       initPageSelect()
-    }
-    /********************************* 分页事件emit *****************************************/
+
+    /** ******************************* 分页事件emit *****************************************/
     /**
      * 前端分页 数据传递方法
      * @param {Object} data - 分页数据
@@ -209,15 +208,15 @@ export default defineComponent({
       ctx.emit('changePage', data)
     }
 
-    /********************************* 分页 内置渲染组件，页码信息、输入跳转 *****************************************/
+    /** ******************************* 分页 内置渲染组件，页码信息、输入跳转 *****************************************/
     /**
      * 页码信息组件
      * @return {JSX.Element | undefined}
      */
     const pageInfoComponent = (): JSX.Element | undefined => {
-      if (props.isDynamic) {
+      if (props.isDynamic)
         return
-      }
+
       const pageCount: number = props.pageCount ? props.pageCount : 0
       const maxPageNum: number = Math.ceil(pageCount / Number(props.pageSize))
       const total: number = props.isFront ? pageParamsFront.maxPageNum : maxPageNum
@@ -232,7 +231,7 @@ export default defineComponent({
      * @return {JSX.Element}
      */
     const pageJumpComponent = (): JSX.Element | undefined => {
-      const disabled: boolean = props.disabled ? true : props.disabledJump ? true : false
+      const disabled: boolean = props.disabled ? true : !!props.disabledJump
       return (
         <div class="be-pager--jump">
           跳至
@@ -247,12 +246,12 @@ export default defineComponent({
         </div>
       )
     }
-    /********************************* provide 注入 *****************************************/
+    /** ******************************* provide 注入 *****************************************/
     provide('$$BePaginProps', props)
     const pagerMix = reactive<IPagerMix>({
       jumpPage: jumpPage.value,
-      pageParamsFront: pageParamsFront,
-      pageNumVal
+      pageParamsFront,
+      pageNumVal,
     })
     provide('$$BePaginMix', pagerMix)
 
@@ -268,8 +267,8 @@ export default defineComponent({
 
       // 定义布局渲染列表
       const renderList: IPagerrenderList = {
-        // @ts-ignore
-        page: <PagerComp ref="pager" {...onEvt}></PagerComp>,
+        // @ts-expect-error jsx与 sfc 问题
+        page: <PagerComp ref="pager" {...onEvt} />,
         jump: pageJumpComponent.call(this),
         info: pageInfoComponent.call(this),
         next: nextSlot(),
@@ -284,14 +283,15 @@ export default defineComponent({
             keyValue="id"
             disabled={props.disabled}
             labelValue="label"
-            custom-class={'be-pager-select'}
+            custom-class="be-pager-select"
             list={pageNumInner.value}
-            onSelect={getPageNum}></be-select>
+            onSelect={getPageNum}
+          />
         )
       }
       return (
         <div class="be-pager-container">
-          {/*根据渲染布局props渲染renderList，实现自定义布局*/}
+          {/* 根据渲染布局props渲染renderList，实现自定义布局 */}
           {props.layout.map((v: any) => {
             return Object(renderList)[v]
           })}

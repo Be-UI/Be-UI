@@ -1,12 +1,14 @@
 <template>
   <div class="exp-input">
-    <be-input size="medium" clearable v-model="value" ></be-input>
+    <be-input v-model="value" size="medium" clearable />
   </div>
 </template>
+
 <script setup lang="ts">
-import {ref} from 'vue'
+import { ref } from 'vue'
 const value = ref<string>('這是一首簡單的小情歌')
 </script>
+
 <style lang="scss">
 .exp-input{
   display: flex;

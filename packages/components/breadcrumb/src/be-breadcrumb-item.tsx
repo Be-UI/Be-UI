@@ -1,8 +1,8 @@
-import type { VNode } from 'vue'
 import { computed, defineComponent, getCurrentInstance, h, nextTick, onMounted } from 'vue'
-import { useBrowserLocation } from '@be-ui/utils'
+import { getUuid, useBrowserLocation } from '@be-ui/utils'
 import { BePopover } from '@be-ui/components'
-import { getUuid } from '@be-ui/utils'
+
+import type { VNode } from 'vue'
 import type { IBreadcrumbInst, IBreadcrumbItemVnode, IBreadcrumbPopover } from './be-breadcrumb-type'
 export default defineComponent({
   name: 'BeBreadcrumbItem',
@@ -60,7 +60,6 @@ export default defineComponent({
      * @param {Event} event - 事件对象
      */
     const handleClick = (event: Event): void => {
-      // @ts-ignore
       if (
         (internalInstance?.vnode as IBreadcrumbItemVnode)?.beBreadcrumbIndex === 'last'
         || optionList.value.length > 0
@@ -83,7 +82,7 @@ export default defineComponent({
         props?.clickOption(val)
 
       const curInstPopover = (internalInstance?.refs.beBreadcrumbPopover) as IBreadcrumbPopover
-      // @ts-ignore
+
       curInstPopover.close()
     }
 
@@ -93,12 +92,11 @@ export default defineComponent({
     const renderOption = () => {
       const renderList: Array<VNode> = []
       optionList.value.forEach((val: any) => {
-       // @ts-ignore
         const id = val.id ? val.id as string : getUuid()
-       // @ts-ignore
+
         const label = val.label
         renderList.push(
-         // @ts-ignore
+
           <li key={id} class="be-breadcrumb--li" onClick={() => handleClickItem(val)}>{label}</li>,
         )
       })
@@ -114,7 +112,8 @@ export default defineComponent({
           class="be-breadcrumb--item__content"
           ref="BeBreadcrumbItem"
           id={`be_breadcrumb_item__content${uid}`}
-          onClick={($event: Event) => handleClick($event)}>
+          onClick={($event: Event) => handleClick($event)}
+        >
           {h(
             htmlTag.value,
             {
@@ -130,30 +129,31 @@ export default defineComponent({
       nextTick(() => {
         const curInstPopover = internalInstance?.refs.beBreadcrumbPopover as IBreadcrumbPopover
         optionList.value.length > 0
-       // @ts-ignore
+
           && curInstPopover.addEvent(internalInstance?.refs.BeBreadcrumbItem)
       })
     })
     return () => {
-     // @ts-ignore
       return (
         <div
           class={`
                      be-breadcrumb--item
                      ${props.disabled ? 'be-breadcrumb--item__disabled' : ''} `}
-          aria-label="BeBreadcrumbItem">
+          aria-label="BeBreadcrumbItem"
+        >
           {optionList.value.length > 0
             ? (
               <be-popover
-                  forceUpdate={props.forceUpdate}
-                  ref="beBreadcrumbPopover"
-                  customClass="be-breadcrumb--popover"
-                  placement="bottom"
-                  trigger={props.disabled ? 'none' : 'click'}>
-                  {{
-                    default: () => <ul>{renderOption()}</ul>,
-                    trigger: () => renderContent(),
-                  }}
+                forceUpdate={props.forceUpdate}
+                ref="beBreadcrumbPopover"
+                customClass="be-breadcrumb--popover"
+                placement="bottom"
+                trigger={props.disabled ? 'none' : 'click'}
+              >
+                {{
+                  default: () => <ul>{renderOption()}</ul>,
+                  trigger: () => renderContent(),
+                }}
               </be-popover>
               )
             : (

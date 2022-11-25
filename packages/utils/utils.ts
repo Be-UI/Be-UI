@@ -29,8 +29,7 @@ export function asyncExpect(fn: Function, timeout: number | null) {
         fn()
         resolve()
       }, timeout)
-    }
-    else {
+    } else {
       nextTick(() => {
         fn()
         resolve()
@@ -44,14 +43,12 @@ export const accAdd = (arg1: number, arg2: number): number => {
   let m = 0
   try {
     r1 = arg1.toString().split('.')[1].length
-  }
-  catch (e) {
+  } catch (e) {
     r1 = 0
   }
   try {
     r2 = arg2.toString().split('.')[1].length
-  }
-  catch (e) {
+  } catch (e) {
     r2 = 0
   }
   m = 10 ** Math.max(r1, r2)
@@ -110,17 +107,17 @@ export const mapToArr = (map: any): Array<any> => {
 export const arrDupRemov = (arr: Array<any>, key: string): Array<any> => {
   const newObj: IOption = {}
   return arr.reduce((preVal, curVal) => {
-    newObj[curVal[key]] ? '' : (newObj[curVal[key]] = preVal.push(curVal))
+    newObj[curVal[key]] && (newObj[curVal[key]] = preVal.push(curVal))
     return preVal
   }, [])
 }
 
 export function debounce(func: Function, wait: number) {
   let timer: TimeoutHandle
-  return function (...argument) {
+  return function(...argument) {
     const args = argument
     clearTimeout(timer)
-    timer = setTimeout(function () {
+    timer = setTimeout(function() {
       func.apply(this, args)
     }, wait)
   }
@@ -130,8 +127,7 @@ export const arrayDeduplicationSet = (val: Array<any>): Array<any> => Array.from
 export const arrayDeduplicationt = (val: Array<any>, key: string): Array<any> => {
   const obj = {}
   return val.reduce((cur, next) => {
-    obj[next[key]] ? '' : (obj[next[key]] = true && cur.push(next))
+    obj[next[key]] && (obj[next[key]] = cur.push(next))
     return cur
   }, [])
 }
-

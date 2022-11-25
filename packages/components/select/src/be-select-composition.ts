@@ -71,16 +71,15 @@ export default (props: any, ctx: any) => {
    * @param {Boolean} showPopover - popover展開狀態
    */
   const selectOpenChange = (showPopover: boolean): void => {
-    if (showPopover){
+    if (showPopover) {
       computedPosition()
-      nextTick(()=>{
+      nextTick(() => {
         updatePopover()
       })
       focusClass.value = 'be-select--body__focus'
-    }else{
+    } else {
       focusClass.value = ''
     }
-
 
     // 增加滾動監聽
     if (showPopover && curAttrs.onScroll) {
@@ -118,7 +117,7 @@ export default (props: any, ctx: any) => {
   /**
    * 滾動方法
    */
-  const handleScroll = (): void => {
+  function handleScroll() {
     ctx.emit('scroll')
   }
   /**

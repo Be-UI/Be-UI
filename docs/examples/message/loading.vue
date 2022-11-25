@@ -1,8 +1,13 @@
 <template>
-  <be-button @click="msgByLoading()" style="margin-right: 5px"
-             bordered>阿丽思中国游记
+  <be-button
+    style="margin-right: 5px"
+    bordered
+    @click="msgByLoading()"
+  >
+    阿丽思中国游记
   </be-button>
 </template>
+
 <script lang="ts" setup>
 import { BeMessage } from 'be-ui'
 const message = BeMessage.service
@@ -15,6 +20,7 @@ const msgByLoading = (): void => {
   })
 }
 </script>
+
 <style>
 .be-message.test-msg
 .be-message--container

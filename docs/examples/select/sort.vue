@@ -1,41 +1,47 @@
 <template>
   <div class="exp-input">
-    <be-select size="medium" :list="baseList"
-               keyValue="id"
-               search
-               :searchFunc="searchFunc"
-               :sortFunc="sortFunc"
-               v-model="value"
-               labelValue="label">
-    </be-select>
+    <be-select
+      v-model="value"
+      size="medium"
+      :list="baseList"
+      key-value="id"
+      search
+      :search-func="searchFunc"
+      :sort-func="sortFunc"
+      label-value="label"
+    />
   </div>
 </template>
+
 <script setup lang="ts">
 import { ref } from 'vue'
 const baseList = ref<Array<{ id: string, label: string }>>([
-  {id: '君埋泉下泥销骨', label: '君埋泉下泥销骨'},
-  {id: '我寄人间雪满头', label: '我寄人间雪满头'},
-  {id: '满堂花醉三千客', label: '满堂花醉三千客'},
-  {id: '一剑霜寒十四州', label: '一剑霜寒十四州'},
-  {id: '两人对酌山花开', label: '两人对酌山花开'},
-  {id: '一杯一杯复一杯', label: '一杯一杯复一杯'},
-  {id: '我醉欲眠卿且去', label: '我醉欲眠卿且去'},
-  {id: '明朝有意抱琴来', label: '明朝有意抱琴来'},
+  { id: '君埋泉下泥销骨', label: '君埋泉下泥销骨' },
+  { id: '我寄人间雪满头', label: '我寄人间雪满头' },
+  { id: '满堂花醉三千客', label: '满堂花醉三千客' },
+  { id: '一剑霜寒十四州', label: '一剑霜寒十四州' },
+  { id: '两人对酌山花开', label: '两人对酌山花开' },
+  { id: '一杯一杯复一杯', label: '一杯一杯复一杯' },
+  { id: '我醉欲眠卿且去', label: '我醉欲眠卿且去' },
+  { id: '明朝有意抱琴来', label: '明朝有意抱琴来' },
 ])
 const value = ref<string>('君埋泉下泥销骨')
 
-const searchFunc = (value: string, ordData: Array<any>, labelValue: string) =>{
-  let arr = value ? ordData.filter(
+const searchFunc = (value: string, ordData: Array<any>, labelValue: string) => {
+  const arr = value
+    ? ordData.filter(
       (val: any) => {
-        return (val[labelValue].toString().toLowerCase().indexOf(value.toLowerCase()) >= 0);
-      }) : ordData
+        return (val[labelValue].toString().toLowerCase().includes(value.toLowerCase()))
+      })
+    : ordData
   return arr.length > 0 ? arr : ordData
 }
 
-const sortFunc = (a:any, b:any):void =>{
+const sortFunc = (a:any, b:any):void => {
   return a.label.toLowerCase().localeCompare(b.label.toLowerCase())
 }
 </script>
+
 <style lang="scss">
 .exp-input{
   display: flex;

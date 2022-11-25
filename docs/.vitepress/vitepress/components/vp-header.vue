@@ -2,64 +2,72 @@
   <div class="flex flex-1 items-center">
     <div
       class="flex h-10 items-center cursor-pointer md:w-64 sm:w-12"
-      @click="routerPush(navs[0].link)">
-      <img src="../assets/img/logo.png" class="h-10 w-10 mr-4" />
-      <div class="font-mono text-2xl md:flex sm:hidden">Be-UI3</div>
+      @click="routerPush(navs[0].link)"
+    >
+      <img src="../assets/img/logo.png" class="h-10 w-10 mr-4">
+      <div class="font-mono text-2xl md:flex sm:hidden">
+        Be-UI3
+      </div>
     </div>
 
     <div class="h-10 flex items-center justify-between ml-10">
       <div
-        class="w-16 cursor-pointer font-mono text-center text-lg h-60px leading-60px md:flex sm:hidden hover:text-pink-500"
         v-for="(item, index) in navs"
         :key="item.link + item.text"
-        :class="{active: index === curIndex}"
-        @click="routerPush(item.link, index)">
-        <p style="margin: 0 auto">{{ item.text }}</p>
+        class="w-16 cursor-pointer font-mono text-center text-lg h-60px leading-60px md:flex sm:hidden hover:text-pink-500"
+        :class="{ active: index === curIndex }"
+        @click="routerPush(item.link, index)"
+      >
+        <p style="margin: 0 auto">
+          {{ item.text }}
+        </p>
       </div>
-      <vp-search class="search" :options="theme.algolia" multilang></vp-search>
+      <VpSearch class="search" :options="theme.algolia" multilang />
     </div>
   </div>
 
-  <div class="flex-1 text-right font-mono md:block sm:hidden">V 1.0.2</div>
+  <div class="flex-1 text-right font-mono md:block sm:hidden">
+    V 1.0.2
+  </div>
   <div class="text-right md:hidden sm:flex">
-    <be-icon icon="type" customClass="menu-icon"></be-icon>
+    <be-icon icon="type" custom-class="menu-icon" />
   </div>
 </template>
 
 <script lang="tsx">
-  import { defineComponent , ref} from 'vue'
-  import { useNav } from '../composables/nav'
-  import { useRouter, Router } from 'vitepress'
-  import VpSearch from './vp-search.vue'
-  import { useData } from 'vitepress'
-  //import {initAlgolia} from "../utils/algolia";
+import { defineComponent, ref } from 'vue'
+import { Router, useData, useRouter } from 'vitepress'
+import { useNav } from '../composables/nav'
+import VpSearch from './vp-search.vue'
 
-  export default defineComponent({
-    name: 'vp-header',
-    components: {
-      VpSearch,
-    },
-    setup() {
-      const navs = useNav()
-      const { theme } = useData()
-      const curIndex = ref(0)
-      /**
+// import {initAlgolia} from "../utils/algolia";
+
+export default defineComponent({
+  name: 'VpHeader',
+  components: {
+    VpSearch,
+  },
+  setup() {
+    const navs = useNav()
+    const { theme } = useData()
+    const curIndex = ref(0)
+    /**
        * 跳转方法
        * @param path 路由地址
        */
-      const router: Router = useRouter()
-      const routerPush = (path: string, index: number): void => {
-        curIndex.value = index
-        router.go(path)
-      }
-      return {
-        theme,
-        routerPush,
-        navs,
-        curIndex
-      }
-    },
-  })
+    const router: Router = useRouter()
+    const routerPush = (path: string, index: number): void => {
+      curIndex.value = index
+      router.go(path)
+    }
+    return {
+      theme,
+      routerPush,
+      navs,
+      curIndex,
+    }
+  },
+})
 </script>
 
 <style>

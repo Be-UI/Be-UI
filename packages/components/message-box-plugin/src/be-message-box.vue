@@ -164,16 +164,16 @@ export default defineComponent({
       setAnimate()
     })
 
-    const bodyRenderer = defineComponent(()=>{
+    const bodyRenderer = defineComponent(() => {
       return props.bodyRender
     })
-    const footerRenderer = defineComponent(()=>{
+    const footerRenderer = defineComponent(() => {
       return props.footerRender
     })
-    const iconNextRenderer = defineComponent(()=>{
+    const iconNextRenderer = defineComponent(() => {
       return props.iconNextRender
     })
-    const iconPreRenderer = defineComponent(()=>{
+    const iconPreRenderer = defineComponent(() => {
       return props.iconPreRender
     })
 
@@ -187,7 +187,7 @@ export default defineComponent({
       bodyRenderer,
       footerRenderer,
       iconPreRenderer,
-      iconNextRenderer
+      iconNextRenderer,
     }
   },
 })
@@ -209,7 +209,7 @@ export default defineComponent({
           class="be-message-box--head"
         >
           <div v-if="iconPreRender">
-            <component :is='iconPreRenderer' />
+            <component :is="iconPreRenderer" />
             <span :class="`text-${msgType}`">{{ titles }}</span>
           </div>
           <div v-if="!iconPreRender">
@@ -225,7 +225,7 @@ export default defineComponent({
               v-if="iconNextRender"
               @click="close"
             >
-              <component :is='iconNextRenderer' />
+              <component :is="iconNextRenderer" />
             </div>
             <BeIcon
               v-if="!iconNextRender"
@@ -237,7 +237,7 @@ export default defineComponent({
       </div>
 
       <div class="be-message-box--body">
-        <component :is='bodyRenderer' />
+        <component :is="bodyRenderer" />
       </div>
 
       <div :class="`be-message-box--footer be-message-box--footer__${footerType}`">
@@ -245,7 +245,7 @@ export default defineComponent({
           v-if="footerRender"
           @click="confirmFunc()"
         >
-          <component :is='footerRenderer' />
+          <component :is="footerRenderer" />
         </div>
         <div v-if="!footerRender">
           <button

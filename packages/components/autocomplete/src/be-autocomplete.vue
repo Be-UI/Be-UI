@@ -85,6 +85,8 @@ export default defineComponent({
     const handleChange = (): void => {
       ctx.emit('change', valInner.value)
     }
+    // 输入建议數據緩存
+    let listDataCache: Array<any> = []
     /**
        * input 事件处理方法，实现双向绑定
        */
@@ -93,16 +95,14 @@ export default defineComponent({
       // 點擊觸發時
       if (props.focusTrigger) {
         matchSuggestions(valInner.value, suggestionList)
-      }
-      else {
+      } else {
         // 輸入觸發，傳遞了方法就遠程獲取
         if (props.fetchSuggestions) {
           getSuggestions((list: Array<any>): void => {
             matchSuggestions(valInner.value, list)
             showPopover()
           })
-        }
-        else {
+        } else {
           // 否則直接匹配
           matchSuggestions(valInner.value, suggestionList)
           showPopover()
@@ -166,7 +166,7 @@ export default defineComponent({
        * 计算输入建议下拉框位置
        * @param {Element} $eventDom - 输入建议下拉框dom
        */
-    const computedPosition = ($eventDom: HTMLElement | null): void => {
+    function computedPosition($eventDom: HTMLElement | null) {
       if (!$eventDom)
         return
       selectStyle.width = `${Number(window.getComputedStyle($eventDom).width.split('px')[0])}px`
@@ -176,7 +176,7 @@ export default defineComponent({
        * @param {string} value - 輸入值
        * @param {Array} ordData - 原始數據集
        */
-    const matchSuggestions = (value: string, ordData: Array<any>): void => {
+    function matchSuggestions(value: string, ordData: Array<any>) {
       nextTick(() => {
         selectList.value = value
           ? ordData.filter((val: any) => {
@@ -190,18 +190,16 @@ export default defineComponent({
     /**
        * 顯示輸入建議下拉
        */
-    const showPopover = (): void => {
+    function showPopover() {
       const curInstPopover = internalInstance.refs.beInputPopover as IInputSelectFunc
       curInstPopover.changeDisplay(true)
     }
-    // 输入建议數據緩存
-    let listDataCache: Array<any> = []
     // 输入建议下拉显示控制
     const loading = ref<boolean>(false)
     /**
        * 获取输入建议
        */
-    const getSuggestions = (cb: Function = () => {}): void => {
+    function getSuggestions(cb: Function = () => {}) {
       nextTick(() => {
         // 沒有缓存就請求數據
         if (props.fetchSuggestions) {

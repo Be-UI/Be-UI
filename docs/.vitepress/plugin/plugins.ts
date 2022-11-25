@@ -2,9 +2,9 @@ import * as path from 'path'
 import * as fs from 'fs'
 import MarkdownIt from 'markdown-it'
 import mdContainer from 'markdown-it-container'
+import { highlight } from '../utils/highlight'
 import type Token from 'markdown-it/lib/token'
 import type Renderer from 'markdown-it/lib/renderer'
-import { highlight } from '../utils/highlight'
 
 const localMd = MarkdownIt()
 
@@ -31,14 +31,14 @@ export const mdPlugin = (md: MarkdownIt) => {
         if (sourceFileToken.type === 'inline') {
           source = fs.readFileSync(
             path.resolve('../docs', 'examples', `${sourceFile}.vue`),
-            'utf-8'
+            'utf-8',
           )
         }
         if (!source) throw new Error(`Incorrect source file: ${sourceFile}`)
         return `<Demo :demos="demos" source="${encodeURIComponent(
-          highlight(source, 'vue')
+          highlight(source, 'vue'),
         )}" path="${sourceFile}" raw-source="${encodeURIComponent(
-          source
+          source,
         )}" description="${encodeURIComponent(localMd.render(description))}">`
       } else {
         return '</Demo>'

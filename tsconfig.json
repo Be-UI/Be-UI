@@ -16,11 +16,12 @@
     "preserveSymlinks": true,
     "lib": ["ESNext", "DOM"],
     "types": [
-      "node"
+      "node",
     ]
   },
   "include": [
     "/packages/**/*.ts",
+    "/**/*.tsx",
     "/build/**/*.ts",
     "/packages/**/*.vue",
     "packages/components/shims-vue.d.ts"

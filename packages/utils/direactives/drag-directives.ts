@@ -39,8 +39,7 @@ export const dragDirective: ObjectDirective = {
             break
           }
         }
-      }
-      else {
+      } else {
         // 兼容下火狐
         isTitle = true
       }
