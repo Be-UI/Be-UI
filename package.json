@@ -12,7 +12,7 @@
     "node": ">= 16"
   },
   "scripts": {
-    "init": "pnpm install",
+    "init": "pnpm install -w",
     "lint:fix": "eslint . --fix",
     "dev": "pnpm run --filter @be-ui/play dev",
     "docs:dev": "pnpm run --filter @be-ui/docs docs:dev",

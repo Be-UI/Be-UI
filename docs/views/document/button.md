@@ -3,7 +3,7 @@ title: button
 lang: en-US
 ---
 
-# 图标
+# 按钮
 
 ## 介绍
 

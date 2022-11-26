@@ -20,5 +20,9 @@
   },
   "devDependencies": {
     "@be-ui/utils": "*"
+  },
+  "dependencies": {
+    "vitest": "^0.25.3",
+    "vue": "^3.2.45"
   }
 }
