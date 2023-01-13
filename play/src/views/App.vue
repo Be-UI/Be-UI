@@ -1,8 +1,12 @@
 <template>
-  <div style="width: 100%;height: 5000px" />
-  <BeBackTop :bottom="100" :right="500" />
+  <div style="width: 100%;height: 200px" />
+  <BeBadge :value="123" :show="true" :max="10" :is-dot="false" type="primary">
+    <button type="button">
+      123
+    </button>
+  </BeBadge>
 </template>
 
 <script lang="ts" setup>
-import { BeBackTop } from '@be-ui/components'
+import { BeBadge } from '@be-ui/components'
 </script>

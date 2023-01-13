@@ -19,7 +19,7 @@
     "vue": "^3.2.0"
   },
   "devDependencies": {
-    "@be-ui/utils": "*"
+    "@be-ui/utils": "workspace:*"
   },
   "dependencies": {
     "vitest": "^0.25.3",

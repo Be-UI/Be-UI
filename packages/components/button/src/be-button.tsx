@@ -185,7 +185,7 @@ export default defineComponent({
                 ${props.customClass}`}
           disabled={props.disabled || props.loading}
         >
-          <div class={'be-button--body'} style={{ margin: ' 0 auto', display: 'flex' }}>
+          <div class={'be-button--body'} style={{ margin: '0 auto', display: 'flex' }}>
             {prevIconRender()}
             <div class="be-button--slot">{ctx.slots.default && ctx.slots.default()}</div>
             {nextIconRender()}

@@ -1,8 +1,10 @@
 # Project exclude paths
-/build/node_modules/
-/node_modules/
-/packages/components/node_modules/
-/packages/utils/node_modules/
-/play/node_modules/
-/docs/node_modules/
+build/node_modules/
+node_modules/
+packages/components/node_modules/
+packages/utils/node_modules/
+play/node_modules/
+docs/node_modules/
+packages/style/node_modules/
+packages/be-ui/node_modules/
 dist

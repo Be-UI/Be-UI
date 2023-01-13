@@ -1,0 +1,59 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'badge' ;
+
+@include create-B(badge) {
+  @include set-component-style-var('badge', $--badge);
+}
+
+@include create-B(badge) {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+
+  .#{ $componentsClass }#{$modifier-separator}sup {
+      border-radius: var(--be-badge-rounded-full);
+      color: var(--be-badge-font-color);
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      font-size: var(--be-badge-font-size);
+      height: var(--be-badge-h);
+      padding: 0 var(--be-badge-px);
+      position: absolute;
+      top: 0;
+      right: calc(1px + var(--be-badge-h) / 2);
+      transform: translateY(-50%) translate(100%);
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}dot {
+    height: var(--be-badge-h-dot);
+    width: var(--be-badge-h-dot);
+    right: calc(1px + var(--be-badge-h-dot) / 2);
+    padding: 0;
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}sup#{$element-separator}error {
+    background-color: var(--be-badge-error-color);
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}sup#{$element-separator}success {
+    background-color: var(--be-badge-success-color);
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}sup#{$element-separator}warning {
+    background-color: var(--be-badge-warning-color);
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}sup#{$element-separator}info {
+    background-color: var(--be-badge-info-color);
+  }
+
+  .#{ $componentsClass }#{$modifier-separator}sup#{$element-separator}primary {
+    background-color: var(--be-badge-primary-color);
+  }
+
+}

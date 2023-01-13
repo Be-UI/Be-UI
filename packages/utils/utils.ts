@@ -17,6 +17,8 @@ export const getUuid = (): string => {
 }
 export const jsonClone = <T>(val: T): T => JSON.parse(JSON.stringify(val))
 export const isBool = (val: unknown) => typeof val === 'boolean'
+export const isObject = (val: unknown): val is Record<any, any> =>
+  val !== null && typeof val === 'object'
 export const isString = (val: unknown): val is string =>
   typeof val == 'string' && val.constructor === String
 export const isNumber = (val: unknown): val is number => typeof val === 'number'

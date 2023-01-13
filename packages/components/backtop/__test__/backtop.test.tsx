@@ -59,7 +59,7 @@ describe('be-back-top', () => {
     expect(wrapper.find('.be-back-top').exists()).toBe(false)
     wrapper.element.scrollTop = 2000
     await wrapper.trigger('scroll')
-
+ 
     expect(wrapper.find('.be-back-top').exists()).toBe(true)
     const slotElm = wrapper.find('#test_backtop_slot')
     expect(slotElm.exists()).toBe(true)

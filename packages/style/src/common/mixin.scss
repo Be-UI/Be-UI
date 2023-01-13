@@ -625,3 +625,25 @@ $--back-top: map.deep-merge(
                 ),
                 $--back-top
 );
+
+// 生成 be-badge
+$--badge: () !default;
+$--badge: map.deep-merge(
+                (
+
+                        'font-size': 12px,
+                        'h':18px,
+                        'h-dot':9px,
+                        'px': 6px,
+                        'font-color': var(--be-base-color-w),
+
+                        'rounded-full': var(--be-rounded-full),
+                        'success-color': var(--be-emo-success-color),
+                        'error-color': var(--be-emo-error-color),
+                        'warning-color': var(--be-emo-warning-color),
+                        'info-color': var(--be-emo-info-color),
+                        'primary-color': var(--be-emo-link-color),
+
+                ),
+                $--badge
+);
