@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import docsearch from '@docsearch/js'
-import '@docsearch/css'
+// import docsearch from '@docsearch/js'
+// import '@docsearch/css'
 import { getCurrentInstance, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vitepress'
 import { isClient } from '@vueuse/core'
-import type { DocSearchHit } from '@docsearch/react/dist/esm/types'
+import type { DocSearchHit } from '../../../utils/types'
 
 const props = defineProps<{
   options: any
@@ -23,7 +23,7 @@ watch(
 )
 
 onMounted(() => {
-  initialize(props.options)
+  // initialize(props.options)
 })
 
 function isSpecialClick(event: MouseEvent) {
@@ -39,11 +39,11 @@ function getRelativePath(absoluteUrl: string) {
 function update(options: any) {
   if (vm && vm.vnode.el) {
     vm.vnode.el.innerHTML = '<div class="algolia-search-box" id="docsearch"></div>'
-    initialize(options)
+    // initialize(options)
   }
 }
 
-function initialize(userOptions: any) {
+/*function initialize(userOptions: any) {
   docsearch(
     Object.assign({}, userOptions, {
       container: '#docsearch',
@@ -109,7 +109,7 @@ function initialize(userOptions: any) {
       },
     }),
   )
-}
+}*/
 </script>
 
 <template>

@@ -1,4 +1,3 @@
-import BeBadge from "./badge";
 
 export { default as BeSwitch } from './switch'
 export { default as BeButton } from './button'
@@ -27,7 +26,7 @@ export { BeContainer } from './container'
 export { BeSelect } from './select'
 export { BeSelectMultiple } from './select'
 export { BeBackTop } from './backtop'
-export { BeBadge } from './badge
+export { BeBadge } from './badge'
 
 // plugins
 export { loadingPlugin as BeLoadingSer } from './loading-plugin' // 服务

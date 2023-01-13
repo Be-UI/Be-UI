@@ -13,8 +13,7 @@ import {
 } from 'vue'
 import { BePopover } from '@be-ui/components/popover'
 import { BeInput } from '@be-ui/components/input'
-import { isString, jsonClone } from '@be-ui/utils'
-import { isObject } from '@vue/shared'
+import { isObject, isString, jsonClone } from '@be-ui/utils'
 import BeInputSelect from './be-input-select.vue'
 import type { IInputSelectFunc, IInputSelectInst } from './be-autocomplete-type'
 export default defineComponent({

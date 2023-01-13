@@ -14,7 +14,7 @@ import {
   watch,
 } from 'vue'
 import { BeIcon } from '@be-ui/components/icon'
-import { isObject } from '@vue/shared'
+import { isObject } from '@be-ui/utils'
 import compTextareaHeight from '../src/computeAreaHeight'
 import type { PropType } from 'vue'
 import type { AutosizeProp, IInputInst } from './be-input-type'

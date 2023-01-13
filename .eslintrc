@@ -7,12 +7,12 @@
     "plugin:@baiwusanyu/markdown"
   ],
   "rules": {
-    // "vue/no-irregular-whitespace": "off",
-    // "no-irregular-whitespace": "off", // js
-    // "multiline-ternary": "off", // js
-    // "no-cond-assign":"off",
-    // "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
-    // // "n/no-callback-literal": "off",
-    // "no-unmodified-loop-condition": "off"
+    "vue/no-irregular-whitespace": "off",
+    "no-irregular-whitespace": "off", // js
+    "multiline-ternary": "off", // js
+    "no-cond-assign":"off",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "n/no-callback-literal": "off",
+    "no-unmodified-loop-condition": "off"
   }
 }
