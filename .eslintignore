@@ -1,8 +1,8 @@
 node_modules
-/packages/**/svg-dict.ts
-/packages/**/*.test.ts
-/packages/**/*.d.ts
-/packages/**/*.test.tsx
+packages/**/svg-dict.ts
+packages/**/*.test.ts
+packages/**/*.d.ts
+packages/**/*.test.tsx
 package.json
 jest.config.js
 .eslintrc.js
