@@ -21,11 +21,12 @@
   },
   "include": [
     "packages/**/*.ts",
-    "packages/**/*.tsx",
+    "packages/*.tsx",
     "build/**/*.ts",
     "packages/**/*.vue",
+    "packages/components/shims-vue.d.ts"
   ],
   // ts 排除的文件
-  "exclude": ["node_modules", "**/__tests__/"],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

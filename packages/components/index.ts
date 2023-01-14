@@ -13,6 +13,7 @@ export { default as BeIcon } from './icon'
 export { default as BeTag } from './tag'
 export { default as BePopover } from './popover'
 export { default as BePagination } from './pagination'
+export { default as BeBadge } from './badge'
 export { BeContextmenu } from './contextmenu'
 export { BeContextmenuItem } from './contextmenu'
 export { BeContextmenuSubMenu } from './contextmenu'
@@ -26,7 +27,6 @@ export { BeContainer } from './container'
 export { BeSelect } from './select'
 export { BeSelectMultiple } from './select'
 export { BeBackTop } from './backtop'
-export { BeBadge } from './badge'
 
 // plugins
 export { loadingPlugin as BeLoadingSer } from './loading-plugin' // 服务
