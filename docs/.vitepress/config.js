@@ -80,6 +80,10 @@ export default defineConfigWithTheme({
               link: '/views/document/breadcrumb',
             },
             {
+              text: '徽章 badge',
+              link: '/views/document/badge',
+            },
+            {
               text: '按钮 button',
               link: '/views/document/button',
             },

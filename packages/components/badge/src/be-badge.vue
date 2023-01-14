@@ -5,50 +5,53 @@
       v-if="show"
       class="be-badge--sup"
       :class="`
-         be-badge--sup__${props.type}
-         ${props.isDot ? 'be-badge--dot ' : ''}`"
+         be-badge--sup__${type}
+         ${isDot ? 'be-badge--dot ' : ''}`"
     >
       {{ contentValue }}
     </sup>
   </div>
 </template>
 
-<script setup lang="ts" name="be-badge">
-import { PropType, computed, defineExpose, defineProps } from 'vue'
+<script lang="ts">
+import { PropType, computed, defineComponent } from 'vue'
 import { isNumber } from '@be-ui/utils'
+export default defineComponent({
+  name: 'BeBadge',
+  props:{
+    value: {
+      type: [String, Number],
+      default: '',
+    },
+    type: {
+      type: String as PropType<'primary'|'success' |'info'|'warning'|'error'>,
+      default: 'error',
+    },
+    show: {
+      type: Boolean,
+      default: true,
+    },
+    max: {
+      type: Number,
+      default: 100,
+    },
+    isDot: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup(props){
+    const contentValue = computed<string>(() => {
+      if (props.isDot) return ''
+      if (isNumber(props.value) && isNumber(props.max))
+        return props.max < props.value ? `${props.max}+` : `${props.value}`
 
-const props = defineProps({
-  value: { // TODO TEST
-    type: [String, Number],
-    default: '',
-  },
-  type: { // TODO TEST
-    type: String as PropType<'primary'|'success' |'info'|'warning'|'error'>,
-    default: 'error',
-  },
-  show: { // TODO TEST
-    type: Boolean,
-    default: true,
-  },
-  max: { // TODO TEST
-    type: Number,
-    default: 100,
-  },
-  isDot: { // TODO TEST
-    type: Boolean,
-    default: false,
-  },
-})
+      return `${props.value}`
+    })
 
-const contentValue = computed<string>(() => {
-  if (props.isDot) return ''
-  if (isNumber(props.value) && isNumber(props.max))
-    return props.max < props.value ? `${props.max}+` : `${props.value}`
-
-  return `${props.value}`
-})
-
-defineExpose({
-  contentValue,
+    return {
+      contentValue
+    }
+  }
 })
 </script>
