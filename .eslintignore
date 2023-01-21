@@ -8,3 +8,4 @@ jest.config.js
 .eslintrc.js
 /**/*.d.ts
 build
+docs

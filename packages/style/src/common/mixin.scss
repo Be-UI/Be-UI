@@ -647,3 +647,20 @@ $--badge: map.deep-merge(
                 ),
                 $--badge
 );
+
+// 生成 be-link
+$--link: () !default;
+$--link: map.deep-merge(
+                (
+
+                        'text-default': var(--be-text-color-primary),
+                        'disabled-color': var(--be-text-color-placeholder),
+                        'success-color': var(--be-emo-success-color),
+                        'error-color': var(--be-emo-error-color),
+                        'warning-color': var(--be-emo-warning-color),
+                        'info-color': var(--be-emo-info-color),
+                        'primary-color': var(--be-emo-link-color),
+
+                ),
+                $--link
+);

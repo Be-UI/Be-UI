@@ -1,0 +1,57 @@
+@import 'common/animate';
+@import 'common/common';
+@import 'common/mixin';
+@import 'common/var';
+@import 'common/config';
+$componentsClass: $name + '-' + 'link' ;
+@include create-B(link) {
+  @include set-component-style-var('link', $--link);
+}
+
+@include create-B(link) {
+  text-decoration: none;
+  color: var(--be-link-text-default);
+  @include flex-align-center;
+  .be-icon{
+    margin: 0 4px;
+  }
+}
+.#{$componentsClass}#{$modifier-separator}disabled {
+  @include be-disabled;
+  color: var(--be-link-disabled-color);
+}
+.#{$componentsClass}#{$modifier-separator}underline {
+  text-decoration: underline;
+}
+
+.#{$componentsClass}#{$element-separator}primary {
+  color: var(--be-link-primary-color);
+  .be-icon{
+    fill: var(--be-link-primary-color);
+  }
+}
+.#{$componentsClass}#{$element-separator}success {
+  color: var(--be-link-success-color);
+  .be-icon{
+    fill: var(--be-link-success-color);
+  }
+}
+.#{$componentsClass}#{$element-separator}warning {
+  color: var(--be-link-warning-color);
+  .be-icon{
+    fill: var(--be-link-warning-color);
+  }
+}
+.#{$componentsClass}#{$element-separator}error {
+  color: var(--be-link-error-color);
+  .be-icon{
+    fill: var(--be-link-error-color);
+  }
+}
+.#{$componentsClass}#{$element-separator}info {
+  color: var(--be-link-info-color);
+  .be-icon{
+    fill: var(--be-link-info-color);
+  }
+}
+

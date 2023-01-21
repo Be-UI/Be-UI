@@ -1,9 +1,13 @@
 <template>
-  <div style="width: 100%;height: 200px" />
-  <be-badge :value="123" :show="true" :max="10" :is-dot="false" type="primary">
-    <be-button type="warning">
-      warning
-    </be-button>
-  </be-badge>
+  <be-link href="https://www.baidu.com"
+           content="demo"
+           nextIcon="add"
+           type="error"
+           target="_blank">
+          <template #nextIcon>nextIcon</template>
+  </be-link>
 </template>
+<script setup>
+import { BeLink } from "@be-ui/components";
+</script>
 
