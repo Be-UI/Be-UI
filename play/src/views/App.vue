@@ -2,6 +2,7 @@
   <be-link href="https://www.baidu.com"
            content="demo"
            nextIcon="add"
+           underline
            type="error"
            target="_blank">
           <template #nextIcon>nextIcon</template>

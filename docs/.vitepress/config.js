@@ -159,6 +159,10 @@ export default defineConfigWithTheme({
               text: '回到顶部 backtop',
               link: '/views/document/backtop',
             },
+            {
+              text: '链接 link',
+              link: '/views/document/link',
+            },
           ],
         },
       ],

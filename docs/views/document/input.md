@@ -110,7 +110,7 @@ input/autosize
 | clearable    | `Boolean`                                                                 | `false`   | 是否可以清除                             |
 | type         | `String`                                                                  | `text`    | 输入框类型 `'text' / 'textarea'`        |
 | showPassword | `Boolean`                                                                 | `false`   | 禁用                                 |
-| prevIcon     | `String`                                                                  | `-`       | 前置 `icon` 图标类型（必须是 `be-icon` 的名称   |
+| prevIcon     | `String`                                                                  | `-`       | 前置 `icon` 图标类型（必须是 `be-icon` 的名称）  |
 | nextIcon     | `String`                                                                  | `-`       | 后置 `icon` 图标类型（必须是 `be-icon` 的名称）  |
 | label        | `String / Number`                                                         | `-`       | 输入框关联的 `label` 文字                  |
 | tabindex     | `Boolean`                                                                 | `false`   | `input` 元素或 `textarea` 元素的 `style` |
