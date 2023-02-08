@@ -146,9 +146,6 @@ main {
 
   a {
     font-weight: 500;
-    text-decoration: inherit;
-    color: var(--brand-color);
-
     &.header-anchor {
       color: var(--brand-color);
     }
